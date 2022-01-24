@@ -29,6 +29,8 @@ public class Bullet : MonoBehaviour
         sprite.sprite = weapon.model;
         sprite.material = weapon.material;
         trail.material = weapon.trail;
+        deathMaterial = weapon.material;
+        deathEffect = weapon.effect;
 
         // Set bullet stats
         damage = weapon.damage * Deck.GetMultiplier(Stat.Damage) + Deck.GetAdditions(Stat.Damage);
@@ -55,12 +57,15 @@ public class Bullet : MonoBehaviour
     // Destroy the bullet
     public virtual void Destroy()
     {
-        ParticleSystemRenderer particle = Instantiate(deathEffect, transform.position, Quaternion.identity).GetComponent<ParticleSystemRenderer>();
+        Transform newParticle = Instantiate(deathEffect, transform.position, Quaternion.identity).GetComponent<Transform>();
+        ParticleSystemRenderer particle = newParticle.GetComponent<ParticleSystemRenderer>();
+
         if (particle != null) 
         {
             particle.material = deathMaterial;
             particle.trailMaterial = deathMaterial;
         }
+
         Destroy(gameObject);
     }
 

@@ -9,6 +9,9 @@ public class Deck : MonoBehaviour
     public static Dictionary<Stat, float> multipliers;
     public static Dictionary<Stat, bool> flags;
 
+    // Barrel location
+    public Transform barrel;
+
     // Default card
     public WeaponData defaultWeapon;
     public bool useDefaultCard;
@@ -40,7 +43,7 @@ public class Deck : MonoBehaviour
 
         // Set default slot
         if (useDefaultCard && weaponSlots.Length > 0)
-            weaponSlots[0] = defaultWeapon;
+            SetWeaponSlot(0, defaultWeapon);
     }
 
     // Calculate cooldown
@@ -65,9 +68,14 @@ public class Deck : MonoBehaviour
     // Shoot method
     public void Shoot()
     {
-        for(int i = 0; i < weaponSlots.Length; i++)
+        for (int i = 0; i < weaponSlots.Length; i++)
+        {
             if (weaponSlots[i] != null && weaponCooldowns[i] <= 0)
-                weaponSlots[i].Shoot();
+            {
+                BulletHandler.active.CreateBullet(weaponSlots[i], barrel.position, transform.rotation);
+                weaponCooldowns[i] = weaponSlots[i].cooldown;
+            }
+        }
     }
 
     // Get multiplier

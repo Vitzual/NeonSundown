@@ -34,11 +34,16 @@ public class BulletHandler : MonoBehaviour
         }
     }
     // Create a new active enemy instance
-    public void CreateBullet(WeaponData weapon, Vector2 position, Quaternion rotation)
+    public void CreateBullet(WeaponData weapon, Vector2 position, Quaternion rotation, bool adjustRotation = true)
     {
         // Create the tile
         GameObject lastObj = Instantiate(weapon.bullet.gameObject, position, rotation);
         lastObj.name = weapon.bullet.gameObject.name;
+
+        // Adjust for rotational offset
+        Vector3 rotationOffset = new Vector3(lastObj.transform.eulerAngles.x, lastObj.transform.eulerAngles.y, 
+            (lastObj.transform.eulerAngles.z - 90f) + Random.Range(-weapon.bloom, weapon.bloom));
+        lastObj.transform.eulerAngles = rotationOffset;
 
         // Attempt to set enemy variant
         Bullet bullet = lastObj.GetComponent<Bullet>();

@@ -14,10 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Duster
   description: A weak starting weapon. Best to throw it away.
-  rarity: 0
   dropchance: 0
   damage: 1
-  cooldown: 0.2
-  speed: 25
-  bloom: 2
+  cooldown: 0.15
+  speed: 55
+  bloom: 5
+  pierces: 0
   bullets: 1
+  lifetime: 1
+  bullet: {fileID: 3547703638905520931, guid: afcb6e3c47783de4080790735a569129, type: 3}
+  tracking: 0
+  model: {fileID: 21300000, guid: ed7d2bbfa68c05a4e8d2a6c0fe734db2, type: 3}
+  material: {fileID: 2100000, guid: 4ab3027e425e85946b39bff6ca3ab165, type: 2}
+  trail: {fileID: 2100000, guid: 4ab3027e425e85946b39bff6ca3ab165, type: 2}
+  effect: {fileID: 8187003936069489464, guid: ca8dd1dc0d1584743b0edd08671aa666, type: 3}

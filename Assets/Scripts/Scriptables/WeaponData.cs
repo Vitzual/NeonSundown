@@ -5,9 +5,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Card", menuName = "Cards/Weapon")]
 public class WeaponData : CardData
 {
-    public Sprite model;
-    public Material material;
-    public Material trail;
     public float damage;
     public float cooldown;
     public float speed;
@@ -18,8 +15,8 @@ public class WeaponData : CardData
     public Bullet bullet;
     public bool tracking;
 
-    public void Shoot()
-    {
-        
-    }
+    public Sprite model;
+    public Material material;
+    public Material trail;
+    public ParticleSystem effect;
 }
