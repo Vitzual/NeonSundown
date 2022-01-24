@@ -1,0 +1,18 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+[CreateAssetMenu(fileName = "New Enemy", menuName = "Entities/Enemy")]
+public class EnemyData : ScriptableObject
+{
+    public GameObject obj;
+    public new string name;
+    public string desc;
+    public float health;
+    public float damage;
+    public float speed;
+    public float minXP;
+    public float maxXP;
+    public int minRound;
+    public int maxRound;
+}
