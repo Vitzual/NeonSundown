@@ -29,10 +29,7 @@ public class EnemyHandler : MonoBehaviour
         {
             if (enemies[a] != null)
             {
-                if (enemies[a].target != null)
-                {
-                    enemies[a].MoveTowardsTarget();
-                }
+                enemies[a].Move();
             }
             else
             {

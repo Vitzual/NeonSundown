@@ -28,7 +28,7 @@ public class Bullet : MonoBehaviour
         // Set renderer componenets
         sprite.sprite = weapon.model;
         sprite.material = weapon.material;
-        trail.material = weapon.trail;
+        //trail.material = weapon.trail;
         deathMaterial = weapon.material;
         deathEffect = weapon.effect;
 
@@ -57,16 +57,18 @@ public class Bullet : MonoBehaviour
     // Destroy the bullet
     public virtual void Destroy()
     {
-        Transform newParticle = Instantiate(deathEffect, transform.position, Quaternion.identity).GetComponent<Transform>();
-        ParticleSystemRenderer particle = newParticle.GetComponent<ParticleSystemRenderer>();
-
-        if (particle != null) 
-        {
-            particle.material = deathMaterial;
-            particle.trailMaterial = deathMaterial;
-        }
-
+        CreateParticle();
         Destroy(gameObject);
+    }
+
+    // Creates a particle and sets the material
+    public void CreateParticle()
+    {
+        ParticleSystemRenderer holder = Instantiate(deathEffect, transform.position,
+                transform.rotation).GetComponent<ParticleSystemRenderer>();
+        holder.transform.rotation *= Quaternion.Euler(-90, 90, 0);
+        holder.material = deathMaterial;
+        holder.trailMaterial = deathMaterial;
     }
 
     // On collision
@@ -79,7 +81,7 @@ public class Bullet : MonoBehaviour
         if (enemy != null)
         {
             // Get material to hold
-            Material holder = enemy.enemyData.material;
+            Material holder = enemy.GetMaterial();
 
             pierce -= 1;
             enemy.Damage(damage);
@@ -90,4 +92,6 @@ public class Bullet : MonoBehaviour
             }
         }
     }
+
+
 }

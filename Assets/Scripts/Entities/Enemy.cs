@@ -5,14 +5,14 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     // Scriptable object
-    public EnemyData enemyData;
+    private EnemyData enemyData;
 
     // Internal runtime variables
     private float health;
     private float maxHealth;
 
     // Target transform for moving
-    public Transform target;
+    private Transform target;
     
     // Setup the enemy
     public virtual void Setup(EnemyData data)
@@ -36,9 +36,18 @@ public class Enemy : MonoBehaviour
     }
 
     // Move towards the target
-    public virtual void MoveTowardsTarget()
+    public virtual void Move()
     {
-        float step = enemyData.speed * Time.deltaTime;
-        transform.position = Vector2.MoveTowards(transform.position, target.position, step);
+        if (target != null)
+        {
+            float step = enemyData.speed * Time.deltaTime;
+            transform.position = Vector2.MoveTowards(transform.position, target.position, step);
+        }
+    }
+
+    // Get material function
+    public Material GetMaterial()
+    {
+        return enemyData.material;
     }
 }

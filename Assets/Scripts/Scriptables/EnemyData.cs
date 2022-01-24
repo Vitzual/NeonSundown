@@ -8,7 +8,7 @@ public class EnemyData : ScriptableObject
     public GameObject obj;
     public Material material;
     public new string name;
-    public string desc;
+    [TextArea] public string desc;
     public float health;
     public float damage;
     public float speed;
