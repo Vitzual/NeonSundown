@@ -5,6 +5,7 @@ using UnityEngine;
 public class Deck : MonoBehaviour
 {
     // Multipliers 
+    public static Dictionary<Stat, int> additions;
     public static Dictionary<Stat, float> multipliers;
     public static Dictionary<Stat, bool> flags;
 
@@ -54,6 +55,14 @@ public class Deck : MonoBehaviour
         for(int i = 0; i < weaponSlots.Length; i++)
             if (weaponSlots[i] != null && weaponCooldowns[i] <= 0)
                 weaponSlots[i].Shoot();
+    }
+
+    // Get multiplier
+    public static int GetAdditions(Stat type)
+    {
+        if (additions.ContainsKey(type))
+            return additions[type];
+        else return 0;
     }
 
     // Get multiplier

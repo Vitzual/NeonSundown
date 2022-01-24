@@ -7,5 +7,6 @@ public enum Stat
     Bloom,
     Bullets,
     Pierces,
-    Tracking
+    Tracking,
+    Lifetime
 }

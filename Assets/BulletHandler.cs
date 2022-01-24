@@ -24,10 +24,7 @@ public class BulletHandler : MonoBehaviour
         {
             if (bullets[a] != null)
             {
-                if (bullets[a].target != null)
-                {
-                    bullets[a].Move();
-                }
+                bullets[a].Move();
             }
             else
             {
@@ -45,10 +42,7 @@ public class BulletHandler : MonoBehaviour
 
         // Attempt to set enemy variant
         Bullet bullet = lastObj.GetComponent<Bullet>();
-        bullet.Setup(weapon.damage * Deck.GetMultiplier(Stat.Damage),
-                     weapon.speed * Deck.GetMultiplier(Stat.Speed),
-                     weapon.pierces * Deck.GetMultiplier(Stat.Pierces),
-                     weapon.tracking || Deck.GetFlag(Stat.Tracking));
+        bullet.Setup(weapon);
 
         // Add to enemies list
         bullets.Add(bullet);
