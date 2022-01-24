@@ -19,16 +19,22 @@ public class Deck : MonoBehaviour
     public int _powerupAmount;
 
     // Deck slots
-    public WeaponData[] weaponSlots;
-    public float[] weaponCooldowns;
-    public StatData[] statSlots;
-    public PowerupData[] powerupSlots;
+    private WeaponData[] weaponSlots;
+    private float[] weaponCooldowns;
+    private StatData[] statSlots;
+    private PowerupData[] powerupSlots;
 
     // On start, create decks
     public void Start()
     {
+        // Create new dictionaries
+        additions = new Dictionary<Stat, int>();
+        multipliers = new Dictionary<Stat, float>();
+        flags = new Dictionary<Stat, bool>();
+
         // Create starting slots
         weaponSlots = new WeaponData[_weaponAmount];
+        weaponCooldowns = new float[_weaponAmount];
         statSlots = new StatData[_statAmount];
         powerupSlots = new PowerupData[_powerupAmount];
 
@@ -47,6 +53,13 @@ public class Deck : MonoBehaviour
             if (weaponCooldowns[i] > 0)
                 weaponCooldowns[i] -= Time.deltaTime;
         }
+    }
+
+    // Set card slot
+    public void SetWeaponSlot(int index, WeaponData weapon)
+    {
+        weaponSlots[index] = weapon;
+        weaponCooldowns[index] = weapon.cooldown;
     }
 
     // Shoot method
