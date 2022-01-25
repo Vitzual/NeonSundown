@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Enemy", menuName = "Entities/Enemy")]
-public class EnemyData : ScriptableObject
+public class EnemyData : IdentifiableScriptableObject
 {
     public GameObject obj;
     public Material material;
@@ -14,6 +14,6 @@ public class EnemyData : ScriptableObject
     public float speed;
     public float minXP;
     public float maxXP;
-    public int minRound;
-    public int maxRound;
+    public float spawnTime;
+    public float spawnChance;
 }

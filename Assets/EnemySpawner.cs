@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    // Tracking
+    public float timer;
+    public float cooldown;
 
     // Update is called once per frame
     void Update()
     {
-        
+        timer += Time.deltaTime;
+        cooldown -= Time.deltaTime;
+
+        foreach(EnemyData enemy in )
     }
 }
