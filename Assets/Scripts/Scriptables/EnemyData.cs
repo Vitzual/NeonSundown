@@ -7,13 +7,14 @@ public class EnemyData : IdentifiableScriptableObject
 {
     public GameObject obj;
     public Material material;
+    public ParticleSystem deathParticle;
     public new string name;
     [TextArea] public string desc;
     public float health;
     public float damage;
     public float speed;
-    public float minXP;
-    public float maxXP;
+    public int xpDrops;
     public float spawnTime;
-    public float spawnChance;
+    [Range(0, 100)]
+    public int spawnChance;
 }
