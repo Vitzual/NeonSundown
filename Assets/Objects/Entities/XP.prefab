@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 4182466394475484056}
   - component: {fileID: 4182466394475484039}
   - component: {fileID: 5649815641690287147}
-  m_Layer: 0
+  - component: {fileID: 1261324257845225890}
+  m_Layer: 8
   m_Name: XP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,3 +97,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startDistance: 15
+--- !u!58 &1261324257845225890
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4182466394475484038}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 10

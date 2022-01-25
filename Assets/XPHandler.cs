@@ -10,7 +10,7 @@ public class XPHandler : MonoBehaviour
     // XP mover class
     public class XPInstance
     {
-        public XPInstance(Transform transform, Vector2 startPos, float speed= 5f, float timer = 15f)
+        public XPInstance(Transform transform, Vector2 startPos, float speed = 5f, float timer = 15f)
         {
             this.transform = transform;
             this.startPos = startPos;
@@ -61,7 +61,7 @@ public class XPHandler : MonoBehaviour
                     xpList[a].speed += speedIncreaseModifier;
 
                     // Check distance
-                    if (Vector2.Distance(xpList[a].transform.position, player.position) < targetDistanceCheck)
+                    if (Vector2.Distance(xpList[a].transform.position, player.position) < 1f)
                     {
                         Destroy(xpList[a].transform.gameObject);
                         xpList.RemoveAt(a);
@@ -111,7 +111,6 @@ public class XPHandler : MonoBehaviour
     {
         for (int i = 0; i < amount; i++)
         {
-            Debug.Log(Random.Range(-startDistance, startDistance));
             XP newXp = Instantiate(xpObject, startPos, Quaternion.identity);
             newXp.Setup(new Vector2(startPos.x + Random.Range(-startDistance, startDistance),
                 startPos.y + Random.Range(-startDistance, startDistance)));
@@ -121,7 +120,7 @@ public class XPHandler : MonoBehaviour
     // Register mover
     public XPInstance Register(Transform transform, Vector2 startPos)
     {
-        XPInstance newXP = new XPInstance(transform, startPos, startSpeed);
+        XPInstance newXP = new XPInstance(transform, startPos);
         xpList.Add(newXP);
         return newXP;
     }
