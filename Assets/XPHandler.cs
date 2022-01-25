@@ -10,7 +10,7 @@ public class XPHandler : MonoBehaviour
     // XP mover class
     public class XPInstance
     {
-        public XPInstance(Transform transform, Vector2 startPos, float speed = 5f, float timer = 15f)
+        public XPInstance(Transform transform, Vector2 startPos, float speed = 10f, float timer = 15f)
         {
             this.transform = transform;
             this.startPos = startPos;
@@ -36,7 +36,7 @@ public class XPHandler : MonoBehaviour
     public XP xpObject;
     public Transform player;
     public float startSpeed = 5f;
-    public float startDistance = 5f;
+    public float startDistance = 10f;
     public float speedFatigueModifier = 0.1f;
     public float speedIncreaseModifier = 0.1f;
     public float targetDistanceCheck = 1f;
@@ -61,7 +61,7 @@ public class XPHandler : MonoBehaviour
                     xpList[a].speed += speedIncreaseModifier;
 
                     // Check distance
-                    if (Vector2.Distance(xpList[a].transform.position, player.position) < 1f)
+                    if (Vector2.Distance(xpList[a].transform.position, player.position) < targetDistanceCheck)
                     {
                         Destroy(xpList[a].transform.gameObject);
                         xpList.RemoveAt(a);
