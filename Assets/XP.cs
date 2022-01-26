@@ -17,7 +17,6 @@ public class XP : MonoBehaviour
     // On collision with player
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("Moving to target");
         xpReference.isMoving = true;
     }
 }

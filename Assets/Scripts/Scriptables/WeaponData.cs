@@ -2,21 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Card", menuName = "Cards/Weapon")]
-public class WeaponData : CardData
+public class WeaponData : MonoBehaviour
 {
-    public float damage;
-    public float cooldown;
-    public float speed;
-    public float bloom;
-    public float pierces;
-    public float bullets;
-    public float lifetime;
-    public Bullet bullet;
-    public bool tracking;
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
 
-    public Sprite model;
-    public Material material;
-    public Material trail;
-    public ParticleSystem effect;
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
 }

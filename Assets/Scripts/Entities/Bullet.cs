@@ -19,7 +19,7 @@ public class Bullet : Entity
     private float lifetime;
 
     // Set up the bullet
-    public virtual void Setup(WeaponData weapon)
+    public virtual void Setup(PrimaryData weapon)
     {
         // Set renderer componenets
         sprite.sprite = weapon.model;

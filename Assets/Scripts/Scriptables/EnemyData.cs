@@ -17,4 +17,7 @@ public class EnemyData : IdentifiableScriptableObject
     public float spawnTime;
     [Range(0, 100)]
     public int spawnChance;
+    public bool rotate;
+    public float rotateSpeed;
+    public bool isDashResistent;
 }

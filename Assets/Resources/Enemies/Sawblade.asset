@@ -10,19 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3bb79e06c46f6ad4498c248143bf61ee, type: 3}
-  m_Name: Triangle
+  m_Name: Sawblade
   m_EditorClassIdentifier: 
-  internalId: 4d714316-d01e-4528-9aa6-4b9f24072acc
-  createdAtTicks: 637786475070661649
-  obj: {fileID: 8071768145869598022, guid: fb9add62e63ec4a4aa5e58f9c7d776b7, type: 3}
+  internalId: 27787722-b5e5-436e-bf8c-d283dbe3b5ab
+  createdAtTicks: 637787267793713275
+  obj: {fileID: 8071768145869598022, guid: bf377f8c51d006641ae1162aa9595d89, type: 3}
   material: {fileID: 2100000, guid: de44ca3cc974af545a2feb8b4148a6fa, type: 2}
   deathParticle: {fileID: 2055333318299029104, guid: db7f2bd89549db747aade2de38a9a6d3, type: 3}
-  name: Triangle
-  desc: Moves in a straight line towards you. Nothing special.
-  health: 2
-  damage: 1
-  speed: 15
-  xpDrops: 5
+  name: Sawblade
+  desc: A nasty spinning blade of death. Dashing into it will inflict damage.
+  health: 3
+  damage: 2
+  speed: 20
+  xpDrops: 8
   spawnTime: 0
-  spawnChance: 100
-  isDashResistent: 0
+  spawnChance: 25
+  rotate: 1
+  rotateSpeed: 120
+  isDashResistent: 1

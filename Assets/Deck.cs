@@ -13,17 +13,19 @@ public class Deck : MonoBehaviour
     public Transform barrel;
 
     // Default card
-    public WeaponData defaultWeapon;
+    public PrimaryData defaultWeapon;
     public bool useDefaultCard;
 
     // Deck size
-    public int _weaponAmount;
     public int _statAmount;
     public int _powerupAmount;
 
     // Deck slots
-    private WeaponData[] weaponSlots;
-    private float[] weaponCooldowns;
+    private PrimaryData primary;
+    private PrimaryData secondary;
+    private float primaryCooldown;
+    private float secondaryCooldown;
+
     private StatData[] statSlots;
     private PowerupData[] powerupSlots;
 
@@ -36,46 +38,66 @@ public class Deck : MonoBehaviour
         flags = new Dictionary<Stat, bool>();
 
         // Create starting slots
-        weaponSlots = new WeaponData[_weaponAmount];
-        weaponCooldowns = new float[_weaponAmount];
         statSlots = new StatData[_statAmount];
         powerupSlots = new PowerupData[_powerupAmount];
 
         // Set default slot
-        if (useDefaultCard && weaponSlots.Length > 0)
-            SetWeaponSlot(0, defaultWeapon);
+        if (useDefaultCard)
+            SetWeaponSlot(true, defaultWeapon);
     }
 
     // Calculate cooldown
     public void Update()
     {
-        if (Input.GetKey(Keybinds.shoot)) Shoot();
+        if (Input.GetKey(Keybinds.shoot)) Shoot(true);
 
-        for(int i = 0; i < weaponCooldowns.Length; i++)
-        {
-            if (weaponCooldowns[i] > 0)
-                weaponCooldowns[i] -= Time.deltaTime;
-        }
+        if (primaryCooldown > 0)
+            primaryCooldown -= Time.deltaTime;
+
+        if (secondaryCooldown > 0)
+            secondaryCooldown -= Time.deltaTime;
     }
 
     // Set card slot
-    public void SetWeaponSlot(int index, WeaponData weapon)
+    public void SetWeaponSlot(bool isPrimary, PrimaryData weapon)
     {
-        weaponSlots[index] = weapon;
-        weaponCooldowns[index] = weapon.cooldown;
+        if (isPrimary)
+        {
+            primary = weapon;
+            primaryCooldown = weapon.cooldown;
+        }
+        else
+        {
+            secondary = weapon;
+            secondaryCooldown = weapon.cooldown;
+        }
     }
 
     // Shoot method
-    public void Shoot()
+    public void Shoot(bool isPrimary)
     {
-        for (int i = 0; i < weaponSlots.Length; i++)
+        if (isPrimary)
         {
-            if (weaponSlots[i] != null && weaponCooldowns[i] <= 0)
+            if (primaryCooldown <= 0)
             {
-                BulletHandler.active.CreateBullet(weaponSlots[i], barrel.position, transform.rotation);
-                weaponCooldowns[i] = weaponSlots[i].cooldown;
+                BulletHandler.active.CreateBullet(primary, barrel.position, transform.rotation);
+                primaryCooldown = primary.cooldown;
             }
         }
+        else
+        {
+            if (secondaryCooldown <= 0)
+            {
+                BulletHandler.active.CreateBullet(secondary, barrel.position, transform.rotation);
+                secondaryCooldown = secondary.cooldown;
+            }
+        }
+    }
+
+    // Calculate stat
+    public static float CalculateStat(Stat type, float amount)
+    {
+        return amount + GetAdditions(type) * GetMultiplier(type);
     }
 
     // Get multiplier

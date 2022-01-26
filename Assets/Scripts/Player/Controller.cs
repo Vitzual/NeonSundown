@@ -7,6 +7,11 @@ public class Controller : MonoBehaviour
     // GameObject child transforms
     private Rigidbody2D body;
 
+    // Base stat variables
+    public float dashDamage = 3f;
+    public float dashTimeSlowdown = 0.8f;
+    public float dashTimeRecoveryValue = 0.1f;
+
     // Movement variables
     public float moveSpeed = 5f;
     public float dashSpeed = 25f;
@@ -17,6 +22,7 @@ public class Controller : MonoBehaviour
     // Dash flag
     private bool isDashing = false;
     private bool dashOnCooldown = false;
+    private bool dashQuickReset = false;
 
     // Internal input measurements
     private float horizontal;
@@ -71,8 +77,8 @@ public class Controller : MonoBehaviour
             if (dash <= 0)
             {
                 isDashing = false;
-                dashOnCooldown = true;
                 dash = dashCooldown;
+                dashOnCooldown = !dashQuickReset;
             }
         }
 
@@ -89,10 +95,11 @@ public class Controller : MonoBehaviour
             isDashing = true;
             dash = dashTimer;
             speed = dashSpeed;
+            dashQuickReset = false;
         }
     }
 
-   // Rotates the players head towards the mouse
+    // Rotates the players head towards the mouse
     private void RotateToMouse()
     {
         Vector3 mousePos = Input.mousePosition;
@@ -103,5 +110,39 @@ public class Controller : MonoBehaviour
 
         float angle = Mathf.Atan2(mousePos.y, mousePos.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+    }
+
+    // On collision with enemies
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+        // Grab the enemy component attached to the enemy
+        Enemy enemy = collision.collider.GetComponent<Enemy>();
+
+        // Check if the collision was indeed an enemy
+        if (enemy != null)
+        {
+            if (isDashing)
+            {
+                if (enemy.IsDashResistant())
+                {
+                    // ow
+                }
+                else
+                {
+                    // Damage the enemy
+                    enemy.Damage(Deck.CalculateStat(Stat.DashDamage, dashDamage));
+
+                    // Reset dash
+                    isDashing = true;
+                    dash = dashTimer / 2;
+                    speed = dashSpeed;
+                    dashQuickReset = true;
+
+                    // Slow down time
+                    // Time.timeScale = 0.1f;
+                    // Time.fixedDeltaTime = 0.002f;
+                }
+            }
+        }
     }
 }

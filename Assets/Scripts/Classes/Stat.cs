@@ -8,5 +8,7 @@ public enum Stat
     Bullets,
     Pierces,
     Tracking,
-    Lifetime
+    Lifetime,
+    DashDamage,
+    DashSpeed
 }

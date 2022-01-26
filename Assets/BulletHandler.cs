@@ -13,11 +13,8 @@ public class BulletHandler : MonoBehaviour
     // Start method
     public void Start() { active = this; }
 
-    // Handles enemy movement every frame
-    public void Update() { MoveBullets(); }
-
     // Move normal enemies
-    public virtual void MoveBullets()
+    public void Update()
     {
         // Move enemies each frame towards their target
         for (int a = 0; a < bullets.Count; a++)
@@ -34,7 +31,7 @@ public class BulletHandler : MonoBehaviour
         }
     }
     // Create a new active enemy instance
-    public void CreateBullet(WeaponData weapon, Vector2 position, Quaternion rotation, bool adjustRotation = true)
+    public void CreateBullet(PrimaryData weapon, Vector2 position, Quaternion rotation, bool adjustRotation = true)
     {
         // Create the tile
         GameObject lastObj = Instantiate(weapon.bullet.gameObject, position, rotation);

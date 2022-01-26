@@ -8,6 +8,9 @@ public class Enemy : Entity
     // Scriptable object
     private EnemyData enemyData;
 
+    // Rotation thing
+    public Transform rotator;
+
     // Internal runtime variables
     private float health;
     private float maxHealth;
@@ -54,11 +57,19 @@ public class Enemy : Entity
     {
         if (target != null)
         {
-            // Rotate to the target
-            float angle = Mathf.Atan2(target.transform.position.y - transform.position.y, 
-                target.transform.position.x - transform.position.x) * Mathf.Rad2Deg;
-            Quaternion targetRotation = Quaternion.Euler(new Vector3(0, 0, angle - 90f));
-            transform.rotation = targetRotation;
+            if (enemyData.rotate)
+            {
+                // Rotate if it says to 
+                rotator.Rotate(Vector3.forward, enemyData.rotateSpeed * Time.deltaTime);
+            }
+            else
+            {
+                // Rotate to the target
+                float angle = Mathf.Atan2(target.transform.position.y - transform.position.y,
+                    target.transform.position.x - transform.position.x) * Mathf.Rad2Deg;
+                Quaternion targetRotation = Quaternion.Euler(new Vector3(0, 0, angle - 90f));
+                transform.rotation = targetRotation;
+            }
 
             // Move towards the target
             float step = enemyData.speed * Time.deltaTime;
@@ -70,5 +81,11 @@ public class Enemy : Entity
     public Material GetMaterial()
     {
         return enemyData.material;
+    }
+
+    // See if enemy can take dash damage
+    public bool IsDashResistant()
+    {
+        return enemyData.isDashResistent;
     }
 }

@@ -71,7 +71,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 2225fcecbdce2a148ad1a11858a4c5f1, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9970331333ff37d4e97f084e5e7db2f7, type: 3}
   m_Color: {r: 0.3018868, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -93,9 +93,9 @@ GameObject:
   - component: {fileID: 8071768145869598027}
   - component: {fileID: 2187755415249497648}
   - component: {fileID: 8071768145869598020}
-  - component: {fileID: 8071768145869598021}
+  - component: {fileID: 4671508394471602760}
   m_Layer: 0
-  m_Name: Triangle
+  m_Name: Sawblade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -128,6 +128,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83b4a6d62eaea864e826931f2a511f80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotator: {fileID: 8071768146122005024}
 --- !u!50 &8071768145869598020
 Rigidbody2D:
   serializedVersion: 4
@@ -149,8 +150,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!60 &8071768145869598021
-PolygonCollider2D:
+--- !u!58 &4671508394471602760
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -163,21 +164,8 @@ PolygonCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 0, y: 2}
-      - {x: -2.25, y: -1.9}
-      - {x: 0, y: -1.4}
-      - {x: 2.25, y: -1.9}
+  serializedVersion: 2
+  m_Radius: 3
 --- !u!1 &8071768146122005025
 GameObject:
   m_ObjectHideFlags: 0
@@ -204,7 +192,7 @@ Transform:
   m_GameObject: {fileID: 8071768146122005025}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.4, y: 1.4, z: 1}
   m_Children:
   - {fileID: 8071768145815941774}
   m_Father: {fileID: 8071768145869598027}
@@ -250,7 +238,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 86143abb9690bae449e374d4dedc18af, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 211332b1008ea4d439d3200fd7a59846, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
