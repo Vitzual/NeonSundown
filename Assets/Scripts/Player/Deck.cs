@@ -11,12 +11,20 @@ public class Deck : MonoBehaviour
 
     // Barrel location
     public Transform barrel;
+    public Transform rotator;
 
     // Default card
     public PrimaryData defaultWeapon;
-    public bool useDefaultCard;
+    public bool useDefaultWeapon;
+
+    // Starting cards
+    public List<WeaponData> startingWeaponCards;
+    public List<StatData> startingStatCards;
+    public List<AbilityData> startingAbilityCards;
+    public bool useStartingCards;
 
     // Deck size
+    public int _weaponAmount;
     public int _statAmount;
     public int _powerupAmount;
 
@@ -26,8 +34,13 @@ public class Deck : MonoBehaviour
     private float primaryCooldown;
     private float secondaryCooldown;
 
+    // Scriptable and weapon reference
+    private Weapon[] weaponInstances;
+    private WeaponData[] weaponSlots;
+
+    // Scriptable only
     private StatData[] statSlots;
-    private PowerupData[] powerupSlots;
+    private AbilityData[] powerupSlots;
 
     // On start, create decks
     public void Start()
@@ -38,28 +51,70 @@ public class Deck : MonoBehaviour
         flags = new Dictionary<Stat, bool>();
 
         // Create starting slots
+        weaponInstances = new Weapon[_weaponAmount];
+        weaponSlots = new WeaponData[_weaponAmount];
         statSlots = new StatData[_statAmount];
-        powerupSlots = new PowerupData[_powerupAmount];
+        powerupSlots = new AbilityData[_powerupAmount];
 
         // Set default slot
-        if (useDefaultCard)
-            SetWeaponSlot(true, defaultWeapon);
+        if (useDefaultWeapon)
+            SetPrimarySlot(true, defaultWeapon);
+
+        // Set starting weapons
+        if (useStartingCards)
+        {
+            for (int i = 0; i < startingWeaponCards.Count; i++)
+                SetWeaponSlot(i, startingWeaponCards[i]);
+        }
     }
 
     // Calculate cooldown
     public void Update()
     {
+        // Check if LMB input detected
         if (Input.GetKey(Keybinds.shoot)) Shoot(true);
 
+        // Update primary cooldown
         if (primaryCooldown > 0)
             primaryCooldown -= Time.deltaTime;
 
+        // Update secondary cooldown
         if (secondaryCooldown > 0)
             secondaryCooldown -= Time.deltaTime;
+
+        // Iterate through all weapon instances
+        for (int i = 0; i < weaponInstances.Length; i++) 
+        {
+            if (weaponInstances[i] != null)
+                weaponInstances[i].Use();
+        }
     }
 
-    // Set card slot
-    public void SetWeaponSlot(bool isPrimary, PrimaryData weapon)
+    // Set weapon card slot
+    public void SetWeaponSlot(int slot, WeaponData weapon)
+    {
+        if (slot < weaponSlots.Length)
+        {
+            // Remove old weapon
+            if (weaponInstances[slot] != null)
+                Destroy(weaponInstances[slot].gameObject);
+
+            // Set new weapon SO
+            weaponSlots[slot] = weapon;
+
+            // Create the new weapon instance
+            Weapon newWeapon = Instantiate(weapon.obj, transform.position, Quaternion.identity).GetComponent<Weapon>();
+            newWeapon.Setup(weapon, transform);
+            weaponInstances[slot] = newWeapon;
+
+            // Check if player is parent
+            if (weapon.setPlayerAsParent)
+                newWeapon.transform.SetParent(transform);
+        }
+    }
+
+    // Set primary card slot
+    public void SetPrimarySlot(bool isPrimary, PrimaryData weapon)
     {
         if (isPrimary)
         {
@@ -80,7 +135,7 @@ public class Deck : MonoBehaviour
         {
             if (primaryCooldown <= 0)
             {
-                BulletHandler.active.CreateBullet(primary, barrel.position, transform.rotation);
+                BulletHandler.active.CreateBullet(primary, barrel.position, rotator.rotation);
                 primaryCooldown = primary.cooldown;
             }
         }
@@ -88,7 +143,7 @@ public class Deck : MonoBehaviour
         {
             if (secondaryCooldown <= 0)
             {
-                BulletHandler.active.CreateBullet(secondary, barrel.position, transform.rotation);
+                BulletHandler.active.CreateBullet(secondary, barrel.position, rotator.rotation);
                 secondaryCooldown = secondary.cooldown;
             }
         }

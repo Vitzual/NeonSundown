@@ -29,11 +29,16 @@ public class Bullet : Entity
         deathEffect = weapon.effect;
 
         // Set bullet stats
-        damage = weapon.damage * Deck.GetMultiplier(Stat.Damage) + Deck.GetAdditions(Stat.Damage);
-        speed = weapon.speed * Deck.GetMultiplier(Stat.Speed) + Deck.GetAdditions(Stat.Damage);
-        pierce = weapon.pierces * Deck.GetMultiplier(Stat.Pierces) + Deck.GetAdditions(Stat.Damage);
-        lifetime = weapon.lifetime * Deck.GetMultiplier(Stat.Lifetime) + Deck.GetAdditions(Stat.Damage);
+        damage = Deck.CalculateStat(Stat.Damage, weapon.damage);
+        speed = Deck.CalculateStat(Stat.Speed, weapon.speed);
+        pierce = Deck.CalculateStat(Stat.Pierces, weapon.pierces);
         tracking = (weapon.tracking || Deck.GetFlag(Stat.Tracking)) && target != null;
+
+        // Give bullets a bit of randomness
+        float lowValue = Deck.CalculateStat(Stat.Lifetime, weapon.lifetime) - 0.1f;
+        float highValue = Deck.CalculateStat(Stat.Lifetime, weapon.lifetime) + 0.1f;
+        if (lowValue <= 0f) lowValue = 0.001f;
+        lifetime = Random.Range(lowValue, highValue);
     }
 
     // Moves the bullet

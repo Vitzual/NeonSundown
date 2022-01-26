@@ -10,11 +10,12 @@ public class EnemySpawner : MonoBehaviour
     // Tracking
     private float timer;
     private float cooldown;
+    public float _cooldown;
 
     private void Start()
     {
         timer = 0f;
-        cooldown = 1f;
+        cooldown = _cooldown;
     }
 
     // Update is called once per frame
@@ -32,7 +33,7 @@ public class EnemySpawner : MonoBehaviour
             cooldown -= Time.deltaTime;
             return;
         }
-        else cooldown = 1f;
+        else cooldown = _cooldown;
 
         // Iterate through enemies
         foreach(EnemyData enemy in Scriptables.enemies)

@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 153c17b437486e247978b2d4dcab4b10, type: 3}
+  m_Name: Scythe
+  m_EditorClassIdentifier: 
+  internalId: b2a11d16-f04c-40b4-a600-90323e422238
+  createdAtTicks: 637787430929397253
+  name: Scythe
+  description: Creates a scythe that rotates around the player, slicing up whatever
+    comes in it's path.
+  dropchance: 0.5
+  obj: {fileID: 838190405679987182, guid: 24d18b76fa599134aad309b14868aa5d, type: 3}
+  damage: 5
+  speed: 15
+  rotateSpeed: 600
+  orbitSpeed: 150
+  material: {fileID: 2100000, guid: 797858e7ce56098428f00ca6f5601518, type: 2}
+  setPlayerAsParent: 1
