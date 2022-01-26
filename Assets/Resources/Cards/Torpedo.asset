@@ -17,24 +17,26 @@ MonoBehaviour:
   name: Torpedos
   description: Fires torpedos randomly in all directions. Beautiful, beautiful chaos.
   dropchance: 0.5
-  obj: {fileID: 649058797943903191, guid: 4cf86e87db440044398a93f1d2f6872f, type: 3}
   damage: 25
-  cooldown: 0.5
+  cooldown: 1
   moveSpeed: 40
-  rotateSpeed: 150
+  rotateSpeed: 80
   bloom: 0
   pierces: 0
   bullets: 0
   lifetime: 3
+  randomDirection: 1
   randomTarget: 1
   trackTarget: 1
   lockTarget: 0
   bullet: {fileID: 5224849746800538397, guid: e460744ba85ef65499bb0b82f6cec518, type: 3}
-  useSprite: 0
+  obj: {fileID: 649058797943903191, guid: 4cf86e87db440044398a93f1d2f6872f, type: 3}
+  setPlayerAsParent: 1
   useMaterial: 0
   useTrail: 0
-  sprite: {fileID: 0}
+  useParticle: 1
   material: {fileID: 2100000, guid: 2acce2318e344e24bbf3b0cc69b0278f, type: 2}
   trail: {fileID: 2100000, guid: 2acce2318e344e24bbf3b0cc69b0278f, type: 2}
-  effect: {fileID: 993855083006936043, guid: 01c48aa84a2ea6c49901482836dcdd15, type: 3}
-  setPlayerAsParent: 1
+  particle: {fileID: 993855083006936043, guid: 01c48aa84a2ea6c49901482836dcdd15, type: 3}
+  shakeScreenOnSpawn: 0
+  shakeScreenOnDeath: 1

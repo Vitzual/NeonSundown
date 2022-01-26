@@ -2,10 +2,13 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using Sirenix.OdinInspector;
+using UnityEngine;
+
+// Editor Only
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
-using UnityEngine;
 
 // Script by BlackPhoenix134
 //
@@ -19,10 +22,10 @@ public class IdentifiableScriptableObject : ScriptableObject
     private static readonly Dictionary<string, IdentifiableScriptableObject> StringToObject =
         new Dictionary<string, IdentifiableScriptableObject>();
 
-    [SerializeField]
+    [SerializeField, ReadOnly]
     private string internalId;
 
-    [SerializeField]
+    [SerializeField, ReadOnly]
     private long createdAtTicks;
 
     [NonSerialized]

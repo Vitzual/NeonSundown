@@ -1,23 +1,37 @@
-using System.Collections;
-using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Enemy", menuName = "Entities/Enemy")]
 public class EnemyData : IdentifiableScriptableObject
 {
-    public GameObject obj;
-    public Material material;
-    public ParticleSystem deathParticle;
+    [BoxGroup("Enemy Info")]
     public new string name;
-    [TextArea] public string desc;
+    [BoxGroup("Enemy Info"), TextArea]
+    public string desc;
+    [BoxGroup("Enemy Info")]
+    public GameObject obj;
+
+    [BoxGroup("Enemy Stats")]
     public float health;
+    [BoxGroup("Enemy Stats")]
     public float damage;
+    [BoxGroup("Enemy Stats")]
     public float speed;
-    public int xpDrops;
-    public float spawnTime;
-    [Range(0, 100)]
-    public int spawnChance;
+    [BoxGroup("Enemy Stats")]
     public bool rotate;
+    [BoxGroup("Enemy Stats")]
     public float rotateSpeed;
+    [BoxGroup("Enemy Stats")]
     public bool isDashResistent;
+    [BoxGroup("Enemy Stats")]
+    public float spawnTime;
+    [BoxGroup("Enemy Stats"), Range(0, 100)]
+    public int spawnChance;
+    [BoxGroup("Enemy Stats")]
+    public int xpDrops;
+
+    [BoxGroup("Rendering Variables")]
+    public Material material;
+    [BoxGroup("Rendering Variables")]
+    public ParticleSystem deathParticle;
 }

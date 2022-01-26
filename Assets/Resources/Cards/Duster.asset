@@ -17,7 +17,6 @@ MonoBehaviour:
   name: Duster
   description: The basic starting weapon. Best to get rid of this one.
   dropchance: 0
-  obj: {fileID: 0}
   damage: 1
   cooldown: 0.2
   moveSpeed: 180
@@ -26,13 +25,17 @@ MonoBehaviour:
   pierces: 0
   bullets: 1
   lifetime: 0.3
-  tracking: 0
+  randomTarget: 0
+  trackTarget: 0
+  lockTarget: 0
   bullet: {fileID: 4616838733166897725, guid: afcb6e3c47783de4080790735a569129, type: 3}
-  useSprite: 0
-  useMaterial: 0
+  obj: {fileID: 0}
+  setPlayerAsParent: 0
+  useMaterial: 1
   useTrail: 0
-  sprite: {fileID: 0}
+  useParticle: 1
   material: {fileID: 2100000, guid: 70b93e4f16329e64d88d2b955a631547, type: 2}
   trail: {fileID: 2100000, guid: 70b93e4f16329e64d88d2b955a631547, type: 2}
-  effect: {fileID: 8187003936069489464, guid: ca8dd1dc0d1584743b0edd08671aa666, type: 3}
-  setPlayerAsParent: 0
+  particle: {fileID: 8187003936069489464, guid: ca8dd1dc0d1584743b0edd08671aa666, type: 3}
+  shakeScreenOnSpawn: 0
+  shakeScreenOnDeath: 0
