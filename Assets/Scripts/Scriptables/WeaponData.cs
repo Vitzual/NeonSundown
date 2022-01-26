@@ -2,17 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeaponData : MonoBehaviour
+[CreateAssetMenu(fileName = "New Card", menuName = "Cards/Weapon")]
+public class WeaponData : CardData
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public Weapon weapon;
+    public float damage;
+    public float speed;
+    public Material material;
 }
