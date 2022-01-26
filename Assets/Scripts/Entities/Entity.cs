@@ -5,11 +5,12 @@ using UnityEngine;
 public class Entity : MonoBehaviour
 {
     // The particle effect for this bullet
+    public bool rotateParticle = false;
     protected Material deathMaterial;
     protected ParticleSystem deathEffect;
 
     // Creates a particle and sets the material
-    public void CreateParticle(bool rotate = false)
+    public void CreateParticle()
     {
         // Check if has death effect
         if (deathEffect == null) return;
@@ -21,6 +22,6 @@ public class Entity : MonoBehaviour
         holder.trailMaterial = deathMaterial;
 
         // Rotate if set to true
-        if (rotate) holder.transform.rotation *= Quaternion.Euler(-90, 90, 0);
+        if (rotateParticle) holder.transform.rotation *= Quaternion.Euler(-90, 90, 0);
     }
 }

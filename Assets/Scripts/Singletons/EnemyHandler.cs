@@ -75,4 +75,11 @@ public class EnemyHandler : MonoBehaviour
             else return new Vector2(player.position.x + Random.Range(-spawnRange, spawnRange), player.position.y - spawnRange);
         }
     }
+
+    // Returns the closest enemy
+    public Enemy GetRandomEnemy()
+    {
+        if (enemies.Count == 0) return null;
+        else return enemies[Random.Range(0, enemies.Count)];
+    }
 }

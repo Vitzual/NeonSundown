@@ -14,7 +14,7 @@ public class Deck : MonoBehaviour
     public Transform rotator;
 
     // Default card
-    public PrimaryData defaultWeapon;
+    public WeaponData defaultWeapon;
     public bool useDefaultWeapon;
 
     // Starting cards
@@ -29,10 +29,8 @@ public class Deck : MonoBehaviour
     public int _powerupAmount;
 
     // Deck slots
-    private PrimaryData primary;
-    private PrimaryData secondary;
-    private float primaryCooldown;
-    private float secondaryCooldown;
+    private WeaponData primary;
+    private float cooldown;
 
     // Scriptable and weapon reference
     private Weapon[] weaponInstances;
@@ -58,7 +56,7 @@ public class Deck : MonoBehaviour
 
         // Set default slot
         if (useDefaultWeapon)
-            SetPrimarySlot(true, defaultWeapon);
+            SetPrimarySlot(defaultWeapon);
 
         // Set starting weapons
         if (useStartingCards)
@@ -72,15 +70,11 @@ public class Deck : MonoBehaviour
     public void Update()
     {
         // Check if LMB input detected
-        if (Input.GetKey(Keybinds.shoot)) Shoot(true);
+        if (Input.GetKey(Keybinds.shoot)) Shoot();
 
         // Update primary cooldown
-        if (primaryCooldown > 0)
-            primaryCooldown -= Time.deltaTime;
-
-        // Update secondary cooldown
-        if (secondaryCooldown > 0)
-            secondaryCooldown -= Time.deltaTime;
+        if (cooldown > 0)
+            cooldown -= Time.deltaTime;
 
         // Iterate through all weapon instances
         for (int i = 0; i < weaponInstances.Length; i++) 
@@ -114,38 +108,19 @@ public class Deck : MonoBehaviour
     }
 
     // Set primary card slot
-    public void SetPrimarySlot(bool isPrimary, PrimaryData weapon)
+    public void SetPrimarySlot(WeaponData weapon)
     {
-        if (isPrimary)
-        {
-            primary = weapon;
-            primaryCooldown = weapon.cooldown;
-        }
-        else
-        {
-            secondary = weapon;
-            secondaryCooldown = weapon.cooldown;
-        }
+        primary = weapon;
+        cooldown = weapon.cooldown;
     }
 
     // Shoot method
-    public void Shoot(bool isPrimary)
+    public void Shoot()
     {
-        if (isPrimary)
+        if (cooldown <= 0)
         {
-            if (primaryCooldown <= 0)
-            {
-                BulletHandler.active.CreateBullet(primary, barrel.position, rotator.rotation);
-                primaryCooldown = primary.cooldown;
-            }
-        }
-        else
-        {
-            if (secondaryCooldown <= 0)
-            {
-                BulletHandler.active.CreateBullet(secondary, barrel.position, rotator.rotation);
-                secondaryCooldown = secondary.cooldown;
-            }
+            BulletHandler.active.CreateBullet(primary, barrel.position, rotator.rotation);
+            cooldown = primary.cooldown;
         }
     }
 

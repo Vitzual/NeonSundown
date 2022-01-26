@@ -30,8 +30,9 @@ public class BulletHandler : MonoBehaviour
             }
         }
     }
-    // Create a new active enemy instance
-    public void CreateBullet(PrimaryData weapon, Vector2 position, Quaternion rotation, bool adjustRotation = true)
+
+    // Create a new active bullet instance
+    public void CreateBullet(WeaponData weapon, Vector2 position, Quaternion rotation, bool adjustRotation = true)
     {
         // Create the tile
         GameObject lastObj = Instantiate(weapon.bullet.gameObject, position, rotation);
@@ -50,4 +51,9 @@ public class BulletHandler : MonoBehaviour
         bullets.Add(bullet);
     }
 
+    // Creates a new active bullet instance
+    public void CreateBullet()
+    {
+
+    }
 }

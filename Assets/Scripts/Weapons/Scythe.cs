@@ -20,7 +20,7 @@ public class Scythe : Weapon
     public override void Use()
     {
         rotator.Rotate(Vector3.forward, weaponData.rotateSpeed * Time.deltaTime);
-        transform.RotateAround(target.position, Vector3.forward, weaponData.orbitSpeed * Time.deltaTime);
+        transform.RotateAround(target.position, Vector3.forward, weaponData.moveSpeed * Time.deltaTime);
     }
 
     // On collision with enemy, apply damage

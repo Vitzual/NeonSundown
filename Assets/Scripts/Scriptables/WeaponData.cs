@@ -6,11 +6,29 @@ using UnityEngine;
 public class WeaponData : CardData
 {
     public Weapon obj;
+
     public float damage;
-    public float speed;
+    public float cooldown;
+    public float moveSpeed;
     public float rotateSpeed;
-    public float orbitSpeed;
+    public float bloom;
+    public float pierces;
+    public float bullets;
+    public float lifetime;
+    public bool randomTarget;
+    public bool trackTarget;
+    public bool lockTarget;
+    public Bullet bullet;
+
+    public bool useSprite;
+    public bool useMaterial;
+    public bool useTrail;
+
+    public Sprite sprite;
     public Material material;
-    public bool hasActiveInstance;
+    public Material trail;
+    public ParticleSystem effect;
+    public bool shakeScreen;
+
     public bool setPlayerAsParent;
 }
