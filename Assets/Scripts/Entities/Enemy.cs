@@ -40,7 +40,7 @@ public class Enemy : Entity
     public void Damage(float amount)
     {
         health -= amount;
-        if (health <= 0) Destroy();
+        if (IsDead()) Destroy();
     }
 
     // Destroy entity
@@ -87,5 +87,11 @@ public class Enemy : Entity
     public bool IsDashResistant()
     {
         return enemyData.isDashResistent;
+    }
+
+    // Check if enemy is dead
+    public bool IsDead()
+    {
+        return health <= 0;
     }
 }

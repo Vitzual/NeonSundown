@@ -31,8 +31,12 @@ public class WeaponData : CardData
 
     [BoxGroup("Object Instances"), Tooltip("The bullet object associated with this SO. Optional.")]
     public Bullet bullet;
+    [BoxGroup("Object Instances"), Tooltip("The sound associated with the bullet. Optional.")]
+    public AudioClip bulletSound;
     [BoxGroup("Object Instances"), Tooltip("The weapon instance associated with this SO. Optional.")]
     public Weapon obj;
+    [BoxGroup("Object Instances"), Tooltip("The sound associated with the weapon instance. Optional.")]
+    public AudioClip objSound;
     [BoxGroup("Object Instances"), Tooltip("If the weapon instance above should be set as a child of the parent.")]
     public bool setPlayerAsParent;
 

@@ -11,6 +11,9 @@ public class Bullet : Entity
     public SpriteRenderer sprite;
     public TrailRenderer trail;
 
+    // Audio source
+    public AudioSource audioSource;
+
     // The bullets target
     protected Transform target;
 
@@ -82,6 +85,10 @@ public class Bullet : Entity
     // Destroy the bullet
     public virtual void Destroy()
     {
+        // Check if bullet has a sound
+        if (weapon.objSound != null)
+            AudioPlayer.Play(weapon.objSound);
+
         CreateParticle();
         Destroy(gameObject);
     }

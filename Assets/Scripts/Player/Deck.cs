@@ -119,6 +119,7 @@ public class Deck : MonoBehaviour
     {
         if (cooldown <= 0)
         {
+            // Create bullet
             BulletHandler.active.CreateBullet(primary, barrel.position, rotator.rotation);
             cooldown = primary.cooldown;
         }

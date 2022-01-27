@@ -20,11 +20,11 @@ public class AutoShooter : Weapon
         cooldown -= Time.deltaTime;
         if (cooldown <= 0)
         {
-            if (weaponData.randomDirection)
+            if (weapon.randomDirection)
                 transform.eulerAngles = new Vector3(0, 0, Random.Range(0, 360));
 
-            BulletHandler.active.CreateBullet(weaponData, transform.position, transform.rotation);
-            cooldown = weaponData.cooldown;
+            BulletHandler.active.CreateBullet(weapon, transform.position, transform.rotation);
+            cooldown = weapon.cooldown;
         }
     }
 }

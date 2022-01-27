@@ -8,13 +8,13 @@ public class Weapon : MonoBehaviour
     protected Transform target;
 
     // Weapon data
-    protected WeaponData weaponData;
+    protected WeaponData weapon;
 
     // Set the weapon data
     public virtual void Setup(WeaponData data, Transform target = null)
     {
         this.target = target;
-        weaponData = data;
+        weapon = data;
     }
 
     public virtual void Use()

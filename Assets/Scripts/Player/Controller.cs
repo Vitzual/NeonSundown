@@ -7,6 +7,9 @@ public class Controller : MonoBehaviour
     // Transform that rotates
     public Transform rotator;
 
+    // Dashing sound
+    public AudioClip dashSound;
+
     // GameObject child transforms
     private Rigidbody2D body;
 
@@ -99,6 +102,9 @@ public class Controller : MonoBehaviour
             dash = dashTimer;
             speed = dashSpeed;
             dashQuickReset = false;
+
+            // Play dash sound
+            AudioPlayer.Play(dashSound);
         }
     }
 

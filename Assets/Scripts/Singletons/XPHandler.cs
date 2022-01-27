@@ -34,6 +34,7 @@ public class XPHandler : MonoBehaviour
 
     // Target
     public XP xpObject;
+    public AudioClip xpSound;
     public Transform player;
     public float startSpeed = 5f;
     public float startDistance = 10f;
@@ -63,6 +64,7 @@ public class XPHandler : MonoBehaviour
                     // Check distance
                     if (Vector2.Distance(xpList[a].transform.position, player.position) < targetDistanceCheck)
                     {
+                        AudioPlayer.Play(xpSound);
                         Destroy(xpList[a].transform.gameObject);
                         xpList.RemoveAt(a);
                         a--;

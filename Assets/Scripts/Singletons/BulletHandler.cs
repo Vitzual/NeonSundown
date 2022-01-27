@@ -49,11 +49,9 @@ public class BulletHandler : MonoBehaviour
 
         // Add to enemies list
         bullets.Add(bullet);
-    }
 
-    // Creates a new active bullet instance
-    public void CreateBullet()
-    {
-
+        // Check if bullet has a sound
+        if (weapon.bulletSound != null)
+            AudioPlayer.Play(weapon.bulletSound);
     }
 }
