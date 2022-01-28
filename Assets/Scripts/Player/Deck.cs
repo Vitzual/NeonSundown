@@ -36,7 +36,7 @@ public class Deck : MonoBehaviour
     private float cooldown;
 
     // Scriptable and weapon reference
-    private Weapon[] weaponInstances;
+    private List<Weapon> weaponInstances;
     private StatData[] statSlots;
     private AbilityData[] powerupSlots;
 
@@ -52,7 +52,7 @@ public class Deck : MonoBehaviour
         flags = new Dictionary<Stat, bool>();
 
         // Create starting slots
-        weaponInstances = new Weapon[_weaponAmount];
+        weaponInstances = new List<Weapon>();
         statSlots = new StatData[_statAmount];
         powerupSlots = new AbilityData[_powerupAmount];
 
@@ -71,6 +71,9 @@ public class Deck : MonoBehaviour
     // Calculate cooldown
     public void Update()
     {
+        // Check if something is open
+        if (Dealer.isOpen) return;
+
         // Check if LMB input detected
         if (Input.GetKey(Keybinds.shoot)) UseActive();
 
@@ -79,7 +82,7 @@ public class Deck : MonoBehaviour
             cooldown -= Time.deltaTime;
 
         // Iterate through all weapon instances
-        for (int i = 0; i < weaponInstances.Length; i++) 
+        for (int i = 0; i < weaponInstances.Count; i++) 
         {
             if (weaponInstances[i] != null)
                 weaponInstances[i].Use();
@@ -122,6 +125,7 @@ public class Deck : MonoBehaviour
         // Create the new weapon instance
         Weapon newWeapon = Instantiate(weapon.obj, transform.position, Quaternion.identity).GetComponent<Weapon>();
         newWeapon.Setup(weapon, transform);
+        weaponInstances.Add(newWeapon);
 
         // Check if player is parent
         if (weapon.setPlayerAsParent)

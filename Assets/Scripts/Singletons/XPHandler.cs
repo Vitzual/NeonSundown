@@ -48,6 +48,9 @@ public class XPHandler : MonoBehaviour
     // Move normal enemies
     public void FixedUpdate()
     {
+        // Check if something is open
+        if (Dealer.isOpen) return;
+
         // Move enemies each frame towards their target
         for (int a = 0; a < xpList.Count; a++)
         {

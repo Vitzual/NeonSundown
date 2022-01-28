@@ -9,5 +9,9 @@ public class CardData : IdentifiableScriptableObject
     [BoxGroup("Card Info")]
     [TextArea] public string description;
     [BoxGroup("Card Info")]
-    public float dropchance;
+    public bool canDrop;
+    [BoxGroup("Card Sprite")]
+    public Sprite sprite;
+    [BoxGroup("Card Info")]
+    public Color color;
 }

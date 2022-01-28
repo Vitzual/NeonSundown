@@ -21,12 +21,12 @@ public class EnemyHandler : MonoBehaviour
     // Start method
     public void Start() { active = this; }
 
-    // Handles enemy movement every frame
-    public void FixedUpdate() { MoveEnemies(); }
-
     // Move normal enemies
-    public virtual void MoveEnemies()
+    public void FixedUpdate()
     {
+        // Check if something is open
+        if (Dealer.isOpen) return;
+
         // Move enemies each frame towards their target
         for (int a = 0; a < enemies.Count; a++)
         {

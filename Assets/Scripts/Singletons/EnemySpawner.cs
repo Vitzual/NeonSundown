@@ -21,6 +21,9 @@ public class EnemySpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Check if something is open
+        if (Dealer.isOpen) return;
+
         // Increase run timer
         timer += Time.deltaTime;
 

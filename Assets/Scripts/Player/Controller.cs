@@ -46,6 +46,9 @@ public class Controller : MonoBehaviour
     // Normal frame update
     void Update()
     {
+        // Check if something is open
+        if (Dealer.isOpen) return;
+
         // Checks for keyboard input
         CheckMovementInput();
         RotateToMouse();

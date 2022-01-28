@@ -16,6 +16,9 @@ public class BulletHandler : MonoBehaviour
     // Move normal enemies
     public void Update()
     {
+        // Check if something is open
+        if (Dealer.isOpen) return;
+
         // Move enemies each frame towards their target
         for (int a = 0; a < bullets.Count; a++)
         {
