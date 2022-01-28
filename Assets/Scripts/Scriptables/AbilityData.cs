@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Card", menuName = "Cards/Powerup")]
-public class AbilityData : ScriptableObject
+public class AbilityData : CardData
 {
     
 }

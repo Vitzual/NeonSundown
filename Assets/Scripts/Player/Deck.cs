@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Deck : MonoBehaviour
 {
+    // Cards in deck
+    private Dictionary<CardData, int> cards;
+
     // Multipliers 
     public static Dictionary<Stat, int> additions;
     public static Dictionary<Stat, float> multipliers;
@@ -29,20 +32,20 @@ public class Deck : MonoBehaviour
     public int _powerupAmount;
 
     // Deck slots
-    private WeaponData primary;
+    private WeaponData activeWeapon;
     private float cooldown;
 
     // Scriptable and weapon reference
     private Weapon[] weaponInstances;
-    private WeaponData[] weaponSlots;
-
-    // Scriptable only
     private StatData[] statSlots;
     private AbilityData[] powerupSlots;
 
     // On start, create decks
     public void Start()
     {
+        // Set new card dictionary
+        cards = new Dictionary<CardData, int>(); 
+
         // Create new dictionaries
         additions = new Dictionary<Stat, int>();
         multipliers = new Dictionary<Stat, float>();
@@ -50,19 +53,18 @@ public class Deck : MonoBehaviour
 
         // Create starting slots
         weaponInstances = new Weapon[_weaponAmount];
-        weaponSlots = new WeaponData[_weaponAmount];
         statSlots = new StatData[_statAmount];
         powerupSlots = new AbilityData[_powerupAmount];
 
         // Set default slot
         if (useDefaultWeapon)
-            SetPrimarySlot(defaultWeapon);
+            SetupActive(defaultWeapon);
 
         // Set starting weapons
         if (useStartingCards)
         {
             for (int i = 0; i < startingWeaponCards.Count; i++)
-                SetWeaponSlot(i, startingWeaponCards[i]);
+                AddCard(startingWeaponCards[i]);
         }
     }
 
@@ -70,7 +72,7 @@ public class Deck : MonoBehaviour
     public void Update()
     {
         // Check if LMB input detected
-        if (Input.GetKey(Keybinds.shoot)) Shoot();
+        if (Input.GetKey(Keybinds.shoot)) UseActive();
 
         // Update primary cooldown
         if (cooldown > 0)
@@ -85,43 +87,67 @@ public class Deck : MonoBehaviour
     }
 
     // Set weapon card slot
-    public void SetWeaponSlot(int slot, WeaponData weapon)
+    public void AddCard(CardData card)
     {
-        if (slot < weaponSlots.Length)
+        // Check if card already in inventory
+        if (cards.ContainsKey(card))
         {
-            // Remove old weapon
-            if (weaponInstances[slot] != null)
-                Destroy(weaponInstances[slot].gameObject);
+            cards[card] += 1;
+        }
+        else
+        {
+            // Add new card
+            cards.Add(card, 1);
 
-            // Set new weapon SO
-            weaponSlots[slot] = weapon;
-
-            // Create the new weapon instance
-            Weapon newWeapon = Instantiate(weapon.obj, transform.position, Quaternion.identity).GetComponent<Weapon>();
-            newWeapon.Setup(weapon, transform);
-            weaponInstances[slot] = newWeapon;
-
-            // Check if player is parent
-            if (weapon.setPlayerAsParent)
-                newWeapon.transform.SetParent(transform);
+            // Setup the card
+            if (card is WeaponData)
+                SetupPassive((WeaponData)card);
+            else if (card is StatData)
+                SetupStat((StatData)card);
+            else if (card is AbilityData)
+                SetupAbility((AbilityData)card);
         }
     }
 
     // Set primary card slot
-    public void SetPrimarySlot(WeaponData weapon)
+    public void SetupActive(WeaponData weapon)
     {
-        primary = weapon;
+        activeWeapon = weapon;
         cooldown = weapon.cooldown;
     }
 
+    // Set passive card slot
+    public void SetupPassive(WeaponData weapon)
+    {
+        // Create the new weapon instance
+        Weapon newWeapon = Instantiate(weapon.obj, transform.position, Quaternion.identity).GetComponent<Weapon>();
+        newWeapon.Setup(weapon, transform);
+
+        // Check if player is parent
+        if (weapon.setPlayerAsParent)
+            newWeapon.transform.SetParent(transform);
+    }
+
+    // Set passive card slot
+    public void SetupStat(StatData stat)
+    {
+
+    }
+
+    // Set passive card slot
+    public void SetupAbility(AbilityData ability)
+    {
+
+    }
+
     // Shoot method
-    public void Shoot()
+    public void UseActive()
     {
         if (cooldown <= 0)
         {
             // Create bullet
-            BulletHandler.active.CreateBullet(primary, barrel.position, rotator.rotation);
-            cooldown = primary.cooldown;
+            BulletHandler.active.CreateBullet(activeWeapon, barrel.position, rotator.rotation);
+            cooldown = activeWeapon.cooldown;
         }
     }
 
