@@ -23,6 +23,7 @@ MonoBehaviour:
   damage: 2
   cooldown: 0
   moveSpeed: 300
+  rotate: 0
   rotateSpeed: 600
   bloom: 0
   pierces: 0
@@ -33,9 +34,10 @@ MonoBehaviour:
   trackTarget: 0
   lockTarget: 0
   bullet: {fileID: 0}
-  bulletSound: {fileID: 8300000, guid: a22790ffcfdf864438e28f5223ad1bfa, type: 3}
+  bulletSound: {fileID: 0}
   obj: {fileID: 838190405679987182, guid: 24d18b76fa599134aad309b14868aa5d, type: 3}
-  objSound: {fileID: 8300000, guid: 341b8ef73490fa240b93c6b727b058ad, type: 3}
+  deathSound: {fileID: 8300000, guid: 341b8ef73490fa240b93c6b727b058ad, type: 3}
+  onDamageSound: {fileID: 8300000, guid: a22790ffcfdf864438e28f5223ad1bfa, type: 3}
   setPlayerAsParent: 1
   useMaterial: 0
   useTrail: 0

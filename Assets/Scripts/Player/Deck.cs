@@ -76,10 +76,11 @@ public class Deck : MonoBehaviour
 
         // Check if LMB input detected
         if (Input.GetKey(Keybinds.shoot)) UseActive();
+        if (Input.GetKey(Keybinds.debug)) Dealer.active.OpenDealer();
 
         // Update primary cooldown
         if (cooldown > 0)
-            cooldown -= Time.deltaTime;
+        cooldown -= Time.deltaTime;
 
         // Iterate through all weapon instances
         for (int i = 0; i < weaponInstances.Count; i++) 

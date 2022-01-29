@@ -10,9 +10,7 @@ public class Bullet : Entity
     // Bullet components 
     public SpriteRenderer sprite;
     public TrailRenderer trail;
-
-    // Audio source
-    public AudioSource audioSource;
+    public Transform rotator;
 
     // The bullets target
     protected Transform target;
@@ -80,16 +78,20 @@ public class Bullet : Entity
         
         // Move forward
         transform.position += transform.up * speed * Time.deltaTime;
+        
+        // Check if spinning
+        if (weapon.rotate)
+            rotator.Rotate(Vector3.forward, weapon.rotateSpeed * Time.deltaTime);
     }
 
     // Destroy the bullet
     public virtual void Destroy()
     {
         // Check if bullet has a sound
-        if (weapon.objSound != null)
-            AudioPlayer.Play(weapon.objSound);
+        if (weapon.deathSound != null)
+            AudioPlayer.Play(weapon.deathSound);
 
-        CreateParticle();
+        if (weapon.useParticle) CreateParticle();
         Destroy(gameObject);
     }
 
@@ -108,6 +110,11 @@ public class Bullet : Entity
             // Remove pierces
             pierce -= 1;
             enemy.Damage(damage);
+
+            // Check if bullet has a sound
+            if (weapon.onDamageSound != null)
+                AudioPlayer.Play(weapon.onDamageSound);
+
             if (pierce <= 0)
             {
                 deathMaterial = holder;

@@ -12,6 +12,7 @@ public class Keybinds
     public static KeyCode shoot = KeyCode.Mouse0;
     public static KeyCode escape = KeyCode.Escape;
     public static KeyCode interact = KeyCode.E;
+    public static KeyCode debug = KeyCode.Q;
     public static KeyCode hotbar_1 = KeyCode.Alpha1;
     public static KeyCode hotbar_2 = KeyCode.Alpha2;
     public static KeyCode hotbar_3 = KeyCode.Alpha3;

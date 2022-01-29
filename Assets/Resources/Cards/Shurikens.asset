@@ -18,29 +18,31 @@ MonoBehaviour:
   description: Unleashes an endless barrage of shurikens.
   canDrop: 1
   sprite: {fileID: 21300000, guid: 896391f7b085e1146847bf4749c0cf9a, type: 3}
-  color: {r: 0, g: 0.8143573, b: 1, a: 1}
+  color: {r: 0, g: 0.63664293, b: 1, a: 1}
   damage: 2
-  cooldown: 0.5
+  cooldown: 0.1
   moveSpeed: 120
+  rotate: 1
   rotateSpeed: 180
   bloom: 0
   pierces: 100
   bullets: 0
   lifetime: 1
-  randomDirection: 0
+  randomDirection: 1
   randomTarget: 0
   trackTarget: 0
   lockTarget: 0
-  bullet: {fileID: 0}
+  bullet: {fileID: 5224849746800538397, guid: b37fa456f5aa9d44396aa6eadbfaedac, type: 3}
   bulletSound: {fileID: 0}
-  obj: {fileID: 0}
-  objSound: {fileID: 0}
-  setPlayerAsParent: 0
+  obj: {fileID: 649058797943903191, guid: 4cf86e87db440044398a93f1d2f6872f, type: 3}
+  deathSound: {fileID: 0}
+  onDamageSound: {fileID: 8300000, guid: 240394c72fee0394fbf1eee52c7ff0f3, type: 3}
+  setPlayerAsParent: 1
   useMaterial: 0
   useTrail: 0
   useParticle: 0
   material: {fileID: 0}
   trail: {fileID: 0}
-  particle: {fileID: 0}
+  particle: {fileID: 2055333318299029104, guid: db7f2bd89549db747aade2de38a9a6d3, type: 3}
   shakeScreenOnSpawn: 0
   shakeScreenOnDeath: 0
