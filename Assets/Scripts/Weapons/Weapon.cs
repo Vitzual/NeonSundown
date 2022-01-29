@@ -4,6 +4,14 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
+    // Multipliers 
+    public Dictionary<Stat, int> additions;
+    public Dictionary<Stat, float> multipliers;
+
+    // Weapon level
+    public int level = 0;
+    public bool prestige = false;
+
     // Target transform
     protected Transform target;
 
@@ -16,9 +24,69 @@ public class Weapon : MonoBehaviour
         this.target = target;
         weapon = data;
     }
+    
+    // Base weapon methods
+    public virtual void Use() 
+    { 
+        // Override in parent class to tell this weapon what to do
+    }
 
-    public virtual void Use()
+    // Upgrades a weapon
+    public virtual void Upgrade() 
     {
-        // Do something
+        // Get the current level
+        WeaponData.Level newLevel;
+        if (prestige) newLevel = weapon.prestigeLevels[level];
+        else newLevel = weapon.baseLevels[level];
+
+        // Add the upgrade
+        if (newLevel.multiply)
+            AddMultiplier(newLevel.stat, newLevel.modifier);
+        else AddAddition(newLevel.stat, (int)newLevel.modifier);
+    }
+
+    // Prestiges a weapon
+    public virtual void Prestige()
+    {
+        additions = new Dictionary<Stat, int>();
+        multipliers = new Dictionary<Stat, float>();
+    }
+
+    // Calculate stat
+    public float CalculateStat(Stat type, float amount)
+    {
+        return amount + GetAdditions(type) * GetMultiplier(type);
+    }
+
+    // Get multiplier
+    public int GetAdditions(Stat type)
+    {
+        if (additions.ContainsKey(type))
+            return additions[type];
+        else return 0;
+    }
+
+    // Get multiplier
+    public float GetMultiplier(Stat type)
+    {
+        if (multipliers.ContainsKey(type))
+            return multipliers[type];
+        else return 1;
+    }
+
+    // Add a multiplier
+    public void AddAddition(Stat type, int amount)
+    {
+        if (additions.ContainsKey(type))
+            additions[type] += amount;
+        else additions.Add(type, amount);
+    }
+
+    // Add a multiplier
+    public void AddMultiplier(Stat type, float amount)
+    {
+        if (multipliers.ContainsKey(type))
+            multipliers[type] *= amount;
+        else multipliers.Add(type, amount);
     }
 }

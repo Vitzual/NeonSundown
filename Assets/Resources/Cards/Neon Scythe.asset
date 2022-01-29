@@ -1,0 +1,90 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 153c17b437486e247978b2d4dcab4b10, type: 3}
+  m_Name: Neon Scythe
+  m_EditorClassIdentifier: 
+  internalId: b2a11d16-f04c-40b4-a600-90323e422238
+  createdAtTicks: 637787430929397253
+  name: Neon Scythe
+  description: Summons a rotating scythe that slices through enemies.
+  canDrop: 1
+  sprite: {fileID: 21300000, guid: 26911e8f21f921e439a4e61b5ae3bb45, type: 3}
+  color: {r: 0.73146677, g: 0, b: 1, a: 1}
+  baseLevels:
+  - stat: 1
+    description: Increases damage by 1
+    multiply: 0
+    modifier: 1
+  - stat: 3
+    description: Increases orbital speed by 50%
+    multiply: 1
+    modifier: 1.5
+  - stat: 9
+    description: Adds knockback
+    multiply: 0
+    modifier: 1
+  - stat: 1
+    description: Increases damage by 2
+    multiply: 0
+    modifier: 2
+  - stat: 5
+    description: Adds a second scythe
+    multiply: 0
+    modifier: 1
+  prestigeLevels:
+  - stat: 1
+    description: Increases damage by 10
+    multiply: 0
+    modifier: 0
+  - stat: 3
+    description: Increases orbital speed by 100%
+    multiply: 1
+    modifier: 2
+  - stat: 9
+    description: Adds heavy knockback
+    multiply: 0
+    modifier: 2
+  - stat: 1
+    description: Increases damage by 20
+    multiply: 0
+    modifier: 0
+  - stat: 5
+    description: Adds a second scythe
+    multiply: 0
+    modifier: 1
+  damage: 2
+  cooldown: 0
+  moveSpeed: 300
+  rotate: 0
+  rotateSpeed: 600
+  bloom: 0
+  pierces: 0
+  bullets: 0
+  lifetime: 0
+  randomDirection: 0
+  randomTarget: 0
+  trackTarget: 0
+  lockTarget: 0
+  bullet: {fileID: 0}
+  bulletSound: {fileID: 0}
+  obj: {fileID: 838190405679987182, guid: 24d18b76fa599134aad309b14868aa5d, type: 3}
+  onDamageSound: {fileID: 8300000, guid: a22790ffcfdf864438e28f5223ad1bfa, type: 3}
+  onDeathSound: {fileID: 0}
+  setPlayerAsParent: 1
+  useMaterial: 0
+  useTrail: 0
+  useParticle: 0
+  material: {fileID: 0}
+  trail: {fileID: 0}
+  particle: {fileID: 0}
+  shakeScreenOnSpawn: 0
+  shakeScreenOnDeath: 0

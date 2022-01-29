@@ -47,7 +47,13 @@ public class Controller : MonoBehaviour
     void Update()
     {
         // Check if something is open
-        if (Dealer.isOpen) return;
+        if (Dealer.isOpen)
+        {
+            vertical = 0;
+            horizontal = 0;
+            body.velocity = new Vector2(0, 0);
+            return;
+        }
 
         // Checks for keyboard input
         CheckMovementInput();
@@ -107,7 +113,7 @@ public class Controller : MonoBehaviour
             dashQuickReset = false;
 
             // Play dash sound
-            AudioPlayer.Play(dashSound);
+            // AudioPlayer.Play(dashSound);
         }
     }
 
@@ -133,28 +139,7 @@ public class Controller : MonoBehaviour
         // Check if the collision was indeed an enemy
         if (enemy != null)
         {
-            if (isDashing)
-            {
-                if (enemy.IsDashResistant())
-                {
-                    // ow
-                }
-                else
-                {
-                    // Damage the enemy
-                    enemy.Damage(Deck.CalculateStat(Stat.DashDamage, dashDamage));
-
-                    // Reset dash
-                    isDashing = true;
-                    dash = dashTimer / 2;
-                    speed = dashSpeed;
-                    dashQuickReset = true;
-
-                    // Slow down time
-                    // Time.timeScale = 0.1f;
-                    // Time.fixedDeltaTime = 0.002f;
-                }
-            }
+            
         }
     }
 }

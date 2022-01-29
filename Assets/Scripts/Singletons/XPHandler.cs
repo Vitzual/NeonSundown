@@ -35,7 +35,7 @@ public class XPHandler : MonoBehaviour
     // Target
     public XP xpObject;
     public AudioClip xpSound;
-    public Transform player;
+    public Player player;
     public float startSpeed = 5f;
     public float startDistance = 10f;
     public float speedFatigueModifier = 0.1f;
@@ -61,13 +61,13 @@ public class XPHandler : MonoBehaviour
                 {
                     // Move towards the target
                     float step = xpList[a].speed * Time.deltaTime;
-                    xpList[a].transform.position = Vector2.MoveTowards(xpList[a].transform.position, player.position, step);
+                    xpList[a].transform.position = Vector2.MoveTowards(xpList[a].transform.position, player.transform.position, step);
                     xpList[a].speed += speedIncreaseModifier;
 
                     // Check distance
-                    if (Vector2.Distance(xpList[a].transform.position, player.position) < targetDistanceCheck)
+                    if (Vector2.Distance(xpList[a].transform.position, player.transform.position) < targetDistanceCheck)
                     {
-                        AudioPlayer.Play(xpSound);
+                        player.AddXP(1);
                         Destroy(xpList[a].transform.gameObject);
                         xpList.RemoveAt(a);
                         a--;

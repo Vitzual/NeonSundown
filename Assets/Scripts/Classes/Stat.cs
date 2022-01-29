@@ -9,6 +9,5 @@ public enum Stat
     Pierces,
     Tracking,
     Lifetime,
-    DashDamage,
-    DashSpeed
+    Knockback
 }

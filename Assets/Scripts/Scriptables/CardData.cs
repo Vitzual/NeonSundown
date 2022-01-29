@@ -7,10 +7,10 @@ public class CardData : IdentifiableScriptableObject
     [BoxGroup("Card Info")]
     public new string name;
     [BoxGroup("Card Info")]
-    [TextArea] public string description;
+    public string description;
     [BoxGroup("Card Info")]
     public bool canDrop;
-    [BoxGroup("Card Sprite")]
+    [BoxGroup("Card Info")]
     public Sprite sprite;
     [BoxGroup("Card Info")]
     public Color color;

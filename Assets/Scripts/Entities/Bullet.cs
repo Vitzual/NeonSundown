@@ -47,14 +47,14 @@ public class Bullet : Entity
         deathEffect = weapon.particle;
 
         // Set bullet stats
-        damage = Deck.CalculateStat(Stat.Damage, weapon.damage);
-        speed = Deck.CalculateStat(Stat.Speed, weapon.moveSpeed);
-        pierce = Deck.CalculateStat(Stat.Pierces, weapon.pierces);
-        tracking = weapon.trackTarget || Deck.GetFlag(Stat.Tracking);
+        damage = Player.CalculateStat(Stat.Damage, weapon.damage);
+        speed = Player.CalculateStat(Stat.Speed, weapon.moveSpeed);
+        pierce = Player.CalculateStat(Stat.Pierces, weapon.pierces);
+        tracking = weapon.trackTarget || Player.GetFlag(Stat.Tracking);
 
         // Give bullets a bit of randomness
-        float lowValue = Deck.CalculateStat(Stat.Lifetime, weapon.lifetime) - 0.1f;
-        float highValue = Deck.CalculateStat(Stat.Lifetime, weapon.lifetime) + 0.1f;
+        float lowValue = Player.CalculateStat(Stat.Lifetime, weapon.lifetime) - 0.1f;
+        float highValue = Player.CalculateStat(Stat.Lifetime, weapon.lifetime) + 0.1f;
         if (lowValue <= 0f) lowValue = 0.001f;
         lifetime = Random.Range(lowValue, highValue);
     }
@@ -88,8 +88,8 @@ public class Bullet : Entity
     public virtual void Destroy()
     {
         // Check if bullet has a sound
-        if (weapon.deathSound != null)
-            AudioPlayer.Play(weapon.deathSound);
+        if (weapon.onDeathSound != null)
+            AudioPlayer.Play(weapon.onDeathSound);
 
         if (weapon.useParticle) CreateParticle();
         Destroy(gameObject);
