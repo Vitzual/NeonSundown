@@ -19,8 +19,49 @@ MonoBehaviour:
   canDrop: 1
   sprite: {fileID: 21300000, guid: 896391f7b085e1146847bf4749c0cf9a, type: 3}
   color: {r: 0, g: 0.63664293, b: 1, a: 1}
-  baseLevels: []
-  prestigeLevels: []
+  prestigeSprite: {fileID: 21300000, guid: d807475d70447d948b2a785ebda93296, type: 3}
+  baseLevels:
+  - stat: 2
+    description: Decreases cooldown rate by 0.25s
+    multiply: 0
+    modifier: -0.25
+  - stat: 1
+    description: Increases damage by 2
+    multiply: 0
+    modifier: 2
+  - stat: 2
+    description: Decreases cooldown rate by 0.25s
+    multiply: 0
+    modifier: -0.25
+  - stat: 1
+    description: Increases damage by 3
+    multiply: 0
+    modifier: 3
+  - stat: 2
+    description: Decreases cooldown rate by 0.25s
+    multiply: 0
+    modifier: -0.25
+  prestigeLevels:
+  - stat: 2
+    description: Decreases cooldown rate by 0.45s
+    multiply: 0
+    modifier: -0.45
+  - stat: 1
+    description: Increases damage by 10
+    multiply: 0
+    modifier: 10
+  - stat: 2
+    description: Decreases cooldown rate by 0.45s
+    multiply: 0
+    modifier: -0.45
+  - stat: 1
+    description: Increases damage by 10
+    multiply: 0
+    modifier: 10
+  - stat: 1
+    description: Increases damage by 10
+    multiply: 0
+    modifier: 10
   damage: 2
   cooldown: 1
   moveSpeed: 120

@@ -11,10 +11,6 @@ public class Dealer : MonoBehaviour
     public static Dealer active;
     public static bool isOpen;
 
-    // Player instance
-    [BoxGroup("Player Instance")]
-    public Deck playerDeck;
-
     // List of card slots
     [BoxGroup("Card Options")]
     public List<Card> cardSlots;
@@ -157,7 +153,7 @@ public class Dealer : MonoBehaviour
     public void PickCard(CardData card, int number)
     {
         CloseDealer();
-        playerDeck.AddCard(card);
+        Deck.active.AddCard(card);
     }
 
     // Open dealer
@@ -165,7 +161,6 @@ public class Dealer : MonoBehaviour
     {
         // Get copy of the scriptables list
         dealList = new List<CardData>(Scriptables.cards);
-        Debug.Log(dealList.Count);
 
         // Deal the cards
         dealCards = true;

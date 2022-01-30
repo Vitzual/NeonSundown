@@ -5,7 +5,7 @@ using UnityEngine;
 public class Weapon : MonoBehaviour
 {
     // Multipliers 
-    protected Dictionary<Stat, int> additions = new Dictionary<Stat, int>();
+    protected Dictionary<Stat, float> additions = new Dictionary<Stat, float>();
     protected Dictionary<Stat, float> multipliers = new Dictionary<Stat, float>();
 
     // Prestige and base models
@@ -15,16 +15,13 @@ public class Weapon : MonoBehaviour
     protected GameObject prestigeModel;
 
     // Weapon variables
-    protected float damage;
-    protected float cooldown;
-    protected float moveSpeed;
-    protected float bloom;
-    protected float pierces;
-    protected float bullets;
-    protected float lifetime;
+    [HideInInspector]
+    public float damage, cooldown, moveSpeed, bloom, pierces, bullets, lifetime;
 
     // Weapon level
+    [HideInInspector]
     public int level = 0;
+    [HideInInspector]
     public bool prestige = false;
 
     // Target transform
@@ -58,7 +55,7 @@ public class Weapon : MonoBehaviour
         // Add the upgrade
         if (newLevel.multiply)
             AddMultiplier(newLevel.stat, newLevel.modifier);
-        else AddAddition(newLevel.stat, (int)newLevel.modifier);
+        else AddAddition(newLevel.stat, newLevel.modifier);
 
         // Update stats
         UpdateStat(newLevel.stat);
@@ -76,7 +73,7 @@ public class Weapon : MonoBehaviour
         prestige = true;
 
         // Reset additions and multipliers on the card
-        additions = new Dictionary<Stat, int>();
+        additions = new Dictionary<Stat, float>();
         multipliers = new Dictionary<Stat, float>();
 
         // Set prestige model to true
@@ -136,7 +133,7 @@ public class Weapon : MonoBehaviour
     }
 
     // Get multiplier
-    protected int GetAdditions(Stat type)
+    protected float GetAdditions(Stat type)
     {
         if (additions.ContainsKey(type))
             return additions[type];
@@ -152,7 +149,7 @@ public class Weapon : MonoBehaviour
     }
 
     // Add a multiplier
-    protected void AddAddition(Stat type, int amount)
+    protected void AddAddition(Stat type, float amount)
     {
         if (additions.ContainsKey(type))
             additions[type] += amount;

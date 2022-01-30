@@ -35,7 +35,7 @@ public class BulletHandler : MonoBehaviour
     }
 
     // Create a new active bullet instance
-    public void CreateBullet(WeaponData weapon, Vector2 position, Quaternion rotation, bool adjustRotation = true)
+    public void CreateBullet(Weapon parent, WeaponData weapon, Vector2 position, Quaternion rotation, Transform target = null)
     {
         // Create the tile
         GameObject lastObj = Instantiate(weapon.bullet.gameObject, position, rotation);
@@ -48,7 +48,7 @@ public class BulletHandler : MonoBehaviour
 
         // Attempt to set enemy variant
         Bullet bullet = lastObj.GetComponent<Bullet>();
-        bullet.Setup(weapon);
+        bullet.Setup(parent, weapon, target);
 
         // Add to enemies list
         bullets.Add(bullet);

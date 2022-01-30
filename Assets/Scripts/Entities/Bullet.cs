@@ -7,6 +7,10 @@ public class Bullet : Entity
     // Weapon data
     protected WeaponData weapon;
 
+    // Prestige object
+    public GameObject baseModel;
+    public GameObject prestigeModel;
+
     // Bullet components 
     public SpriteRenderer sprite;
     public TrailRenderer trail;
@@ -23,8 +27,12 @@ public class Bullet : Entity
     protected float lifetime;
 
     // Set up the bullet
-    public virtual void Setup(WeaponData weapon, Transform target = null)
+    public virtual void Setup(Weapon parent, WeaponData weapon, Transform target = null)
     {
+        // Check if prestiged
+        if (parent.prestige && prestigeModel != null)
+            prestigeModel.SetActive(true);
+
         // Set primary weapon SO
         this.weapon = weapon;
 
@@ -47,14 +55,14 @@ public class Bullet : Entity
         deathEffect = weapon.particle;
 
         // Set bullet stats
-        damage = Deck.CalculateStat(Stat.Damage, weapon.damage);
-        speed = Deck.CalculateStat(Stat.Speed, weapon.moveSpeed);
-        pierce = Deck.CalculateStat(Stat.Pierces, weapon.pierces);
+        damage = parent.damage;
+        speed = parent.moveSpeed;
+        pierce = parent.pierces;
         tracking = weapon.trackTarget || Deck.GetFlag(Stat.Tracking);
 
         // Give bullets a bit of randomness
-        float lowValue = Deck.CalculateStat(Stat.Lifetime, weapon.lifetime) - 0.1f;
-        float highValue = Deck.CalculateStat(Stat.Lifetime, weapon.lifetime) + 0.1f;
+        float lowValue = parent.lifetime - 0.05f;
+        float highValue = parent.lifetime + 0.05f;
         if (lowValue <= 0f) lowValue = 0.001f;
         lifetime = Random.Range(lowValue, highValue);
     }

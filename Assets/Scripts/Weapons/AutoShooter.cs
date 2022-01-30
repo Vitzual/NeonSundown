@@ -4,27 +4,26 @@ using UnityEngine;
 
 public class AutoShooter : Weapon
 {
-    // Internal variables
-    protected float cooldown;
+    // Internal cooldown
+    protected float weaponCooldown = 0;
 
     // Set the SO reference
     public override void Setup(WeaponData data, Transform target = null)
     {
-        cooldown = data.cooldown;
         base.Setup(data, target);
     }
 
     // Shoots projectiles
     public override void Use()
     {
-        cooldown -= Time.deltaTime;
-        if (cooldown <= 0)
+        weaponCooldown -= Time.deltaTime;
+        if (weaponCooldown <= 0)
         {
             if (weapon.randomDirection)
                 transform.eulerAngles = new Vector3(0, 0, Random.Range(0, 360));
 
-            BulletHandler.active.CreateBullet(weapon, transform.position, transform.rotation);
-            cooldown = weapon.cooldown;
+            BulletHandler.active.CreateBullet(this, weapon, transform.position, transform.rotation);
+            weaponCooldown = cooldown;
         }
     }
 }
