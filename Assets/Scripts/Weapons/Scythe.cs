@@ -23,7 +23,7 @@ public class Scythe : Weapon
     public override void Use()
     {
         rotator.Rotate(Vector3.forward, weapon.rotateSpeed * Time.deltaTime);
-        transform.RotateAround(target.position, Vector3.forward, CalculateStat(Stat.Speed) * Time.deltaTime);
+        transform.RotateAround(target.position, Vector3.forward, moveSpeed * Time.deltaTime);
     }
 
     // On collision with enemy, apply damage
@@ -33,7 +33,7 @@ public class Scythe : Weapon
         if (enemy != null)
         {
             // Attempt to damage the enemy
-            enemy.Damage(CalculateStat(Stat.Damage));
+            enemy.Damage(damage);
 
             // Play death sound if enemy dies
             if (enemy.IsDead()) AudioPlayer.Play(weapon.onDeathSound);

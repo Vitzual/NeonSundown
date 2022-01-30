@@ -33,10 +33,12 @@ public class Card : MonoBehaviour
 
         // Set card information
         model.color = card.color;
-        image.sprite = card.sprite;
         image.color = card.color;
         title.text = card.name.ToUpper();
         title.color = card.color;
+        level.color = card.color;
+
+        bool useBase = true;
 
         // Check if card is a weapon or not
         if (card is WeaponData)
@@ -45,24 +47,44 @@ public class Card : MonoBehaviour
             Weapon weapon = Deck.active.GetWeaponInstance(weaponData);
             if (weapon != null)
             {
+                useBase = false;
+
                 if (weapon.prestige)
                 {
-                    desc.text = weaponData.prestigeLevels[weapon.level].description;
+                    image.sprite = weaponData.prestigeSprite;
+
                     if (weapon.level == weaponData.prestigeLevels.Count)
+                    {
+                        desc.text = "Card is maxed";
                         level.text = "PRESTIGE MAX";
-                    else level.text = "PRESTIGE " + weapon.level;
+                    }
+                    else
+                    {
+                        desc.text = weaponData.prestigeLevels[weapon.level].description;
+                        level.text = "PRESTIGE " + weapon.level;
+                    }
                 }
                 else
                 {
-                    desc.text = weaponData.baseLevels[weapon.level].description;
+                    image.sprite = weaponData.sprite;
+
                     if (weapon.level == weaponData.baseLevels.Count)
+                    {
+                        desc.text = "Sacrifice the card to enter prestige levels";
                         level.text = "LEVEL MAX";
-                    else level.text = "LEVEL " + weapon.level;
+                    }
+                    else
+                    {
+                        desc.text = weaponData.baseLevels[weapon.level].description;
+                        level.text = "LEVEL " + weapon.level;
+                    }
                 }
             }
         }
-        else 
+        
+        if (useBase)
         {
+            image.sprite = card.sprite;
             desc.text = card.description;
             int cardAmount = Deck.active.GetCardAmount(cardData);
             if (cardAmount > 0) level.text = cardAmount + " IN DECK";

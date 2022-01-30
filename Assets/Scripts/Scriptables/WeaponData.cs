@@ -16,6 +16,8 @@ public class WeaponData : CardData
     }
 
     [BoxGroup("Weapon Levels")]
+    public Sprite prestigeSprite;
+    [BoxGroup("Weapon Levels")]
     public List<Level> baseLevels;
     [BoxGroup("Weapon Levels")]
     public List<Level> prestigeLevels;

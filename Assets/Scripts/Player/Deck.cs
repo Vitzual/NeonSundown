@@ -145,6 +145,9 @@ public class Deck : MonoBehaviour
                 else if (!upgradeables[card].prestige &&
                     upgradeables[card].level != weaponData.baseLevels.Count)
                     upgradeables[card].Upgrade();
+                else if (!upgradeables[card].prestige &&
+                    upgradeables[card].level == weaponData.baseLevels.Count)
+                    upgradeables[card].Prestige();
 
                 return;
             }
@@ -200,7 +203,9 @@ public class Deck : MonoBehaviour
     // Set passive card slot
     public void SetupStat(StatData stat)
     {
-
+        // Update all weapon cards
+        foreach(KeyValuePair<CardData, Weapon> card in upgradeables)
+            if (card.Value != null) card.Value.UpdateStat(stat.type);
     }
 
     // Set passive card slot
