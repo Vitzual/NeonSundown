@@ -23,7 +23,7 @@ public class Scythe : Weapon
     public override void Use()
     {
         rotator.Rotate(Vector3.forward, weapon.rotateSpeed * Time.deltaTime);
-        transform.RotateAround(target.position, Vector3.forward, weapon.moveSpeed * Time.deltaTime);
+        transform.RotateAround(target.position, Vector3.forward, CalculateStat(Stat.Speed) * Time.deltaTime);
     }
 
     // On collision with enemy, apply damage
@@ -33,7 +33,7 @@ public class Scythe : Weapon
         if (enemy != null)
         {
             // Attempt to damage the enemy
-            enemy.Damage(Player.CalculateStat(Stat.Damage, weapon.damage));
+            enemy.Damage(CalculateStat(Stat.Damage));
 
             // Play death sound if enemy dies
             if (enemy.IsDead()) AudioPlayer.Play(weapon.onDeathSound);
@@ -44,6 +44,6 @@ public class Scythe : Weapon
     // Override upgrade method
     public override void Upgrade()
     {
-        
+        base.Upgrade();
     }
 }

@@ -17,6 +17,7 @@ public class Card : MonoBehaviour
     public Image image;
     public TextMeshProUGUI title;
     public TextMeshProUGUI desc;
+    public TextMeshProUGUI level;
 
     // Canvas group
     private CanvasGroup canvasGroup;
@@ -36,7 +37,37 @@ public class Card : MonoBehaviour
         image.color = card.color;
         title.text = card.name.ToUpper();
         title.color = card.color;
-        desc.text = card.description;
+
+        // Check if card is a weapon or not
+        if (card is WeaponData)
+        {
+            WeaponData weaponData = (WeaponData)card;
+            Weapon weapon = Deck.active.GetWeaponInstance(weaponData);
+            if (weapon != null)
+            {
+                if (weapon.prestige)
+                {
+                    desc.text = weaponData.prestigeLevels[weapon.level].description;
+                    if (weapon.level == weaponData.prestigeLevels.Count)
+                        level.text = "PRESTIGE MAX";
+                    else level.text = "PRESTIGE " + weapon.level;
+                }
+                else
+                {
+                    desc.text = weaponData.baseLevels[weapon.level].description;
+                    if (weapon.level == weaponData.baseLevels.Count)
+                        level.text = "LEVEL MAX";
+                    else level.text = "LEVEL " + weapon.level;
+                }
+            }
+        }
+        else 
+        {
+            desc.text = card.description;
+            int cardAmount = Deck.active.GetCardAmount(cardData);
+            if (cardAmount > 0) level.text = cardAmount + " IN DECK";
+            else level.text = "NEW CARD";
+        }
 
         // Animate the card
         transform.localPosition = new Vector3(cardPosition.x, cardPosition.y - 25f, 0);

@@ -47,14 +47,14 @@ public class Bullet : Entity
         deathEffect = weapon.particle;
 
         // Set bullet stats
-        damage = Player.CalculateStat(Stat.Damage, weapon.damage);
-        speed = Player.CalculateStat(Stat.Speed, weapon.moveSpeed);
-        pierce = Player.CalculateStat(Stat.Pierces, weapon.pierces);
-        tracking = weapon.trackTarget || Player.GetFlag(Stat.Tracking);
+        damage = Deck.CalculateStat(Stat.Damage, weapon.damage);
+        speed = Deck.CalculateStat(Stat.Speed, weapon.moveSpeed);
+        pierce = Deck.CalculateStat(Stat.Pierces, weapon.pierces);
+        tracking = weapon.trackTarget || Deck.GetFlag(Stat.Tracking);
 
         // Give bullets a bit of randomness
-        float lowValue = Player.CalculateStat(Stat.Lifetime, weapon.lifetime) - 0.1f;
-        float highValue = Player.CalculateStat(Stat.Lifetime, weapon.lifetime) + 0.1f;
+        float lowValue = Deck.CalculateStat(Stat.Lifetime, weapon.lifetime) - 0.1f;
+        float highValue = Deck.CalculateStat(Stat.Lifetime, weapon.lifetime) + 0.1f;
         if (lowValue <= 0f) lowValue = 0.001f;
         lifetime = Random.Range(lowValue, highValue);
     }

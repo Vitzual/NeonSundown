@@ -3,10 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Deck : MonoBehaviour
 {
+    // Active instance
+    public static Deck active;
+
     // Cards in deck
     private Dictionary<CardData, int> cards;
+    private Dictionary<CardData, Weapon> upgradeables;
 
     // Multipliers 
     public static Dictionary<Stat, int> additions;
@@ -50,8 +54,12 @@ public class Player : MonoBehaviour
     // On start, create decks
     public void Start()
     {
+        // Set active instance
+        active = this;
+
         // Set new card dictionary
-        cards = new Dictionary<CardData, int>(); 
+        cards = new Dictionary<CardData, int>();
+        upgradeables = new Dictionary<CardData, Weapon>();
 
         // Create new dictionaries
         additions = new Dictionary<Stat, int>();
@@ -122,21 +130,50 @@ public class Player : MonoBehaviour
         // Check if card already in inventory
         if (cards.ContainsKey(card))
         {
-            cards[card] += 1;
-        }
-        else
-        {
-            // Add new card
-            cards.Add(card, 1);
+            // If exists and not upgradeable, add
+            if (!upgradeables.ContainsKey(card))
+                cards[card] += 1;
+            
+            // If upgradeable, apply to the instance.
+            else
+            {
+                WeaponData weaponData = (WeaponData)card;
 
-            // Setup the card
-            if (card is WeaponData)
-                SetupPassive((WeaponData)card);
-            else if (card is StatData)
-                SetupStat((StatData)card);
-            else if (card is AbilityData)
-                SetupAbility((AbilityData)card);
+                if (upgradeables[card].prestige &&
+                    upgradeables[card].level != weaponData.prestigeLevels.Count)
+                    upgradeables[card].Upgrade();
+                else if (!upgradeables[card].prestige &&
+                    upgradeables[card].level != weaponData.baseLevels.Count)
+                    upgradeables[card].Upgrade();
+
+                return;
+            }
         }
+        else cards.Add(card, 1);
+
+        // Setup the card
+        if (card is WeaponData)
+            SetupPassive((WeaponData)card);
+        else if (card is StatData)
+            SetupStat((StatData)card);
+        else if (card is AbilityData)
+            SetupAbility((AbilityData)card);
+    }
+
+    // Returns a weapon card instance
+    public Weapon GetWeaponInstance(WeaponData card)
+    {
+        if (upgradeables.ContainsKey(card))
+            return upgradeables[card];
+        else return null;
+    }
+
+    // Get an amount of a card
+    public int GetCardAmount(CardData card)
+    {
+        if (cards.ContainsKey(card))
+            return cards[card];
+        else return 0;
     }
 
     // Set primary card slot
@@ -153,6 +190,7 @@ public class Player : MonoBehaviour
         Weapon newWeapon = Instantiate(weapon.obj, transform.position, Quaternion.identity).GetComponent<Weapon>();
         newWeapon.Setup(weapon, transform);
         weaponInstances.Add(newWeapon);
+        upgradeables.Add(weapon, newWeapon);
 
         // Check if player is parent
         if (weapon.setPlayerAsParent)

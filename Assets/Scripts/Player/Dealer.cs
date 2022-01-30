@@ -13,7 +13,7 @@ public class Dealer : MonoBehaviour
 
     // Player instance
     [BoxGroup("Player Instance")]
-    public Player playerDeck;
+    public Deck playerDeck;
 
     // List of card slots
     [BoxGroup("Card Options")]

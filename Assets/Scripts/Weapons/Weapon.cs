@@ -43,6 +43,9 @@ public class Weapon : MonoBehaviour
         if (newLevel.multiply)
             AddMultiplier(newLevel.stat, newLevel.modifier);
         else AddAddition(newLevel.stat, (int)newLevel.modifier);
+
+        // Increase level
+        level += 1;
     }
 
     // Prestiges a weapon
@@ -50,12 +53,13 @@ public class Weapon : MonoBehaviour
     {
         additions = new Dictionary<Stat, int>();
         multipliers = new Dictionary<Stat, float>();
+        level = 0;
     }
 
     // Calculate stat
-    public float CalculateStat(Stat type, float amount)
+    public float CalculateStat(Stat type)
     {
-        return amount + GetAdditions(type) * GetMultiplier(type);
+        return Deck.CalculateStat(Stat.Damage, weapon.damage) + GetAdditions(type) * GetMultiplier(type);
     }
 
     // Get multiplier
