@@ -90,32 +90,32 @@ public class Weapon : MonoBehaviour
         switch (type)
         {
             case Stat.Damage:
-                damage = Deck.CalculateStat(type, weapon.damage) 
-                    + GetAdditions(type) * GetMultiplier(type);
+                damage = (Deck.CalculateStat(type, weapon.damage) 
+                    + GetAdditions(type)) * GetMultiplier(type);
                 break;
             case Stat.Cooldown:
-                cooldown = Deck.CalculateStat(type, weapon.cooldown)
-                    + GetAdditions(type) * GetMultiplier(type);
+                cooldown = (Deck.CalculateStat(type, weapon.cooldown)
+                    + GetAdditions(type)) * GetMultiplier(type);
                 break;
             case Stat.Speed:
-                moveSpeed = Deck.CalculateStat(type, weapon.moveSpeed)
-                    + GetAdditions(type) * GetMultiplier(type);
+                moveSpeed = (Deck.CalculateStat(type, weapon.moveSpeed)
+                    + GetAdditions(type)) * GetMultiplier(type);
                 break;
             case Stat.Bloom:
-                bloom = Deck.CalculateStat(type, weapon.bloom)
-                    + GetAdditions(type) * GetMultiplier(type);
+                bloom = (Deck.CalculateStat(type, weapon.bloom)
+                    + GetAdditions(type)) * GetMultiplier(type);
                 break;
             case Stat.Pierces:
-                pierces = Deck.CalculateStat(type, weapon.pierces)
-                    + GetAdditions(type) * GetMultiplier(type);
+                pierces = (Deck.CalculateStat(type, weapon.pierces)
+                    + GetAdditions(type)) * GetMultiplier(type);
                 break;
             case Stat.Bullets:
-                bullets = Deck.CalculateStat(type, weapon.bullets)
-                    + GetAdditions(type) * GetMultiplier(type);
+                bullets = (Deck.CalculateStat(type, weapon.bullets)
+                    + GetAdditions(type)) * GetMultiplier(type);
                 break;
             case Stat.Lifetime:
-                lifetime = Deck.CalculateStat(type, weapon.lifetime)
-                    + GetAdditions(type) * GetMultiplier(type);
+                lifetime = (Deck.CalculateStat(type, weapon.lifetime)
+                    + GetAdditions(type)) * GetMultiplier(type);
                 break;
         }
     }

@@ -3,9 +3,13 @@ using UnityEngine;
 
 public class Player : Weapon
 {
+    // Health amount
+    private float health;
+
+
     // XP amount
-    private int xp = 0;
-    private int rankup = 50;
+    private float xp = 0;
+    private float rankup = 50;
     public float rankupMultiplier;
     public ProgressBar xpBar;
 
@@ -40,7 +44,7 @@ public class Player : Weapon
     public void AddXP(int amount)
     {
         // Add the XP amount
-        xp += amount;
+        xp += Deck.CalculateStat(Stat.XPGain, amount);
 
         // Check if XP over rankup
         if (xp >= rankup)

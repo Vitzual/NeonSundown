@@ -23,8 +23,6 @@ public class EnemyData : IdentifiableScriptableObject
     public float rotateSpeed;
     [BoxGroup("Enemy Stats")]
     public bool isDashResistent;
-    [BoxGroup("Enemy Stats")]
-    public float spawnTime;
     [BoxGroup("Enemy Stats"), Range(0, 100)]
     public int spawnChance;
     [BoxGroup("Enemy Stats")]

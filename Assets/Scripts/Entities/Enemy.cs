@@ -94,4 +94,10 @@ public class Enemy : Entity
     {
         return health <= 0;
     }
+
+    // Get enemy data
+    public EnemyData GetData()
+    {
+        return enemyData;
+    }
 }

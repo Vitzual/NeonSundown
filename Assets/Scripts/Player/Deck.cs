@@ -13,7 +13,7 @@ public class Deck : MonoBehaviour
     private Dictionary<CardData, Weapon> upgradeables;
 
     // Multipliers 
-    public static Dictionary<Stat, int> additions;
+    public static Dictionary<Stat, float> additions;
     public static Dictionary<Stat, float> multipliers;
     public static Dictionary<Stat, bool> flags;
 
@@ -31,7 +31,7 @@ public class Deck : MonoBehaviour
         upgradeables = new Dictionary<CardData, Weapon>();
 
         // Create new dictionaries
-        additions = new Dictionary<Stat, int>();
+        additions = new Dictionary<Stat, float>();
         multipliers = new Dictionary<Stat, float>();
         flags = new Dictionary<Stat, bool>();
 
@@ -112,6 +112,7 @@ public class Deck : MonoBehaviour
     public void SetupPassive(WeaponData weapon)
     {
         // Create the new weapon instance
+        Debug.Log("Adding passive weapon card " + weapon.name + " to deck");
         Weapon newWeapon = Instantiate(weapon.obj, transform.position, Quaternion.identity).GetComponent<Weapon>();
         newWeapon.Setup(weapon, transform);
         weaponInstances.Add(newWeapon);
@@ -125,25 +126,30 @@ public class Deck : MonoBehaviour
     // Set passive card slot
     public void SetupStat(StatData stat)
     {
+        // Add stat to the thing
+        Debug.Log("Adding stat card " + stat.name + " to deck");
+        if (stat.multiply) AddMultiplier(stat.type, stat.modifier);
+        else AddAddition(stat.type, stat.modifier);
+
         // Update all weapon cards
-        foreach(KeyValuePair<CardData, Weapon> card in upgradeables)
+        foreach (KeyValuePair<CardData, Weapon> card in upgradeables)
             if (card.Value != null) card.Value.UpdateStat(stat.type);
     }
 
     // Set passive card slot
     public void SetupAbility(AbilityData ability)
     {
-
+        Debug.Log("Adding ability card " + ability.name + " to deck");
     }
 
     // Calculate stat
     public static float CalculateStat(Stat type, float amount)
     {
-        return amount + GetAdditions(type) * GetMultiplier(type);
+        return (amount + GetAdditions(type)) * GetMultiplier(type);
     }
 
     // Get multiplier
-    public static int GetAdditions(Stat type)
+    public static float GetAdditions(Stat type)
     {
         if (additions.ContainsKey(type))
             return additions[type];
@@ -155,7 +161,7 @@ public class Deck : MonoBehaviour
     {
         if (multipliers.ContainsKey(type))
             return multipliers[type];
-        else return 1;
+        return 1;
     }
 
     // Get flag
@@ -164,5 +170,21 @@ public class Deck : MonoBehaviour
         if (flags.ContainsKey(type))
             return flags[type];
         else return false;
+    }
+
+    // Add a multiplier
+    public static void AddAddition(Stat type, float amount)
+    {
+        if (additions.ContainsKey(type))
+            additions[type] += amount;
+        else additions.Add(type, amount);
+    }
+
+    // Add a multiplier
+    public static void AddMultiplier(Stat type, float amount)
+    {
+        if (multipliers.ContainsKey(type))
+            multipliers[type] *= amount;
+        else multipliers.Add(type, amount);
     }
 }

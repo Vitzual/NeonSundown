@@ -4,18 +4,33 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
+    // List of all stages
+    public List<Stage> stages;
+    private Stage activeStage;
+    private int nextStageIndex = 0;
+    private bool stagesLeft = true;
+
+    // List of all enemies with their cooldowns
+    public Dictionary<EnemyData, float> enemies;
+
+    // Game timer
+    private float timer = 0;
+    private float stageTime = 0;
+
     // Spawning flag
     public bool spawnEnemies = true;
 
-    // Tracking
-    private float timer;
-    private float cooldown;
-    public float _cooldown;
-
-    private void Start()
+    // On start, generate enemies
+    void Start()
     {
-        timer = 0f;
-        cooldown = _cooldown;
+        // Get enemies from scriptable controller
+        enemies = new Dictionary<EnemyData, float>();
+        foreach (EnemyData enemy in Scriptables.enemies)
+            enemies.Add(enemy, 0);
+
+        // Setup stages
+        activeStage = stages[nextStageIndex];
+        stageTime = activeStage.time;
     }
 
     // Update is called once per frame
@@ -26,27 +41,39 @@ public class EnemySpawner : MonoBehaviour
 
         // Increase run timer
         timer += Time.deltaTime;
+        stageTime -= Time.deltaTime;
+
+        // Check if next stage should start
+        if (stagesLeft && stageTime <= 0) NextStage();
 
         // Check if enemy spawning enabled
         if (!spawnEnemies) return;
 
-        // Check if cooldown above 0
-        if (cooldown > 0)
+        // Spawn enemies
+        foreach(Stage.Enemy enemy in activeStage.enemies)
         {
-            cooldown -= Time.deltaTime;
+            if (enemies[enemy.data] <= 0f)
+            {
+                enemies[enemy.data] = enemy.cooldown;
+                EnemyHandler.active.CreateEnemy(enemy.data);
+            }
+            else enemies[enemy.data] -= Time.deltaTime;
+        }
+    }
+
+    private void NextStage()
+    {
+        // Check if stage exists
+        if (stages.Count >= nextStageIndex)
+        {
+            Debug.Log("No stages left!");
+            stagesLeft = false;
             return;
         }
-        else cooldown = _cooldown;
 
-        // Iterate through enemies
-        foreach(EnemyData enemy in Scriptables.enemies)
-        {
-            if (enemy.spawnTime < timer)
-            {
-                int random = Random.Range(0, 100);
-                if (enemy.spawnChance > random)
-                    EnemyHandler.active.CreateEnemy(enemy);
-            }
-        }
+        // Setup stages
+        activeStage = stages[nextStageIndex];
+        stageTime = activeStage.time;
+        nextStageIndex += 1;
     }
 }

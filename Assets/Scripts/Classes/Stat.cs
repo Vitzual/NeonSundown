@@ -9,5 +9,6 @@ public enum Stat
     Pierces,
     Tracking,
     Lifetime,
-    Knockback
+    Knockback,
+    XPGain
 }
