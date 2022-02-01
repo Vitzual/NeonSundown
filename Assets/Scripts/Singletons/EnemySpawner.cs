@@ -72,7 +72,7 @@ public class EnemySpawner : MonoBehaviour
     private void NextStage()
     {
         // Check if stage exists
-        if (stages.Count < nextStageIndex)
+        if (stages.Count <= nextStageIndex)
         {
             Debug.Log("No stages left!");
             stagesLeft = false;

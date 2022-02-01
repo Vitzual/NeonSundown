@@ -75,7 +75,7 @@ TrailRenderer:
   m_Time: 5
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 1.5
+    widthMultiplier: 1
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -209,7 +209,7 @@ SpriteRenderer:
   m_SortingLayerID: 1487707015
   m_SortingLayer: 1
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 2225fcecbdce2a148ad1a11858a4c5f1, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c9053c1c18b892744bd71adc2a55dd00, type: 3}
   m_Color: {r: 0.3018868, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -233,7 +233,7 @@ GameObject:
   - component: {fileID: 8071768145869598020}
   - component: {fileID: 8071768145869598021}
   m_Layer: 7
-  m_Name: Triangle
+  m_Name: Flapper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -247,8 +247,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8071768145869598022}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 12.25, y: 2.32, z: 0}
-  m_LocalScale: {x: 0.7, y: 0.7, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children:
   - {fileID: 8071768146122005024}
   m_Father: {fileID: 0}
@@ -314,7 +314,9 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0, y: 2}
+    - - {x: 1.6, y: 1}
+      - {x: 0, y: 2}
+      - {x: -1.6, y: 1}
       - {x: -2.25, y: -1.9}
       - {x: 0, y: -1.4}
       - {x: 2.25, y: -1.9}
@@ -391,7 +393,7 @@ SpriteRenderer:
   m_SortingLayerID: 1487707015
   m_SortingLayer: 1
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: 86143abb9690bae449e374d4dedc18af, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6845877a83c8b6f4a9fb585d034da097, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

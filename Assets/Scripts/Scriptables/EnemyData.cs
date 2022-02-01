@@ -22,11 +22,9 @@ public class EnemyData : IdentifiableScriptableObject
     [BoxGroup("Enemy Stats")]
     public float rotateSpeed;
     [BoxGroup("Enemy Stats")]
-    public bool isDashResistent;
-    [BoxGroup("Enemy Stats"), Range(0, 100)]
-    public int spawnChance;
+    public int minXP;
     [BoxGroup("Enemy Stats")]
-    public int xpDrops;
+    public int maxXP;
 
     [BoxGroup("Rendering Variables")]
     public Material material;

@@ -47,7 +47,7 @@ public class Enemy : Entity
     public virtual void Destroy()
     {
         CreateParticle();
-        XPHandler.active.Spawn(transform.position, enemyData.xpDrops);
+        XPHandler.active.Spawn(transform.position, enemyData.minXP);
         CameraShake.ShakeAll();
         Destroy(gameObject);
     }
@@ -81,12 +81,6 @@ public class Enemy : Entity
     public Material GetMaterial()
     {
         return enemyData.material;
-    }
-
-    // See if enemy can take dash damage
-    public bool IsDashResistant()
-    {
-        return enemyData.isDashResistent;
     }
 
     // Check if enemy is dead
