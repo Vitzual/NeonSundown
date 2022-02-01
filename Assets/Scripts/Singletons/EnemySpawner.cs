@@ -1,20 +1,26 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
     // List of all stages
-    public List<Stage> stages;
-    private Stage activeStage;
+    public List<StageData> stages;
+    private StageData activeStage;
     private int nextStageIndex = 0;
     private bool stagesLeft = true;
+
+    // Interface elements
+    public TextMeshProUGUI timer;
+    public TextMeshProUGUI stageText;
 
     // List of all enemies with their cooldowns
     public Dictionary<EnemyData, float> enemies;
 
     // Game timer
-    private float timer = 0;
+    private float time = 0;
     private float stageTime = 0;
 
     // Spawning flag
@@ -29,8 +35,7 @@ public class EnemySpawner : MonoBehaviour
             enemies.Add(enemy, 0);
 
         // Setup stages
-        activeStage = stages[nextStageIndex];
-        stageTime = activeStage.time;
+        NextStage();
     }
 
     // Update is called once per frame
@@ -40,8 +45,11 @@ public class EnemySpawner : MonoBehaviour
         if (Dealer.isOpen) return;
 
         // Increase run timer
-        timer += Time.deltaTime;
+        time += Time.deltaTime;
         stageTime -= Time.deltaTime;
+
+        // Set the timer string
+        timer.text = FormatTime(time);
 
         // Check if next stage should start
         if (stagesLeft && stageTime <= 0) NextStage();
@@ -50,7 +58,7 @@ public class EnemySpawner : MonoBehaviour
         if (!spawnEnemies) return;
 
         // Spawn enemies
-        foreach(Stage.Enemy enemy in activeStage.enemies)
+        foreach(StageData.Enemy enemy in activeStage.enemies)
         {
             if (enemies[enemy.data] <= 0f)
             {
@@ -64,7 +72,7 @@ public class EnemySpawner : MonoBehaviour
     private void NextStage()
     {
         // Check if stage exists
-        if (stages.Count >= nextStageIndex)
+        if (stages.Count < nextStageIndex)
         {
             Debug.Log("No stages left!");
             stagesLeft = false;
@@ -73,7 +81,14 @@ public class EnemySpawner : MonoBehaviour
 
         // Setup stages
         activeStage = stages[nextStageIndex];
+        stageText.text = activeStage.name;
         stageTime = activeStage.time;
         nextStageIndex += 1;
+    }
+
+    private string FormatTime(float time)
+    {
+        TimeSpan timeSpan = TimeSpan.FromSeconds(time);
+        return string.Format("{0:D1}:{1:D2}", timeSpan.Minutes, timeSpan.Seconds);
     }
 }

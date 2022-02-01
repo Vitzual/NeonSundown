@@ -1,16 +1,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-// List of all events
-public class Stage : IdentifiableScriptableObject
+[CreateAssetMenu(fileName = "New Stage", menuName = "Stage")]
+public class StageData : IdentifiableScriptableObject
 {
-    [SerializeField]
+    [System.Serializable]
     public class Enemy
     {
         public EnemyData data;
         public float cooldown;
     }
 
+    public new string name;
     public List<Enemy> enemies;
     public float time;
 }

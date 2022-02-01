@@ -11,6 +11,9 @@ public class Card : MonoBehaviour
 
     // Card position
     public Vector3 cardPosition;
+    public float verticalAdjustment = 100f;
+    public float animationSpeed = 0.25f;
+    public float fadeInSpeed = 0.25f;
 
     // Card elements
     public Image model;
@@ -92,10 +95,10 @@ public class Card : MonoBehaviour
         }
 
         // Animate the card
-        transform.localPosition = new Vector3(cardPosition.x, cardPosition.y - 25f, 0);
+        transform.localPosition = new Vector3(cardPosition.x, cardPosition.y - verticalAdjustment, 0);
         canvasGroup.alpha = 0f;
-        LeanTween.moveLocal(gameObject, cardPosition, 0.25f);
-        LeanTween.alphaCanvas(canvasGroup, 1f, 0.25f);
+        LeanTween.moveLocal(gameObject, cardPosition, animationSpeed);
+        LeanTween.alphaCanvas(canvasGroup, 1f, fadeInSpeed);
     }
 
     // Card clicked
