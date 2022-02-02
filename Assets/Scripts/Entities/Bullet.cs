@@ -104,30 +104,23 @@ public class Bullet : Entity
     }
 
     // On collision
-    public void OnTriggerEnter2D(Collider2D collision)
+    public void OnHit(Entity entity)
     {
-        // Get the other enemy component
-        Enemy enemy = collision.GetComponent<Enemy>();
+        // Get material to hold
+        Material holder = entity.GetMaterial();
 
-        // If is enemy, damage
-        if (enemy != null)
+        // Remove pierces
+        pierce -= 1;
+        entity.Damage(damage);
+
+        // Check if bullet has a sound
+        if (weapon.onDamageSound != null)
+            AudioPlayer.Play(weapon.onDamageSound);
+
+        if (pierce <= 0)
         {
-            // Get material to hold
-            Material holder = enemy.GetMaterial();
-
-            // Remove pierces
-            pierce -= 1;
-            enemy.Damage(damage);
-
-            // Check if bullet has a sound
-            if (weapon.onDamageSound != null)
-                AudioPlayer.Play(weapon.onDamageSound);
-
-            if (pierce <= 0)
-            {
-                deathMaterial = holder;
-                Destroy();
-            }
+            deathMaterial = holder;
+            Destroy();
         }
     }
 

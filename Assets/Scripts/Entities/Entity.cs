@@ -24,4 +24,24 @@ public class Entity : MonoBehaviour
         // Rotate if set to true
         if (rotateParticle) holder.transform.rotation *= Quaternion.Euler(-90, 90, 0);
     }
+
+    // Damage entity
+    public virtual void Damage(float amount)
+    {
+        // Do something
+    }
+
+    // Destroy entity
+    public virtual void Destroy()
+    {
+        // Destroy object
+        Destroy(gameObject);
+    }
+
+    // Get material function
+    public virtual Material GetMaterial()
+    {
+        // Return material
+        return null;
+    }
 }

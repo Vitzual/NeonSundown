@@ -37,14 +37,14 @@ public class Enemy : Entity
     }
 
     // Damage entity
-    public void Damage(float amount)
+    public override void Damage(float amount)
     {
         health -= amount;
         if (IsDead()) Destroy();
     }
 
     // Destroy entity
-    public virtual void Destroy()
+    public override void Destroy()
     {
         CreateParticle();
         XPHandler.active.Spawn(transform.position, enemyData.minXP);
@@ -78,7 +78,7 @@ public class Enemy : Entity
     }
 
     // Get material function
-    public Material GetMaterial()
+    public override Material GetMaterial()
     {
         return enemyData.material;
     }
@@ -93,5 +93,16 @@ public class Enemy : Entity
     public EnemyData GetData()
     {
         return enemyData;
+    }
+
+    // On collision
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        // Get the other enemy component
+        Bullet bullet = collision.GetComponent<Bullet>();
+
+        // If is enemy, damage
+        if (bullet != null)
+            bullet.OnHit(this);
     }
 }
