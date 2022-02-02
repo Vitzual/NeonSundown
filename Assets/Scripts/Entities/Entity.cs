@@ -5,9 +5,10 @@ using UnityEngine;
 public class Entity : MonoBehaviour
 {
     // The particle effect for this bullet
+    public bool overrideOtherParticles = false;
     public bool rotateParticle = false;
-    protected Material deathMaterial;
-    protected ParticleSystem deathEffect;
+    public Material deathMaterial;
+    public ParticleSystem deathEffect;
 
     // Creates a particle and sets the material
     public void CreateParticle()
@@ -42,6 +43,6 @@ public class Entity : MonoBehaviour
     public virtual Material GetMaterial()
     {
         // Return material
-        return null;
+        return deathMaterial;
     }
 }

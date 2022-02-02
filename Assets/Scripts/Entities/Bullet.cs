@@ -93,7 +93,7 @@ public class Bullet : Entity
     }
 
     // Destroy the bullet
-    public virtual void Destroy()
+    public override void Destroy()
     {
         // Check if bullet has a sound
         if (weapon.onDeathSound != null)
@@ -108,6 +108,13 @@ public class Bullet : Entity
     {
         // Get material to hold
         Material holder = entity.GetMaterial();
+
+        // Check if entity overrides this particle
+        if (entity.overrideOtherParticles)
+        {
+            deathMaterial = holder;
+            deathEffect = entity.deathEffect;
+        }
 
         // Remove pierces
         pierce -= 1;
@@ -135,4 +142,7 @@ public class Bullet : Entity
         else transform.rotation = Quaternion.RotateTowards(transform.rotation, 
             targetRotation, weapon.rotateSpeed * Time.deltaTime);
     }
+
+    // Get the damage
+    public float GetDamage() { return damage; }
 }
