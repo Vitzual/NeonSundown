@@ -7,7 +7,7 @@ public class Settings
     public float _soundVolume;
 
     public static float music = 0.5f;
-    public static float sound = 0.5f;
+    public static float sound = 0.75f;
 
     public void UpdateVolume()
     {

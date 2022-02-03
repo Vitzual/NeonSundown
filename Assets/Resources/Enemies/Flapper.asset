@@ -17,12 +17,16 @@ MonoBehaviour:
   name: Flapper
   desc: Fast little buggers.
   obj: {fileID: 8071768145869598022, guid: df8e8a72c65cbf94f99dedb5ee04c53a, type: 3}
+  hurt: {fileID: 0}
+  destroyed: {fileID: 8300000, guid: eb8d849ee191e0641b37d170b52e6de7, type: 3}
   health: 1
   damage: 1
-  speed: 30
+  speed: 25
   rotate: 0
   rotateSpeed: 0
   minXP: 2
   maxXP: 5
+  canSpawnOnMenu: 1
+  spawnChance: 1
   material: {fileID: 2100000, guid: de44ca3cc974af545a2feb8b4148a6fa, type: 2}
   deathParticle: {fileID: 2055333318299029104, guid: db7f2bd89549db747aade2de38a9a6d3, type: 3}

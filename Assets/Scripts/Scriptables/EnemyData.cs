@@ -11,6 +11,11 @@ public class EnemyData : IdentifiableScriptableObject
     [BoxGroup("Enemy Info")]
     public GameObject obj;
 
+    [BoxGroup("Enemy Sounds")]
+    public AudioClip hurt;
+    [BoxGroup("Enemy Sounds")]
+    public AudioClip destroyed;
+
     [BoxGroup("Enemy Stats")]
     public float health;
     [BoxGroup("Enemy Stats")]
@@ -25,6 +30,11 @@ public class EnemyData : IdentifiableScriptableObject
     public int minXP;
     [BoxGroup("Enemy Stats")]
     public int maxXP;
+
+    [BoxGroup("Enemy Spawning")]
+    public bool canSpawnOnMenu;
+    [BoxGroup("Enemy Spawning"), Range(0, 1f)]
+    public float spawnChance;
 
     [BoxGroup("Rendering Variables")]
     public Material material;

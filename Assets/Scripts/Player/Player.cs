@@ -5,13 +5,15 @@ public class Player : Weapon
 {
     // Health amount
     private float health;
-
+    private float maxHealth;
+    public ProgressBar healthBar;
 
     // XP amount
     private float xp = 0;
     private float rankup = 50;
     public float rankupMultiplier;
     public ProgressBar xpBar;
+    public CircleCollider2D xpRange;
 
     // Barrel location
     public Transform barrel;
@@ -24,6 +26,9 @@ public class Player : Weapon
     // On start, setup
     public void Start()
     {
+        health = 10;
+        maxHealth = health;
+
         weapon = defaultWeapon;
         Setup(defaultWeapon);
     }
@@ -68,5 +73,37 @@ public class Player : Weapon
             BulletHandler.active.CreateBullet(this, defaultWeapon, barrel.position, rotator.rotation);
             weaponCooldown = cooldown;
         }
+    }
+
+    // Heal amount
+    public void Health(float amount)
+    {
+        // Update health
+        health += amount;
+        UpdateBar();
+    }
+
+    // Damage method
+    public void Damage(float damage)
+    {
+        // Update health
+        health -= damage;
+        if (health <= 0) Kill();
+
+        // Update health UI bar
+        UpdateBar();
+    }
+
+    private void UpdateBar()
+    {
+        // Update health UI bar
+        healthBar.currentPercent = (float)health / maxHealth * 100;
+        healthBar.UpdateUI();
+    }
+
+    // Kill the player
+    public void Kill()
+    {
+        
     }
 }

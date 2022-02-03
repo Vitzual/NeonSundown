@@ -17,6 +17,8 @@ MonoBehaviour:
   name: Triangle
   desc: Moves in a straight line towards you. Nothing special.
   obj: {fileID: 8071768145869598022, guid: fb9add62e63ec4a4aa5e58f9c7d776b7, type: 3}
+  hurt: {fileID: 0}
+  destroyed: {fileID: 8300000, guid: eb8d849ee191e0641b37d170b52e6de7, type: 3}
   health: 2
   damage: 1
   speed: 10
@@ -24,5 +26,7 @@ MonoBehaviour:
   rotateSpeed: 0
   minXP: 3
   maxXP: 5
+  canSpawnOnMenu: 1
+  spawnChance: 0.5
   material: {fileID: 2100000, guid: de44ca3cc974af545a2feb8b4148a6fa, type: 2}
   deathParticle: {fileID: 2055333318299029104, guid: db7f2bd89549db747aade2de38a9a6d3, type: 3}

@@ -101,8 +101,21 @@ public class Enemy : Entity
         // Get the other enemy component
         Bullet bullet = collision.GetComponent<Bullet>();
 
-        // If is enemy, damage
-        if (bullet != null)
+        // If is bullet, invoke on hit method
+        if (bullet != null) 
+        {
             bullet.OnHit(this);
+            return;
+        }
+
+        // Get the other enemy component
+        Player player = collision.GetComponent<Player>();
+
+        // If is player, invoke on hit method
+        if (player != null)
+        {
+            player.Damage(enemyData.damage);
+            Destroy();
+        }
     }
 }

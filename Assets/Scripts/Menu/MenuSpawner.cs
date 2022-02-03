@@ -4,32 +4,37 @@ using UnityEngine;
 
 public class MenuSpawner : MonoBehaviour
 {
-    // Contains all active enemies in the scene
-    public List<Enemy> enemies = new List<Enemy>();
+    // Menu stage
+    public StageData menuStage;
 
-    public float speed;
-    public float rotate;
+    // List of all enemies with their cooldowns
+    public Dictionary<EnemyData, float> enemyList;
+    public List<Enemy> enemies;
+
     public float range;
     public float moveUpTo;
-    public float cooldown;
-    private float timer;
 
-    private void Start()
+    // On start, generate enemies
+    void Start()
     {
-        timer = cooldown;
+        // Get enemies from scriptable controller
+        enemyList = new Dictionary<EnemyData, float>();
+        foreach (EnemyData enemy in Scriptables.enemies)
+            enemyList.Add(enemy, 0);
     }
 
     // Update is called once per frame
     void Update()
     {
-        // Check if cooldown above 0
-        if (timer > 0) timer -= Time.deltaTime;
-
-        // If not, spawn enemy
-        else
+        // Spawn enemies
+        foreach (StageData.Enemy enemy in menuStage.enemies)
         {
-            SpawnMenuEnemy();
-            timer = cooldown;
+            if (enemyList[enemy.data] <= 0f)
+            {
+                enemyList[enemy.data] = enemy.cooldown;
+                SpawnMenuEnemy(enemy.data);
+            }
+            else enemyList[enemy.data] -= Time.deltaTime;
         }
 
         // Move enemies each frame towards their target
@@ -62,10 +67,9 @@ public class MenuSpawner : MonoBehaviour
         }
     }
 
-    public void SpawnMenuEnemy()
+    public void SpawnMenuEnemy(EnemyData newEnemy)
     {
-        // Iterate through enemies
-        EnemyData newEnemy = Scriptables.enemies[Random.Range(0, Scriptables.enemies.Count)];
+        // Setup the enemy
         Vector2 spawnPos = new Vector2(Random.Range(-range, range), transform.position.y);
         Enemy enemy = Instantiate(newEnemy.obj, spawnPos, Quaternion.identity).GetComponent<Enemy>();
         Rigidbody2D rb = enemy.GetComponent<Rigidbody2D>();
