@@ -8,6 +8,9 @@ public class Deck : MonoBehaviour
     // Active instance
     public static Deck active;
 
+    // Player instance
+    private Player player;
+
     // Cards in deck
     private Dictionary<CardData, int> cards;
     private Dictionary<CardData, Weapon> upgradeables;
@@ -25,6 +28,9 @@ public class Deck : MonoBehaviour
     {
         // Set active instance
         active = this;
+
+        // Get player instance on the object
+        player = GetComponent<Player>();
 
         // Set new card dictionary
         cards = new Dictionary<CardData, int>();
@@ -130,6 +136,9 @@ public class Deck : MonoBehaviour
         Debug.Log("Adding stat card " + stat.name + " to deck");
         if (stat.multiply) AddMultiplier(stat.type, stat.modifier);
         else AddAddition(stat.type, stat.modifier);
+
+        // Check player stats first
+        player.UpdateStat(stat.type);
 
         // Update all weapon cards
         foreach (KeyValuePair<CardData, Weapon> card in upgradeables)

@@ -2,10 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Menu : MonoBehaviour
 {
     // Title leen element
+    public CanvasGroup menuButtons;
+    public CanvasGroup pressSpace;
+    public CanvasGroup socialsLeft;
+    public CanvasGroup socialsRight;
     public RectTransform title;
     public Vector2 titleTargetPos = new Vector2(0, 200);
     public float titleAnimSpeed;
@@ -31,7 +36,14 @@ public class Menu : MonoBehaviour
     {
         if (!spacePressed && Input.anyKey)
         {
-            
+            LeanTween.scale(title, titleTargetSize, titleSizeSpeed).setEase(LeanTweenType.easeInExpo).setDelay(0.2f);
+            LeanTween.moveLocal(title.gameObject, titleTargetPos, titleAnimSpeed).setEase(LeanTweenType.easeInExpo).setDelay(0.2f);
+            LeanTween.alphaCanvas(pressSpace, 0f, titleAnimSpeed);
+            LeanTween.alphaCanvas(menuButtons, 1f, titleAnimSpeed).setDelay(titleAnimSpeed);
+            LeanTween.alphaCanvas(socialsLeft, 1f, titleAnimSpeed).setDelay(titleAnimSpeed);
+            LeanTween.alphaCanvas(socialsRight, 1f, titleAnimSpeed).setDelay(titleAnimSpeed);
+            menuButtons.interactable = true;
+            menuButtons.blocksRaycasts = true;
             spacePressed = true;
         }
     }
@@ -49,5 +61,17 @@ public class Menu : MonoBehaviour
             pressSpaceText.alpha -= alphaAdjustSpeed;
             if (pressSpaceText.alpha <= 0f) increaseAlpha = true;
         }
+    }
+
+    // Load the main scene
+    public void LoadMain()
+    {
+        SceneManager.LoadScene("Main");
+    }
+
+    // Exit the application
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 }

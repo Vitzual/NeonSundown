@@ -7,6 +7,7 @@ public class OnHoverAdjustScale : MonoBehaviour, IPointerEnterHandler, IPointerE
 {
     // Hover variables
     public float scaleAdjustment = 0.1f;
+    public AudioClip audioClip;
     private RectTransform rect;
 
     // On start grab rect transform
@@ -18,6 +19,9 @@ public class OnHoverAdjustScale : MonoBehaviour, IPointerEnterHandler, IPointerE
         rect.localScale = new Vector3(rect.localScale.x + scaleAdjustment,
                                       rect.localScale.y + scaleAdjustment,
                                       rect.localScale.z + scaleAdjustment);
+
+        if (audioClip != null)
+            AudioPlayer.Play(audioClip, false);
     }
 
     // On mouse exit make local scale smaller

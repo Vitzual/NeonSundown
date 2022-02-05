@@ -95,8 +95,7 @@ public class Card : MonoBehaviour
         }
 
         // Animate the card
-        transform.localPosition = new Vector3(cardPosition.x, cardPosition.y - verticalAdjustment, 0);
-        canvasGroup.alpha = 0f;
+        ResetCard();
         LeanTween.moveLocal(gameObject, cardPosition, animationSpeed);
         LeanTween.alphaCanvas(canvasGroup, 1f, fadeInSpeed);
     }
@@ -105,5 +104,12 @@ public class Card : MonoBehaviour
     public void OnClick()
     {
         Dealer.active.PickCard(cardData, cardNumber);
+    }
+
+    // Reset card
+    public void ResetCard()
+    {
+        transform.localPosition = new Vector3(cardPosition.x, cardPosition.y - verticalAdjustment, 0);
+        canvasGroup.alpha = 0f;
     }
 }

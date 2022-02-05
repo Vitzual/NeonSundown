@@ -85,7 +85,7 @@ public class Weapon : MonoBehaviour
     }
 
     // Calculate stat
-    public void UpdateStat(Stat type)
+    public virtual void UpdateStat(Stat type)
     {
         switch (type)
         {

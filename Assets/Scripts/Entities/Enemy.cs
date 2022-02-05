@@ -52,6 +52,13 @@ public class Enemy : Entity
         Destroy(gameObject);
     }
 
+    // Called when a player hits this enemy
+    public virtual void OnHitPlayer(Player player)
+    {
+        player.Damage(enemyData.damage);
+        Destroy();
+    }
+
     // Move towards the target
     public virtual void Move()
     {
@@ -106,16 +113,6 @@ public class Enemy : Entity
         {
             bullet.OnHit(this);
             return;
-        }
-
-        // Get the other enemy component
-        Player player = collision.GetComponent<Player>();
-
-        // If is player, invoke on hit method
-        if (player != null)
-        {
-            player.Damage(enemyData.damage);
-            Destroy();
         }
     }
 }

@@ -28,6 +28,8 @@ public class Dealer : MonoBehaviour
     public AudioSource music;
     [BoxGroup("Music Options")]
     public float pitchSpeed = 0.1f;
+    [BoxGroup("Music Options")]
+    public float pitchDown = 0.8f;
 
     // Interface variables
     [BoxGroup("Interface Options")]
@@ -89,7 +91,7 @@ public class Dealer : MonoBehaviour
         // Pitch down music
         if (isOpen)
         {
-            if (music.pitch > 0.8f)
+            if (music.pitch > pitchDown)
                 music.pitch -= pitchSpeed;
 
             if (!canvasSet && cardsDealt)
@@ -183,6 +185,10 @@ public class Dealer : MonoBehaviour
     // Open dealer
     public void CloseDealer()
     {
+        // Reset cards
+        foreach(Card card in cardSlots)
+            card.ResetCard();
+
         // Set the canvas component
         canvasGroup.alpha = 0f;
         canvasGroup.interactable = false;
