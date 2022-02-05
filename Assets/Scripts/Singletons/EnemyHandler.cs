@@ -42,6 +42,21 @@ public class EnemyHandler : MonoBehaviour
         }
     }
 
+    // Creates a new enemy with a specific position
+    public void CreateEnemy(EnemyData enemyData, Vector2 position)
+    {
+        // Create the tile
+        GameObject lastObj = Instantiate(enemyData.obj, position, Quaternion.identity);
+        lastObj.name = enemyData.name;
+
+        // Attempt to set enemy variant
+        Enemy enemy = lastObj.GetComponent<Enemy>();
+        enemy.Setup(enemyData, player);
+
+        // Add to enemies list
+        enemies.Add(enemy);
+    }
+
     // Create a new active enemy instance
     public void CreateEnemy(EnemyData enemyData)
     {

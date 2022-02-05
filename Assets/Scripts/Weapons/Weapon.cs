@@ -16,7 +16,7 @@ public class Weapon : MonoBehaviour
 
     // Weapon variables
     [HideInInspector]
-    public float damage, cooldown, moveSpeed, bloom, pierces, bullets, lifetime;
+    public float damage, cooldown, moveSpeed, bloom, pierces, bullets, lifetime, range;
 
     // Weapon level
     [HideInInspector]
@@ -130,6 +130,7 @@ public class Weapon : MonoBehaviour
         pierces = weapon.pierces;
         bullets = weapon.bullets;
         lifetime = weapon.lifetime;
+        range = weapon.range;
     }
 
     // Get multiplier

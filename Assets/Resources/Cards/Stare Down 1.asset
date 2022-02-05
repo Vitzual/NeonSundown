@@ -47,10 +47,11 @@ MonoBehaviour:
     multiply: 0
     modifier: 10
   damage: 1
-  cooldown: 0
+  cooldown: 1
   moveSpeed: 0
   rotate: 0
   rotateSpeed: 0
+  range: 10
   bloom: 0
   pierces: 0
   bullets: 0
@@ -61,9 +62,11 @@ MonoBehaviour:
   lockTarget: 0
   bullet: {fileID: 0}
   bulletSound: {fileID: 0}
-  obj: {fileID: 0}
+  obj: {fileID: 4664292228507031762, guid: e31ddfb02a94d974a988ac8b7aad76ff, type: 3}
   onDamageSound: {fileID: 0}
   onDeathSound: {fileID: 0}
+  minPitch: 0.9
+  maxPitch: 1.1
   setPlayerAsParent: 0
   useMaterial: 0
   useTrail: 0

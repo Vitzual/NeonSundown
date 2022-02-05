@@ -33,20 +33,23 @@ public class WeaponData : CardData
     [BoxGroup("Weapon Stats")]
     public float rotateSpeed;
     [BoxGroup("Weapon Stats")]
+    public float range;
+
+    [BoxGroup("Bullet Stats")]
     public float bloom;
-    [BoxGroup("Weapon Stats")]
+    [BoxGroup("Bullet Stats")]
     public float pierces;
-    [BoxGroup("Weapon Stats")]
+    [BoxGroup("Bullet Stats")]
     public float bullets;
-    [BoxGroup("Weapon Stats")]
+    [BoxGroup("Bullet Stats")]
     public float lifetime;
-    [BoxGroup("Weapon Stats"), Tooltip("Points the weapon in random directions.")]
+    [BoxGroup("Bullet Stats"), Tooltip("Points the weapon in random directions.")]
     public bool randomDirection;
-    [BoxGroup("Weapon Stats"), Tooltip("Chooses a random enemy to target.")]
+    [BoxGroup("Bullet Stats"), Tooltip("Chooses a random enemy to target.")]
     public bool randomTarget;
-    [BoxGroup("Weapon Stats"), Tooltip("Determins if a bullet should follow its target.")]
+    [BoxGroup("Bullet Stats"), Tooltip("Determins if a bullet should follow its target.")]
     public bool trackTarget;
-    [BoxGroup("Weapon Stats"), Tooltip("Locks rotation to a target. Only applied if track target is true.")]
+    [BoxGroup("Bullet Stats"), Tooltip("Locks rotation to a target. Only applied if track target is true.")]
     public bool lockTarget;
 
     [BoxGroup("Object Instances"), Tooltip("The bullet object associated with this SO. Optional.")]
@@ -59,6 +62,10 @@ public class WeaponData : CardData
     public AudioClip onDamageSound;
     [BoxGroup("Object Instances"), Tooltip("The sound played when the weapon gets destroyed. Optional.")]
     public AudioClip onDeathSound;
+    [BoxGroup("Object Instances"), Tooltip("The minimum pitch value applied to the audio clip. Optional."), Range(0.5f, 1.5f)]
+    public float minPitch = 0.9f;
+    [BoxGroup("Object Instances"), Tooltip("The maximum pitch value applied to the audio clip. Optional."), Range(0.5f, 1.5f)]
+    public float maxPitch = 1.1f;
     [BoxGroup("Object Instances"), Tooltip("If the weapon instance above should be set as a child of the parent.")]
     public bool setPlayerAsParent;
 

@@ -105,7 +105,7 @@ public class Player : Weapon
             // Increase level
             level += 1;
             xp -= rankup;
-            if (levels.Count < level) rankup = (int)(rankup * rankupMultiplier);
+            if (levels.Count <= level) rankup = (int)(rankup * rankupMultiplier);
             else rankup = levels[level];
 
             // Set text

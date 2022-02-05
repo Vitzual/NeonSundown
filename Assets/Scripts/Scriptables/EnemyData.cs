@@ -31,11 +31,6 @@ public class EnemyData : IdentifiableScriptableObject
     [BoxGroup("Enemy Stats")]
     public int maxXP;
 
-    [BoxGroup("Enemy Spawning")]
-    public bool canSpawnOnMenu;
-    [BoxGroup("Enemy Spawning"), Range(0, 1f)]
-    public float spawnChance;
-
     [BoxGroup("Rendering Variables")]
     public Material material;
     [BoxGroup("Rendering Variables")]

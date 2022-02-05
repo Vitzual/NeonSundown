@@ -39,6 +39,12 @@ public class Entity : MonoBehaviour
         Destroy(gameObject);
     }
 
+    // Check if enemy is dead
+    public virtual bool IsDead()
+    {
+        return false;
+    }
+
     // Get material function
     public virtual Material GetMaterial()
     {

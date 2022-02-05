@@ -6,7 +6,7 @@ using UnityEngine;
 public class Enemy : Entity
 {
     // Scriptable object
-    private EnemyData enemyData;
+    protected EnemyData enemyData;
 
     // Rotation thing
     public Transform rotator;
@@ -91,7 +91,7 @@ public class Enemy : Entity
     }
 
     // Check if enemy is dead
-    public bool IsDead()
+    public override bool IsDead()
     {
         return health <= 0;
     }

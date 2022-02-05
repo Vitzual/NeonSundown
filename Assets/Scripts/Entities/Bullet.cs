@@ -95,10 +95,6 @@ public class Bullet : Entity
     // Destroy the bullet
     public override void Destroy()
     {
-        // Check if bullet has a sound
-        if (weapon.onDeathSound != null)
-            AudioPlayer.Play(weapon.onDeathSound);
-
         if (weapon.useParticle) CreateParticle();
         Destroy(gameObject);
     }
@@ -122,7 +118,11 @@ public class Bullet : Entity
 
         // Check if bullet has a sound
         if (weapon.onDamageSound != null)
-            AudioPlayer.Play(weapon.onDamageSound);
+            AudioPlayer.Play(weapon.onDamageSound, true, weapon.minPitch, weapon.maxPitch);
+
+        // Check if bullet has a sound
+        if (weapon.onDeathSound != null && entity.IsDead())
+            AudioPlayer.Play(weapon.onDeathSound, true, weapon.minPitch, weapon.maxPitch);
 
         if (pierce <= 0)
         {

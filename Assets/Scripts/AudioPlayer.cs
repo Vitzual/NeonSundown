@@ -34,7 +34,7 @@ public class AudioPlayer : MonoBehaviour
     }
 
     // Play an audio clip
-    public static void Play(AudioClip clip, bool randomizePitch = true)
+    public static void Play(AudioClip clip, bool randomizePitch = true, float minPitch = 0.9f, float maxPitch = 1.1f)
     {
         // Check if cooldown expired
         if (audioClips.Contains(clip)) return;
@@ -44,7 +44,7 @@ public class AudioPlayer : MonoBehaviour
             cooldowns.Add(0.1f);
         }
 
-        if (randomizePitch) audioSource.pitch = Random.Range(0.9f, 1.1f);
+        if (randomizePitch) audioSource.pitch = Random.Range(minPitch, maxPitch);
         else audioSource.pitch = 1f;
 
         audioSource.PlayOneShot(clip, Settings.sound);
