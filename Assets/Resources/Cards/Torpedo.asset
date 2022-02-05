@@ -19,9 +19,50 @@ MonoBehaviour:
   canDrop: 1
   sprite: {fileID: 21300000, guid: b46d0c8c022681a4085ea02b49eb88c6, type: 3}
   color: {r: 1, g: 0.69146764, b: 0, a: 1}
-  baseLevels: []
-  prestigeLevels: []
-  damage: 25
+  prestigeSprite: {fileID: 21300000, guid: 0a3d7d412c181d74eabda7489ac29172, type: 3}
+  baseLevels:
+  - stat: 1
+    description: Increases damage by 5
+    multiply: 0
+    modifier: 5
+  - stat: 2
+    description: Decreases cooldown by 0.5s
+    multiply: 0
+    modifier: -0.5
+  - stat: 3
+    description: Increases move speed by 10
+    multiply: 0
+    modifier: 10
+  - stat: 8
+    description: Increases lifetime by 1 second
+    multiply: 0
+    modifier: 1
+  - stat: 6
+    description: Adds piercing to rockets.
+    multiply: 0
+    modifier: 2
+  prestigeLevels:
+  - stat: 1
+    description: Increases damage by 25
+    multiply: 0
+    modifier: 25
+  - stat: 2
+    description: Decreases cooldown by 1.5s
+    multiply: 0
+    modifier: -1.5
+  - stat: 3
+    description: Increases move speed by 25
+    multiply: 0
+    modifier: 25
+  - stat: 8
+    description: Increases lifetime by 2 seconds
+    multiply: 0
+    modifier: 2
+  - stat: 6
+    description: Adds piercing to rockets.
+    multiply: 0
+    modifier: 2
+  damage: 10
   cooldown: 2
   moveSpeed: 40
   rotate: 0

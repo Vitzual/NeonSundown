@@ -14,15 +14,39 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   internalId: 221b57f0-8b2d-4a78-b828-c393d297efff
   createdAtTicks: 637795958435254299
-  name: 
-  description: 
-  canDrop: 0
-  sprite: {fileID: 0}
-  color: {r: 0, g: 0, b: 0, a: 0}
-  prestigeSprite: {fileID: 0}
-  baseLevels: []
-  prestigeLevels: []
-  damage: 0
+  name: Stare Down
+  description: Enemies start taking damage when they get close
+  canDrop: 1
+  sprite: {fileID: 21300000, guid: 6c4369e08ae1e184da6c2d7f4555180b, type: 3}
+  color: {r: 1, g: 0, b: 0, a: 1}
+  prestigeSprite: {fileID: 21300000, guid: 6c4369e08ae1e184da6c2d7f4555180b, type: 3}
+  baseLevels:
+  - stat: 1
+    description: Increases damage by 1
+    multiply: 0
+    modifier: 1
+  - stat: 1
+    description: Increases damage by 1
+    multiply: 0
+    modifier: 1
+  - stat: 12
+    description: Increases range by 5
+    multiply: 0
+    modifier: 5
+  prestigeLevels:
+  - stat: 1
+    description: Increases damage by 5
+    multiply: 0
+    modifier: 5
+  - stat: 1
+    description: Increases damage by 5
+    multiply: 0
+    modifier: 5
+  - stat: 12
+    description: Increases range by 10
+    multiply: 0
+    modifier: 10
+  damage: 1
   cooldown: 0
   moveSpeed: 0
   rotate: 0

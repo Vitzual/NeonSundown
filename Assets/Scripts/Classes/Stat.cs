@@ -11,5 +11,6 @@ public enum Stat
     Lifetime,
     Knockback,
     XPGain,
-    View
+    View,
+    Range
 }
