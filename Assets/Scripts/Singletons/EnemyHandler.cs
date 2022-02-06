@@ -43,7 +43,7 @@ public class EnemyHandler : MonoBehaviour
     }
 
     // Creates a new enemy with a specific position
-    public void CreateEnemy(EnemyData enemyData, Vector2 position)
+    public void CreateEnemy(EnemyData enemyData, Variant variant, Vector2 position)
     {
         // Create the tile
         GameObject lastObj = Instantiate(enemyData.obj, position, Quaternion.identity);
@@ -51,14 +51,14 @@ public class EnemyHandler : MonoBehaviour
 
         // Attempt to set enemy variant
         Enemy enemy = lastObj.GetComponent<Enemy>();
-        enemy.Setup(enemyData, player);
+        enemy.Setup(enemyData.variants[variant], variant, player);
 
         // Add to enemies list
         enemies.Add(enemy);
     }
 
     // Create a new active enemy instance
-    public void CreateEnemy(EnemyData enemyData)
+    public void CreateEnemy(EnemyData enemyData, Variant variant)
     {
         // Generate position
         Vector2 position = GeneratePosition();
@@ -69,7 +69,7 @@ public class EnemyHandler : MonoBehaviour
 
         // Attempt to set enemy variant
         Enemy enemy = lastObj.GetComponent<Enemy>();
-        enemy.Setup(enemyData, player);
+        enemy.Setup(enemyData.variants[variant], variant, player); 
 
         // Add to enemies list
         enemies.Add(enemy);

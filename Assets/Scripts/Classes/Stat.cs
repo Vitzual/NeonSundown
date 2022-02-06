@@ -3,14 +3,16 @@ public enum Stat
     Health,
     Damage,
     Cooldown,
-    Speed,
+    MoveSpeed,
+    DashSpeed,
     Bloom,
     Bullets,
     Pierces,
+    Range,
     Tracking,
     Lifetime,
     Knockback,
     XPGain,
-    View,
-    Range
+    XPRange,
+    View
 }

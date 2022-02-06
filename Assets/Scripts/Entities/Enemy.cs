@@ -6,9 +6,13 @@ using UnityEngine;
 public class Enemy : Entity
 {
     // Scriptable object
-    protected EnemyData enemyData;
+    protected Variant variant;
+    protected VariantData data;
 
-    // Rotation thing
+    // Transform lists
+    public List<TrailRenderer> trails;
+    public List<SpriteRenderer> glows;
+    public List<SpriteRenderer> fills;
     public Transform rotator;
 
     // Internal runtime variables
@@ -19,17 +23,26 @@ public class Enemy : Entity
     private Transform target;
     
     // Setup the enemy
-    public virtual void Setup(EnemyData data, Transform player)
+    public virtual void Setup(VariantData data, Variant variant, Transform player)
     {
+        // Loop through all glows and fills
+        foreach (TrailRenderer trail in trails) 
+            trail.material = data.material;
+        foreach (SpriteRenderer glow in glows)
+            glow.material = data.material;
+        foreach (SpriteRenderer fill in fills)
+            fill.color = data.color;
+
         // Set scriptable
-        enemyData = data;
+        this.variant = variant;
+        this.data = data;
 
         // Set material / particle
         deathEffect = data.deathParticle;
         deathMaterial = data.material;
 
         // Set stats
-        health = enemyData.health;
+        health = data.health;
         maxHealth = health;
 
         // Set target
@@ -47,7 +60,7 @@ public class Enemy : Entity
     public override void Destroy()
     {
         CreateParticle();
-        XPHandler.active.Spawn(transform.position, enemyData.minXP);
+        XPHandler.active.Spawn(transform.position, data.minXP);
         CameraShake.ShakeAll();
         Destroy(gameObject);
     }
@@ -55,7 +68,7 @@ public class Enemy : Entity
     // Called when a player hits this enemy
     public virtual void OnHitPlayer(Player player)
     {
-        player.Damage(enemyData.damage);
+        player.Damage(data.damage);
         Destroy();
     }
 
@@ -64,10 +77,10 @@ public class Enemy : Entity
     {
         if (target != null)
         {
-            if (enemyData.rotate)
+            if (data.rotate)
             {
                 // Rotate if it says to 
-                rotator.Rotate(Vector3.forward, enemyData.rotateSpeed * Time.deltaTime);
+                rotator.Rotate(Vector3.forward, data.rotateSpeed * Time.deltaTime);
             }
             else
             {
@@ -79,7 +92,7 @@ public class Enemy : Entity
             }
 
             // Move towards the target
-            float step = enemyData.speed * Time.deltaTime;
+            float step = data.speed * Time.deltaTime;
             transform.position = Vector2.MoveTowards(transform.position, target.position, step);
         }
     }
@@ -87,7 +100,7 @@ public class Enemy : Entity
     // Get material function
     public override Material GetMaterial()
     {
-        return enemyData.material;
+        return data.material;
     }
 
     // Check if enemy is dead
@@ -97,9 +110,9 @@ public class Enemy : Entity
     }
 
     // Get enemy data
-    public EnemyData GetData()
+    public VariantData GetData()
     {
-        return enemyData;
+        return data;
     }
 
     // On collision

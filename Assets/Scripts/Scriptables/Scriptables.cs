@@ -57,6 +57,7 @@ public static class Scriptables
 
         foreach (EnemyData enemy in loaded)
         {
+            enemy.GenerateStats();
             enemiesDict.Add(enemy.InternalID, enemy);
             enemies.Add(enemy);
             Debug.Log("Loaded " + enemy.name + " with UUID " + enemy.InternalID);

@@ -138,11 +138,13 @@ public class Deck : MonoBehaviour
         else AddAddition(stat.type, stat.modifier);
 
         // Check player stats first
-        player.UpdateStat(stat.type);
+        if (stat.applyToPlayer)
+            player.UpdateStat(stat.type);
 
         // Update all weapon cards
-        foreach (KeyValuePair<CardData, Weapon> card in upgradeables)
-            if (card.Value != null) card.Value.UpdateStat(stat.type);
+        if (stat.applyToCards)
+            foreach (KeyValuePair<CardData, Weapon> card in upgradeables)
+                if (card.Value != null) card.Value.UpdateStat(stat.type);
     }
 
     // Set passive card slot

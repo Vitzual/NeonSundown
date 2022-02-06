@@ -63,7 +63,7 @@ public class EnemySpawner : MonoBehaviour
             if (enemies[enemy.data] <= 0f)
             {
                 enemies[enemy.data] = enemy.cooldown;
-                EnemyHandler.active.CreateEnemy(enemy.data);
+                EnemyHandler.active.CreateEnemy(enemy.data, enemy.variant);
             }
             else enemies[enemy.data] -= Time.deltaTime;
         }

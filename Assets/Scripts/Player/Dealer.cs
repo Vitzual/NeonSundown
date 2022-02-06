@@ -80,7 +80,7 @@ public class Dealer : MonoBehaviour
         if (dealCards)
         {
             if (background.color.a < 0.5f)
-                background.color = new Color(0, 0, 0, background.color.a + bgFadeInSpeed);
+                background.color = new Color(0, 0, 0, background.color.a + (bgFadeInSpeed * Time.deltaTime));
             else
             {
                 if (cardCooldown <= 0f) DealCard(cardNumber);
@@ -92,12 +92,12 @@ public class Dealer : MonoBehaviour
         if (isOpen)
         {
             if (music.pitch > pitchDown)
-                music.pitch -= pitchSpeed;
+                music.pitch -= pitchSpeed * Time.deltaTime;
 
             if (!canvasSet && cardsDealt)
             {
                 if (title.alpha < 1f)
-                    title.alpha += titleFadeInSpeed;
+                    title.alpha += titleFadeInSpeed * Time.deltaTime;
                 else canvasSet = true;
             }
         }
@@ -105,7 +105,7 @@ public class Dealer : MonoBehaviour
         // Pitch back up music after dealign
         else if (music.pitch < 1.0f)
         {
-            music.pitch += pitchSpeed;
+            music.pitch += pitchSpeed * Time.deltaTime;
             if (music.pitch >= 1f)
                 music.pitch = 1f;
         }

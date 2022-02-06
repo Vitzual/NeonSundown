@@ -17,16 +17,26 @@ MonoBehaviour:
   name: Sawblade
   desc: A nasty spinning blade of death. Dashing into it will inflict damage.
   obj: {fileID: 8071768145869598022, guid: bf377f8c51d006641ae1162aa9595d89, type: 3}
-  hurt: {fileID: 0}
-  destroyed: {fileID: 8300000, guid: eb8d849ee191e0641b37d170b52e6de7, type: 3}
-  health: 3
-  damage: 2
-  speed: 15
-  rotate: 1
-  rotateSpeed: 120
-  minXP: 5
-  maxXP: 8
-  canSpawnOnMenu: 1
-  spawnChance: 0.5
-  material: {fileID: 2100000, guid: de44ca3cc974af545a2feb8b4148a6fa, type: 2}
-  deathParticle: {fileID: 2055333318299029104, guid: db7f2bd89549db747aade2de38a9a6d3, type: 3}
+  variantStats:
+  - type: 0
+    color: {r: 1, g: 0, b: 0, a: 1}
+    material: {fileID: 2100000, guid: de44ca3cc974af545a2feb8b4148a6fa, type: 2}
+    deathParticle: {fileID: 2055333318299029104, guid: db7f2bd89549db747aade2de38a9a6d3, type: 3}
+    health: 3
+    damage: 2
+    speed: 15
+    minXP: 3
+    maxXP: 5
+    rotate: 1
+    rotateSpeed: -100
+  - type: 1
+    color: {r: 0.1509434, g: 0.1473834, b: 0.1473834, a: 1}
+    material: {fileID: 2100000, guid: 4ab3027e425e85946b39bff6ca3ab165, type: 2}
+    deathParticle: {fileID: 993855083006936043, guid: 01c48aa84a2ea6c49901482836dcdd15, type: 3}
+    health: 60
+    damage: 8
+    speed: 25
+    minXP: 10
+    maxXP: 15
+    rotate: 0
+    rotateSpeed: 0

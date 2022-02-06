@@ -17,16 +17,15 @@ MonoBehaviour:
   name: Fighter
   desc: He's a fighter that one
   obj: {fileID: 8071768145869598022, guid: 60efeddd5807be74ab61499b2ae18256, type: 3}
-  hurt: {fileID: 0}
-  destroyed: {fileID: 0}
-  health: 25
-  damage: 5
-  speed: 8
-  rotate: 0
-  rotateSpeed: 0
-  minXP: 10
-  maxXP: 15
-  canSpawnOnMenu: 0
-  spawnChance: 0
-  material: {fileID: 2100000, guid: de44ca3cc974af545a2feb8b4148a6fa, type: 2}
-  deathParticle: {fileID: 2055333318299029104, guid: db7f2bd89549db747aade2de38a9a6d3, type: 3}
+  variantStats:
+  - type: 0
+    color: {r: 1, g: 0, b: 0, a: 1}
+    material: {fileID: 2100000, guid: de44ca3cc974af545a2feb8b4148a6fa, type: 2}
+    deathParticle: {fileID: 2055333318299029104, guid: db7f2bd89549db747aade2de38a9a6d3, type: 3}
+    health: 12
+    damage: 2
+    speed: 12
+    minXP: 2
+    maxXP: 5
+    rotate: 0
+    rotateSpeed: 0

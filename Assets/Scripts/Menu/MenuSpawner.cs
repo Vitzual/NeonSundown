@@ -43,11 +43,11 @@ public class MenuSpawner : MonoBehaviour
             if (enemies[a] != null)
             {
                 // Rotate if it says to 
-                EnemyData enemyData = enemies[a].GetData();
-                if (enemyData.rotate) enemies[a].rotator.Rotate(Vector3.forward, enemyData.rotateSpeed * Time.deltaTime);
+                VariantData data = enemies[a].GetData();
+                if (data.rotate) enemies[a].rotator.Rotate(Vector3.forward, data.rotateSpeed * Time.deltaTime);
 
                 // Move towards the target
-                float step = enemyData.speed * Time.deltaTime;
+                float step = data.speed * Time.deltaTime;
                 enemies[a].transform.position = Vector2.MoveTowards(enemies[a].transform.position, 
                     new Vector2(enemies[a].transform.position.x, moveUpTo), step);
 
@@ -75,7 +75,7 @@ public class MenuSpawner : MonoBehaviour
         Rigidbody2D rb = enemy.GetComponent<Rigidbody2D>();
         if (rb != null) Destroy(rb);
         enemy.transform.name = newEnemy.name;
-        enemy.Setup(newEnemy, null);
+        enemy.Setup(newEnemy.variants[Variant.Normal], Variant.Normal, null);
         enemies.Add(enemy);
     }
 }

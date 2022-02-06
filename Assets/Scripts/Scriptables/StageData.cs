@@ -8,6 +8,7 @@ public class StageData : IdentifiableScriptableObject
     public class Enemy
     {
         public EnemyData data;
+        public Variant variant;
         public float cooldown;
     }
 

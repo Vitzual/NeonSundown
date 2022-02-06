@@ -1,4 +1,5 @@
 using Sirenix.OdinInspector;
+using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Enemy", menuName = "Entities/Enemy")]
@@ -11,28 +12,26 @@ public class EnemyData : IdentifiableScriptableObject
     [BoxGroup("Enemy Info")]
     public GameObject obj;
 
-    [BoxGroup("Enemy Sounds")]
-    public AudioClip hurt;
-    [BoxGroup("Enemy Sounds")]
-    public AudioClip destroyed;
+    [BoxGroup("Enemy Stats"), SerializeField]
+    protected List<VariantData> variantStats;
+    public Dictionary<Variant, VariantData> variants;
 
-    [BoxGroup("Enemy Stats")]
-    public float health;
-    [BoxGroup("Enemy Stats")]
-    public float damage;
-    [BoxGroup("Enemy Stats")]
-    public float speed;
-    [BoxGroup("Enemy Stats")]
-    public bool rotate;
-    [BoxGroup("Enemy Stats")]
-    public float rotateSpeed;
-    [BoxGroup("Enemy Stats")]
-    public int minXP;
-    [BoxGroup("Enemy Stats")]
-    public int maxXP;
+    // Generate the variants stat dictionary handler
+    // Needs to be run in or der to get stats
+    public void GenerateStats()
+    {
+        // Check if one variant defined
+        if (variantStats.Count == 0)
+        {
+            Debug.Log(name + " has no variants defined and will not work!");
+            return;
+        }
 
-    [BoxGroup("Rendering Variables")]
-    public Material material;
-    [BoxGroup("Rendering Variables")]
-    public ParticleSystem deathParticle;
+        // Generate stats
+        Debug.Log("Generating " + name + " scriptable stat data...");
+        variants = new Dictionary<Variant, VariantData>();
+        foreach (VariantData variant in variantStats)
+            variants.Add(variant.type, variant);
+        Debug.Log("Successfully generated " + name + " with " + variantStats.Count + " stat entries!");
+    }
 }

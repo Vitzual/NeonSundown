@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class Player : Weapon
 {
+    // Controller associated with the player
+    private Controller controller;
+
     // Health amount
     private float health;
     private float maxHealth;
@@ -36,6 +39,9 @@ public class Player : Weapon
     // On start, setup
     public void Start()
     {
+        // Get controller instance
+        controller = GetComponent<Controller>();
+
         // Setup base stuff
         level = 0;
         xp = 0;
@@ -89,6 +95,23 @@ public class Player : Weapon
 
                 // Upgrade the view distance
                 cam.orthographicSize += 2.5f;
+                break;
+
+            // Upgrades the speed 
+            case Stat.MoveSpeed:
+
+                // Upgrade speed
+                controller.moveSpeed += 2.5f;
+                controller.dashSpeed += 2.5f;
+                //controller.dashTimer += 0.25f;
+                break;
+
+            // Upgrades the speed 
+            case Stat.DashSpeed:
+
+                // Upgrade speed
+                controller.dashSpeed += 2.5f;
+                //controller.dashTimer += 0.25f;
                 break;
         }
     }
