@@ -5,6 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class Gamemode : MonoBehaviour
 {
+    // Static arena being used
+    public static ArenaData arena;
+
     // Setup the game
     public void Awake()
     {

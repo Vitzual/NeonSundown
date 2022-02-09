@@ -7,10 +7,10 @@ using UnityEngine;
 public class Currencies : MonoBehaviour
 {
     // Save data
-    public static string savePath = "/playerdata.save";
+    public static string savePath = "/currencies.save";
 
     // Save a game
-    public static void SaveGame(int xpCrystals, int bloodCrystals, int lifeCrystals)
+    public static void SaveGame()
     {
         // Grab the persistent data path
         string path = Application.persistentDataPath + savePath;
@@ -23,8 +23,7 @@ public class Currencies : MonoBehaviour
             SaveData saveData = JsonUtility.FromJson<SaveData>(data);
 
             // Create new save data instance
-            SaveData loadData = new SaveData(saveData.xpCrystals + xpCrystals,
-            saveData.bloodCrystals + bloodCrystals, saveData.lifeCrystals + lifeCrystals);
+            SaveData loadData = new SaveData();
 
             // Convert to json and save
             string newData = JsonUtility.ToJson(loadData);
@@ -38,7 +37,7 @@ public class Currencies : MonoBehaviour
         else
         {
             // Create new save data instance
-            SaveData newSaveData = new SaveData(xpCrystals, bloodCrystals, lifeCrystals);
+            SaveData newSaveData = new SaveData();
 
             // Convert to json and save
             string newData = JsonUtility.ToJson(newSaveData);

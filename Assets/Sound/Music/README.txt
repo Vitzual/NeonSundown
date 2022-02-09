@@ -1,3 +1,1 @@
-All music and author logo provided by Drew (Volt Mother)
-
-https://soundcloud.com/voltmother
+A fast-paced roguelite shooter. Build your deck using a variety of unique playing cards, earn resources to unlock new powerful weapons and abilties, and try to become unstoppable against thousands of enemies at a time. Think you have what it takes to survive?
