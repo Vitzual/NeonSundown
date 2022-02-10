@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aced9c16daebd17488504288ab2353f4, type: 3}
+  m_Name: Blaster
+  m_EditorClassIdentifier: 
+  internalId: 23cbcc2c-95ca-41a1-9fa0-78bdda1cc96c
+  createdAtTicks: 637800192052777074
+  name: Blaster
+  description: Fires groups of bullets at a time with low accuracy. Is great for
+    area control and dealing with swarms, but has a harder time with stronger enemies.
+  canDrop: 0
+  sprite: {fileID: 21300000, guid: bfe18ded3f16bd64d8d02d132a88795d, type: 3}
+  color: {r: 0, g: 1, b: 0.013665199, a: 1}
+  prestigeSprite: {fileID: 0}
+  baseLevels: []
+  prestigeLevels: []
+  damage: 1
+  cooldown: 0.5
+  moveSpeed: 160
+  rotate: 0
+  rotateSpeed: 0
+  range: 0
+  bloom: 25
+  pierces: 0
+  bullets: 5
+  lifetime: 0.2
+  randomDirection: 0
+  randomTarget: 0
+  trackTarget: 0
+  lockTarget: 0
+  bullet: {fileID: 4616838733166897725, guid: afcb6e3c47783de4080790735a569129, type: 3}
+  bulletSound: {fileID: 8300000, guid: 88d1cd910f4853b41b47fb1520c9ea49, type: 3}
+  obj: {fileID: 0}
+  onDamageSound: {fileID: 0}
+  onDeathSound: {fileID: 0}
+  minPitch: 0.9
+  maxPitch: 1.1
+  setPlayerAsParent: 0
+  useMaterial: 1
+  useTrail: 0
+  useParticle: 1
+  material: {fileID: 2100000, guid: 11704204528017449aef7314f9c036c4, type: 2}
+  trail: {fileID: 2100000, guid: 11704204528017449aef7314f9c036c4, type: 2}
+  particle: {fileID: 8187003936069489464, guid: ca8dd1dc0d1584743b0edd08671aa666, type: 3}
+  shakeScreenOnSpawn: 0
+  shakeScreenOnDeath: 0
+  playerSize: {x: 1, y: 1}
+  barrelPosition: {x: 0, y: 0}
+  modelOffset: {x: 0, y: 0}
+  border: {fileID: 21300000, guid: 36c8a5deb3a753e4d929e3f4a4c28121, type: 3}
+  fill: {fileID: 21300000, guid: f46f4286343c4214a81d7726133c711f, type: 3}
+  borderMaterial: {fileID: 2100000, guid: 11704204528017449aef7314f9c036c4, type: 2}
+  fillColor: {r: 0.119199276, g: 1, b: 0, a: 1}
+  playerControlledRotation: 1
+  canRegen: 0
+  canFire: 1
+  regenRate: 0
+  playerSpeed: 20
+  dashSpeed: 80
+  startingHealth: 25

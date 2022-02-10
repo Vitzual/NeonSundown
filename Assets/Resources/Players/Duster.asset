@@ -9,16 +9,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 153c17b437486e247978b2d4dcab4b10, type: 3}
+  m_Script: {fileID: 11500000, guid: aced9c16daebd17488504288ab2353f4, type: 3}
   m_Name: Duster
   m_EditorClassIdentifier: 
-  internalId: 27fca266-d361-4887-be48-f76035824339
-  createdAtTicks: 637787429979250315
+  internalId: 0f2b04f7-c552-47bd-be22-2a5aad969830
+  createdAtTicks: 637800152397938811
   name: Duster
-  description: The basic starting weapon. Best to get rid of this one.
+  description: 'A basic weapon that is able to dish out a fair amount of firepower.
+    A jack of all trades but master of none. '
   canDrop: 0
-  sprite: {fileID: 0}
-  color: {r: 0, g: 0, b: 0, a: 0}
+  sprite: {fileID: 21300000, guid: 64943dfd2e6b1a843971836df3052816, type: 3}
+  color: {r: 1, g: 1, b: 1, a: 1}
   prestigeSprite: {fileID: 0}
   baseLevels: []
   prestigeLevels: []
@@ -52,3 +53,17 @@ MonoBehaviour:
   particle: {fileID: 8187003936069489464, guid: ca8dd1dc0d1584743b0edd08671aa666, type: 3}
   shakeScreenOnSpawn: 0
   shakeScreenOnDeath: 0
+  playerSize: {x: 1, y: 1}
+  barrelPosition: {x: 0, y: 0}
+  modelOffset: {x: 0, y: 0}
+  border: {fileID: 21300000, guid: 344d87197b43c874e94bddea4e0532eb, type: 3}
+  fill: {fileID: 21300000, guid: fead9ccd11ad87d4db4473d5d0ef442c, type: 3}
+  borderMaterial: {fileID: 2100000, guid: 4ab3027e425e85946b39bff6ca3ab165, type: 2}
+  fillColor: {r: 1, g: 1, b: 1, a: 1}
+  playerControlledRotation: 1
+  canRegen: 0
+  canFire: 1
+  regenRate: 0
+  playerSpeed: 25
+  dashSpeed: 80
+  startingHealth: 10

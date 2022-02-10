@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aced9c16daebd17488504288ab2353f4, type: 3}
+  m_Name: Ranger
+  m_EditorClassIdentifier: 
+  internalId: 68b73366-ccaf-4875-bc6e-e894e29901cf
+  createdAtTicks: 637800400448540093
+  name: Ranger
+  description: A weapon that specializes in long range combat. Has a very hard time
+    dealing with swarms, but can dish out huge damage to stronger enemies.
+  canDrop: 0
+  sprite: {fileID: 21300000, guid: b299a122daf4c3843be6a968b8939e3f, type: 3}
+  color: {r: 1, g: 0.84890294, b: 0, a: 1}
+  prestigeSprite: {fileID: 0}
+  baseLevels: []
+  prestigeLevels: []
+  damage: 25
+  cooldown: 0.8
+  moveSpeed: 220
+  rotate: 0
+  rotateSpeed: 0
+  range: 0
+  bloom: 0
+  pierces: 0
+  bullets: 1
+  lifetime: 0.5
+  randomDirection: 0
+  randomTarget: 0
+  trackTarget: 0
+  lockTarget: 0
+  bullet: {fileID: 4616838733166897725, guid: afcb6e3c47783de4080790735a569129, type: 3}
+  bulletSound: {fileID: 8300000, guid: caa5565beb5762e4d8fe34ad9d35eb56, type: 3}
+  obj: {fileID: 0}
+  onDamageSound: {fileID: 0}
+  onDeathSound: {fileID: 0}
+  minPitch: 0.9
+  maxPitch: 1.1
+  setPlayerAsParent: 0
+  useMaterial: 1
+  useTrail: 0
+  useParticle: 1
+  material: {fileID: 2100000, guid: 2acce2318e344e24bbf3b0cc69b0278f, type: 2}
+  trail: {fileID: 2100000, guid: 2acce2318e344e24bbf3b0cc69b0278f, type: 2}
+  particle: {fileID: 8187003936069489464, guid: ca8dd1dc0d1584743b0edd08671aa666, type: 3}
+  shakeScreenOnSpawn: 0
+  shakeScreenOnDeath: 0
+  playerSize: {x: 1.2, y: 1.2}
+  barrelPosition: {x: 0, y: 0}
+  modelOffset: {x: 0, y: 0}
+  border: {fileID: 21300000, guid: 55b57bf6d4215fb408a406577a688f29, type: 3}
+  fill: {fileID: 21300000, guid: 5838f8c1ee3666f4b8aef79ff115a801, type: 3}
+  borderMaterial: {fileID: 2100000, guid: 2acce2318e344e24bbf3b0cc69b0278f, type: 2}
+  fillColor: {r: 1, g: 0.8666667, b: 0, a: 1}
+  playerControlledRotation: 1
+  canRegen: 0
+  canFire: 1
+  regenRate: 0
+  playerSpeed: 25
+  dashSpeed: 80
+  startingHealth: 5

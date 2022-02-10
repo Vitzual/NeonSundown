@@ -34,14 +34,18 @@ public class AudioPlayer : MonoBehaviour
     }
 
     // Play an audio clip
-    public static void Play(AudioClip clip, bool randomizePitch = true, float minPitch = 0.9f, float maxPitch = 1.1f)
+    public static void Play(AudioClip clip, bool randomizePitch = true, 
+        float minPitch = 0.9f, float maxPitch = 1.1f, bool overrideCooldown = false)
     {
         // Check if cooldown expired
-        if (audioClips.Contains(clip)) return;
-        else
+        if (!overrideCooldown)
         {
-            audioClips.Add(clip);
-            cooldowns.Add(0.1f);
+            if (audioClips.Contains(clip)) return;
+            else
+            {
+                audioClips.Add(clip);
+                cooldowns.Add(0.1f);
+            }
         }
 
         if (randomizePitch) audioSource.pitch = Random.Range(minPitch, maxPitch);

@@ -6,7 +6,7 @@ public class CardData : IdentifiableScriptableObject
     // Card variables
     [BoxGroup("Card Info")]
     public new string name;
-    [BoxGroup("Card Info")]
+    [BoxGroup("Card Info"), TextArea]
     public string description;
     [BoxGroup("Card Info")]
     public bool canDrop;

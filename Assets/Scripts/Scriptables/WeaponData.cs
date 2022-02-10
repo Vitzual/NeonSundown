@@ -40,7 +40,7 @@ public class WeaponData : CardData
     [BoxGroup("Bullet Stats")]
     public float pierces;
     [BoxGroup("Bullet Stats")]
-    public float bullets;
+    public int bullets;
     [BoxGroup("Bullet Stats")]
     public float lifetime;
     [BoxGroup("Bullet Stats"), Tooltip("Points the weapon in random directions.")]

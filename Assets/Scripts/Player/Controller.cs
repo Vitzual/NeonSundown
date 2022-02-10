@@ -26,6 +26,7 @@ public class Controller : MonoBehaviour
     public float dashFatigue = 0.1f;
 
     // Dash flag
+    public bool canRotate = true;
     private bool isDashing = false;
     private bool dashOnCooldown = false;
     private bool dashQuickReset = false;
@@ -57,7 +58,7 @@ public class Controller : MonoBehaviour
 
         // Checks for keyboard input
         CheckMovementInput();
-        RotateToMouse();
+        if (canRotate) RotateToMouse();
     }
 
     // Physics update for handling movement calculations 

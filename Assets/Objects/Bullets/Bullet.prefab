@@ -46,10 +46,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a159d61f79ed2684da82661e3552d9d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  overrideOtherParticles: 0
   rotateParticle: 1
+  deathMaterial: {fileID: 0}
+  deathEffect: {fileID: 0}
+  baseModel: {fileID: 0}
+  prestigeModel: {fileID: 0}
   sprite: {fileID: 4619522053647639269}
   trail: {fileID: 0}
-  audioSource: {fileID: 0}
+  rotator: {fileID: 0}
 --- !u!50 &4619522053146212436
 Rigidbody2D:
   serializedVersion: 4
@@ -86,7 +91,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 1
+  m_Radius: 1.25
 --- !u!1 &4619522053647639267
 GameObject:
   m_ObjectHideFlags: 0

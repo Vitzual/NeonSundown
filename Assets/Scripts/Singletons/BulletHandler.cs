@@ -35,26 +35,31 @@ public class BulletHandler : MonoBehaviour
     }
 
     // Create a new active bullet instance
-    public void CreateBullet(Weapon parent, WeaponData weapon, Vector2 position, Quaternion rotation, Transform target = null)
+    public void CreateBullet(Weapon parent, WeaponData weapon, Vector2 position, 
+        Quaternion rotation, int amount, bool overrideAudioCooldown = false, Transform target = null)
     {
-        // Create the tile
-        GameObject lastObj = Instantiate(weapon.bullet.gameObject, position, rotation);
-        lastObj.name = weapon.bullet.gameObject.name;
+        // Loop depending on bullet amount
+        for (int i = 0; i < amount; i++)
+        {
+            // Create the tile
+            GameObject lastObj = Instantiate(weapon.bullet.gameObject, position, rotation);
+            lastObj.name = weapon.bullet.gameObject.name;
 
-        // Adjust for rotational offset
-        Vector3 rotationOffset = new Vector3(lastObj.transform.eulerAngles.x, lastObj.transform.eulerAngles.y, 
-            (lastObj.transform.eulerAngles.z - 90f) + Random.Range(-weapon.bloom, weapon.bloom));
-        lastObj.transform.eulerAngles = rotationOffset;
+            // Adjust for rotational offset
+            Vector3 rotationOffset = new Vector3(lastObj.transform.eulerAngles.x, lastObj.transform.eulerAngles.y,
+                (lastObj.transform.eulerAngles.z - 90f) + Random.Range(-weapon.bloom, weapon.bloom));
+            lastObj.transform.eulerAngles = rotationOffset;
 
-        // Attempt to set enemy variant
-        Bullet bullet = lastObj.GetComponent<Bullet>();
-        bullet.Setup(parent, weapon, target);
+            // Attempt to set enemy variant
+            Bullet bullet = lastObj.GetComponent<Bullet>();
+            bullet.Setup(parent, weapon, target);
 
-        // Add to enemies list
-        bullets.Add(bullet);
+            // Add to enemies list
+            bullets.Add(bullet);
+        }
 
         // Check if bullet has a sound
         if (weapon.bulletSound != null)
-            AudioPlayer.Play(weapon.bulletSound);
+            AudioPlayer.Play(weapon.bulletSound, true, weapon.minPitch, weapon.maxPitch, overrideAudioCooldown);
     }
 }

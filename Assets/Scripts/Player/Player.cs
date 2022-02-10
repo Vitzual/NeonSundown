@@ -8,6 +8,15 @@ public class Player : Weapon
     // Controller associated with the player
     private Controller controller;
 
+    // Player model and data
+    public PlayerData playerData;
+    public SpriteRenderer border;
+    public SpriteRenderer fill;
+
+    // Barrel location
+    public Transform barrel;
+    public Transform model;
+
     // Health amount
     private float health;
     private float maxHealth;
@@ -28,25 +37,44 @@ public class Player : Weapon
     // View distance
     public Camera cam;
 
-    // Barrel location
-    public Transform barrel;
-    public Transform rotator;
-
     // Default card
     public WeaponData defaultWeapon;
     private float weaponCooldown;
+    private float regenCooldown;
     
     // On start, setup
     public void Start()
     {
+        // Setup the player model
+        border.sprite = playerData.border;
+        fill.sprite = playerData.fill;
+        border.material = playerData.borderMaterial;
+        fill.color = playerData.fillColor;
+
+        // Set positioning of models
+        border.transform.localPosition = playerData.barrelPosition;
+        fill.transform.localPosition = playerData.modelOffset;
+        border.transform.localScale = playerData.playerSize;
+        fill.transform.localScale = playerData.playerSize;
+
         // Get controller instance
         controller = GetComponent<Controller>();
+        controller.moveSpeed = playerData.playerSpeed;
+        controller.dashSpeed = playerData.dashSpeed;
+        controller.dashSpeed = playerData.dashSpeed;
+        controller.canRotate = playerData.playerControlledRotation;
 
         // Setup base stuff
         level = 0;
         xp = 0;
-        health = 10;
+        health = playerData.startingHealth;
         maxHealth = health;
+        regenCooldown = playerData.regenRate;
+
+        // Set weapon info
+        defaultWeapon = playerData;
+        weapon = playerData;
+        Setup(defaultWeapon);
 
         // Set starting rankup cost
         if (levels.Count > 0)
@@ -58,9 +86,6 @@ public class Player : Weapon
         xpText.text = Mathf.Round(xp) + " / " + Mathf.Round(rankup);
         xpBar.currentPercent = (float)xp / rankup * 100;
         xpBar.UpdateUI();
-
-        weapon = defaultWeapon;
-        Setup(defaultWeapon);
     }
 
     // Update method 
@@ -70,9 +95,27 @@ public class Player : Weapon
         if (Dealer.isOpen) return;
 
         // Check if LMB input detected
-        if (Input.GetKey(Keybinds.shoot)) Use();
+        if (Input.GetKey(Keybinds.shoot) && playerData.canFire) Use();
         if (Input.GetKey(Keybinds.debug)) Dealer.active.OpenDealer();
         if (weaponCooldown > 0) weaponCooldown -= Time.deltaTime;
+
+        // If can regen, regenerate
+        if (playerData.canRegen)
+        {
+            if (regenCooldown > 0)
+            {
+                regenCooldown -= Time.deltaTime;
+            }
+            else if (health < maxHealth)
+            {
+                regenCooldown = playerData.regenRate;
+                Heal(0.1f);
+            }
+        }
+
+        // If player can rotate, rotate
+        if (!playerData.playerControlledRotation)
+            model.Rotate(Vector3.forward, weapon.rotateSpeed * Time.deltaTime);
     }
 
     // Update stat
@@ -148,16 +191,19 @@ public class Player : Weapon
         if (weaponCooldown <= 0)
         {
             // Create bullet
-            BulletHandler.active.CreateBullet(this, defaultWeapon, barrel.position, rotator.rotation);
+            BulletHandler.active.CreateBullet(this, defaultWeapon, barrel.position, 
+                model.rotation, defaultWeapon.bullets, true);
             weaponCooldown = cooldown;
         }
     }
 
     // Heal amount
-    public void Health(float amount)
+    public void Heal(float amount)
     {
         // Update health
         health += amount;
+        if (health > maxHealth)
+            health = maxHealth;
         UpdateHealth();
     }
 
@@ -180,6 +226,7 @@ public class Player : Weapon
 
         // Show bar for short period of time
         healthCanvas.alpha = 1f;
+        LeanTween.reset();
         LeanTween.alphaCanvas(healthCanvas, 0f, 0.5f).setDelay(3f);
     }
 
