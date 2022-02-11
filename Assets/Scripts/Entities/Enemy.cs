@@ -60,7 +60,16 @@ public class Enemy : Entity
     public override void Destroy()
     {
         CreateParticle();
-        XPHandler.active.Spawn(transform.position, data.minXP);
+
+        // Spawn XP and possibly crystal
+        if (data.canDropCrystal)
+        {
+            if (Random.Range(0, 1f) < data.crystalDropChance)
+                XPHandler.active.Spawn(transform.position, data.minXP, data.crystal);
+            else XPHandler.active.Spawn(transform.position, data.minXP);
+        }
+        else XPHandler.active.Spawn(transform.position, data.minXP);
+
         CameraShake.ShakeAll();
         Destroy(gameObject);
     }

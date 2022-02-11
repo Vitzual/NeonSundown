@@ -49,7 +49,7 @@ public class EnemySpawner : MonoBehaviour
         stageTime -= Time.deltaTime;
 
         // Set the timer string
-        timer.text = FormatTime(time);
+        timer.text = Formatter.Time(time);
 
         // Check if next stage should start
         if (stagesLeft && stageTime <= 0) NextStage();
@@ -84,11 +84,5 @@ public class EnemySpawner : MonoBehaviour
         stageText.text = activeStage.name;
         stageTime = activeStage.time;
         nextStageIndex += 1;
-    }
-
-    private string FormatTime(float time)
-    {
-        TimeSpan timeSpan = TimeSpan.FromSeconds(time);
-        return string.Format("{0:D1}:{1:D2}", timeSpan.Minutes, timeSpan.Seconds);
     }
 }

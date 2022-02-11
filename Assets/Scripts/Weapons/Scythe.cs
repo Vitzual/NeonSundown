@@ -29,14 +29,15 @@ public class Scythe : Weapon
     // On collision with enemy, apply damage
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        Enemy enemy = collision.GetComponent<Enemy>();
-        if (enemy != null)
+        // Get the enemy component
+        Entity entity = collision.GetComponent<Entity>();
+        if (entity != null)
         {
             // Attempt to damage the enemy
-            enemy.Damage(damage);
+            entity.Damage(damage);
 
             // Play death sound if enemy dies
-            if (enemy.IsDead()) AudioPlayer.Play(weapon.onDeathSound);
+            if (entity.IsDead()) AudioPlayer.Play(weapon.onDeathSound);
             else AudioPlayer.Play(weapon.onDamageSound);
         }
     }

@@ -112,13 +112,21 @@ public class XPHandler : MonoBehaviour
     }
 
     // Spawn XP
-    public void Spawn(Vector2 startPos, int amount)
+    public void Spawn(Vector2 startPos, int amount, Crystal crystal = null)
     {
+        // Spawn XP
         for (int i = 0; i < amount; i++)
         {
             XP newXp = Instantiate(xpObject, startPos, Quaternion.identity);
             newXp.Setup(new Vector2(startPos.x + Random.Range(-startDistance, startDistance),
                 startPos.y + Random.Range(-startDistance, startDistance)));
+        }
+
+        // If crystal spawn set to true, spawn
+        if (crystal != null)
+        {
+            Crystal newCrystal = Instantiate(crystal, startPos, Quaternion.identity).GetComponent<Crystal>();
+            newCrystal.SetSpeed();
         }
     }
 

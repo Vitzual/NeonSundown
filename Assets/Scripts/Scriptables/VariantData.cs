@@ -18,6 +18,12 @@ public class VariantData
     public float health, damage, speed;
     [BoxGroup("Variant Stats")]
     public int minXP, maxXP;
+    [BoxGroup("Variant Stats")]
+    public bool canDropCrystal;
+    [BoxGroup("Variant Stats")]
+    public Crystal crystal;
+    [BoxGroup("Variant Stats")]
+    public float crystalDropChance;
 
     [BoxGroup("Movement Variables")]
     public bool rotate;

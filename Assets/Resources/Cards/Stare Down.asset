@@ -1,0 +1,78 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 153c17b437486e247978b2d4dcab4b10, type: 3}
+  m_Name: Stare Down
+  m_EditorClassIdentifier: 
+  internalId: 221b57f0-8b2d-4a78-b828-c393d297efff
+  createdAtTicks: 637795958435254299
+  name: Stare Down
+  description: Enemies start taking damage when they get close
+  canDrop: 1
+  sprite: {fileID: 21300000, guid: 6c4369e08ae1e184da6c2d7f4555180b, type: 3}
+  color: {r: 1, g: 0, b: 0, a: 1}
+  prestigeSprite: {fileID: 21300000, guid: 6c4369e08ae1e184da6c2d7f4555180b, type: 3}
+  baseLevels:
+  - stat: 1
+    description: Increases damage by 1
+    multiply: 0
+    modifier: 1
+  - stat: 11
+    description: Increases knockback
+    multiply: 0
+    modifier: 1
+  - stat: 8
+    description: Increases range by 5
+    multiply: 0
+    modifier: 5
+  prestigeLevels:
+  - stat: 1
+    description: Increases damage by 5
+    multiply: 0
+    modifier: 5
+  - stat: 11
+    description: Increases knockback
+    multiply: 0
+    modifier: 2
+  - stat: 8
+    description: Increases range by 10
+    multiply: 0
+    modifier: 10
+  damage: 2
+  cooldown: 1
+  moveSpeed: 0
+  rotate: 0
+  rotateSpeed: 0
+  range: 10
+  bloom: 0
+  pierces: 0
+  bullets: 0
+  lifetime: 0
+  randomDirection: 0
+  randomTarget: 0
+  trackTarget: 0
+  lockTarget: 0
+  bullet: {fileID: 0}
+  bulletSound: {fileID: 0}
+  obj: {fileID: 4664292228507031762, guid: e31ddfb02a94d974a988ac8b7aad76ff, type: 3}
+  onDamageSound: {fileID: 0}
+  onDeathSound: {fileID: 0}
+  minPitch: 0.9
+  maxPitch: 1.1
+  setPlayerAsParent: 0
+  useMaterial: 0
+  useTrail: 0
+  useParticle: 0
+  material: {fileID: 0}
+  trail: {fileID: 0}
+  particle: {fileID: 0}
+  shakeScreenOnSpawn: 0
+  shakeScreenOnDeath: 0

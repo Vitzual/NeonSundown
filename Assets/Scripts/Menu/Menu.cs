@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -6,7 +5,15 @@ using UnityEngine.SceneManagement;
 
 public class Menu : MonoBehaviour
 {
-    // Title leen element
+    // Arena elements
+    public ArenaButton arenaButton;
+    public Transform arenaList;
+
+    // Group CG elements
+    public CanvasGroup mainMenuGroup;
+    public CanvasGroup arenaSelectGroup;
+
+    // Other CG elements
     public CanvasGroup menuButtons;
     public CanvasGroup pressSpace;
     public CanvasGroup socialsLeft;
@@ -24,6 +31,7 @@ public class Menu : MonoBehaviour
 
     // Menu flags
     private bool spacePressed = false;
+    private bool arenasGenerated = false;
 
     // Start is called before the first frame update
     public void Awake()
@@ -46,6 +54,46 @@ public class Menu : MonoBehaviour
             menuButtons.blocksRaycasts = true;
             spacePressed = true;
         }
+    }
+
+    // Open arena panel
+    public void OpenArenas()
+    {
+        // Check if arenas generated
+        if (!arenasGenerated)
+        {
+            // Get save data
+            PlayerSave arenaSaves = Loader.GetPlayerSave();
+            bool arenasOnRecord = arenaSaves != null;
+            List<ArenaButton> buttonList = new List<ArenaButton>();
+
+            // Get all arenas on record
+            foreach (ArenaData arena in Scriptables.arenas)
+            {
+                // Create arena buttons
+                ArenaButton newButton = Instantiate(arenaButton, Vector2.zero, Quaternion.identity).GetComponent<ArenaButton>();
+                newButton.transform.SetParent(arenaList);
+                buttonList.Add(newButton);
+                if (arenasOnRecord && arenaSaves.arenas.ContainsKey(arena.InternalID))
+                    newButton.Set(arena, "<b>Best Run:</b> " + Formatter.Time(arenaSaves.arenas[arena.InternalID]));
+                else newButton.Set(arena, "<b>Best Run:</b> 0:00");
+            }
+
+            // Iterate through all generated buttons and set order
+            foreach(ArenaButton button in buttonList)
+                button.transform.SetSiblingIndex(button.arena.order);
+
+            // Set arenas generated flag to true
+            arenasGenerated = true;
+        }
+
+        // Change menu
+        LeanTween.alphaCanvas(mainMenuGroup, 0f, 0.5f);
+        mainMenuGroup.interactable = false;
+        mainMenuGroup.blocksRaycasts = false;
+        LeanTween.alphaCanvas(arenaSelectGroup, 1f, 0.5f).setDelay(0.25f);
+        arenaSelectGroup.interactable = true;
+        arenaSelectGroup.blocksRaycasts = true;
     }
 
     // Update menu

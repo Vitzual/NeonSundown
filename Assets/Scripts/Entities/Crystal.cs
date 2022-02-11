@@ -5,6 +5,7 @@ using UnityEngine;
 public class Crystal : Entity
 {
     // Internal values
+    public Rigidbody2D rb;
     public AudioClip crystalSound;
     public AudioClip crystalDestroy;
     private int minAmount = 25;
@@ -16,6 +17,13 @@ public class Crystal : Entity
         this.health = health;
         minAmount = min;
         maxAmount = max;
+    }
+
+    // Set the speed of the crystal
+    public void SetSpeed()
+    {
+        rb.AddForce(new Vector2(Random.Range(-2000, 2000), Random.Range(-2000, 2000)));
+        rb.angularVelocity = Random.Range(-1000, 1000);
     }
 
     // On collision
