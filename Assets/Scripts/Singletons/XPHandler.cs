@@ -35,7 +35,7 @@ public class XPHandler : MonoBehaviour
     // Target
     public XP xpObject;
     public AudioClip xpSound;
-    public Player player;
+    public Ship player;
     public float startSpeed = 5f;
     public float startDistance = 10f;
     public float speedFatigueModifier = 0.1f;

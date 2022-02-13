@@ -15,11 +15,14 @@ MonoBehaviour:
   internalId: c13f1f74-0250-4bfc-bb55-90f1cde35f52
   createdAtTicks: 637801297251146925
   name: The Abyss
-  desc: The starting arena. Ya
+  desc: The starting arena. Although it's mostly comprised of weak enemies, it is
+    guarded by the DREADNAUGHT.
   difficulty: Easy
   length: ~10 Minutes
   order: 0
   buttonColor: {r: 1, g: 0, b: 0, a: 1}
+  lineColor: {r: 1, g: 0.43921572, b: 0.43921572, a: 1}
+  difficultyColor: {r: 0.41960788, g: 1, b: 0.48627454, a: 1}
   primaryObjective:
     name: Defeat the DREADNAUGHT
     reward: Fear Factory Arena
@@ -29,10 +32,10 @@ MonoBehaviour:
     cardReward: {fileID: 0}
   secondaryObjective:
     name: Survive 15 minutes
-    reward: Blaster Drone
+    reward: Speedster Drone
     objective: 0
     arenaReward: {fileID: 0}
-    playerReward: {fileID: 11400000, guid: 4ed169223a9464146b2a58576b2ba8d3, type: 2}
+    playerReward: {fileID: 11400000, guid: 6576443c95c96114dba9e65f4fc7a0b9, type: 2}
     cardReward: {fileID: 0}
   stages:
   - {fileID: 11400000, guid: 1f5cdefd64e41f94881a4244522d9755, type: 2}
@@ -47,7 +50,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 288a2357a547d1246a5375e91df14f82, type: 2}
   - {fileID: 11400000, guid: b11ec4b10fdbfb6488c4c61f1bbf398d, type: 2}
   - {fileID: 11400000, guid: ba4ee68ec80a17b46b030cf86440a6f9, type: 2}
-  startingCards:
-  - {fileID: 11400000, guid: c65fd8a705ce9b94d8d4f6775c2a86c9, type: 2}
-  blacklistCards:
-  - {fileID: 11400000, guid: 9186d097da559a74b9b699d6a27454dd, type: 2}
+  startingCards: []
+  blacklistCards: []

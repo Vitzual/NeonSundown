@@ -15,8 +15,31 @@ MonoBehaviour:
   internalId: cca0868e-b3ec-490f-a937-9b64363444d3
   createdAtTicks: 637801322624770263
   name: Terminus
-  desc: The end.
+  desc: The beginning of the end. You will not survive.
+  difficulty: Hard
+  length: ~10 minutes
   order: 10
   buttonColor: {r: 0.24528301, g: 0.24528301, b: 0.24528301, a: 1}
-  stages: []
-  blacklistedCards: []
+  lineColor: {r: 0.4056604, g: 0.4056604, b: 0.4056604, a: 1}
+  difficultyColor: {r: 1, g: 0.43921572, b: 0.43921572, a: 1}
+  primaryObjective:
+    name: Defeat the Mothership
+    reward: Something
+    objective: 3
+    arenaReward: {fileID: 0}
+    playerReward: {fileID: 0}
+    cardReward: {fileID: 0}
+  secondaryObjective:
+    name: Survive for 30 minutes
+    reward: Something else
+    objective: 0
+    arenaReward: {fileID: 0}
+    playerReward: {fileID: 0}
+    cardReward: {fileID: 0}
+  stages:
+  - {fileID: 0}
+  startingCards: []
+  blacklistCards:
+  - {fileID: 11400000, guid: 9186d097da559a74b9b699d6a27454dd, type: 2}
+  - {fileID: 11400000, guid: c65fd8a705ce9b94d8d4f6775c2a86c9, type: 2}
+  - {fileID: 11400000, guid: 00a48d5498e3041409693bf6b0062c35, type: 2}

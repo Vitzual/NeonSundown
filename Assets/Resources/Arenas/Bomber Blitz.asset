@@ -15,8 +15,31 @@ MonoBehaviour:
   internalId: 7da474c6-55e5-4054-b618-288262a1542f
   createdAtTicks: 637801325366034677
   name: Bomber Blitz
-  desc: 
+  desc: 'Tread carefully! This arena is full of bombs that will explode on impact. '
+  difficulty: Normal
+  length: ~5 minutes
   order: 2
   buttonColor: {r: 1, g: 0.52494174, b: 0, a: 1}
+  lineColor: {r: 1, g: 0.67629427, b: 0.3820755, a: 1}
+  difficultyColor: {r: 1, g: 0.69411767, b: 0, a: 1}
+  primaryObjective:
+    name: Destroy 100 bombers
+    reward: Terminus Arena
+    objective: 1
+    arenaReward: {fileID: 11400000, guid: 49df97c5ead3cec438fb33d7927f2eea, type: 2}
+    playerReward: {fileID: 0}
+    cardReward: {fileID: 0}
+  secondaryObjective:
+    name: Survive for 10 minutes
+    reward: Ranger Drone
+    objective: 0
+    arenaReward: {fileID: 0}
+    playerReward: {fileID: 11400000, guid: e5a70adca57194b4c92443b1c595722b, type: 2}
+    cardReward: {fileID: 0}
   stages: []
-  blacklistedCards: []
+  startingCards:
+  - {fileID: 11400000, guid: 91fcd69764e8265499069148c124b679, type: 2}
+  - {fileID: 11400000, guid: 91fcd69764e8265499069148c124b679, type: 2}
+  - {fileID: 11400000, guid: 91fcd69764e8265499069148c124b679, type: 2}
+  blacklistCards:
+  - {fileID: 11400000, guid: df970b1c867c6e84aafc2d590461dbe2, type: 2}

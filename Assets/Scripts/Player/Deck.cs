@@ -9,7 +9,7 @@ public class Deck : MonoBehaviour
     public static Deck active;
 
     // Player instance
-    private Player player;
+    private Ship player;
 
     // Cards in deck
     private Dictionary<CardData, int> cards;
@@ -30,7 +30,7 @@ public class Deck : MonoBehaviour
         active = this;
 
         // Get player instance on the object
-        player = GetComponent<Player>();
+        player = GetComponent<Ship>();
 
         // Set new card dictionary
         cards = new Dictionary<CardData, int>();

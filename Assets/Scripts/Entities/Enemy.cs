@@ -75,7 +75,7 @@ public class Enemy : Entity
     }
 
     // Called when a player hits this enemy
-    public virtual void OnHitPlayer(Player player)
+    public virtual void OnHitPlayer(Ship player)
     {
         player.Damage(data.damage);
         Destroy();

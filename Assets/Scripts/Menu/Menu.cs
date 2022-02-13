@@ -5,19 +5,25 @@ using UnityEngine.SceneManagement;
 
 public class Menu : MonoBehaviour
 {
+    // Menu panels
+    public ArenaPanel arenaPanel;
+    public PlanningPanel planningPanel;
+
     // Arena elements
     public ArenaButton arenaButton;
     public Transform arenaList;
 
     // Group CG elements
-    public CanvasGroup mainMenuGroup;
-    public CanvasGroup arenaSelectGroup;
-
-    // Other CG elements
-    public CanvasGroup menuButtons;
+    public CanvasGroup mainGroup;
+    public CanvasGroup arenaGroup;
+    public CanvasGroup planningGroup;
+    public CanvasGroup catalogGroup;
+    public CanvasGroup buttonsGroup;
+    public CanvasGroup socialsGroup;
+    public CanvasGroup titleGroup;
     public CanvasGroup pressSpace;
-    public CanvasGroup socialsLeft;
-    public CanvasGroup socialsRight;
+
+    // Other interface options
     public RectTransform title;
     public Vector2 titleTargetPos = new Vector2(0, 200);
     public float titleAnimSpeed;
@@ -37,6 +43,7 @@ public class Menu : MonoBehaviour
     public void Awake()
     {
         Scriptables.GenerateAllScriptables();
+        Loader.GetSave();
     }
 
     // Update user input
@@ -47,11 +54,12 @@ public class Menu : MonoBehaviour
             LeanTween.scale(title, titleTargetSize, titleSizeSpeed).setEase(LeanTweenType.easeInExpo).setDelay(0.2f);
             LeanTween.moveLocal(title.gameObject, titleTargetPos, titleAnimSpeed).setEase(LeanTweenType.easeInExpo).setDelay(0.2f);
             LeanTween.alphaCanvas(pressSpace, 0f, titleAnimSpeed);
-            LeanTween.alphaCanvas(menuButtons, 1f, titleAnimSpeed).setDelay(titleAnimSpeed);
-            LeanTween.alphaCanvas(socialsLeft, 1f, titleAnimSpeed).setDelay(titleAnimSpeed);
-            LeanTween.alphaCanvas(socialsRight, 1f, titleAnimSpeed).setDelay(titleAnimSpeed);
-            menuButtons.interactable = true;
-            menuButtons.blocksRaycasts = true;
+            LeanTween.alphaCanvas(buttonsGroup, 1f, titleAnimSpeed).setDelay(titleAnimSpeed);
+            LeanTween.alphaCanvas(socialsGroup, 1f, titleAnimSpeed).setDelay(titleAnimSpeed);
+            buttonsGroup.interactable = true;
+            buttonsGroup.blocksRaycasts = true;
+            socialsGroup.interactable = true;
+            socialsGroup.blocksRaycasts = true;
             spacePressed = true;
         }
     }
@@ -63,8 +71,6 @@ public class Menu : MonoBehaviour
         if (!arenasGenerated)
         {
             // Get save data
-            PlayerSave arenaSaves = Loader.GetPlayerSave();
-            bool arenasOnRecord = arenaSaves != null;
             List<ArenaButton> buttonList = new List<ArenaButton>();
 
             // Get all arenas on record
@@ -74,8 +80,8 @@ public class Menu : MonoBehaviour
                 ArenaButton newButton = Instantiate(arenaButton, Vector2.zero, Quaternion.identity).GetComponent<ArenaButton>();
                 newButton.transform.SetParent(arenaList);
                 buttonList.Add(newButton);
-                if (arenasOnRecord && arenaSaves.arenas.ContainsKey(arena.InternalID))
-                    newButton.Set(arena, "<b>Best Run:</b> " + Formatter.Time(arenaSaves.arenas[arena.InternalID]));
+                if (Loader.saveData.arenaTimes.ContainsKey(arena.InternalID))
+                    newButton.Set(arena, "<b>Best Run:</b> " + Formatter.Time(Loader.saveData.arenaTimes[arena.InternalID]));
                 else newButton.Set(arena, "<b>Best Run:</b> 0:00");
             }
 
@@ -88,12 +94,36 @@ public class Menu : MonoBehaviour
         }
 
         // Change menu
-        LeanTween.alphaCanvas(mainMenuGroup, 0f, 0.5f);
-        mainMenuGroup.interactable = false;
-        mainMenuGroup.blocksRaycasts = false;
-        LeanTween.alphaCanvas(arenaSelectGroup, 1f, 0.5f).setDelay(0.25f);
-        arenaSelectGroup.interactable = true;
-        arenaSelectGroup.blocksRaycasts = true;
+        ToggleArenaPanel(true);
+    }
+
+    // Open canvas group panel
+    public void TogglePanel(CanvasGroup open, CanvasGroup close)
+    {
+        LeanTween.alphaCanvas(open, 1f, 0.35f).setDelay(0.30f);
+        open.interactable = true;
+        open.blocksRaycasts = true;
+        LeanTween.alphaCanvas(close, 0f, 0.35f);
+        close.interactable = false;
+        close.blocksRaycasts = false;
+    }
+
+    // Open arena panel
+    public void ToggleArenaPanel(bool toggle)
+    {
+        if (toggle) TogglePanel(arenaGroup, mainGroup);
+        else TogglePanel(mainGroup, arenaGroup);
+    }
+
+    // Open planning panel
+    public void TogglePlanningPanel(bool toggle)
+    {
+        if (toggle)
+        {
+            TogglePanel(planningGroup, arenaGroup);
+            
+        }
+        else TogglePanel(arenaGroup, planningGroup);
     }
 
     // Update menu

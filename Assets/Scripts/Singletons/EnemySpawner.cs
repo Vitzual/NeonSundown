@@ -6,6 +6,9 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
+    // Static instance
+    public static EnemySpawner active;
+
     // List of all stages
     public List<StageData> stages;
     private StageData activeStage;
@@ -25,6 +28,13 @@ public class EnemySpawner : MonoBehaviour
 
     // Spawning flag
     public bool spawnEnemies = true;
+
+    // On awake set instance
+    private void Awake()
+    {
+        // Set active instance
+        active = this;
+    }
 
     // On start, generate enemies
     void Start()

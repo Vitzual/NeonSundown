@@ -15,7 +15,7 @@ public class ArenaData : IdentifiableScriptableObject
         // Objective enum and rewards
         public Objective objective;
         public ArenaData arenaReward;
-        public PlayerData playerReward;
+        public ShipData playerReward;
         public CardData cardReward;
     }
 
@@ -26,6 +26,8 @@ public class ArenaData : IdentifiableScriptableObject
     public string length;
     public int order;
     public Color buttonColor;
+    public Color lineColor;
+    public Color difficultyColor;
 
     // Arena objectives
     public ArenaObjective primaryObjective;
