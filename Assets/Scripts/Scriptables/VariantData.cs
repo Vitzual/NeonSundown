@@ -5,14 +5,8 @@ using UnityEngine;
 [System.Serializable]
 public class VariantData
 {
-    [BoxGroup("Variant Model")]
-    public Variant type;
-    [BoxGroup("Variant Model")]
-    public Color color;
-    [BoxGroup("Variant Model")]
-    public Material material;
-    [BoxGroup("Variant Model")]
-    public ParticleSystem deathParticle;
+    [BoxGroup("Variant Type")]
+    public Variant variant;
 
     [BoxGroup("Variant Stats")]
     public float health, damage, speed;

@@ -10,7 +10,6 @@ public class EnemySpawner : MonoBehaviour
     public static EnemySpawner active;
 
     // List of all stages
-    public List<StageData> stages;
     private StageData activeStage;
     private int nextStageIndex = 0;
     private bool stagesLeft = true;
@@ -23,7 +22,7 @@ public class EnemySpawner : MonoBehaviour
     public Dictionary<EnemyData, float> enemies;
 
     // Game timer
-    private float time = 0;
+    private static float time = 0;
     private float stageTime = 0;
 
     // Spawning flag
@@ -34,6 +33,9 @@ public class EnemySpawner : MonoBehaviour
     {
         // Set active instance
         active = this;
+
+        // Reset the timer
+        time = 0;
     }
 
     // On start, generate enemies
@@ -73,7 +75,7 @@ public class EnemySpawner : MonoBehaviour
             if (enemies[enemy.data] <= 0f)
             {
                 enemies[enemy.data] = enemy.cooldown;
-                EnemyHandler.active.CreateEnemy(enemy.data, enemy.variant);
+                EnemyHandler.active.QueueEnemy(enemy.data, enemy.variant, enemy.amount);
             }
             else enemies[enemy.data] -= Time.deltaTime;
         }
@@ -82,7 +84,7 @@ public class EnemySpawner : MonoBehaviour
     private void NextStage()
     {
         // Check if stage exists
-        if (stages.Count <= nextStageIndex)
+        if (Gamemode.arena.stages.Count <= nextStageIndex)
         {
             Debug.Log("No stages left!");
             stagesLeft = false;
@@ -90,9 +92,12 @@ public class EnemySpawner : MonoBehaviour
         }
 
         // Setup stages
-        activeStage = stages[nextStageIndex];
+        activeStage = Gamemode.arena.stages[nextStageIndex];
         stageText.text = activeStage.name;
         stageTime = activeStage.time;
         nextStageIndex += 1;
     }
+
+    // Returns the time
+    public static float GetTime() { return time; }
 }

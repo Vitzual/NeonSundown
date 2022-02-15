@@ -22,12 +22,12 @@ public class Ship : Weapon
     private float maxHealth;
     public ProgressBar healthBar;
     public CanvasGroup healthCanvas;
-    public CanvasGroup gameOverScreen;
 
     // XP amount
     public List<float> levels;
     private float xp = 0;
     private float rankup = 50;
+    private float xpMultiplier = 1;
     public float rankupMultiplier;
     public ProgressBar xpBar;
     public CircleCollider2D xpRange;
@@ -45,9 +45,9 @@ public class Ship : Weapon
     // Subscribe to setup event
     public void Start()
     {
-        if (shipData == null)
+        if (Gamemode.ship != null)
             Events.active.onSetupShip += Setup;
-        else Setup(shipData);
+        else if (shipData != null) Setup(shipData);
     }
 
     // On start, setup
@@ -81,6 +81,16 @@ public class Ship : Weapon
         health = shipData.startingHealth;
         maxHealth = health;
         regenCooldown = shipData.regenRate;
+
+        // Set weapon variables
+        damage = shipData.weapon.damage;
+        cooldown = shipData.weapon.cooldown;
+        moveSpeed = shipData.weapon.moveSpeed;
+        range = shipData.weapon.range;
+        bloom = shipData.weapon.bloom;
+        pierces = shipData.weapon.pierces;
+        bullets = shipData.weapon.bullets;
+        lifetime = shipData.weapon.lifetime;
 
         // Set starting rankup cost
         if (levels.Count > 0)
@@ -162,6 +172,59 @@ public class Ship : Weapon
                 controller.dashSpeed += 2.5f;
                 //controller.dashTimer += 0.25f;
                 break;
+
+            // Upgrades the damage 
+            case Stat.Damage:
+
+                // Upgrade damage output
+                damage += 0.5f;
+                break;
+
+            // Increases firerate 
+            case Stat.Cooldown:
+
+                // Upgrade firerate
+                cooldown -= 0.01f;
+                if (cooldown < 0.05f)
+                    cooldown = 0.05f;
+                break;
+
+            // Increases piercing rounds
+            case Stat.Pierces:
+
+                // Upgrade piercing
+                pierces += 1;
+                break;
+
+            // Increases bullet lifetime
+            case Stat.Lifetime:
+
+                // Upgrade lfietime
+                lifetime += 0.1f;
+                break;
+
+            // Increases accuracy
+            case Stat.Bloom:
+
+                // Increase accuracy
+                bloom -= 2.5f;
+                if (bloom < 0f)
+                    bloom = 0f;
+                break;
+
+            // Increase XP gain
+            case Stat.XPGain:
+
+                // Increase xp multiplier
+                xpMultiplier += 0.25f;
+                break;
+
+            // Increase XP range
+            case Stat.XPRange:
+
+                // Increases XP range
+                xpRange.radius += 5;
+                break;
         }
     }
 
@@ -169,7 +232,7 @@ public class Ship : Weapon
     public void AddXP(int amount)
     {
         // Add the XP amount
-        xp += Deck.CalculateStat(Stat.XPGain, amount);
+        xp += amount * xpMultiplier;
 
         // Check if XP over rankup
         if (xp >= rankup)
@@ -243,11 +306,7 @@ public class Ship : Weapon
     public void Kill()
     {
         // Open game over screen
-        Dealer.active.pitchDown = 0f;
-        Dealer.isOpen = true;
-        LeanTween.alphaCanvas(gameOverScreen, 1f, 1f);
-        gameOverScreen.interactable = true;
-        gameOverScreen.blocksRaycasts = true;
+        Events.active.ShipDestroyed();
 
         // Set is dead flag to true
         isDead = true;

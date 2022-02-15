@@ -16,6 +16,12 @@ MonoBehaviour:
   createdAtTicks: 637801325366034677
   name: Bomber Blitz
   desc: 'Tread carefully! This arena is full of bombs that will explode on impact. '
+  arenaBackground: {fileID: 11400000, guid: 78b14405765f3a14495ef54a3a0159fc, type: 2}
+  arenaMusic: {fileID: 8300000, guid: da056ee86462c8d43a98ee628fe628e1, type: 3}
+  menuStage: {fileID: 0}
+  arenaRequirement: {fileID: 11400000, guid: de60c29b8a696df49adc0977addb8216, type: 2}
+  unlockByDefault: 0
+  unlockObjective: 'Complete "Fear Factory" '
   difficulty: Normal
   length: ~5 minutes
   order: 2
@@ -23,18 +29,22 @@ MonoBehaviour:
   lineColor: {r: 1, g: 0.67629427, b: 0.3820755, a: 1}
   difficultyColor: {r: 1, g: 0.69411767, b: 0, a: 1}
   primaryObjective:
-    name: Destroy 100 bombers
+    name: Survive for 5 minutes
     reward: Terminus Arena
-    objective: 1
-    arenaReward: {fileID: 11400000, guid: 49df97c5ead3cec438fb33d7927f2eea, type: 2}
-    playerReward: {fileID: 0}
+    objective: 0
+    surviveTime: 300
+    enemyData: {fileID: 0}
+    enemyAmount: 0
+    shipReward: {fileID: 0}
     cardReward: {fileID: 0}
   secondaryObjective:
     name: Survive for 10 minutes
     reward: Ranger Drone
     objective: 0
-    arenaReward: {fileID: 0}
-    playerReward: {fileID: 11400000, guid: e5a70adca57194b4c92443b1c595722b, type: 2}
+    surviveTime: 0
+    enemyData: {fileID: 0}
+    enemyAmount: 0
+    shipReward: {fileID: 11400000, guid: 744961d9e6627c44ba7ecd1806ba9649, type: 2}
     cardReward: {fileID: 0}
   stages: []
   startingCards:

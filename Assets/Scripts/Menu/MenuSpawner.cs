@@ -4,6 +4,25 @@ using UnityEngine;
 
 public class MenuSpawner : MonoBehaviour
 {
+    // Custom enemy spawn queue
+    public class EnemyQueue
+    {
+        public EnemyQueue(EnemyData enemy, Variant variant, Vector2 position)
+        {
+            this.variant = variant;
+            this.enemy = enemy;
+            this.position = position;
+        }
+
+        public Variant variant;
+        public EnemyData enemy;
+        public Vector2 position;
+    }
+    protected Queue<EnemyQueue> enemyQueue = new Queue<EnemyQueue>();
+
+    // Active instance
+    public static MenuSpawner active;
+
     // Menu stage
     public StageData menuStage;
 
@@ -13,6 +32,12 @@ public class MenuSpawner : MonoBehaviour
 
     public float range;
     public float moveUpTo;
+
+    // On activate, get instance
+    private void Awake()
+    {
+        active = this;
+    }
 
     // On start, generate enemies
     void Start()
@@ -27,12 +52,19 @@ public class MenuSpawner : MonoBehaviour
     void Update()
     {
         // Spawn enemies
+        if (enemyQueue.Count > 0)
+        {
+            EnemyQueue newEnemy = enemyQueue.Dequeue();
+            CreateEnemy(newEnemy.enemy, newEnemy.variant, newEnemy.position);
+        }
+
+        // Spawn enemies
         foreach (StageData.Enemy enemy in menuStage.enemies)
         {
             if (enemyList[enemy.data] <= 0f)
             {
                 enemyList[enemy.data] = enemy.cooldown;
-                SpawnMenuEnemy(enemy.data);
+                QueueEnemy(enemy.data, enemy.variant, enemy.amount);
             }
             else enemyList[enemy.data] -= Time.deltaTime;
         }
@@ -67,15 +99,42 @@ public class MenuSpawner : MonoBehaviour
         }
     }
 
-    public void SpawnMenuEnemy(EnemyData newEnemy)
+    // Create a new active enemy instance
+    public void QueueEnemy(EnemyData enemyData, Variant variant, int amount)
+    {
+        // Generate position
+        Vector2 position = new Vector2(Random.Range(-range, range), transform.position.y);
+
+        // For loop
+        for (int i = 0; i < amount; i++)
+        {
+            // Create slight offset
+            if (i > 0) position = new Vector2(position.x + Random.Range(-5f, 5f), position.y + Random.Range(-5f, 5f));
+
+            // Create the tile
+            enemyQueue.Enqueue(new EnemyQueue(enemyData, variant, position));
+        }
+    }
+
+    // Creates a new enemy with a specific position
+    public void CreateEnemy(EnemyData enemyData, Variant variant, Vector2 position)
     {
         // Setup the enemy
-        Vector2 spawnPos = new Vector2(Random.Range(-range, range), transform.position.y);
-        Enemy enemy = Instantiate(newEnemy.obj, spawnPos, Quaternion.identity).GetComponent<Enemy>();
+        Enemy enemy = Instantiate(enemyData.obj, position, Quaternion.identity).GetComponent<Enemy>();
         Rigidbody2D rb = enemy.GetComponent<Rigidbody2D>();
-        if (rb != null) Destroy(rb);
-        enemy.transform.name = newEnemy.name;
-        enemy.Setup(newEnemy.variants[Variant.Normal], Variant.Normal, null);
+        if (rb != null) rb.freezeRotation = true;
+        enemy.Setup(enemyData.variants[variant], null);
         enemies.Add(enemy);
+    }
+
+    // Wipe all enemies
+    public void WipeEnemies()
+    {
+        for (int i = 0; i < enemies.Count; i++)
+        {
+            Destroy(enemies[i].gameObject);
+            enemies.RemoveAt(i);
+            i--;
+        }
     }
 }

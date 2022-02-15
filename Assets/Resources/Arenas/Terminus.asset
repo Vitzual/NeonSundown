@@ -16,6 +16,12 @@ MonoBehaviour:
   createdAtTicks: 637801322624770263
   name: Terminus
   desc: The beginning of the end. You will not survive.
+  arenaBackground: {fileID: 11400000, guid: f7a70c40f25f4234b9c2aad64605892b, type: 2}
+  arenaMusic: {fileID: 8300000, guid: e43f515f9e6e21d4a900a524d2c1fa8b, type: 3}
+  menuStage: {fileID: 0}
+  arenaRequirement: {fileID: 11400000, guid: 7853fe88b866c694ea0908cd935ca19d, type: 2}
+  unlockByDefault: 0
+  unlockObjective: 'Complete "Bomber Blitz" '
   difficulty: Hard
   length: ~10 minutes
   order: 10
@@ -26,15 +32,19 @@ MonoBehaviour:
     name: Defeat the Mothership
     reward: Something
     objective: 3
-    arenaReward: {fileID: 0}
-    playerReward: {fileID: 0}
+    surviveTime: 0
+    enemyData: {fileID: 0}
+    enemyAmount: 0
+    shipReward: {fileID: 0}
     cardReward: {fileID: 0}
   secondaryObjective:
     name: Survive for 30 minutes
     reward: Something else
     objective: 0
-    arenaReward: {fileID: 0}
-    playerReward: {fileID: 0}
+    surviveTime: 0
+    enemyData: {fileID: 0}
+    enemyAmount: 0
+    shipReward: {fileID: 0}
     cardReward: {fileID: 0}
   stages:
   - {fileID: 0}

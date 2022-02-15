@@ -50,6 +50,6 @@ public class ShipData : IdentifiableScriptableObject
     // Checks if the ship is unlocked
     public bool IsUnlocked()
     {
-        return unlocked || Loader.IsShipUnlocked(InternalID);
+        return unlocked || SaveSystem.IsShipUnlocked(InternalID);
     }
 }

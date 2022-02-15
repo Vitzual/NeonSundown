@@ -4,7 +4,13 @@ using UnityEngine;
 
 public class SaveData
 {
+    // Constructor
+    public SaveData()
+    {
+        shipsUnlocked = new List<string>();
+        arenas = new SerializableDictionary<string, ArenaSave>();
+    } 
+
     public List<string> shipsUnlocked;
-    public List<string> arenasUnlocked;
-    public Dictionary<string, float> arenaTimes;
+    public SerializableDictionary<string, ArenaSave> arenas;
 }

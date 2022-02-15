@@ -5,7 +5,8 @@ using UnityEngine;
 public class MusicPlayer : MonoBehaviour
 {
     // Audio source for music
-    public List<AudioClip> tracks;
+    public bool useRandomTracks = false;
+    private bool arenaMusic = false;
     private AudioSource music;
 
     // Start is called before the first frame update
@@ -13,19 +14,29 @@ public class MusicPlayer : MonoBehaviour
     {
         // Get the audio source
         music = GetComponent<AudioSource>();
-        music.clip = tracks[Random.Range(0, tracks.Count)];
+        if (Gamemode.arena.arenaMusic == null)
+        {
+            music.clip = MusicLoader.tracks[Random.Range(0, MusicLoader.tracks.Count)];
+        }
+        else
+        {
+            music.clip = Gamemode.arena.arenaMusic;
+            music.loop = true;
+            arenaMusic = true;
+        }
+
         music.Play();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!music.isPlaying)
+        if (!arenaMusic && !music.isPlaying)
         {
-            AudioClip clip = tracks[Random.Range(0, tracks.Count)];
+            AudioClip clip = MusicLoader.tracks[Random.Range(0, MusicLoader.tracks.Count)];
             if (clip != music.clip)
             {
-                music.clip = tracks[Random.Range(0, tracks.Count)];
+                music.clip = MusicLoader.tracks[Random.Range(0, MusicLoader.tracks.Count)];
                 music.Play();
             }
         }

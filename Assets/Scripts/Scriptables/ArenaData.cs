@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 [CreateAssetMenu(fileName = "New Arena", menuName = "Arena/Arena")]
 public class ArenaData : IdentifiableScriptableObject
@@ -14,14 +15,28 @@ public class ArenaData : IdentifiableScriptableObject
 
         // Objective enum and rewards
         public Objective objective;
-        public ArenaData arenaReward;
-        public ShipData playerReward;
+
+        // Objectives
+        public float surviveTime;
+        public EnemyData enemyData;
+        public int enemyAmount;
+
+        // Rewards
+        public ShipData shipReward;
         public CardData cardReward;
     }
 
     // Arena Information
     public new string name;
     [TextArea] public string desc;
+    public TileBase arenaBackground;
+    public AudioClip arenaMusic;
+    public StageData menuStage;
+    public ArenaData arenaRequirement;
+    public bool unlockByDefault;
+
+    // Other information
+    public string unlockObjective;
     public string difficulty;
     public string length;
     public int order;

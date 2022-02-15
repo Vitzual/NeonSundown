@@ -43,6 +43,10 @@ public class Deck : MonoBehaviour
 
         // Create starting slots
         weaponInstances = new List<Weapon>();
+
+        // Add starting card if arena has one
+        for (int i = 0; i < Gamemode.arena.startingCards.Count; i++)
+            AddCard(Gamemode.arena.startingCards[i]);
     }
 
     // Calculate cooldown

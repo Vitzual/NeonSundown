@@ -18,25 +18,25 @@ MonoBehaviour:
   desc: A nasty spinning blade of death. Dashing into it will inflict damage.
   obj: {fileID: 8071768145869598022, guid: bf377f8c51d006641ae1162aa9595d89, type: 3}
   variantStats:
-  - type: 0
-    color: {r: 1, g: 0, b: 0, a: 1}
-    material: {fileID: 2100000, guid: de44ca3cc974af545a2feb8b4148a6fa, type: 2}
-    deathParticle: {fileID: 2055333318299029104, guid: db7f2bd89549db747aade2de38a9a6d3, type: 3}
+  - variant: 0
     health: 3
     damage: 2
     speed: 15
     minXP: 3
     maxXP: 5
+    canDropCrystal: 0
+    crystal: {fileID: 0}
+    crystalDropChance: 0
     rotate: 1
     rotateSpeed: -100
-  - type: 1
-    color: {r: 0.1509434, g: 0.1473834, b: 0.1473834, a: 1}
-    material: {fileID: 2100000, guid: 4ab3027e425e85946b39bff6ca3ab165, type: 2}
-    deathParticle: {fileID: 993855083006936043, guid: 01c48aa84a2ea6c49901482836dcdd15, type: 3}
-    health: 60
-    damage: 8
+  - variant: 1
+    health: 5
+    damage: 3
     speed: 25
-    minXP: 10
-    maxXP: 15
-    rotate: 0
-    rotateSpeed: 0
+    minXP: 3
+    maxXP: 5
+    canDropCrystal: 0
+    crystal: {fileID: 0}
+    crystalDropChance: 0
+    rotate: 1
+    rotateSpeed: -100

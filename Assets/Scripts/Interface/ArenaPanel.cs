@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 using UnityEngine.UI;
 
 public class ArenaPanel : MonoBehaviour
@@ -12,6 +13,9 @@ public class ArenaPanel : MonoBehaviour
         public Image icon;
         public Image model;
     }
+
+    // Background tilebase
+    public Tilemap backgroundTilemap;
 
     // Canvas group
     public CanvasGroup panelGroup;
@@ -78,6 +82,9 @@ public class ArenaPanel : MonoBehaviour
             }
             else break;
         }
+
+        // Change the background
+        ChangeBackground(arena);
     }
 
     public void ResetPanel()
@@ -96,4 +103,18 @@ public class ArenaPanel : MonoBehaviour
             blacklistCards[i].model.color = emptyCardColor;
         }
     }
+
+    public void ChangeBackground(ArenaData arena)
+    {
+        // Set the arena stage
+        MenuSpawner.active.menuStage = arena.menuStage;
+
+        // Wipe the old background
+        MenuSpawner.active.WipeEnemies();
+
+        // Set the background
+        for (int x = -4; x < 4; x++)
+            for (int y = -4; y < 4; y++)
+                backgroundTilemap.SetTile(new Vector3Int(x, y, 0), arena.arenaBackground);
+     }
 }

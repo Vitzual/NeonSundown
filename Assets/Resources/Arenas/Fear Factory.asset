@@ -17,6 +17,12 @@ MonoBehaviour:
   name: Fear Factory
   desc: Hope you like swarms! This arena is mainly comprised of small fast enemies
     that group up and try to swarm you.
+  arenaBackground: {fileID: 11400000, guid: bf8da83d748b7e944b74db83fbf1ee52, type: 2}
+  arenaMusic: {fileID: 8300000, guid: fd78f0da95799524d9114149f6f79544, type: 3}
+  menuStage: {fileID: 11400000, guid: 710ec9da504aab442bc32b8df9ab4e08, type: 2}
+  arenaRequirement: {fileID: 11400000, guid: a0b8076f4aba12d4d916bc79feb00a67, type: 2}
+  unlockByDefault: 0
+  unlockObjective: 'Complete "The Abyss" '
   difficulty: Normal
   length: ~5 minutes
   order: 1
@@ -27,17 +33,26 @@ MonoBehaviour:
     name: Survive for 5 minutes
     reward: Bomber Blitz Arena
     objective: 0
-    arenaReward: {fileID: 11400000, guid: 7853fe88b866c694ea0908cd935ca19d, type: 2}
-    playerReward: {fileID: 0}
+    surviveTime: 300
+    enemyData: {fileID: 0}
+    enemyAmount: 0
+    shipReward: {fileID: 0}
     cardReward: {fileID: 0}
   secondaryObjective:
-    name: Exterminate 100 hives
+    name: Survive for 10 minutes
     reward: Blaster Drone
     objective: 1
-    arenaReward: {fileID: 0}
-    playerReward: {fileID: 11400000, guid: 4ed169223a9464146b2a58576b2ba8d3, type: 2}
+    surviveTime: 600
+    enemyData: {fileID: 0}
+    enemyAmount: 0
+    shipReward: {fileID: 11400000, guid: ef3fc83e8a4d5404fbca2a69804a5563, type: 2}
     cardReward: {fileID: 0}
-  stages: []
+  stages:
+  - {fileID: 11400000, guid: e4f802fd157770646a91d3181001b127, type: 2}
+  - {fileID: 11400000, guid: 596eb40251254f2439256433d1987165, type: 2}
+  - {fileID: 11400000, guid: 2a5c80d98aa3c0347bd647ef7e98029f, type: 2}
+  - {fileID: 11400000, guid: db41b09840b3a8f409fba41c670835c5, type: 2}
+  - {fileID: 11400000, guid: 9d80d4161aefc334ea0ab3183aeaebf1, type: 2}
   startingCards:
   - {fileID: 11400000, guid: c65fd8a705ce9b94d8d4f6775c2a86c9, type: 2}
   blacklistCards:

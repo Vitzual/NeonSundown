@@ -43,7 +43,7 @@ public class Menu : MonoBehaviour
     public void Awake()
     {
         Scriptables.GenerateAllScriptables();
-        Loader.GetSave();
+        SaveSystem.GetSave();
     }
 
     // Update user input
@@ -80,9 +80,20 @@ public class Menu : MonoBehaviour
                 ArenaButton newButton = Instantiate(arenaButton, Vector2.zero, Quaternion.identity).GetComponent<ArenaButton>();
                 newButton.transform.SetParent(arenaList);
                 buttonList.Add(newButton);
-                if (Loader.saveData.arenaTimes.ContainsKey(arena.InternalID))
-                    newButton.Set(arena, "<b>Best Run:</b> " + Formatter.Time(Loader.saveData.arenaTimes[arena.InternalID]));
-                else newButton.Set(arena, "<b>Best Run:</b> 0:00");
+
+                // Check if save is unlocked, and if so set time
+                if (SaveSystem.IsArenaUnlocked(arena))
+                {
+                    if (SaveSystem.saveData.arenas.ContainsKey(arena.InternalID))
+                    {
+                        newButton.Set(arena, "<b>Best Run:</b> " + Formatter.Time
+                            (SaveSystem.saveData.arenas[arena.InternalID].bestTime));
+                    }
+                    else newButton.Set(arena, "<b>Best Run:</b> 0:00");
+                }
+
+                // If arena not unlocked, show it as locked
+                else newButton.Lock(arena);
             }
 
             // Iterate through all generated buttons and set order
@@ -151,5 +162,11 @@ public class Menu : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    // Open link
+    public void OpenLink(string link)
+    {
+        Application.OpenURL(link);
     }
 }

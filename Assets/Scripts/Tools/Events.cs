@@ -14,6 +14,14 @@ public class Events : MonoBehaviour
         active = this;
     }
 
+    // Player died
+    public event Action onShipDestroyed;
+    public void ShipDestroyed()
+    {
+        if (onShipDestroyed != null)
+            onShipDestroyed();
+    }
+
     // Cosmetic applied
     public event Action<ShipData> onSetupShip;
     public void SetupShip(ShipData ship)

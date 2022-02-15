@@ -18,14 +18,25 @@ MonoBehaviour:
   desc: spawns stuff
   obj: {fileID: 8071768145869598022, guid: 66e5a97b2501b0a4bb719a8a7ae7891c, type: 3}
   variantStats:
-  - type: 0
-    color: {r: 1, g: 0, b: 0, a: 1}
-    material: {fileID: 2100000, guid: de44ca3cc974af545a2feb8b4148a6fa, type: 2}
-    deathParticle: {fileID: 2055333318299029104, guid: db7f2bd89549db747aade2de38a9a6d3, type: 3}
+  - variant: 0
     health: 35
     damage: 150
-    speed: 0.1
+    speed: 0.2
     minXP: 30
     maxXP: 70
+    canDropCrystal: 0
+    crystal: {fileID: 0}
+    crystalDropChance: 0
+    rotate: 0
+    rotateSpeed: 0
+  - variant: 1
+    health: 50
+    damage: 150
+    speed: 0.15
+    minXP: 50
+    maxXP: 100
+    canDropCrystal: 0
+    crystal: {fileID: 0}
+    crystalDropChance: 0
     rotate: 0
     rotateSpeed: 0

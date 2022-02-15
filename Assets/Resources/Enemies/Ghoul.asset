@@ -18,14 +18,25 @@ MonoBehaviour:
   desc: Spooky
   obj: {fileID: 8071768145869598022, guid: 5f28ca0a85e215247a9803be15722c16, type: 3}
   variantStats:
-  - type: 0
-    color: {r: 1, g: 0, b: 0, a: 1}
-    material: {fileID: 2100000, guid: de44ca3cc974af545a2feb8b4148a6fa, type: 2}
-    deathParticle: {fileID: 3499844798619087542, guid: a6c7db84b014c27478067f4c77388510, type: 3}
+  - variant: 0
     health: 100
     damage: 35
     speed: 25
+    minXP: 35
+    maxXP: 80
+    canDropCrystal: 1
+    crystal: {fileID: 8448323221370727099, guid: 3d033a6255a85a0498fc4b8e74da9e21, type: 3}
+    crystalDropChance: 0.3
+    rotate: 0
+    rotateSpeed: 0
+  - variant: 1
+    health: 150
+    damage: 40
+    speed: 30
     minXP: 50
-    maxXP: 150
+    maxXP: 100
+    canDropCrystal: 1
+    crystal: {fileID: 8448323221370727099, guid: 3d033a6255a85a0498fc4b8e74da9e21, type: 3}
+    crystalDropChance: 0.3
     rotate: 0
     rotateSpeed: 0

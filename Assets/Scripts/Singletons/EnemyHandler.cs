@@ -3,6 +3,22 @@ using UnityEngine;
 
 public class EnemyHandler : MonoBehaviour
 {
+    // Custom enemy spawn queue
+    public class EnemyQueue
+    {
+        public EnemyQueue( EnemyData enemy, Variant variant, Vector2 position)
+        {
+            this.variant = variant;
+            this.enemy = enemy;
+            this.position = position;
+        }
+
+        public Variant variant;
+        public EnemyData enemy;
+        public Vector2 position;
+    }
+    protected Queue<EnemyQueue> enemyQueue = new Queue<EnemyQueue>();
+
     // Active instance
     public static EnemyHandler active;
 
@@ -20,6 +36,16 @@ public class EnemyHandler : MonoBehaviour
 
     // Start method
     public void Start() { active = this; }
+
+    // Spawn enemies
+    public void Update()
+    {
+        if (enemyQueue.Count > 0)
+        {
+            EnemyQueue newEnemy = enemyQueue.Dequeue();
+            CreateEnemy(newEnemy.enemy, newEnemy.variant, newEnemy.position);
+        }
+    }
 
     // Move normal enemies
     public void FixedUpdate()
@@ -42,6 +68,23 @@ public class EnemyHandler : MonoBehaviour
         }
     }
 
+    // Create a new active enemy instance
+    public void QueueEnemy(EnemyData enemyData, Variant variant, int amount)
+    {
+        // Generate position
+        Vector2 position = GeneratePosition();
+
+        // For loop
+        for (int i = 0; i < amount; i++)
+        {
+            // Create slight offset
+            if (i > 0) position = new Vector2(position.x + Random.Range(-5f, 5f), position.y + Random.Range(-5f, 5f));
+
+            // Create the tile
+            enemyQueue.Enqueue(new EnemyQueue(enemyData, variant, position));
+        }
+    }
+
     // Creates a new enemy with a specific position
     public void CreateEnemy(EnemyData enemyData, Variant variant, Vector2 position)
     {
@@ -51,25 +94,7 @@ public class EnemyHandler : MonoBehaviour
 
         // Attempt to set enemy variant
         Enemy enemy = lastObj.GetComponent<Enemy>();
-        enemy.Setup(enemyData.variants[variant], variant, player);
-
-        // Add to enemies list
-        enemies.Add(enemy);
-    }
-
-    // Create a new active enemy instance
-    public void CreateEnemy(EnemyData enemyData, Variant variant)
-    {
-        // Generate position
-        Vector2 position = GeneratePosition();
-
-        // Create the tile
-        GameObject lastObj = Instantiate(enemyData.obj, position, Quaternion.identity);
-        lastObj.name = enemyData.name;
-
-        // Attempt to set enemy variant
-        Enemy enemy = lastObj.GetComponent<Enemy>();
-        enemy.Setup(enemyData.variants[variant], variant, player); 
+        enemy.Setup(enemyData.variants[variant], player);
 
         // Add to enemies list
         enemies.Add(enemy);

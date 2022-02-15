@@ -31,7 +31,7 @@ public class EnemyData : IdentifiableScriptableObject
         Debug.Log("Generating " + name + " scriptable stat data...");
         variants = new Dictionary<Variant, VariantData>();
         foreach (VariantData variant in variantStats)
-            variants.Add(variant.type, variant);
+            variants.Add(variant.variant, variant);
         Debug.Log("Successfully generated " + name + " with " + variantStats.Count + " stat entries!");
     }
 }

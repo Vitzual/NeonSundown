@@ -125,7 +125,7 @@ public class Dealer : MonoBehaviour
 
         // Take the card and remove it from the list
         CardData card = dealList[Random.Range(0, dealList.Count)];
-        if (card.canDrop)
+        if (!Gamemode.arena.blacklistCards.Contains(card) && card.canDrop)
         {
             cardSlots[number].Set(card);
             dealList.Remove(card);
@@ -154,6 +154,8 @@ public class Dealer : MonoBehaviour
     // Pick the card and add to palyer
     public void PickCard(CardData card, int number)
     {
+        if (!cardsDealt) return;
+
         CloseDealer();
         Deck.active.AddCard(card);
     }
@@ -161,6 +163,10 @@ public class Dealer : MonoBehaviour
     // Open dealer
     public void OpenDealer()
     {
+        // Reset all cards
+        foreach (Card card in cardSlots)
+            card.canvasGroup.alpha = 0f;
+
         // Get copy of the scriptables list
         dealList = new List<CardData>(Scriptables.cards);
 

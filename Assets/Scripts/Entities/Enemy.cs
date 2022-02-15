@@ -8,6 +8,7 @@ public class Enemy : Entity
     // Scriptable object
     protected Variant variant;
     protected VariantData data;
+    protected Material material;
 
     // Transform lists
     public List<TrailRenderer> trails;
@@ -23,23 +24,27 @@ public class Enemy : Entity
     private Transform target;
     
     // Setup the enemy
-    public virtual void Setup(VariantData data, Variant variant, Transform player)
+    public virtual void Setup(VariantData data, Transform player)
     {
+        // Get the variant color
+        VariantColor variantColor = VariantPalette.GetVariantColor(data.variant);
+
         // Loop through all glows and fills
         foreach (TrailRenderer trail in trails) 
-            trail.material = data.material;
+            trail.material = variantColor.material;
         foreach (SpriteRenderer glow in glows)
-            glow.material = data.material;
+            glow.material = variantColor.material;
         foreach (SpriteRenderer fill in fills)
-            fill.color = data.color;
+            fill.color = variantColor.color;
 
         // Set scriptable
-        this.variant = variant;
+        variant = data.variant;
         this.data = data;
 
         // Set material / particle
-        deathEffect = data.deathParticle;
-        deathMaterial = data.material;
+        deathEffect = variantColor.deathParticle;
+        deathMaterial = variantColor.material;
+        material = variantColor.material;
 
         // Set stats
         health = data.health;
@@ -109,7 +114,7 @@ public class Enemy : Entity
     // Get material function
     public override Material GetMaterial()
     {
-        return data.material;
+        return material;
     }
 
     // Check if enemy is dead

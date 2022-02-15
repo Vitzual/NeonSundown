@@ -10,10 +10,10 @@ public class Hivemind : Enemy
     private float cooldown;
 
     // Setup the hivemind
-    public override void Setup(VariantData data, Variant variant, Transform player)
+    public override void Setup(VariantData data, Transform player)
     {
         cooldown = data.speed;
-        base.Setup(data, variant, player);
+        base.Setup(data, player);
     }
 
     // Start is called before the first frame update

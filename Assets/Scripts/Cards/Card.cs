@@ -23,7 +23,7 @@ public class Card : MonoBehaviour
     public TextMeshProUGUI level;
 
     // Canvas group
-    private CanvasGroup canvasGroup;
+    public CanvasGroup canvasGroup;
 
     // Get the canvas group
     public void Start() { canvasGroup = GetComponent<CanvasGroup>(); }

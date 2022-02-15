@@ -10,9 +10,11 @@ public class StageData : IdentifiableScriptableObject
         public EnemyData data;
         public Variant variant;
         public float cooldown;
+        public int amount = 1;
     }
 
     public new string name;
+    public bool isMenuStage;
     public List<Enemy> enemies;
     public float time;
 }

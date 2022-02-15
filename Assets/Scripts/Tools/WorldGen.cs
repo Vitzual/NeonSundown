@@ -20,7 +20,6 @@ public class WorldGen : MonoBehaviour
 
     // List of environment tiles
     public Tilemap environment;
-    public TileBase backgroundTile;
 
     // Loaded chunks
     public Dictionary<Vector2Int, GameObject> loadedChunks;
@@ -92,7 +91,7 @@ public class WorldGen : MonoBehaviour
         chunk.name = newChunk.x + " " + newChunk.y;
 
         // Spawn background tiles
-        SetBackground(backgroundTile, tileCoords);
+        SetBackground(Gamemode.arena.arenaBackground, tileCoords);
 
         return chunk;
     }

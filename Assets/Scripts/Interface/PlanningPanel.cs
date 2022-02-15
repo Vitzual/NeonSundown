@@ -30,24 +30,25 @@ public class PlanningPanel : MonoBehaviour
             bool setDefault = Gamemode.ship == null;
 
             // Iterate through ships and set sprite
-            if (ship.data.IsUnlocked())
-            {
+            //if (ship.data.IsUnlocked())
+            //{
                 // Set the ship variables
                 ship.image.sprite = ship.data.model;
                 ship.button.enabled = true;
                 ship.scale.enabled = true;
 
                 if (setDefault && ship.data.unlocked) ChangeShip(ship.data);
-            }
+            //}
 
             // If ship not unlocked, set the locked image
-            else
-            {
+            //else
+            //{
                 // Set the ship variables
                 ship.image.sprite = lockedShipIcon;
+                ship.image.color = unselectedColor;
                 ship.button.enabled = false;
                 ship.scale.enabled = false;
-            }
+            //}
         }
     }
 
