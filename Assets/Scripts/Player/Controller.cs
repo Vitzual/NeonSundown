@@ -106,15 +106,12 @@ public class Controller : MonoBehaviour
         }
 
         // Check if dash pressed
-        else if (Input.GetKey(Keybinds.sprint))
+        else if (Input.GetKey(Keybinds.dash))
         {
             isDashing = true;
             dash = dashTimer;
             speed = dashSpeed;
             dashQuickReset = false;
-
-            // Play dash sound
-            // AudioPlayer.Play(dashSound);
         }
     }
 

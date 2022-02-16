@@ -4,24 +4,101 @@ using UnityEngine;
 
 public class Keybinds
 {
-    public static KeyCode move_up = KeyCode.W;
-    public static KeyCode move_down = KeyCode.S;
-    public static KeyCode move_left = KeyCode.A;
-    public static KeyCode move_right = KeyCode.D;
-    public static KeyCode space = KeyCode.Space;
-    public static KeyCode sprint = KeyCode.LeftShift;
-    public static KeyCode shoot = KeyCode.Mouse0;
-    public static KeyCode escape = KeyCode.Escape;
-    public static KeyCode interact = KeyCode.E;
-    public static KeyCode debug = KeyCode.Q;
-    public static KeyCode hotbar_1 = KeyCode.Alpha1;
-    public static KeyCode hotbar_2 = KeyCode.Alpha2;
-    public static KeyCode hotbar_3 = KeyCode.Alpha3;
-    public static KeyCode hotbar_4 = KeyCode.Alpha4;
-    public static KeyCode hotbar_5 = KeyCode.Alpha5;
-    public static KeyCode hotbar_6 = KeyCode.Alpha6;
-    public static KeyCode hotbar_7 = KeyCode.Alpha7;
-    public static KeyCode hotbar_8 = KeyCode.Alpha8;
-    public static KeyCode hotbar_9 = KeyCode.Alpha9;
-    public static KeyCode hotbar_0 = KeyCode.Alpha0;
+    public enum Key
+    {
+        move_up,
+        move_left,
+        move_down,
+        move_right,
+        dash,
+        shoot,
+        escape
+    }
+
+    public static KeyCode move_up { get; set; }
+    public static KeyCode move_left { get; set; }
+    public static KeyCode move_down { get; set; }
+    public static KeyCode move_right { get; set; }
+    public static KeyCode dash { get; set; }
+    public static KeyCode shoot { get; set; }
+    public static KeyCode ability { get; set; }
+    public static KeyCode escape { get; set; }
+    public static KeyCode debug { get; set; }
+
+    public static void SetKeybind(Key key, KeyCode value)
+    {
+        switch (key)
+        {
+            case Key.move_up:
+                move_up = value;
+                break;
+
+            case Key.move_left:
+                move_left = value;
+                break;
+
+            case Key.move_down:
+                move_down = value;
+                break;
+
+            case Key.move_right:
+                move_right = value;
+                break;
+
+            case Key.dash:
+                dash = value;
+                break;
+
+            case Key.shoot:
+                shoot = value;
+                break;
+
+            case Key.escape:
+                escape = value;
+                break;
+        }
+    }
+
+    public static KeyCode GetKeybind(Key key)
+    {
+        switch (key)
+        {
+            case Key.move_up:
+                return move_up;
+
+            case Key.move_left:
+                return move_left;
+
+            case Key.move_down:
+                return move_down;
+
+            case Key.move_right:
+                return move_right;
+
+            case Key.dash:
+                return dash;
+
+            case Key.shoot:
+                return shoot;
+
+            case Key.escape:
+                return escape;
+
+            default:
+                return move_up;
+        }
+    }
+
+    public static void SetDefaultKeybinds()
+    {
+        move_up = KeyCode.W;
+        move_left = KeyCode.A;
+        move_down = KeyCode.S;
+        move_right = KeyCode.D;
+        dash = KeyCode.LeftShift;
+        shoot = KeyCode.Mouse0;
+        ability = KeyCode.Mouse1;
+        escape = KeyCode.Escape;
+        debug = KeyCode.Q;
+    }
 }

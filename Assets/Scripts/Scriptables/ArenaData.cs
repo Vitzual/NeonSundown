@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -27,29 +28,52 @@ public class ArenaData : IdentifiableScriptableObject
     }
 
     // Arena Information
+    [BoxGroup("Arena Info")]
     public new string name;
-    [TextArea] public string desc;
+    [BoxGroup("Arena Info"), TextArea]
+    public string desc;
+    [BoxGroup("Arena Info")]
     public TileBase arenaBackground;
+    [BoxGroup("Arena Info")]
     public AudioClip arenaMusic;
+    [BoxGroup("Arena Info")]
     public StageData menuStage;
-    public ArenaData arenaRequirement;
-    public bool unlockByDefault;
 
     // Other information
+    [BoxGroup("Arena Requirement")]
+    public ArenaData arenaRequirement;
+    [BoxGroup("Arena Requirement")]
+    public bool unlockByDefault;
+    [BoxGroup("Arena Requirement")]
     public string unlockObjective;
+
+    // Arena stats
+    [BoxGroup("Arena Stats")]
     public string difficulty;
+    [BoxGroup("Arena Stats")]
     public string length;
+    [BoxGroup("Arena Stats")]
     public int order;
+    [BoxGroup("Arena Stats")]
     public Color buttonColor;
+    [BoxGroup("Arena Stats")]
     public Color lineColor;
+    [BoxGroup("Arena Stats")]
     public Color difficultyColor;
 
     // Arena objectives
+    [BoxGroup("Arena Objective")]
     public ArenaObjective primaryObjective;
+    [BoxGroup("Arena Objective")]
     public ArenaObjective secondaryObjective;
 
     // Arena rule set
+    [BoxGroup("Arena Rules")]
     public List<StageData> stages;
+    [BoxGroup("Arena Rules")]
     public List<CardData> startingCards;
+    [BoxGroup("Arena Rules")]
     public List<CardData> blacklistCards;
+    [BoxGroup("Arena Rules")]
+    public bool useWall = false;
 }

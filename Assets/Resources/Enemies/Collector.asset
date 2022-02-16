@@ -18,14 +18,25 @@ MonoBehaviour:
   desc: 'Big chungus '
   obj: {fileID: 8071768145869598022, guid: e8814715d1222b646b7bacca770c503d, type: 3}
   variantStats:
-  - type: 0
-    color: {r: 1, g: 0, b: 0, a: 1}
-    material: {fileID: 2100000, guid: de44ca3cc974af545a2feb8b4148a6fa, type: 2}
-    deathParticle: {fileID: 3499844798619087542, guid: a6c7db84b014c27478067f4c77388510, type: 3}
+  - variant: 0
     health: 150
     damage: 25
     speed: 5
     minXP: 25
     maxXP: 50
+    canDropCrystal: 0
+    crystal: {fileID: 0}
+    crystalDropChance: 0
+    rotate: 0
+    rotateSpeed: 0
+  - variant: 2
+    health: 250
+    damage: 50
+    speed: 10
+    minXP: 50
+    maxXP: 100
+    canDropCrystal: 0
+    crystal: {fileID: 0}
+    crystalDropChance: 0
     rotate: 0
     rotateSpeed: 0

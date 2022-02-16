@@ -25,9 +25,9 @@ public class CameraFollow : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(Keybinds.sprint))
+        if (Input.GetKeyDown(Keybinds.dash))
             speed = 250f;
-        else if (Input.GetKeyUp(Keybinds.sprint))
+        else if (Input.GetKeyUp(Keybinds.dash))
             speed = 100f;
 
         if (freecam) CheckMovementInput();

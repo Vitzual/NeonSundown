@@ -3,11 +3,11 @@ using UnityEngine;
 
 public class SaveSystem
 {
+    // Save path
+    private const string SAVE_PATH = "/player.save";
+
     // Most up-to-date data
     public static SaveData saveData;
-
-    // Save path
-    protected static string savePath = "/player.save";
 
     // Update the save file
     public static void UpdateSave()
@@ -24,7 +24,7 @@ public class SaveSystem
 
         // Convert to json and save
         string newData = JsonUtility.ToJson(saveData);
-        File.WriteAllText(Application.persistentDataPath + savePath, newData);
+        File.WriteAllText(Application.persistentDataPath + SAVE_PATH, newData);
 
         // Game saved 
         Debug.Log("[SAVE] Game was saved successfully!");
@@ -34,7 +34,7 @@ public class SaveSystem
     public static void GetSave()
     {
         // Grab the persistent data path
-        string path = Application.persistentDataPath + savePath;
+        string path = Application.persistentDataPath + SAVE_PATH;
 
         // Check if file exists
         if (File.Exists(path))
@@ -65,7 +65,7 @@ public class SaveSystem
 
         // Convert to json and save
         string newData = JsonUtility.ToJson(saveData);
-        File.WriteAllText(Application.persistentDataPath + savePath, newData);
+        File.WriteAllText(Application.persistentDataPath + SAVE_PATH, newData);
 
         // Game saved 
         Debug.Log("[SAVE] New save data was created successfully!");

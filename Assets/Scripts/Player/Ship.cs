@@ -112,7 +112,7 @@ public class Ship : Weapon
 
         // Check if LMB input detected
         if (Input.GetKey(Keybinds.shoot) && shipData.canFire) Use();
-        if (Input.GetKey(Keybinds.debug)) Dealer.active.OpenDealer();
+        // if (Input.GetKey(Keybinds.debug)) Dealer.active.OpenDealer();
         if (shipCooldown > 0) shipCooldown -= Time.deltaTime;
 
         // If can regen, regenerate
