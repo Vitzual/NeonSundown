@@ -10,6 +10,9 @@ public class Enemy : Entity
     protected VariantData data;
     protected Material material;
 
+    // Rigidbody attached to the enemy
+    public Rigidbody2D rb;
+
     // Transform lists
     public List<TrailRenderer> trails;
     public List<SpriteRenderer> glows;
@@ -57,6 +60,10 @@ public class Enemy : Entity
     // Damage entity
     public override void Damage(float amount)
     {
+        // Apply knockback
+        rb.AddForce((target.position - transform.position) * -10);
+
+        // Modify internal values
         health -= amount;
         if (IsDead()) Destroy();
     }
