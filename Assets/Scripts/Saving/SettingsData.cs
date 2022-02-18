@@ -4,7 +4,6 @@ using System;
 public class SettingsData
 {
     // Audio options
-    public float master;
     public float music;
     public float sound;
 

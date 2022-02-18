@@ -2,12 +2,15 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Menu : MonoBehaviour
 {
     // Menu panels
     public ArenaPanel arenaPanel;
     public PlanningPanel planningPanel;
+    public Store storePanel;
+    public ModuleData defaultStoreModule;
 
     // Arena elements
     public ArenaButton arenaButton;
@@ -18,6 +21,7 @@ public class Menu : MonoBehaviour
     public CanvasGroup arenaGroup;
     public CanvasGroup planningGroup;
     public CanvasGroup catalogGroup;
+    public CanvasGroup storeGroup;
     public CanvasGroup buttonsGroup;
     public CanvasGroup socialsGroup;
     public CanvasGroup titleGroup;
@@ -44,6 +48,7 @@ public class Menu : MonoBehaviour
     {
         Scriptables.GenerateAllScriptables();
         SaveSystem.GetSave();
+        Settings.LoadSettings();
     }
 
     // Update user input
@@ -129,12 +134,20 @@ public class Menu : MonoBehaviour
     // Open planning panel
     public void TogglePlanningPanel(bool toggle)
     {
+        if (toggle) TogglePanel(planningGroup, arenaGroup);
+        else TogglePanel(arenaGroup, planningGroup);
+    }
+
+    // Open store panel
+    public void ToggleStorePanel(bool toggle)
+    {
         if (toggle)
         {
-            TogglePanel(planningGroup, arenaGroup);
-            
+            TogglePanel(storeGroup, mainGroup);
+            storePanel.UpdateCrystals();
+            storePanel.SetPanel(defaultStoreModule);
         }
-        else TogglePanel(arenaGroup, planningGroup);
+        else TogglePanel(mainGroup, storeGroup);
     }
 
     // Update menu

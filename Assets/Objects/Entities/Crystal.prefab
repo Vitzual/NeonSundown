@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 8448323219929391267}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.6, y: 0.6, z: 1}
+  m_LocalScale: {x: 0.85, y: 0.85, z: 1}
   m_Children: []
   m_Father: {fileID: 8448323221370727100}
   m_RootOrder: 1
@@ -50,7 +50,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 389d32be12b19ab4d8618459a5d1aa75, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -70,8 +70,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 244700495
   m_SortingLayer: 2
-  m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 49d11b6abd98803449c55234ebfe28c1, type: 3}
+  m_SortingOrder: 2
+  m_Sprite: {fileID: 21300000, guid: ca741cc272e70244b8eed848387bf232, type: 3}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -215,6 +215,11 @@ MonoBehaviour:
   rotateParticle: 0
   deathMaterial: {fileID: 2100000, guid: 54935f9f076fcfd438c4bd1725f9606e, type: 2}
   deathEffect: {fileID: 8187003936069489464, guid: 4a1a5940497995c4e85df4b56439db61, type: 3}
+  crystals:
+  - {fileID: 11400000, guid: 166e382c5fd0e3f49a60c8c2e7c82ae4, type: 2}
+  - {fileID: 11400000, guid: ed656c671e61d5f4aa41b7e29192edf7, type: 2}
+  - {fileID: 11400000, guid: 532e0828db94e4c4e85d39a0b75aa195, type: 2}
+  crystalBorder: {fileID: 8448323220291423407}
   rb: {fileID: 8448323221370727098}
   crystalSound: {fileID: 8300000, guid: 7747094faa394454793e36b158afabb2, type: 3}
   crystalDestroy: {fileID: 8300000, guid: 3efc136c8a73ea34db2fd69dc63a39da, type: 3}

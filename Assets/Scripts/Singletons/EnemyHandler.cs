@@ -24,6 +24,8 @@ public class EnemyHandler : MonoBehaviour
 
     // Player object
     public float spawnRange = 100;
+    public float cullRange = 150;
+    private int cullIndex = 0;
 
     // Contains all active enemies in the scene
     public List<Enemy> enemies = new List<Enemy>();
@@ -40,8 +42,29 @@ public class EnemyHandler : MonoBehaviour
     // Spawn enemies
     public void Update()
     {
+        // Check distance of enemy
+        if (cullIndex < enemies.Count)
+        {
+            // Check if enemy exists
+            if (enemies[cullIndex] == null)
+                enemies.RemoveAt(cullIndex);
+
+            // If enemy is far away, yeet and delete
+            else if (Vector2.Distance(enemies[cullIndex].transform.position, player.position) > cullRange)
+            {
+                Destroy(enemies[cullIndex].gameObject);
+                enemies.RemoveAt(cullIndex);
+            }
+
+            // Update cull index
+            cullIndex += 1;
+        }
+        else cullIndex = 0;
+
+        // Enemy queue
         if (enemyQueue.Count > 0)
         {
+            // Dequeue enemy from list
             EnemyQueue newEnemy = enemyQueue.Dequeue();
             CreateEnemy(newEnemy.enemy, newEnemy.variant, newEnemy.position);
         }

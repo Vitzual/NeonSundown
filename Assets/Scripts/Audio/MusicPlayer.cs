@@ -6,39 +6,38 @@ public class MusicPlayer : MonoBehaviour
 {
     // Audio source for music
     public bool useRandomTracks = false;
+    public bool isMenu = false;
     private bool arenaMusic = false;
-    private AudioSource music;
+    private static AudioSource music;
 
     // Start is called before the first frame update
     void Start()
     {
+        // Subscribe to volume change event
+        Events.active.onVolumeChanged += UpdateVolume;
+
         // Get the audio source
         music = GetComponent<AudioSource>();
-        if (Gamemode.arena.arenaMusic == null)
-        {
-            music.clip = MusicLoader.tracks[Random.Range(0, MusicLoader.tracks.Count)];
-        }
-        else
+
+        // Check if is menu
+        if (!isMenu)
         {
             music.clip = Gamemode.arena.arenaMusic;
             music.loop = true;
             arenaMusic = true;
         }
 
+        music.volume = Settings.music;
         music.Play();
     }
 
-    // Update is called once per frame
-    void Update()
+    // Update music volume
+    public void UpdateVolume(float volume)
     {
-        if (!arenaMusic && !music.isPlaying)
-        {
-            AudioClip clip = MusicLoader.tracks[Random.Range(0, MusicLoader.tracks.Count)];
-            if (clip != music.clip)
-            {
-                music.clip = MusicLoader.tracks[Random.Range(0, MusicLoader.tracks.Count)];
-                music.Play();
-            }
-        }
+        music.volume = volume;
     }
+
+    // Play / Stop the music
+    public static void PlayMusic() { music.Play(); }
+    public static void StopMusic() { music.Pause(); }
 }

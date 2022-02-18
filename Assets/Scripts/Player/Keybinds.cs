@@ -4,17 +4,6 @@ using UnityEngine;
 
 public class Keybinds
 {
-    public enum Key
-    {
-        move_up,
-        move_left,
-        move_down,
-        move_right,
-        dash,
-        shoot,
-        escape
-    }
-
     public static KeyCode move_up { get; set; }
     public static KeyCode move_left { get; set; }
     public static KeyCode move_down { get; set; }

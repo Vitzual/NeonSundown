@@ -1,18 +1,21 @@
 using Michsky.UI.ModernUIPack;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using UnityEngine;
 
 public class SettingsUI : MonoBehaviour
 {
     // List of keybinds
+    [System.Serializable]
     public class Keybind
     {
-        public Keybinds.Key key;
+        public Key key;
         public ButtonManagerBasic button;
     }
+
     public List<Keybind> keybinds;
-    private Keybinds.Key listeningForKey;
+    private Key listeningForKey;
     private bool listeningForInput = false;
 
     // Active
@@ -42,24 +45,58 @@ public class SettingsUI : MonoBehaviour
     {
         if (listeningForInput && Input.anyKeyDown)
         {
-            Keybinds.SetKeybind(listeningForKey, (KeyCode)System.Enum.Parse(typeof(KeyCode), Input.inputString));
+            // Grab input and capitalize it if needed
+            string input = Input.inputString.ToUpper();
+            if (input == "")
+            {
+                // Debug to player thing
+                Debug.Log("Invalid key press detected, checking specific cases...");
+
+                // Get other supported inputs
+                input = CheckOtherInputs();
+
+                // Check if input is now valid
+                if (input == "")
+                {
+                    Debug.Log("Input is not supported! Please contact me (Ben) to get support for this device / input key.");
+                    return;
+                }
+                else Debug.Log("Matched invalid key press to " + input);
+            }
+
+            // Debug to player thing
+            Debug.Log("Attempting to change " + listeningForKey + " to " + input);
+            Keybinds.SetKeybind(listeningForKey, (KeyCode)System.Enum.Parse(typeof(KeyCode), input));
             listeningForInput = false;
 
+            // Loop through keybinds and change key
             foreach (Keybind keybind in keybinds)
+            {
                 if (keybind.key == listeningForKey)
-                    keybind.button.buttonText = Input.inputString;
+                {
+                    keybind.button.buttonText = input;
+                    keybind.button.UpdateUI();
+                }
+            }
         }
     }
 
     // Set keybinds methods
-    public void SetKeybind(Keybinds.Key key)
+    public void SetKeybind(int number)
     {
+        Key key = (Key)number;
+
         listeningForInput = true;
         listeningForKey = key;
 
         foreach (Keybind keybind in keybinds)
+        {
             if (keybind.key == key)
+            {
                 keybind.button.buttonText = "Press any key...";
+                keybind.button.UpdateUI();
+            }
+        }
     }
 
     // Set volume control methods
@@ -131,8 +168,11 @@ public class SettingsUI : MonoBehaviour
             pausedMenu.SetActive(false);
 
         // Set all keybind buttons
-        foreach(Keybind keybind in keybinds)
+        foreach (Keybind keybind in keybinds)
+        {
             keybind.button.buttonText = Keybinds.GetKeybind(keybind.key).ToString();
+            keybind.button.UpdateUI();
+        }
     }
 
     // Go back
@@ -150,5 +190,26 @@ public class SettingsUI : MonoBehaviour
         // Open paused menu if it exists
         if (pausedMenu != null)
             pausedMenu.SetActive(true);
+    }
+
+    public string CheckOtherInputs()
+    {
+        // Check mouse input
+        if (Input.GetMouseButtonDown(0)) return "Mouse0";
+        else if (Input.GetMouseButtonDown(1)) return "Mouse1";
+        else if (Input.GetMouseButtonDown(2)) return "Mouse2";
+        else if (Input.GetMouseButtonDown(3)) return "Mouse3";
+        else if (Input.GetMouseButtonDown(4)) return "Mouse4";
+        else if (Input.GetMouseButtonDown(5)) return "Mouse5";
+        else if (Input.GetKeyDown(KeyCode.Tab)) return "Tab";
+        else if (Input.GetKeyDown(KeyCode.CapsLock)) return "CapsLock";
+        else if (Input.GetKeyDown(KeyCode.LeftShift)) return "LeftShift";
+        else if (Input.GetKeyDown(KeyCode.Space)) return "Space";
+        else if (Input.GetKeyDown(KeyCode.LeftControl)) return "LeftControl";
+        else if (Input.GetKeyDown(KeyCode.UpArrow)) return "UpArrow";
+        else if (Input.GetKeyDown(KeyCode.LeftArrow)) return "LeftArrow";
+        else if (Input.GetKeyDown(KeyCode.DownArrow)) return "DownArrow";
+        else if (Input.GetKeyDown(KeyCode.RightArrow)) return "RightArrow";
+        else return "";
     }
 }

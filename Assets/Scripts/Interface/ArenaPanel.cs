@@ -18,7 +18,10 @@ public class ArenaPanel : MonoBehaviour
     public Tilemap backgroundTilemap;
 
     // Canvas group
+    public Image panelBackground;
     public CanvasGroup panelGroup;
+    public CanvasGroup selectArena;
+    public CanvasGroup arenaLocked;
     public Color emptyCardColor;
 
     // Panel variables
@@ -42,6 +45,8 @@ public class ArenaPanel : MonoBehaviour
         // Reset the panel
         ResetPanel();
         panelGroup.alpha = 1f;
+        selectArena.alpha = 0f;
+        panelBackground.color = arena.buttonColor;
 
         // Set arena information
         this.arena.text = arena.name;

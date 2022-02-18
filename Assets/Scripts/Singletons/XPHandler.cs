@@ -126,6 +126,7 @@ public class XPHandler : MonoBehaviour
         if (crystal != null)
         {
             Crystal newCrystal = Instantiate(crystal, startPos, Quaternion.identity).GetComponent<Crystal>();
+            newCrystal.Setup(50);
             newCrystal.SetSpeed();
         }
     }

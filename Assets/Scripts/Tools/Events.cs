@@ -37,4 +37,12 @@ public class Events : MonoBehaviour
         if (onArenaButtonClicked != null)
             onArenaButtonClicked(arena);
     }
+
+    // Cosmetic applied
+    public event Action<float> onVolumeChanged;
+    public void VolumeChanged(float volume)
+    {
+        if (onVolumeChanged != null)
+            onVolumeChanged(volume);
+    }
 }

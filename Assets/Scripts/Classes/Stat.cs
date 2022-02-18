@@ -14,5 +14,8 @@ public enum Stat
     Knockback,
     XPGain,
     XPRange,
-    View
+    View,
+    Syphon,
+    Regen,
+    Evasion
 }

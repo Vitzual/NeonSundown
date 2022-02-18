@@ -18,11 +18,6 @@ public class Settings
     public static float music = 0.5f;
     public static float sound = 0.5f;
 
-    // Volume settings
-    private static float _master = 1f;
-    private static float _music = 0.5f;
-    private static float _sound = 0.5f;
-
     // Video options
     private static int resolutionX = 1920;
     private static int resolutionY = 1080;
@@ -36,9 +31,8 @@ public class Settings
         SettingsData settingsData = new SettingsData();
 
         // Set settings data
-        settingsData.master = _master;
-        settingsData.music = _music;
-        settingsData.sound = _sound;
+        settingsData.music = music;
+        settingsData.sound = sound;
         settingsData.resolutionX = resolutionX;
         settingsData.resolutionY = resolutionY;
         settingsData.screenmode = screenmode;
@@ -72,9 +66,8 @@ public class Settings
             SettingsData settingsData = JsonUtility.FromJson<SettingsData>(data);
 
             // Parse settings data from file
-            _master = settingsData.master;
-            _music = settingsData.music;
-            _sound = settingsData.sound;
+            music = settingsData.music;
+            sound = settingsData.sound;
             resolutionX = settingsData.resolutionX;
             resolutionY = settingsData.resolutionY;
             screenmode = settingsData.screenmode;
@@ -97,9 +90,8 @@ public class Settings
         {
             // Set default settings
             Keybinds.SetDefaultKeybinds();
-            _master = 0.5f;
-            _music = 0.5f;
-            _sound = 0.5f;
+            music = 0.5f;
+            sound = 1f;
             resolutionX = 1920;
             resolutionY = 1080;
             screenmode = true;
@@ -113,14 +105,11 @@ public class Settings
         // Set the new volume
         switch(type)
         {
-            case Volume.Master:
-                _master = value;
-                break;
             case Volume.Music:
-                _music = value;
+                music = value;
                 break;
             case Volume.Sound:
-                _sound = value;
+                sound = value;
                 break;
         }
 
@@ -160,7 +149,7 @@ public class Settings
     // Update the volume
     public static void UpdateVolumeSettings()
     {
-        music = _music * _master;
-        sound = _sound * _master;
+        if (Events.active != null)
+            Events.active.VolumeChanged(music);
     }
 }

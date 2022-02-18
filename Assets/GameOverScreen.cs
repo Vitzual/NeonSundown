@@ -6,6 +6,7 @@ public class GameOverScreen : MonoBehaviour
 {
     // Canvas group
     public CanvasGroup gameOverScreen;
+    public AudioClip gameOverSound;
 
     // Start is called before the first frame update
     public void Start()
@@ -16,10 +17,11 @@ public class GameOverScreen : MonoBehaviour
     // Update is called once per frame
     private void ShowScreen()
     {
-        Dealer.active.pitchDown = 0f;
+        MusicPlayer.StopMusic();
         Dealer.isOpen = true;
         LeanTween.alphaCanvas(gameOverScreen, 1f, 1f);
         gameOverScreen.interactable = true;
         gameOverScreen.blocksRaycasts = true;
+        AudioPlayer.Play(gameOverSound, false);
     }
 }
