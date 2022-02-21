@@ -7,24 +7,23 @@ Welcome to the source code for Neon Sundown!
 - [Reddit](https://www.reddit.com/r/NeonSundown/)
 
 # Note about this repository
-This repository contains external assets from the Unity asset store that I am not able to share. Though the game is almost completely comprised of my own work, there are a few assets you'll need to grab if you wish to be able to fully run it in the unity editor. (though I recommend treating this repository as something you can reference for your own projects, rather than contribute to)
+This repository contains external assets from the Unity asset store, as well as licensed sounds and music that I am not able to share. I recommend treating this repository as something you can reference for your own projects, though if you wish to get the game running in the Unity editor it is still possible (with or without them)
+
+# External Assets
+Below is a list of all the assets used in the project, along with whether or not they're required for the game to run properly in the editor. Though the game is comprised almost completely of my own work, I do use these assets to save development time as well as for QOL purposes. 
 
 **Paid Assets:**
-- [**Modern UI Pack |** $30 (Required)](https://assetstore.unity.com/packages/tools/gui/modern-ui-pack-150824)
-- [**Odin Inspector |** $55 (Optional)](https://assetstore.unity.com/packages/tools/utilities/odin-inspector-and-serializer-89041)
-- [**MK Glow Lite |** $10 (Optional)](https://assetstore.unity.com/packages/vfx/shaders/fullscreen-camera-effects/mk-glow-lite-155643)
+- [**Modern UI Pack |** $30 (Required)](https://assetstore.unity.com/packages/tools/gui/modern-ui-pack-150824) - Used for a few in-game UI prefabs
+- [**Odin Inspector |** $55 (Optional)](https://assetstore.unity.com/packages/tools/utilities/odin-inspector-and-serializer-89041) - Used to beautify Unity's interface
+- [**MK Glow Lite |** $10 (Optional)](https://assetstore.unity.com/packages/vfx/shaders/fullscreen-camera-effects/mk-glow-lite-155643) - Used to make objects glow
 
 **Free Assets:**
-- [**LeanTween |** FREE (Required)](https://assetstore.unity.com/packages/tools/animation/leantween-3595)
-- [**Audio Visualize Anything |** FREE (Optional)](https://assetstore.unity.com/packages/tools/audio/audio-visualize-anything-190384)
+- [**LeanTween |** FREE (Required)](https://assetstore.unity.com/packages/tools/animation/leantween-3595) - Used to optimize moving UI objects
+- [**Steamworks v2: Foundation |** FREE (Required)](https://assetstore.unity.com/packages/tools/integration/steamworks-v2-foundation-186949) - Used for Steam achievements
+- [**Audio Visualize Anything |** FREE (Optional)](https://assetstore.unity.com/packages/tools/audio/audio-visualize-anything-190384) - Used for Neon Sundown title on menu
 
-**Note:** The game can function without any of the above assets, but it will require a bit of modification!
+# External Audio
+If you've pulled the project files and obtained the above assets (or modified the game to work without them), you'll need to obtain the audio files used in the game. All sound effects were obtained from ZapSplat, and the music is provided by Volt Mother. Links to both below.
 
-# Setup instructions
-In order to run the game, you'll need the latest LTS version of Unity. You can find this by installing [Unity Hub](https://unity3d.com/get-unity/download) and than going to installs and adding the latest LTS version. Once installed, follow the below steps to get setup...
-
-1. Pull the project files onto your machine (I recommend GitHub desktop)
-2. Open the project. Most likely it will prompt you to enter safemode since it'll be missing references to the above assets. Just click "Ignore" for the time being.
-3. Once inside, grab the above assets from the Unity asset store and place them in the External folder. (except for Odin Inspector, place that in the Plugins folder) Note that if you don't want to obtain the above assets, you'll have to work your way through the errors and remove any references to them.
-
-And that's it, you're good to go! Again if you decide not to get the above assets it will require some slight modification to get running, but it is still entirely possible to run the game without them.
+- **ZapSplat:** https://www.zapsplat.com/
+- **Volt Mother:** https://soundcloud.com/voltmother/tracks
