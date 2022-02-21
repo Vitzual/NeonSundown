@@ -1,4 +1,4 @@
-# NeonSundown
+# Neon Sundown
 Welcome to the source code for Neon Sundown!
 
 **Important Links!**
