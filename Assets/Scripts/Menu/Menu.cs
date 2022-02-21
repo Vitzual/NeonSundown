@@ -18,6 +18,7 @@ public class Menu : MonoBehaviour
 
     // Group CG elements
     public CanvasGroup mainGroup;
+    public CanvasGroup mainBackground;
     public CanvasGroup arenaGroup;
     public CanvasGroup planningGroup;
     public CanvasGroup catalogGroup;
@@ -61,6 +62,7 @@ public class Menu : MonoBehaviour
             LeanTween.alphaCanvas(pressSpace, 0f, titleAnimSpeed);
             LeanTween.alphaCanvas(buttonsGroup, 1f, titleAnimSpeed).setDelay(titleAnimSpeed);
             LeanTween.alphaCanvas(socialsGroup, 1f, titleAnimSpeed).setDelay(titleAnimSpeed);
+            LeanTween.alphaCanvas(mainBackground, 1f, titleAnimSpeed).setDelay(titleAnimSpeed);
             buttonsGroup.interactable = true;
             buttonsGroup.blocksRaycasts = true;
             socialsGroup.interactable = true;

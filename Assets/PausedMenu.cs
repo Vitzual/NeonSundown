@@ -6,7 +6,7 @@ public class PausedMenu : MonoBehaviour
 {
     // Pause menu variables
     private static CanvasGroup canvasGroup;
-    private bool isOpen = false;
+    private static bool isOpen = false;
 
     // On start grab the canvas group
     public void Start()
@@ -19,18 +19,8 @@ public class PausedMenu : MonoBehaviour
     {
         if (Input.GetKeyDown(Keybinds.escape) && !Dealer.isOpen)
         {
-            if (isOpen)
-            {
-                Close();
-                isOpen = false;
-                Dealer.isOpen = false;
-            }
-            else
-            {
-                Open();
-                isOpen = true;
-                Dealer.isOpen = true;
-            }
+            if (isOpen) Close();
+            else Open();
         }
     }
 
@@ -40,6 +30,9 @@ public class PausedMenu : MonoBehaviour
         canvasGroup.alpha = 1f;
         canvasGroup.interactable = true;
         canvasGroup.blocksRaycasts = true;
+
+        isOpen = true;
+        Dealer.isOpen = true;
     }
 
     // Close the pause menu
@@ -48,5 +41,8 @@ public class PausedMenu : MonoBehaviour
         canvasGroup.alpha = 0f;
         canvasGroup.interactable = false;
         canvasGroup.blocksRaycasts = false;
+
+        isOpen = false;
+        Dealer.isOpen = false;
     }
 }
