@@ -13,7 +13,7 @@ This repository contains external assets from the Unity asset store, as well as 
 Below is a list of all the assets used in the project, along with whether or not they're required for the game to run properly in the editor. Though the game is comprised almost completely of my own work, I do use these assets to save development time as well as for QOL purposes. 
 
 **Paid Assets:**
-- [**Modern UI Pack |** $30 (Required)](https://assetstore.unity.com/packages/tools/gui/modern-ui-pack-150824) - Used for a few in-game UI prefabs
+- [**Modern UI Pack |** $30 (Optional)](https://assetstore.unity.com/packages/tools/gui/modern-ui-pack-150824) - Used for a few in-game UI prefabs
 - [**Odin Inspector |** $55 (Optional)](https://assetstore.unity.com/packages/tools/utilities/odin-inspector-and-serializer-89041) - Used to beautify Unity's interface
 - [**MK Glow Lite |** $10 (Optional)](https://assetstore.unity.com/packages/vfx/shaders/fullscreen-camera-effects/mk-glow-lite-155643) - Used to make objects glow
 
