@@ -1,5 +1,5 @@
+using HeathenEngineering.SteamworksIntegration;
 using Sirenix.OdinInspector;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -20,6 +20,7 @@ public class ArenaData : IdentifiableScriptableObject
         public ArenaData arenaReward;
         public ShipData shipReward;
         public CardData cardReward;
+        public AchievementObject achievementReward;
     }
 
     // Arena Information

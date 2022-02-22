@@ -20,33 +20,48 @@ MonoBehaviour:
   arenaBackground: {fileID: 11400000, guid: bf8da83d748b7e944b74db83fbf1ee52, type: 2}
   arenaMusic: {fileID: 8300000, guid: fd78f0da95799524d9114149f6f79544, type: 3}
   menuStage: {fileID: 11400000, guid: 710ec9da504aab442bc32b8df9ab4e08, type: 2}
-  arenaRequirement: {fileID: 11400000, guid: a0b8076f4aba12d4d916bc79feb00a67, type: 2}
   unlockByDefault: 0
   unlockObjective: 'Complete "The Abyss" '
-  difficulty: Normal
-  length: ~5 minutes
   order: 1
   buttonColor: {r: 0.6022401, g: 0, b: 1, a: 1}
   lineColor: {r: 0.71707374, g: 0.3726415, b: 1, a: 1}
   difficultyColor: {r: 1, g: 0.6909754, b: 0, a: 1}
-  primaryObjective:
-    name: Survive for 5 minutes
-    reward: Bomber Blitz Arena
-    objective: 0
-    surviveTime: 300
-    enemyData: {fileID: 0}
-    enemyAmount: 0
+  objectiveOne:
+    rewardName: NEW SHIP
+    rewardImage: {fileID: 21300000, guid: ee3f96a2ebe7ebc498c5871d3b0e6367, type: 3}
+    rewardColor: {r: 1, g: 1, b: 1, a: 1}
+    timeRequired: 150
+    arenaReward: {fileID: 0}
+    shipReward: {fileID: 11400000, guid: 249653bf22762f14197e7285bb50a574, type: 2}
+    cardReward: {fileID: 0}
+    achievementReward: {fileID: 0}
+  objectiveTwo:
+    rewardName: NEW ARENA
+    rewardImage: {fileID: 21300000, guid: 091ffb3a3fd9d7d4d995e056ce8fdb75, type: 3}
+    rewardColor: {r: 1, g: 1, b: 1, a: 1}
+    timeRequired: 300
+    arenaReward: {fileID: 11400000, guid: 7853fe88b866c694ea0908cd935ca19d, type: 2}
     shipReward: {fileID: 0}
     cardReward: {fileID: 0}
-  secondaryObjective:
-    name: Survive for 10 minutes
-    reward: Blaster Drone
-    objective: 1
-    surviveTime: 600
-    enemyData: {fileID: 0}
-    enemyAmount: 0
-    shipReward: {fileID: 11400000, guid: ef3fc83e8a4d5404fbca2a69804a5563, type: 2}
+    achievementReward: {fileID: 0}
+  objectiveThree:
+    rewardName: NEW CARD
+    rewardImage: {fileID: 21300000, guid: ee3120f9261369b4db7aee73e48f0e52, type: 3}
+    rewardColor: {r: 1, g: 0, b: 0.5113454, a: 1}
+    timeRequired: 450
+    arenaReward: {fileID: 0}
+    shipReward: {fileID: 0}
     cardReward: {fileID: 0}
+    achievementReward: {fileID: 0}
+  objectiveFour:
+    rewardName: ACHIEVEMENT
+    rewardImage: {fileID: 21300000, guid: 57021c907bdc4ad48a8d3c0344a22eca, type: 3}
+    rewardColor: {r: 1, g: 1, b: 1, a: 1}
+    timeRequired: 600
+    arenaReward: {fileID: 0}
+    shipReward: {fileID: 0}
+    cardReward: {fileID: 0}
+    achievementReward: {fileID: -5388829342435185633, guid: f589d5fe6376ca443bb8e175e09de7de, type: 2}
   stages:
   - {fileID: 11400000, guid: e4f802fd157770646a91d3181001b127, type: 2}
   - {fileID: 11400000, guid: 596eb40251254f2439256433d1987165, type: 2}
@@ -57,3 +72,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c65fd8a705ce9b94d8d4f6775c2a86c9, type: 2}
   blacklistCards:
   - {fileID: 11400000, guid: 9186d097da559a74b9b699d6a27454dd, type: 2}
+  useWall: 0
