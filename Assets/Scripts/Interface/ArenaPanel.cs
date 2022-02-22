@@ -69,21 +69,25 @@ public class ArenaPanel : MonoBehaviour
         timestampOne.text = Formatter.Time(arena.objectiveOne.timeRequired);
         rewardOne.text = arena.objectiveOne.rewardName;
         rewardOneImage.sprite = arena.objectiveOne.rewardImage;
+        rewardOneImage.color = arena.objectiveOne.rewardColor;
 
         // Set arena objective two
         timestampTwo.text = Formatter.Time(arena.objectiveTwo.timeRequired);
         rewardTwo.text = arena.objectiveTwo.rewardName;
         rewardTwoImage.sprite = arena.objectiveTwo.rewardImage;
+        rewardTwoImage.color = arena.objectiveTwo.rewardColor;
 
         // Set arena objective three
         timestampThree.text = Formatter.Time(arena.objectiveThree.timeRequired);
         rewardThree.text = arena.objectiveThree.rewardName;
         rewardThreeImage.sprite = arena.objectiveThree.rewardImage;
+        rewardThreeImage.color = arena.objectiveThree.rewardColor;
 
         // Set arena objective four
         timestampFour.text = Formatter.Time(arena.objectiveFour.timeRequired);
         rewardFour.text = arena.objectiveFour.rewardName;
         rewardFourImage.sprite = arena.objectiveFour.rewardImage;
+        rewardFourImage.color = arena.objectiveFour.rewardColor;
 
         // Set starting cards information
         for (int i = 0; i < startingCards.Count; i++)

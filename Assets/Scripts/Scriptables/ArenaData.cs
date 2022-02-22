@@ -13,6 +13,7 @@ public class ArenaData : IdentifiableScriptableObject
         // Objective description
         public string rewardName;
         public Sprite rewardImage;
+        public Color rewardColor = Color.white;
         public float timeRequired;
 
         // Rewards
@@ -40,8 +41,6 @@ public class ArenaData : IdentifiableScriptableObject
     public string unlockObjective;
 
     // Arena stats
-    [BoxGroup("Arena Stats")]
-    public float length;
     [BoxGroup("Arena Stats")]
     public int order;
     [BoxGroup("Arena Stats")]

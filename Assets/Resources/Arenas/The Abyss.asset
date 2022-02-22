@@ -20,32 +20,43 @@ MonoBehaviour:
   arenaBackground: {fileID: 11400000, guid: b08ebedb5432ea04fa93879ef2011108, type: 2}
   arenaMusic: {fileID: 8300000, guid: f24370469b5308c4fb5d5aef97315735, type: 3}
   menuStage: {fileID: 11400000, guid: f6b857027ee9aef49bf2472479e1744f, type: 2}
-  arenaRequirement: {fileID: 0}
   unlockByDefault: 1
   unlockObjective: Unlocked by default
-  difficulty: Easy
-  length: ~10 Minutes
   order: 0
   buttonColor: {r: 1, g: 0, b: 0, a: 1}
   lineColor: {r: 1, g: 0.43921572, b: 0.43921572, a: 1}
   difficultyColor: {r: 0.41960788, g: 1, b: 0.48627454, a: 1}
-  primaryObjective:
-    name: Survive for 5 minutes
-    reward: Fear Factory Arena
-    objective: 0
-    surviveTime: 300
-    enemyData: {fileID: 0}
-    enemyAmount: 0
+  objectiveOne:
+    rewardName: NEW SHIP
+    rewardImage: {fileID: 21300000, guid: ee3f96a2ebe7ebc498c5871d3b0e6367, type: 3}
+    rewardColor: {r: 1, g: 1, b: 1, a: 1}
+    timeRequired: 300
+    arenaReward: {fileID: 0}
+    shipReward: {fileID: 11400000, guid: 249653bf22762f14197e7285bb50a574, type: 2}
+    cardReward: {fileID: 0}
+  objectiveTwo:
+    rewardName: NEW ARENA
+    rewardImage: {fileID: 21300000, guid: 57021c907bdc4ad48a8d3c0344a22eca, type: 3}
+    rewardColor: {r: 1, g: 1, b: 1, a: 1}
+    timeRequired: 600
+    arenaReward: {fileID: 11400000, guid: de60c29b8a696df49adc0977addb8216, type: 2}
     shipReward: {fileID: 0}
     cardReward: {fileID: 0}
-  secondaryObjective:
-    name: Survive for 10 minutes
-    reward: Speedster Drone
-    objective: 0
-    surviveTime: 600
-    enemyData: {fileID: 0}
-    enemyAmount: 0
-    shipReward: {fileID: 11400000, guid: 249653bf22762f14197e7285bb50a574, type: 2}
+  objectiveThree:
+    rewardName: NEW CARD
+    rewardImage: {fileID: 21300000, guid: 0dc4bfc3438db4e41805a34e66bc7b8d, type: 3}
+    rewardColor: {r: 1, g: 0.29309148, b: 0, a: 1}
+    timeRequired: 900
+    arenaReward: {fileID: 0}
+    shipReward: {fileID: 0}
+    cardReward: {fileID: 0}
+  objectiveFour:
+    rewardName: ACHIEVEMENT
+    rewardImage: {fileID: 21300000, guid: c80a8d95872da5e4fb3a054214547c60, type: 3}
+    rewardColor: {r: 1, g: 1, b: 1, a: 1}
+    timeRequired: 1200
+    arenaReward: {fileID: 0}
+    shipReward: {fileID: 0}
     cardReward: {fileID: 0}
   stages:
   - {fileID: 11400000, guid: 1f5cdefd64e41f94881a4244522d9755, type: 2}
