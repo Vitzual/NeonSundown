@@ -1,3 +1,5 @@
+using HeathenEngineering.SteamworksIntegration;
+using HeathenEngineering.SteamworksIntegration.API;
 using System.IO;
 using UnityEngine;
 
@@ -101,13 +103,38 @@ public class SaveSystem
     }
 
     // Saves arena time
+    public static void AddArenaUnlock(string id)
+    {
+        // Update the arena unlocks
+        if (!saveData.arenasUnlocked.Contains(id))
+            saveData.arenasUnlocked.Add(id);
+    }
+
+    // Saves arena time
     public static void AddShipUnlock(string id)
     {
-        // Update the arena time
+        // Update the ship unlocks
         if (!saveData.shipsUnlocked.Contains(id))
-        {
             saveData.shipsUnlocked.Add(id);
-            UpdateSave();
+    }
+
+    // Saves arena time
+    public static void AddCardUnlock(string id)
+    {
+        // Update the card unlocks
+        if (!saveData.cardsUnlocked.Contains(id))
+            saveData.cardsUnlocked.Add(id);
+    }
+
+    // Saves arena time
+    public static void UnlockAchievement(AchievementObject achievement)
+    {
+        // Give the achievement to the user
+        UserData userData = User.Client.Id;
+        if (!achievement.IsAchieved)
+        {
+            achievement.Unlock(userData);
+            achievement.Store();
         }
     }
 
