@@ -72,32 +72,18 @@ public class SaveSystem
     }
 
     // Saves arena time
-    public static void UpdateArena(string id, float time, bool primary, bool secondary)
+    public static void UpdateArena(string id, float time)
     {
         // Update the arena time
-        if (saveData.arenas.ContainsKey(id))
+        if (saveData.arenaTimes.ContainsKey(id))
         {
             // Tells system if it should update save
             bool updateSave = false;
 
             // Check if best time achieved
-            if (saveData.arenas[id].bestTime < time)
+            if (saveData.arenaTimes[id] < time)
             {
-                saveData.arenas[id].bestTime = time;
-                updateSave = true;
-            }
-
-            // Check if primary objective achieved
-            if (!saveData.arenas[id].primary && primary)
-            {
-                saveData.arenas[id].primary = true;
-                updateSave = true;
-            }
-
-            // Check if secondary objective achieved
-            if (!saveData.arenas[id].secondary && secondary)
-            {
-                saveData.arenas[id].secondary = true;
+                saveData.arenaTimes[id] = time;
                 updateSave = true;
             }
 
@@ -108,7 +94,7 @@ public class SaveSystem
         // If arena does not exist, create new instance
         else
         {
-            saveData.arenas.Add(id, new ArenaSave(time, primary, secondary));
+            saveData.arenaTimes.Add(id, time);
             Debug.Log("Created arena " + id);
             UpdateSave();
         }
@@ -126,10 +112,7 @@ public class SaveSystem
     }
 
     // Checks if a ship is unlocked
+    public static bool IsArenaUnlocked(string id) { return saveData != null && saveData.arenasUnlocked.Contains(id); }
     public static bool IsShipUnlocked(string id) { return saveData != null && saveData.shipsUnlocked.Contains(id); }
-    public static bool IsArenaUnlocked(ArenaData arena) 
-    {
-        return arena.arenaRequirement == null || (saveData != null && saveData.arenas.ContainsKey(arena.arenaRequirement.InternalID) &&
-                saveData.arenas[arena.arenaRequirement.InternalID].primary);
-    }
+    public static bool IsCardUnlocked(string id) { return saveData != null && saveData.cardsUnlocked.Contains(id); }
 }

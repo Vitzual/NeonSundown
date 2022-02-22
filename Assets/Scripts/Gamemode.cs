@@ -43,39 +43,8 @@ public class Gamemode : MonoBehaviour
     // Update arena
     public void UpdateSave()
     {
-        // Get objective status
-        bool primary = CheckObjective(arena.primaryObjective);
-        bool secondary = CheckObjective(arena.secondaryObjective);
-
-        // If objective complete, award them
-        if (primary) RewardObjective(arena.primaryObjective);
-        if (secondary) RewardObjective(arena.secondaryObjective);
-
         // Save the game
-        SaveSystem.UpdateArena(arena.InternalID, EnemySpawner.GetTime(), primary, secondary);
-    }
-
-    // Check objectives
-    public bool CheckObjective(ArenaData.ArenaObjective arenaObjective)
-    {
-        switch(arenaObjective.objective)
-        {
-            case Objective.Survival:
-                return EnemySpawner.GetTime() >= arenaObjective.surviveTime;
-
-            case Objective.Extermination:
-                break;
-
-            case Objective.Guardian:
-                break;
-
-            default:
-                break;
-
-                
-        }
-
-        return false;
+        SaveSystem.UpdateArena(arena.InternalID, EnemySpawner.GetTime());
     }
 
     // Reward objective

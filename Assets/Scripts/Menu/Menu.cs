@@ -89,12 +89,12 @@ public class Menu : MonoBehaviour
                 buttonList.Add(newButton);
 
                 // Check if save is unlocked, and if so set time
-                if (SaveSystem.IsArenaUnlocked(arena))
+                if (SaveSystem.IsArenaUnlocked(arena.InternalID))
                 {
-                    if (SaveSystem.saveData.arenas.ContainsKey(arena.InternalID))
+                    if (SaveSystem.saveData.arenaTimes.ContainsKey(arena.InternalID))
                     {
                         newButton.Set(arena, "<b>Best Run:</b> " + Formatter.Time
-                            (SaveSystem.saveData.arenas[arena.InternalID].bestTime));
+                            (SaveSystem.saveData.arenaTimes[arena.InternalID]));
                     }
                     else newButton.Set(arena, "<b>Best Run:</b> 0:00");
                 }

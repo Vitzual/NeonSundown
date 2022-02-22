@@ -11,18 +11,12 @@ public class ArenaData : IdentifiableScriptableObject
     public class ArenaObjective
     {
         // Objective description
-        public string name;
-        public string reward;
-
-        // Objective enum and rewards
-        public Objective objective;
-
-        // Objectives
-        public float surviveTime;
-        public EnemyData enemyData;
-        public int enemyAmount;
+        public string rewardName;
+        public Sprite rewardImage;
+        public float timeRequired;
 
         // Rewards
+        public ArenaData arenaReward;
         public ShipData shipReward;
         public CardData cardReward;
     }
@@ -38,10 +32,8 @@ public class ArenaData : IdentifiableScriptableObject
     public AudioClip arenaMusic;
     [BoxGroup("Arena Info")]
     public StageData menuStage;
-
+    
     // Other information
-    [BoxGroup("Arena Requirement")]
-    public ArenaData arenaRequirement;
     [BoxGroup("Arena Requirement")]
     public bool unlockByDefault;
     [BoxGroup("Arena Requirement")]
@@ -49,9 +41,7 @@ public class ArenaData : IdentifiableScriptableObject
 
     // Arena stats
     [BoxGroup("Arena Stats")]
-    public string difficulty;
-    [BoxGroup("Arena Stats")]
-    public string length;
+    public float length;
     [BoxGroup("Arena Stats")]
     public int order;
     [BoxGroup("Arena Stats")]
@@ -63,9 +53,13 @@ public class ArenaData : IdentifiableScriptableObject
 
     // Arena objectives
     [BoxGroup("Arena Objective")]
-    public ArenaObjective primaryObjective;
+    public ArenaObjective objectiveOne;
     [BoxGroup("Arena Objective")]
-    public ArenaObjective secondaryObjective;
+    public ArenaObjective objectiveTwo;
+    [BoxGroup("Arena Objective")]
+    public ArenaObjective objectiveThree;
+    [BoxGroup("Arena Objective")]
+    public ArenaObjective objectiveFour;
 
     // Arena rule set
     [BoxGroup("Arena Rules")]

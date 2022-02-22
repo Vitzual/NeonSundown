@@ -25,9 +25,9 @@ public class ArenaPanel : MonoBehaviour
     public Color emptyCardColor;
 
     // Panel variables
-    public TextMeshProUGUI arena, description, difficulty,
-        length, phases, primaryObjective, secondaryObjective,
-        primaryStatus, secondaryStatus;
+    public TextMeshProUGUI arena, description, timestampOne, timestampTwo, timestampThree,
+        timestampFour, rewardOne, rewardTwo, rewardThree, rewardFour;
+    public Image rewardOneImage, rewardTwoImage, rewardThreeImage, rewardFourImage;
     public List<Card> startingCards;
     public List<Card> blacklistCards;
 
@@ -51,19 +51,29 @@ public class ArenaPanel : MonoBehaviour
         // Set arena information
         this.arena.text = arena.name;
         description.text = arena.desc;
-        difficulty.text = "<b>DIFFICULTY:</b> " + arena.difficulty;
-        difficulty.color = arena.difficultyColor;
-        length.text = "<b>LENGTH:</b> " + arena.length;
-        phases.text = "<b>PHASES:</b> " + arena.stages.Count + " phases";
 
-        // Set arena objectives
-        primaryObjective.text = arena.primaryObjective.name + "<br>" +
-            "<b>REWARD:</b> " + arena.primaryObjective.reward;
-        secondaryObjective.text = arena.secondaryObjective.name + "<br>" +
-            "<b>REWARD:</b> " + arena.secondaryObjective.reward;
+        // Set arena objective one
+        timestampOne.text = Formatter.Time(arena.objectiveOne.timeRequired);
+        rewardOne.text = arena.objectiveOne.rewardName;
+        rewardOneImage.sprite = arena.objectiveOne.rewardImage;
+
+        // Set arena objective two
+        timestampTwo.text = Formatter.Time(arena.objectiveTwo.timeRequired);
+        rewardTwo.text = arena.objectiveTwo.rewardName;
+        rewardTwoImage.sprite = arena.objectiveTwo.rewardImage;
+
+        // Set arena objective three
+        timestampThree.text = Formatter.Time(arena.objectiveThree.timeRequired);
+        rewardThree.text = arena.objectiveThree.rewardName;
+        rewardThreeImage.sprite = arena.objectiveThree.rewardImage;
+
+        // Set arena objective four
+        timestampFour.text = Formatter.Time(arena.objectiveFour.timeRequired);
+        rewardFour.text = arena.objectiveFour.rewardName;
+        rewardFourImage.sprite = arena.objectiveFour.rewardImage;
 
         // Set starting cards information
-        for(int i = 0; i < startingCards.Count; i++)
+        for (int i = 0; i < startingCards.Count; i++)
         {
             if (i < arena.startingCards.Count)
             {
