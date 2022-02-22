@@ -1,3 +1,4 @@
+using Michsky.UI.ModernUIPack;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -25,8 +26,10 @@ public class ArenaPanel : MonoBehaviour
     public Color emptyCardColor;
 
     // Panel variables
+    public ProgressBar progressBar;
+    public Image barBackground, barFill;
     public TextMeshProUGUI arena, description, timestampOne, timestampTwo, timestampThree,
-        timestampFour, rewardOne, rewardTwo, rewardThree, rewardFour;
+        timestampFour, rewardOne, rewardTwo, rewardThree, rewardFour, bestTime;
     public Image rewardOneImage, rewardTwoImage, rewardThreeImage, rewardFourImage;
     public List<Card> startingCards;
     public List<Card> blacklistCards;
@@ -47,10 +50,20 @@ public class ArenaPanel : MonoBehaviour
         panelGroup.alpha = 1f;
         selectArena.alpha = 0f;
         panelBackground.color = arena.buttonColor;
+        barBackground.color = new Color(arena.buttonColor.r, arena.buttonColor.g, arena.buttonColor.b, 0.1f);
+        barFill.color = arena.buttonColor;
 
         // Set arena information
         this.arena.text = arena.name;
         description.text = arena.desc;
+
+        // Set best time
+        float time = SaveSystem.GetBestTime(arena.InternalID);
+        float maxTime = arena.objectiveFour.timeRequired;
+        progressBar.maxValue = maxTime;
+        progressBar.currentPercent = (time / maxTime) * 100f;
+        progressBar.UpdateUI();
+        bestTime.text = "BEST TIME:<br><size=60>" + Formatter.Time(time);
 
         // Set arena objective one
         timestampOne.text = Formatter.Time(arena.objectiveOne.timeRequired);

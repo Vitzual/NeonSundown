@@ -111,6 +111,14 @@ public class SaveSystem
         }
     }
 
+    // Get best time
+    public static float GetBestTime(string id)
+    {
+        if (saveData != null && saveData.arenaTimes.ContainsKey(id))
+            return saveData.arenaTimes[id];
+        else return 0;
+    }
+
     // Checks if a ship is unlocked
     public static bool IsArenaUnlocked(string id) { return saveData != null && saveData.arenasUnlocked.Contains(id); }
     public static bool IsShipUnlocked(string id) { return saveData != null && saveData.shipsUnlocked.Contains(id); }
