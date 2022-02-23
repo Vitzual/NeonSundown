@@ -168,10 +168,9 @@ public class SaveSystem
     public static void UnlockAchievement(AchievementObject achievement)
     {
         // Give the achievement to the user
-        UserData userData = User.Client.Id;
         if (!achievement.IsAchieved)
         {
-            achievement.Unlock(userData);
+            achievement.Unlock();
             achievement.Store();
         }
     }
