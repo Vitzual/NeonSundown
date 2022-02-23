@@ -16,12 +16,18 @@ public class SaveSystem
     // Sets the meta context
     public static void SetMetacontext(string arena, string ship, List<string> blacklist)
     {
+        // Log to the thing
+        Debug.Log("[SAVE] Setting meta context...");
+
         // Create new meta context
         MetaContext context = new MetaContext(arena, ship, blacklist);
 
         // Overwrite previous context
         string newData = JsonUtility.ToJson(context);
-        File.WriteAllText(Application.persistentDataPath + SAVE_PATH, newData);
+        File.WriteAllText(Application.persistentDataPath + META_PATH, newData);
+
+        // Log to the thing
+        Debug.Log("[SAVE] Context set successfully! Starting game...");
     }
 
     // Get the meta context

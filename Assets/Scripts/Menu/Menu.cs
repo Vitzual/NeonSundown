@@ -62,16 +62,24 @@ public class Menu : MonoBehaviour
         // If not null, apply context
         if (context != null)
         {
-            ArenaData arena = Scriptables.arenasDict[context.lastArena];
-            if (arena != null)
+            // Attempt to grab last arena
+            if (Scriptables.arenasDict.ContainsKey(context.lastArena))
             {
-                arenaPanel.SetPanel(arena);
-                Color c = arena.buttonColor;
-                pressSpaceBg.color = new Color(c.r, c.g, c.b, 0.5f);
+                ArenaData arena = Scriptables.arenasDict[context.lastArena];
+                if (arena != null)
+                {
+                    arenaPanel.SetPanel(arena);
+                    Color c = arena.buttonColor;
+                    pressSpaceBg.color = new Color(c.r, c.g, c.b, 0.25f);
+                }
             }
 
-            ShipData ship = Scriptables.shipsDict[context.lastArena];
-            if (ship != null) planningPanel.ChangeShip(ship);
+            // Attempt to grab last ship
+            if (Scriptables.shipsDict.ContainsKey(context.lastShip))
+            {
+                ShipData ship = Scriptables.shipsDict[context.lastShip];
+                if (ship != null) planningPanel.ChangeShip(ship);
+            }
         }
     }
 
@@ -193,6 +201,8 @@ public class Menu : MonoBehaviour
     // Load the main scene
     public void LoadMain()
     {
+        // Set context and load the scene
+        SaveSystem.SetMetacontext(Gamemode.arena.InternalID, Gamemode.ship.InternalID, null);
         SceneManager.LoadScene("Main");
     }
 
