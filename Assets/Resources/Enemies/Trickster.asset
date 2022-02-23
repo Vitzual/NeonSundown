@@ -18,14 +18,15 @@ MonoBehaviour:
   desc: 
   obj: {fileID: 8071768145869598022, guid: 6e83aff891d4c3e4ca8c99cc0bcafa80, type: 3}
   variantStats:
-  - type: 0
-    color: {r: 1, g: 0, b: 0, a: 1}
-    material: {fileID: 2100000, guid: de44ca3cc974af545a2feb8b4148a6fa, type: 2}
-    deathParticle: {fileID: 2055333318299029104, guid: db7f2bd89549db747aade2de38a9a6d3, type: 3}
+  - variant: 0
     health: 8
     damage: 3
     speed: 15
     minXP: 5
     maxXP: 10
+    canDropCrystal: 0
+    crystal: {fileID: 0}
+    crystalDropChance: 0
     rotate: 1
     rotateSpeed: 25
+    shakeScreenOnDeath: 1
