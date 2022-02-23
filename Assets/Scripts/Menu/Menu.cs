@@ -27,6 +27,7 @@ public class Menu : MonoBehaviour
     public CanvasGroup socialsGroup;
     public CanvasGroup titleGroup;
     public CanvasGroup pressSpace;
+    public Image pressSpaceBg;
 
     // Other interface options
     public RectTransform title;
@@ -50,6 +51,28 @@ public class Menu : MonoBehaviour
         Scriptables.GenerateAllScriptables();
         SaveSystem.GetSave();
         Settings.LoadSettings();
+    }
+
+    // On start, try and get meta context
+    public void Start()
+    {
+        // Attempt to get the metacontext on file
+        MetaContext context = SaveSystem.GetMetacontext();
+
+        // If not null, apply context
+        if (context != null)
+        {
+            ArenaData arena = Scriptables.arenasDict[context.lastArena];
+            if (arena != null)
+            {
+                arenaPanel.SetPanel(arena);
+                Color c = arena.buttonColor;
+                pressSpaceBg.color = new Color(c.r, c.g, c.b, 0.5f);
+            }
+
+            ShipData ship = Scriptables.shipsDict[context.lastArena];
+            if (ship != null) planningPanel.ChangeShip(ship);
+        }
     }
 
     // Update user input
@@ -89,7 +112,7 @@ public class Menu : MonoBehaviour
                 buttonList.Add(newButton);
 
                 // Check if save is unlocked, and if so set time
-                if (SaveSystem.IsArenaUnlocked(arena.InternalID))
+                if (arena.unlockByDefault || SaveSystem.IsArenaUnlocked(arena.InternalID))
                 {
                     if (SaveSystem.saveData.arenaTimes.ContainsKey(arena.InternalID))
                     {

@@ -1,5 +1,6 @@
 using HeathenEngineering.SteamworksIntegration;
 using HeathenEngineering.SteamworksIntegration.API;
+using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
@@ -7,9 +8,40 @@ public class SaveSystem
 {
     // Save path
     private const string SAVE_PATH = "/player.save";
+    private const string META_PATH = "/context.last";
 
     // Most up-to-date data
     public static SaveData saveData;
+
+    // Sets the meta context
+    public static void SetMetacontext(string arena, string ship, List<string> blacklist)
+    {
+        // Create new meta context
+        MetaContext context = new MetaContext(arena, ship, blacklist);
+
+        // Overwrite previous context
+        string newData = JsonUtility.ToJson(context);
+        File.WriteAllText(Application.persistentDataPath + SAVE_PATH, newData);
+    }
+
+    // Get the meta context
+    public static MetaContext GetMetacontext()
+    {
+        // Grab the persistent data path
+        string path = Application.persistentDataPath + META_PATH;
+
+        // Check if file exists
+        if (File.Exists(path))
+        {
+            // Debug save to log
+            Debug.Log("[SAVE] Found context data, loading...");
+
+            // Load json file
+            string data = File.ReadAllText(path);
+            return JsonUtility.FromJson<MetaContext>(data);
+        }
+        else return null;
+    }
 
     // Update the save file
     public static void UpdateSave()

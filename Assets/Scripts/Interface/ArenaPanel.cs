@@ -61,7 +61,7 @@ public class ArenaPanel : MonoBehaviour
         float time = SaveSystem.GetBestTime(arena.InternalID);
         float maxTime = arena.objectiveFour.timeRequired;
         progressBar.maxValue = maxTime;
-        progressBar.currentPercent = (time / maxTime) * 100f;
+        progressBar.currentPercent = time;
         progressBar.UpdateUI();
         bestTime.text = "BEST TIME:<br><size=60>" + Formatter.Time(time);
 

@@ -11,18 +11,21 @@ public static class Scriptables
     public static string EnemiesPath = "Enemies";
     public static string StagesPath = "Stages";
     public static string ArenasPath = "Arenas";
+    public static string ShipsPath = "Ships";
 
     // Scriptable dictionaries
     public static Dictionary<string, CardData> cardsDict;
     public static Dictionary<string, EnemyData> enemiesDict;
     public static Dictionary<string, StageData> stagesDict;
     public static Dictionary<string, ArenaData> arenasDict;
+    public static Dictionary<string, ShipData> shipsDict;
 
     // Scriptable lists
     public static List<CardData> cards;
     public static List<EnemyData> enemies;
     public static List<StageData> stages;
     public static List<ArenaData> arenas;
+    public static List<ShipData> ships;
 
     // Generate scriptables
     public static void GenerateAllScriptables()
@@ -31,6 +34,7 @@ public static class Scriptables
         GenerateEnemies();
         GenerateStages();
         GenerateArenas();
+        GenerateShips();
     }
 
     // Generate buildings on startup
@@ -99,6 +103,23 @@ public static class Scriptables
             arenasDict.Add(arena.InternalID, arena);
             arenas.Add(arena);
             Debug.Log("Loaded " + arena.name + " with UUID " + arena.InternalID);
+        }
+    }
+
+    // Generate buildings on startup
+    public static void GenerateShips()
+    {
+        shipsDict = new Dictionary<string, ShipData>();
+        ships = new List<ShipData>();
+
+        List<ShipData> loaded = Resources.LoadAll(ShipsPath, typeof(ShipData)).Cast<ShipData>().ToList();
+        Debug.Log("Loaded " + loaded.Count + " ships from " + ShipsPath);
+
+        foreach (ShipData ship in loaded)
+        {
+            shipsDict.Add(ship.InternalID, ship);
+            ships.Add(ship);
+            Debug.Log("Loaded " + ship.name + " with UUID " + ship.InternalID);
         }
     }
 }
