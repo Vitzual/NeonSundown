@@ -48,9 +48,11 @@ public class AudioPlayer : MonoBehaviour
             }
         }
 
+        // Set volume and pitch
+        audioSource.volume = Settings.sound;
         if (randomizePitch) audioSource.pitch = Random.Range(minPitch, maxPitch);
         else audioSource.pitch = 1f;
 
-        audioSource.PlayOneShot(clip, Settings.sound);
+        audioSource.PlayOneShot(clip);
     }
 }
