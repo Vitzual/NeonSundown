@@ -138,6 +138,9 @@ public class ArenaPanel : MonoBehaviour
 
     public void ChangeBackground(ArenaData arena)
     {
+        // Check if stage already active
+        if (MenuSpawner.active.menuStage == arena.menuStage) return;
+
         // Set the arena stage
         MenuSpawner.active.menuStage = arena.menuStage;
 
