@@ -12,6 +12,7 @@ public class SettingsData
     public int resolutionY;
     public bool screenmode;
     public int framerate;
+    public bool screenShake;
 
     // Keybinds
     public string keybind_move_up;

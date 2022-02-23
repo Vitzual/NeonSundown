@@ -81,8 +81,12 @@ public class Enemy : Entity
             else XPHandler.active.Spawn(transform.position, data.minXP);
         }
         else XPHandler.active.Spawn(transform.position, data.minXP);
+        
+        // Check if enemy can shake screen on death
+        if (data.shakeScreenOnDeath && Settings.screenShake)
+            CameraShake.ShakeAll();
 
-        CameraShake.ShakeAll();
+        // Destroy the object
         Destroy(gameObject);
     }
 

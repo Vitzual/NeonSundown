@@ -28,6 +28,7 @@ public class SettingsUI : MonoBehaviour
 
     // Get stuff
     public GameObject pausedMenu;
+    public SwitchManager shakeSwitch;
 
     // Canvas group
     public CanvasGroup canvasGroup;
@@ -100,6 +101,17 @@ public class SettingsUI : MonoBehaviour
         }
     }
 
+    // Reset all keybinds
+    public void ResetKeybinds()
+    {
+        Keybinds.SetDefaultKeybinds();
+        foreach (Keybind keybind in keybinds)
+        {
+            keybind.button.buttonText = Keybinds.GetKeybind(keybind.key).ToString();
+            keybind.button.UpdateUI();
+        }
+    }
+
     // Set volume control methods
     public void SetMaster(float value) { Settings.SetVolume(Settings.Volume.Master, value); }
     public void SetMusic(float value) { Settings.SetVolume(Settings.Volume.Music, value); }
@@ -145,16 +157,21 @@ public class SettingsUI : MonoBehaviour
         Settings.UpdateVideoSettings();
     }
 
+    // Set screen shake flag
+    public void ScreenShake(bool toggle) { Settings.screenShake = toggle; }
+
     // Go back
     public void Enable()
     {
         // Set values
         music.mainSlider.value = Settings.music;
         sound.mainSlider.value = Settings.sound;
+        shakeSwitch.isOn = Settings.screenShake;
 
         // Update values
         music.UpdateUI();
         sound.UpdateUI();
+        shakeSwitch.UpdateUI();
 
         // Update canvas group
         canvasGroup.alpha = 1f;

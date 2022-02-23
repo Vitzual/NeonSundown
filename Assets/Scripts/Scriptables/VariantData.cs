@@ -23,4 +23,7 @@ public class VariantData
     public bool rotate;
     [BoxGroup("Movement Variables")]
     public float rotateSpeed;
+
+    [BoxGroup("Rendering Variables")]
+    public bool shakeScreenOnDeath;
 }

@@ -23,6 +23,7 @@ public class Settings
     private static int resolutionY = 1080;
     private static bool screenmode = true;
     private static int framerate = 999;
+    public static bool screenShake = true;
 
     // Save settings
     public static void SaveSettings()
@@ -37,6 +38,7 @@ public class Settings
         settingsData.resolutionY = resolutionY;
         settingsData.screenmode = screenmode;
         settingsData.framerate = framerate;
+        settingsData.screenShake = screenShake;
 
         // Get keybinds from file
         settingsData.keybind_move_up = Keybinds.move_up.ToString();
@@ -72,6 +74,7 @@ public class Settings
             resolutionY = settingsData.resolutionY;
             screenmode = settingsData.screenmode;
             framerate = settingsData.framerate;
+            screenShake = settingsData.screenShake;
 
             // Get keybinds from file
             Keybinds.move_up = (KeyCode)System.Enum.Parse(typeof(KeyCode), settingsData.keybind_move_up);
