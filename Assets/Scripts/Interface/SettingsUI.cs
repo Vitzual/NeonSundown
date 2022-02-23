@@ -63,6 +63,7 @@ public class SettingsUI : MonoBehaviour
                 }
                 else Debug.Log("Matched invalid key press to " + input);
             }
+            else if (input == " ") input = "Space";
 
             // Debug to player thing
             Debug.Log("Attempting to change " + listeningForKey + " to " + input);
@@ -201,6 +202,7 @@ public class SettingsUI : MonoBehaviour
         else if (Input.GetMouseButtonDown(3)) return "Mouse3";
         else if (Input.GetMouseButtonDown(4)) return "Mouse4";
         else if (Input.GetMouseButtonDown(5)) return "Mouse5";
+        else if (Input.GetKeyDown(KeyCode.Escape)) return "Escape";
         else if (Input.GetKeyDown(KeyCode.Tab)) return "Tab";
         else if (Input.GetKeyDown(KeyCode.CapsLock)) return "CapsLock";
         else if (Input.GetKeyDown(KeyCode.LeftShift)) return "LeftShift";

@@ -45,7 +45,7 @@ public class Menu : MonoBehaviour
     // Menu flags
     private bool spacePressed = false;
     private bool arenasGenerated = false;
-
+    
     // Start is called before the first frame update
     public void Awake()
     {
