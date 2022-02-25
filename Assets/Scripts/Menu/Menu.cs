@@ -28,6 +28,7 @@ public class Menu : MonoBehaviour
     public CanvasGroup socialsGroup;
     public CanvasGroup titleGroup;
     public CanvasGroup pressSpace;
+    public CanvasGroup alphaGroup;
     public Image pressSpaceBg;
 
     // Other interface options
@@ -40,6 +41,9 @@ public class Menu : MonoBehaviour
     // Press space text element
     public TextMeshProUGUI pressSpaceText;
     public bool increaseAlpha = false;
+    public bool alphaBuild = false;
+    public ArenaData alphaArena;
+    public ShipData alphaShip;
     public float alphaAdjustSpeed = 0.1f;
 
     // Menu flags
@@ -89,17 +93,28 @@ public class Menu : MonoBehaviour
     {
         if (!spacePressed && Input.anyKey)
         {
-            LeanTween.scale(title, titleTargetSize, titleSizeSpeed).setEase(LeanTweenType.easeInExpo).setDelay(0.2f);
-            LeanTween.moveLocal(title.gameObject, titleTargetPos, titleAnimSpeed).setEase(LeanTweenType.easeInExpo).setDelay(0.2f);
-            LeanTween.alphaCanvas(pressSpace, 0f, titleAnimSpeed);
-            LeanTween.alphaCanvas(buttonsGroup, 1f, titleAnimSpeed).setDelay(titleAnimSpeed);
-            LeanTween.alphaCanvas(socialsGroup, 1f, titleAnimSpeed).setDelay(titleAnimSpeed);
-            LeanTween.alphaCanvas(mainBackground, 1f, titleAnimSpeed).setDelay(titleAnimSpeed);
-            buttonsGroup.interactable = true;
-            buttonsGroup.blocksRaycasts = true;
-            socialsGroup.interactable = true;
-            socialsGroup.blocksRaycasts = true;
-            spacePressed = true;
+            if (alphaBuild)
+            {
+                LeanTween.alphaCanvas(alphaGroup, 1f, titleAnimSpeed);
+                alphaGroup.interactable = true;
+                alphaGroup.blocksRaycasts = true;
+                Gamemode.arena = alphaArena;
+                Gamemode.ship = alphaShip;
+            }
+            else
+            {
+                LeanTween.scale(title, titleTargetSize, titleSizeSpeed).setEase(LeanTweenType.easeInExpo).setDelay(0.2f);
+                LeanTween.moveLocal(title.gameObject, titleTargetPos, titleAnimSpeed).setEase(LeanTweenType.easeInExpo).setDelay(0.2f);
+                LeanTween.alphaCanvas(pressSpace, 0f, titleAnimSpeed);
+                LeanTween.alphaCanvas(buttonsGroup, 1f, titleAnimSpeed).setDelay(titleAnimSpeed);
+                LeanTween.alphaCanvas(socialsGroup, 1f, titleAnimSpeed).setDelay(titleAnimSpeed);
+                LeanTween.alphaCanvas(mainBackground, 1f, titleAnimSpeed).setDelay(titleAnimSpeed);
+                buttonsGroup.interactable = true;
+                buttonsGroup.blocksRaycasts = true;
+                socialsGroup.interactable = true;
+                socialsGroup.blocksRaycasts = true;
+                spacePressed = true;
+            }
         }
     }
 

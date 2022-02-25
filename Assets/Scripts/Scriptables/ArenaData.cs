@@ -34,6 +34,8 @@ public class ArenaData : IdentifiableScriptableObject
     public AudioClip arenaMusic;
     [BoxGroup("Arena Info")]
     public StageData menuStage;
+    [BoxGroup("Arena Info")]
+    public bool availableInDemo;
     
     // Other information
     [BoxGroup("Arena Requirement")]
