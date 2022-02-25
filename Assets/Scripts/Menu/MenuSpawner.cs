@@ -51,6 +51,9 @@ public class MenuSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Check if stage data null
+        if (menuStage == null) return;
+
         // Spawn enemies
         if (enemyQueue.Count > 0)
         {
