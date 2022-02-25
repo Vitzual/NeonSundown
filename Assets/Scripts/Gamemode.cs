@@ -11,6 +11,7 @@ public class Gamemode : MonoBehaviour
     // Static arena being used
     public static ArenaData arena;
     public static ShipData ship;
+    public static bool isAlphaBuild;
 
     // Setup the game
     public void Awake()
@@ -43,6 +44,9 @@ public class Gamemode : MonoBehaviour
     // Update arena
     public void UpdateSave()
     {
+        // Check if build is alpha
+        if (isAlphaBuild) return;
+
         // Get arena time
         float time = EnemySpawner.GetTime();
 

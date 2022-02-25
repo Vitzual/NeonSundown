@@ -54,7 +54,7 @@ public class Menu : MonoBehaviour
     public void Awake()
     {
         Scriptables.GenerateAllScriptables();
-        SaveSystem.GetSave();
+        if (!alphaBuild) SaveSystem.GetSave();
         Settings.LoadSettings();
     }
 
