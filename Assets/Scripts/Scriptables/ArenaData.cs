@@ -48,10 +48,6 @@ public class ArenaData : IdentifiableScriptableObject
     public int order;
     [BoxGroup("Arena Stats")]
     public Color buttonColor;
-    [BoxGroup("Arena Stats")]
-    public Color lineColor;
-    [BoxGroup("Arena Stats")]
-    public Color difficultyColor;
 
     // Arena objectives
     [BoxGroup("Arena Objective")]

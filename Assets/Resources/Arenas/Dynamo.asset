@@ -10,24 +10,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 11e4b15b9d0780149a9df1f26a44f82a, type: 3}
-  m_Name: Centauri
+  m_Name: Dynamo
   m_EditorClassIdentifier: 
   internalId: 60c68b09-14da-4b71-94ac-febf71c6b04a
   createdAtTicks: 637813879695549752
-  name: Centauri
-  desc: 
-  arenaBackground: {fileID: 0}
-  arenaMusic: {fileID: 0}
+  name: Dynamo
+  desc: An arena comprised of armored enemieds. Locate the power cells on each enemy
+    and destroy them to drop their shields.
+  arenaBackground: {fileID: 11400000, guid: 212235cec4c12fd42a5384b47c1febca, type: 2}
+  arenaMusic: {fileID: 8300000, guid: e1a9a43f8255a4d4e89766b3ce467c63, type: 3}
   menuStage: {fileID: 0}
   availableInDemo: 0
   unlockByDefault: 0
-  unlockObjective: 
+  unlockObjective: 'Complete "Bomber Blitz" '
   order: 3
-  buttonColor: {r: 0, g: 0, b: 0, a: 0}
-  lineColor: {r: 0, g: 0, b: 0, a: 0}
-  difficultyColor: {r: 0, g: 0, b: 0, a: 0}
+  buttonColor: {r: 0, g: 0.6497364, b: 1, a: 1}
   objectiveOne:
-    rewardName: 
+    rewardName: NEW CARD
     rewardImage: {fileID: 0}
     rewardColor: {r: 1, g: 1, b: 1, a: 1}
     timeRequired: 0
@@ -36,7 +35,7 @@ MonoBehaviour:
     cardReward: {fileID: 0}
     achievementReward: {fileID: 0}
   objectiveTwo:
-    rewardName: 
+    rewardName: NEW ARENA
     rewardImage: {fileID: 0}
     rewardColor: {r: 1, g: 1, b: 1, a: 1}
     timeRequired: 0
@@ -45,7 +44,7 @@ MonoBehaviour:
     cardReward: {fileID: 0}
     achievementReward: {fileID: 0}
   objectiveThree:
-    rewardName: 
+    rewardName: NEW CARD
     rewardImage: {fileID: 0}
     rewardColor: {r: 1, g: 1, b: 1, a: 1}
     timeRequired: 0
@@ -54,7 +53,7 @@ MonoBehaviour:
     cardReward: {fileID: 0}
     achievementReward: {fileID: 0}
   objectiveFour:
-    rewardName: 
+    rewardName: ACHIEVEMENT
     rewardImage: {fileID: 0}
     rewardColor: {r: 1, g: 1, b: 1, a: 1}
     timeRequired: 0
