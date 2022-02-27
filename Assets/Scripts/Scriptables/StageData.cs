@@ -15,6 +15,7 @@ public class StageData : IdentifiableScriptableObject
 
     public new string name;
     public bool isMenuStage;
+    public bool enemyScaling;
     public List<Enemy> enemies;
     public float time;
 }

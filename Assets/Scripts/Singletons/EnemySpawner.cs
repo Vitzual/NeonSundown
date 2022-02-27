@@ -24,6 +24,8 @@ public class EnemySpawner : MonoBehaviour
     // Game timer
     private static float time = 0;
     private float stageTime = 0;
+    private float scaleCalc = 0;
+    private float scaleIncrease = 15;
 
     // Spawning flag
     public bool spawnEnemies = true;
@@ -60,6 +62,17 @@ public class EnemySpawner : MonoBehaviour
         time += Time.deltaTime;
         stageTime -= Time.deltaTime;
 
+        // Update scaling
+        if (activeStage.enemyScaling)
+        {
+            scaleIncrease -= Time.deltaTime;
+            if (scaleIncrease <= 0)
+            {
+                scaleIncrease = 15f;
+                scaleCalc += 0.25f;
+            }
+        }
+
         // Set the timer string
         timer.text = Formatter.Time(time);
 
@@ -75,6 +88,12 @@ public class EnemySpawner : MonoBehaviour
             if (enemies[enemy.data] <= 0f)
             {
                 enemies[enemy.data] = enemy.cooldown;
+                if (activeStage.enemyScaling)
+                {
+                    enemies[enemy.data] -= scaleCalc;
+                    if (enemies[enemy.data] < 0.1f)
+                        enemies[enemy.data] = 0.1f;
+                }
                 EnemyHandler.active.QueueEnemy(enemy.data, enemy.variant, enemy.amount);
             }
             else enemies[enemy.data] -= Time.deltaTime;
@@ -96,6 +115,8 @@ public class EnemySpawner : MonoBehaviour
         stageText.text = activeStage.name;
         stageTime = activeStage.time;
         nextStageIndex += 1;
+        scaleCalc = 0;
+        scaleIncrease = 15;
     }
 
     // Returns the time
