@@ -14,4 +14,6 @@ public class CardData : IdentifiableScriptableObject
     public Sprite sprite;
     [BoxGroup("Card Info")]
     public Color color;
+    [BoxGroup("Card Info")]
+    public int maximumAmount;
 }

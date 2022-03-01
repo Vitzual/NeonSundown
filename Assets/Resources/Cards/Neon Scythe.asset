@@ -19,16 +19,25 @@ MonoBehaviour:
   canDrop: 1
   sprite: {fileID: 21300000, guid: 26911e8f21f921e439a4e61b5ae3bb45, type: 3}
   color: {r: 0.73146677, g: 0, b: 1, a: 1}
+  maximumAmount: 6
   prestigeSprite: {fileID: 21300000, guid: c5b78cf61808e5c458e00271391be3ba, type: 3}
   baseLevels:
   - stat: 1
-    description: Increases damage by 1
+    description: Increases damage by 2
     multiply: 0
-    modifier: 1
+    modifier: 2
   - stat: 3
-    description: Increases orbital speed by 25%
+    description: Increases orbital speed by 15%
     multiply: 1
-    modifier: 1.25
+    modifier: 1.15
+  - stat: 1
+    description: Increases damage by 2
+    multiply: 0
+    modifier: 2
+  - stat: 3
+    description: Increases orbital speed by 15%
+    multiply: 1
+    modifier: 1.15
   - stat: 1
     description: Increases damage by 2
     multiply: 0
@@ -37,15 +46,23 @@ MonoBehaviour:
   - stat: 1
     description: Increases damage by 10
     multiply: 0
-    modifier: 0
+    modifier: 10
   - stat: 3
     description: Increases orbital speed by 50%
     multiply: 1
     modifier: 1.5
   - stat: 1
-    description: Increases damage by 20
+    description: Increases damage by 10
     multiply: 0
-    modifier: 0
+    modifier: 10
+  - stat: 3
+    description: Increases orbital speed by 50%
+    multiply: 1
+    modifier: 1.5
+  - stat: 1
+    description: Increases damage by 10
+    multiply: 0
+    modifier: 10
   damage: 2
   cooldown: 0
   moveSpeed: 300
