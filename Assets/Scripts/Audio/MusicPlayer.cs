@@ -10,6 +10,10 @@ public class MusicPlayer : MonoBehaviour
     private bool arenaMusic = false;
     private static AudioSource music;
 
+    // Fade in variables
+    private static float targetFadeIn = 1f;
+    private static float targetFadeOut = 0.5f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,9 +39,47 @@ public class MusicPlayer : MonoBehaviour
     public void UpdateVolume(float volume)
     {
         music.volume = volume;
+        StopAllCoroutines();
     }
 
     // Play / Stop the music
     public static void PlayMusic() { music.Play(); }
     public static void StopMusic() { music.Pause(); }
+
+    // Creates a fade in
+    public static IEnumerator FadeIn(float FadeTime, float delay)
+    {
+        float startVolume = music.volume;
+        targetFadeIn = Settings.music;
+
+        while (delay > 0f)
+        {
+            delay -= Time.deltaTime;
+            yield return null;
+        }
+
+        while (music.volume < targetFadeIn)
+        {
+            music.volume += startVolume * Time.deltaTime / FadeTime;
+            yield return null;
+        }
+
+        music.volume = targetFadeIn;
+    }
+
+    // Creates a fade out
+    public static IEnumerator FadeOut(float FadeTime, float divisor)
+    {
+        float startVolume = music.volume;
+        targetFadeOut = Settings.music / divisor;
+
+        while (music.volume > targetFadeOut)
+        {
+            music.volume -= startVolume * Time.deltaTime / FadeTime;
+
+            yield return null;
+        }
+
+        music.volume = targetFadeOut;
+    }
 }

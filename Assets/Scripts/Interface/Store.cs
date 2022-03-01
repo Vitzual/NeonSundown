@@ -15,6 +15,7 @@ public class Store : MonoBehaviour
     public new TextMeshProUGUI name;
     public TextMeshProUGUI desc;
     public TextMeshProUGUI owned;
+    public AudioClip purchaseSound;
 
     // Crystal variables
     public CrystalData blueCrystal;
@@ -26,6 +27,14 @@ public class Store : MonoBehaviour
 
     // Internal variables
     private ModuleData module;
+    private AudioSource audioSource;
+    
+    // Get the audio source on this object
+    public void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+        audioSource.clip = purchaseSound;
+    }
 
     // Update the crystal amounts
     public void UpdateCrystals()
@@ -59,6 +68,7 @@ public class Store : MonoBehaviour
         moduleBorderTwo.color = module.color;
         panelBorder.color = module.color;
         panelButton.color = module.color;
+        owned.color = module.color;
 
         // Set panel info
         name.text = module.name;
@@ -77,17 +87,24 @@ public class Store : MonoBehaviour
         if (module == null) return;
 
         // Check if player has enough crystals
-        if (SaveSystem.saveData.crystals.ContainsKey(module.InternalID) &&
-            SaveSystem.saveData.crystals[module.InternalID] > 0)
+        if (SaveSystem.saveData != null && SaveSystem.saveData.crystals.ContainsKey(module.cost.InternalID) &&
+            SaveSystem.saveData.crystals[module.cost.InternalID] > 0)
         {
             // Update the save with new module
             if (SaveSystem.saveData.modules.ContainsKey(module.InternalID))
                 SaveSystem.saveData.modules[module.InternalID] += 1;
             else SaveSystem.saveData.modules.Add(module.InternalID, 1);
-            SaveSystem.saveData.crystals[module.InternalID] -= 1;
+            SaveSystem.saveData.crystals[module.cost.InternalID] -= 1;
             SaveSystem.UpdateSave();
             UpdateCrystals();
             SetPanel(module);
+
+            // Play sound
+            Events.active.VolumeChanged(Settings.music / 3f);
+            audioSource.volume = Settings.sound;
+            audioSource.Play();
+            StopAllCoroutines();
+            StartCoroutine(MusicPlayer.FadeIn(1f, 2f));
 
             // Debug
             Debug.Log("Successfully purchased " + module.name);
