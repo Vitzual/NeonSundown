@@ -170,6 +170,12 @@ public class Dealer : MonoBehaviour
         // Get copy of the scriptables list
         dealList = new List<CardData>(Scriptables.cards);
 
+        // Check cards and remove outdated ones
+        Dictionary<CardData, int> deckCards = Deck.active.GetCards();
+        foreach (CardData card in dealList)
+            if (deckCards.ContainsKey(card) && deckCards[card] >= 10)
+                dealList.Remove(card);
+
         // Deal the cards
         dealCards = true;
         cardsDealt = false;

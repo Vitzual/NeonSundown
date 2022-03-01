@@ -12,8 +12,8 @@ public class Deck : MonoBehaviour
     private Ship player;
 
     // Cards in deck
-    private Dictionary<CardData, int> cards;
-    private Dictionary<CardData, Weapon> upgradeables;
+    private static Dictionary<CardData, int> cards;
+    private static Dictionary<CardData, Weapon> upgradeables;
 
     // Multipliers 
     public static Dictionary<Stat, float> additions;
@@ -70,11 +70,10 @@ public class Deck : MonoBehaviour
         if (cards.ContainsKey(card))
         {
             // If exists and not upgradeable, add
-            if (!upgradeables.ContainsKey(card))
-                cards[card] += 1;
+            cards[card] += 1;
             
             // If upgradeable, apply to the instance.
-            else
+            if (upgradeables.ContainsKey(card))
             {
                 WeaponData weaponData = (WeaponData)card;
 
@@ -155,6 +154,12 @@ public class Deck : MonoBehaviour
     public void SetupAbility(AbilityData ability)
     {
         Debug.Log("Adding ability card " + ability.name + " to deck");
+    }
+
+    // Get deck cards
+    public Dictionary<CardData, int> GetCards()
+    {
+        return cards;
     }
 
     // Calculate stat
