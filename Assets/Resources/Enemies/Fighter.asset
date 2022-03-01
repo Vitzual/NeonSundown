@@ -21,24 +21,26 @@ MonoBehaviour:
   - variant: 0
     health: 12
     damage: 2
-    speed: 12
-    minXP: 2
-    maxXP: 5
-    canDropCrystal: 0
-    crystal: {fileID: 0}
-    crystalDropChance: 0
-    rotate: 0
-    rotateSpeed: 0
-    shakeScreenOnDeath: 1
-  - variant: 2
-    health: 20
-    damage: 3
     speed: 15
     minXP: 2
     maxXP: 5
     canDropCrystal: 0
     crystal: {fileID: 0}
     crystalDropChance: 0
+    lockTarget: 0
     rotate: 0
-    rotateSpeed: 0
+    rotateSpeed: 15
+    shakeScreenOnDeath: 1
+  - variant: 2
+    health: 20
+    damage: 3
+    speed: 20
+    minXP: 2
+    maxXP: 5
+    canDropCrystal: 0
+    crystal: {fileID: 0}
+    crystalDropChance: 0
+    lockTarget: 0
+    rotate: 0
+    rotateSpeed: 25
     shakeScreenOnDeath: 1
