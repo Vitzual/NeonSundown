@@ -320,5 +320,15 @@ public class Ship : Weapon
         // If is player, invoke on hit method
         if (enemy != null)
             enemy.OnHitPlayer(this);
+
+        // Get the other enemy component 
+        Bullet bullet = collision.collider.GetComponent<Bullet>();
+
+        // If is bullet, invoke on hit method
+        if (bullet != null)
+        {
+            Damage(bullet.GetDamage());
+            bullet.Destroy();
+        }
     }
 }

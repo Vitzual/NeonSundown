@@ -12,6 +12,7 @@ public class Enemy : Entity
 
     // Rigidbody attached to the enemy
     public Rigidbody2D rb;
+    public bool isCullable = true;
 
     // Transform lists
     public List<TrailRenderer> trails;
@@ -129,12 +130,12 @@ public class Enemy : Entity
                 float rotateStep = data.rotateSpeed * Time.deltaTime;
                 float angle = Mathf.Atan2(target.transform.position.y - transform.position.y, 
                     target.transform.position.x - transform.position.x) * Mathf.Rad2Deg;
-                Quaternion targetRotation = Quaternion.Euler(new Vector3(0, 0, angle));
+                Quaternion targetRotation = Quaternion.Euler(new Vector3(0, 0, angle - 90f));
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotateStep);
 
                 // Move towards the target
                 float movementStep = data.speed * Time.deltaTime;
-                transform.position = transform.position += transform.up * movementStep;
+                transform.position += transform.up * movementStep;
             }
         }
     }
@@ -152,10 +153,11 @@ public class Enemy : Entity
     }
 
     // Get enemy data
-    public VariantData GetData()
-    {
-        return data;
-    }
+    public VariantData GetData() { return data; }
+
+    // Get health variables
+    public float GetHealth() { return health; }
+    public float GetMaxHealth() { return maxHealth; }
 
     // On collision
     public void OnTriggerEnter2D(Collider2D collision)

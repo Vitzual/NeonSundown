@@ -14,6 +14,22 @@ public class Events : MonoBehaviour
         active = this;
     }
 
+    // On boss hurt
+    public event Action onBossHurt;
+    public void BossHurt()
+    {
+        if (onBossHurt != null)
+            BossHurt();
+    }
+
+    // On boss spawned
+    public event Action<Boss, Enemy> onBossSpawned;
+    public void BossSpawned(Boss boss, Enemy enemy)
+    {
+        if (onBossSpawned != null)
+            onBossSpawned(boss, enemy);
+    }
+
     // Player died
     public event Action onShipDestroyed;
     public void ShipDestroyed()

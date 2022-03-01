@@ -50,7 +50,7 @@ public class EnemyHandler : MonoBehaviour
                 enemies.RemoveAt(cullIndex);
 
             // If enemy is far away, yeet and delete
-            else if (Vector2.Distance(enemies[cullIndex].transform.position, player.position) > cullRange)
+            else if (enemies[cullIndex].isCullable && Vector2.Distance(enemies[cullIndex].transform.position, player.position) > cullRange)
             {
                 Destroy(enemies[cullIndex].gameObject);
                 enemies.RemoveAt(cullIndex);

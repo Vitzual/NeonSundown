@@ -7,7 +7,7 @@ public class Boss : MonoBehaviour
     // Reference the main enemy script
     public List<Turret> turrets;
     public WeaponData weapon;
-    public Bullet bullet;
+    public Sprite bossModel;
     protected Enemy enemy;
     protected Transform target;
 
@@ -20,28 +20,20 @@ public class Boss : MonoBehaviour
 
         // Setup turrets
         foreach(Turret turret in turrets)
-            turret.Setup(weapon, bullet, Random.Range(1f, 2f), target);
+            turret.Setup(weapon, Random.Range(1f, 2f), target);
+
+        // Set the boss bar
+        Events.active.BossSpawned(this, enemy);
     }
 
     // Control turrets
     public void Update()
     {
-        // Keep turrets up to date
-        foreach(Turret turret in turrets)
-        {
-            // Rotate to the target
-            float angle = Mathf.Atan2(target.transform.position.y - transform.position.y,
-                target.transform.position.x - transform.position.x) * Mathf.Rad2Deg;
-            Quaternion targetRotation = Quaternion.Euler(new Vector3(0, 0, angle - 90f));
-            transform.rotation = targetRotation;
+        // Check if paused
+        if (Dealer.isOpen) return;
 
-            // Calculate cooldown
-            turret.cooldown -= Time.deltaTime;
-            if (turret.cooldown <= 0)
-            {
-                turret.cooldown = Random.Range(1f, 2f);
-                turret.Fire();
-            }
-        }
+        // Keep turrets up to date
+        foreach (Turret turret in turrets)
+            turret.Use();
     }
 }
