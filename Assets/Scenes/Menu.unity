@@ -3129,7 +3129,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 154849195}
   m_Enabled: 1
-  m_Alpha: 0
+  m_Alpha: 1
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -23115,7 +23115,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   arenaPanel: {fileID: 1546299622}
-  shipPanel: {fileID: 0}
+  shipPanel: {fileID: 2111438666}
   storePanel: {fileID: 2023639860}
   defaultStoreModule: {fileID: 11400000, guid: efd4902d37441ad44af8003e6e8ef76a, type: 2}
   arenaButton: {fileID: 1705493712831676087, guid: b284755a1392d344dac6017ed66fbca9, type: 3}
@@ -24972,20 +24972,6 @@ MonoBehaviour:
   rewardTwoImage: {fileID: 363970314}
   rewardThreeImage: {fileID: 219693130}
   rewardFourImage: {fileID: 1756605930}
-  startingCards:
-  - icon: {fileID: 0}
-    model: {fileID: 0}
-  - icon: {fileID: 0}
-    model: {fileID: 0}
-  - icon: {fileID: 0}
-    model: {fileID: 0}
-  blacklistCards:
-  - icon: {fileID: 0}
-    model: {fileID: 0}
-  - icon: {fileID: 0}
-    model: {fileID: 0}
-  - icon: {fileID: 0}
-    model: {fileID: 0}
 --- !u!1 &1548280145
 GameObject:
   m_ObjectHideFlags: 0
@@ -35808,9 +35794,9 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2111438661}
   m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
+  m_Alpha: 0
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
 --- !u!114 &2111438666
 MonoBehaviour:
@@ -35827,6 +35813,7 @@ MonoBehaviour:
   shipButton: {fileID: 2275348311075863504, guid: 65c7464c5e4032641bc6a060343f3bbb, type: 3}
   shipList: {fileID: 858853584}
   name: {fileID: 647152675}
+  modules: {fileID: 2127448533}
   subTitle: {fileID: 1533614065}
   desc: {fileID: 473142720}
   health: {fileID: 1850227413}

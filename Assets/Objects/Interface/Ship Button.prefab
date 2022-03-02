@@ -192,8 +192,7 @@ MonoBehaviour:
   name: {fileID: 1031972229907978886}
   desc: {fileID: 1031972230840375405}
   icon: {fileID: 1031972231194675287}
-  button: {fileID: 1031972231358528452}
-  lockedIcon: {fileID: 0}
+  button: {fileID: 1031972230183564005}
   ship: {fileID: 0}
 --- !u!222 &1031972230183564004
 CanvasRenderer:
@@ -576,9 +575,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: ArenaButton, Assembly-CSharp
-        m_MethodName: OnClick
+      - m_Target: {fileID: 2275348311075863504}
+        m_TargetAssemblyTypeName: ShipButton, Assembly-CSharp
+        m_MethodName: SelectShip
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

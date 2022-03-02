@@ -13,7 +13,7 @@ public class ShipPanel : MonoBehaviour
 
     // Panel elements
     public new TextMeshProUGUI name;
-    public TextMeshProUGUI subTitle, desc, health, regen,
+    public TextMeshProUGUI modules, subTitle, desc, health, regen,
         speed, dash, damage, firerate, pierces, lifetime;
     public Image icon, leftLine, rightLine, bottomLine, panel;
 
@@ -52,20 +52,34 @@ public class ShipPanel : MonoBehaviour
         desc.text = ship.desc;
         icon.sprite = ship.icon;
 
-        // Set all stats
+        // Set ship stats
         health.text = "<b>HEALTH:</b><color=white>" + Formatter.Round(ship.startingHealth) + "hp";
         regen.text = "<b>REGEN:</b><color=white>" + Formatter.Round(ship.regenRate) + " / second";
         speed.text = "<b>SPEED:</b><color=white>" + Formatter.Round(ship.playerSpeed) + " km/h";
         dash.text = "<b>DASH:</b><color=white>" + Formatter.Round(ship.dashSpeed) + " km/h";
-        damage.text = "<b>DAMAGE:</b><color=white>" + Formatter.Round(ship.weapon.damage) + "hp / shot";
-        firerate.text = "<b>FIRERATE:</b><color=white>" + Formatter.Round(ship.weapon.cooldown / 1f) + " / second";
-        pierces.text = "<b>PIERCES:</b><color=white>" + Formatter.Round(ship.weapon.pierces) + " / shot";
-        lifetime.text = "<b>LIFETIME:</b><color=white>" + Formatter.Round(ship.weapon.lifetime) + " seconds";
-        
+
+        // Set weapon stats
+        if (ship.weapon != null)
+        {
+            damage.text = "<b>DAMAGE:</b><color=white>" + Formatter.Round(ship.weapon.damage) + "hp / shot";
+            firerate.text = "<b>FIRERATE:</b><color=white>" + Formatter.Round(ship.weapon.cooldown / 1f) + " / second";
+            pierces.text = "<b>PIERCES:</b><color=white>" + Formatter.Round(ship.weapon.pierces) + " / shot";
+            lifetime.text = "<b>LIFETIME:</b><color=white>" + Formatter.Round(ship.weapon.lifetime) + " seconds";
+        }
+        else
+        {
+            damage.text = "<b>DAMAGE:</b><color=white> N/A";
+            firerate.text = "<b>FIRERATE:</b><color=white> N/A";
+            pierces.text = "<b>PIERCES:</b><color=white> N/A";
+            lifetime.text = "<b>LIFETIME:</b><color=white> N/A";
+        }
+
         // Set all colors
+        panel.color = ship.mainColor;
         leftLine.color = ship.mainColor;
         rightLine.color = ship.mainColor;
         bottomLine.color = ship.mainColor;
+        modules.color = ship.subColor;
         subTitle.color = ship.subColor;
         health.color = ship.subColor;
         regen.color = ship.subColor;

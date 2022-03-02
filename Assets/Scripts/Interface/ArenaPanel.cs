@@ -31,8 +31,6 @@ public class ArenaPanel : MonoBehaviour
     public TextMeshProUGUI arena, description, timestampOne, timestampTwo, timestampThree,
         timestampFour, rewardOne, rewardTwo, rewardThree, rewardFour, bestTime;
     public Image rewardOneImage, rewardTwoImage, rewardThreeImage, rewardFourImage;
-    public List<Card> startingCards;
-    public List<Card> blacklistCards;
 
     // Subscribe to the arena button event
     public void Start()
@@ -89,7 +87,7 @@ public class ArenaPanel : MonoBehaviour
         rewardFourImage.sprite = arena.objectiveFour.rewardImage;
         rewardFourImage.color = arena.objectiveFour.rewardColor;
 
-        // Set starting cards information
+        /* Set starting cards information
         for (int i = 0; i < startingCards.Count; i++)
         {
             if (i < arena.startingCards.Count)
@@ -114,6 +112,7 @@ public class ArenaPanel : MonoBehaviour
             }
             else break;
         }
+        */
 
         // Change the background
         ChangeBackground(arena);
@@ -121,7 +120,7 @@ public class ArenaPanel : MonoBehaviour
 
     public void ResetPanel()
     {
-        // Set starting cards information
+        /* Set starting cards information
         for (int i = 0; i < startingCards.Count; i++)
         {
             startingCards[i].icon.gameObject.SetActive(false);
@@ -134,6 +133,7 @@ public class ArenaPanel : MonoBehaviour
             blacklistCards[i].icon.gameObject.SetActive(false);
             blacklistCards[i].model.color = emptyCardColor;
         }
+        */
     }
 
     public void ChangeBackground(ArenaData arena)
