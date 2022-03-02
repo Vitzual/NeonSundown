@@ -15,7 +15,7 @@ public class ArenaButton : MonoBehaviour
     public Image buttonImage;
     public GameObject locked;
     private bool isLocked = false;
-
+    
     // Generates at runtime
     public void Set(ArenaData arena, string bestRun)
     {

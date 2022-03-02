@@ -9,7 +9,7 @@ public class Menu : MonoBehaviour
 {
     // Menu panels
     public ArenaPanel arenaPanel;
-    public PlanningPanel planningPanel;
+    public ShipPanel shipPanel;
     public Store storePanel;
     public ModuleData defaultStoreModule;
 
@@ -83,8 +83,10 @@ public class Menu : MonoBehaviour
             if (Scriptables.shipsDict.ContainsKey(context.lastShip))
             {
                 ShipData ship = Scriptables.shipsDict[context.lastShip];
-                if (ship != null) planningPanel.ChangeShip(ship);
+                if (ship != null) shipPanel.Setup(ship);
+                else shipPanel.Setup(alphaShip);
             }
+            else shipPanel.Setup(alphaShip);
         }
     }
 

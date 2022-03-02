@@ -8,10 +8,19 @@ public class ShipData : IdentifiableScriptableObject
 {
     [BoxGroup("Ship Info")]
     public new string name;
+    [BoxGroup("Ship Info")]
+    public Sprite icon;
     [BoxGroup("Ship Info"), TextArea]
     public string desc;
     [BoxGroup("Ship Info")]
     public bool unlocked;
+
+    [BoxGroup("Ship Selection Variables")]
+    public string subTitle, shortDesc;
+    [BoxGroup("Ship Selection Variables")]
+    public Color mainColor, subColor;
+    [BoxGroup("Ship Selection Variables")]
+    public int listOrder;
 
     [BoxGroup("Ship Model")]
     public Sprite model;
