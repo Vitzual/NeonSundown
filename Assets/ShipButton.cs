@@ -14,7 +14,7 @@ public class ShipButton : MonoBehaviour
     public ShipData ship;
 
     // Internal flags
-    private bool isLocked;
+    private bool isUnlocked;
 
     // Set the button
     public void Set(ShipData ship)
@@ -23,10 +23,10 @@ public class ShipButton : MonoBehaviour
         this.ship = ship;
 
         // Check if ship is unlocked
-        isLocked = SaveSystem.IsShipUnlocked(ship.InternalID);
+        isUnlocked = ship.IsUnlocked();
 
         // If not locked, set variables
-        if (!isLocked)
+        if (isUnlocked)
         {
             name.text = ship.name;
             desc.text = ship.shortDesc;
@@ -34,12 +34,15 @@ public class ShipButton : MonoBehaviour
             icon.sprite = ship.icon;
             button.color = ship.mainColor;
         }
+
+        // Set sibling index
+        transform.SetSiblingIndex(ship.listOrder);
     }
 
     // Select ship
     public void SelectShip()
     {
-        if (!isLocked)
+        if (isUnlocked)
             Events.active.SetupShip(ship);
     }
 }

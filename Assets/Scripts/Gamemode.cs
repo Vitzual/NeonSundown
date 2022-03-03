@@ -11,6 +11,7 @@ public class Gamemode : MonoBehaviour
     // Static arena being used
     public static ArenaData arena;
     public static ShipData ship;
+    public static Dictionary<int, ModuleData> modules;
     public static bool isAlphaBuild;
 
     // Setup the game

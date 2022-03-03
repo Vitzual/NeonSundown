@@ -6,10 +6,22 @@ using UnityEngine.UI;
 
 public class ShipPanel : MonoBehaviour
 {
+    // Module slot on ship panel
+    [System.Serializable]
+    public class Module
+    {
+        public Image module;
+        public Image icon;
+    }
+    public List<Module> moduleSlots;
+
     // Ship button prefab
     public ShipButton shipButton;
     public Transform shipList;
+    public CanvasGroup shipCanvas;
+    public CanvasGroup moduleCanvas;
     private List<ShipButton> buttons;
+    private int moduleSlot = 0;
 
     // Panel elements
     public new TextMeshProUGUI name;
@@ -43,6 +55,9 @@ public class ShipPanel : MonoBehaviour
     // Update the ships
     public void Setup(ShipData ship)
     {
+        // Set modules to false
+        ToggleModules(false);
+
         // Set the ship
         Gamemode.ship = ship;
 
@@ -89,5 +104,73 @@ public class ShipPanel : MonoBehaviour
         firerate.color = ship.subColor;
         pierces.color = ship.subColor;
         lifetime.color = ship.subColor;
+    }
+
+    // Open module list
+    public void OpenModules(int slot)
+    {
+        moduleSlot = slot;
+        ToggleModules(true);
+    }
+
+    // Set a module
+    public void SetModule(ModuleData module)
+    {
+        // Is the module null
+        bool isModuleNull = module == null;
+
+        // Check if user has enough modules
+        if (isModuleNull || SaveSystem.HasModule(module.InternalID))
+        {
+            // Check if module is already added
+            if (Gamemode.modules.ContainsKey(moduleSlot))
+            {
+                if (Gamemode.modules[moduleSlot] != null)
+                    SaveSystem.AddModule(Gamemode.modules[moduleSlot].InternalID, 1);
+                Gamemode.modules[moduleSlot] = module;
+            }
+            else Gamemode.modules.Add(moduleSlot, module);
+
+            // Update the module slot
+            if (!isModuleNull)
+            {
+                moduleSlots[moduleSlot].module.color = module.color;
+                moduleSlots[moduleSlot].icon.sprite = module.icon;
+                moduleSlots[moduleSlot].icon.color = module.color;
+            }
+            else
+            {
+                moduleSlots[moduleSlot].module.color = Color.white;
+                moduleSlots[moduleSlot].icon.color = new Color(0, 0, 0, 0);
+            }
+
+            // Toggle modules
+            ToggleModules(false);
+        }
+    }
+
+    // Toggle module list
+    public void ToggleModules(bool toggle)
+    {
+        if (toggle)
+        {
+            shipCanvas.alpha = 0f;
+            shipCanvas.interactable = false;
+            shipCanvas.blocksRaycasts = false;
+
+            moduleCanvas.alpha = 1f;
+            moduleCanvas.interactable = true;
+            moduleCanvas.blocksRaycasts = true;
+        }
+        else
+        {
+            moduleCanvas.alpha = 0f;
+            moduleCanvas.interactable = false;
+            moduleCanvas.blocksRaycasts = false;
+
+            shipCanvas.alpha = 1f;
+            shipCanvas.interactable = true;
+            shipCanvas.blocksRaycasts = true;
+        }
     }
 }

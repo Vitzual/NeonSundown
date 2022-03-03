@@ -87,14 +87,11 @@ public class Store : MonoBehaviour
         if (module == null) return;
 
         // Check if player has enough crystals
-        if (SaveSystem.saveData != null && SaveSystem.saveData.crystals.ContainsKey(module.cost.InternalID) &&
-            SaveSystem.saveData.crystals[module.cost.InternalID] > 0)
+        if (SaveSystem.HasModule(module.InternalID))
         {
             // Update the save with new module
-            if (SaveSystem.saveData.modules.ContainsKey(module.InternalID))
-                SaveSystem.saveData.modules[module.InternalID] += 1;
-            else SaveSystem.saveData.modules.Add(module.InternalID, 1);
-            SaveSystem.saveData.crystals[module.cost.InternalID] -= 1;
+            SaveSystem.AddModule(module.InternalID, 1);
+            SaveSystem.AddCrystal(module.cost.InternalID, -1);
             SaveSystem.UpdateSave();
             UpdateCrystals();
             SetPanel(module);

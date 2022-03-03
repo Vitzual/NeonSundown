@@ -7,8 +7,8 @@ using UnityEngine;
 public class SaveSystem
 {
     // Save path
-    private const string SAVE_PATH = "/player.save";
-    private const string META_PATH = "/context.last";
+    private const string SAVE_PATH = "/player.json";
+    private const string META_PATH = "/context.json";
 
     // Most up-to-date data
     public static SaveData saveData;
@@ -140,6 +140,22 @@ public class SaveSystem
         }
     }
 
+    // Add a crystal to save
+    public static void AddModule(string id, int amount)
+    {
+        if (saveData.modules.ContainsKey(id))
+            saveData.modules[id] += amount;
+        else if (amount > 0) saveData.modules.Add(id, amount);
+    }
+
+    // Add a crystal to save
+    public static void AddCrystal(string id, int amount)
+    {
+        if (saveData.crystals.ContainsKey(id))
+            saveData.crystals[id] += amount;
+        else if (amount > 0) saveData.crystals.Add(id, amount);
+    }
+
     // Saves arena time
     public static void AddArenaUnlock(string id)
     {
@@ -181,6 +197,12 @@ public class SaveSystem
         if (saveData != null && saveData.arenaTimes.ContainsKey(id))
             return saveData.arenaTimes[id];
         else return 0;
+    }
+
+    // Check if user has module
+    public static bool HasModule(string id)
+    {
+        return saveData.modules.ContainsKey(id) && saveData.modules[id] > 0;
     }
 
     // Checks if a ship is unlocked
