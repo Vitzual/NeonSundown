@@ -15,8 +15,13 @@ public class ArenaPanel : MonoBehaviour
         public Image model;
     }
 
+    // Stages panel
+    public StagesPanel stagesPanel;
+
     // Background tilebase
     public Tilemap backgroundTilemap;
+    public List<Card> blacklistCards;
+    public List<Card> startingCards;
 
     // Canvas group
     public Image panelBackground;
@@ -27,7 +32,7 @@ public class ArenaPanel : MonoBehaviour
 
     // Panel variables
     public ProgressBar progressBar;
-    public Image barBackground, barFill;
+    public Image barBackground, barFill, titleBarLeft, titleBarRight, arenaViewRules;
     public TextMeshProUGUI arena, description, timestampOne, timestampTwo, timestampThree,
         timestampFour, rewardOne, rewardTwo, rewardThree, rewardFour, bestTime;
     public Image rewardOneImage, rewardTwoImage, rewardThreeImage, rewardFourImage;
@@ -50,6 +55,9 @@ public class ArenaPanel : MonoBehaviour
         panelBackground.color = arena.buttonColor;
         barBackground.color = new Color(arena.buttonColor.r, arena.buttonColor.g, arena.buttonColor.b, 0.1f);
         barFill.color = arena.buttonColor;
+        titleBarLeft.color = arena.buttonColor;
+        titleBarRight.color = arena.buttonColor;
+        arenaViewRules.color = arena.buttonColor;
 
         // Set arena information
         this.arena.text = arena.name;
@@ -87,7 +95,7 @@ public class ArenaPanel : MonoBehaviour
         rewardFourImage.sprite = arena.objectiveFour.rewardImage;
         rewardFourImage.color = arena.objectiveFour.rewardColor;
 
-        /* Set starting cards information
+        // Set starting cards information
         for (int i = 0; i < startingCards.Count; i++)
         {
             if (i < arena.startingCards.Count)
@@ -112,15 +120,21 @@ public class ArenaPanel : MonoBehaviour
             }
             else break;
         }
-        */
 
         // Change the background
         ChangeBackground(arena);
     }
 
+    public void ViewArena()
+    {
+        stagesPanel.Set(Gamemode.arena);
+        stagesPanel.stageButtonIndex = 0;
+        stagesPanel.SwitchStage(0);
+    }
+
     public void ResetPanel()
     {
-        /* Set starting cards information
+        // Set starting cards information
         for (int i = 0; i < startingCards.Count; i++)
         {
             startingCards[i].icon.gameObject.SetActive(false);
@@ -133,7 +147,6 @@ public class ArenaPanel : MonoBehaviour
             blacklistCards[i].icon.gameObject.SetActive(false);
             blacklistCards[i].model.color = emptyCardColor;
         }
-        */
     }
 
     public void ChangeBackground(ArenaData arena)
