@@ -15,16 +15,22 @@ public class StageButton : MonoBehaviour
     public void Set(StageData.Enemy enemy)
     {
         // Get the variant color
-        Color color = VariantPalette.GetPrimaryColor(enemy.variant);
-        
+        Color primaryColor = VariantPalette.GetPrimaryColor(enemy.variant);
+        Color secondaryColor = VariantPalette.GetSecondaryColor(enemy.variant);
+
+        // Get seconds thing
+        string seconds = " seconds";
+        if (enemy.cooldown == 1) seconds = " second";
+
         // Set all enemy information
         name.text = enemy.data.name;
-        rate.text = enemy.amount + "x / " + enemy.cooldown + "s";
+        rate.text = enemy.amount + "x / " + enemy.cooldown + seconds;
         stats.text = "<b>HEALTH:</b> " + enemy.data.variants[enemy.variant].health +
-                     "| <b>DAMAGE:</b> " + enemy.data.variants[enemy.variant].damage +
-                     "| <b>SPEED:</b> " + enemy.data.variants[enemy.variant].speed;
+                     "  |  <b>DAMAGE:</b> " + enemy.data.variants[enemy.variant].damage +
+                     "  |  <b>SPEED:</b> " + enemy.data.variants[enemy.variant].speed;
+        stats.color = secondaryColor;
         icon.sprite = enemy.data.icon;
-        icon.color = color;
-        border.color = color;
+        icon.color = primaryColor;
+        border.color = primaryColor;
     }
 }

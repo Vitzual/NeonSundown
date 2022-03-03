@@ -28,4 +28,11 @@ public class VariantPalette : MonoBehaviour
             return variantColors[variant].borderColor;
         else return Color.white;
     }
+
+    public static Color GetSecondaryColor(Variant variant)
+    {
+        if (variantColors.ContainsKey(variant))
+            return variantColors[variant].lightColor;
+        else return Color.white;
+    }
 }
