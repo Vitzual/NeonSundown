@@ -21,4 +21,11 @@ public class VariantPalette : MonoBehaviour
             return variantColors[variant];
         else return null;
     }
+
+    public static Color GetPrimaryColor(Variant variant)
+    {
+        if (variantColors.ContainsKey(variant))
+            return variantColors[variant].borderColor;
+        else return Color.white;
+    }
 }

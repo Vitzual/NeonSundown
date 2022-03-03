@@ -85,10 +85,14 @@ public class StagesPanel : MonoBehaviour
             {
                 // Set stage button to active
                 stageButtons[index].gameObject.SetActive(true);
+                stageButtons[index].Set(enemy);
 
                 // Increase index 
                 index += 1;
             }
+
+            // Increase stage button
+            stageButtonIndex += increase;
         }
 
         // Hide remaining buttons

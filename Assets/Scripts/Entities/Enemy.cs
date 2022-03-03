@@ -39,7 +39,7 @@ public class Enemy : Entity
         foreach (SpriteRenderer glow in glows)
             glow.material = variantColor.material;
         foreach (SpriteRenderer fill in fills)
-            fill.color = variantColor.color;
+            fill.color = variantColor.fillColor;
 
         // Set scriptable
         variant = data.variant;

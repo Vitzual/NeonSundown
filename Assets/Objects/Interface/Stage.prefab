@@ -84,11 +84,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2651095932316223927}
-  - component: {fileID: 3822273817207603388}
+  - component: {fileID: 223605450348792868}
   - component: {fileID: 2651095932316223880}
   - component: {fileID: 2651095932316223881}
-  - component: {fileID: 2651095932316223926}
-  - component: {fileID: 223605450348792868}
   m_Layer: 5
   m_Name: Stage
   m_TagString: Untagged
@@ -119,7 +117,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &3822273817207603388
+--- !u!114 &223605450348792868
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -128,14 +126,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 2651095932316223924}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc2c6c8607912b5489d86fc51cf6f0a9, type: 3}
+  m_Script: {fileID: 11500000, guid: e54e907e44a2fea4b8beb5c0292b192e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   name: {fileID: 2651095932541739498}
-  desc: {fileID: 0}
+  rate: {fileID: 3012894837520508752}
+  stats: {fileID: 3012894837728281790}
   icon: {fileID: 2651095931179807547}
-  button: {fileID: 2651095932316223881}
-  ship: {fileID: 0}
+  border: {fileID: 2651095932316223881}
 --- !u!222 &2651095932316223880
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -174,37 +172,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 10
---- !u!114 &2651095932316223926
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2651095932316223924}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e5418d1ac335fe428d069483c95ff69, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scaleAdjustment: 0.05
-  audioClip: {fileID: 8300000, guid: 3b2ee9781e3d99644aa064050de938a2, type: 3}
---- !u!114 &223605450348792868
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2651095932316223924}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e54e907e44a2fea4b8beb5c0292b192e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  name: {fileID: 2651095932541739498}
-  rate: {fileID: 3012894837520508752}
-  stats: {fileID: 3012894837728281790}
-  icon: {fileID: 2651095931179807547}
-  border: {fileID: 2651095932316223881}
 --- !u!1 &2651095932541739496
 GameObject:
   m_ObjectHideFlags: 0

@@ -15,8 +15,8 @@ public class StageButton : MonoBehaviour
     public void Set(StageData.Enemy enemy)
     {
         // Get the variant color
-        Color color = VariantPalette.GetVariantColor(enemy.variant).color;
-
+        Color color = VariantPalette.GetPrimaryColor(enemy.variant);
+        
         // Set all enemy information
         name.text = enemy.data.name;
         rate.text = enemy.amount + "x / " + enemy.cooldown + "s";
