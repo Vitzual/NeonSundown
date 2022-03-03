@@ -6,6 +6,9 @@ using UnityEngine;
 
 public static class Scriptables
 {
+    // Flag for calculating arena stage times
+    private static bool generated = false;
+
     // Resource paths
     public static string CardsPath = "Cards";
     public static string EnemiesPath = "Enemies";
@@ -30,11 +33,18 @@ public static class Scriptables
     // Generate scriptables
     public static void GenerateAllScriptables()
     {
+        // Check if already generated
+        if (generated) return;
+
+        // If not, set them
         GenerateCards();
         GenerateEnemies();
         GenerateStages();
         GenerateArenas();
         GenerateShips();
+
+        // Set generated to true
+        generated = true;
     }
 
     // Generate buildings on startup
@@ -102,6 +112,11 @@ public static class Scriptables
         {
             arenasDict.Add(arena.InternalID, arena);
             arenas.Add(arena);
+
+            float runningTime = 0;
+            foreach(StageData stage in arena.stages)
+                runningTime = stage.CalcTotal(runningTime);
+
             Debug.Log("Loaded " + arena.name + " with UUID " + arena.InternalID);
         }
     }

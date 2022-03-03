@@ -18,4 +18,24 @@ public class StageData : IdentifiableScriptableObject
     public bool enemyScaling;
     public List<Enemy> enemies;
     public float time;
+
+    // Runtime display variables
+    private string runtime = "";
+
+    // Called by scriptable loader on setup
+    public float CalcTotal(float runningTime)
+    {
+        float endTime = runningTime + time;
+
+        if (enemyScaling) runtime = Formatter.Time(runningTime) + " - INFINITE";
+        else runtime = Formatter.Time(runningTime) + " - " + Formatter.Time(endTime);
+
+        return endTime;
+    }
+
+    // Returns a string of the stage time
+    public string GetTime()
+    {
+        return runtime;
+    }
 }

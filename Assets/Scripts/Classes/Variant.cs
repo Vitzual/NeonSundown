@@ -2,5 +2,7 @@ public enum Variant
 {
     Normal,
     Ghost,
-    Chaos
+    Chaos,
+    Fusion,
+    Toxic
 }

@@ -68,18 +68,18 @@ public class ShipPanel : MonoBehaviour
         icon.sprite = ship.icon;
 
         // Set ship stats
-        health.text = "<b>HEALTH:</b><color=white>" + Formatter.Round(ship.startingHealth) + "hp";
-        regen.text = "<b>REGEN:</b><color=white>" + Formatter.Round(ship.regenRate) + " / second";
-        speed.text = "<b>SPEED:</b><color=white>" + Formatter.Round(ship.playerSpeed) + " km/h";
-        dash.text = "<b>DASH:</b><color=white>" + Formatter.Round(ship.dashSpeed) + " km/h";
+        health.text = "<b>HEALTH:</b><color=white> " + Formatter.Round(ship.startingHealth) + "hp";
+        regen.text = "<b>REGEN:</b><color=white> " + Formatter.Round(ship.regenRate) + " / second";
+        speed.text = "<b>SPEED:</b><color=white> " + Formatter.Round(ship.playerSpeed) + " km/h";
+        dash.text = "<b>DASH:</b><color=white> " + Formatter.Round(ship.dashSpeed) + " km/h";
 
         // Set weapon stats
         if (ship.weapon != null)
         {
-            damage.text = "<b>DAMAGE:</b><color=white>" + Formatter.Round(ship.weapon.damage) + "hp / shot";
-            firerate.text = "<b>FIRERATE:</b><color=white>" + Formatter.Round(ship.weapon.cooldown / 1f) + " / second";
-            pierces.text = "<b>PIERCES:</b><color=white>" + Formatter.Round(ship.weapon.pierces) + " / shot";
-            lifetime.text = "<b>LIFETIME:</b><color=white>" + Formatter.Round(ship.weapon.lifetime) + " seconds";
+            damage.text = "<b>DAMAGE:</b><color=white> " + Formatter.Round(ship.weapon.damage) + "hp / shot";
+            firerate.text = "<b>FIRERATE:</b><color=white> " + Formatter.Round(ship.weapon.cooldown / 1f) + " / second";
+            pierces.text = "<b>PIERCES:</b><color=white> " + Formatter.Round(ship.weapon.pierces) + " / shot";
+            lifetime.text = "<b>LIFETIME:</b><color=white> " + Formatter.Round(ship.weapon.lifetime) + " seconds";
         }
         else
         {

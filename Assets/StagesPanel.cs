@@ -82,7 +82,7 @@ public class StagesPanel : MonoBehaviour
 
             // Calculate time
             runningTime += stage.time;
-            stageTime.text = Formatter.Time(stage.time);
+            stageTime.text = stage.GetTime();
             stageTime.color = arena.buttonColor;
 
             // Iterate through stage enemies

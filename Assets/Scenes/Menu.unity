@@ -3793,7 +3793,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 154849195}
   m_Enabled: 1
-  m_Alpha: 0
+  m_Alpha: 1
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -7061,7 +7061,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 329460104}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 0
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
@@ -29643,18 +29643,18 @@ MonoBehaviour:
   backgroundTilemap: {fileID: 131810207}
   blacklistCards:
   - icon: {fileID: 2044077}
-    model: {fileID: 1546675009}
+    model: {fileID: 984521180}
   - icon: {fileID: 1787212752}
-    model: {fileID: 1967038726}
+    model: {fileID: 1781476237}
   - icon: {fileID: 471571019}
-    model: {fileID: 1257555711}
+    model: {fileID: 1006808802}
   startingCards:
   - icon: {fileID: 1207384182}
-    model: {fileID: 984521180}
+    model: {fileID: 1546675009}
   - icon: {fileID: 1965956806}
-    model: {fileID: 1781476237}
+    model: {fileID: 1967038726}
   - icon: {fileID: 511195734}
-    model: {fileID: 1006808802}
+    model: {fileID: 1257555711}
   panelBackground: {fileID: 822555486}
   panelGroup: {fileID: 1870188710}
   selectArena: {fileID: 1033592451}
@@ -33397,6 +33397,18 @@ MonoBehaviour:
     lightColor: {r: 1, g: 0.7067298, b: 0.41037738, a: 1}
     material: {fileID: 2100000, guid: 4b02bf1bd62576c4db90bf7824c03559, type: 2}
     deathParticle: {fileID: 2055333318299029104, guid: db7f2bd89549db747aade2de38a9a6d3, type: 3}
+  - type: 3
+    fillColor: {r: 0, g: 0.5, b: 0.5, a: 1}
+    borderColor: {r: 0, g: 1, b: 1, a: 1}
+    lightColor: {r: 0.495283, g: 1, b: 1, a: 1}
+    material: {fileID: 2100000, guid: 74365c856c4c07647bf5e00d5158249c, type: 2}
+    deathParticle: {fileID: 3499844798619087542, guid: a6c7db84b014c27478067f4c77388510, type: 3}
+  - type: 4
+    fillColor: {r: 0.33166853, g: 0.5188679, b: 0, a: 1}
+    borderColor: {r: 0.6392157, g: 1, b: 0, a: 1}
+    lightColor: {r: 0.7872734, g: 1, b: 0.41037738, a: 1}
+    material: {fileID: 2100000, guid: 64d3647783cb73540b8923daab926268, type: 2}
+    deathParticle: {fileID: 1983349488827960787, guid: 339faf01867f7004ebd3add2c3e88d72, type: 3}
 --- !u!4 &1698921122
 Transform:
   m_ObjectHideFlags: 0
