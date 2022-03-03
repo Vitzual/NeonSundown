@@ -9,8 +9,6 @@ public class EnemyData : IdentifiableScriptableObject
     public new string name;
     [BoxGroup("Enemy Info")]
     public Sprite icon;
-    [BoxGroup("Enemy Info"), TextArea]
-    public string desc;
     [BoxGroup("Enemy Info")]
     public GameObject obj;
 
