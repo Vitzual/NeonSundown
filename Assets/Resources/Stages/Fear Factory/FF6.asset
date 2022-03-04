@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74bee22c4c15df545aab77de393cc123, type: 3}
+  m_Name: FF6
+  m_EditorClassIdentifier: 
+  internalId: c8197d34-f68f-498b-bf24-ef0e985cb291
+  createdAtTicks: 637819961278461235
+  name: BOSS PHASE
+  isMenuStage: 0
+  enemyScaling: 0
+  enemies:
+  - data: {fileID: 11400000, guid: 83e41a2d30c207449a8381a61d5bd24d, type: 2}
+    variant: 1
+    cooldown: 125
+    amount: 1
+  - data: {fileID: 11400000, guid: 93a6ee9e8a156aa4cb5d660915aca99e, type: 2}
+    variant: 0
+    cooldown: 5
+    amount: 5
+  - data: {fileID: 11400000, guid: 31309ad257c223f49917d49d350b3979, type: 2}
+    variant: 0
+    cooldown: 10
+    amount: 25
+  - data: {fileID: 11400000, guid: 6fab594cc37a5f147829f1e090bb84d7, type: 2}
+    variant: 0
+    cooldown: 1
+    amount: 1
+  time: 120

@@ -18,6 +18,7 @@ public class Enemy : Entity
     public List<TrailRenderer> trails;
     public List<SpriteRenderer> glows;
     public List<SpriteRenderer> fills;
+    public List<ParticleSystemRenderer> particles;
     public Transform rotator;
 
     // Internal runtime variables
@@ -40,6 +41,14 @@ public class Enemy : Entity
             glow.material = variantColor.material;
         foreach (SpriteRenderer fill in fills)
             fill.color = variantColor.fillColor;
+
+        // Loop through particle trails and sprites
+        foreach (ParticleSystemRenderer particle in particles)
+        {
+            particle.material = variantColor.material;
+            particle.trailMaterial = variantColor.material;
+        }
+
 
         // Set scriptable
         variant = data.variant;

@@ -94,9 +94,8 @@ public class Weapon : MonoBehaviour
                     + GetAdditions(type)) * GetMultiplier(type);
                 break;
             case Stat.Cooldown:
-                cooldown -= 0.01f;
-                if (cooldown <= 0.05f)
-                    cooldown = 0.05f;
+                cooldown = (Deck.CalculateStat(type, weapon.cooldown)
+                    + GetAdditions(type)) * GetMultiplier(type);
                 break;
             case Stat.MoveSpeed:
                 moveSpeed = (Deck.CalculateStat(type, weapon.moveSpeed)
@@ -162,7 +161,7 @@ public class Weapon : MonoBehaviour
     protected void AddMultiplier(Stat type, float amount)
     {
         if (multipliers.ContainsKey(type))
-            multipliers[type] *= amount;
+            multipliers[type] += amount;
         else multipliers.Add(type, amount);
     }
 }

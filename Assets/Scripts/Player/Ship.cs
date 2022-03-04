@@ -220,10 +220,11 @@ public class Ship : Weapon
             case Stat.Cooldown:
 
                 // Upgrade firerate
+                Debug.Log("Multiplying " + cooldown + " by " + amount + " = " + cooldown * amount);
                 if (multiply) cooldown *= amount;
                 else cooldown -= amount;
                 if (cooldown < 0.05f)
-                    cooldown = amount;
+                    cooldown = 0.05f;
                 break;
 
             // Increases piercing rounds
