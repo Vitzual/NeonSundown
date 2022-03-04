@@ -34,6 +34,7 @@ public class ShipButton : MonoBehaviour
             icon.sprite = ship.icon;
             button.color = ship.mainColor;
         }
+        else desc.text = ship.unlockRequirement;
 
         // Set sibling index
         transform.SetSiblingIndex(ship.listOrder);

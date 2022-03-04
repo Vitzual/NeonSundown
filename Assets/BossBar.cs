@@ -35,6 +35,7 @@ public class BossBar : MonoBehaviour
         // Set the new enemy info
         name.text = enemy.name;
         icon.sprite = boss.bossModel;
+        icon.color = VariantPalette.GetPrimaryColor(enemy.GetData().variant);
 
         // Show the bar
         canvasGroup.alpha = 1f;

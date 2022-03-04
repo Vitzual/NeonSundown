@@ -13,10 +13,6 @@ public class Menu : MonoBehaviour
     public Store storePanel;
     public ModuleData defaultStoreModule;
 
-    // Arena elements
-    public ArenaButton arenaButton;
-    public Transform arenaList;
-
     // Group CG elements
     public CanvasGroup mainGroup;
     public CanvasGroup mainBackground;
@@ -48,7 +44,6 @@ public class Menu : MonoBehaviour
 
     // Menu flags
     private bool spacePressed = false;
-    private bool arenasGenerated = false;
     
     // Start is called before the first frame update
     public void Awake()
@@ -121,50 +116,6 @@ public class Menu : MonoBehaviour
                 spacePressed = true;
             }
         }
-    }
-
-    // Open arena panel
-    public void OpenArenas()
-    {
-        // Check if arenas generated
-        if (!arenasGenerated)
-        {
-            // Get save data
-            List<ArenaButton> buttonList = new List<ArenaButton>();
-
-            // Get all arenas on record
-            foreach (ArenaData arena in Scriptables.arenas)
-            {
-                // Create arena buttons
-                ArenaButton newButton = Instantiate(arenaButton, Vector2.zero, Quaternion.identity).GetComponent<ArenaButton>();
-                newButton.transform.SetParent(arenaList);
-                buttonList.Add(newButton);
-
-                // Check if save is unlocked, and if so set time
-                if (arena.unlockByDefault || SaveSystem.IsArenaUnlocked(arena.InternalID))
-                {
-                    if (SaveSystem.saveData.arenaTimes.ContainsKey(arena.InternalID))
-                    {
-                        newButton.Set(arena, "<b>Best Run:</b> " + Formatter.Time
-                            (SaveSystem.saveData.arenaTimes[arena.InternalID]));
-                    }
-                    else newButton.Set(arena, "<b>Best Run:</b> 0:00");
-                }
-
-                // If arena not unlocked, show it as locked
-                else newButton.Lock(arena);
-            }
-
-            // Iterate through all generated buttons and set order
-            foreach(ArenaButton button in buttonList)
-                button.transform.SetSiblingIndex(button.arena.order);
-
-            // Set arenas generated flag to true
-            arenasGenerated = true;
-        }
-
-        // Change menu
-        ToggleArenaPanel(true);
     }
 
     // Open canvas group panel

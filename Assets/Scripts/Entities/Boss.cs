@@ -8,6 +8,7 @@ public class Boss : MonoBehaviour
     public List<Turret> turrets;
     public WeaponData weapon;
     public Sprite bossModel;
+    public AudioClip spawnSound;
     protected Enemy enemy;
     protected Transform target;
 
@@ -24,6 +25,9 @@ public class Boss : MonoBehaviour
 
         // Set the boss bar
         Events.active.BossSpawned(this, enemy);
+
+        // Play spawn sound
+        AudioPlayer.Play(spawnSound, false);
     }
 
     // Control turrets

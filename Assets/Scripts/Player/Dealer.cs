@@ -172,10 +172,16 @@ public class Dealer : MonoBehaviour
 
         // Check cards and remove outdated ones
         Dictionary<CardData, int> deckCards = Deck.active.GetCards();
-        foreach (CardData card in dealList)
+        for (int i = 0; i < dealList.Count; i++)
+        {
+            CardData card = dealList[i];
             if ((!card.isUnlocked && !SaveSystem.IsCardUnlocked(card.InternalID)) ||
                 (deckCards.ContainsKey(card) && deckCards[card] >= card.maximumAmount))
+            {
                 dealList.Remove(card);
+                i--;
+            }
+        }
 
         // Deal the cards
         dealCards = true;

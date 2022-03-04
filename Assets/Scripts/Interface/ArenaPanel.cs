@@ -18,6 +18,10 @@ public class ArenaPanel : MonoBehaviour
     // Stages panel
     public StagesPanel stagesPanel;
 
+    // Arena elements
+    public ArenaButton arenaButton;
+    public Transform arenaList;
+
     // Background tilebase
     public Tilemap backgroundTilemap;
     public List<Card> blacklistCards;
@@ -37,10 +41,61 @@ public class ArenaPanel : MonoBehaviour
         timestampFour, rewardOne, rewardTwo, rewardThree, rewardFour, bestTime;
     public Image rewardOneImage, rewardTwoImage, rewardThreeImage, rewardFourImage;
 
+    // Private internal flag
+    private bool arenasGenerated = false;
+
     // Subscribe to the arena button event
     public void Start()
     {
+        // Setup events
         Events.active.onArenaButtonClicked += SetPanel;
+
+        // Check if arenas already generated
+        if (!arenasGenerated)
+        {
+            // Setup arenas
+            List<ArenaButton> buttonList = new List<ArenaButton>();
+
+            // Iterate through all arenas
+            foreach (ArenaData arena in Scriptables.arenas)
+            {
+                // Create arena buttons
+                ArenaButton newButton = Instantiate(arenaButton, Vector2.zero, Quaternion.identity);
+                newButton.transform.SetParent(arenaList);
+                RectTransform rect = newButton.GetComponent<RectTransform>();
+                rect.localScale = new Vector3(1, 1, 1);
+                buttonList.Add(newButton);
+
+                // Check if save is unlocked, and if so set time
+                if (arena.unlockByDefault || SaveSystem.IsArenaUnlocked(arena.InternalID))
+                {
+                    if (SaveSystem.saveData.arenaTimes.ContainsKey(arena.InternalID))
+                    {
+                        newButton.Set(arena, "<b>Best Run:</b> " + Formatter.Time
+                            (SaveSystem.saveData.arenaTimes[arena.InternalID]));
+                    }
+                    else newButton.Set(arena, "<b>Best Run:</b> 0:00");
+                }
+
+                // If arena not unlocked, show it as locked
+                else newButton.Lock(arena);
+            }
+
+            // Iterate through all generated buttons and set order
+            foreach (ArenaButton button in buttonList)
+                button.gameObject.transform.SetSiblingIndex(button.arena.order);
+
+            // Iterate through all generated buttons and set order
+            foreach (ArenaButton button in buttonList)
+                button.gameObject.transform.SetSiblingIndex(button.arena.order);
+
+            // Iterate through all generated buttons and set order
+            foreach (ArenaButton button in buttonList)
+                button.gameObject.transform.SetSiblingIndex(button.arena.order);
+
+            // Set arenas generated flag to true
+            arenasGenerated = true;
+        }
     }
 
     public void SetPanel(ArenaData arena)

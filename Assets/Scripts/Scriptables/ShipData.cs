@@ -13,6 +13,8 @@ public class ShipData : IdentifiableScriptableObject
     [BoxGroup("Ship Info"), TextArea]
     public string desc;
     [BoxGroup("Ship Info")]
+    public string unlockRequirement;
+    [BoxGroup("Ship Info")]
     public bool unlocked;
 
     [BoxGroup("Ship Selection Variables")]

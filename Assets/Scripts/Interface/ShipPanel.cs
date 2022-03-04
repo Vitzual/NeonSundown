@@ -15,6 +15,16 @@ public class ShipPanel : MonoBehaviour
     }
     public List<Module> moduleSlots;
 
+    // Module buttons
+    [System.Serializable]
+    public class ModuleButton
+    {
+        public ModuleData data;
+        public TextMeshProUGUI amount;
+    }
+    public List<ModuleButton> moduleButtons;
+    private Dictionary<string, TextMeshProUGUI> moduleAmounts;
+
     // Ship button prefab
     public ShipButton shipButton;
     public Transform shipList;
@@ -32,6 +42,11 @@ public class ShipPanel : MonoBehaviour
     // On start, subscribe to ship setup and create buttons
     public void Start()
     {
+        // Setup module amounts
+        moduleAmounts = new Dictionary<string, TextMeshProUGUI>();
+        foreach (ModuleButton module in moduleButtons)
+            moduleAmounts.Add(module.data.InternalID, module.amount);
+
         // Subscribe to setup event
         Events.active.onSetupShip += Setup;
         buttons = new List<ShipButton>();
@@ -49,7 +64,15 @@ public class ShipPanel : MonoBehaviour
 
         // After creating, set ordering
         foreach (ShipButton button in buttons)
-            button.transform.SetSiblingIndex(button.ship.listOrder);
+            button.gameObject.transform.SetSiblingIndex(button.ship.listOrder);
+
+        // After creating, set ordering
+        foreach (ShipButton button in buttons)
+            button.gameObject.transform.SetSiblingIndex(button.ship.listOrder);
+
+        // After creating, set ordering
+        foreach (ShipButton button in buttons)
+            button.gameObject.transform.SetSiblingIndex(button.ship.listOrder);
     }
 
     // Update the ships
@@ -109,8 +132,20 @@ public class ShipPanel : MonoBehaviour
     // Open module list
     public void OpenModules(int slot)
     {
+        // Update amounts based on save data
+        foreach(KeyValuePair<string, int> module in SaveSystem.saveData.modules)
+            if (moduleAmounts.ContainsKey(module.Key)) 
+                moduleAmounts[module.Key].text = module.Value + " owned";
+
+        // Open modules and set slot
         moduleSlot = slot;
         ToggleModules(true);
+    }
+
+    // Clear module
+    public void ClearModule()
+    {
+        SetModule(null);
     }
 
     // Set a module

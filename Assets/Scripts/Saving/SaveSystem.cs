@@ -205,6 +205,12 @@ public class SaveSystem
         return saveData.modules.ContainsKey(id) && saveData.modules[id] > 0;
     }
 
+    // Check if user has crystal
+    public static bool HasCrystal(string id)
+    {
+        return saveData.crystals.ContainsKey(id) && saveData.crystals[id] > 0;
+    }
+
     // Checks if a ship is unlocked
     public static bool IsArenaUnlocked(string id) { return saveData != null && saveData.arenasUnlocked.Contains(id); }
     public static bool IsShipUnlocked(string id) { return saveData != null && saveData.shipsUnlocked.Contains(id); }
