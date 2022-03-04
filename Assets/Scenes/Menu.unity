@@ -432,11 +432,11 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 329460109}
         m_TargetAssemblyTypeName: ShipPanel, Assembly-CSharp
-        m_MethodName: SetModule
-        m_Mode: 2
+        m_MethodName: ClearModule
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: ModuleData, Assembly-CSharp
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -647,7 +647,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scaleAdjustment: 0.1
-  audioClip: {fileID: 0}
 --- !u!114 &14962577
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1312,7 +1311,6 @@ GameObject:
   - component: {fileID: 38871546}
   - component: {fileID: 38871549}
   - component: {fileID: 38871548}
-  - component: {fileID: 38871547}
   m_Layer: 5
   m_Name: ???
   m_TagString: Untagged
@@ -1342,20 +1340,6 @@ RectTransform:
   m_AnchoredPosition: {x: 220.00015, y: 0}
   m_SizeDelta: {x: 150, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &38871547
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 38871545}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e5418d1ac335fe428d069483c95ff69, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scaleAdjustment: 0.1
-  audioClip: {fileID: 0}
 --- !u!114 &38871548
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2506,7 +2490,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scaleAdjustment: 0.1
-  audioClip: {fileID: 0}
 --- !u!114 &78838521
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2631,7 +2614,6 @@ GameObject:
   - component: {fileID: 96620439}
   - component: {fileID: 96620442}
   - component: {fileID: 96620441}
-  - component: {fileID: 96620440}
   m_Layer: 5
   m_Name: ???
   m_TagString: Untagged
@@ -2661,20 +2643,6 @@ RectTransform:
   m_AnchoredPosition: {x: 365, y: 0}
   m_SizeDelta: {x: 150, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &96620440
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 96620438}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e5418d1ac335fe428d069483c95ff69, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scaleAdjustment: 0.1
-  audioClip: {fileID: 0}
 --- !u!114 &96620441
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2976,7 +2944,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scaleAdjustment: 0.1
-  audioClip: {fileID: 0}
 --- !u!114 &113540732
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4261,7 +4228,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 154849195}
   m_Enabled: 1
-  m_Alpha: 0
+  m_Alpha: 1
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -4854,7 +4821,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scaleAdjustment: 0.1
-  audioClip: {fileID: 0}
 --- !u!114 &200369645
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5187,7 +5153,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scaleAdjustment: 0.1
-  audioClip: {fileID: 0}
 --- !u!114 &220967510
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6340,7 +6305,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scaleAdjustment: 0.01
-  audioClip: {fileID: 0}
 --- !u!114 &273491848
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6567,7 +6531,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scaleAdjustment: 0.02
-  audioClip: {fileID: 0}
 --- !u!114 &277683398
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6972,7 +6935,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scaleAdjustment: 0.1
-  audioClip: {fileID: 0}
 --- !u!114 &291762279
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7587,7 +7549,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 311265102}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 0
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
@@ -7679,6 +7641,7 @@ GameObject:
   - component: {fileID: 329460108}
   - component: {fileID: 329460107}
   - component: {fileID: 329460106}
+  - component: {fileID: 329460110}
   m_Layer: 5
   m_Name: Ship Panel
   m_TagString: Untagged
@@ -7707,7 +7670,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.000061035156, y: 23.386414}
+  m_AnchoredPosition: {x: 0, y: 25}
   m_SizeDelta: {x: 1500, y: 740}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &329460106
@@ -7756,7 +7719,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 329460104}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 0
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
@@ -7798,7 +7761,7 @@ MonoBehaviour:
     amount: {fileID: 918072261}
   - data: {fileID: 11400000, guid: 1ec29a2d25345f546883e6e8163d5eba, type: 2}
     amount: {fileID: 562705646}
-  - data: {fileID: 11400000, guid: 61d19dfb6c7007a4fb07d66803c15c12, type: 2}
+  - data: {fileID: 11400000, guid: c127eb29483bcfc47b26a4c70c1f51a4, type: 2}
     amount: {fileID: 261318921}
   - data: {fileID: 11400000, guid: 2d993bbf0d910dd46af1a8673f533f26, type: 2}
     amount: {fileID: 143630301}
@@ -7812,6 +7775,7 @@ MonoBehaviour:
   shipList: {fileID: 580719850}
   shipCanvas: {fileID: 2130826135}
   moduleCanvas: {fileID: 311265104}
+  moduleSound: {fileID: 8300000, guid: 69bbeb6cd2302ba4cbb99778ae9dd592, type: 3}
   name: {fileID: 543853572}
   modules: {fileID: 473081596}
   subTitle: {fileID: 1696980284}
@@ -7829,6 +7793,104 @@ MonoBehaviour:
   rightLine: {fileID: 1205065393}
   bottomLine: {fileID: 146372686}
   panel: {fileID: 173493179}
+  moduleCancelButton: {fileID: 1610411009}
+  moduleClearButton: {fileID: 273491848}
+--- !u!82 &329460110
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 329460104}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 69bbeb6cd2302ba4cbb99778ae9dd592, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 77
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &330557640
 GameObject:
   m_ObjectHideFlags: 0
@@ -8106,7 +8168,6 @@ GameObject:
   - component: {fileID: 336623497}
   - component: {fileID: 336623500}
   - component: {fileID: 336623499}
-  - component: {fileID: 336623498}
   m_Layer: 5
   m_Name: ???
   m_TagString: Untagged
@@ -8136,20 +8197,6 @@ RectTransform:
   m_AnchoredPosition: {x: 365, y: 0}
   m_SizeDelta: {x: 150, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &336623498
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 336623496}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e5418d1ac335fe428d069483c95ff69, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scaleAdjustment: 0.1
-  audioClip: {fileID: 0}
 --- !u!114 &336623499
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8821,7 +8868,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scaleAdjustment: 0.1
-  audioClip: {fileID: 0}
 --- !u!114 &371281092
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8962,7 +9008,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scaleAdjustment: 0.1
-  audioClip: {fileID: 0}
 --- !u!114 &381952579
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9054,7 +9099,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scaleAdjustment: 0.05
-  audioClip: {fileID: 0}
 --- !u!114 &382392756
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9202,8 +9246,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 124.471054, y: -34.99993}
-  m_SizeDelta: {x: 137.205, y: 14.744}
+  m_AnchoredPosition: {x: 148.71992, y: -34.99993}
+  m_SizeDelta: {x: 161.454, y: 14.744}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &388947711
 MonoBehaviour:
@@ -10064,7 +10108,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scaleAdjustment: 0.01
-  audioClip: {fileID: 0}
 --- !u!114 &420220280
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10306,7 +10349,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scaleAdjustment: 0.01
-  audioClip: {fileID: 0}
 --- !u!114 &424089154
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11636,7 +11678,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scaleAdjustment: 0.1
-  audioClip: {fileID: 0}
 --- !u!114 &535136123
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11862,7 +11903,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scaleAdjustment: 0.01
-  audioClip: {fileID: 0}
 --- !u!114 &545475204
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12372,7 +12412,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scaleAdjustment: 0.01
-  audioClip: {fileID: 0}
 --- !u!114 &581464740
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12445,8 +12484,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 124.471054, y: 0.000068099835}
-  m_SizeDelta: {x: 137.205, y: 14.744}
+  m_AnchoredPosition: {x: 148.71992, y: 0.000068099835}
+  m_SizeDelta: {x: 161.454, y: 14.744}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &582071822
 MonoBehaviour:
@@ -16039,7 +16078,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scaleAdjustment: 0.1
-  audioClip: {fileID: 0}
 --- !u!1 &769954681
 GameObject:
   m_ObjectHideFlags: 0
@@ -16094,7 +16132,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scaleAdjustment: 0.1
-  audioClip: {fileID: 0}
 --- !u!114 &769954684
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17254,7 +17291,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scaleAdjustment: 0.01
-  audioClip: {fileID: 0}
 --- !u!114 &839487792
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17377,11 +17413,11 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 329460109}
         m_TargetAssemblyTypeName: ShipPanel, Assembly-CSharp
-        m_MethodName: SetModule
-        m_Mode: 2
+        m_MethodName: ToggleModules
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: ModuleData, Assembly-CSharp
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -17629,7 +17665,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scaleAdjustment: 0.05
-  audioClip: {fileID: 8300000, guid: 3b2ee9781e3d99644aa064050de938a2, type: 3}
 --- !u!1 &871815874
 GameObject:
   m_ObjectHideFlags: 0
@@ -18560,7 +18595,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scaleAdjustment: 0.1
-  audioClip: {fileID: 0}
 --- !u!114 &884665839
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18761,7 +18795,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scaleAdjustment: 0.05
-  audioClip: {fileID: 8300000, guid: 3b2ee9781e3d99644aa064050de938a2, type: 3}
 --- !u!1 &901705940
 GameObject:
   m_ObjectHideFlags: 0
@@ -19803,7 +19836,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scaleAdjustment: 0.1
-  audioClip: {fileID: 0}
 --- !u!114 &944240520
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20225,7 +20257,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scaleAdjustment: 0.05
-  audioClip: {fileID: 8300000, guid: 3b2ee9781e3d99644aa064050de938a2, type: 3}
 --- !u!1 &978532054
 GameObject:
   m_ObjectHideFlags: 0
@@ -22023,7 +22054,6 @@ GameObject:
   - component: {fileID: 1059759696}
   - component: {fileID: 1059759699}
   - component: {fileID: 1059759698}
-  - component: {fileID: 1059759697}
   m_Layer: 5
   m_Name: ???
   m_TagString: Untagged
@@ -22053,20 +22083,6 @@ RectTransform:
   m_AnchoredPosition: {x: 365, y: 0}
   m_SizeDelta: {x: 150, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1059759697
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1059759695}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e5418d1ac335fe428d069483c95ff69, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scaleAdjustment: 0.1
-  audioClip: {fileID: 0}
 --- !u!114 &1059759698
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22186,19 +22202,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1064437637}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 329460109}
-        m_TargetAssemblyTypeName: ShipPanel, Assembly-CSharp
-        m_MethodName: SetModule
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: 233d62e3434f5d94e810a63c4f49198a, type: 2}
-          m_ObjectArgumentAssemblyTypeName: ModuleData, Assembly-CSharp
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1064437637
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22291,7 +22295,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scaleAdjustment: 0.02
-  audioClip: {fileID: 0}
 --- !u!114 &1068893792
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22620,19 +22623,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1083065280}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 329460109}
-        m_TargetAssemblyTypeName: ShipPanel, Assembly-CSharp
-        m_MethodName: SetModule
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: 233d62e3434f5d94e810a63c4f49198a, type: 2}
-          m_ObjectArgumentAssemblyTypeName: ModuleData, Assembly-CSharp
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1083065280
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22725,7 +22716,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scaleAdjustment: 0.02
-  audioClip: {fileID: 0}
 --- !u!114 &1083564551
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22818,7 +22808,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scaleAdjustment: 0.1
-  audioClip: {fileID: 0}
 --- !u!114 &1088697160
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24711,7 +24700,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scaleAdjustment: 0.1
-  audioClip: {fileID: 0}
 --- !u!114 &1207779724
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25070,7 +25058,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scaleAdjustment: 0.02
-  audioClip: {fileID: 0}
 --- !u!114 &1213893034
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25275,8 +25262,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 124.471054, y: 35.00007}
-  m_SizeDelta: {x: 137.205, y: 14.744}
+  m_AnchoredPosition: {x: 148.71992, y: 35.00007}
+  m_SizeDelta: {x: 161.454, y: 14.744}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1221953937
 MonoBehaviour:
@@ -25555,7 +25542,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scaleAdjustment: 0.1
-  audioClip: {fileID: 0}
 --- !u!114 &1226276182
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26118,7 +26104,6 @@ GameObject:
   - component: {fileID: 1248172012}
   - component: {fileID: 1248172015}
   - component: {fileID: 1248172014}
-  - component: {fileID: 1248172013}
   m_Layer: 5
   m_Name: ???
   m_TagString: Untagged
@@ -26148,20 +26133,6 @@ RectTransform:
   m_AnchoredPosition: {x: 220.00015, y: 0}
   m_SizeDelta: {x: 150, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1248172013
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1248172011}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e5418d1ac335fe428d069483c95ff69, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scaleAdjustment: 0.1
-  audioClip: {fileID: 0}
 --- !u!114 &1248172014
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26498,7 +26469,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scaleAdjustment: 0.1
-  audioClip: {fileID: 0}
 --- !u!114 &1269245203
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26591,7 +26561,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scaleAdjustment: 0.1
-  audioClip: {fileID: 0}
 --- !u!114 &1271686978
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27122,7 +27091,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scaleAdjustment: 0.05
-  audioClip: {fileID: 8300000, guid: 3b2ee9781e3d99644aa064050de938a2, type: 3}
 --- !u!1 &1297076836
 GameObject:
   m_ObjectHideFlags: 0
@@ -27509,19 +27477,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1319307890}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 329460109}
-        m_TargetAssemblyTypeName: ShipPanel, Assembly-CSharp
-        m_MethodName: SetModule
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: 233d62e3434f5d94e810a63c4f49198a, type: 2}
-          m_ObjectArgumentAssemblyTypeName: ModuleData, Assembly-CSharp
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1319307890
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27747,7 +27703,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scaleAdjustment: 0.1
-  audioClip: {fileID: 0}
 --- !u!114 &1325359601
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27914,7 +27869,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scaleAdjustment: 0.01
-  audioClip: {fileID: 0}
 --- !u!114 &1329656246
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28215,7 +28169,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scaleAdjustment: 0.05
-  audioClip: {fileID: 0}
 --- !u!114 &1342355597
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28308,7 +28261,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scaleAdjustment: 0.1
-  audioClip: {fileID: 0}
 --- !u!114 &1342877998
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28648,7 +28600,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scaleAdjustment: 0.1
-  audioClip: {fileID: 0}
 --- !u!114 &1351591899
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29188,7 +29139,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scaleAdjustment: 0.05
-  audioClip: {fileID: 8300000, guid: 3b2ee9781e3d99644aa064050de938a2, type: 3}
 --- !u!1 &1389408480
 GameObject:
   m_ObjectHideFlags: 0
@@ -30123,7 +30073,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scaleAdjustment: 0.1
-  audioClip: {fileID: 0}
 --- !u!114 &1442197713
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30366,7 +30315,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scaleAdjustment: 0.02
-  audioClip: {fileID: 0}
 --- !u!114 &1453033717
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30458,7 +30406,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scaleAdjustment: 0.1
-  audioClip: {fileID: 0}
 --- !u!114 &1458095558
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31029,7 +30976,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scaleAdjustment: 0.05
-  audioClip: {fileID: 8300000, guid: 3b2ee9781e3d99644aa064050de938a2, type: 3}
 --- !u!1 &1513377307
 GameObject:
   m_ObjectHideFlags: 0
@@ -31598,7 +31544,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 23.38637}
+  m_AnchoredPosition: {x: 0, y: 25}
   m_SizeDelta: {x: 1500, y: 740}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!225 &1546299619
@@ -31668,18 +31614,18 @@ MonoBehaviour:
   arenaList: {fileID: 647036171}
   backgroundTilemap: {fileID: 131810207}
   blacklistCards:
-  - icon: {fileID: 2044077}
+  - icon: {fileID: 1207384182}
     model: {fileID: 984521180}
-  - icon: {fileID: 1787212752}
+  - icon: {fileID: 1965956806}
     model: {fileID: 1781476237}
-  - icon: {fileID: 471571019}
+  - icon: {fileID: 511195734}
     model: {fileID: 1006808802}
   startingCards:
-  - icon: {fileID: 1207384182}
+  - icon: {fileID: 2044077}
     model: {fileID: 1546675009}
-  - icon: {fileID: 1965956806}
+  - icon: {fileID: 1787212752}
     model: {fileID: 1967038726}
-  - icon: {fileID: 511195734}
+  - icon: {fileID: 471571019}
     model: {fileID: 1257555711}
   panelBackground: {fileID: 822555486}
   panelGroup: {fileID: 1870188710}
@@ -31707,6 +31653,10 @@ MonoBehaviour:
   rewardTwoImage: {fileID: 363970314}
   rewardThreeImage: {fileID: 219693130}
   rewardFourImage: {fileID: 1756605930}
+  lineOne: {fileID: 660275492}
+  lineTwo: {fileID: 268225977}
+  lineThree: {fileID: 1892526109}
+  lineFour: {fileID: 987758011}
 --- !u!1 &1546675007
 GameObject:
   m_ObjectHideFlags: 0
@@ -33643,7 +33593,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scaleAdjustment: 0.01
-  audioClip: {fileID: 0}
 --- !u!114 &1610411009
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -37138,7 +37087,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scaleAdjustment: 0.05
-  audioClip: {fileID: 8300000, guid: 3b2ee9781e3d99644aa064050de938a2, type: 3}
 --- !u!1 &1770849421
 GameObject:
   m_ObjectHideFlags: 0
@@ -37763,7 +37711,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scaleAdjustment: 0.1
-  audioClip: {fileID: 0}
 --- !u!114 &1804365935
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -37855,7 +37802,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scaleAdjustment: 0.1
-  audioClip: {fileID: 0}
 --- !u!114 &1808891974
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39087,8 +39033,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 124.471054, y: 70.00007}
-  m_SizeDelta: {x: 137.205, y: 14.744}
+  m_AnchoredPosition: {x: 148.71992, y: 70.00007}
+  m_SizeDelta: {x: 161.454, y: 14.744}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1878412203
 MonoBehaviour:
@@ -40006,7 +39952,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scaleAdjustment: 0.02
-  audioClip: {fileID: 0}
 --- !u!114 &1907954835
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -40308,19 +40253,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1920519528}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 329460109}
-        m_TargetAssemblyTypeName: ShipPanel, Assembly-CSharp
-        m_MethodName: SetModule
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: 233d62e3434f5d94e810a63c4f49198a, type: 2}
-          m_ObjectArgumentAssemblyTypeName: ModuleData, Assembly-CSharp
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1920519528
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -40757,7 +40690,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scaleAdjustment: 0.1
-  audioClip: {fileID: 0}
 --- !u!114 &1938094212
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -42815,19 +42747,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1992471225}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 329460109}
-        m_TargetAssemblyTypeName: ShipPanel, Assembly-CSharp
-        m_MethodName: SetModule
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: 233d62e3434f5d94e810a63c4f49198a, type: 2}
-          m_ObjectArgumentAssemblyTypeName: ModuleData, Assembly-CSharp
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1992471225
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -43079,19 +42999,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2000005258}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 329460109}
-        m_TargetAssemblyTypeName: ShipPanel, Assembly-CSharp
-        m_MethodName: SetModule
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: 233d62e3434f5d94e810a63c4f49198a, type: 2}
-          m_ObjectArgumentAssemblyTypeName: ModuleData, Assembly-CSharp
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &2000005258
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -43524,7 +43432,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scaleAdjustment: 0.1
-  audioClip: {fileID: 0}
 --- !u!114 &2017695044
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -44084,7 +43991,6 @@ GameObject:
   - component: {fileID: 2026013858}
   - component: {fileID: 2026013861}
   - component: {fileID: 2026013860}
-  - component: {fileID: 2026013859}
   m_Layer: 5
   m_Name: ???
   m_TagString: Untagged
@@ -44114,20 +44020,6 @@ RectTransform:
   m_AnchoredPosition: {x: 220, y: 0}
   m_SizeDelta: {x: 150, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &2026013859
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2026013857}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e5418d1ac335fe428d069483c95ff69, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scaleAdjustment: 0.1
-  audioClip: {fileID: 0}
 --- !u!114 &2026013860
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -46382,7 +46274,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scaleAdjustment: 0.1
-  audioClip: {fileID: 0}
 --- !u!114 &2126182407
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -46446,7 +46337,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2130826133}
   m_Enabled: 1
-  m_Alpha: 0
+  m_Alpha: 1
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -46504,7 +46395,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scaleAdjustment: 0.1
-  audioClip: {fileID: 0}
 --- !u!114 &2139172643
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -9,7 +9,6 @@ public class StagesPanel : MonoBehaviour
     // Internal arena
     [HideInInspector]
     public ArenaData arena;
-    private float runningTime;
 
     // List of arenas 
     public List<StageButton> stageButtons;
@@ -29,11 +28,10 @@ public class StagesPanel : MonoBehaviour
     {
         // Set arena data
         this.arena = arena;
-        runningTime = 0;
 
         // Set the panel
         arenaName.text = arena.name;
-        arenaSubtitle.color = arena.buttonColor;
+        arenaSubtitle.color = arena.lightColor;
         arenaIcon.sprite = arena.icon;
         stagesBackground.color = arena.buttonColor;
         previous.color = arena.buttonColor;
@@ -81,9 +79,8 @@ public class StagesPanel : MonoBehaviour
             stageTitle.text = stage.name;
 
             // Calculate time
-            runningTime += stage.time;
             stageTime.text = stage.GetTime();
-            stageTime.color = arena.buttonColor;
+            stageTime.color = arena.lightColor;
 
             // Iterate through stage enemies
             foreach(StageData.Enemy enemy in stage.enemies)

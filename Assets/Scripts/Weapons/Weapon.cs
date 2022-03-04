@@ -124,14 +124,14 @@ public class Weapon : MonoBehaviour
     // Setup stats
     protected void SetupStats()
     {
-        damage = weapon.damage;
-        cooldown = weapon.cooldown;
-        moveSpeed = weapon.moveSpeed;
-        bloom = weapon.bloom;
-        pierces = weapon.pierces;
-        bullets = weapon.bullets;
-        lifetime = weapon.lifetime;
-        range = weapon.range;
+        UpdateStat(Stat.Damage);
+        UpdateStat(Stat.Cooldown);
+        UpdateStat(Stat.MoveSpeed);
+        UpdateStat(Stat.Bloom);
+        UpdateStat(Stat.Pierces);
+        UpdateStat(Stat.Bullets);
+        UpdateStat(Stat.Lifetime);
+        UpdateStat(Stat.Range);
     }
 
     // Get multiplier

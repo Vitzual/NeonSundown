@@ -39,7 +39,8 @@ public class ArenaPanel : MonoBehaviour
     public Image barBackground, barFill, titleBarLeft, titleBarRight, arenaViewRules;
     public TextMeshProUGUI arena, description, timestampOne, timestampTwo, timestampThree,
         timestampFour, rewardOne, rewardTwo, rewardThree, rewardFour, bestTime;
-    public Image rewardOneImage, rewardTwoImage, rewardThreeImage, rewardFourImage;
+    public Image rewardOneImage, rewardTwoImage, rewardThreeImage, rewardFourImage,
+        lineOne, lineTwo, lineThree, lineFour;
 
     // Private internal flag
     private bool arenasGenerated = false;
@@ -80,6 +81,9 @@ public class ArenaPanel : MonoBehaviour
                 // If arena not unlocked, show it as locked
                 else newButton.Lock(arena);
             }
+
+            // I'll come back to this later. Unity is being a dummy and
+            // not giving two shits about setting the sibling index
 
             // Iterate through all generated buttons and set order
             foreach (ArenaButton button in buttonList)
@@ -131,24 +135,28 @@ public class ArenaPanel : MonoBehaviour
         rewardOne.text = arena.objectiveOne.rewardName;
         rewardOneImage.sprite = arena.objectiveOne.rewardImage;
         rewardOneImage.color = arena.objectiveOne.rewardColor;
+        lineOne.color = arena.lightColor;
 
         // Set arena objective two
         timestampTwo.text = Formatter.Time(arena.objectiveTwo.timeRequired);
         rewardTwo.text = arena.objectiveTwo.rewardName;
         rewardTwoImage.sprite = arena.objectiveTwo.rewardImage;
         rewardTwoImage.color = arena.objectiveTwo.rewardColor;
+        lineTwo.color = arena.lightColor;
 
         // Set arena objective three
         timestampThree.text = Formatter.Time(arena.objectiveThree.timeRequired);
         rewardThree.text = arena.objectiveThree.rewardName;
         rewardThreeImage.sprite = arena.objectiveThree.rewardImage;
         rewardThreeImage.color = arena.objectiveThree.rewardColor;
+        lineThree.color = arena.lightColor;
 
         // Set arena objective four
         timestampFour.text = Formatter.Time(arena.objectiveFour.timeRequired);
         rewardFour.text = arena.objectiveFour.rewardName;
         rewardFourImage.sprite = arena.objectiveFour.rewardImage;
         rewardFourImage.color = arena.objectiveFour.rewardColor;
+        lineFour.color = arena.lightColor;
 
         // Set starting cards information
         for (int i = 0; i < startingCards.Count; i++)

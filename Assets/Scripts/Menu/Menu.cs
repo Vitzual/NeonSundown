@@ -58,6 +58,7 @@ public class Menu : MonoBehaviour
     {
         // Reset module slots if applicable
         Gamemode.modules = new Dictionary<int, ModuleData>();
+        Gamemode.moduleEffects = new Dictionary<Stat, float>();
 
         // Attempt to get the metacontext on file
         MetaContext context = SaveSystem.GetMetacontext();
@@ -173,6 +174,9 @@ public class Menu : MonoBehaviour
     // Load the main scene
     public void LoadMain()
     {
+        // Save game to update modules
+        SaveSystem.UpdateSave();
+
         // Set context and load the scene
         SaveSystem.SetMetacontext(Gamemode.arena.InternalID, Gamemode.ship.InternalID, null);
         SceneManager.LoadScene("Main");

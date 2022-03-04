@@ -32,16 +32,24 @@ public class ShipPanel : MonoBehaviour
     public CanvasGroup moduleCanvas;
     private List<ShipButton> buttons;
     private int moduleSlot = 0;
+    public AudioClip moduleSound;
+    private AudioSource audioSource;
 
     // Panel elements
     public new TextMeshProUGUI name;
     public TextMeshProUGUI modules, subTitle, desc, health, regen,
         speed, dash, damage, firerate, pierces, lifetime;
-    public Image icon, leftLine, rightLine, bottomLine, panel;
+    private string healthStr, regenStr, speedStr, dashStr, 
+        damageStr, firerateStr, piercesStr, lifetimeStr;
+    public Image icon, leftLine, rightLine, bottomLine, panel,
+        moduleCancelButton, moduleClearButton;
 
     // On start, subscribe to ship setup and create buttons
     public void Start()
     {
+        // Get audio source component 
+        audioSource = GetComponent<AudioSource>();
+
         // Setup module amounts
         moduleAmounts = new Dictionary<string, TextMeshProUGUI>();
         foreach (ModuleButton module in moduleButtons)
@@ -62,6 +70,9 @@ public class ShipPanel : MonoBehaviour
             buttons.Add(button);
         }
 
+        // I'll come back to this later. Unity is being a dummy and
+        // not giving two shits about setting the sibling index
+
         // After creating, set ordering
         foreach (ShipButton button in buttons)
             button.gameObject.transform.SetSiblingIndex(button.ship.listOrder);
@@ -80,6 +91,7 @@ public class ShipPanel : MonoBehaviour
     {
         // Set modules to false
         ToggleModules(false);
+        ClearModule(true);
 
         // Set the ship
         Gamemode.ship = ship;
@@ -91,26 +103,36 @@ public class ShipPanel : MonoBehaviour
         icon.sprite = ship.icon;
 
         // Set ship stats
-        health.text = "<b>HEALTH:</b><color=white> " + Formatter.Round(ship.startingHealth) + "hp";
-        regen.text = "<b>REGEN:</b><color=white> " + Formatter.Round(ship.regenRate) + " / second";
-        speed.text = "<b>SPEED:</b><color=white> " + Formatter.Round(ship.playerSpeed) + " km/h";
-        dash.text = "<b>DASH:</b><color=white> " + Formatter.Round(ship.dashSpeed) + " km/h";
+        healthStr = "<b>HEALTH:</b><color=white> " + Formatter.Round(ship.startingHealth) + "hp";
+        regenStr = "<b>REGEN:</b><color=white> " + Formatter.Round(ship.regenAmount) + " / second";
+        speedStr = "<b>SPEED:</b><color=white> " + Formatter.Round(ship.playerSpeed) + " km/h";
+        dashStr = "<b>DASH:</b><color=white> " + Formatter.Round(ship.dashSpeed) + " km/h";
 
         // Set weapon stats
         if (ship.weapon != null)
         {
-            damage.text = "<b>DAMAGE:</b><color=white> " + Formatter.Round(ship.weapon.damage) + "hp / shot";
-            firerate.text = "<b>FIRERATE:</b><color=white> " + Formatter.Round(ship.weapon.cooldown / 1f) + " / second";
-            pierces.text = "<b>PIERCES:</b><color=white> " + Formatter.Round(ship.weapon.pierces) + " / shot";
-            lifetime.text = "<b>LIFETIME:</b><color=white> " + Formatter.Round(ship.weapon.lifetime) + " seconds";
+            damageStr = "<b>DAMAGE:</b><color=white> " + Formatter.Round(ship.weapon.damage) + "hp / shot";
+            firerateStr = "<b>FIRERATE:</b><color=white> " + Formatter.Round(ship.weapon.cooldown / 1f) + " / second";
+            piercesStr = "<b>PIERCES:</b><color=white> " + Formatter.Round(ship.weapon.pierces) + " / shot";
+            lifetimeStr = "<b>LIFETIME:</b><color=white> " + Formatter.Round(ship.weapon.lifetime) + " seconds";
         }
         else
         {
-            damage.text = "<b>DAMAGE:</b><color=white> N/A";
-            firerate.text = "<b>FIRERATE:</b><color=white> N/A";
-            pierces.text = "<b>PIERCES:</b><color=white> N/A";
-            lifetime.text = "<b>LIFETIME:</b><color=white> N/A";
+            damageStr = "<b>DAMAGE:</b><color=white> N/A";
+            firerateStr = "<b>FIRERATE:</b><color=white> N/A";
+            piercesStr = "<b>PIERCES:</b><color=white> N/A";
+            lifetimeStr = "<b>LIFETIME:</b><color=white> N/A";
         }
+
+        // Set elements based off new strings
+        health.text = healthStr;
+        regen.text = regenStr;
+        speed.text = speedStr;
+        dash.text = dashStr;
+        damage.text = damageStr;
+        firerate.text = firerateStr;
+        pierces.text = piercesStr;
+        lifetime.text = lifetimeStr;
 
         // Set all colors
         panel.color = ship.mainColor;
@@ -127,6 +149,8 @@ public class ShipPanel : MonoBehaviour
         firerate.color = ship.subColor;
         pierces.color = ship.subColor;
         lifetime.color = ship.subColor;
+        moduleCancelButton.color = ship.subColor;
+        moduleClearButton.color = ship.subColor;
     }
 
     // Open module list
@@ -143,14 +167,40 @@ public class ShipPanel : MonoBehaviour
     }
 
     // Clear module
-    public void ClearModule()
+    public void ClearModule(bool all)
     {
-        SetModule(null);
+        if (all)
+        {
+            for (int i = 0; i < moduleSlots.Count; i++)
+            {
+                moduleSlot = i;
+                SetModule(null);
+            }
+        }
+        else SetModule(null);
     }
 
     // Set a module
     public void SetModule(ModuleData module)
     {
+        // Check if ship is null
+        if (Gamemode.ship == null)
+        {
+            Debug.Log("Gamemode ship is set to null!");
+            return;
+        }
+
+        // Check if the module is valid 
+        if (Gamemode.ship.weapon == null)
+        {
+            if (module.stat == Stat.Damage || module.stat == Stat.Range || module.stat == Stat.Cooldown ||
+                module.stat == Stat.Bullets || module.stat == Stat.Pierces || module.stat == Stat.Lifetime)
+            {
+                Debug.Log(module.name + " cannot be applied to " + Gamemode.ship.name + "!");
+                return;
+            }
+        }
+
         // Is the module null
         bool isModuleNull = module == null;
 
@@ -161,7 +211,11 @@ public class ShipPanel : MonoBehaviour
             if (Gamemode.modules.ContainsKey(moduleSlot))
             {
                 if (Gamemode.modules[moduleSlot] != null)
+                {
                     SaveSystem.AddModule(Gamemode.modules[moduleSlot].InternalID, 1);
+                    ApplyModule(Gamemode.modules[moduleSlot].stat, -Gamemode.modules[moduleSlot].value,
+                        Gamemode.modules[moduleSlot].multi);
+                }
                 Gamemode.modules[moduleSlot] = module;
             }
             else Gamemode.modules.Add(moduleSlot, module);
@@ -169,9 +223,21 @@ public class ShipPanel : MonoBehaviour
             // Update the module slot
             if (!isModuleNull)
             {
+                // Remove module from player and apply
+                SaveSystem.AddModule(module.InternalID, -1);
+                ApplyModule(module.stat, module.value, module.multi);
+
+                // Set module colors
                 moduleSlots[moduleSlot].module.color = module.color;
                 moduleSlots[moduleSlot].icon.sprite = module.icon;
                 moduleSlots[moduleSlot].icon.color = module.color;
+
+                // Play module sound
+                Events.active.VolumeChanged(Settings.music / 3f);
+                audioSource.volume = Settings.sound;
+                audioSource.Play();
+                StopAllCoroutines();
+                StartCoroutine(MusicPlayer.FadeIn(1f, 2f));
             }
             else
             {
@@ -181,6 +247,65 @@ public class ShipPanel : MonoBehaviour
 
             // Toggle modules
             ToggleModules(false);
+        }
+    }
+    
+    // Applies a module to the ship stats
+    private void ApplyModule(Stat stat, float amount, bool multi)
+    {
+        // Check if stat already exists and apply
+        if (Gamemode.moduleEffects.ContainsKey(stat))
+            Gamemode.moduleEffects[stat] += amount;
+        else
+        {
+            if (multi) Gamemode.moduleEffects.Add(stat, amount + 1);
+            else Gamemode.moduleEffects.Add(stat, amount);
+        }
+
+        // Check if stat is no longer applied
+        bool clear = Gamemode.moduleEffects[stat] >= -0.0001 
+            && Gamemode.moduleEffects[stat] <= 0.0001;
+        float val = Gamemode.moduleEffects[stat];
+        ShipData ship = Gamemode.ship;
+
+        // Update the UI elements
+        switch (stat)
+        {
+            case Stat.Health:
+                if (clear) health.text = healthStr;
+                else health.text = healthStr + "<color=green> (+" +
+                        ship.startingHealth * val + ")";
+                break;
+            case Stat.Regen:
+                if (clear) regen.text = regenStr;
+                else regen.text = regenStr + "<color=green> (+" +
+                        ship.regenAmount * val + ")";
+                break;
+            case Stat.MoveSpeed:
+                if (clear) speed.text = speedStr;
+                else speed.text = speedStr + "<color=green> (+" +
+                        ship.playerSpeed * val + ")";
+                break;
+            case Stat.Damage:
+                if (clear) damage.text = damageStr;
+                else damage.text = damageStr + "<color=green> (+" +
+                        ship.weapon.damage * val + ")";
+                break;
+            case Stat.Cooldown:
+                if (clear) firerate.text = firerateStr;
+                else firerate.text = firerateStr + "<color=green> (-" +
+                        ship.weapon.cooldown * val + ")";
+                break;
+            case Stat.Pierces:
+                if (clear) pierces.text = piercesStr;
+                else pierces.text = piercesStr + "<color=green> (+" +
+                        ship.weapon.pierces + val + ")";
+                break;
+            case Stat.Lifetime:
+                if (clear) lifetime.text = lifetimeStr;
+                else lifetime.text = lifetimeStr + "<color=green> (+" +
+                        ship.weapon.lifetime * val + ")";
+                break;
         }
     }
 

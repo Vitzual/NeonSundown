@@ -34,6 +34,10 @@ public class Ship : Weapon
     public TextMeshProUGUI levelText;
     public TextMeshProUGUI xpText;
 
+    // Ship specific stats
+    private float regenAmount;
+    private float firerateMulti;
+
     // View distance
     public Camera cam;
 
@@ -80,7 +84,17 @@ public class Ship : Weapon
         xp = 0;
         health = shipData.startingHealth;
         maxHealth = health;
-        regenCooldown = shipData.regenRate;
+
+        // Setup ship specific variables
+        regenAmount = shipData.regenAmount;
+
+        // Setup ship weapon specific variables
+        if (shipData.weapon != null) 
+        {
+            // Set firerate multiplier
+            firerateMulti = shipData.weapon.cooldown / 10;
+            Debug.Log("Set firerate multi to " + firerateMulti);
+        }
 
         // Set weapon variables
         damage = shipData.weapon.damage;
@@ -102,6 +116,9 @@ public class Ship : Weapon
         xpText.text = Mathf.Round(xp) + " / " + Mathf.Round(rankup);
         xpBar.currentPercent = (float)xp / rankup * 100;
         xpBar.UpdateUI();
+
+        // Setup any attached modules
+        SetupModules();
     }
 
     // Update method 
@@ -119,13 +136,12 @@ public class Ship : Weapon
         if (shipData.canRegen)
         {
             if (regenCooldown > 0)
-            {
                 regenCooldown -= Time.deltaTime;
-            }
+
             else if (health < maxHealth)
             {
-                regenCooldown = shipData.regenRate;
-                Heal(0.1f);
+                regenCooldown = 1f;
+                Heal(regenAmount);
             }
         }
 
@@ -135,7 +151,8 @@ public class Ship : Weapon
     }
 
     // Update stat
-    public override void UpdateStat(Stat stat)
+    // THIS METHOD IS GOING TO BE REDONE
+    public void UpdateStat(Stat stat, float amount, bool multiply = false)
     {
         switch(stat)
         {
@@ -143,8 +160,18 @@ public class Ship : Weapon
             case Stat.Health:
 
                 // Upgrade health
-                maxHealth += 5;
-                health += 5;
+                if (multiply)
+                {
+                    float newHealth = maxHealth * amount;
+                    float change = maxHealth - newHealth;
+                    maxHealth *= newHealth;
+                    health += change;
+                }
+                else
+                {
+                    maxHealth += amount;
+                    health += amount;
+                }
 
                 UpdateHealth();
                 break;
@@ -153,61 +180,74 @@ public class Ship : Weapon
             case Stat.View:
 
                 // Upgrade the view distance
-                cam.orthographicSize += 2.5f;
+                if (multiply) cam.orthographicSize *= amount;
+                else cam.orthographicSize += amount;
                 break;
 
             // Upgrades the speed 
             case Stat.MoveSpeed:
 
                 // Upgrade speed
-                controller.moveSpeed += 2.5f;
-                controller.dashSpeed += 2.5f;
-                //controller.dashTimer += 0.25f;
+                if (multiply)
+                {
+                    controller.moveSpeed *= amount;
+                    controller.dashSpeed *= amount;
+                }
+                else
+                {
+                    controller.moveSpeed += amount;
+                    controller.dashSpeed += amount;
+                }
                 break;
 
             // Upgrades the speed 
             case Stat.DashSpeed:
 
                 // Upgrade speed
-                controller.dashSpeed += 2.5f;
-                //controller.dashTimer += 0.25f;
+                if (multiply) controller.dashSpeed *= amount;
+                else controller.dashSpeed += amount;
                 break;
 
             // Upgrades the damage 
             case Stat.Damage:
 
                 // Upgrade damage output
-                damage += 0.5f;
+                if (multiply) damage *= amount;
+                else damage += amount;
                 break;
 
             // Increases firerate 
             case Stat.Cooldown:
 
                 // Upgrade firerate
-                cooldown -= 0.01f;
+                if (multiply) cooldown *= amount;
+                else cooldown -= amount;
                 if (cooldown < 0.05f)
-                    cooldown = 0.05f;
+                    cooldown = amount;
                 break;
 
             // Increases piercing rounds
             case Stat.Pierces:
 
                 // Upgrade piercing
-                pierces += 1;
+                if (multiply) pierces *= amount;
+                else pierces += amount;
                 break;
 
             // Increases bullet lifetime
             case Stat.Lifetime:
 
                 // Upgrade lfietime
-                lifetime += 0.1f;
+                if (multiply) lifetime *= amount;
+                else lifetime += amount;
                 break;
 
             // Increases accuracy
             case Stat.Bloom:
 
                 // Increase accuracy
-                bloom -= 2.5f;
+                if (multiply) bloom *= amount;
+                else bloom -= amount;
                 if (bloom < 0f)
                     bloom = 0f;
                 break;
@@ -216,14 +256,24 @@ public class Ship : Weapon
             case Stat.XPGain:
 
                 // Increase xp multiplier
-                xpMultiplier += 0.25f;
+                if (multiply) xpMultiplier *= amount;
+                else xpMultiplier += amount;
                 break;
 
             // Increase XP range
             case Stat.XPRange:
 
                 // Increases XP range
-                xpRange.radius += 5;
+                if (multiply) xpRange.radius *= amount;
+                else xpRange.radius += amount;
+                break;
+
+            // Increase regen rate
+            case Stat.Regen:
+
+                // Increases regen rate
+                if (multiply) regenAmount *= amount;
+                else regenAmount += amount;
                 break;
         }
     }
@@ -330,5 +380,14 @@ public class Ship : Weapon
             Damage(bullet.GetDamage());
             bullet.Destroy();
         }
+    }
+
+    // Sets up any attached power modules
+    public void SetupModules()
+    {
+        // Iterate through all modules
+        foreach(KeyValuePair<Stat, float> module in Gamemode.moduleEffects)
+            UpdateStat(module.Key, module.Value, true);
+        Gamemode.moduleEffects = new Dictionary<Stat, float>();
     }
 }

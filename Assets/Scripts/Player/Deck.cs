@@ -142,7 +142,7 @@ public class Deck : MonoBehaviour
 
         // Check player stats first
         if (stat.applyToPlayer)
-            player.UpdateStat(stat.type);
+            player.UpdateStat(stat.type, stat.modifier, stat.multiply);
 
         // Update all weapon cards
         if (stat.applyToCards)

@@ -50,7 +50,7 @@ public class ShipData : IdentifiableScriptableObject
     [BoxGroup("Ship Data")]
     public bool canFire;
     [BoxGroup("Ship Data")]
-    public float regenRate;
+    public float regenAmount;
     [BoxGroup("Ship Data")]
     public float playerSpeed;
     [BoxGroup("Ship Data")]

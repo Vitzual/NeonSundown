@@ -12,5 +12,6 @@ public class ModuleData : IdentifiableScriptableObject
     public Color color;
     public Stat stat;
     public float value;
+    public bool multi;
     public CrystalData cost;
 }
