@@ -37,6 +37,11 @@ public class Controller : MonoBehaviour
     private float dash;
     private float speed;
 
+    // Cursor variables
+    public Texture2D cursorTexture;
+    public CursorMode cursorMode = CursorMode.Auto;
+    public Vector2 hotSpot = Vector2.zero;
+
     // Called on start
     void Start()
     {
@@ -128,16 +133,6 @@ public class Controller : MonoBehaviour
         rotator.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
     }
 
-    // On collision with enemies
-    public void OnCollisionEnter2D(Collision2D collision)
-    {
-        // Grab the enemy component attached to the enemy
-        Enemy enemy = collision.collider.GetComponent<Enemy>();
-
-        // Check if the collision was indeed an enemy
-        if (enemy != null)
-        {
-            
-        }
-    }
+    //public void OnMouseEnter() { Cursor.SetCursor(cursorTexture, hotSpot, cursorMode); }
+    //public void OnMouseExit() { Cursor.SetCursor(null, Vector2.zero, cursorMode); }
 }

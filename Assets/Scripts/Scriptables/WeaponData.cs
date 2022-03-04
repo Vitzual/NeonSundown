@@ -66,6 +66,8 @@ public class WeaponData : CardData
     public float minPitch = 0.9f;
     [BoxGroup("Object Instances"), Tooltip("The maximum pitch value applied to the audio clip. Optional."), Range(0.5f, 1.5f)]
     public float maxPitch = 1.1f;
+    [BoxGroup("Object Instances"), Tooltip("The scale at which to play the audio. Optional."), Range(0.5f, 2f)]
+    public float audioScale = 1f;
     [BoxGroup("Object Instances"), Tooltip("If the weapon instance above should be set as a child of the parent.")]
     public bool setPlayerAsParent;
 

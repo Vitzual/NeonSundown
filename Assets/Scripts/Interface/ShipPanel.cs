@@ -112,14 +112,14 @@ public class ShipPanel : MonoBehaviour
         if (ship.weapon != null)
         {
             damageStr = "<b>DAMAGE:</b><color=white> " + Formatter.Round(ship.weapon.damage) + "hp / shot";
-            firerateStr = "<b>FIRERATE:</b><color=white> " + Formatter.Round(ship.weapon.cooldown / 1f) + " / second";
+            firerateStr = "<b>COOLDOWN:</b><color=white> " + Formatter.Round(ship.weapon.cooldown) + " seconds";
             piercesStr = "<b>PIERCES:</b><color=white> " + Formatter.Round(ship.weapon.pierces) + " / shot";
             lifetimeStr = "<b>LIFETIME:</b><color=white> " + Formatter.Round(ship.weapon.lifetime) + " seconds";
         }
         else
         {
             damageStr = "<b>DAMAGE:</b><color=white> N/A";
-            firerateStr = "<b>FIRERATE:</b><color=white> N/A";
+            firerateStr = "<b>COOLDOWN:</b><color=white> N/A";
             piercesStr = "<b>PIERCES:</b><color=white> N/A";
             lifetimeStr = "<b>LIFETIME:</b><color=white> N/A";
         }
@@ -266,6 +266,7 @@ public class ShipPanel : MonoBehaviour
         bool clear = Gamemode.moduleEffects[stat] >= -0.0001 
             && Gamemode.moduleEffects[stat] <= 0.0001;
         float val = Gamemode.moduleEffects[stat];
+        Debug.Log(val);
         ShipData ship = Gamemode.ship;
 
         // Update the UI elements
@@ -273,38 +274,36 @@ public class ShipPanel : MonoBehaviour
         {
             case Stat.Health:
                 if (clear) health.text = healthStr;
-                else health.text = healthStr + "<color=green> (+" +
-                        ship.startingHealth * val + ")";
+                else health.text = healthStr + "<color=green> (+" + Formatter.Round(
+                    (ship.startingHealth * val) - ship.startingHealth) + ")";
                 break;
             case Stat.Regen:
                 if (clear) regen.text = regenStr;
-                else regen.text = regenStr + "<color=green> (+" +
-                        ship.regenAmount * val + ")";
+                else regen.text = regenStr + "<color=green> (+" + val + ")";
                 break;
             case Stat.MoveSpeed:
                 if (clear) speed.text = speedStr;
-                else speed.text = speedStr + "<color=green> (+" +
-                        ship.playerSpeed * val + ")";
+                else speed.text = speedStr + "<color=green> (+" + Formatter.Round(
+                    (ship.playerSpeed * val) - ship.playerSpeed) + ")";
                 break;
             case Stat.Damage:
                 if (clear) damage.text = damageStr;
-                else damage.text = damageStr + "<color=green> (+" +
-                        ship.weapon.damage * val + ")";
+                else damage.text = damageStr + "<color=green> (+" + Formatter.Round(
+                    (ship.weapon.damage * val) - ship.weapon.damage) + ")";
                 break;
             case Stat.Cooldown:
                 if (clear) firerate.text = firerateStr;
-                else firerate.text = firerateStr + "<color=green> (-" +
-                        ship.weapon.cooldown * val + ")";
+                else firerate.text = firerateStr + "<color=green> (-" + Formatter.Round(
+                    ship.weapon.cooldown - (ship.weapon.cooldown * val), "0.00") + ")";
                 break;
             case Stat.Pierces:
                 if (clear) pierces.text = piercesStr;
-                else pierces.text = piercesStr + "<color=green> (+" +
-                        ship.weapon.pierces + val + ")";
+                else pierces.text = piercesStr + "<color=green> (+" + val + ")";
                 break;
             case Stat.Lifetime:
                 if (clear) lifetime.text = lifetimeStr;
-                else lifetime.text = lifetimeStr + "<color=green> (+" +
-                        ship.weapon.lifetime * val + ")";
+                else lifetime.text = lifetimeStr + "<color=green> (+" + Formatter.Round(
+                    (ship.weapon.lifetime * val) - ship.weapon.lifetime) + ")";
                 break;
         }
     }

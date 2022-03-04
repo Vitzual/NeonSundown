@@ -37,7 +37,7 @@ public class Scythe : Weapon
             entity.Damage(damage);
 
             // Play death sound if enemy dies
-            if (entity.IsDead()) AudioPlayer.Play(weapon.onDeathSound);
+            if (entity.IsDead()) AudioPlayer.Play(weapon.onDeathSound, true, 0.9f, 1.1f, false, weapon.audioScale);
             else AudioPlayer.Play(weapon.onDamageSound);
         }
     }

@@ -68,6 +68,7 @@ public class XPHandler : MonoBehaviour
                     if (Vector2.Distance(xpList[a].transform.position, player.transform.position) < targetDistanceCheck)
                     {
                         player.AddXP(1);
+                        AudioPlayer.Play(xpSound, true, 0.8f, 1.2f, false, 1.5f);
                         Destroy(xpList[a].transform.gameObject);
                         xpList.RemoveAt(a);
                         a--;

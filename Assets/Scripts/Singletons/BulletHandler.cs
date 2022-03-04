@@ -60,6 +60,6 @@ public class BulletHandler : MonoBehaviour
 
         // Check if bullet has a sound
         if (weapon.bulletSound != null)
-            AudioPlayer.Play(weapon.bulletSound, true, weapon.minPitch, weapon.maxPitch, overrideAudioCooldown);
+            AudioPlayer.Play(weapon.bulletSound, true, weapon.minPitch, weapon.maxPitch, overrideAudioCooldown, weapon.audioScale);
     }
 }

@@ -386,8 +386,11 @@ public class Ship : Weapon
     public void SetupModules()
     {
         // Iterate through all modules
-        foreach(KeyValuePair<Stat, float> module in Gamemode.moduleEffects)
+        foreach (KeyValuePair<Stat, float> module in Gamemode.moduleEffects)
+        {
+            Debug.Log("Setting up module " + module.Key.ToString() + " with value " + module.Value);
             UpdateStat(module.Key, module.Value, true);
+        }
         Gamemode.moduleEffects = new Dictionary<Stat, float>();
     }
 }

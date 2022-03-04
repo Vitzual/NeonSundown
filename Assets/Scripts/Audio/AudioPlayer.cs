@@ -34,8 +34,8 @@ public class AudioPlayer : MonoBehaviour
     }
 
     // Play an audio clip
-    public static void Play(AudioClip clip, bool randomizePitch = true, 
-        float minPitch = 0.9f, float maxPitch = 1.1f, bool overrideCooldown = false)
+    public static void Play(AudioClip clip, bool randomizePitch = true, float minPitch = 0.9f, 
+        float maxPitch = 1.1f, bool overrideCooldown = false, float audioScale = 1)
     {
         // Check if cooldown expired
         if (!overrideCooldown)
@@ -53,6 +53,6 @@ public class AudioPlayer : MonoBehaviour
         if (randomizePitch) audioSource.pitch = Random.Range(minPitch, maxPitch);
         else audioSource.pitch = 1f;
 
-        audioSource.PlayOneShot(clip);
+        audioSource.PlayOneShot(clip, audioScale);
     }
 }
