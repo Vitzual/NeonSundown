@@ -17,7 +17,8 @@ public class Boss : MonoBehaviour
     {
         // Get enemy and target reference
         enemy = GetComponent<Enemy>();
-        if (target != null) target = EnemyHandler.active.player;
+        if (EnemyHandler.active.player != null) 
+            target = EnemyHandler.active.player;
 
         // Setup turrets
         foreach(Turret turret in turrets)

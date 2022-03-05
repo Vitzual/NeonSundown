@@ -20,6 +20,8 @@ public class VariantData
     public float crystalDropChance;
 
     [BoxGroup("Movement Variables")]
+    public bool knockback;
+    [BoxGroup("Movement Variables")]
     public bool lockTarget;
     [BoxGroup("Movement Variables")]
     public bool rotate;

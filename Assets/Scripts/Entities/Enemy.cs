@@ -13,6 +13,7 @@ public class Enemy : Entity
     // Rigidbody attached to the enemy
     public Rigidbody2D rb;
     public bool isCullable = true;
+    private bool isDestroyed = false;
 
     // Transform lists
     public List<TrailRenderer> trails;
@@ -49,7 +50,6 @@ public class Enemy : Entity
             particle.trailMaterial = variantColor.material;
         }
 
-
         // Set scriptable
         variant = data.variant;
         this.data = data;
@@ -71,7 +71,8 @@ public class Enemy : Entity
     public override void Damage(float amount)
     {
         // Apply knockback
-        rb.AddForce((target.position - transform.position) * -10);
+        if (data.knockback)
+            rb.AddForce((target.position - transform.position) * -10);
 
         // Modify internal values
         health -= amount;
@@ -81,17 +82,24 @@ public class Enemy : Entity
     // Destroy entity
     public override void Destroy()
     {
+        // Create particle
         CreateParticle();
 
         // Spawn XP and possibly crystal
-        if (data.canDropCrystal)
+        if (!isDestroyed)
         {
-            if (Random.Range(0, 1f) < data.crystalDropChance)
-                XPHandler.active.Spawn(transform.position, data.minXP, data.crystal);
+            if (data.canDropCrystal)
+            {
+                if (Random.Range(0, 1f) < data.crystalDropChance)
+                    XPHandler.active.Spawn(transform.position, data.minXP, data.crystal);
+                else XPHandler.active.Spawn(transform.position, data.minXP);
+            }
             else XPHandler.active.Spawn(transform.position, data.minXP);
         }
-        else XPHandler.active.Spawn(transform.position, data.minXP);
-        
+
+        // Set is destroy to true
+        isDestroyed = true;
+
         // Check if enemy can shake screen on death
         if (data.shakeScreenOnDeath && Settings.screenShake)
             CameraShake.ShakeAll();

@@ -178,7 +178,7 @@ public class Ship : Weapon
 
             // Upgrades the view distance
             case Stat.View:
-
+                
                 // Upgrade the view distance
                 if (multiply) cam.orthographicSize *= amount;
                 else cam.orthographicSize += amount;
@@ -230,16 +230,14 @@ public class Ship : Weapon
             case Stat.Bullets:
 
                 // Upgrade bullets
-                if (multiply) bullets *= amount;
-                else bullets += amount;
+                bullets += amount;
                 break;
 
             // Increases piercing rounds
             case Stat.Pierces:
 
                 // Upgrade piercing
-                if (multiply) pierces *= amount;
-                else pierces += amount;
+                pierces += amount;
                 break;
 
             // Increases bullet lifetime
@@ -319,7 +317,7 @@ public class Ship : Weapon
         {
             // Create bullet
             BulletHandler.active.CreateBullet(this, shipData.weapon, barrel.position, 
-                model.rotation, shipData.weapon.bullets, true);
+                model.rotation, (int)bullets, true);
             shipCooldown = cooldown;
         }
     }
