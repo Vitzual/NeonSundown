@@ -4,5 +4,6 @@ public enum Variant
     Ghost,
     Chaos,
     Fusion,
-    Toxic
+    Toxic,
+    Dark
 }

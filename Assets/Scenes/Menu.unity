@@ -21967,7 +21967,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   useRandomTracks: 0
-  isMenu: 1
+  _isMenu: 1
 --- !u!1 &1054796135
 GameObject:
   m_ObjectHideFlags: 0
@@ -25394,7 +25394,7 @@ MonoBehaviour:
   menuStage: {fileID: 11400000, guid: f6b857027ee9aef49bf2472479e1744f, type: 2}
   enemies: []
   range: 60
-  moveUpTo: 40
+  moveUpTo: 60
 --- !u!4 &1223023756
 Transform:
   m_ObjectHideFlags: 0
@@ -25403,7 +25403,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1223023754}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -40, z: 0}
+  m_LocalPosition: {x: 0, y: -65, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -35592,6 +35592,12 @@ MonoBehaviour:
     lightColor: {r: 0.7872734, g: 1, b: 0.41037738, a: 1}
     material: {fileID: 2100000, guid: 64d3647783cb73540b8923daab926268, type: 2}
     deathParticle: {fileID: 1983349488827960787, guid: 339faf01867f7004ebd3add2c3e88d72, type: 3}
+  - type: 5
+    fillColor: {r: 0.14150941, g: 0.14150941, b: 0.14150941, a: 1}
+    borderColor: {r: 1, g: 1, b: 1, a: 1}
+    lightColor: {r: 0.5754717, g: 0.5754717, b: 0.5754717, a: 1}
+    material: {fileID: 2100000, guid: 4ab3027e425e85946b39bff6ca3ab165, type: 2}
+    deathParticle: {fileID: 993855083006936043, guid: 01c48aa84a2ea6c49901482836dcdd15, type: 3}
 --- !u!4 &1698921122
 Transform:
   m_ObjectHideFlags: 0

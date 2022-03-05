@@ -17,7 +17,7 @@ public class Boss : MonoBehaviour
     {
         // Get enemy and target reference
         enemy = GetComponent<Enemy>();
-        target = EnemyHandler.active.player;
+        if (target != null) target = EnemyHandler.active.player;
 
         // Setup turrets
         foreach(Turret turret in turrets)
@@ -27,7 +27,8 @@ public class Boss : MonoBehaviour
         Events.active.BossSpawned(this, enemy);
 
         // Play spawn sound
-        AudioPlayer.Play(spawnSound, false);
+        if (!MusicPlayer.isMenu)
+            AudioPlayer.Play(spawnSound, false);
     }
 
     // Control turrets

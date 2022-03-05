@@ -16,7 +16,6 @@ MonoBehaviour:
   createdAtTicks: 637795888674283940
   name: Ghoul
   icon: {fileID: 21300000, guid: 2b9338a7914877541974f20ae28e5322, type: 3}
-  desc: Spooky
   obj: {fileID: 8071768145869598022, guid: 5f28ca0a85e215247a9803be15722c16, type: 3}
   variantStats:
   - variant: 0
@@ -41,6 +40,19 @@ MonoBehaviour:
     canDropCrystal: 1
     crystal: {fileID: 8448323221370727099, guid: 3d033a6255a85a0498fc4b8e74da9e21, type: 3}
     crystalDropChance: 0.3
+    lockTarget: 1
+    rotate: 0
+    rotateSpeed: 0
+    shakeScreenOnDeath: 1
+  - variant: 5
+    health: 250
+    damage: 50
+    speed: 15
+    minXP: 80
+    maxXP: 150
+    canDropCrystal: 0
+    crystal: {fileID: 0}
+    crystalDropChance: 0
     lockTarget: 1
     rotate: 0
     rotateSpeed: 0

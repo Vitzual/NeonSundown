@@ -169,7 +169,7 @@ public class Enemy : Entity
     public float GetMaxHealth() { return maxHealth; }
 
     // On collision
-    public void OnTriggerEnter2D(Collider2D collision)
+    public virtual void OnTriggerEnter2D(Collider2D collision)
     {
         // Get the other enemy component
         Bullet bullet = collision.GetComponent<Bullet>();

@@ -33,6 +33,8 @@ public class ArenaData : IdentifiableScriptableObject
     [BoxGroup("Arena Info")]
     public TileBase arenaBackground;
     [BoxGroup("Arena Info")]
+    public float arenaMenuPitch = 1f;
+    [BoxGroup("Arena Info")]
     public AudioClip arenaMusic;
     [BoxGroup("Arena Info")]
     public StageData menuStage;

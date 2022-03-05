@@ -6,29 +6,29 @@ public class MusicPlayer : MonoBehaviour
 {
     // Audio source for music
     public bool useRandomTracks = false;
-    public bool isMenu = false;
-    private bool arenaMusic = false;
-    private static AudioSource music;
+    public bool _isMenu = false;
+    public static bool isMenu = false;
+    public static AudioSource music;
 
     // Fade in variables
     private static float targetFadeIn = 1f;
     private static float targetFadeOut = 0.5f;
 
     // Start is called before the first frame update
-    void Start()
+    public void Start()
     {
         // Subscribe to volume change event
         Events.active.onVolumeChanged += UpdateVolume;
 
         // Get the audio source
         music = GetComponent<AudioSource>();
+        isMenu = _isMenu;
 
         // Check if is menu
-        if (!isMenu)
+        if (!_isMenu)
         {
             music.clip = Gamemode.arena.arenaMusic;
             music.loop = true;
-            arenaMusic = true;
         }
 
         music.volume = Settings.music;

@@ -4,17 +4,26 @@ using UnityEngine;
 
 public class Turret : Weapon
 {
+    // Turret aiming thing
+    private bool hasTarget = false;
+
     // Setup the turret
     public void Setup(WeaponData weapon, float cooldown, Transform target)
     {
+        hasTarget = target != null;
+
         this.weapon = weapon;
         this.cooldown = cooldown;
         this.target = target;
-        SetupStats();
+
+        if (hasTarget) SetupStats();
     }
 
     public override void Use()
     {
+        // Check if has target
+        if (!hasTarget) return;
+
         // Rotate to the target
         float angle = Mathf.Atan2(target.transform.position.y - transform.position.y,
             target.transform.position.x - transform.position.x) * Mathf.Rad2Deg;

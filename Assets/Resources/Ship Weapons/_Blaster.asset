@@ -16,9 +16,11 @@ MonoBehaviour:
   createdAtTicks: 637803422143901835
   name: Blaster
   description: 
-  canDrop: 0
   sprite: {fileID: 0}
   color: {r: 0, g: 0, b: 0, a: 0}
+  maximumAmount: 0
+  canDrop: 0
+  isUnlocked: 0
   prestigeSprite: {fileID: 0}
   baseLevels: []
   prestigeLevels: []
@@ -30,7 +32,7 @@ MonoBehaviour:
   range: 0
   bloom: 20
   pierces: 0
-  bullets: 4
+  bullets: 5
   lifetime: 0.4
   randomDirection: 0
   randomTarget: 0
@@ -39,10 +41,11 @@ MonoBehaviour:
   bullet: {fileID: 4616838733166897725, guid: afcb6e3c47783de4080790735a569129, type: 3}
   bulletSound: {fileID: 8300000, guid: f3eba842a78790b45aa3ae62c01a8ddd, type: 3}
   obj: {fileID: 0}
-  onDamageSound: {fileID: 0}
-  onDeathSound: {fileID: 0}
+  onDamageSound: {fileID: 8300000, guid: 55ccd25efa4ef2e4cb4854f42f47b0a6, type: 3}
+  onDeathSound: {fileID: 8300000, guid: eb8d849ee191e0641b37d170b52e6de7, type: 3}
   minPitch: 0.9
   maxPitch: 1.1
+  audioScale: 1
   setPlayerAsParent: 0
   useMaterial: 1
   useTrail: 0

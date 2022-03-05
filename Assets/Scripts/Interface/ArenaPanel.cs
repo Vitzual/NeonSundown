@@ -184,6 +184,13 @@ public class ArenaPanel : MonoBehaviour
             else break;
         }
 
+        // Set menu music
+        if (MusicPlayer.isMenu)
+        {
+            Debug.Log("Setting music pitch to " + arena.arenaMenuPitch);
+            MusicPlayer.music.pitch = arena.arenaMenuPitch;
+        }
+
         // Change the background
         ChangeBackground(arena);
     }

@@ -19,51 +19,53 @@ MonoBehaviour:
   desc: An arena comprised of armored enemies. Locate the power cells on each enemy
     and destroy them to drop their shields.
   arenaBackground: {fileID: 11400000, guid: 212235cec4c12fd42a5384b47c1febca, type: 2}
+  arenaMenuPitch: 1
   arenaMusic: {fileID: 8300000, guid: e1a9a43f8255a4d4e89766b3ce467c63, type: 3}
-  menuStage: {fileID: 0}
+  menuStage: {fileID: 11400000, guid: 9050d9ffa7d4c0c49925120bf802a7f1, type: 2}
   availableInDemo: 0
-  unlockByDefault: 0
+  unlockByDefault: 1
   unlockObjective: 'Complete "Bomber Blitz" '
   order: 3
   buttonColor: {r: 0, g: 0.6497364, b: 1, a: 1}
   lightColor: {r: 0.4764151, g: 0.81725866, b: 1, a: 1}
   objectiveOne:
     rewardName: NEW CARD
-    rewardImage: {fileID: 0}
-    rewardColor: {r: 1, g: 1, b: 1, a: 1}
-    timeRequired: 0
+    rewardImage: {fileID: 21300000, guid: 176490883beb38b4fa6a5e34db378dcf, type: 3}
+    rewardColor: {r: 0, g: 0.7058824, b: 0.5058824, a: 1}
+    timeRequired: 150
     arenaReward: {fileID: 0}
     shipReward: {fileID: 0}
-    cardReward: {fileID: 0}
+    cardReward: {fileID: 11400000, guid: 157aa582266421048a67d5537a2111c6, type: 2}
     achievementReward: {fileID: 0}
   objectiveTwo:
     rewardName: NEW ARENA
     rewardImage: {fileID: 21300000, guid: b630d9252643dcc48ba78cff14e58ab8, type: 3}
     rewardColor: {r: 1, g: 1, b: 1, a: 1}
-    timeRequired: 0
-    arenaReward: {fileID: 0}
+    timeRequired: 300
+    arenaReward: {fileID: 11400000, guid: 7fe1ab745ef0023428cfac666e92bbd5, type: 2}
     shipReward: {fileID: 0}
     cardReward: {fileID: 0}
     achievementReward: {fileID: 0}
   objectiveThree:
-    rewardName: NEW CARD
-    rewardImage: {fileID: 0}
+    rewardName: NEW SHIP
+    rewardImage: {fileID: 21300000, guid: b299a122daf4c3843be6a968b8939e3f, type: 3}
     rewardColor: {r: 1, g: 1, b: 1, a: 1}
-    timeRequired: 0
+    timeRequired: 450
     arenaReward: {fileID: 0}
-    shipReward: {fileID: 0}
+    shipReward: {fileID: 11400000, guid: 744961d9e6627c44ba7ecd1806ba9649, type: 2}
     cardReward: {fileID: 0}
     achievementReward: {fileID: 0}
   objectiveFour:
     rewardName: ACHIEVEMENT
     rewardImage: {fileID: 21300000, guid: 9e08bdaab5753e04fad6f37676622765, type: 3}
     rewardColor: {r: 1, g: 1, b: 1, a: 1}
-    timeRequired: 0
+    timeRequired: 600
     arenaReward: {fileID: 0}
     shipReward: {fileID: 0}
     cardReward: {fileID: 0}
     achievementReward: {fileID: 3391616857268349422, guid: f589d5fe6376ca443bb8e175e09de7de, type: 2}
-  stages: []
+  stages:
+  - {fileID: 11400000, guid: a0ef91bf259abf743828c959e37a70ad, type: 2}
   startingCards: []
   blacklistCards: []
   useWall: 0

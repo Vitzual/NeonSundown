@@ -9,7 +9,7 @@ public class StagesPanel : MonoBehaviour
     // Internal arena
     [HideInInspector]
     public ArenaData arena;
-
+    
     // List of arenas 
     public List<StageButton> stageButtons;
     [HideInInspector]

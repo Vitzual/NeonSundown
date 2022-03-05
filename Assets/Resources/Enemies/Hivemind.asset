@@ -16,15 +16,14 @@ MonoBehaviour:
   createdAtTicks: 637796052283711065
   name: Hivemind
   icon: {fileID: 21300000, guid: 2a5bd82d3d54fb54496530dd25a565d4, type: 3}
-  desc: spawns stuff
   obj: {fileID: 8071768145869598022, guid: 66e5a97b2501b0a4bb719a8a7ae7891c, type: 3}
   variantStats:
   - variant: 0
     health: 35
     damage: 150
     speed: 0.2
-    minXP: 30
-    maxXP: 70
+    minXP: 25
+    maxXP: 40
     canDropCrystal: 0
     crystal: {fileID: 0}
     crystalDropChance: 0
@@ -36,8 +35,21 @@ MonoBehaviour:
     health: 50
     damage: 150
     speed: 0.15
-    minXP: 50
-    maxXP: 100
+    minXP: 30
+    maxXP: 50
+    canDropCrystal: 0
+    crystal: {fileID: 0}
+    crystalDropChance: 0
+    lockTarget: 1
+    rotate: 0
+    rotateSpeed: 0
+    shakeScreenOnDeath: 1
+  - variant: 3
+    health: 50
+    damage: 150
+    speed: 0.15
+    minXP: 25
+    maxXP: 50
     canDropCrystal: 0
     crystal: {fileID: 0}
     crystalDropChance: 0

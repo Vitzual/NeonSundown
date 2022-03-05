@@ -150,7 +150,7 @@ public class Dealer : MonoBehaviour
             dealList.Remove(card);
         }
     }
-
+    
     // Pick the card and add to palyer
     public void PickCard(CardData card, int number)
     {
