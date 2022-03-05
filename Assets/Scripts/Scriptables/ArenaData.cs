@@ -23,6 +23,15 @@ public class ArenaData : IdentifiableScriptableObject
         public AchievementObject achievementReward;
     }
 
+    [System.Serializable]
+    public class ArenaCard
+    {
+        // Card data
+        public CardData card;
+        public int amount;
+        public bool prestige;
+    }
+
     // Arena Information
     [BoxGroup("Arena Info")]
     public new string name;
@@ -69,7 +78,7 @@ public class ArenaData : IdentifiableScriptableObject
     [BoxGroup("Arena Rules")]
     public List<StageData> stages;
     [BoxGroup("Arena Rules")]
-    public List<CardData> startingCards;
+    public List<ArenaCard> startingCards;
     [BoxGroup("Arena Rules")]
     public List<CardData> blacklistCards;
     [BoxGroup("Arena Rules")]

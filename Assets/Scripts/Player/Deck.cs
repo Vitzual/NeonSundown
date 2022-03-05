@@ -45,8 +45,9 @@ public class Deck : MonoBehaviour
         weaponInstances = new List<Weapon>();
 
         // Add starting card if arena has one
-        for (int i = 0; i < Gamemode.arena.startingCards.Count; i++)
-            AddCard(Gamemode.arena.startingCards[i]);
+        for (int a = 0; a < Gamemode.arena.startingCards.Count; a++)
+            for (int b = 0; b < Gamemode.arena.startingCards[b].amount; b++)
+                AddCard(Gamemode.arena.startingCards[a].card);
     }
 
     // Calculate cooldown

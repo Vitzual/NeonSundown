@@ -20,7 +20,7 @@ MonoBehaviour:
     and destroy them to drop their shields.
   arenaBackground: {fileID: 11400000, guid: 212235cec4c12fd42a5384b47c1febca, type: 2}
   arenaMenuPitch: 1
-  arenaMusic: {fileID: 8300000, guid: e1a9a43f8255a4d4e89766b3ce467c63, type: 3}
+  arenaMusic: {fileID: 8300000, guid: 760adcc133b79df4aa93117252aa4bc8, type: 3}
   menuStage: {fileID: 11400000, guid: 9050d9ffa7d4c0c49925120bf802a7f1, type: 2}
   availableInDemo: 0
   unlockByDefault: 0
@@ -66,6 +66,11 @@ MonoBehaviour:
     achievementReward: {fileID: 3391616857268349422, guid: f589d5fe6376ca443bb8e175e09de7de, type: 2}
   stages:
   - {fileID: 11400000, guid: a0ef91bf259abf743828c959e37a70ad, type: 2}
-  startingCards: []
-  blacklistCards: []
+  startingCards:
+  - card: {fileID: 11400000, guid: 3d3373173462c1e48a69f2d69be0f831, type: 2}
+    amount: 3
+    prestige: 0
+  blacklistCards:
+  - {fileID: 11400000, guid: 9186d097da559a74b9b699d6a27454dd, type: 2}
+  - {fileID: 11400000, guid: 3e73f82ae1838654598c10a96338db95, type: 2}
   useWall: 0

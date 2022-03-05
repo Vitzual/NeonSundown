@@ -13,6 +13,7 @@ public class ArenaPanel : MonoBehaviour
     {
         public Image icon;
         public Image model;
+        public TextMeshProUGUI amount;
     }
 
     // Stages panel
@@ -164,9 +165,11 @@ public class ArenaPanel : MonoBehaviour
             if (i < arena.startingCards.Count)
             {
                 startingCards[i].icon.gameObject.SetActive(true);
-                startingCards[i].icon.sprite = arena.startingCards[i].sprite;
-                startingCards[i].icon.color = arena.startingCards[i].color;
-                startingCards[i].model.color = arena.startingCards[i].color;
+                startingCards[i].icon.sprite = arena.startingCards[i].card.sprite;
+                startingCards[i].icon.color = arena.startingCards[i].card.color;
+                startingCards[i].model.color = arena.startingCards[i].card.color;
+                startingCards[i].amount.text = "LEVEL " + arena.startingCards[i].amount;
+                startingCards[i].amount.color = arena.startingCards[i].card.color;
             }
             else break;
         }
