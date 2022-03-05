@@ -16,7 +16,6 @@ MonoBehaviour:
   createdAtTicks: 637792475018089937
   name: Mosquito
   icon: {fileID: 21300000, guid: 5b2f9a61e50c86541be5ec3243d562cf, type: 3}
-  desc: 'annoying '
   obj: {fileID: 8071768145869598022, guid: df8e8a72c65cbf94f99dedb5ee04c53a, type: 3}
   variantStats:
   - variant: 0
@@ -28,6 +27,7 @@ MonoBehaviour:
     canDropCrystal: 0
     crystal: {fileID: 0}
     crystalDropChance: 0
+    knockback: 1
     lockTarget: 1
     rotate: 0
     rotateSpeed: 0
@@ -38,9 +38,10 @@ MonoBehaviour:
     speed: 35
     minXP: 3
     maxXP: 5
-    canDropCrystal: 0
+    canDropCrystal: 1
     crystal: {fileID: 0}
     crystalDropChance: 0
+    knockback: 0
     lockTarget: 1
     rotate: 0
     rotateSpeed: 0
