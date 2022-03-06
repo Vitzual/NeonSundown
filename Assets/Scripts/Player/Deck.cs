@@ -43,11 +43,6 @@ public class Deck : MonoBehaviour
 
         // Create starting slots
         weaponInstances = new List<Weapon>();
-
-        // Add starting card if arena has one
-        for (int a = 0; a < Gamemode.arena.startingCards.Count; a++)
-            for (int b = 0; b < Gamemode.arena.startingCards[b].amount; b++)
-                AddCard(Gamemode.arena.startingCards[a].card);
     }
 
     // Calculate cooldown
@@ -57,7 +52,7 @@ public class Deck : MonoBehaviour
         if (Dealer.isOpen) return;
 
         // Iterate through all weapon instances
-        for (int i = 0; i < weaponInstances.Count; i++) 
+        for (int i = 0; i < weaponInstances.Count; i++)
         {
             if (weaponInstances[i] != null)
                 weaponInstances[i].Use();
@@ -155,6 +150,15 @@ public class Deck : MonoBehaviour
     public void SetupAbility(AbilityData ability)
     {
         Debug.Log("Adding ability card " + ability.name + " to deck");
+    }
+
+    // Setup starting cards
+    public void SetupStartingCards()
+    {
+        // Add starting card if arena has one
+        for (int a = 0; a < Gamemode.arena.startingCards.Count; a++)
+            for (int b = 0; b < Gamemode.arena.startingCards[a].amount; b++)
+                AddCard(Gamemode.arena.startingCards[a].card);
     }
 
     // Get deck cards

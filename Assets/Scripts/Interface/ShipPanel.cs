@@ -24,6 +24,7 @@ public class ShipPanel : MonoBehaviour
     }
     public List<ModuleButton> moduleButtons;
     private Dictionary<string, TextMeshProUGUI> moduleAmounts;
+    private List<ModuleData> equippedModules;
 
     // Ship button prefab
     public ShipButton shipButton;
@@ -51,6 +52,7 @@ public class ShipPanel : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
 
         // Setup module amounts
+        equippedModules = new List<ModuleData>();
         moduleAmounts = new Dictionary<string, TextMeshProUGUI>();
         foreach (ModuleButton module in moduleButtons)
             moduleAmounts.Add(module.data.InternalID, module.amount);
@@ -184,11 +186,7 @@ public class ShipPanel : MonoBehaviour
     public void SetModule(ModuleData module)
     {
         // Check if ship is null
-        if (Gamemode.ship == null)
-        {
-            Debug.Log("Gamemode ship is set to null!");
-            return;
-        }
+        if (Gamemode.ship == null) return;
 
         // Check if the module is valid 
         if (Gamemode.ship.weapon == null)
@@ -200,6 +198,9 @@ public class ShipPanel : MonoBehaviour
                 return;
             }
         }
+
+        // Check if module is already applied
+        if (equippedModules.Contains(module)) return;
 
         // Is the module null
         bool isModuleNull = module == null;
@@ -215,6 +216,8 @@ public class ShipPanel : MonoBehaviour
                     SaveSystem.AddModule(Gamemode.modules[moduleSlot].InternalID, 1);
                     ApplyModule(Gamemode.modules[moduleSlot].stat, -Gamemode.modules[moduleSlot].value,
                         Gamemode.modules[moduleSlot].multi);
+                    if (equippedModules.Contains(Gamemode.modules[moduleSlot]))
+                        equippedModules.Remove(Gamemode.modules[moduleSlot]);
                 }
                 Gamemode.modules[moduleSlot] = module;
             }
@@ -226,6 +229,7 @@ public class ShipPanel : MonoBehaviour
                 // Remove module from player and apply
                 SaveSystem.AddModule(module.InternalID, -1);
                 ApplyModule(module.stat, module.value, module.multi);
+                equippedModules.Add(module);
 
                 // Set module colors
                 moduleSlots[moduleSlot].module.color = module.color;

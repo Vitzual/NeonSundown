@@ -165,11 +165,11 @@ public class ArenaPanel : MonoBehaviour
             if (i < arena.startingCards.Count)
             {
                 startingCards[i].icon.gameObject.SetActive(true);
+                startingCards[i].amount.gameObject.SetActive(true);
                 startingCards[i].icon.sprite = arena.startingCards[i].card.sprite;
                 startingCards[i].icon.color = arena.startingCards[i].card.color;
                 startingCards[i].model.color = arena.startingCards[i].card.color;
                 startingCards[i].amount.text = "LEVEL " + arena.startingCards[i].amount;
-                startingCards[i].amount.color = arena.startingCards[i].card.color;
             }
             else break;
         }
@@ -211,6 +211,7 @@ public class ArenaPanel : MonoBehaviour
         for (int i = 0; i < startingCards.Count; i++)
         {
             startingCards[i].icon.gameObject.SetActive(false);
+            startingCards[i].amount.gameObject.SetActive(false);
             startingCards[i].model.color = emptyCardColor;
         }
 

@@ -31,7 +31,7 @@ MonoBehaviour:
     lockTarget: 1
     rotate: 1
     rotateSpeed: -100
-    shakeScreenOnDeath: 1
+    shakeScreenOnDeath: 0
   - variant: 1
     health: 5
     damage: 3
@@ -45,4 +45,18 @@ MonoBehaviour:
     lockTarget: 1
     rotate: 1
     rotateSpeed: -100
-    shakeScreenOnDeath: 1
+    shakeScreenOnDeath: 0
+  - variant: 2
+    health: 6
+    damage: 3
+    speed: 20
+    minXP: 3
+    maxXP: 5
+    canDropCrystal: 0
+    crystal: {fileID: 0}
+    crystalDropChance: 0
+    knockback: 1
+    lockTarget: 1
+    rotate: 1
+    rotateSpeed: -100
+    shakeScreenOnDeath: 0

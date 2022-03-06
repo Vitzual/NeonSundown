@@ -29,16 +29,16 @@ MonoBehaviour:
     modifier: 2
   - stat: 3
     description: Increases orbital speed by 15%
-    multiply: 1
-    modifier: 1.15
+    multiply: 0
+    modifier: 25
   - stat: 1
     description: Increases damage by 2
     multiply: 0
     modifier: 2
   - stat: 3
     description: Increases orbital speed by 15%
-    multiply: 1
-    modifier: 1.15
+    multiply: 0
+    modifier: 25
   - stat: 1
     description: Increases damage by 2
     multiply: 0
@@ -49,17 +49,17 @@ MonoBehaviour:
     multiply: 0
     modifier: 10
   - stat: 3
-    description: Increases orbital speed by 50%
-    multiply: 1
-    modifier: 1.5
+    description: Increases orbital speed by 25%
+    multiply: 0
+    modifier: 50
   - stat: 1
     description: Increases damage by 10
     multiply: 0
     modifier: 10
   - stat: 3
-    description: Increases orbital speed by 50%
-    multiply: 1
-    modifier: 1.5
+    description: Increases orbital speed by 25%
+    multiply: 0
+    modifier: 50
   - stat: 1
     description: Increases damage by 10
     multiply: 0
@@ -85,6 +85,7 @@ MonoBehaviour:
   onDeathSound: {fileID: 8300000, guid: 341b8ef73490fa240b93c6b727b058ad, type: 3}
   minPitch: 0.9
   maxPitch: 1.1
+  audioScale: 1
   setPlayerAsParent: 1
   useMaterial: 0
   useTrail: 0

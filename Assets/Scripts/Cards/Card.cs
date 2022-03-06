@@ -21,6 +21,7 @@ public class Card : MonoBehaviour
     public TextMeshProUGUI title;
     public TextMeshProUGUI desc;
     public TextMeshProUGUI level;
+    public TextMeshProUGUI type;
 
     // Canvas group
     public CanvasGroup canvasGroup;
@@ -46,6 +47,10 @@ public class Card : MonoBehaviour
         // Check if card is a weapon or not
         if (card is WeaponData)
         {
+            // Set type
+            type.text = "Weapon";
+            type.color = card.color;
+
             WeaponData weaponData = (WeaponData)card;
             Weapon weapon = Deck.active.GetWeaponInstance(weaponData);
             if (weapon != null)
@@ -83,6 +88,12 @@ public class Card : MonoBehaviour
                     }
                 }
             }
+        }
+        else if (card is StatData)
+        {
+            // Set type
+            type.text = "Stat";
+            type.color = card.color;
         }
         
         if (useBase)

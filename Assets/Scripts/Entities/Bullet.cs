@@ -124,7 +124,7 @@ public class Bullet : Entity
         if (weapon.onDeathSound != null && entity.IsDead())
             AudioPlayer.Play(weapon.onDeathSound, true, weapon.minPitch, weapon.maxPitch);
 
-        if (pierce <= 0)
+        if (pierce < 0)
         {
             deathMaterial = holder;
             Destroy();
