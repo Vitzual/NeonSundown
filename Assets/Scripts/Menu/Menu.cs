@@ -25,6 +25,7 @@ public class Menu : MonoBehaviour
     public CanvasGroup titleGroup;
     public CanvasGroup pressSpace;
     public CanvasGroup alphaGroup;
+    public CanvasGroup preReleaseGroup;
     public Image pressSpaceBg;
 
     // Other interface options
@@ -38,6 +39,7 @@ public class Menu : MonoBehaviour
     public TextMeshProUGUI pressSpaceText;
     public bool increaseAlpha = false;
     public bool alphaBuild = false;
+    public static bool preReleaseBuild = true;
     public ArenaData alphaArena;
     public ShipData alphaShip;
     public float alphaAdjustSpeed = 0.1f;
@@ -87,6 +89,7 @@ public class Menu : MonoBehaviour
             }
             else shipPanel.Setup(alphaShip);
         }
+        else shipPanel.Setup(alphaShip);
     }
 
     // Update user input
@@ -102,21 +105,39 @@ public class Menu : MonoBehaviour
                 Gamemode.arena = alphaArena;
                 Gamemode.ship = alphaShip;
             }
-            else
+            else if (preReleaseBuild)
             {
-                LeanTween.scale(title, titleTargetSize, titleSizeSpeed).setEase(LeanTweenType.easeInExpo).setDelay(0.2f);
-                LeanTween.moveLocal(title.gameObject, titleTargetPos, titleAnimSpeed).setEase(LeanTweenType.easeInExpo).setDelay(0.2f);
-                LeanTween.alphaCanvas(pressSpace, 0f, titleAnimSpeed);
-                LeanTween.alphaCanvas(buttonsGroup, 1f, titleAnimSpeed).setDelay(titleAnimSpeed);
-                LeanTween.alphaCanvas(socialsGroup, 1f, titleAnimSpeed).setDelay(titleAnimSpeed);
-                LeanTween.alphaCanvas(mainBackground, 1f, titleAnimSpeed).setDelay(titleAnimSpeed);
-                buttonsGroup.interactable = true;
-                buttonsGroup.blocksRaycasts = true;
-                socialsGroup.interactable = true;
-                socialsGroup.blocksRaycasts = true;
-                spacePressed = true;
+                LeanTween.alphaCanvas(preReleaseGroup, 1f, titleAnimSpeed);
+                preReleaseGroup.interactable = true;
+                preReleaseGroup.blocksRaycasts = true;
             }
+            else OpenMain();
         }
+    }
+
+    // Open main panel
+    public void OpenMain()
+    {
+        // If pre release enabled, disable it
+        if (preReleaseBuild)
+        {
+            LeanTween.alphaCanvas(preReleaseGroup, 0f, titleAnimSpeed);
+            preReleaseGroup.interactable = false;
+            preReleaseGroup.blocksRaycasts = false;
+            preReleaseBuild = false;
+        }
+
+        LeanTween.scale(title, titleTargetSize, titleSizeSpeed).setEase(LeanTweenType.easeInExpo).setDelay(0.2f);
+        LeanTween.moveLocal(title.gameObject, titleTargetPos, titleAnimSpeed).setEase(LeanTweenType.easeInExpo).setDelay(0.2f);
+        LeanTween.alphaCanvas(pressSpace, 0f, titleAnimSpeed);
+        LeanTween.alphaCanvas(buttonsGroup, 1f, titleAnimSpeed).setDelay(titleAnimSpeed);
+        LeanTween.alphaCanvas(socialsGroup, 1f, titleAnimSpeed).setDelay(titleAnimSpeed);
+        LeanTween.alphaCanvas(mainBackground, 1f, titleAnimSpeed).setDelay(titleAnimSpeed);
+        buttonsGroup.interactable = true;
+        buttonsGroup.blocksRaycasts = true;
+        socialsGroup.interactable = true;
+        socialsGroup.blocksRaycasts = true;
+        spacePressed = true;
     }
 
     // Open canvas group panel
