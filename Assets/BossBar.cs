@@ -13,7 +13,7 @@ public class BossBar : MonoBehaviour
     // Interface variables
     public ProgressBar bar;
     public new TextMeshProUGUI name;
-    public Image icon;
+    public Image icon, fill, background;
     private CanvasGroup canvasGroup;
 
     // Internal hidden flag
@@ -35,7 +35,12 @@ public class BossBar : MonoBehaviour
         // Set the new enemy info
         name.text = enemy.name;
         icon.sprite = boss.bossModel;
-        icon.color = VariantPalette.GetPrimaryColor(enemy.GetData().variant);
+
+        // Set the colors
+        Color color = VariantPalette.GetPrimaryColor(enemy.GetData().variant);
+        background.color = new Color(color.r, color.g, color.b, 0.075f);
+        icon.color = color;
+        fill.color = color;
 
         // Show the bar
         canvasGroup.alpha = 1f;

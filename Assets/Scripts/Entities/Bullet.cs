@@ -27,7 +27,7 @@ public class Bullet : Entity
     protected float lifetime;
 
     // Set up the bullet
-    public virtual void Setup(Weapon parent, WeaponData weapon, Transform target = null)
+    public virtual void Setup(Weapon parent, WeaponData weapon, Material material, Transform target = null)
     {
         // Check if prestiged
         if (parent.prestige && prestigeModel != null)
@@ -46,12 +46,12 @@ public class Bullet : Entity
 
         // Set renderer componenets
         if (weapon.useMaterial)
-            sprite.material = weapon.material;
+            sprite.material = material;
         if (weapon.useTrail)
             trail.material = weapon.trail;
 
         // Set death materials and effect
-        deathMaterial = weapon.material;
+        deathMaterial = material;
         deathEffect = weapon.particle;
 
         // Set bullet stats

@@ -6,11 +6,16 @@ public class Turret : Weapon
 {
     // Turret aiming thing
     private bool hasTarget = false;
+    private Material material;
 
     // Setup the turret
-    public void Setup(WeaponData weapon, float cooldown, Transform target)
+    public void Setup(WeaponData weapon, float cooldown, Transform target, Material material = null)
     {
+        this.material = material;
         hasTarget = target != null;
+
+        if (!hasTarget)
+            transform.eulerAngles = new Vector3(0, 0, 90);
 
         this.weapon = weapon;
         this.cooldown = cooldown;
@@ -43,6 +48,7 @@ public class Turret : Weapon
     public void Fire()
     {
         // Creat the bullet
-        BulletHandler.active.CreateBullet(this, weapon, transform.position, transform.rotation, 1);
+        BulletHandler.active.CreateBullet(this, weapon, transform.position, 
+            transform.rotation, 1, material, false, null);
     }
 }

@@ -320,7 +320,7 @@ public class Ship : Weapon
         {
             // Create bullet
             BulletHandler.active.CreateBullet(this, shipData.weapon, barrel.position, 
-                model.rotation, (int)bullets, true);
+                model.rotation, (int)bullets, shipData.weapon.material, true);
             shipCooldown = cooldown;
         }
     }

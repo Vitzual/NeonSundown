@@ -19,7 +19,7 @@ MonoBehaviour:
   obj: {fileID: 8071768145869598022, guid: 60efeddd5807be74ab61499b2ae18256, type: 3}
   variantStats:
   - variant: 0
-    health: 12
+    health: 8
     damage: 2
     speed: 15
     minXP: 2
@@ -33,11 +33,25 @@ MonoBehaviour:
     rotateSpeed: 50
     shakeScreenOnDeath: 0
   - variant: 2
-    health: 20
+    health: 15
     damage: 3
     speed: 20
     minXP: 2
     maxXP: 5
+    canDropCrystal: 0
+    crystal: {fileID: 0}
+    crystalDropChance: 0
+    knockback: 0
+    lockTarget: 0
+    rotate: 0
+    rotateSpeed: 50
+    shakeScreenOnDeath: 0
+  - variant: 3
+    health: 5
+    damage: 3
+    speed: 18
+    minXP: 5
+    maxXP: 10
     canDropCrystal: 0
     crystal: {fileID: 0}
     crystalDropChance: 0

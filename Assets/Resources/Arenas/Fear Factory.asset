@@ -23,7 +23,7 @@ MonoBehaviour:
   arenaMusic: {fileID: 8300000, guid: fd78f0da95799524d9114149f6f79544, type: 3}
   menuStage: {fileID: 11400000, guid: 710ec9da504aab442bc32b8df9ab4e08, type: 2}
   availableInDemo: 1
-  unlockByDefault: 1
+  unlockByDefault: 0
   unlockObjective: 'Complete "The Abyss" '
   order: 1
   buttonColor: {r: 0.6022401, g: 0, b: 1, a: 1}
@@ -76,9 +76,5 @@ MonoBehaviour:
   - card: {fileID: 11400000, guid: c65fd8a705ce9b94d8d4f6775c2a86c9, type: 2}
     amount: 1
     prestige: 0
-  - card: {fileID: 11400000, guid: 2f330f2e412cedc4ea795376f8520437, type: 2}
-    amount: 5
-    prestige: 0
-  blacklistCards:
-  - {fileID: 11400000, guid: 9186d097da559a74b9b699d6a27454dd, type: 2}
+  blacklistCards: []
   useWall: 0

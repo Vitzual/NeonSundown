@@ -50,7 +50,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: de44ca3cc974af545a2feb8b4148a6fa, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -72,7 +72,7 @@ SpriteRenderer:
   m_SortingLayer: 1
   m_SortingOrder: 7
   m_Sprite: {fileID: 21300000, guid: be903c937f65fbc43b1b846dc7902ccd, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -467,7 +467,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8071768145869598022}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 12.25, y: 2.32, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children:
   - {fileID: 8071768146122005024}
@@ -491,7 +491,7 @@ MonoBehaviour:
   deathMaterial: {fileID: 0}
   deathEffect: {fileID: 0}
   rb: {fileID: 8071768145869598020}
-  isCullable: 1
+  isCullable: 0
   trails:
   - {fileID: 6995822315313541828}
   - {fileID: 6141485848266384585}
@@ -501,9 +501,11 @@ MonoBehaviour:
   - {fileID: 8071768145815941773}
   particles: []
   rotator: {fileID: 8071768146122005024}
-  enemyToSpawn: {fileID: 0}
-  setupWithHandler: 0
+  enemyToSpawn: {fileID: 11400000, guid: b2aee538d12350a42be1e76cc0405f8b, type: 2}
+  setupWithHandler: 1
+  circlePlayer: 0
   spawnCooldown: 0.25
+  spawnOffset: {x: 10, y: 10}
 --- !u!50 &8071768145869598020
 Rigidbody2D:
   serializedVersion: 4

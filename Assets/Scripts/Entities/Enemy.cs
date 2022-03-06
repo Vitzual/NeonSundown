@@ -27,7 +27,7 @@ public class Enemy : Entity
     private float maxHealth;
 
     // Target transform for moving
-    private Transform target;
+    protected Transform target;
     
     // Setup the enemy
     public virtual void Setup(VariantData data, Transform player)

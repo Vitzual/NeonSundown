@@ -23,8 +23,8 @@ public class EnemyHandler : MonoBehaviour
     public static EnemyHandler active;
 
     // Player object
-    public float spawnRange = 100;
-    public float cullRange = 150;
+    public float spawnRange = 120;
+    public float cullRange = 200;
     private int cullIndex = 0;
 
     // Contains all active enemies in the scene
@@ -114,6 +114,12 @@ public class EnemyHandler : MonoBehaviour
         // Create the tile
         GameObject lastObj = Instantiate(enemyData.obj, position, Quaternion.identity);
         lastObj.name = enemyData.name;
+
+        // Rotate to the target
+        float angle = Mathf.Atan2(player.transform.position.y - lastObj.transform.position.y,
+            player.transform.position.x - lastObj.transform.position.x) * Mathf.Rad2Deg;
+        Quaternion targetRotation = Quaternion.Euler(new Vector3(0, 0, angle - 90f));
+        lastObj.transform.rotation = targetRotation;
 
         // Attempt to set enemy variant
         Enemy enemy = lastObj.GetComponent<Enemy>();
