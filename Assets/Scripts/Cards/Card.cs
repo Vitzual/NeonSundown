@@ -42,6 +42,7 @@ public class Card : MonoBehaviour
         title.text = card.name.ToUpper();
         title.color = card.color;
         level.color = card.color;
+        type.color = card.color;
 
         bool useBase = true;
 
@@ -106,12 +107,18 @@ public class Card : MonoBehaviour
             float currentAmount = Deck.GetStat(stat.type);
 
             // Calculate effect
-            if (stat.multiply) newAmount = (currentAmount + Deck.GetAdditions(stat.type)) * (Deck.GetMultiplier(stat.type) + stat.modifier);
+            if (stat.multiply) newAmount = (currentAmount + Deck.GetAdditions(stat.type)) * (Deck.GetMultiplier(stat.type) * stat.modifier);
             else newAmount = (currentAmount + Deck.GetAdditions(stat.type) + stat.modifier) * Deck.GetMultiplier(stat.type);
+            float total = newAmount - currentAmount;
+
+            // Calculate color
+            string color = "<color=green> (";
+            if (total >= 0) color += "+";
 
             // Show effect
+            effectOne.gameObject.SetActive(true);
             effectOne.text = stat.type.ToString() + ": " + Deck.GetStat(stat.type) +
-                "<color=green>(" + (newAmount - currentAmount) + ")";
+                color + Formatter.Round(total) + ")";
             effectTwo.gameObject.SetActive(false);
         }
 
@@ -127,16 +134,19 @@ public class Card : MonoBehaviour
             // Calculate effect
             PrimaryData.StatType stat = primary.stats[0];
             currentAmount = Deck.GetStat(stat.type);
-            if (stat.multiply) newAmount = (currentAmount + Deck.GetAdditions(stat.type)) * (Deck.GetMultiplier(stat.type) + stat.modifier);
+            if (stat.multiply) newAmount = (currentAmount + Deck.GetAdditions(stat.type)) * (Deck.GetMultiplier(stat.type) * stat.modifier);
             else newAmount = (currentAmount + Deck.GetAdditions(stat.type) + stat.modifier) * Deck.GetMultiplier(stat.type);
+            float total = newAmount - currentAmount;
 
             // Calculate color
-            string color = "<color=green";
-            if (!stat.positive) color = "<color=red>";
+            string color = "<color=green> (";
+            if (!stat.positive) color = "<color=red> (";
+            if (total >= 0) color += "+";
 
             // Show effect
+            effectOne.gameObject.SetActive(true);
             effectOne.text = stat.type.ToString() + ": " + Deck.GetStat(stat.type) +
-                color + "(" + (newAmount - currentAmount) + ")";
+                color + " (" + Formatter.Round(total) + ")";
 
             // Check if second effect available
             if (primary.stats.Count >= 2)
@@ -144,20 +154,23 @@ public class Card : MonoBehaviour
                 // Calculate effect
                 stat = primary.stats[1];
                 currentAmount = Deck.GetStat(stat.type);
-                if (stat.multiply) newAmount = (currentAmount + Deck.GetAdditions(stat.type)) * (Deck.GetMultiplier(stat.type) + stat.modifier);
+                if (stat.multiply) newAmount = (currentAmount + Deck.GetAdditions(stat.type)) * (Deck.GetMultiplier(stat.type) * stat.modifier);
                 else newAmount = (currentAmount + Deck.GetAdditions(stat.type) + stat.modifier) * Deck.GetMultiplier(stat.type);
+                total = newAmount - currentAmount;
 
                 // Calculate color
-                color = "<color=green";
-                if (!stat.positive) color = "<color=red>";
+                color = "<color=green> (";
+                if (!stat.positive) color = "<color=red> (";
+                if (total >= 0) color += "+";
 
                 // Show effect
+                effectTwo.gameObject.SetActive(true);
                 effectTwo.text = stat.type.ToString() + ": " + Deck.GetStat(stat.type) +
-                    color + "(" + (newAmount - currentAmount) + ")";
+                    color + " (" + Formatter.Round(total) + ")";
             }
             else effectTwo.gameObject.SetActive(false);
         }
-
+        
         if (useBase)
         {
             image.sprite = card.sprite;

@@ -298,7 +298,7 @@ public class ShipPanel : MonoBehaviour
             case Stat.Cooldown:
                 if (clear) firerate.text = firerateStr;
                 else firerate.text = firerateStr + "<color=green> (-" + Formatter.Round(
-                    ship.weapon.cooldown - (ship.weapon.cooldown * val), "0.00") + ")";
+                    ship.weapon.cooldown - (ship.weapon.cooldown * val)) + ")";
                 break;
             case Stat.Pierces:
                 if (clear) pierces.text = piercesStr;

@@ -226,7 +226,7 @@ public class Deck : MonoBehaviour
     public static void AddMultiplier(Stat type, float amount)
     {
         if (multipliers.ContainsKey(type))
-            multipliers[type] *= amount;
+            multipliers[type] += amount;
         else multipliers.Add(type, amount);
     }
 

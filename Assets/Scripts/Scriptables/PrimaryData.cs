@@ -14,9 +14,7 @@ public class PrimaryData : CardData
         public bool multiply;
         public bool positive;
     }
-    
-    [BoxGroup("Primary Info")]
-    public PrimaryType type;
+
     [BoxGroup("Primary Info")]
     public List<StatType> stats;
 }
