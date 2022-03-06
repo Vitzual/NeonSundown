@@ -22,6 +22,7 @@ public class Card : MonoBehaviour
     public TextMeshProUGUI desc;
     public TextMeshProUGUI level;
     public TextMeshProUGUI type;
+    public TextMeshProUGUI effectOne, effectTwo;
 
     // Canvas group
     public CanvasGroup canvasGroup;
@@ -88,14 +89,75 @@ public class Card : MonoBehaviour
                     }
                 }
             }
+
+            // Set effects
+            effectOne.gameObject.SetActive(false);
+            effectTwo.gameObject.SetActive(false);
         }
+
         else if (card is StatData)
         {
             // Set type
+            StatData stat = (StatData)card;
             type.text = "Stat";
-            type.color = card.color;
+
+            // Get amounts
+            float newAmount;
+            float currentAmount = Deck.GetStat(stat.type);
+
+            // Calculate effect
+            if (stat.multiply) newAmount = (currentAmount + Deck.GetAdditions(stat.type)) * (Deck.GetMultiplier(stat.type) + stat.modifier);
+            else newAmount = (currentAmount + Deck.GetAdditions(stat.type) + stat.modifier) * Deck.GetMultiplier(stat.type);
+
+            // Show effect
+            effectOne.text = stat.type.ToString() + ": " + Deck.GetStat(stat.type) +
+                "<color=green>(" + (newAmount - currentAmount) + ")";
+            effectTwo.gameObject.SetActive(false);
         }
-        
+
+        // I WILL REDO THIS
+        else if (card is PrimaryData)
+        {
+            // Set type
+            PrimaryData primary = (PrimaryData)card;
+            type.text = "Primary";
+            float newAmount;
+            float currentAmount;
+
+            // Calculate effect
+            PrimaryData.StatType stat = primary.stats[0];
+            currentAmount = Deck.GetStat(stat.type);
+            if (stat.multiply) newAmount = (currentAmount + Deck.GetAdditions(stat.type)) * (Deck.GetMultiplier(stat.type) + stat.modifier);
+            else newAmount = (currentAmount + Deck.GetAdditions(stat.type) + stat.modifier) * Deck.GetMultiplier(stat.type);
+
+            // Calculate color
+            string color = "<color=green";
+            if (!stat.positive) color = "<color=red>";
+
+            // Show effect
+            effectOne.text = stat.type.ToString() + ": " + Deck.GetStat(stat.type) +
+                color + "(" + (newAmount - currentAmount) + ")";
+
+            // Check if second effect available
+            if (primary.stats.Count >= 2)
+            {
+                // Calculate effect
+                stat = primary.stats[1];
+                currentAmount = Deck.GetStat(stat.type);
+                if (stat.multiply) newAmount = (currentAmount + Deck.GetAdditions(stat.type)) * (Deck.GetMultiplier(stat.type) + stat.modifier);
+                else newAmount = (currentAmount + Deck.GetAdditions(stat.type) + stat.modifier) * Deck.GetMultiplier(stat.type);
+
+                // Calculate color
+                color = "<color=green";
+                if (!stat.positive) color = "<color=red>";
+
+                // Show effect
+                effectTwo.text = stat.type.ToString() + ": " + Deck.GetStat(stat.type) +
+                    color + "(" + (newAmount - currentAmount) + ")";
+            }
+            else effectTwo.gameObject.SetActive(false);
+        }
+
         if (useBase)
         {
             image.sprite = card.sprite;

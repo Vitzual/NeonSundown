@@ -9,7 +9,7 @@ public class Deck : MonoBehaviour
     public static Deck active;
 
     // Player instance
-    private Ship player;
+    private static Ship player;
 
     // Cards in deck
     private static Dictionary<CardData, int> cards;
@@ -93,6 +93,8 @@ public class Deck : MonoBehaviour
             SetupPassive((WeaponData)card);
         else if (card is StatData)
             SetupStat((StatData)card);
+        else if (card is PrimaryData)
+            SetupPrimary((PrimaryData)card);
         else if (card is AbilityData)
             SetupAbility((AbilityData)card);
     }
@@ -144,6 +146,21 @@ public class Deck : MonoBehaviour
         if (stat.applyToCards)
             foreach (KeyValuePair<CardData, Weapon> card in upgradeables)
                 if (card.Value != null) card.Value.UpdateStat(stat.type);
+    }
+
+    // Set passive card slot
+    public void SetupPrimary(PrimaryData primary)
+    {
+        // Add stat to the thing
+        Debug.Log("Adding stat card " + primary.name + " to deck");
+
+        // Go through and apply stats
+        foreach(PrimaryData.StatType stat in primary.stats)
+        {
+            if (stat.multiply) AddMultiplier(stat.type, stat.modifier);
+            else AddAddition(stat.type, stat.modifier);
+            player.UpdateStat(stat.type, stat.modifier, stat.multiply);
+        }
     }
 
     // Set passive card slot
@@ -211,5 +228,11 @@ public class Deck : MonoBehaviour
         if (multipliers.ContainsKey(type))
             multipliers[type] *= amount;
         else multipliers.Add(type, amount);
+    }
+
+    // Get a stat
+    public static float GetStat(Stat type)
+    {
+        return player.GetStat(type);
     }
 }

@@ -287,6 +287,95 @@ public class Ship : Weapon
         }
     }
 
+    // Returns a stat
+    public float GetStat(Stat stat)
+    {
+        switch (stat)
+        {
+            // Upgrades the health
+            case Stat.Health:
+
+                // Upgrade health
+                return health;
+
+            // Upgrades the view distance
+            case Stat.View:
+
+                // Upgrade the view distance
+                return cam.orthographicSize;
+
+            // Upgrades the speed 
+            case Stat.MoveSpeed:
+
+                // Upgrade speed
+                return controller.moveSpeed;
+
+            // Upgrades the speed 
+            case Stat.DashSpeed:
+
+                // Upgrade speed
+                return controller.dashSpeed;
+
+            // Upgrades the damage 
+            case Stat.Damage:
+
+                // Upgrade damage output
+                return damage;
+
+            // Increases firerate 
+            case Stat.Cooldown:
+
+                // Upgrade firerate
+                return cooldown;
+
+            // Increases bullets
+            case Stat.Bullets:
+
+                // Upgrade bullets
+                return bullets;
+
+            // Increases piercing rounds
+            case Stat.Pierces:
+
+                // Upgrade piercing
+                return pierces;
+
+            // Increases bullet lifetime
+            case Stat.Lifetime:
+
+                // Upgrade lfietime
+                return lifetime;
+
+            // Increases accuracy
+            case Stat.Bloom:
+
+                // Increase accuracy
+                return bloom;
+
+            // Increase XP gain
+            case Stat.XPGain:
+
+                // Increase xp multiplier
+                return xpMultiplier;
+
+            // Increase XP range
+            case Stat.XPRange:
+
+                // Increases XP range
+                return xpRange.radius;
+
+            // Increase regen rate
+            case Stat.Regen:
+
+                // Increases regen rate
+                return regenAmount;
+
+            // Default case
+            default:
+                return 0;
+        }
+    }
+
     // Add XP
     public void AddXP(int amount)
     {
