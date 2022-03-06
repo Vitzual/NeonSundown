@@ -14,6 +14,8 @@ public class CardData : IdentifiableScriptableObject
     public Color color;
     [BoxGroup("Card Info")]
     public int maximumAmount;
+    [BoxGroup("Card Info"), Range(0f, 1f)]
+    public float dropChance = 1f;
     [BoxGroup("Card Info")]
     public bool canDrop;
     [BoxGroup("Card Info")]

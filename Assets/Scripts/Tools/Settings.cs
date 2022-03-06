@@ -15,8 +15,8 @@ public class Settings
     }
 
     // Volume control
-    public static float music = 0.8f;
-    public static float sound = 0.5f;
+    public static float music = 1f;
+    public static float sound = 1f;
 
     // Video options
     private static int resolutionX = 1920;

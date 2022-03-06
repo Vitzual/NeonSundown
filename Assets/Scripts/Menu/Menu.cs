@@ -91,7 +91,7 @@ public class Menu : MonoBehaviour
         }
         else shipPanel.Setup(alphaShip);
     }
-
+    
     // Update user input
     public void Update()
     {

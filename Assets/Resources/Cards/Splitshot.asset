@@ -10,24 +10,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 03b23b43cf5929d49b3e2a80b1a27393, type: 3}
-  m_Name: Multishot
+  m_Name: Splitshot
   m_EditorClassIdentifier: 
-  internalId: 6c32bde1-3a4d-4eb7-beb0-c475618fba33
-  createdAtTicks: 637821596507664875
-  name: Multishot
-  description: Increases ship projectiles, but lowers damage
-  sprite: {fileID: 21300000, guid: 9b4f57a45de399d40b6990bf190447ac, type: 3}
-  color: {r: 0.46590996, g: 0, b: 1, a: 1}
-  maximumAmount: 5
+  internalId: 4fd2b69f-e51c-4bec-b532-afc8f8871731
+  createdAtTicks: 637821706237246243
+  name: Splitshot
+  description: Adds a splitshot projectile, but reduces firerate
+  sprite: {fileID: 21300000, guid: 4fcbd3c737c86854fb9a9b4cc5b2b179, type: 3}
+  color: {r: 1, g: 0.9561808, b: 0, a: 1}
+  maximumAmount: 3
   dropChance: 0.5
   canDrop: 1
-  isUnlocked: 0
+  isUnlocked: 1
   stats:
-  - type: 6
-    modifier: 1
+  - type: 18
+    modifier: 2
     multiply: 0
     positive: 1
-  - type: 1
-    modifier: 0.85
+  - type: 2
+    modifier: 1.25
     multiply: 1
     positive: 0

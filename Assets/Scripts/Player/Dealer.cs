@@ -176,7 +176,8 @@ public class Dealer : MonoBehaviour
         {
             CardData card = dealList[i];
             if ((!card.isUnlocked && !SaveSystem.IsCardUnlocked(card.InternalID)) ||
-                (deckCards.ContainsKey(card) && deckCards[card] >= card.maximumAmount))
+                (deckCards.ContainsKey(card) && deckCards[card] >= card.maximumAmount)
+                || (Random.Range(0, 1) > dealList[i].dropChance))
             {
                 dealList.Remove(card);
                 i--;

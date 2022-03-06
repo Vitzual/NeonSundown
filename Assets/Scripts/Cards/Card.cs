@@ -117,7 +117,7 @@ public class Card : MonoBehaviour
 
             // Show effect
             effectOne.gameObject.SetActive(true);
-            effectOne.text = stat.type.ToString() + ": " + Deck.GetStat(stat.type) +
+            effectOne.text = stat.type.ToString() + ": " + Formatter.Round(Deck.GetStat(stat.type)) +
                 color + Formatter.Round(total) + ")";
             effectTwo.gameObject.SetActive(false);
         }
@@ -145,8 +145,8 @@ public class Card : MonoBehaviour
 
             // Show effect
             effectOne.gameObject.SetActive(true);
-            effectOne.text = stat.type.ToString() + ": " + Deck.GetStat(stat.type) +
-                color + " (" + Formatter.Round(total) + ")";
+            effectOne.text = stat.type.ToString() + ": " + Formatter.Round(Deck.GetStat(stat.type)) +
+                color + Formatter.Round(total) + ")";
 
             // Check if second effect available
             if (primary.stats.Count >= 2)
@@ -165,8 +165,8 @@ public class Card : MonoBehaviour
 
                 // Show effect
                 effectTwo.gameObject.SetActive(true);
-                effectTwo.text = stat.type.ToString() + ": " + Deck.GetStat(stat.type) +
-                    color + " (" + Formatter.Round(total) + ")";
+                effectTwo.text = stat.type.ToString() + ": " + Formatter.Round(Deck.GetStat(stat.type)) +
+                    color + Formatter.Round(total) + ")";
             }
             else effectTwo.gameObject.SetActive(false);
         }

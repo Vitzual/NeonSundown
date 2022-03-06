@@ -27,7 +27,7 @@ public class Entity : MonoBehaviour
     }
 
     // Damage entity
-    public virtual void Damage(float amount)
+    public virtual void Damage(float amount, float knockback = -10f)
     {
         // Do something
     }

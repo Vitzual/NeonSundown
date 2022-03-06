@@ -25,11 +25,18 @@ public class Bullet : Entity
     protected float pierce;
     protected bool tracking;
     protected float lifetime;
+    protected float knockback;
+    protected float splitshots;
+
+    // Is a split shot
+    private Weapon parent;
+    private bool isSplitShot = false;
 
     // Set up the bullet
-    public virtual void Setup(Weapon parent, WeaponData weapon, Material material, Transform target = null)
+    public virtual void Setup(Weapon parent, WeaponData weapon, Material material, Transform target = null, bool isSplitShot = false)
     {
         // Check if prestiged
+        this.parent = parent;
         if (parent.prestige && prestigeModel != null)
             prestigeModel.SetActive(true);
 
@@ -58,13 +65,18 @@ public class Bullet : Entity
         damage = parent.damage;
         speed = parent.moveSpeed;
         pierce = parent.pierces;
+        knockback = parent.knockback;
         tracking = weapon.trackTarget || Deck.GetFlag(Stat.Tracking);
+        splitshots = parent.splitshots;
 
         // Give bullets a bit of randomness
         float lowValue = parent.lifetime - 0.05f;
         float highValue = parent.lifetime + 0.05f;
         if (lowValue <= 0f) lowValue = 0.001f;
         lifetime = Random.Range(lowValue, highValue);
+
+        // Check if splitshot
+        this.isSplitShot = isSplitShot;
     }
 
     // Moves the bullet
@@ -95,6 +107,11 @@ public class Bullet : Entity
     // Destroy the bullet
     public override void Destroy()
     {
+        // Check if bullet has splitshots
+        if (!isSplitShot) BulletHandler.active.CreateSplitshot(parent, weapon, transform.position,
+                transform.rotation, (int)splitshots, weapon.material, 360f);
+
+        // Destroy the bullet
         if (weapon.useParticle) CreateParticle();
         Destroy(gameObject);
     }
@@ -114,7 +131,7 @@ public class Bullet : Entity
 
         // Remove pierces
         pierce -= 1;
-        entity.Damage(damage);
+        entity.Damage(damage, knockback);
 
         // Check if bullet has a sound
         if (weapon.onDamageSound != null)

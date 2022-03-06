@@ -44,10 +44,10 @@ public class BulletHandler : MonoBehaviour
             // Create the tile
             GameObject lastObj = Instantiate(weapon.bullet.gameObject, position, rotation);
             lastObj.name = weapon.bullet.gameObject.name;
-
+            
             // Adjust for rotational offset
             Vector3 rotationOffset = new Vector3(lastObj.transform.eulerAngles.x, lastObj.transform.eulerAngles.y,
-                (lastObj.transform.eulerAngles.z - 90f) + Random.Range(-weapon.bloom, weapon.bloom));
+                (lastObj.transform.eulerAngles.z - 90f) + Random.Range(-parent.bloom, parent.bloom));
             lastObj.transform.eulerAngles = rotationOffset;
 
             // Attempt to set enemy variant
@@ -61,5 +61,29 @@ public class BulletHandler : MonoBehaviour
         // Check if bullet has a sound
         if (weapon.bulletSound != null)
             AudioPlayer.Play(weapon.bulletSound, true, weapon.minPitch, weapon.maxPitch, overrideAudioCooldown, weapon.audioScale);
+    }
+
+    // Creates a splitshot bullet instance
+    public void CreateSplitshot(Weapon parent, WeaponData weapon, Vector2 position, Quaternion rotation,
+    int amount, Material material, float rotationAmount)
+    {
+        // Loop depending on bullet amount
+        for (int i = 0; i < amount; i++)
+        {
+            // Create the tile
+            GameObject lastObj = Instantiate(weapon.bullet.gameObject, position, rotation);
+            lastObj.name = weapon.bullet.gameObject.name;
+
+            // Adjust for rotational offset
+            lastObj.transform.rotation = rotation;
+            lastObj.transform.eulerAngles = new Vector3(0, 0, Random.Range(0, rotationAmount));
+
+            // Attempt to set enemy variant
+            Bullet bullet = lastObj.GetComponent<Bullet>();
+            bullet.Setup(parent, weapon, material, null, true);
+
+            // Add to enemies list
+            bullets.Add(bullet);
+        }
     }
 }

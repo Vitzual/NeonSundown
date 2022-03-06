@@ -11,7 +11,7 @@ public class Shielder : Enemy
     private bool shieldActive = true;
 
     // Damage entity
-    public override void Damage(float amount)
+    public override void Damage(float amount, float knockback = 0f)
     {
         // Damage shield if active
         if (shieldActive)

@@ -105,6 +105,8 @@ public class Ship : Weapon
         pierces = shipData.weapon.pierces;
         bullets = shipData.weapon.bullets;
         lifetime = shipData.weapon.lifetime;
+        knockback = shipData.weapon.knockback;
+        splitshots = 0;
 
         // Set starting rankup cost
         if (levels.Count > 0)
@@ -132,7 +134,6 @@ public class Ship : Weapon
 
         // Check if LMB input detected
         if (Input.GetKey(Keybinds.shoot) && shipData.canFire) Use();
-        // if (Input.GetKey(Keybinds.debug)) Dealer.active.OpenDealer();
         if (shipCooldown > 0) shipCooldown -= Time.deltaTime;
 
         // If can regen, regenerate
@@ -252,7 +253,7 @@ public class Ship : Weapon
                 break;
 
             // Increases accuracy
-            case Stat.Bloom:
+            case Stat.Spread:
 
                 // Increase accuracy
                 if (multiply) bloom *= amount;
@@ -284,6 +285,22 @@ public class Ship : Weapon
                 if (multiply) regenAmount *= amount;
                 else regenAmount += amount;
                 break;
+
+            // Increase regen rate
+            case Stat.Knockback:
+
+                // Increases regen rate
+                if (multiply) knockback *= amount;
+                else knockback += amount;
+                break;
+
+            // Increase splitshots
+            case Stat.Splitshot:
+
+                // Increases regen rate
+                if (multiply) splitshots *= amount;
+                else splitshots += amount;
+                break;
         }
     }
 
@@ -294,81 +311,63 @@ public class Ship : Weapon
         {
             // Upgrades the health
             case Stat.Health:
-
-                // Upgrade health
                 return health;
 
             // Upgrades the view distance
             case Stat.View:
-
-                // Upgrade the view distance
                 return cam.orthographicSize;
 
             // Upgrades the speed 
             case Stat.MoveSpeed:
-
-                // Upgrade speed
                 return controller.moveSpeed;
 
             // Upgrades the speed 
             case Stat.DashSpeed:
-
-                // Upgrade speed
                 return controller.dashSpeed;
 
             // Upgrades the damage 
             case Stat.Damage:
-
-                // Upgrade damage output
                 return damage;
 
             // Increases firerate 
             case Stat.Cooldown:
-
-                // Upgrade firerate
                 return cooldown;
 
             // Increases bullets
             case Stat.Bullets:
-
-                // Upgrade bullets
                 return bullets;
 
             // Increases piercing rounds
             case Stat.Pierces:
-
-                // Upgrade piercing
                 return pierces;
 
             // Increases bullet lifetime
             case Stat.Lifetime:
-
-                // Upgrade lfietime
                 return lifetime;
 
             // Increases accuracy
-            case Stat.Bloom:
-
-                // Increase accuracy
+            case Stat.Spread:
                 return bloom;
 
             // Increase XP gain
             case Stat.XPGain:
-
-                // Increase xp multiplier
                 return xpMultiplier;
 
             // Increase XP range
             case Stat.XPRange:
-
-                // Increases XP range
                 return xpRange.radius;
 
             // Increase regen rate
             case Stat.Regen:
-
-                // Increases regen rate
                 return regenAmount;
+
+            // Increase regen rate
+            case Stat.Knockback:
+                return knockback;
+
+            // Get splitshots
+            case Stat.Splitshot:
+                return splitshots;
 
             // Default case
             default:

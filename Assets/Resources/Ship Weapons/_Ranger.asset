@@ -19,6 +19,7 @@ MonoBehaviour:
   sprite: {fileID: 0}
   color: {r: 0, g: 0, b: 0, a: 0}
   maximumAmount: 0
+  dropChance: 1
   canDrop: 0
   isUnlocked: 0
   prestigeSprite: {fileID: 0}
@@ -30,9 +31,10 @@ MonoBehaviour:
   rotate: 0
   rotateSpeed: 0
   range: 0
-  bloom: 0
+  bloom: 3
   pierces: 5
   bullets: 1
+  knockback: -15
   lifetime: 0.5
   randomDirection: 0
   randomTarget: 0

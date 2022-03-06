@@ -10,24 +10,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 03b23b43cf5929d49b3e2a80b1a27393, type: 3}
-  m_Name: Multishot
+  m_Name: Spread
   m_EditorClassIdentifier: 
-  internalId: 6c32bde1-3a4d-4eb7-beb0-c475618fba33
-  createdAtTicks: 637821596507664875
-  name: Multishot
-  description: Increases ship projectiles, but lowers damage
-  sprite: {fileID: 21300000, guid: 9b4f57a45de399d40b6990bf190447ac, type: 3}
-  color: {r: 0.46590996, g: 0, b: 1, a: 1}
-  maximumAmount: 5
+  internalId: a8882450-4fd4-4692-807d-f7e3b048d4d6
+  createdAtTicks: 637821702538921618
+  name: Bullet Spread
+  description: Reduces bullet spread but also reduces damage
+  sprite: {fileID: 21300000, guid: 633fbbcf8baa3a1408a263196375d9f8, type: 3}
+  color: {r: 1, g: 0.39636728, b: 0, a: 1}
+  maximumAmount: 3
   dropChance: 0.5
   canDrop: 1
-  isUnlocked: 0
+  isUnlocked: 1
   stats:
-  - type: 6
-    modifier: 1
-    multiply: 0
+  - type: 5
+    modifier: 0.75
+    multiply: 1
     positive: 1
   - type: 1
-    modifier: 0.85
+    modifier: 0.8
     multiply: 1
     positive: 0

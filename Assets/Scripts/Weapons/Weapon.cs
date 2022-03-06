@@ -16,7 +16,8 @@ public class Weapon : MonoBehaviour
 
     // Weapon variables
     [HideInInspector]
-    public float damage, cooldown, moveSpeed, bloom, pierces, bullets, lifetime, range;
+    public float damage, cooldown, moveSpeed, bloom, pierces, 
+        bullets, lifetime, range, knockback, splitshots;
 
     // Weapon level
     [HideInInspector]
@@ -101,7 +102,7 @@ public class Weapon : MonoBehaviour
                 moveSpeed = (Deck.CalculateStat(type, weapon.moveSpeed)
                     + GetAdditions(type)) * GetMultiplier(type);
                 break;
-            case Stat.Bloom:
+            case Stat.Spread:
                 bloom = (Deck.CalculateStat(type, weapon.bloom)
                     + GetAdditions(type)) * GetMultiplier(type);
                 break;
@@ -117,6 +118,10 @@ public class Weapon : MonoBehaviour
                 lifetime = (Deck.CalculateStat(type, weapon.lifetime)
                     + GetAdditions(type)) * GetMultiplier(type);
                 break;
+            case Stat.Knockback:
+                knockback = (Deck.CalculateStat(type, weapon.knockback) 
+                    + GetAdditions(type)) * GetMultiplier(type);
+                break;
         }
     }
 
@@ -126,11 +131,12 @@ public class Weapon : MonoBehaviour
         UpdateStat(Stat.Damage);
         UpdateStat(Stat.Cooldown);
         UpdateStat(Stat.MoveSpeed);
-        UpdateStat(Stat.Bloom);
+        UpdateStat(Stat.Spread);
         UpdateStat(Stat.Pierces);
         UpdateStat(Stat.Bullets);
         UpdateStat(Stat.Lifetime);
         UpdateStat(Stat.Range);
+        UpdateStat(Stat.Knockback);
     }
 
     // Get multiplier

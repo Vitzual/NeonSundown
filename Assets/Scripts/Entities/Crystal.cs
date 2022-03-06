@@ -45,8 +45,12 @@ public class Crystal : Entity
     }
 
     // On collision
-    public override void Damage(float amount)
+    public override void Damage(float amount, float knockback = -10f)
     {
+        // Add knockback
+        rb.AddForce((EnemyHandler.active.player.position - transform.position) * knockback);
+
+        // Calculate health
         health -= amount;
         if (health <= 0)
             Destroy();

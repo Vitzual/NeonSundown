@@ -5,7 +5,7 @@ public enum Stat
     Cooldown,
     MoveSpeed,
     DashSpeed,
-    Bloom,
+    Spread,
     Bullets,
     Pierces,
     Range,
@@ -17,5 +17,6 @@ public enum Stat
     View,
     Syphon,
     Regen,
-    Evasion
+    Evasion,
+    Splitshot
 }

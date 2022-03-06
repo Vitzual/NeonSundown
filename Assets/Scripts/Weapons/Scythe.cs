@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class Scythe : Weapon
 {
-    // Secondary scythe
-    public Scythe secondary;
-
     // Rotator transform
     public Transform rotator;
     public float xOffset = 0;
@@ -34,8 +31,8 @@ public class Scythe : Weapon
         if (entity != null)
         {
             // Attempt to damage the enemy
-            entity.Damage(damage);
-
+            entity.Damage(damage, weapon.knockback);
+            
             // Play death sound if enemy dies
             if (entity.IsDead()) AudioPlayer.Play(weapon.onDeathSound, true, 0.9f, 1.1f, false, weapon.audioScale);
             else AudioPlayer.Play(weapon.onDamageSound);
