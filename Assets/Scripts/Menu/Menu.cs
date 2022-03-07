@@ -26,6 +26,9 @@ public class Menu : MonoBehaviour
     public CanvasGroup pressSpace;
     public CanvasGroup alphaGroup;
     public CanvasGroup preReleaseGroup;
+    public CanvasGroup roadmapGroup;
+    public CanvasGroup creditsGroup;
+    public CanvasGroup roadmapWarningGroup;
     public Image pressSpaceBg;
 
     // Other interface options
@@ -40,6 +43,7 @@ public class Menu : MonoBehaviour
     public bool increaseAlpha = false;
     public bool alphaBuild = false;
     public static bool preReleaseBuild = true;
+    public static bool roadmapWarningShown = false;
     public ArenaData alphaArena;
     public ShipData alphaShip;
     public float alphaAdjustSpeed = 0.1f;
@@ -148,6 +152,37 @@ public class Menu : MonoBehaviour
         LeanTween.alphaCanvas(close, 0f, 0.35f);
         close.interactable = false;
         close.blocksRaycasts = false;
+    }
+
+    // Open arena panel
+    public void ToggleRoadmapPanel(bool toggle)
+    {
+        if (!roadmapWarningShown)
+        {
+            roadmapWarningShown = true;
+            TogglePanel(roadmapWarningGroup, mainGroup);
+        }
+        else
+        {
+            DisableRoadmapWarning();
+            if (toggle) TogglePanel(roadmapGroup, mainGroup);
+            else TogglePanel(mainGroup, roadmapGroup);
+        }
+    }
+
+    // Disable roadmap panel
+    public void DisableRoadmapWarning()
+    {
+        LeanTween.alphaCanvas(roadmapWarningGroup, 0f, 0.35f);
+        roadmapWarningGroup.interactable = false;
+        roadmapWarningGroup.blocksRaycasts = false;
+    }
+
+    // Open arena panel
+    public void ToggleCreditsPanel(bool toggle)
+    {
+        if (toggle) TogglePanel(creditsGroup, mainGroup);
+        else TogglePanel(mainGroup, creditsGroup);
     }
 
     // Open arena panel
