@@ -99,74 +99,37 @@ public class Card : MonoBehaviour
         else if (card is StatData)
         {
             // Set type
-            StatData stat = (StatData)card;
+            StatData statData = (StatData)card;
             type.text = "Stat";
 
-            // Get amounts
-            float newAmount;
-            float currentAmount = Deck.GetStat(stat.type);
-
             // Calculate effect
-            if (stat.multiply) newAmount = (currentAmount + Deck.GetAdditions(stat.type)) * (Deck.GetMultiplier(stat.type) * stat.modifier);
-            else newAmount = (currentAmount + Deck.GetAdditions(stat.type) + stat.modifier) * Deck.GetMultiplier(stat.type);
-            float total = newAmount - currentAmount;
-
-            // Calculate color
-            string color = "<color=green> (";
-            if (total >= 0) color += "+";
-
-            // Show effect
+            StatValue statType = statData.value;
             effectOne.gameObject.SetActive(true);
-            effectOne.text = stat.type.ToString() + ": " + Formatter.Round(Deck.GetStat(stat.type)) +
-                color + Formatter.Round(total) + ")";
+            effectOne.text = statType.type.ToString() + ": " + Formatter.Round(
+                Deck.GetStat(statType.type)) + GetDifference(statType);
             effectTwo.gameObject.SetActive(false);
         }
 
-        // I WILL REDO THIS
         else if (card is PrimaryData)
         {
             // Set type
             PrimaryData primary = (PrimaryData)card;
             type.text = "Primary";
-            float newAmount;
-            float currentAmount;
 
             // Calculate effect
-            PrimaryData.StatType stat = primary.stats[0];
-            currentAmount = Deck.GetStat(stat.type);
-            if (stat.multiply) newAmount = (currentAmount + Deck.GetAdditions(stat.type)) * (Deck.GetMultiplier(stat.type) * stat.modifier);
-            else newAmount = (currentAmount + Deck.GetAdditions(stat.type) + stat.modifier) * Deck.GetMultiplier(stat.type);
-            float total = newAmount - currentAmount;
-
-            // Calculate color
-            string color = "<color=green> (";
-            if (!stat.positive) color = "<color=red> (";
-            if (total >= 0) color += "+";
-
-            // Show effect
+            StatValue statType = primary.stats[0];
             effectOne.gameObject.SetActive(true);
-            effectOne.text = stat.type.ToString() + ": " + Formatter.Round(Deck.GetStat(stat.type)) +
-                color + Formatter.Round(total) + ")";
-
+            effectOne.text = statType.type.ToString() + ": " + Formatter.Round(
+                Deck.GetStat(statType.type)) + GetDifference(statType);
+            
             // Check if second effect available
             if (primary.stats.Count >= 2)
             {
-                // Calculate effect
-                stat = primary.stats[1];
-                currentAmount = Deck.GetStat(stat.type);
-                if (stat.multiply) newAmount = (currentAmount + Deck.GetAdditions(stat.type)) * (Deck.GetMultiplier(stat.type) * stat.modifier);
-                else newAmount = (currentAmount + Deck.GetAdditions(stat.type) + stat.modifier) * Deck.GetMultiplier(stat.type);
-                total = newAmount - currentAmount;
-
-                // Calculate color
-                color = "<color=green> (";
-                if (!stat.positive) color = "<color=red> (";
-                if (total >= 0) color += "+";
-
                 // Show effect
+                statType = primary.stats[1];
                 effectTwo.gameObject.SetActive(true);
-                effectTwo.text = stat.type.ToString() + ": " + Formatter.Round(Deck.GetStat(stat.type)) +
-                    color + Formatter.Round(total) + ")";
+                effectTwo.text = statType.type.ToString() + ": " + Formatter.Round(
+                    Deck.GetStat(statType.type)) + GetDifference(statType);
             }
             else effectTwo.gameObject.SetActive(false);
         }
@@ -197,5 +160,36 @@ public class Card : MonoBehaviour
     {
         transform.localPosition = new Vector3(cardPosition.x, cardPosition.y - verticalAdjustment, 0);
         canvasGroup.alpha = 0f;
+    }
+
+    // Calculate stat
+    public string GetDifference(StatValue stat)
+    {
+        // New and current amounts
+        float defaultAmount = Deck.GetDefaultStat(stat.type);
+        float newAmount;
+
+        // Calculate the stat
+        if (stat.multiply)
+        {
+            Debug.Log(stat.type.ToString() + ": (" + defaultAmount + " + " + Deck.GetAdditions(stat.type) + 
+                ") * (" + Deck.GetMultiplier(stat.type) + " * " + stat.modifier + ")");
+            newAmount = (defaultAmount + Deck.GetAdditions(stat.type)) * (Deck.GetMultiplier(stat.type) * stat.modifier);
+        }
+        else
+        {
+            Debug.Log(stat.type.ToString() + ": (" + defaultAmount + " + " + Deck.GetAdditions(stat.type) +
+                " + " + stat.modifier + ")" + " * " + Deck.GetMultiplier(stat.type));
+            newAmount = (defaultAmount + Deck.GetAdditions(stat.type) + stat.modifier) * Deck.GetMultiplier(stat.type);
+        }
+        float total = newAmount - Deck.GetStat(stat.type);
+
+        // Calculate color
+        string color = "<color=green> (";
+        if (!stat.positive) color = "<color=red> (";
+        if (total >= 0) color += "+";
+
+        // Return formatted string
+        return color + Formatter.Round(total) + ")";
     }
 }

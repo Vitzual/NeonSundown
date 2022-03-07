@@ -19,10 +19,13 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: 2ff8eb6a5148a9641a53139a958a196b, type: 3}
   color: {r: 0, g: 0.9608455, b: 1, a: 1}
   maximumAmount: 5
+  dropChance: 1
   canDrop: 1
   isUnlocked: 1
-  type: 12
-  multiply: 0
-  modifier: 1.25
+  value:
+    type: 12
+    modifier: 1.25
+    multiply: 1
+    positive: 1
   applyToCards: 0
   applyToPlayer: 1

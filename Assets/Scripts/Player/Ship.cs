@@ -36,7 +36,6 @@ public class Ship : Weapon
 
     // Ship specific stats
     private float regenAmount;
-    private float firerateMulti;
 
     // View distance
     public Camera cam;
@@ -59,6 +58,7 @@ public class Ship : Weapon
     {
         // Setup the ship data
         shipData = data;
+        weapon = data.weapon;
 
         // Setup the player model
         border.sprite = shipData.border;
@@ -87,14 +87,6 @@ public class Ship : Weapon
 
         // Setup ship specific variables
         regenAmount = shipData.regenAmount;
-
-        // Setup ship weapon specific variables
-        if (shipData.weapon != null) 
-        {
-            // Set firerate multiplier
-            firerateMulti = shipData.weapon.cooldown / 10;
-            Debug.Log("Set firerate multi to " + firerateMulti);
-        }
 
         // Set weapon variables
         damage = shipData.weapon.damage;
@@ -155,7 +147,6 @@ public class Ship : Weapon
     }
 
     // Update stat
-    // THIS METHOD IS GOING TO BE REDONE
     public void UpdateStat(Stat stat, float amount, bool multiply = false)
     {
         switch(stat)
@@ -305,7 +296,7 @@ public class Ship : Weapon
     }
 
     // Returns a stat
-    public float GetStat(Stat stat)
+    public override float GetStat(Stat stat)
     {
         switch (stat)
         {
@@ -368,6 +359,73 @@ public class Ship : Weapon
             // Get splitshots
             case Stat.Splitshot:
                 return splitshots;
+
+            // Default case
+            default:
+                return 0;
+        }
+    }
+
+    // Returns a stat
+    public override float GetDefaultStat(Stat stat)
+    {
+        switch (stat)
+        {
+            // Upgrades the health
+            case Stat.Health:
+                return shipData.startingHealth;
+
+            // Upgrades the view distance
+            case Stat.View:
+                return 35f;
+
+            // Upgrades the speed 
+            case Stat.MoveSpeed:
+                return shipData.playerSpeed;
+
+            // Upgrades the speed 
+            case Stat.DashSpeed:
+                return shipData.dashSpeed;
+
+            // Upgrades the damage 
+            case Stat.Damage:
+                return weapon.damage;
+
+            // Increases firerate 
+            case Stat.Cooldown:
+                return weapon.cooldown;
+
+            // Increases bullets
+            case Stat.Bullets:
+                return weapon.bullets;
+
+            // Increases piercing rounds
+            case Stat.Pierces:
+                return weapon.pierces;
+
+            // Increases bullet lifetime
+            case Stat.Lifetime:
+                return weapon.lifetime;
+
+            // Increases accuracy
+            case Stat.Spread:
+                return weapon.bloom;
+
+            // Increase XP gain
+            case Stat.XPGain:
+                return 1f;
+
+            // Increase XP range
+            case Stat.XPRange:
+                return 15f;
+
+            // Increase regen rate
+            case Stat.Regen:
+                return shipData.regenAmount;
+
+            // Increase regen rate
+            case Stat.Knockback:
+                return weapon.knockback;
 
             // Default case
             default:

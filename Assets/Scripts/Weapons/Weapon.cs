@@ -139,6 +139,88 @@ public class Weapon : MonoBehaviour
         UpdateStat(Stat.Knockback);
     }
 
+    // Returns a stat
+    public virtual float GetStat(Stat stat)
+    {
+        switch (stat)
+        {
+            // Upgrades the damage 
+            case Stat.Damage:
+                return damage;
+
+            // Increases firerate 
+            case Stat.Cooldown:
+                return cooldown;
+
+            // Increases bullets
+            case Stat.Bullets:
+                return bullets;
+
+            // Increases piercing rounds
+            case Stat.Pierces:
+                return pierces;
+
+            // Increases bullet lifetime
+            case Stat.Lifetime:
+                return lifetime;
+
+            // Increases accuracy
+            case Stat.Spread:
+                return bloom;
+
+            // Increase regen rate
+            case Stat.Knockback:
+                return knockback;
+
+            // Get splitshots
+            case Stat.Splitshot:
+                return splitshots;
+
+            // Default case
+            default:
+                return 0;
+        }
+    }
+
+    // Returns a stat
+    public virtual float GetDefaultStat(Stat stat)
+    {
+        switch (stat)
+        {
+            // Upgrades the damage 
+            case Stat.Damage:
+                return weapon.damage;
+
+            // Increases firerate 
+            case Stat.Cooldown:
+                return weapon.cooldown;
+
+            // Increases bullets
+            case Stat.Bullets:
+                return weapon.bullets;
+
+            // Increases piercing rounds
+            case Stat.Pierces:
+                return weapon.pierces;
+
+            // Increases bullet lifetime
+            case Stat.Lifetime:
+                return weapon.lifetime ;
+
+            // Increases accuracy
+            case Stat.Spread:
+                return weapon.bloom;
+
+            // Increase regen rate
+            case Stat.Knockback:
+                return weapon.knockback;
+
+            // Default case
+            default:
+                return 0;
+        }
+    }
+
     // Get multiplier
     protected float GetAdditions(Stat type)
     {

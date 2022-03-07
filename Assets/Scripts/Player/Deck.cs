@@ -135,17 +135,17 @@ public class Deck : MonoBehaviour
     {
         // Add stat to the thing
         Debug.Log("Adding stat card " + stat.name + " to deck");
-        if (stat.multiply) AddMultiplier(stat.type, stat.modifier);
-        else AddAddition(stat.type, stat.modifier);
+        if (stat.value.multiply) AddMultiplier(stat.value.type, stat.value.modifier);
+        else AddAddition(stat.value.type, stat.value.modifier);
 
         // Check player stats first
         if (stat.applyToPlayer)
-            player.UpdateStat(stat.type, stat.modifier, stat.multiply);
+            player.UpdateStat(stat.value.type, stat.value.modifier, stat.value.multiply);
 
         // Update all weapon cards
         if (stat.applyToCards)
             foreach (KeyValuePair<CardData, Weapon> card in upgradeables)
-                if (card.Value != null) card.Value.UpdateStat(stat.type);
+                if (card.Value != null) card.Value.UpdateStat(stat.value.type);
     }
 
     // Set passive card slot
@@ -155,7 +155,7 @@ public class Deck : MonoBehaviour
         Debug.Log("Adding stat card " + primary.name + " to deck");
 
         // Go through and apply stats
-        foreach(PrimaryData.StatType stat in primary.stats)
+        foreach(StatValue stat in primary.stats)
         {
             if (stat.multiply) AddMultiplier(stat.type, stat.modifier);
             else AddAddition(stat.type, stat.modifier);
@@ -226,13 +226,11 @@ public class Deck : MonoBehaviour
     public static void AddMultiplier(Stat type, float amount)
     {
         if (multipliers.ContainsKey(type))
-            multipliers[type] += amount;
+            multipliers[type] *= amount;
         else multipliers.Add(type, amount);
     }
 
     // Get a stat
-    public static float GetStat(Stat type)
-    {
-        return player.GetStat(type);
-    }
+    public static float GetStat(Stat type) { return player.GetStat(type); }
+    public static float GetDefaultStat(Stat type) { return player.GetDefaultStat(type); }
 }
