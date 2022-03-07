@@ -28,6 +28,7 @@ public class Enemy : Entity
 
     // Target transform for moving
     protected Transform target;
+    protected bool hasRigidbody;
     
     // Setup the enemy
     public virtual void Setup(VariantData data, Transform player)
@@ -65,19 +66,24 @@ public class Enemy : Entity
 
         // Set target
         target = player;
+
+        // Set rigidbody flag
+        hasRigidbody = rb != null;
     }
 
     // Damage entity
     public override void Damage(float amount, float knockback = -10f)
     {
-        Damage(amount, knockback, target.position);
+        if (target != null)
+            Damage(amount, knockback, target.position);
+        else Damage(amount, knockback, Vector3.zero);
     }
 
     // Damage entity
     public void Damage(float amount, float knockback, Vector3 origin)
     {
         // Apply knockback
-        if (data.knockback)
+        if (hasRigidbody && data.knockback)
             rb.AddForce(Vector3.Normalize(origin - transform.position) * knockback);
 
         // Modify internal values
