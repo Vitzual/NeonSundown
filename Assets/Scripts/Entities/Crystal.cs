@@ -54,7 +54,7 @@ public class Crystal : Entity
     public void Damage(float amount, float knockback, Vector3 origin)
     {
         // Add knockback
-        rb.AddForce(Vector3.Normalize(origin - transform.position) * knockback);
+        rb.AddForce(Vector3.Normalize(origin - transform.position) * (knockback / 2));
 
         // Calculate health
         health -= amount;

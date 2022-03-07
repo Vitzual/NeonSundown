@@ -18,8 +18,8 @@ public class Ship : Weapon
     public Transform model;
 
     // Health amount
-    private float health;
-    private float maxHealth;
+    private static float health;
+    private static float maxHealth;
     public ProgressBar healthBar;
     public CanvasGroup healthCanvas;
 
@@ -512,4 +512,6 @@ public class Ship : Weapon
         }
         Gamemode.modules =new Dictionary<int, ModuleData>();
     }
+
+    public static float GetHealth() { return health; }
 }

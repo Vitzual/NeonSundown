@@ -168,11 +168,19 @@ public class Card : MonoBehaviour
         // New and current amounts
         float defaultAmount = Deck.GetDefaultStat(stat.type);
         float newAmount;
+        float total;
 
         // Calculate the stat
-        if (stat.multiply) newAmount = (defaultAmount + Deck.GetAdditions(stat.type)) * (Deck.GetMultiplier(stat.type) * stat.modifier);
-        else newAmount = (defaultAmount + Deck.GetAdditions(stat.type) + stat.modifier) * Deck.GetMultiplier(stat.type);
-        float total = newAmount - Deck.GetStat(stat.type);
+        if (stat.type == Stat.Health)
+        {
+            total = stat.modifier;
+        }
+        else
+        {
+            if (stat.multiply) newAmount = (defaultAmount + Deck.GetAdditions(stat.type)) * (Deck.GetMultiplier(stat.type) * stat.modifier);
+            else newAmount = (defaultAmount + Deck.GetAdditions(stat.type) + stat.modifier) * Deck.GetMultiplier(stat.type);
+            total = newAmount - Deck.GetStat(stat.type);
+        }
 
         // Calculate color
         string color = "<color=green> (";
