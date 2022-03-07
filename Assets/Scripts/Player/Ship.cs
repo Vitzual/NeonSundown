@@ -147,150 +147,89 @@ public class Ship : Weapon
     }
 
     // Update stat
-    public void UpdateStat(Stat stat, float amount, bool multiply = false)
+    public override void UpdateStat(Stat stat)
     {
         switch(stat)
         {
             // Upgrades the health
             case Stat.Health:
-
-                // Upgrade health
-                if (multiply)
-                {
-                    float newHealth = maxHealth * amount;
-                    float change = maxHealth - newHealth;
-                    maxHealth *= newHealth;
-                    health += change;
-                }
-                else
-                {
-                    maxHealth += amount;
-                    health += amount;
-                }
-
+                float oldHealth = maxHealth;
+                maxHealth = Deck.CalculateStat(stat, shipData.startingHealth);
+                health += maxHealth - oldHealth;
                 UpdateHealth();
                 break;
 
             // Upgrades the view distance
             case Stat.View:
-                
-                // Upgrade the view distance
-                if (multiply) cam.orthographicSize *= amount;
-                else cam.orthographicSize += amount;
+                cam.orthographicSize = Deck.CalculateStat(stat, 35);
                 break;
 
             // Upgrades the speed 
             case Stat.MoveSpeed:
-
-                // Upgrade speed
-                if (multiply)
-                {
-                    controller.moveSpeed *= amount;
-                    controller.dashSpeed *= amount;
-                }
-                else
-                {
-                    controller.moveSpeed += amount;
-                    controller.dashSpeed += amount;
-                }
+                controller.moveSpeed = Deck.CalculateStat(stat, shipData.playerSpeed);
+                controller.dashSpeed = Deck.CalculateStat(stat, shipData.dashSpeed);
                 break;
 
             // Upgrades the speed 
             case Stat.DashSpeed:
-
-                // Upgrade speed
-                if (multiply) controller.dashSpeed *= amount;
-                else controller.dashSpeed += amount;
+                controller.dashSpeed = Deck.CalculateStat(stat, shipData.dashSpeed);
                 break;
 
             // Upgrades the damage 
             case Stat.Damage:
-
-                // Upgrade damage output
-                if (multiply) damage *= amount;
-                else damage += amount;
+                damage = Deck.CalculateStat(stat, weapon.damage);
                 break;
 
             // Increases firerate 
             case Stat.Cooldown:
-
-                // Upgrade firerate
-                if (multiply) cooldown *= amount;
-                else cooldown -= amount;
-                if (cooldown < 0.05f)
-                    cooldown = 0.05f;
+                cooldown = Mathf.Clamp(Deck.CalculateStat(stat, 
+                    weapon.cooldown), 0.05f, Mathf.Infinity);
                 break;
 
             // Increases bullets
             case Stat.Bullets:
-
-                // Upgrade bullets
-                bullets += amount;
+                bullets = Deck.CalculateStat(stat, weapon.bullets);
                 break;
 
             // Increases piercing rounds
             case Stat.Pierces:
-
-                // Upgrade piercing
-                pierces += amount;
+                pierces = Deck.CalculateStat(stat, weapon.pierces);
                 break;
 
             // Increases bullet lifetime
             case Stat.Lifetime:
-
-                // Upgrade lfietime
-                if (multiply) lifetime *= amount;
-                else lifetime += amount;
+                lifetime = Deck.CalculateStat(stat, weapon.lifetime);
                 break;
 
             // Increases accuracy
             case Stat.Spread:
-
-                // Increase accuracy
-                if (multiply) bloom *= amount;
-                else bloom -= amount;
-                if (bloom < 0f)
-                    bloom = 0f;
+                bloom = Mathf.Clamp(Deck.CalculateStat(stat,
+                    weapon.bloom), 0f, Mathf.Infinity);
                 break;
 
             // Increase XP gain
             case Stat.XPGain:
-
-                // Increase xp multiplier
-                if (multiply) xpMultiplier *= amount;
-                else xpMultiplier += amount;
+                xpMultiplier = Deck.CalculateStat(stat, 1);
                 break;
 
             // Increase XP range
             case Stat.XPRange:
-
-                // Increases XP range
-                if (multiply) xpRange.radius *= amount;
-                else xpRange.radius += amount;
+                xpRange.radius = Deck.CalculateStat(stat, 15);
                 break;
 
             // Increase regen rate
             case Stat.Regen:
-
-                // Increases regen rate
-                if (multiply) regenAmount *= amount;
-                else regenAmount += amount;
+                regenAmount = Deck.CalculateStat(stat, shipData.regenAmount);
                 break;
 
             // Increase regen rate
             case Stat.Knockback:
-
-                // Increases regen rate
-                if (multiply) knockback *= amount;
-                else knockback += amount;
+                knockback = Deck.CalculateStat(stat, weapon.knockback);
                 break;
 
             // Increase splitshots
             case Stat.Splitshot:
-
-                // Increases regen rate
-                if (multiply) splitshots *= amount;
-                else splitshots += amount;
+                splitshots = Deck.CalculateStat(stat, 0);
                 break;
         }
     }
@@ -541,11 +480,18 @@ public class Ship : Weapon
     public void SetupModules()
     {
         // Iterate through all modules
-        foreach (KeyValuePair<Stat, float> module in Gamemode.moduleEffects)
+        foreach (KeyValuePair<int, ModuleData> module in Gamemode.modules)
         {
-            Debug.Log("Setting up module " + module.Key.ToString() + " with value " + module.Value);
-            UpdateStat(module.Key, module.Value, true);
+            // Check if module is empty
+            if (module.Value == null) continue;
+
+            // Setup the module
+            ModuleData newModule = module.Value;
+            Debug.Log("Setting up module " + newModule.name + " with value " + newModule.value);
+            if (module.Value.multi) Deck.AddMultiplier(newModule.stat, newModule.value);
+            else Deck.AddAddition(newModule.stat, newModule.value);
+            UpdateStat(newModule.stat);
         }
-        Gamemode.moduleEffects = new Dictionary<Stat, float>();
+        Gamemode.modules =new Dictionary<int, ModuleData>();
     }
 }

@@ -213,9 +213,8 @@ public class ShipPanel : MonoBehaviour
             {
                 if (Gamemode.modules[moduleSlot] != null)
                 {
+                    UpdateModuleInterface(Gamemode.modules[moduleSlot].stat, true, 0);
                     SaveSystem.AddModule(Gamemode.modules[moduleSlot].InternalID, 1);
-                    ApplyModule(Gamemode.modules[moduleSlot].stat, -Gamemode.modules[moduleSlot].value,
-                        Gamemode.modules[moduleSlot].multi);
                     if (equippedModules.Contains(Gamemode.modules[moduleSlot]))
                         equippedModules.Remove(Gamemode.modules[moduleSlot]);
                 }
@@ -228,7 +227,7 @@ public class ShipPanel : MonoBehaviour
             {
                 // Remove module from player and apply
                 SaveSystem.AddModule(module.InternalID, -1);
-                ApplyModule(module.stat, module.value, module.multi);
+                ApplyModule(module);
                 equippedModules.Add(module);
 
                 // Set module colors
@@ -255,22 +254,44 @@ public class ShipPanel : MonoBehaviour
     }
     
     // Applies a module to the ship stats
-    private void ApplyModule(Stat stat, float amount, bool multi)
+    private void ApplyModule(ModuleData module)
     {
         // Check if stat already exists and apply
-        if (Gamemode.moduleEffects.ContainsKey(stat))
-            Gamemode.moduleEffects[stat] += amount;
+        if (Gamemode.modules.ContainsKey(moduleSlot))
+            Gamemode.modules[moduleSlot] = module;
+        else Gamemode.modules.Add(moduleSlot, module);
+        UpdateModuleInterface(module.stat, false, module.value);
+    }
+
+    // Toggle module list
+    public void ToggleModules(bool toggle)
+    {
+        if (toggle)
+        {
+            shipCanvas.alpha = 0f;
+            shipCanvas.interactable = false;
+            shipCanvas.blocksRaycasts = false;
+
+            moduleCanvas.alpha = 1f;
+            moduleCanvas.interactable = true;
+            moduleCanvas.blocksRaycasts = true;
+        }
         else
         {
-            if (multi) Gamemode.moduleEffects.Add(stat, amount + 1);
-            else Gamemode.moduleEffects.Add(stat, amount);
-        }
+            moduleCanvas.alpha = 0f;
+            moduleCanvas.interactable = false;
+            moduleCanvas.blocksRaycasts = false;
 
+            shipCanvas.alpha = 1f;
+            shipCanvas.interactable = true;
+            shipCanvas.blocksRaycasts = true;
+        }
+    }
+
+    // Update interface
+    public void UpdateModuleInterface(Stat stat, bool clear, float val)
+    {
         // Check if stat is no longer applied
-        bool clear = Gamemode.moduleEffects[stat] >= -0.0001 
-            && Gamemode.moduleEffects[stat] <= 0.0001;
-        float val = Gamemode.moduleEffects[stat];
-        Debug.Log(val);
         ShipData ship = Gamemode.ship;
 
         // Update the UI elements
@@ -279,7 +300,7 @@ public class ShipPanel : MonoBehaviour
             case Stat.Health:
                 if (clear) health.text = healthStr;
                 else health.text = healthStr + "<color=green> (+" + Formatter.Round(
-                    (ship.startingHealth * val) - ship.startingHealth) + ")";
+                    (ship.startingHealth + val) - ship.startingHealth) + ")";
                 break;
             case Stat.Regen:
                 if (clear) regen.text = regenStr;
@@ -309,31 +330,6 @@ public class ShipPanel : MonoBehaviour
                 else lifetime.text = lifetimeStr + "<color=green> (+" + Formatter.Round(
                     (ship.weapon.lifetime * val) - ship.weapon.lifetime) + ")";
                 break;
-        }
-    }
-
-    // Toggle module list
-    public void ToggleModules(bool toggle)
-    {
-        if (toggle)
-        {
-            shipCanvas.alpha = 0f;
-            shipCanvas.interactable = false;
-            shipCanvas.blocksRaycasts = false;
-
-            moduleCanvas.alpha = 1f;
-            moduleCanvas.interactable = true;
-            moduleCanvas.blocksRaycasts = true;
-        }
-        else
-        {
-            moduleCanvas.alpha = 0f;
-            moduleCanvas.interactable = false;
-            moduleCanvas.blocksRaycasts = false;
-
-            shipCanvas.alpha = 1f;
-            shipCanvas.interactable = true;
-            shipCanvas.blocksRaycasts = true;
         }
     }
 }

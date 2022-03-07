@@ -248,6 +248,7 @@ public class Weapon : MonoBehaviour
     // Add a multiplier
     protected void AddMultiplier(Stat type, float amount)
     {
+        Debug.Log(type + " added " + amount);
         if (multipliers.ContainsKey(type))
             multipliers[type] += amount;
         else multipliers.Add(type, amount);

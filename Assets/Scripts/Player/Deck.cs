@@ -43,6 +43,9 @@ public class Deck : MonoBehaviour
 
         // Create starting slots
         weaponInstances = new List<Weapon>();
+
+        // Setup ship
+        Events.active.SetupShip(Gamemode.ship);
     }
 
     // Calculate cooldown
@@ -139,8 +142,7 @@ public class Deck : MonoBehaviour
         else AddAddition(stat.value.type, stat.value.modifier);
 
         // Check player stats first
-        if (stat.applyToPlayer)
-            player.UpdateStat(stat.value.type, stat.value.modifier, stat.value.multiply);
+        player.UpdateStat(stat.value.type);
 
         // Update all weapon cards
         if (stat.applyToCards)
@@ -159,7 +161,7 @@ public class Deck : MonoBehaviour
         {
             if (stat.multiply) AddMultiplier(stat.type, stat.modifier);
             else AddAddition(stat.type, stat.modifier);
-            player.UpdateStat(stat.type, stat.modifier, stat.multiply);
+            player.UpdateStat(stat.type);
         }
     }
 

@@ -12,7 +12,6 @@ public class Gamemode : MonoBehaviour
     public static ArenaData arena;
     public static ShipData ship;
     public static Dictionary<int, ModuleData> modules;
-    public static Dictionary<Stat, float> moduleEffects;
     public static bool isAlphaBuild;
 
     // Setup the game
@@ -31,9 +30,6 @@ public class Gamemode : MonoBehaviour
 
         // On ship destroyed, update save
         Events.active.onShipDestroyed += UpdateSave;
-
-        // Set player
-        Events.active.SetupShip(ship);
     }
 
     // Load menu
