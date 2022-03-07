@@ -231,6 +231,11 @@ public class Ship : Weapon
             case Stat.Splitshot:
                 splitshots = Deck.CalculateStat(stat, 0);
                 break;
+
+            // Increase explosive rounds
+            case Stat.Explosive:
+                explosiveRounds = true;
+                break;
         }
     }
 
@@ -299,6 +304,11 @@ public class Ship : Weapon
             case Stat.Splitshot:
                 return splitshots;
 
+            // Get explosive rounds
+            case Stat.Explosive:
+                if (explosiveRounds) return 1;
+                else return 0;
+
             // Default case
             default:
                 return 0;
@@ -366,6 +376,14 @@ public class Ship : Weapon
             case Stat.Knockback:
                 return weapon.knockback;
 
+            // Increase regen rate
+            case Stat.Splitshot:
+                return 0;
+
+            // Increase regen rate
+            case Stat.Explosive:
+                return 0;
+
             // Default case
             default:
                 return 0;
@@ -405,7 +423,7 @@ public class Ship : Weapon
         {
             // Create bullet
             BulletHandler.active.CreateBullet(this, shipData.weapon, barrel.position, 
-                model.rotation, (int)bullets, shipData.weapon.material, true);
+                model.rotation, (int)bullets, shipData.weapon.material, true, explosiveRounds);
             shipCooldown = cooldown;
         }
     }

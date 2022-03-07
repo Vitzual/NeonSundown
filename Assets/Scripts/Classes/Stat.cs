@@ -18,5 +18,6 @@ public enum Stat
     Syphon,
     Regen,
     Evasion,
-    Splitshot
+    Splitshot,
+    Explosive
 }

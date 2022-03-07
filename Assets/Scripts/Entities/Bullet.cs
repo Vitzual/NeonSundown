@@ -27,13 +27,15 @@ public class Bullet : Entity
     protected float lifetime;
     protected float knockback;
     protected float splitshots;
+    public bool explosive;
 
     // Is a split shot
     private Weapon parent;
     private bool isSplitShot = false;
 
     // Set up the bullet
-    public virtual void Setup(Weapon parent, WeaponData weapon, Material material, Transform target = null, bool isSplitShot = false)
+    public virtual void Setup(Weapon parent, WeaponData weapon, Material material, 
+        Transform target = null, bool isSplitShot = false, bool explosiveRound = false)
     {
         // Check if prestiged
         this.parent = parent;
@@ -68,6 +70,7 @@ public class Bullet : Entity
         knockback = parent.knockback;
         tracking = weapon.trackTarget || Deck.GetFlag(Stat.Tracking);
         splitshots = parent.splitshots;
+        if (!explosive) explosive = parent.explosiveRounds;
 
         // Give bullets a bit of randomness
         float lowValue = parent.lifetime - 0.05f;
@@ -107,18 +110,32 @@ public class Bullet : Entity
     // Destroy the bullet
     public override void Destroy()
     {
+        // Check if bullet is explosive
+        if (explosive)
+        {
+            ExplosiveHandler.CreateExplosion(transform.position, 10f,
+                damage, knockback, deathMaterial);
+        }
+
         // Check if bullet has splitshots
         if (!isSplitShot) BulletHandler.active.CreateSplitshot(parent, weapon, transform.position,
-                transform.rotation, (int)splitshots, weapon.material, 360f);
+            transform.rotation, (int)splitshots, weapon.material, 360f, explosive);
 
         // Destroy the bullet
-        if (weapon.useParticle) CreateParticle();
+        if (weapon.useParticle && !explosive) CreateParticle();
         Destroy(gameObject);
     }
 
     // On collision
     public void OnHit(Entity entity)
     {
+        // Check if explosive
+        if (explosive)
+        {
+            Destroy();
+            return;
+        }
+
         // Get material to hold
         Material holder = entity.GetMaterial();
 

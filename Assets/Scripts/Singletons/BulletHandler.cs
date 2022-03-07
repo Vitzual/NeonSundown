@@ -35,8 +35,8 @@ public class BulletHandler : MonoBehaviour
     }
 
     // Create a new active bullet instance
-    public void CreateBullet(Weapon parent, WeaponData weapon, Vector2 position, Quaternion rotation, 
-        int amount, Material material, bool overrideAudioCooldown = false, Transform target = null)
+    public void CreateBullet(Weapon parent, WeaponData weapon, Vector2 position, Quaternion rotation, int amount, 
+        Material material, bool overrideAudioCooldown = false, bool explosiveRound = false, Transform target = null)
     {
         // Loop depending on bullet amount
         for (int i = 0; i < amount; i++)
@@ -52,7 +52,7 @@ public class BulletHandler : MonoBehaviour
 
             // Attempt to set enemy variant
             Bullet bullet = lastObj.GetComponent<Bullet>();
-            bullet.Setup(parent, weapon, material, target);
+            bullet.Setup(parent, weapon, material, target, false, explosiveRound);
 
             // Add to enemies list
             bullets.Add(bullet);
@@ -65,7 +65,7 @@ public class BulletHandler : MonoBehaviour
 
     // Creates a splitshot bullet instance
     public void CreateSplitshot(Weapon parent, WeaponData weapon, Vector2 position, Quaternion rotation,
-    int amount, Material material, float rotationAmount)
+    int amount, Material material, float rotationAmount, bool explosiveRound = false)
     {
         // Loop depending on bullet amount
         for (int i = 0; i < amount; i++)
@@ -80,7 +80,7 @@ public class BulletHandler : MonoBehaviour
 
             // Attempt to set enemy variant
             Bullet bullet = lastObj.GetComponent<Bullet>();
-            bullet.Setup(parent, weapon, material, null, true);
+            bullet.Setup(parent, weapon, material, null, true, explosiveRound);
 
             // Add to enemies list
             bullets.Add(bullet);

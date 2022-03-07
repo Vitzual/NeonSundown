@@ -6506,7 +6506,7 @@ Transform:
   - {fileID: 1219245967}
   - {fileID: 1156845493}
   m_Father: {fileID: 0}
-  m_RootOrder: 19
+  m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!58 &872257024
 CircleCollider2D:
@@ -6567,6 +6567,9 @@ MonoBehaviour:
   bullets: 0
   lifetime: 0
   range: 0
+  knockback: 0
+  splitshots: 0
+  explosiveRounds: 0
   level: 0
   prestige: 0
   shipData: {fileID: 11400000, guid: b1370a648ab4cb542922d56a80462803, type: 2}
@@ -6580,16 +6583,21 @@ MonoBehaviour:
   - 10
   - 25
   - 50
+  - 75
   - 100
+  - 125
   - 150
+  - 175
   - 200
+  - 225
   - 250
+  - 275
   - 300
   - 350
   - 400
   - 450
   - 500
-  rankupMultiplier: 1.25
+  rankupMultiplier: 1.15
   xpBar: {fileID: 26750952}
   xpRange: {fileID: 1219245968}
   levelText: {fileID: 812923217}
@@ -12099,7 +12107,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 17
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1440029480
 GameObject:
@@ -13878,6 +13886,62 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1576501588}
   m_CullTransparentMesh: 1
+--- !u!1 &1614732530
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1614732532}
+  - component: {fileID: 1614732531}
+  m_Layer: 0
+  m_Name: Explosive Handler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1614732531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1614732530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ada1b35dce6dc7840b26b456c040066e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _explosionSound: {fileID: 8300000, guid: a46b7b40ba19a95448a2d30d4b9c4f2a, type: 3}
+  _explosionParticle: {fileID: 993855083006936043, guid: 01c48aa84a2ea6c49901482836dcdd15, type: 3}
+  _explosionLayers:
+  - serializedVersion: 2
+    m_Bits: 128
+  - serializedVersion: 2
+    m_Bits: 8192
+  - serializedVersion: 2
+    m_Bits: 65536
+  - serializedVersion: 2
+    m_Bits: 131072
+  - serializedVersion: 2
+    m_Bits: 2048
+--- !u!4 &1614732532
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1614732530}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 17
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!224 &1641081061 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8838788522258047301, guid: 9cf2beafc0151f8408ca49ee4fde60c5, type: 3}
@@ -17315,7 +17379,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 18
+  m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &9158845374959330797
 GameObject:

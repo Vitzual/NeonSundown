@@ -70,9 +70,15 @@ public class Enemy : Entity
     // Damage entity
     public override void Damage(float amount, float knockback = -10f)
     {
+        Damage(amount, knockback, target.position);
+    }
+
+    // Damage entity
+    public void Damage(float amount, float knockback, Vector3 origin)
+    {
         // Apply knockback
         if (data.knockback)
-            rb.AddForce((target.position - transform.position) * knockback);
+            rb.AddForce(Vector3.Normalize(origin - transform.position) * knockback);
 
         // Modify internal values
         health -= amount;

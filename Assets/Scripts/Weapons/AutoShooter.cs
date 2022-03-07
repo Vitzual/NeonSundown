@@ -23,7 +23,7 @@ public class AutoShooter : Weapon
                 transform.eulerAngles = new Vector3(0, 0, Random.Range(0, 360));
 
             BulletHandler.active.CreateBullet(this, weapon, transform.position, 
-                transform.rotation, weapon.bullets, weapon.material);
+                transform.rotation, weapon.bullets, weapon.material, false, explosiveRounds);
             weaponCooldown = cooldown;
         }
     }

@@ -47,8 +47,14 @@ public class Crystal : Entity
     // On collision
     public override void Damage(float amount, float knockback = -10f)
     {
+        Damage(amount, knockback, EnemyHandler.active.player.position);
+    }
+
+    // On collision
+    public void Damage(float amount, float knockback, Vector3 origin)
+    {
         // Add knockback
-        rb.AddForce((EnemyHandler.active.player.position - transform.position) * knockback);
+        rb.AddForce(Vector3.Normalize(origin - transform.position) * knockback);
 
         // Calculate health
         health -= amount;
@@ -58,7 +64,7 @@ public class Crystal : Entity
         {
             // Do something based on crystal
             AudioPlayer.Play(crystalSound);
-            switch(crystalData.type)
+            switch (crystalData.type)
             {
                 // If blue crystal, drop XP
                 case CrystalType.blue:
