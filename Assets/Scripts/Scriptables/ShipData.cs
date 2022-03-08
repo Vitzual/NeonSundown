@@ -46,8 +46,6 @@ public class ShipData : IdentifiableScriptableObject
     [BoxGroup("Ship Data")]
     public bool playerControlledRotation;
     [BoxGroup("Ship Data")]
-    public bool canRegen;
-    [BoxGroup("Ship Data")]
     public bool canFire;
     [BoxGroup("Ship Data")]
     public float regenAmount;

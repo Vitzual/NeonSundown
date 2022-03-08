@@ -130,7 +130,7 @@ public class Ship : Weapon
         if (shipCooldown > 0) shipCooldown -= Time.deltaTime;
 
         // If can regen, regenerate
-        if (shipData.canRegen)
+        if (regenAmount > 0)
         {
             if (regenCooldown > 0)
                 regenCooldown -= Time.deltaTime;
