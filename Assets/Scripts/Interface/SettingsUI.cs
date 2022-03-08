@@ -1,8 +1,10 @@
 using Michsky.UI.ModernUIPack;
+using MK.Glow.URP;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class SettingsUI : MonoBehaviour
 {
@@ -25,6 +27,7 @@ public class SettingsUI : MonoBehaviour
     // Variables
     public SliderManager music;
     public SliderManager sound;
+    public SliderManager glow;
 
     // Get stuff
     public GameObject pausedMenu;
@@ -32,6 +35,10 @@ public class SettingsUI : MonoBehaviour
 
     // Canvas group
     public CanvasGroup canvasGroup;
+
+    // Volume component
+    public VolumeProfile menuVolume;
+    public VolumeProfile mainVolume;
 
     // Get active instance
     public void Awake()
@@ -160,6 +167,15 @@ public class SettingsUI : MonoBehaviour
     // Set screen shake flag
     public void ScreenShake(bool toggle) { Settings.screenShake = toggle; }
 
+    // Set glow amount 
+    public void SetGlowAmount(float amount)
+    {
+        MKGlowLite mkg = (MKGlowLite)menuVolume.components[1];
+        if (mkg != null) mkg.bloomIntensity.value = amount;
+        mkg = (MKGlowLite)mainVolume.components[3];
+        if (mkg != null) mkg.bloomIntensity.value = amount;
+    }
+
     // Go back
     public void Enable()
     {
@@ -167,6 +183,10 @@ public class SettingsUI : MonoBehaviour
         music.mainSlider.value = Settings.music;
         sound.mainSlider.value = Settings.sound;
         shakeSwitch.isOn = Settings.screenShake;
+
+        // Get glow volume
+        MKGlowLite mkg = (MKGlowLite)menuVolume.components[1];
+        glow.mainSlider.value = mkg.bloomIntensity.value;
 
         // Update values
         music.UpdateUI();
