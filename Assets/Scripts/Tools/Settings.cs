@@ -93,7 +93,7 @@ public class Settings
         {
             // Set default settings
             Keybinds.SetDefaultKeybinds();
-            music = 0.5f;
+            music = 1f;
             sound = 1f;
             resolutionX = 1920;
             resolutionY = 1080;

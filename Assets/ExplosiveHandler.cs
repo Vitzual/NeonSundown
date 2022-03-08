@@ -37,6 +37,17 @@ public class ExplosiveHandler : MonoBehaviour
             // If enemy not null, apply damage
             if (enemy != null)
                 enemy.Damage(damage, knockback - 100, position);
+
+            // If null, check for crystals
+            else
+            {
+                // Get crystal component
+                Crystal crystal = colliders[i].GetComponent<Crystal>();
+
+                // If crystal not null, apply damage
+                if (crystal != null)
+                    crystal.Damage(damage, knockback - 100, position);
+            }
         }
 
         // Create particle effect

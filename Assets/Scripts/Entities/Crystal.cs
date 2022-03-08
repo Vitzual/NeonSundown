@@ -14,6 +14,7 @@ public class Crystal : Entity
     public AudioClip crystalSound;
     public AudioClip crystalDestroy;
     private float health = 50;
+    private bool isDead = false;
 
     public void Setup(float health)
     {
@@ -77,6 +78,9 @@ public class Crystal : Entity
     // On destroy
     public override void Destroy()
     {
+        // Check if already dead
+        if (isDead) return;
+
         // Add crystal to save data
         if (SaveSystem.saveData != null)
         {
@@ -84,6 +88,9 @@ public class Crystal : Entity
                 SaveSystem.saveData.crystals[crystalData.InternalID] += 1;
             else SaveSystem.saveData.crystals.Add(crystalData.InternalID, 1);
         }
+
+        // Set is dead flag
+        isDead = true;
 
         // Destroy the crystal
         AudioPlayer.Play(crystalDestroy);
