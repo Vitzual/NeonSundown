@@ -43,6 +43,7 @@ public class Ship : Weapon
     // Default card
     private float shipCooldown;
     private float regenCooldown;
+
     private bool isDead = false;
 
     // Subscribe to setup event

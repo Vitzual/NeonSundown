@@ -14,7 +14,7 @@ public class Gunner : MonoBehaviour
     public void Start()
     {
         if (selfSetup)
-            Setup();
+            Setup(weapon.material);
     }
 
     // Sets up a thing

@@ -47,10 +47,12 @@ public class Menu : MonoBehaviour
     public ArenaData alphaArena;
     public ShipData alphaShip;
     public float alphaAdjustSpeed = 0.1f;
+    public AudioClip buttonSound;
 
     // Menu flags
     private bool spacePressed = false;
-    
+    private CanvasGroup currentOpening;
+
     // Start is called before the first frame update
     public void Awake()
     {
@@ -146,12 +148,17 @@ public class Menu : MonoBehaviour
     // Open canvas group panel
     public void TogglePanel(CanvasGroup open, CanvasGroup close)
     {
+        // Toggle the panels
+        LeanTween.cancel(open.gameObject);
         LeanTween.alphaCanvas(open, 1f, 0.35f).setDelay(0.30f);
         open.interactable = true;
         open.blocksRaycasts = true;
+        currentOpening = open;
+        LeanTween.cancel(close.gameObject);
         LeanTween.alphaCanvas(close, 0f, 0.35f);
         close.interactable = false;
         close.blocksRaycasts = false;
+        AudioPlayer.Play(buttonSound, false);
     }
 
     // Open arena panel

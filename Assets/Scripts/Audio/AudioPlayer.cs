@@ -4,14 +4,19 @@ using UnityEngine;
 
 public class AudioPlayer : MonoBehaviour
 {
+    // Button sound
+    public AudioClip _buttonSound;
+
     // List of audio sources
     public static List<AudioClip> audioClips;
     public static List<float> cooldowns;
     public static AudioSource audioSource;
+    public static AudioClip buttonSound;
 
     // Set audio sources
     public void Awake()
     {
+        buttonSound = _buttonSound;
         audioClips = new List<AudioClip>();
         cooldowns = new List<float>();
         audioSource = GetComponent<AudioSource>();
@@ -54,5 +59,15 @@ public class AudioPlayer : MonoBehaviour
         else audioSource.pitch = 1f;
 
         audioSource.PlayOneShot(clip, audioScale);
+    }
+
+    // Plays a button sound on hover
+    public static void PlayButton()
+    {
+        if (buttonSound != null)
+        {
+            audioSource.volume = Settings.sound;
+            audioSource.PlayOneShot(buttonSound);
+        }
     }
 }

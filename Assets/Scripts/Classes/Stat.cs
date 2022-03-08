@@ -19,5 +19,6 @@ public enum Stat
     Regen,
     Evasion,
     Splitshot,
-    Explosive
+    Explosive,
+    Size
 }
