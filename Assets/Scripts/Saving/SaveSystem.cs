@@ -117,18 +117,9 @@ public class SaveSystem
         // Update the arena time
         if (saveData.arenaTimes.ContainsKey(id))
         {
-            // Tells system if it should update save
-            bool updateSave = false;
-
             // Check if best time achieved
             if (saveData.arenaTimes[id] < time)
-            {
                 saveData.arenaTimes[id] = time;
-                updateSave = true;
-            }
-
-            // Update save if requried
-            if (updateSave) UpdateSave();
         }
 
         // If arena does not exist, create new instance
@@ -136,7 +127,6 @@ public class SaveSystem
         {
             saveData.arenaTimes.Add(id, time);
             Debug.Log("Created arena " + id);
-            UpdateSave();
         }
     }
 

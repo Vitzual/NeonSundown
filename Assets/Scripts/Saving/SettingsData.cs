@@ -13,6 +13,7 @@ public class SettingsData
     public bool screenmode;
     public int framerate;
     public bool screenShake;
+    public float glowAmount;
 
     // Keybinds
     public string keybind_move_up;

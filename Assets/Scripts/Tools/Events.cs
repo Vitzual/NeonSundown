@@ -61,4 +61,12 @@ public class Events : MonoBehaviour
         if (onVolumeChanged != null)
             onVolumeChanged(volume);
     }
+
+    // Cosmetic applied
+    public event Action<float> onGlowChanged;
+    public void GlowChanged(float volume)
+    {
+        if (onGlowChanged != null)
+            onGlowChanged(volume);
+    }
 }

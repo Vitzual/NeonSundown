@@ -24,6 +24,7 @@ public class Settings
     private static bool screenmode = true;
     private static int framerate = 999;
     public static bool screenShake = true;
+    public static float glowAmount = 1f;
 
     // Save settings
     public static void SaveSettings()
@@ -39,6 +40,7 @@ public class Settings
         settingsData.screenmode = screenmode;
         settingsData.framerate = framerate;
         settingsData.screenShake = screenShake;
+        settingsData.glowAmount = glowAmount;
 
         // Get keybinds from file
         settingsData.keybind_move_up = Keybinds.move_up.ToString();
@@ -76,6 +78,13 @@ public class Settings
             framerate = settingsData.framerate;
             screenShake = settingsData.screenShake;
 
+            // Check if glow exists
+            if (settingsData.glowAmount != null)
+            {
+                glowAmount = settingsData.glowAmount;
+                if (glowAmount > 1f) glowAmount = 1f;
+            }
+
             // Get keybinds from file
             Keybinds.move_up = (KeyCode)System.Enum.Parse(typeof(KeyCode), settingsData.keybind_move_up);
             Keybinds.move_left = (KeyCode)System.Enum.Parse(typeof(KeyCode), settingsData.keybind_move_left);
@@ -88,6 +97,7 @@ public class Settings
             // Apply settings
             UpdateVideoSettings();
             UpdateVolumeSettings();
+            
         }
         else
         {
@@ -99,6 +109,7 @@ public class Settings
             resolutionY = 1080;
             screenmode = true;
             framerate = 999;
+            glowAmount = 1f;
         }
     }
 

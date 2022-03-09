@@ -27,14 +27,12 @@ public class Gamemode : MonoBehaviour
         // Check if save data exists
         if (SaveSystem.saveData == null)
             SaveSystem.GetSave();
-
-        // On ship destroyed, update save
-        Events.active.onShipDestroyed += UpdateSave;
     }
 
     // Load menu
     public void LoadMenu()
     {
+        UpdateSave();
         Dealer.isOpen = false;
         SceneManager.LoadScene("Menu");
     }
@@ -60,6 +58,7 @@ public class Gamemode : MonoBehaviour
 
         // Save the game
         SaveSystem.UpdateArena(arena.InternalID, time);
+        SaveSystem.UpdateSave();
     }
 
     // Reward objective

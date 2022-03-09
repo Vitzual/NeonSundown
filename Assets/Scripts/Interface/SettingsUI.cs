@@ -174,6 +174,7 @@ public class SettingsUI : MonoBehaviour
         if (mkg != null) mkg.bloomIntensity.value = amount;
         mkg = (MKGlowLite)mainVolume.components[3];
         if (mkg != null) mkg.bloomIntensity.value = amount;
+        Settings.glowAmount = amount;
     }
 
     // Go back
@@ -185,8 +186,7 @@ public class SettingsUI : MonoBehaviour
         shakeSwitch.isOn = Settings.screenShake;
 
         // Get glow volume
-        MKGlowLite mkg = (MKGlowLite)menuVolume.components[1];
-        glow.mainSlider.value = mkg.bloomIntensity.value;
+        glow.mainSlider.value = Settings.glowAmount;
 
         // Update values
         music.UpdateUI();

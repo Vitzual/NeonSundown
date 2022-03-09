@@ -20,6 +20,7 @@ public class Crystal : Entity
     {
         // Set entity stats
         this.health = health;
+        isDead = false;
 
         // Select a crystal at random
         crystalData = crystals[Random.Range(0, crystals.Count)];
@@ -71,6 +72,11 @@ public class Crystal : Entity
                 case CrystalType.blue:
                     XPHandler.active.Spawn(transform.position, Random.Range(1, 3));
                     break;
+
+                // If green crystal, heal
+                case CrystalType.green:
+                    Deck.player.Heal(0.25f);
+                    break;
             }
         }
     }
@@ -82,12 +88,7 @@ public class Crystal : Entity
         if (isDead) return;
 
         // Add crystal to save data
-        if (SaveSystem.saveData != null)
-        {
-            if (SaveSystem.saveData.crystals.ContainsKey(crystalData.InternalID))
-                SaveSystem.saveData.crystals[crystalData.InternalID] += 1;
-            else SaveSystem.saveData.crystals.Add(crystalData.InternalID, 1);
-        }
+        SaveSystem.AddCrystal(crystalData.InternalID, 1);
 
         // Set is dead flag
         isDead = true;
