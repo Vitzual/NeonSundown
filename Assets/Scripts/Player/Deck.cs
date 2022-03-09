@@ -98,8 +98,8 @@ public class Deck : MonoBehaviour
             SetupStat((StatData)card);
         else if (card is PrimaryData)
             SetupPrimary((PrimaryData)card);
-        else if (card is AbilityData)
-            SetupAbility((AbilityData)card);
+        else if (card is SecondaryData)
+            SetupSecondary((SecondaryData)card);
     }
 
     // Returns a weapon card instance
@@ -166,9 +166,11 @@ public class Deck : MonoBehaviour
     }
 
     // Set passive card slot
-    public void SetupAbility(AbilityData ability)
+    public void SetupSecondary(SecondaryData ability)
     {
         Debug.Log("Adding ability card " + ability.name + " to deck");
+
+
     }
 
     // Setup starting cards

@@ -10,6 +10,7 @@ public class Ship : Weapon
 
     // Player model and data
     public ShipData shipData;
+    public SecondaryData secondary;
     public SpriteRenderer border;
     public SpriteRenderer fill;
 
@@ -129,6 +130,14 @@ public class Ship : Weapon
         if (Input.GetKey(Keybinds.shoot) && shipData.canFire) Use();
         if (shipCooldown > 0) shipCooldown -= Time.deltaTime;
 
+        // Update secondary instance
+        if (secondary != null)
+        {
+            if (Input.GetKey(Keybinds.ability))
+                secondary.script.Use();
+            secondary.script.Update();
+        }
+
         // If can regen, regenerate
         if (regenAmount > 0)
         {
@@ -145,6 +154,12 @@ public class Ship : Weapon
         // If player can rotate, rotate
         if (!shipData.playerControlledRotation)
             model.Rotate(Vector3.forward, weapon.rotateSpeed * Time.deltaTime);
+    }
+
+    // Set the secondary weapon
+    public void SetSecondary(SecondaryData secondary)
+    {
+        this.secondary = secondary;
     }
 
     // Update stat
