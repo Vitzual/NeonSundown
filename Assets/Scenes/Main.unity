@@ -644,6 +644,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scaleAdjustment: 0.1
+  playSound: 1
 --- !u!1 &73304863
 GameObject:
   m_ObjectHideFlags: 0
@@ -2454,6 +2455,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scaleAdjustment: 0.1
+  playSound: 1
 --- !u!114 &287118298
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4393,6 +4395,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scaleAdjustment: 0.1
+  playSound: 1
 --- !u!114 &530867032
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4513,6 +4516,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scaleAdjustment: 0.1
+  playSound: 1
 --- !u!114 &539705370
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6453,6 +6457,7 @@ GameObject:
   m_Component:
   - component: {fileID: 872257023}
   - component: {fileID: 872257026}
+  - component: {fileID: 872257029}
   - component: {fileID: 872257022}
   - component: {fileID: 872257028}
   - component: {fileID: 872257025}
@@ -6573,6 +6578,7 @@ MonoBehaviour:
   level: 0
   prestige: 0
   shipData: {fileID: 11400000, guid: b1370a648ab4cb542922d56a80462803, type: 2}
+  secondary: {fileID: 0}
   border: {fileID: 1048120583}
   fill: {fileID: 1168927202}
   barrel: {fileID: 587961114}
@@ -6711,6 +6717,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f189636dd780b324eb326819ce02cf3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &872257029
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 872257021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5145e663e2f532246872acb3e602e321, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: {fileID: 0}
+  cooldown: 0
 --- !u!1 &894485715
 GameObject:
   m_ObjectHideFlags: 0
@@ -10526,6 +10546,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scaleAdjustment: 0.1
+  playSound: 1
 --- !u!114 &1280160441
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11819,6 +11840,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scaleAdjustment: 0.1
+  playSound: 1
 --- !u!1 &1423665064
 GameObject:
   m_ObjectHideFlags: 0
@@ -12353,6 +12375,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3560654e5ad7e84eb1e7cbb6e5fa975, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _buttonSound: {fileID: 0}
 --- !u!4 &1458259017
 Transform:
   m_ObjectHideFlags: 0
@@ -15936,6 +15959,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scaleAdjustment: 0.1
+  playSound: 1
 --- !u!1 &1977393565
 GameObject:
   m_ObjectHideFlags: 0
@@ -16006,6 +16030,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scaleAdjustment: 0.1
+  playSound: 1
 --- !u!114 &1977393569
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16143,6 +16168,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scaleAdjustment: 0.1
+  playSound: 1
 --- !u!114 &1978946283
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17061,6 +17087,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1881371648}
     m_Modifications:
+    - target: {fileID: 6002546553746345325, guid: 9cf2beafc0151f8408ca49ee4fde60c5, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6002546553746345325, guid: 9cf2beafc0151f8408ca49ee4fde60c5, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6002546553746345325, guid: 9cf2beafc0151f8408ca49ee4fde60c5, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6209897288290656360, guid: 9cf2beafc0151f8408ca49ee4fde60c5, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6209897288290656360, guid: 9cf2beafc0151f8408ca49ee4fde60c5, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8838788521189130693, guid: 9cf2beafc0151f8408ca49ee4fde60c5, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0.5
