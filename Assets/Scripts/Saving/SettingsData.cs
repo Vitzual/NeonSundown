@@ -14,6 +14,12 @@ public class SettingsData
     public int framerate;
     public bool screenShake;
     public float glowAmount;
+    public float lightAmount;
+    public bool shipColoring;
+    public bool useParticles;
+    public bool fastCardAnim;
+    public bool skipCardAnim;
+    public bool musicPitching;
 
     // Keybinds
     public string keybind_move_up;

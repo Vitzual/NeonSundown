@@ -116,7 +116,7 @@ public class Bullet : Entity
             ExplosiveHandler.CreateExplosion(transform.position, 10f,
                 damage, knockback, deathMaterial);
         }
-
+        
         // Check if bullet has splitshots
         if (!isSplitShot) BulletHandler.active.CreateSplitshot(parent, weapon, transform.position,
             transform.rotation, (int)splitshots, weapon.material, 360f, explosive);

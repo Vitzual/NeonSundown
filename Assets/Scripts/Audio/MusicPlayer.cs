@@ -19,6 +19,7 @@ public class MusicPlayer : MonoBehaviour
     {
         // Subscribe to volume change event
         Events.active.onVolumeChanged += UpdateVolume;
+        Events.active.onMusicPitchChanged += ResetPitch;
 
         // Get the audio source
         music = GetComponent<AudioSource>();
@@ -45,6 +46,7 @@ public class MusicPlayer : MonoBehaviour
     // Play / Stop the music
     public static void PlayMusic() { music.Play(); }
     public static void StopMusic() { music.Pause(); }
+    public static void ResetPitch() { music.pitch = 1f; }
 
     // Creates a fade in
     public static IEnumerator FadeIn(float FadeTime, float delay)

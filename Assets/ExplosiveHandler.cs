@@ -29,7 +29,7 @@ public class ExplosiveHandler : MonoBehaviour
         Collider2D[] colliders = Physics2D.OverlapCircleAll(position, range, explosionLayer);
 
         // Iterate through colliders and do the damage
-        for(int i = 0; i < colliders.Length; i++)
+        for (int i = 0; i < colliders.Length; i++)
         {
             // Get enemy component
             Enemy enemy = colliders[i].GetComponent<Enemy>();
@@ -51,10 +51,13 @@ public class ExplosiveHandler : MonoBehaviour
         }
 
         // Create particle effect
-        ParticleSystemRenderer holder = Instantiate(explosionParticle, 
-            position, Quaternion.identity).GetComponent<ParticleSystemRenderer>();
-        holder.material = material;
-        holder.trailMaterial = material;
+        if (Settings.useParticles)
+        {
+            ParticleSystemRenderer holder = Instantiate(explosionParticle,
+                position, Quaternion.identity).GetComponent<ParticleSystemRenderer>();
+            holder.material = material;
+            holder.trailMaterial = material;
+        }
 
         // Play explosion sound
         AudioPlayer.Play(explosionSound);

@@ -3921,6 +3921,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 131810205}
+  - component: {fileID: 131810208}
   - component: {fileID: 131810207}
   - component: {fileID: 131810206}
   m_Layer: 0
@@ -4538,6 +4539,18 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!114 &131810208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 131810204}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc8604f07ce0be34f9f4b1a759f2ff6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &137302991
 GameObject:
   m_ObjectHideFlags: 0
@@ -22455,6 +22468,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 154849196}
     m_Modifications:
+    - target: {fileID: 2867568685090546917, guid: 9cf2beafc0151f8408ca49ee4fde60c5, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2867568685090546917, guid: 9cf2beafc0151f8408ca49ee4fde60c5, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6002546553746345325, guid: 9cf2beafc0151f8408ca49ee4fde60c5, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -22473,6 +22494,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6209897288290656360, guid: 9cf2beafc0151f8408ca49ee4fde60c5, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8549253040963691777, guid: 9cf2beafc0151f8408ca49ee4fde60c5, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8549253040963691777, guid: 9cf2beafc0151f8408ca49ee4fde60c5, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8549253040963691777, guid: 9cf2beafc0151f8408ca49ee4fde60c5, type: 3}
+      propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8838788521189130693, guid: 9cf2beafc0151f8408ca49ee4fde60c5, type: 3}

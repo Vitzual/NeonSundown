@@ -28,10 +28,16 @@ public class SettingsUI : MonoBehaviour
     public SliderManager music;
     public SliderManager sound;
     public SliderManager glow;
+    public new SliderManager light;
 
     // Get stuff
     public GameObject pausedMenu;
+    public SwitchManager shipColoringSwitch;
     public SwitchManager shakeSwitch;
+    public SwitchManager particleSwitch;
+    public SwitchManager fastAnimSwitch;
+    public SwitchManager skipAnimSwitch;
+    public SwitchManager musicPitchingSwitch;
 
     // Canvas group
     public CanvasGroup canvasGroup;
@@ -46,6 +52,10 @@ public class SettingsUI : MonoBehaviour
         active = this;
         canvasGroup = GetComponent<CanvasGroup>();
         Settings.LoadSettings();
+
+        light.mainSlider.minValue = 0.5f;
+        light.mainSlider.maxValue = 1f;
+        light.UpdateUI();
     }
 
     // Get input from player
@@ -165,7 +175,12 @@ public class SettingsUI : MonoBehaviour
     }
 
     // Set screen shake flag
+    public void ShipColoring(bool toggle) { Settings.shipColoring = toggle; Events.active.ShipColoring(toggle); }
     public void ScreenShake(bool toggle) { Settings.screenShake = toggle; }
+    public void UseParticles(bool toggle) { Settings.useParticles = toggle; }
+    public void FastAnimation(bool toggle) { Settings.fastCardAnim = toggle; }
+    public void SkipAnimation(bool toggle) { Settings.skipCardAnim = toggle; }
+    public void MusicPitching(bool toggle) { Settings.musicPitching = toggle; Events.active.ResetPitch(); }
 
     // Set glow amount 
     public void SetGlowAmount(float amount)
@@ -177,21 +192,39 @@ public class SettingsUI : MonoBehaviour
         Settings.glowAmount = amount;
     }
 
+    // Set background lighting amount
+    public void SetLightAmount(float amount)
+    {
+        Events.active.LightChanged(amount);
+        Settings.lightAmount = amount;
+    }
+
     // Go back
     public void Enable()
     {
         // Set values
         music.mainSlider.value = Settings.music;
         sound.mainSlider.value = Settings.sound;
-        shakeSwitch.isOn = Settings.screenShake;
-
-        // Get glow volume
         glow.mainSlider.value = Settings.glowAmount;
+        light.mainSlider.value = Settings.lightAmount;
+        shipColoringSwitch.isOn = Settings.shipColoring;
+        shakeSwitch.isOn = Settings.screenShake;
+        particleSwitch.isOn = Settings.useParticles;
+        fastAnimSwitch.isOn = Settings.fastCardAnim;
+        skipAnimSwitch.isOn = Settings.skipCardAnim;
+        musicPitchingSwitch.isOn = Settings.musicPitching;
 
         // Update values
         music.UpdateUI();
         sound.UpdateUI();
+        glow.UpdateUI();
+        light.UpdateUI();
+        shipColoringSwitch.UpdateUI();
         shakeSwitch.UpdateUI();
+        particleSwitch.UpdateUI();
+        fastAnimSwitch.UpdateUI();
+        skipAnimSwitch.UpdateUI();
+        musicPitchingSwitch.UpdateUI();
 
         // Update canvas group
         canvasGroup.alpha = 1f;

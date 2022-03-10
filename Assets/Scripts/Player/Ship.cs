@@ -14,6 +14,10 @@ public class Ship : Weapon
     public SpriteRenderer border;
     public SpriteRenderer fill;
 
+    // Default player models
+    public Material defaultGlow;
+    public Color defaultColor;
+
     // Barrel location
     public Transform barrel;
     public Transform model;
@@ -51,7 +55,10 @@ public class Ship : Weapon
     public void Start()
     {
         if (Gamemode.ship != null)
+        {
             Events.active.onSetupShip += Setup;
+            Events.active.onShipColoringChange += SetupShipColoring;
+        }
         else if (shipData != null) Setup(shipData);
     }
 
@@ -61,18 +68,8 @@ public class Ship : Weapon
         // Setup the ship data
         shipData = data;
         weapon = data.weapon;
-
-        // Setup the player model
-        border.sprite = shipData.border;
-        fill.sprite = shipData.fill;
-        border.material = shipData.borderMaterial;
-        fill.color = shipData.fillColor;
-
-        // Set positioning of models
-        border.transform.localPosition = shipData.barrelPosition;
-        fill.transform.localPosition = shipData.modelOffset;
-        border.transform.localScale = shipData.playerSize;
-        fill.transform.localScale = shipData.playerSize;
+        SetupShipModel();
+        SetupShipColoring(Settings.shipColoring);
 
         // Get controller instance
         controller = GetComponent<Controller>();
@@ -120,6 +117,35 @@ public class Ship : Weapon
         SetupModules();
     }
 
+    // Setup ship model
+    public void SetupShipModel()
+    {
+        // Set border and fill models
+        border.sprite = shipData.border;
+        fill.sprite = shipData.fill;
+
+        // Set positioning of models
+        border.transform.localPosition = shipData.barrelPosition;
+        fill.transform.localPosition = shipData.modelOffset;
+        border.transform.localScale = shipData.playerSize;
+        fill.transform.localScale = shipData.playerSize;
+    }
+
+    // Setup ship coloring
+    public void SetupShipColoring(bool useColoring)
+    {
+        if (useColoring)
+        {
+            border.material = shipData.borderMaterial;
+            fill.color = shipData.fillColor;
+        }
+        else
+        {
+            border.material = defaultGlow;
+            fill.color = defaultColor;
+        }
+    }
+
     // Update method 
     public void Update()
     {
@@ -127,13 +153,13 @@ public class Ship : Weapon
         if (Dealer.isOpen) return;
 
         // Check if LMB input detected
-        if (Input.GetKey(Keybinds.shoot) && shipData.canFire) Use();
+        if (Input.GetKey(Keybinds.primary) && shipData.canFire) Use();
         if (shipCooldown > 0) shipCooldown -= Time.deltaTime;
 
         // Update secondary instance
         if (secondary != null)
         {
-            if (Input.GetKey(Keybinds.ability))
+            if (Input.GetKey(Keybinds.secondary))
                 secondary.script.Use();
             secondary.script.Update();
         }
@@ -161,6 +187,131 @@ public class Ship : Weapon
     {
         this.secondary = secondary;
     }
+
+    // Add XP
+    public void AddXP(int amount)
+    {
+        // Add the XP amount
+        xp += amount * xpMultiplier;
+
+        // Check if XP over rankup
+        if (xp >= rankup)
+        {
+            // Increase level
+            level += 1;
+            xp -= rankup;
+            if (levels.Count <= level) rankup = (int)(rankup * rankupMultiplier);
+            else rankup = levels[level];
+
+            // Set text
+            levelText.text = "LEVEL " + level;
+            Dealer.active.OpenDealer();
+        }
+
+        // Set XP bar
+        xpText.text = Mathf.Round(xp) + " / " + Mathf.Round(rankup);
+        xpBar.currentPercent = (float)xp / rankup * 100;
+        xpBar.UpdateUI();
+    }
+
+    // Shoot method
+    public override void Use()
+    {
+        if (shipCooldown <= 0)
+        {
+            // Create bullet
+            BulletHandler.active.CreateBullet(this, shipData.weapon, barrel.position,
+                model.rotation, (int)bullets, shipData.weapon.material, true, explosiveRounds);
+            shipCooldown = cooldown;
+        }
+    }
+
+    // Heal amount
+    public void Heal(float amount)
+    {
+        // Update health
+        health += amount;
+        if (health > maxHealth)
+            health = maxHealth;
+        UpdateHealth();
+    }
+
+    // Damage method
+    public void Damage(float damage)
+    {
+        // Update health
+        health -= damage;
+        if (health <= 0) Kill();
+
+        // Update health UI bar
+        UpdateHealth();
+    }
+
+    private void UpdateHealth()
+    {
+        // Update health UI bar
+        healthBar.currentPercent = (float)health / maxHealth * 100;
+        healthBar.UpdateUI();
+
+        // Show bar for short period of time
+        if (!isDead)
+        {
+            healthCanvas.alpha = 1f;
+            LeanTween.reset();
+            LeanTween.alphaCanvas(healthCanvas, 0f, 0.5f).setDelay(3f);
+        }
+    }
+
+    // Kill the player
+    public void Kill()
+    {
+        // Open game over screen
+        Events.active.ShipDestroyed();
+
+        // Set is dead flag to true
+        isDead = true;
+    }
+
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+        // Get the other enemy component
+        Enemy enemy = collision.collider.GetComponent<Enemy>();
+
+        // If is player, invoke on hit method
+        if (enemy != null)
+            enemy.OnHitPlayer(this);
+
+        // Get the other enemy component 
+        Bullet bullet = collision.collider.GetComponent<Bullet>();
+
+        // If is bullet, invoke on hit method
+        if (bullet != null)
+        {
+            Damage(bullet.GetDamage());
+            bullet.Destroy();
+        }
+    }
+
+    // Sets up any attached power modules
+    public void SetupModules()
+    {
+        // Iterate through all modules
+        foreach (KeyValuePair<int, ModuleData> module in Gamemode.modules)
+        {
+            // Check if module is empty
+            if (module.Value == null) continue;
+
+            // Setup the module
+            ModuleData newModule = module.Value;
+            Debug.Log("Setting up module " + newModule.name + " with value " + newModule.value);
+            if (module.Value.multi) Deck.AddMultiplier(newModule.stat, newModule.value);
+            else Deck.AddAddition(newModule.stat, newModule.value);
+            UpdateStat(newModule.stat);
+        }
+        Gamemode.modules = new Dictionary<int, ModuleData>();
+    }
+
+    public static float GetHealth() { return health; }
 
     // Update stat
     public override void UpdateStat(Stat stat)
@@ -405,129 +556,4 @@ public class Ship : Weapon
                 return 0;
         }
     }
-
-    // Add XP
-    public void AddXP(int amount)
-    {
-        // Add the XP amount
-        xp += amount * xpMultiplier;
-
-        // Check if XP over rankup
-        if (xp >= rankup)
-        {
-            // Increase level
-            level += 1;
-            xp -= rankup;
-            if (levels.Count <= level) rankup = (int)(rankup * rankupMultiplier);
-            else rankup = levels[level];
-
-            // Set text
-            levelText.text = "LEVEL " + level;
-            Dealer.active.OpenDealer();
-        }
-
-        // Set XP bar
-        xpText.text = Mathf.Round(xp) + " / " + Mathf.Round(rankup);
-        xpBar.currentPercent = (float)xp / rankup * 100;
-        xpBar.UpdateUI();
-    }
-
-    // Shoot method
-    public override void Use()
-    {
-        if (shipCooldown <= 0)
-        {
-            // Create bullet
-            BulletHandler.active.CreateBullet(this, shipData.weapon, barrel.position, 
-                model.rotation, (int)bullets, shipData.weapon.material, true, explosiveRounds);
-            shipCooldown = cooldown;
-        }
-    }
-
-    // Heal amount
-    public void Heal(float amount)
-    {
-        // Update health
-        health += amount;
-        if (health > maxHealth)
-            health = maxHealth;
-        UpdateHealth();
-    }
-
-    // Damage method
-    public void Damage(float damage)
-    {
-        // Update health
-        health -= damage;
-        if (health <= 0) Kill();
-
-        // Update health UI bar
-        UpdateHealth();
-    }
-
-    private void UpdateHealth()
-    {
-        // Update health UI bar
-        healthBar.currentPercent = (float)health / maxHealth * 100;
-        healthBar.UpdateUI();
-
-        // Show bar for short period of time
-        if (!isDead)
-        {
-            healthCanvas.alpha = 1f;
-            LeanTween.reset();
-            LeanTween.alphaCanvas(healthCanvas, 0f, 0.5f).setDelay(3f);
-        }
-    }
-
-    // Kill the player
-    public void Kill()
-    {
-        // Open game over screen
-        Events.active.ShipDestroyed();
-
-        // Set is dead flag to true
-        isDead = true;
-    }
-
-    public void OnCollisionEnter2D(Collision2D collision)
-    {
-        // Get the other enemy component
-        Enemy enemy = collision.collider.GetComponent<Enemy>();
-
-        // If is player, invoke on hit method
-        if (enemy != null)
-            enemy.OnHitPlayer(this);
-
-        // Get the other enemy component 
-        Bullet bullet = collision.collider.GetComponent<Bullet>();
-
-        // If is bullet, invoke on hit method
-        if (bullet != null)
-        {
-            Damage(bullet.GetDamage());
-            bullet.Destroy();
-        }
-    }
-
-    // Sets up any attached power modules
-    public void SetupModules()
-    {
-        // Iterate through all modules
-        foreach (KeyValuePair<int, ModuleData> module in Gamemode.modules)
-        {
-            // Check if module is empty
-            if (module.Value == null) continue;
-
-            // Setup the module
-            ModuleData newModule = module.Value;
-            Debug.Log("Setting up module " + newModule.name + " with value " + newModule.value);
-            if (module.Value.multi) Deck.AddMultiplier(newModule.stat, newModule.value);
-            else Deck.AddAddition(newModule.stat, newModule.value);
-            UpdateStat(newModule.stat);
-        }
-        Gamemode.modules =new Dictionary<int, ModuleData>();
-    }
-
-    public static float GetHealth() { return health; }
 }

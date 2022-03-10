@@ -62,11 +62,27 @@ public class Events : MonoBehaviour
             onVolumeChanged(volume);
     }
 
-    // Cosmetic applied
-    public event Action<float> onGlowChanged;
-    public void GlowChanged(float volume)
+    // Player died
+    public event Action onMusicPitchChanged;
+    public void ResetPitch()
     {
-        if (onGlowChanged != null)
-            onGlowChanged(volume);
+        if (onMusicPitchChanged != null)
+            onMusicPitchChanged();
+    }
+
+    // Cosmetic applied
+    public event Action<float> onLightChanged;
+    public void LightChanged(float volume)
+    {
+        if (onLightChanged != null)
+            onLightChanged(volume);
+    }
+
+    // Ship coloring change
+    public event Action<bool> onShipColoringChange;
+    public void ShipColoring(bool toggle)
+    {
+        if (onShipColoringChange != null)
+            onShipColoringChange(toggle);
     }
 }

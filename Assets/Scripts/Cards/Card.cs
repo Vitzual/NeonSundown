@@ -145,8 +145,22 @@ public class Card : MonoBehaviour
 
         // Animate the card
         ResetCard();
-        LeanTween.moveLocal(gameObject, cardPosition, animationSpeed);
-        LeanTween.alphaCanvas(canvasGroup, 1f, fadeInSpeed);
+
+        if (Settings.skipCardAnim)
+        {
+            transform.localPosition = cardPosition;
+            canvasGroup.alpha = 1f;
+        }
+        else if (Settings.fastCardAnim)
+        {
+            LeanTween.moveLocal(gameObject, cardPosition, animationSpeed / 2f);
+            LeanTween.alphaCanvas(canvasGroup, 1f, fadeInSpeed / 2f);
+        }
+        else
+        {
+            LeanTween.moveLocal(gameObject, cardPosition, animationSpeed);
+            LeanTween.alphaCanvas(canvasGroup, 1f, fadeInSpeed);
+        }
     }
 
     // Card clicked

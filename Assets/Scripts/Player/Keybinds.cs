@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Keybinds
@@ -9,8 +7,8 @@ public class Keybinds
     public static KeyCode move_down { get; set; }
     public static KeyCode move_right { get; set; }
     public static KeyCode dash { get; set; }
-    public static KeyCode shoot { get; set; }
-    public static KeyCode ability { get; set; }
+    public static KeyCode primary { get; set; }
+    public static KeyCode secondary { get; set; }
     public static KeyCode escape { get; set; }
     public static KeyCode debug { get; set; }
 
@@ -38,8 +36,12 @@ public class Keybinds
                 dash = value;
                 break;
 
-            case Key.shoot:
-                shoot = value;
+            case Key.primary:
+                primary = value;
+                break;
+
+            case Key.secondary:
+                secondary = value;
                 break;
 
             case Key.escape:
@@ -67,8 +69,11 @@ public class Keybinds
             case Key.dash:
                 return dash;
 
-            case Key.shoot:
-                return shoot;
+            case Key.primary:
+                return primary;
+
+            case Key.secondary:
+                return secondary;
 
             case Key.escape:
                 return escape;
@@ -85,8 +90,8 @@ public class Keybinds
         move_down = KeyCode.S;
         move_right = KeyCode.D;
         dash = KeyCode.LeftShift;
-        shoot = KeyCode.Mouse0;
-        ability = KeyCode.Mouse1;
+        primary = KeyCode.Mouse0;
+        secondary = KeyCode.Mouse1;
         escape = KeyCode.Escape;
         debug = KeyCode.Q;
     }

@@ -5,6 +5,7 @@ public enum Key
     move_down,
     move_right,
     dash,
-    shoot,
-    escape
+    primary,
+    escape,
+    secondary
 }

@@ -13,6 +13,9 @@ public class Entity : MonoBehaviour
     // Creates a particle and sets the material
     public void CreateParticle()
     {
+        // Check if particles enabled
+        if (!Settings.useParticles) return;
+
         // Check if has death effect
         if (deathEffect == null) return;
 

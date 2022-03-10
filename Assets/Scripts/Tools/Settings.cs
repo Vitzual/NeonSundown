@@ -23,8 +23,14 @@ public class Settings
     private static int resolutionY = 1080;
     private static bool screenmode = true;
     private static int framerate = 999;
+    public static bool shipColoring = true;
     public static bool screenShake = true;
+    public static bool useParticles = true;
     public static float glowAmount = 1f;
+    public static float lightAmount = 1f;
+    public static bool fastCardAnim = false;
+    public static bool skipCardAnim = false;
+    public static bool musicPitching = false;
 
     // Save settings
     public static void SaveSettings()
@@ -39,8 +45,14 @@ public class Settings
         settingsData.resolutionY = resolutionY;
         settingsData.screenmode = screenmode;
         settingsData.framerate = framerate;
+        settingsData.shipColoring = shipColoring;
         settingsData.screenShake = screenShake;
         settingsData.glowAmount = glowAmount;
+        settingsData.lightAmount = lightAmount;
+        settingsData.useParticles = useParticles;
+        settingsData.fastCardAnim = fastCardAnim;
+        settingsData.skipCardAnim = skipCardAnim;
+        settingsData.musicPitching = musicPitching;
 
         // Get keybinds from file
         settingsData.keybind_move_up = Keybinds.move_up.ToString();
@@ -48,7 +60,7 @@ public class Settings
         settingsData.keybind_move_down = Keybinds.move_down.ToString();
         settingsData.keybind_move_right = Keybinds.move_right.ToString();
         settingsData.keybind_dash = Keybinds.dash.ToString();
-        settingsData.keybind_shoot = Keybinds.shoot.ToString();
+        settingsData.keybind_shoot = Keybinds.primary.ToString();
         settingsData.keybind_escape = Keybinds.escape.ToString();
 
         // Convert to json and save
@@ -76,14 +88,21 @@ public class Settings
             resolutionY = settingsData.resolutionY;
             screenmode = settingsData.screenmode;
             framerate = settingsData.framerate;
+            shipColoring = settingsData.shipColoring;
             screenShake = settingsData.screenShake;
+            useParticles = settingsData.useParticles;
+            fastCardAnim = settingsData.fastCardAnim;
+            skipCardAnim = settingsData.skipCardAnim;
+            musicPitching = settingsData.musicPitching;
 
-            // Check if glow exists
-            if (settingsData.glowAmount != null)
-            {
-                glowAmount = settingsData.glowAmount;
-                if (glowAmount > 1f) glowAmount = 1f;
-            }
+            // Apply glow effect
+            glowAmount = settingsData.glowAmount;
+            if (glowAmount > 1f) glowAmount = 1f;
+
+            // Apply lighting effect
+            lightAmount = settingsData.lightAmount;
+            if (lightAmount < 0.5f) lightAmount = 0.5f;
+            else if (lightAmount > 1f) lightAmount = 1f;
 
             // Get keybinds from file
             Keybinds.move_up = (KeyCode)System.Enum.Parse(typeof(KeyCode), settingsData.keybind_move_up);
@@ -91,13 +110,12 @@ public class Settings
             Keybinds.move_down = (KeyCode)System.Enum.Parse(typeof(KeyCode), settingsData.keybind_move_down);
             Keybinds.move_right = (KeyCode)System.Enum.Parse(typeof(KeyCode), settingsData.keybind_move_right);
             Keybinds.dash = (KeyCode)System.Enum.Parse(typeof(KeyCode), settingsData.keybind_dash);
-            Keybinds.shoot = (KeyCode)System.Enum.Parse(typeof(KeyCode), settingsData.keybind_shoot);
+            Keybinds.primary = (KeyCode)System.Enum.Parse(typeof(KeyCode), settingsData.keybind_shoot);
             Keybinds.escape = (KeyCode)System.Enum.Parse(typeof(KeyCode), settingsData.keybind_escape);
 
             // Apply settings
             UpdateVideoSettings();
             UpdateVolumeSettings();
-            
         }
         else
         {
@@ -110,6 +128,13 @@ public class Settings
             screenmode = true;
             framerate = 999;
             glowAmount = 1f;
+            lightAmount = 1f;
+            shipColoring = true;
+            screenShake = true;
+            useParticles = true;
+            fastCardAnim = false;
+            skipCardAnim = false;
+            musicPitching = false;
         }
     }
 
@@ -148,8 +173,14 @@ public class Settings
     // Set the framerate
     public static void SetFramerate(int amount)
     { 
+        // Set frame rate
         if (amount >= 30) 
             framerate = amount;
+
+        // Check if vsync should be applied
+        if (amount <= 144) QualitySettings.vSyncCount = 1;
+        else QualitySettings.vSyncCount = 0;
+
         UpdateVideoSettings();
     }
 
