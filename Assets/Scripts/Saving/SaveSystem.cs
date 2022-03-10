@@ -131,6 +131,10 @@ public class SaveSystem
     }
 
     // Add a crystal to save
+    public static void AddXP(int amount) { saveData.xp += amount; }
+    public static void LevelUp() { saveData.level += 1; }
+
+    // Add a crystal to save
     public static void AddModule(string id, int amount)
     {
         if (saveData.modules.ContainsKey(id))

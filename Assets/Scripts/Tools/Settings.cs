@@ -30,7 +30,7 @@ public class Settings
     public static float lightAmount = 1f;
     public static bool fastCardAnim = false;
     public static bool skipCardAnim = false;
-    public static bool musicPitching = false;
+    public static bool musicPitching = true;
 
     // Save settings
     public static void SaveSettings()
@@ -134,7 +134,7 @@ public class Settings
             useParticles = true;
             fastCardAnim = false;
             skipCardAnim = false;
-            musicPitching = false;
+            musicPitching = true;
         }
     }
 

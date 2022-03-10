@@ -7,15 +7,21 @@ public class OnHoverAdjustScale : MonoBehaviour, IPointerEnterHandler, IPointerE
 {
     // Hover variables
     public float scaleAdjustment = 0.1f;
+    private Vector3 originalSize;
     public bool playSound = true;
     private RectTransform rect;
 
     // On start grab rect transform
-    public void Start() { rect = GetComponent<RectTransform>(); }
+    public void Start() 
+    {
+        rect = GetComponent<RectTransform>();
+        originalSize = rect.localScale;
+    }
 
     // On mouse enter make local scale bigger
     public void OnPointerEnter(PointerEventData eventData)
     {
+        rect.localScale = originalSize;
         rect.localScale = new Vector3(rect.localScale.x + scaleAdjustment,
                                       rect.localScale.y + scaleAdjustment,
                                       rect.localScale.z + scaleAdjustment);
@@ -26,8 +32,6 @@ public class OnHoverAdjustScale : MonoBehaviour, IPointerEnterHandler, IPointerE
     // On mouse exit make local scale smaller
     public void OnPointerExit(PointerEventData eventData)
     {
-        rect.localScale = new Vector3(rect.localScale.x - scaleAdjustment,
-                              rect.localScale.y - scaleAdjustment,
-                              rect.localScale.z - scaleAdjustment);
+        rect.localScale = originalSize;
     }
 }

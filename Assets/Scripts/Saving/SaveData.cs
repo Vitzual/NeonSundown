@@ -7,6 +7,8 @@ public class SaveData
     // Constructor
     public SaveData()
     {
+        xp = 0;
+        level = 0;
         arenasUnlocked = new List<string>();
         shipsUnlocked = new List<string>();
         cardsUnlocked = new List<string>();
@@ -15,6 +17,7 @@ public class SaveData
         modules = new SerializableDictionary<string, int>();
     }
 
+    public float xp, level;
     public List<string> arenasUnlocked;
     public List<string> shipsUnlocked;
     public List<string> cardsUnlocked;
