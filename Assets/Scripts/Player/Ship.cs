@@ -336,7 +336,7 @@ public class Ship : Weapon
 
             // Upgrades the view distance
             case Stat.View:
-                cam.orthographicSize = Deck.CalculateStat(stat, 35);
+                cam.orthographicSize = Deck.CalculateStat(stat, 45);
                 break;
 
             // Upgrades the speed 
