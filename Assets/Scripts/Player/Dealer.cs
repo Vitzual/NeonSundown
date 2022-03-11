@@ -196,12 +196,20 @@ public class Dealer : MonoBehaviour
         Dictionary<CardData, int> deckCards = Deck.active.GetCards();
         for (int i = 0; i < dealList.Count; i++)
         {
+            // Get card
             CardData card = dealList[i];
 
+            // Remove card if not unlocked
             if (!card.canDrop || Gamemode.arena.blacklistCards.Contains(card) ||
                 (!card.isUnlocked && !SaveSystem.IsCardUnlocked(card.InternalID)) ||
-                (deckCards.ContainsKey(card) && deckCards[card] >= card.maximumAmount) ||
-                (Random.Range(0, 1) > dealList[i].dropChance))
+                (deckCards.ContainsKey(card) && deckCards[card] >= card.maximumAmount))
+            {
+                dealList.Remove(card);
+                i--;
+            }
+
+            // If card unlock, use chance
+            else if (Random.Range(0f, 1f) > card.dropChance)
             {
                 dealList.Remove(card);
                 i--;

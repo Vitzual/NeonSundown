@@ -19,6 +19,7 @@ public class AudioPlayer : MonoBehaviour
     public void Awake()
     {
         buttonSound = _buttonSound;
+        stickySound = _stickySound;
         audioClips = new List<AudioClip>();
         cooldowns = new List<float>();
         audioSource = GetComponent<AudioSource>();

@@ -142,7 +142,7 @@ public class Bullet : Entity
         // Check if sticky
         if (BulletHandler.stickyBullets && !stickyImmune)
         {
-            AudioPlayer.PlayStickySound();
+            //AudioPlayer.PlayStickySound();
             entity.transform.SetParent(transform);
             sticks.Add(entity.transform);
             return;
