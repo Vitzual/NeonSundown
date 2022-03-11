@@ -31,7 +31,8 @@ public class Bullet : Entity
 
     // Is a split shot
     private Weapon parent;
-    private bool isSplitShot = false;
+    [HideInInspector]
+    public bool isSplitShot = false;
 
     // Set up the bullet
     public virtual void Setup(Weapon parent, WeaponData weapon, Material material, 
@@ -122,7 +123,7 @@ public class Bullet : Entity
             transform.rotation, (int)splitshots, weapon.material, 360f, explosive);
 
         // Destroy the bullet
-        if (weapon.useParticle && !explosive) CreateParticle();
+        if (!explosive && weapon.useParticle) CreateParticle();
         Destroy(gameObject);
     }
 
@@ -176,6 +177,10 @@ public class Bullet : Entity
         else transform.rotation = Quaternion.RotateTowards(transform.rotation, 
             targetRotation, weapon.rotateSpeed * Time.deltaTime);
     }
+
+    // Set the damage
+    public void SetDamage(float amount) { damage = amount; }
+    public void SetKnockback(float amount) { knockback = amount; }
 
     // Get the damage
     public float GetDamage() { return damage; }

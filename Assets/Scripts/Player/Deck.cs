@@ -10,6 +10,7 @@ public class Deck : MonoBehaviour
 
     // Player instance
     public static Ship player;
+    public static SecondaryData secondary;
 
     // Cards in deck
     private static Dictionary<CardData, int> cards;
@@ -106,6 +107,14 @@ public class Deck : MonoBehaviour
             SetupSecondary((SecondaryData)card);
     }
 
+    // Takes a card
+    public void TakeCard(CardData card)
+    {
+        // Check if card already in inventory
+        if (cards.ContainsKey(card))
+            cards.Remove(card);
+    }
+
     // Returns a weapon card instance
     public Weapon GetWeaponInstance(WeaponData card)
     {
@@ -174,6 +183,7 @@ public class Deck : MonoBehaviour
     {
         Debug.Log("Adding secondary card " + secondary.name + " to deck");
         player.SetSecondary(secondary);
+        Deck.secondary = secondary;
     }
 
     // Setup starting cards

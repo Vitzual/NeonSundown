@@ -143,41 +143,43 @@ public class Dealer : MonoBehaviour
 
         // Take the card and remove it from the list
         CardData card = dealList[Random.Range(0, dealList.Count)];
-        if (!Gamemode.arena.blacklistCards.Contains(card) && card.canDrop)
-        {
-            cardSlots[number].Set(card);
-            dealList.Remove(card);
 
-            // Reset card cooldown
-            if (!Settings.skipCardAnim)
-            {
-                AudioPlayer.Play(cardSound, true, 0.9f, 1.1f, true);
-                if (Settings.fastCardAnim) cardCooldown = cardDealSpeed / 4f;
-                else cardCooldown = cardDealSpeed;
-            }
+        // Set the card
+        cardSlots[number].Set(card);
+        dealList.Remove(card);
 
-            // Check if that was the last card
-            if (number + 1 == cardsToPick)
-            {
-                dealCards = false;
-                cardsDealt = true;
-            }
-            else cardNumber += 1;
-        }
-        else
+        // Reset card cooldown
+        if (!Settings.skipCardAnim)
         {
-            Debug.Log(card.name + " cant drop!");
-            dealList.Remove(card);
+            AudioPlayer.Play(cardSound, true, 0.9f, 1.1f, true);
+            if (Settings.fastCardAnim) cardCooldown = cardDealSpeed / 4f;
+            else cardCooldown = cardDealSpeed;
         }
+
+        // Check if that was the last card
+        if (number + 1 == cardsToPick)
+        {
+            dealCards = false;
+            cardsDealt = true;
+        }
+        else cardNumber += 1;
     }
     
     // Pick the card and add to palyer
-    public void PickCard(CardData card, int number)
+    public void PickCard(CardData card, bool redraw)
     {
         if (!cardsDealt) return;
-
-        CloseDealer();
         Deck.active.AddCard(card);
+
+        // Check if card is secondary
+        if (redraw)
+        {
+            // Reset cards
+            foreach (Card cardSlot in cardSlots)
+                cardSlot.ResetCard();
+            OpenDealer();
+        }
+        else CloseDealer();
     }
 
     // Open dealer
@@ -195,9 +197,11 @@ public class Dealer : MonoBehaviour
         for (int i = 0; i < dealList.Count; i++)
         {
             CardData card = dealList[i];
-            if ((!card.isUnlocked && !SaveSystem.IsCardUnlocked(card.InternalID)) ||
-                (deckCards.ContainsKey(card) && deckCards[card] >= card.maximumAmount)
-                || (Random.Range(0, 1) > dealList[i].dropChance))
+
+            if (!card.canDrop || Gamemode.arena.blacklistCards.Contains(card) ||
+                (!card.isUnlocked && !SaveSystem.IsCardUnlocked(card.InternalID)) ||
+                (deckCards.ContainsKey(card) && deckCards[card] >= card.maximumAmount) ||
+                (Random.Range(0, 1) > dealList[i].dropChance))
             {
                 dealList.Remove(card);
                 i--;

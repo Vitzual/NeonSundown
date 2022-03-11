@@ -56,7 +56,7 @@ public class Crystal : Entity
     public void Damage(float amount, float knockback, Vector3 origin)
     {
         // Add knockback
-        rb.AddForce(Vector3.Normalize(origin - transform.position) * (knockback / 2));
+        Knockback(knockback / 2, origin);
 
         // Calculate health
         health -= amount;
@@ -79,6 +79,13 @@ public class Crystal : Entity
                     break;
             }
         }
+    }
+
+    // Knockback entity
+    public override void Knockback(float amount, Vector3 origin)
+    {
+        // Apply knockback
+        rb.AddForce(Vector3.Normalize(origin - transform.position) * amount);
     }
 
     // On destroy

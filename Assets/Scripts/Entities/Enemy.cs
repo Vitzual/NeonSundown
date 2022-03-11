@@ -91,7 +91,7 @@ public class Enemy : Entity
     }
 
     // Knockback entity
-    public void Knockback(float amount, Vector3 origin)
+    public override void Knockback(float amount, Vector3 origin)
     {
         // Apply knockback
         if (hasRigidbody && data.knockback)

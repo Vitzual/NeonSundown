@@ -26,6 +26,7 @@ public class Card : MonoBehaviour
 
     // Canvas group
     public CanvasGroup canvasGroup;
+    private bool redraw = false;
 
     // Get the canvas group
     public void Start() { canvasGroup = GetComponent<CanvasGroup>(); }
@@ -35,6 +36,7 @@ public class Card : MonoBehaviour
     {
         // Set card data
         cardData = card;
+        redraw = false;
 
         // Set card information
         model.color = card.color;
@@ -140,8 +142,19 @@ public class Card : MonoBehaviour
             type.text = "Secondary";
 
             // Calculate effect
-            effectOne.gameObject.SetActive(false);
-            effectTwo.gameObject.SetActive(false);
+            if (Deck.secondary != null)
+            {
+                redraw = true;
+                effectOne.gameObject.SetActive(true);
+                effectOne.text = "<color=orange>Will replace " + Deck.secondary.name;
+                effectTwo.gameObject.SetActive(true);
+                effectTwo.text = "<color=yellow>Free draw if picked!";
+            }
+            else
+            {
+                effectOne.gameObject.SetActive(false);
+                effectTwo.gameObject.SetActive(false);
+            }
         }
         
         if (useBase)
@@ -176,7 +189,7 @@ public class Card : MonoBehaviour
     // Card clicked
     public void OnClick()
     {
-        Dealer.active.PickCard(cardData, cardNumber);
+        Dealer.active.PickCard(cardData, redraw);
     }
 
     // Reset card

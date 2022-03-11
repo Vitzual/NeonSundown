@@ -180,7 +180,10 @@ public class Ship : Weapon
     {
         // Remove old instance
         if (this.secondary != null)
+        {
+            Deck.active.TakeCard(this.secondary.data);
             this.secondary.Destroy();
+        }
 
         // Create new instance
         this.secondary = Instantiate(secondary.obj, transform.position, Quaternion.identity);

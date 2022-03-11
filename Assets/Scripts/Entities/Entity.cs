@@ -42,6 +42,12 @@ public class Entity : MonoBehaviour
         Destroy(gameObject);
     }
 
+    // Knockback entity
+    public virtual void Knockback(float amount, Vector3 origin)
+    {
+
+    }
+
     // Check if enemy is dead
     public virtual bool IsDead()
     {

@@ -5,7 +5,8 @@ public class Secondary : MonoBehaviour
     // Ship instance
     public AudioClip sound;
     protected Ship ship;
-    protected SecondaryData data;
+    [HideInInspector]
+    public SecondaryData data;
     protected float cooldown = 0;
 
     // Virtual setup method

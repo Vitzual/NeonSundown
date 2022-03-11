@@ -74,7 +74,15 @@ public class ExplosiveHandler : MonoBehaviour
         {
             // Get enemy component
             Enemy enemy = colliders[i].GetComponent<Enemy>();
-            enemy.Knockback(Random.Range(minKnockback, maxKnockback), origin);
+            if (enemy != null) enemy.Knockback(Random.Range(minKnockback, maxKnockback), origin);
+
+            // Get crystal component
+            else
+            {
+                // Get crystal component
+                Crystal crystal = colliders[i].GetComponent<Crystal>();
+                crystal.Knockback(Random.Range(minKnockback, maxKnockback), origin);
+            }
         }
     }
 }
