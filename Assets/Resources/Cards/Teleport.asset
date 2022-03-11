@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b9f04e38a8697e40b65a3782eafc6cd, type: 3}
+  m_Name: Teleport
+  m_EditorClassIdentifier: 
+  internalId: 3f864b8b-c61a-49e5-bd74-f8abad4f5f4a
+  createdAtTicks: 637825945313802495
+  name: Teleport
+  description: Teleports your ship to your cursor
+  sprite: {fileID: 21300000, guid: e11e2480d77338a47896e289c77c4361, type: 3}
+  color: {r: 0.514151, g: 0.98116934, b: 1, a: 1}
+  maximumAmount: 4
+  dropChance: 1
+  canDrop: 1
+  isUnlocked: 1
+  obj: {fileID: 3644455546300394000, guid: de000460a78edb04d9e316d207800cc1, type: 3}
+  setShipAsParent: 1
+  cooldown: 3
+  levels:
+  - stat:
+      type: 2
+      modifier: -0.5
+      multiply: 0
+      positive: 1
+    description: Decreases teleport cooldown by 0.5 seconds
+  - stat:
+      type: 2
+      modifier: -0.5
+      multiply: 0
+      positive: 1
+    description: Decreases teleport cooldown by 0.5 seconds
+  - stat:
+      type: 2
+      modifier: -0.5
+      multiply: 0
+      positive: 1
+    description: Decreases teleport cooldown by 0.5 seconds
