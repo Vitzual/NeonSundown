@@ -24,6 +24,9 @@ public class ChromaHandler : MonoBehaviour
             case ChromaType.StickyBullets:
                 BulletHandler.stickyBullets = true;
                 break;
+            case ChromaType.XPHealing:
+                XPHandler.active.EnableXPHealing();
+                break;
         }
     }
 }

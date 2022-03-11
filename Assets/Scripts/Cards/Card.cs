@@ -27,9 +27,14 @@ public class Card : MonoBehaviour
     // Canvas group
     public CanvasGroup canvasGroup;
     private bool redraw = false;
+    private AudioSource audioSource;
 
     // Get the canvas group
-    public void Start() { canvasGroup = GetComponent<CanvasGroup>(); }
+    public void Start() 
+    { 
+        canvasGroup = GetComponent<CanvasGroup>();
+        audioSource = GetComponent<AudioSource>();
+    }
 
     // Set card function
     public void Set(CardData card)
@@ -231,6 +236,7 @@ public class Card : MonoBehaviour
         // Animate the card
         ResetCard();
 
+        // Set card anim speed
         if (Settings.skipCardAnim)
         {
             transform.localPosition = cardPosition;
@@ -245,6 +251,13 @@ public class Card : MonoBehaviour
         {
             LeanTween.moveLocal(gameObject, cardPosition, animationSpeed);
             LeanTween.alphaCanvas(canvasGroup, 1f, fadeInSpeed);
+        }
+
+        // Play card sound
+        if (!Settings.skipCardAnim)
+        {
+            audioSource.volume = Settings.sound;
+            audioSource.Play();
         }
     }
 

@@ -21,5 +21,6 @@ public enum Stat
     Splitshot,
     Explosive,
     Size,
-    Stun
+    Stun,
+    EnemyDamge
 }

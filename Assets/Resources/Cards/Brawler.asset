@@ -10,24 +10,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 03b23b43cf5929d49b3e2a80b1a27393, type: 3}
-  m_Name: Spread
+  m_Name: Brawler
   m_EditorClassIdentifier: 
-  internalId: a8882450-4fd4-4692-807d-f7e3b048d4d6
-  createdAtTicks: 637821702538921618
-  name: Bullet Spread
-  description: Reduces bullet spread but also reduces damage
-  sprite: {fileID: 21300000, guid: 633fbbcf8baa3a1408a263196375d9f8, type: 3}
-  color: {r: 1, g: 0.57436514, b: 0.4009434, a: 1}
-  maximumAmount: 3
+  internalId: 627bd429-1f49-4ce3-aabd-d5f07ebb0b35
+  createdAtTicks: 637826071334559537
+  name: Brawler
+  description: Enemies deal 25% less damage, but lowers mobility by 10%
+  sprite: {fileID: 21300000, guid: 8e0956af8facfe448b6fe00f7436e3eb, type: 3}
+  color: {r: 1, g: 0, b: 0, a: 1}
+  maximumAmount: 5
   dropChance: 0.5
   canDrop: 1
   isUnlocked: 1
   stats:
-  - type: 5
+  - type: 22
     modifier: 0.75
     multiply: 1
     positive: 1
-  - type: 1
-    modifier: 0.95
+  - type: 3
+    modifier: 0.9
     multiply: 1
     positive: 0

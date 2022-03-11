@@ -33,6 +33,7 @@ public class Ship : Weapon
     private float xp = 0;
     private float rankup = 50;
     private float xpMultiplier = 1;
+    private float enemyDamage = 1;
     public float rankupMultiplier;
     public ProgressBar xpBar;
     public CircleCollider2D xpRange;
@@ -192,7 +193,7 @@ public class Ship : Weapon
     }
 
     // Add XP
-    public void AddXP(int amount)
+    public void AddXP(float amount)
     {
         // Add the XP amount
         xp += amount * xpMultiplier;
@@ -244,6 +245,9 @@ public class Ship : Weapon
     // Damage method
     public void Damage(float damage)
     {
+        // Set enemy damage
+        damage = damage * enemyDamage;
+
         // Update health
         health -= damage;
         if (health <= 0) Kill();
@@ -411,6 +415,11 @@ public class Ship : Weapon
             case Stat.Explosive:
                 explosiveRounds = true;
                 break;
+
+            // Increase explosive rounds
+            case Stat.EnemyDamge:
+                enemyDamage = Deck.CalculateStat(stat, enemyDamage);
+                break;
         }
     }
 
@@ -483,6 +492,10 @@ public class Ship : Weapon
             case Stat.Explosive:
                 if (explosiveRounds) return 1;
                 else return 0;
+
+            // Get splitshots
+            case Stat.EnemyDamge:
+                return enemyDamage;
 
             // Default case
             default:
@@ -558,6 +571,10 @@ public class Ship : Weapon
             // Increase regen rate
             case Stat.Explosive:
                 return 0;
+
+            // Increase regen rate
+            case Stat.EnemyDamge:
+                return 1;
 
             // Default case
             default:

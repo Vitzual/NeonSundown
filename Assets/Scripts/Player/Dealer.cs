@@ -22,8 +22,6 @@ public class Dealer : MonoBehaviour
     public float cardDealSpeed = 0.5f;
     [BoxGroup("Card Options")]
     public float fastDealSpeed = 4f;
-    [BoxGroup("Card Options")]
-    public AudioClip cardSound;
 
     // Pitch in variables
     [BoxGroup("Music Options")]
@@ -151,7 +149,6 @@ public class Dealer : MonoBehaviour
         // Reset card cooldown
         if (!Settings.skipCardAnim)
         {
-            AudioPlayer.Play(cardSound, true, 0.9f, 1.1f, true);
             if (Settings.fastCardAnim) cardCooldown = cardDealSpeed / 4f;
             else cardCooldown = cardDealSpeed;
         }

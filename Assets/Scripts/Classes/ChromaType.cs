@@ -1,5 +1,6 @@
 public enum ChromaType
 {
     InverseExplosions,
-    StickyBullets
+    StickyBullets,
+    XPHealing
 }

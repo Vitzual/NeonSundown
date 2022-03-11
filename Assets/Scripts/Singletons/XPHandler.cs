@@ -41,6 +41,8 @@ public class XPHandler : MonoBehaviour
     public float speedFatigueModifier = 0.1f;
     public float speedIncreaseModifier = 0.1f;
     public float targetDistanceCheck = 1f;
+    public float xpValue = 1;
+    private bool xpHealing = false;
 
     // On start set active
     public void Start() { active = this; }
@@ -67,7 +69,8 @@ public class XPHandler : MonoBehaviour
                     // Check distance
                     if (Vector2.Distance(xpList[a].transform.position, player.transform.position) < targetDistanceCheck)
                     {
-                        player.AddXP(1);
+                        player.AddXP(xpValue);
+                        if (xpHealing) player.Heal(0.05f);
                         AudioPlayer.Play(xpSound, true, 0.8f, 1.2f, false, 1.5f);
                         Destroy(xpList[a].transform.gameObject);
                         xpList.RemoveAt(a);
@@ -138,5 +141,12 @@ public class XPHandler : MonoBehaviour
         XPInstance newXP = new XPInstance(transform, startPos);
         xpList.Add(newXP);
         return newXP;
+    }
+
+    // Enable XP healing
+    public void EnableXPHealing()
+    {
+        xpValue = xpValue / 2;
+        xpHealing = true;
     }
 }
