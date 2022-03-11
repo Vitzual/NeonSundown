@@ -6,13 +6,17 @@ public class ExplosiveHandler : MonoBehaviour
 {
     // Explosion variables
     public AudioClip _explosionSound;
+    public AudioClip _stunSound;
     public ParticleSystem _explosionParticle;
     public ParticleSystem _inverseParticle;
+    public ParticleSystem _stunParticle;
     public List<LayerMask> _explosionLayers;
     public static AudioClip explosionSound;
     public static AudioClip inverseSound;
+    public static AudioClip stunSound;
     public static ParticleSystem explosionParticle;
     public static ParticleSystem inverseParticle;
+    public static ParticleSystem stunParticle;
     public static LayerMask explosionLayer;
     public static bool inverse = false;
 
@@ -20,8 +24,10 @@ public class ExplosiveHandler : MonoBehaviour
     public void Start()
     {
         explosionSound = _explosionSound;
+        stunSound = _stunSound;
         explosionParticle = _explosionParticle;
         inverseParticle = _inverseParticle;
+        stunParticle = _stunParticle;
         inverse = false;
 
         foreach (LayerMask layer in _explosionLayers)
@@ -103,5 +109,36 @@ public class ExplosiveHandler : MonoBehaviour
                 crystal.Knockback(Random.Range(minKnockback, maxKnockback), origin);
             }
         }
+    }
+
+    public static void CreateStun(Vector2 origin, float range, float length, Material material, float knockback = -1f)
+    {
+        // Get all colliders in range
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(origin, range, explosionLayer);
+
+        // Iterate through colliders and do the damage
+        for (int i = 0; i < colliders.Length; i++)
+        {
+            // Get enemy component
+            Enemy enemy = colliders[i].GetComponent<Enemy>();
+            if (enemy != null)
+            {
+                enemy.Stun(length);
+                if (knockback != -1)
+                    enemy.Knockback(knockback, origin);
+            }
+        }
+
+        // Create particle effect
+        if (Settings.useParticles)
+        {
+            ParticleSystemRenderer holder = Instantiate(stunParticle, origin,
+                    Quaternion.identity).GetComponent<ParticleSystemRenderer>();
+            holder.material = material;
+            holder.trailMaterial = material;
+        }
+
+        // Play stun sound
+        AudioPlayer.Play(stunSound);
     }
 }

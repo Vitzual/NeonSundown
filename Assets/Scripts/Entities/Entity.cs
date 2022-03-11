@@ -10,6 +10,10 @@ public class Entity : MonoBehaviour
     public Material deathMaterial;
     public ParticleSystem deathEffect;
 
+    // Entity stunned flag
+    protected bool stunned = false;
+    protected float stunLength = 0f;
+
     // Creates a particle and sets the material
     public void CreateParticle()
     {
@@ -59,5 +63,13 @@ public class Entity : MonoBehaviour
     {
         // Return material
         return deathMaterial;
+    }
+
+    // Stun the entity
+    public virtual void Stun(float length)
+    {
+        Debug.Log("Setting " + transform.name + " stun to true with length " + length);
+        stunned = true;
+        stunLength = length;
     }
 }

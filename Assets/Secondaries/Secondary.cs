@@ -49,6 +49,7 @@ public class Secondary : MonoBehaviour
     // Upgrades the card
     public virtual void Upgrade()
     {
+        Debug.Log("Upgrading " + data.name);
         level += 1;
         cooldown = 0;
     }

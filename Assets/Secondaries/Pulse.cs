@@ -34,7 +34,7 @@ public class Pulse : Secondary
                 case Stat.Range:
                     if (stat.multiply) range *= stat.modifier;
                     else range += stat.modifier;
-                    return;
+                    break;
 
                 case Stat.Knockback:
                     if (stat.multiply)
@@ -47,7 +47,7 @@ public class Pulse : Secondary
                         maxKnockback += stat.modifier;
                         minKnockback += stat.modifier;
                     }
-                    return;
+                    break;
             }
         }
 

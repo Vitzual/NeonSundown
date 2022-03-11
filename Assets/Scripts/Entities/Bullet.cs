@@ -29,6 +29,7 @@ public class Bullet : Entity
     protected float splitshots;
     public bool explosive;
     public bool stickyImmune;
+    public bool stunEnemies;
 
     // Is a split shot
     private Weapon parent;
@@ -123,8 +124,8 @@ public class Bullet : Entity
         // Check if bullet is explosive
         if (explosive)
         {
-            ExplosiveHandler.CreateExplosion(transform.position, 10f,
-                damage, knockback, deathMaterial);
+            if (stunEnemies) ExplosiveHandler.CreateStun(transform.position, 10f, stunLength, deathMaterial, knockback);
+            else ExplosiveHandler.CreateExplosion(transform.position, 10f, damage, knockback, deathMaterial);
         }
         
         // Check if bullet has splitshots
@@ -169,6 +170,10 @@ public class Bullet : Entity
         pierce -= 1;
         entity.Damage(damage, knockback);
 
+        // Check if entity dead
+        if (!entity.IsDead() && stunEnemies)
+            entity.Stun(stunLength);
+
         // Check if bullet has a sound
         if (weapon.onDamageSound != null)
             AudioPlayer.Play(weapon.onDamageSound, true, weapon.minPitch, weapon.maxPitch);
@@ -177,6 +182,7 @@ public class Bullet : Entity
         if (weapon.onDeathSound != null && entity.IsDead())
             AudioPlayer.Play(weapon.onDeathSound, true, weapon.minPitch, weapon.maxPitch);
 
+        // Check pierce amount
         if (pierce < 0)
         {
             deathMaterial = holder;
@@ -199,6 +205,7 @@ public class Bullet : Entity
     // Set the damage
     public void SetDamage(float amount) { damage = amount; }
     public void SetKnockback(float amount) { knockback = amount; }
+    public void SetStunLength(float amount) { stunLength = amount; }
 
     // Get the damage
     public float GetDamage() { return damage; }

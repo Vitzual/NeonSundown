@@ -177,13 +177,13 @@ public class Card : MonoBehaviour
                     float value = secondaryInstance.GetStat(statType.type);
 
                     // Get new value
-                    float newValue = value;
-                    if (statType.multiply) newValue *= statType.modifier;
-                    else newValue += statType.modifier;
+                    float newValue;
+                    if (statType.multiply) newValue = (value * statType.modifier) - value;
+                    else newValue = statType.modifier;
 
                     // Format new value
-                    string display = Formatter.Round(value);
-
+                    string display = statType.type.ToString() + ": " + Formatter.Round(value);
+                    
                     // Get coloring
                     if (statType.positive) display += " <color=green>(";
                     else display += " <color=red>(";

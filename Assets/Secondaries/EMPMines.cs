@@ -2,13 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Mines : Secondary
+public class EMPMines : Mines
 {
-    // Mine instance
-    public Bullet mine;
-    public Material material;
-    public float damage;
-    public float knockback;
+    // Gets the stun time
+    public float stunTime;
 
     // Virtual use method
     public override void Use()
@@ -23,6 +20,7 @@ public class Mines : Secondary
             newMine.isSplitShot = true;
             newMine.SetDamage(damage);
             newMine.SetKnockback(knockback);
+            newMine.SetStunLength(stunTime);
 
             // Play sound
             AudioPlayer.Play(sound);
@@ -36,34 +34,21 @@ public class Mines : Secondary
         if (level < data.levels.Count)
         {
             StatValue stat = data.levels[level].stat;
-            switch (stat.type)
+            if (stat.type == Stat.Stun)
             {
-                case Stat.Damage:
-                    if (stat.multiply) damage *= stat.modifier;
-                    else damage += stat.modifier;
-                    break;
-                case Stat.Knockback:
-                    if (stat.multiply) knockback *= stat.modifier;
-                    else knockback += stat.modifier;
-                    break;
+                if (stat.multiply) stunTime *= stat.modifier;
+                else stunTime += stat.modifier;
+                return;
             }
+            else base.Upgrade();
         }
-
-        // Increase level
-        base.Upgrade();
     }
 
     // Overrides the get stat function
     public override float GetStat(Stat stat)
     {
-        switch (stat)
-        {
-            case Stat.Damage:
-                return damage;
-            case Stat.Knockback:
-                return knockback;
-            default:
-                return base.GetStat(stat);
-        }
+        if (stat == Stat.Stun)
+            return stunTime;
+        else return base.GetStat(stat);
     }
 }

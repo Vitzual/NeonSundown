@@ -20,5 +20,6 @@ public enum Stat
     Evasion,
     Splitshot,
     Explosive,
-    Size
+    Size,
+    Stun
 }

@@ -137,6 +137,15 @@ public class Enemy : Entity
     // Move towards the target
     public virtual void Move()
     {
+        // Check if stunned
+        if (stunned)
+        {
+            stunLength -= Time.deltaTime;
+            if (stunLength <= 0f) stunned = false;
+            return;
+        }
+
+        // Move if target not null
         if (target != null)
         {
             // Check if target should be locked
