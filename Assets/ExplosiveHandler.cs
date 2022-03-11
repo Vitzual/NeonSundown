@@ -62,4 +62,19 @@ public class ExplosiveHandler : MonoBehaviour
         // Play explosion sound
         AudioPlayer.Play(explosionSound);
     }
+
+    // Create a knockback without explosion
+    public static void CreateKnockback(Vector2 origin, float range, float minKnockback, float maxKnockback)
+    {
+        // Get all colliders in range
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(origin, range, explosionLayer);
+
+        // Iterate through colliders and do the damage
+        for (int i = 0; i < colliders.Length; i++)
+        {
+            // Get enemy component
+            Enemy enemy = colliders[i].GetComponent<Enemy>();
+            enemy.Knockback(Random.Range(minKnockback, maxKnockback), origin);
+        }
+    }
 }

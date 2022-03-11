@@ -55,6 +55,14 @@ public class Events : MonoBehaviour
     }
 
     // Cosmetic applied
+    public event Action<SecondaryData> onSecondarySet;
+    public void SetSecondary(SecondaryData secondary)
+    {
+        if (onSecondarySet != null)
+            onSecondarySet(secondary);
+    }
+
+    // Cosmetic applied
     public event Action<float> onVolumeChanged;
     public void VolumeChanged(float volume)
     {

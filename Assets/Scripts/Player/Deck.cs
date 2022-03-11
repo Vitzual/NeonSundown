@@ -23,12 +23,16 @@ public class Deck : MonoBehaviour
     // Scriptable and weapon reference
     private List<Weapon> weaponInstances = new List<Weapon>();
 
-    // On start, create decks
-    public void Start()
+    // On awake, setup instance
+    public void Awake()
     {
         // Set active instance
         active = this;
+    }
 
+    // On start, create decks
+    public void Start()
+    {
         // Get player instance on the object
         player = GetComponent<Ship>();
 
@@ -166,11 +170,10 @@ public class Deck : MonoBehaviour
     }
 
     // Set passive card slot
-    public void SetupSecondary(SecondaryData ability)
+    public void SetupSecondary(SecondaryData secondary)
     {
-        Debug.Log("Adding ability card " + ability.name + " to deck");
-
-
+        Debug.Log("Adding secondary card " + secondary.name + " to deck");
+        player.SetSecondary(secondary);
     }
 
     // Setup starting cards

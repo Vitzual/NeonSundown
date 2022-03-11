@@ -27,8 +27,8 @@ public class SettingsData
     public string keybind_move_down;
     public string keybind_move_right;
     public string keybind_dash;
-    public string keybind_shoot;
-    public string keybind_ability;
+    public string keybind_primary;
+    public string keybind_secondary;
     public string keybind_escape;
     public string keybind_debug;
 }

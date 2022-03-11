@@ -10,7 +10,7 @@ public class Ship : Weapon
 
     // Player model and data
     public ShipData shipData;
-    public SecondaryData secondary;
+    private Secondary secondary;
     public SpriteRenderer border;
     public SpriteRenderer fill;
 
@@ -58,6 +58,7 @@ public class Ship : Weapon
         {
             Events.active.onSetupShip += Setup;
             Events.active.onShipColoringChange += SetupShipColoring;
+            Events.active.onSecondarySet += SetSecondary;
         }
         else if (shipData != null) Setup(shipData);
     }
@@ -156,14 +157,6 @@ public class Ship : Weapon
         if (Input.GetKey(Keybinds.primary) && shipData.canFire) Use();
         if (shipCooldown > 0) shipCooldown -= Time.deltaTime;
 
-        // Update secondary instance
-        if (secondary != null)
-        {
-            if (Input.GetKey(Keybinds.secondary))
-                secondary.script.Use();
-            secondary.script.Update();
-        }
-
         // If can regen, regenerate
         if (regenAmount > 0)
         {
@@ -185,7 +178,14 @@ public class Ship : Weapon
     // Set the secondary weapon
     public void SetSecondary(SecondaryData secondary)
     {
-        this.secondary = secondary;
+        // Remove old instance
+        if (this.secondary != null)
+            this.secondary.Destroy();
+
+        // Create new instance
+        this.secondary = Instantiate(secondary.obj, transform.position, Quaternion.identity);
+        if (secondary.setShipAsParent) this.secondary.transform.SetParent(transform);
+        this.secondary.Setup(this, secondary);
     }
 
     // Add XP
@@ -295,6 +295,9 @@ public class Ship : Weapon
     // Sets up any attached power modules
     public void SetupModules()
     {
+        // Check if modules exist
+        if (Gamemode.modules == null) return;
+
         // Iterate through all modules
         foreach (KeyValuePair<int, ModuleData> module in Gamemode.modules)
         {

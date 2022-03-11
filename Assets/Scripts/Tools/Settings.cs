@@ -60,7 +60,8 @@ public class Settings
         settingsData.keybind_move_down = Keybinds.move_down.ToString();
         settingsData.keybind_move_right = Keybinds.move_right.ToString();
         settingsData.keybind_dash = Keybinds.dash.ToString();
-        settingsData.keybind_shoot = Keybinds.primary.ToString();
+        settingsData.keybind_primary = Keybinds.primary.ToString();
+        settingsData.keybind_secondary = Keybinds.secondary.ToString();
         settingsData.keybind_escape = Keybinds.escape.ToString();
 
         // Convert to json and save
@@ -105,13 +106,23 @@ public class Settings
             else if (lightAmount > 1f) lightAmount = 1f;
 
             // Get keybinds from file
-            Keybinds.move_up = (KeyCode)System.Enum.Parse(typeof(KeyCode), settingsData.keybind_move_up);
-            Keybinds.move_left = (KeyCode)System.Enum.Parse(typeof(KeyCode), settingsData.keybind_move_left);
-            Keybinds.move_down = (KeyCode)System.Enum.Parse(typeof(KeyCode), settingsData.keybind_move_down);
-            Keybinds.move_right = (KeyCode)System.Enum.Parse(typeof(KeyCode), settingsData.keybind_move_right);
-            Keybinds.dash = (KeyCode)System.Enum.Parse(typeof(KeyCode), settingsData.keybind_dash);
-            Keybinds.primary = (KeyCode)System.Enum.Parse(typeof(KeyCode), settingsData.keybind_shoot);
-            Keybinds.escape = (KeyCode)System.Enum.Parse(typeof(KeyCode), settingsData.keybind_escape);
+            try
+            {
+                Keybinds.move_up = (KeyCode)System.Enum.Parse(typeof(KeyCode), settingsData.keybind_move_up);
+                Keybinds.move_left = (KeyCode)System.Enum.Parse(typeof(KeyCode), settingsData.keybind_move_left);
+                Keybinds.move_down = (KeyCode)System.Enum.Parse(typeof(KeyCode), settingsData.keybind_move_down);
+                Keybinds.move_right = (KeyCode)System.Enum.Parse(typeof(KeyCode), settingsData.keybind_move_right);
+                Keybinds.dash = (KeyCode)System.Enum.Parse(typeof(KeyCode), settingsData.keybind_dash);
+                Keybinds.primary = (KeyCode)System.Enum.Parse(typeof(KeyCode), settingsData.keybind_primary);
+                Keybinds.secondary = (KeyCode)System.Enum.Parse(typeof(KeyCode), settingsData.keybind_secondary);
+                Keybinds.escape = (KeyCode)System.Enum.Parse(typeof(KeyCode), settingsData.keybind_escape);
+            }
+            catch 
+            {
+                Debug.Log("Ran into issue with keybind! Resetting to default");
+                Keybinds.SetDefaultKeybinds(); 
+            }
+
 
             // Apply settings
             UpdateVideoSettings();

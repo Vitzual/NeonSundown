@@ -83,12 +83,19 @@ public class Enemy : Entity
     public void Damage(float amount, float knockback, Vector3 origin)
     {
         // Apply knockback
-        if (hasRigidbody && data.knockback)
-            rb.AddForce(Vector3.Normalize(origin - transform.position) * knockback);
+        Knockback(knockback, origin);
 
         // Modify internal values
         health -= amount;
         if (IsDead()) Destroy();
+    }
+
+    // Knockback entity
+    public void Knockback(float amount, Vector3 origin)
+    {
+        // Apply knockback
+        if (hasRigidbody && data.knockback)
+            rb.AddForce(Vector3.Normalize(origin - transform.position) * amount);
     }
 
     // Destroy entity

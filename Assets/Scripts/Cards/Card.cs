@@ -133,6 +133,16 @@ public class Card : MonoBehaviour
             }
             else effectTwo.gameObject.SetActive(false);
         }
+
+        else if (card is SecondaryData)
+        {
+            // Set type
+            type.text = "Secondary";
+
+            // Calculate effect
+            effectOne.gameObject.SetActive(false);
+            effectTwo.gameObject.SetActive(false);
+        }
         
         if (useBase)
         {
