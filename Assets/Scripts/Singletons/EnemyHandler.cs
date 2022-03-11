@@ -62,7 +62,7 @@ public class EnemyHandler : MonoBehaviour
         else cullIndex = 0;
 
         // Enemy queue
-        if (enemyQueue.Count > 0)
+        if (enemyQueue.Count > 0 && enemies.Count < 250)
         {
             // Dequeue enemy from list
             EnemyQueue newEnemy = enemyQueue.Dequeue();
