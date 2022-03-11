@@ -139,21 +139,75 @@ public class Card : MonoBehaviour
         else if (card is SecondaryData)
         {
             // Set type
+            SecondaryData secondary = (SecondaryData)card;
             type.text = "Secondary";
 
             // Calculate effect
-            if (Deck.secondary != null)
+            if (Deck.secondary != secondary)
             {
-                redraw = true;
-                effectOne.gameObject.SetActive(true);
-                effectOne.text = "<color=orange>Will replace " + Deck.secondary.name + "!";
-                effectTwo.gameObject.SetActive(true);
-                effectTwo.text = "<color=white>Free draw if picked!";
+                if (Deck.secondary == null)
+                {
+                    // Set effects to none
+                    effectOne.gameObject.SetActive(false);
+                    effectTwo.gameObject.SetActive(false);
+                }
+                else
+                {
+                    redraw = true;
+                    effectOne.gameObject.SetActive(true);
+                    effectOne.text = "<color=orange>Will replace " + Deck.secondary.name + "!";
+                    effectTwo.gameObject.SetActive(true);
+                    effectTwo.text = "<color=white>Free draw if picked!";
+                }
             }
             else
             {
-                effectOne.gameObject.SetActive(false);
-                effectTwo.gameObject.SetActive(false);
+                // Dont use base
+                useBase = false;
+
+                // Get the current secondary instance
+                Secondary secondaryInstance = Deck.active.GetSecondaryInstance();
+
+                // Set effects to none
+                if (secondaryInstance.level < Deck.secondary.levels.Count)
+                {
+                    // Set stat value
+                    StatValue statType = Deck.secondary.levels[secondaryInstance.level].stat;
+                    effectOne.gameObject.SetActive(true);
+                    float value = secondaryInstance.GetStat(statType.type);
+
+                    // Get new value
+                    float newValue = value;
+                    if (statType.multiply) newValue *= statType.modifier;
+                    else newValue += statType.modifier;
+
+                    // Format new value
+                    string display = Formatter.Round(value);
+
+                    // Get coloring
+                    if (statType.positive) display += " <color=green>(";
+                    else display += " <color=red>(";
+                    if (newValue >= 0) display += "+";
+
+                    // Append new value
+                    display += Formatter.Round(newValue) + ")";
+                    effectOne.text = display;
+
+                    // Set effect two to none
+                    effectTwo.gameObject.SetActive(false);
+
+                    // Set description of card level
+                    image.sprite = card.sprite;
+                    desc.text = secondaryInstance.GetUpgradeString();
+                    level.text = "LEVEL " + secondaryInstance.level;
+                }
+                else
+                {
+                    // Set description of card level
+                    image.sprite = card.sprite;
+                    desc.text = "Card is maxed!";
+                    level.text = "LEVEL MAX";
+                }
             }
         }
 

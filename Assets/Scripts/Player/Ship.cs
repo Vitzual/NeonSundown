@@ -562,4 +562,7 @@ public class Ship : Weapon
                 return 0;
         }
     }
+
+    // Returns a secondary instance
+    public Secondary GetSecondary() { return secondary; }
 }

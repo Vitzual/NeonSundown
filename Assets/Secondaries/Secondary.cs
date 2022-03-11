@@ -8,6 +8,8 @@ public class Secondary : MonoBehaviour
     [HideInInspector]
     public SecondaryData data;
     protected float cooldown = 0;
+    [HideInInspector]
+    public int level;
 
     // Virtual setup method
     public virtual void Setup(Ship ship, SecondaryData data)
@@ -42,5 +44,28 @@ public class Secondary : MonoBehaviour
     public virtual void Destroy()
     {
         Destroy(gameObject);
+    }
+
+    // Upgrades the card
+    public virtual void Upgrade()
+    {
+        level += 1;
+        cooldown = 0;
+    }
+
+    // Returns a formatted string on the upgrade info
+    public virtual string GetUpgradeString()
+    {
+        if (level < data.levels.Count)
+            return data.levels[level].description;
+        else return "LEVEL MAX";
+    }
+
+    // Returns a stat
+    public virtual float GetStat(Stat stat)
+    {
+        if (stat == Stat.Cooldown)
+            return cooldown;
+        else return -1;
     }
 }

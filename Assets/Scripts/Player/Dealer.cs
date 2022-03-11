@@ -209,7 +209,8 @@ public class Dealer : MonoBehaviour
             }
 
             // If card unlock, use chance
-            else if (Random.Range(0f, 1f) > card.dropChance)
+            else if (Random.Range(0f, 1f) > card.dropChance || !(card is SecondaryData 
+                && (SecondaryData)card == Deck.secondary))
             {
                 dealList.Remove(card);
                 i--;

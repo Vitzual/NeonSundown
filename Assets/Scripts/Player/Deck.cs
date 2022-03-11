@@ -183,9 +183,21 @@ public class Deck : MonoBehaviour
     // Set passive card slot
     public void SetupSecondary(SecondaryData secondary)
     {
-        Debug.Log("Adding secondary card " + secondary.name + " to deck");
-        player.SetSecondary(secondary);
-        Deck.secondary = secondary;
+        // Check if secondary card already active
+        if (Deck.secondary == secondary)
+            GetSecondaryInstance().Upgrade();
+        else
+        {
+            Debug.Log("Adding secondary card " + secondary.name + " to deck");
+            player.SetSecondary(secondary);
+            Deck.secondary = secondary;
+        }
+    }
+
+    // Get secondary instance
+    public Secondary GetSecondaryInstance()
+    {
+        return player.GetSecondary();
     }
 
     // Set chroma card slot
