@@ -115,7 +115,7 @@ public class Bullet : Entity
     public override void Destroy()
     {
         // Check if sticky
-        if (BulletHandler.stickyBullets && !stickyImmune)
+        if (BulletHandler.stickyBullets && !stickyImmune && !isSplitShot)
         {
             foreach (Transform child in sticks)
                 if (child != null) child.SetParent(null);
@@ -141,7 +141,7 @@ public class Bullet : Entity
     public void OnHit(Entity entity)
     {
         // Check if sticky
-        if (BulletHandler.stickyBullets && !stickyImmune)
+        if (BulletHandler.stickyBullets && !stickyImmune && !isSplitShot)
         {
             //AudioPlayer.PlayStickySound();
             entity.transform.SetParent(transform);

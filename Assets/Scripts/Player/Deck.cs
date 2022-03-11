@@ -29,6 +29,7 @@ public class Deck : MonoBehaviour
     {
         // Set active instance
         active = this;
+        secondary = null;
     }
 
     // On start, create decks
