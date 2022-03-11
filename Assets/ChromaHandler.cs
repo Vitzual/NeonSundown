@@ -21,6 +21,9 @@ public class ChromaHandler : MonoBehaviour
             case ChromaType.InverseExplosions:
                 ExplosiveHandler.inverse = true;
                 break;
+            case ChromaType.StickyBullets:
+                BulletHandler.stickyBullets = true;
+                break;
         }
     }
 }

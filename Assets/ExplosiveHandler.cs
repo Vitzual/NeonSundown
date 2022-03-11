@@ -14,7 +14,7 @@ public class ExplosiveHandler : MonoBehaviour
     public static ParticleSystem explosionParticle;
     public static ParticleSystem inverseParticle;
     public static LayerMask explosionLayer;
-    public static bool inverse;
+    public static bool inverse = false;
 
     // On start get variables
     public void Start()
@@ -22,8 +22,9 @@ public class ExplosiveHandler : MonoBehaviour
         explosionSound = _explosionSound;
         explosionParticle = _explosionParticle;
         inverseParticle = _inverseParticle;
+        inverse = false;
 
-        foreach(LayerMask layer in _explosionLayers)
+        foreach (LayerMask layer in _explosionLayers)
             explosionLayer = layer | explosionLayer;
     }
 

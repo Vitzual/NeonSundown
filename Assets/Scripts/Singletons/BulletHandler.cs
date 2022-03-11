@@ -6,12 +6,13 @@ public class BulletHandler : MonoBehaviour
 {
     // Active instance
     public static BulletHandler active;
+    public static bool stickyBullets = false;
 
     // List of all active bullets
     public List<Bullet> bullets;
 
     // Start method
-    public void Start() { active = this; }
+    public void Start() { active = this; stickyBullets = false; }
 
     // Move normal enemies
     public void Update()

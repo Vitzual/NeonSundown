@@ -69,7 +69,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1738039745
-  m_SortingLayer: 1
+  m_SortingLayer: 3
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 2336c245b7380e14393f7f4a09be8df1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -127,12 +127,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a159d61f79ed2684da82661e3552d9d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  overrideOtherParticles: 0
   rotateParticle: 0
+  deathMaterial: {fileID: 0}
+  deathEffect: {fileID: 0}
   baseModel: {fileID: 3428032105664813861}
   prestigeModel: {fileID: 8499809056721161539}
   sprite: {fileID: 2361462486360174598}
   trail: {fileID: 0}
   rotator: {fileID: 5004453486318683163}
+  explosive: 0
+  stickyImmune: 1
+  isSplitShot: 0
 --- !u!58 &2361462487313235421
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -218,7 +224,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1738039745
-  m_SortingLayer: 1
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 91cfaef531f91fb47b0af24e7a98b048, type: 3}
   m_Color: {r: 0, g: 0.2128185, b: 0.36862746, a: 1}
@@ -332,7 +338,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1738039745
-  m_SortingLayer: 1
+  m_SortingLayer: 3
   m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: 2336c245b7380e14393f7f4a09be8df1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -446,7 +452,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1738039745
-  m_SortingLayer: 1
+  m_SortingLayer: 3
   m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 91cfaef531f91fb47b0af24e7a98b048, type: 3}
   m_Color: {r: 0, g: 0.2128185, b: 0.36862746, a: 1}

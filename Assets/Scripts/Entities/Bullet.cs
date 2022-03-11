@@ -28,11 +28,13 @@ public class Bullet : Entity
     protected float knockback;
     protected float splitshots;
     public bool explosive;
+    public bool stickyImmune;
 
     // Is a split shot
     private Weapon parent;
     [HideInInspector]
     public bool isSplitShot = false;
+    private List<Transform> sticks = new List<Transform>();
 
     // Set up the bullet
     public virtual void Setup(Weapon parent, WeaponData weapon, Material material, 
@@ -111,6 +113,13 @@ public class Bullet : Entity
     // Destroy the bullet
     public override void Destroy()
     {
+        // Check if sticky
+        if (BulletHandler.stickyBullets && !stickyImmune)
+        {
+            foreach (Transform child in sticks)
+                if (child != null) child.SetParent(null);
+        }
+
         // Check if bullet is explosive
         if (explosive)
         {
@@ -130,6 +139,15 @@ public class Bullet : Entity
     // On collision
     public void OnHit(Entity entity)
     {
+        // Check if sticky
+        if (BulletHandler.stickyBullets && !stickyImmune)
+        {
+            AudioPlayer.PlayStickySound();
+            entity.transform.SetParent(transform);
+            sticks.Add(entity.transform);
+            return;
+        }
+
         // Check if explosive
         if (explosive)
         {

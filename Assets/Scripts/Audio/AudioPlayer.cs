@@ -6,12 +6,14 @@ public class AudioPlayer : MonoBehaviour
 {
     // Button sound
     public AudioClip _buttonSound;
+    public AudioClip _stickySound;
 
     // List of audio sources
     public static List<AudioClip> audioClips;
     public static List<float> cooldowns;
     public static AudioSource audioSource;
     public static AudioClip buttonSound;
+    public static AudioClip stickySound;
 
     // Set audio sources
     public void Awake()
@@ -68,6 +70,24 @@ public class AudioPlayer : MonoBehaviour
         {
             audioSource.volume = Settings.sound;
             audioSource.PlayOneShot(buttonSound);
+        }
+    }
+
+    // Plays a button sound on hover
+    public static void PlayStickySound()
+    {
+        if (stickySound != null)
+        {
+            if (audioClips.Contains(stickySound)) return;
+            else
+            {
+                audioClips.Add(stickySound);
+                cooldowns.Add(0.1f);
+            }
+
+            audioSource.volume = Settings.sound;
+            audioSource.pitch = Random.Range(0.9f, 1.1f);
+            audioSource.PlayOneShot(stickySound);
         }
     }
 }
