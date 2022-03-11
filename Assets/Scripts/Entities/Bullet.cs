@@ -36,6 +36,7 @@ public class Bullet : Entity
     [HideInInspector]
     public bool isSplitShot = false;
     private List<Transform> sticks = new List<Transform>();
+    private Material normalMaterial;
 
     // Set up the bullet
     public virtual void Setup(Weapon parent, WeaponData weapon, Material material, 
@@ -65,6 +66,7 @@ public class Bullet : Entity
 
         // Set death materials and effect
         deathMaterial = material;
+        normalMaterial = material;
         deathEffect = weapon.particle;
 
         // Set bullet stats
@@ -130,7 +132,7 @@ public class Bullet : Entity
         
         // Check if bullet has splitshots
         if (!isSplitShot) BulletHandler.active.CreateSplitshot(parent, weapon, transform.position,
-            transform.rotation, (int)splitshots, weapon.material, 360f, explosive);
+            transform.rotation, (int)splitshots, normalMaterial, 360f, explosive);
 
         // Destroy the bullet
         if (!explosive && weapon.useParticle) CreateParticle();
