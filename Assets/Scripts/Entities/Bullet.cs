@@ -120,7 +120,7 @@ public class Bullet : Entity
             foreach (Transform child in sticks)
                 if (child != null) child.SetParent(null);
         }
-
+        
         // Check if bullet is explosive
         if (explosive)
         {

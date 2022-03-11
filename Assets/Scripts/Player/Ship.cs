@@ -223,8 +223,10 @@ public class Ship : Weapon
         if (shipCooldown <= 0)
         {
             // Create bullet
-            BulletHandler.active.CreateBullet(this, shipData.weapon, barrel.position,
+            if (Settings.shipColoring) BulletHandler.active.CreateBullet(this, shipData.weapon, barrel.position,
                 model.rotation, (int)bullets, shipData.weapon.material, true, explosiveRounds);
+            else BulletHandler.active.CreateBullet(this, shipData.weapon, barrel.position,
+                model.rotation, (int)bullets, defaultGlow, true, explosiveRounds);
             shipCooldown = cooldown;
         }
     }
