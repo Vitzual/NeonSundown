@@ -105,6 +105,8 @@ public class Deck : MonoBehaviour
             SetupPrimary((PrimaryData)card);
         else if (card is SecondaryData)
             SetupSecondary((SecondaryData)card);
+        else if (card is ChromaData)
+            SetupChroma((ChromaData)card);
     }
 
     // Takes a card
@@ -184,6 +186,13 @@ public class Deck : MonoBehaviour
         Debug.Log("Adding secondary card " + secondary.name + " to deck");
         player.SetSecondary(secondary);
         Deck.secondary = secondary;
+    }
+
+    // Set chroma card slot
+    public void SetupChroma(ChromaData chroma)
+    {
+        Debug.Log("Adding chroma card " + chroma.name + " to deck");
+        ChromaHandler.active.Setup(chroma);
     }
 
     // Setup starting cards

@@ -146,15 +146,23 @@ public class Card : MonoBehaviour
             {
                 redraw = true;
                 effectOne.gameObject.SetActive(true);
-                effectOne.text = "<color=orange>Will replace " + Deck.secondary.name;
+                effectOne.text = "<color=orange>Will replace " + Deck.secondary.name + "!";
                 effectTwo.gameObject.SetActive(true);
-                effectTwo.text = "<color=yellow>Free draw if picked!";
+                effectTwo.text = "<color=white>Free draw if picked!";
             }
             else
             {
                 effectOne.gameObject.SetActive(false);
                 effectTwo.gameObject.SetActive(false);
             }
+        }
+
+        else if (card is ChromaData)
+        {
+            // Set type
+            type.text = "Chroma";
+            effectOne.gameObject.SetActive(false);
+            effectTwo.gameObject.SetActive(false);
         }
         
         if (useBase)
