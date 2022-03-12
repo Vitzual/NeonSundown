@@ -85,6 +85,7 @@ public class SaveSystem
             // Load json file
             string data = File.ReadAllText(path);
             saveData = JsonUtility.FromJson<SaveData>(data);
+            if (saveData.redraws <= 0) saveData.redraws = 1;
 
             // Game saved 
             Debug.Log("[SAVE] Successfully loaded save data!");
@@ -191,6 +192,14 @@ public class SaveSystem
         if (saveData != null && saveData.arenaTimes.ContainsKey(id))
             return saveData.arenaTimes[id];
         else return 0;
+    }
+
+    // Get best time
+    public static int GetRedraws()
+    {
+        if (saveData != null)
+            return saveData.redraws;
+        else return 1;
     }
 
     // Check if user has module

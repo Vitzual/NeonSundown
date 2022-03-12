@@ -36,6 +36,8 @@ public class Dealer : MonoBehaviour
     [BoxGroup("Interface Options")]
     public TextMeshProUGUI title;
     [BoxGroup("Interface Options")]
+    public TextMeshProUGUI redraws;
+    [BoxGroup("Interface Options")]
     public CanvasGroup dealOptions;
     [BoxGroup("Interface Options")]
     public float titleFadeInSpeed = 0.01f;
@@ -60,6 +62,7 @@ public class Dealer : MonoBehaviour
     private bool canvasSet = false;
     private float cardCooldown = 0.5f;
     private int cardNumber = 0;
+    private int redrawsLeft = 0;
 
     // Private components 
     private Transform rotator;
@@ -196,8 +199,6 @@ public class Dealer : MonoBehaviour
     // Re draws a specific card
     public void RedrawCard()
     {
-        Debug.Log("redrawing");
-
         // Raycast for card on interface layer
         PointerEventData m_PointerEventData = new PointerEventData(eventSystem);
         m_PointerEventData.position = Input.mousePosition;
@@ -212,17 +213,18 @@ public class Dealer : MonoBehaviour
         foreach (RaycastResult result in results)
         {
             Card card = result.gameObject.GetComponent<Card>();
-            if (card != null)
+            if (card != null && !card.redrawing)
             {
                 // Check to make sure enough cards are in the list
-                if (dealList.Count == 0)
+                if (dealList.Count == 0) redraws.text = "No Cards Left!";
+                else if (redrawsLeft <= 0) redraws.text = "0 Remaining";
+                else
                 {
-                    Debug.Log("Can't re-draw because no cards left");
+                    redrawsLeft -= 1;
+                    card.RedrawCard(PickNewCard());
+                    redraws.text = redrawsLeft + " Remaining";
                     return;
                 }
-                else if (card.redrawing) return;
-                card.RedrawCard(PickNewCard());
-                return;
             }
         }
     }
@@ -284,6 +286,10 @@ public class Dealer : MonoBehaviour
         background.color = new Color(0, 0, 0, 0);
         title.alpha = 0;
         dealOptions.alpha = 0;
+
+        // Get redraws from save file
+        redrawsLeft = SaveSystem.GetRedraws();
+        redraws.text = redrawsLeft + " Remaining";
 
         // Set open flag
         isOpen = true;
