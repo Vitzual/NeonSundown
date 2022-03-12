@@ -5,8 +5,8 @@ using UnityEngine.UI;
 public class Card : MonoBehaviour
 {
     // Get card data
-    [SerializeField]
     private CardData cardData;
+    private CardData redrawCard;
     public int cardNumber;
 
     // Card position
@@ -26,8 +26,9 @@ public class Card : MonoBehaviour
 
     // Canvas group
     public CanvasGroup canvasGroup;
-    private bool redraw = false;
     private AudioSource audioSource;
+    private bool redraw = false;
+    public bool redrawing = false;
 
     // Get the canvas group
     public void Start() 
@@ -36,8 +37,15 @@ public class Card : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
     }
 
+    // Check for redraw
+    public void Update()
+    {
+        if (redrawing && !LeanTween.isTweening())
+            Set(redrawCard, true);
+    }
+
     // Set card function
-    public void Set(CardData card)
+    public void Set(CardData card, bool redrawing = false)
     {
         // Set card data
         cardData = card;
@@ -234,37 +242,45 @@ public class Card : MonoBehaviour
         }
 
         // Animate the card
-        ResetCard();
+        if (!redrawing)
+        {
+            ResetCard();
 
-        // Set card anim speed
-        if (Settings.skipCardAnim)
-        {
-            transform.localPosition = cardPosition;
-            canvasGroup.alpha = 1f;
-        }
-        else if (Settings.fastCardAnim)
-        {
-            LeanTween.moveLocal(gameObject, cardPosition, animationSpeed / 2f);
-            LeanTween.alphaCanvas(canvasGroup, 1f, fadeInSpeed / 2f);
+            // Set card anim speed
+            if (Settings.skipCardAnim)
+            {
+                transform.localPosition = cardPosition;
+                canvasGroup.alpha = 1f;
+            }
+            else if (Settings.fastCardAnim)
+            {
+                LeanTween.moveLocal(gameObject, cardPosition, animationSpeed / 2f);
+                LeanTween.alphaCanvas(canvasGroup, 1f, fadeInSpeed / 2f);
+            }
+            else
+            {
+                LeanTween.moveLocal(gameObject, cardPosition, animationSpeed);
+                LeanTween.alphaCanvas(canvasGroup, 1f, fadeInSpeed);
+            }
+
+            // Play card sound
+            if (!Settings.skipCardAnim)
+            {
+                audioSource.volume = Settings.sound;
+                audioSource.Play();
+            }
         }
         else
         {
-            LeanTween.moveLocal(gameObject, cardPosition, animationSpeed);
-            LeanTween.alphaCanvas(canvasGroup, 1f, fadeInSpeed);
-        }
-
-        // Play card sound
-        if (!Settings.skipCardAnim)
-        {
-            audioSource.volume = Settings.sound;
-            audioSource.Play();
+            this.redrawing = false;
+            LeanTween.rotateLocal(gameObject, Vector3.zero, animationSpeed / 3f);
         }
     }
 
     // Card clicked
     public void OnClick()
     {
-        Dealer.active.PickCard(cardData, redraw);
+        Dealer.active.PickCard(cardData, redraw, cardNumber);
     }
 
     // Reset card
@@ -272,6 +288,16 @@ public class Card : MonoBehaviour
     {
         transform.localPosition = new Vector3(cardPosition.x, cardPosition.y - verticalAdjustment, 0);
         canvasGroup.alpha = 0f;
+    }
+
+    // Redraw card
+    public void RedrawCard(CardData newCard)
+    {
+        redrawCard = newCard;
+        LeanTween.rotateLocal(gameObject, new Vector3(0, 90f, 0), animationSpeed / 3f);
+        audioSource.volume = Settings.sound;
+        audioSource.Play();
+        redrawing = true;
     }
 
     // Calculate stat

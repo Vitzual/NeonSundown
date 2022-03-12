@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Sirenix.OdinInspector;
+using UnityEngine.EventSystems;
 
 public class Dealer : MonoBehaviour
 {
@@ -35,6 +36,8 @@ public class Dealer : MonoBehaviour
     [BoxGroup("Interface Options")]
     public TextMeshProUGUI title;
     [BoxGroup("Interface Options")]
+    public CanvasGroup dealOptions;
+    [BoxGroup("Interface Options")]
     public float titleFadeInSpeed = 0.01f;
     [BoxGroup("Interface Options")]
     public Image background;
@@ -42,6 +45,10 @@ public class Dealer : MonoBehaviour
     public float bgFadeInSpeed = 0.01f;
     [BoxGroup("Interface Options"), Range(0, 1)]
     public float bgAlphaTarget = 0.5f;
+    [BoxGroup("Interface Options")]
+    public EventSystem eventSystem;
+    [BoxGroup("Interface Options")]
+    public GraphicRaycaster eventRaycaster;
 
     // Debug switch
     [BoxGroup("Debug Flags")]
@@ -69,6 +76,9 @@ public class Dealer : MonoBehaviour
     // While open, rotate
     public void Update()
     {
+        // Check if input from re-draw
+        if (isOpen && cardsDealt && Input.GetKeyDown(Keybinds.secondary)) RedrawCard();
+
         // If debug switch set to true, deal cards
         if (debugSwitch)
         {
@@ -107,9 +117,21 @@ public class Dealer : MonoBehaviour
             {
                 if (title.alpha < 1f)
                 {
-                    if (Settings.skipCardAnim) title.alpha = 1f;
-                    else if (Settings.fastCardAnim) title.alpha += titleFadeInSpeed * Time.deltaTime * fastDealSpeed;
-                    else title.alpha += titleFadeInSpeed * Time.deltaTime;
+                    if (Settings.skipCardAnim)
+                    {
+                        title.alpha = 1f;
+                        dealOptions.alpha = 1f;
+                    }
+                    else if (Settings.fastCardAnim)
+                    {
+                        title.alpha += titleFadeInSpeed * Time.deltaTime * fastDealSpeed;
+                        dealOptions.alpha += titleFadeInSpeed * Time.deltaTime * fastDealSpeed;
+                    }
+                    else
+                    {
+                        title.alpha += titleFadeInSpeed * Time.deltaTime;
+                        dealOptions.alpha += titleFadeInSpeed * Time.deltaTime;
+                    }
                 }
                 else canvasSet = true;
             }
@@ -140,11 +162,8 @@ public class Dealer : MonoBehaviour
         }
 
         // Take the card and remove it from the list
-        CardData card = dealList[Random.Range(0, dealList.Count)];
-
-        // Set the card
+        CardData card = PickNewCard();
         cardSlots[number].Set(card);
-        dealList.Remove(card);
 
         // Reset card cooldown
         if (!Settings.skipCardAnim)
@@ -163,20 +182,58 @@ public class Dealer : MonoBehaviour
     }
     
     // Pick the card and add to palyer
-    public void PickCard(CardData card, bool redraw)
+    public void PickCard(CardData card, bool redraw, int cardNumber)
     {
-        if (!cardsDealt) return;
+        // Check if cards dealt
+        if (!cardsDealt || cardSlots[cardNumber].redrawing) return;
         Deck.active.AddCard(card);
 
         // Check if card is secondary
-        if (redraw)
-        {
-            // Reset cards
-            foreach (Card cardSlot in cardSlots)
-                cardSlot.ResetCard();
-            OpenDealer();
-        }
+        if (redraw) cardSlots[cardNumber].RedrawCard(PickNewCard());
         else CloseDealer();
+    }
+
+    // Re draws a specific card
+    public void RedrawCard()
+    {
+        Debug.Log("redrawing");
+
+        // Raycast for card on interface layer
+        PointerEventData m_PointerEventData = new PointerEventData(eventSystem);
+        m_PointerEventData.position = Input.mousePosition;
+
+        //Create a list of Raycast Results
+        List<RaycastResult> results = new List<RaycastResult>();
+
+        //Raycast using the Graphics Raycaster and mouse click position
+        eventRaycaster.Raycast(m_PointerEventData, results);
+
+        // Debug the result
+        foreach (RaycastResult result in results)
+        {
+            Card card = result.gameObject.GetComponent<Card>();
+            if (card != null)
+            {
+                // Check to make sure enough cards are in the list
+                if (dealList.Count == 0)
+                {
+                    Debug.Log("Can't re-draw because no cards left");
+                    return;
+                }
+                else if (card.redrawing) return;
+                card.RedrawCard(PickNewCard());
+                return;
+            }
+        }
+    }
+
+    // Pick card
+    public CardData PickNewCard()
+    {
+        // Take the card and remove it from the list
+        CardData newCard = dealList[Random.Range(0, dealList.Count)];
+        dealList.Remove(newCard);
+        return newCard;
     }
 
     // Open dealer
@@ -226,6 +283,7 @@ public class Dealer : MonoBehaviour
         canvasGroup.blocksRaycasts = true;
         background.color = new Color(0, 0, 0, 0);
         title.alpha = 0;
+        dealOptions.alpha = 0;
 
         // Set open flag
         isOpen = true;
@@ -245,5 +303,6 @@ public class Dealer : MonoBehaviour
 
         // Set open flag
         isOpen = false;
+        cardsDealt = false;
     }
 }
