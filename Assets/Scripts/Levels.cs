@@ -5,18 +5,15 @@ using UnityEngine;
 
 public class Levels : MonoBehaviour
 {
-    public static List<RankData> ranks;
+    public static List<LevelData> ranks;
     public static int level;
 
     // Generate ranks on startup
     public void Awake() 
     {
         // Get a list of all ranks
-        ranks = Resources.LoadAll("Ranks", typeof(RankData)).Cast<RankData>().ToList();
-        Debug.Log("Loaded " + ranks.Count + " ranks from resource folder");
-
-        foreach (RankData rank in ranks)
-            Debug.Log(rank.name);
+        ranks = Resources.LoadAll("Levels", typeof(LevelData)).Cast<LevelData>().ToList();
+        Debug.Log("Loaded " + ranks.Count + " levels from resource folder");
     }
 
     // Add XP to the rankup system
@@ -38,7 +35,7 @@ public class Levels : MonoBehaviour
         if (level < ranks.Count)
         {
             // Level up and give rewards
-            RankData rank = ranks[level];
+            LevelData rank = ranks[level];
 
             // Give card reward
             if (rank.cardReward != null)
@@ -49,12 +46,10 @@ public class Levels : MonoBehaviour
                 SaveSystem.AddArenaUnlock(rank.arenaReward.InternalID);
 
             // Give card reward
-            if (rank.moduleReward != null)
-                SaveSystem.AddModule(rank.moduleReward.InternalID, rank.moduleAmount);
-
-            // Give card reward
-            if (rank.crystalReward != null)
-                SaveSystem.AddCrystal(rank.crystalReward.InternalID, rank.crystalAmount);
+            if (rank.crystalReward)
+            {
+                
+            }
 
             // Increase level
             SaveSystem.LevelUp();

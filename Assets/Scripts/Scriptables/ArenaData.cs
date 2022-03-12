@@ -40,6 +40,8 @@ public class ArenaData : IdentifiableScriptableObject
     [BoxGroup("Arena Info"), TextArea]
     public string desc;
     [BoxGroup("Arena Info")]
+    public string shortDesc;
+    [BoxGroup("Arena Info")]
     public TileBase arenaBackground;
     [BoxGroup("Arena Info")]
     public float arenaMenuPitch = 1f;
