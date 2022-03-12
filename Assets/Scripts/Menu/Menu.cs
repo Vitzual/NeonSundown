@@ -26,10 +26,10 @@ public class Menu : MonoBehaviour
     public CanvasGroup titleGroup;
     public CanvasGroup pressSpace;
     public CanvasGroup alphaGroup;
-    public CanvasGroup preReleaseGroup;
     public CanvasGroup roadmapGroup;
     public CanvasGroup creditsGroup;
     public CanvasGroup roadmapWarningGroup;
+    public CanvasGroup levelsGroup;
     public Image pressSpaceBg;
 
     // Other interface options
@@ -43,7 +43,6 @@ public class Menu : MonoBehaviour
     public TextMeshProUGUI pressSpaceText;
     public bool increaseAlpha = false;
     public bool alphaBuild = false;
-    public static bool preReleaseBuild = true;
     public static bool roadmapWarningShown = false;
     public ArenaData alphaArena;
     public ShipData alphaShip;
@@ -111,12 +110,6 @@ public class Menu : MonoBehaviour
                 Gamemode.arena = alphaArena;
                 Gamemode.ship = alphaShip;
             }
-            else if (preReleaseBuild)
-            {
-                LeanTween.alphaCanvas(preReleaseGroup, 1f, titleAnimSpeed);
-                preReleaseGroup.interactable = true;
-                preReleaseGroup.blocksRaycasts = true;
-            }
             else OpenMain();
         }
     }
@@ -124,15 +117,6 @@ public class Menu : MonoBehaviour
     // Open main panel
     public void OpenMain()
     {
-        // If pre release enabled, disable it
-        if (preReleaseBuild)
-        {
-            LeanTween.alphaCanvas(preReleaseGroup, 0f, titleAnimSpeed);
-            preReleaseGroup.interactable = false;
-            preReleaseGroup.blocksRaycasts = false;
-            preReleaseBuild = false;
-        }
-
         LeanTween.scale(title, titleTargetSize, titleSizeSpeed).setEase(LeanTweenType.easeInExpo).setDelay(0.2f);
         LeanTween.moveLocal(title.gameObject, titleTargetPos, titleAnimSpeed).setEase(LeanTweenType.easeInExpo).setDelay(0.2f);
         LeanTween.alphaCanvas(pressSpace, 0f, titleAnimSpeed);
@@ -192,6 +176,13 @@ public class Menu : MonoBehaviour
     {
         if (toggle) TogglePanel(creditsGroup, mainGroup);
         else TogglePanel(mainGroup, creditsGroup);
+    }
+
+    // Open levels panel
+    public void ToggleLevelsPanel(bool toggle)
+    {
+        if (toggle) TogglePanel(levelsGroup, mainGroup);
+        else TogglePanel(mainGroup, levelsGroup);
     }
 
     // Open arena panel

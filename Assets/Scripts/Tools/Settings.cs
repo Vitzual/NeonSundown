@@ -30,6 +30,7 @@ public class Settings
     public static float lightAmount = 1f;
     public static bool fastCardAnim = false;
     public static bool skipCardAnim = false;
+    public static bool compoundXP = false;
     public static bool musicPitching = true;
 
     // Save settings

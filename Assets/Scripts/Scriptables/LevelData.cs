@@ -5,14 +5,16 @@ using UnityEngine;
 public class LevelData : IdentifiableScriptableObject
 {
     // Rank information
-    [BoxGroup("Level Reward")]
+    [HideIf("IsOptionalRewardPicked", true), BoxGroup("Level Reward")]
     public CardData cardReward;
-    [BoxGroup("Level Reward")]
+    [HideIf("IsOptionalRewardPicked", true), BoxGroup("Level Reward")]
     public ArenaData arenaReward;
-    [BoxGroup("Level Reward")]
+    [HideIf("IsOptionalRewardPicked", true), BoxGroup("Level Reward")]
     public ShipData shipReward;
-    [BoxGroup("Level Reward")]
+    [HideIf("redrawReward", true), BoxGroup("Level Reward")]
     public bool crystalReward;
+    [HideIf("crystalReward", true), BoxGroup("Level Reward")]
+    public bool redrawReward;
 
     // Rank and reward models
     [BoxGroup("Level Reward")]
@@ -32,5 +34,11 @@ public class LevelData : IdentifiableScriptableObject
     private bool IsRewardPicked()
     {
         return cardReward != null || arenaReward != null || shipReward != null;
+    }
+
+    // Check if optional flag rewards are picked
+    private bool IsOptionalRewardPicked()
+    {
+        return crystalReward || redrawReward;
     }
 } 

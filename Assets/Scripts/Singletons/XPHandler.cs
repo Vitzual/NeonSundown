@@ -10,8 +10,9 @@ public class XPHandler : MonoBehaviour
     // XP mover class
     public class XPInstance
     {
-        public XPInstance(Transform transform, Vector2 startPos, float speed = 10f, float timer = 15f)
+        public XPInstance(float value, Transform transform, Vector2 startPos, float speed = 10f, float timer = 15f)
         {
+            this.value = value;
             this.transform = transform;
             this.startPos = startPos;
             this.timer = timer;
@@ -21,6 +22,7 @@ public class XPHandler : MonoBehaviour
             isMoving = false;
         }
 
+        public float value;
         public Transform transform;
         public Vector2 startPos;
         public bool isStarting;
@@ -69,7 +71,7 @@ public class XPHandler : MonoBehaviour
                     // Check distance
                     if (Vector2.Distance(xpList[a].transform.position, player.transform.position) < targetDistanceCheck)
                     {
-                        player.AddXP(xpValue);
+                        player.AddXP(xpList[a].value);
                         if (xpHealing) player.Heal(0.05f);
                         AudioPlayer.Play(xpSound, true, 0.8f, 1.2f, false, 1.5f);
                         Destroy(xpList[a].transform.gameObject);
@@ -119,11 +121,20 @@ public class XPHandler : MonoBehaviour
     public void Spawn(Vector2 startPos, int amount, Crystal crystal = null)
     {
         // Spawn XP
-        for (int i = 0; i < amount; i++)
+        if (!Settings.compoundXP)
+        {
+            for (int i = 0; i < amount; i++)
+            {
+                XP newXp = Instantiate(xpObject, startPos, Quaternion.identity);
+                newXp.Setup(new Vector2(startPos.x + Random.Range(-startDistance, startDistance),
+                    startPos.y + Random.Range(-startDistance, startDistance)), xpValue);
+            }
+        }
+        else
         {
             XP newXp = Instantiate(xpObject, startPos, Quaternion.identity);
             newXp.Setup(new Vector2(startPos.x + Random.Range(-startDistance, startDistance),
-                startPos.y + Random.Range(-startDistance, startDistance)));
+                startPos.y + Random.Range(-startDistance, startDistance)), xpValue * amount);
         }
 
         // If crystal spawn set to true, spawn
@@ -136,9 +147,9 @@ public class XPHandler : MonoBehaviour
     }
 
     // Register mover
-    public XPInstance Register(Transform transform, Vector2 startPos)
+    public XPInstance Register(float value, Transform transform, Vector2 startPos)
     {
-        XPInstance newXP = new XPInstance(transform, startPos);
+        XPInstance newXP = new XPInstance(value, transform, startPos);
         xpList.Add(newXP);
         return newXP;
     }
