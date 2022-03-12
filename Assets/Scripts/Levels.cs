@@ -7,13 +7,16 @@ public class Levels : MonoBehaviour
 {
     public static List<LevelData> ranks;
     public static int level;
+    private static bool generated = false;
 
     // Generate ranks on startup
     public void Awake() 
     {
         // Get a list of all ranks
+        if (generated) return;
         ranks = Resources.LoadAll("Levels", typeof(LevelData)).Cast<LevelData>().ToList();
         Debug.Log("Loaded " + ranks.Count + " levels from resource folder");
+        generated = true;
     }
 
     // Add XP to the rankup system
@@ -46,10 +49,9 @@ public class Levels : MonoBehaviour
                 SaveSystem.AddArenaUnlock(rank.arenaReward.InternalID);
 
             // Give card reward
-            if (rank.crystalReward)
-            {
-                
-            }
+            if (rank.crystalReward && Scriptables.crystals != null)
+                foreach (CrystalData crystal in Scriptables.crystals)
+                    SaveSystem.AddCrystal(crystal.InternalID, 5);
 
             // Increase level
             SaveSystem.LevelUp();

@@ -15,6 +15,7 @@ public static class Scriptables
     public static string StagesPath = "Stages";
     public static string ArenasPath = "Arenas";
     public static string ShipsPath = "Ships";
+    public static string CrystalsPath = "Crystals";
 
     // Scriptable dictionaries
     public static Dictionary<string, CardData> cardsDict;
@@ -29,6 +30,7 @@ public static class Scriptables
     public static List<StageData> stages;
     public static List<ArenaData> arenas;
     public static List<ShipData> ships;
+    public static List<CrystalData> crystals;
 
     // Generate scriptables
     public static void GenerateAllScriptables()
@@ -42,6 +44,7 @@ public static class Scriptables
         GenerateStages();
         GenerateArenas();
         GenerateShips();
+        GenerateCrystals();
 
         // Set generated to true
         generated = true;
@@ -135,6 +138,21 @@ public static class Scriptables
             shipsDict.Add(ship.InternalID, ship);
             ships.Add(ship);
             Debug.Log("Loaded " + ship.name + " with UUID " + ship.InternalID);
+        }
+    }
+
+    // Generate crystals on startup
+    public static void GenerateCrystals()
+    {
+        crystals = new List<CrystalData>();
+
+        List<CrystalData> loaded = Resources.LoadAll(CrystalsPath, typeof(CrystalData)).Cast<CrystalData>().ToList();
+        Debug.Log("Loaded " + loaded.Count + " crystals from " + CrystalsPath);
+
+        foreach (CrystalData crystal in loaded)
+        {
+            crystals.Add(crystal);
+            Debug.Log("Loaded " + crystal.name + " with UUID " + crystal.InternalID);
         }
     }
 }
