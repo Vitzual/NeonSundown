@@ -16,11 +16,11 @@ public class LevelData : IdentifiableScriptableObject
 
     // Rank and reward models
     [BoxGroup("Level Reward")]
-    public float xpRequirement = 1000;
+    public float xpRequirement = 2500;
     [HideIf("IsRewardPicked", true), BoxGroup("Level Info")]
-    public new string name;
+    public string rewardName;
     [HideIf("IsRewardPicked", true), BoxGroup("Level Info")]
-    public string desc;
+    public string rewardDesc;
     [HideIf("IsRewardPicked", true), BoxGroup("Level Info")]
     public Sprite rewardIcon;
     [HideIf("IsRewardPicked", true), BoxGroup("Level Info")]

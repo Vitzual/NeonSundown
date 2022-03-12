@@ -11,9 +11,10 @@ public class Reward : MonoBehaviour
     public TextMeshProUGUI levelText, rewardName, rewardDescription, xpAmount;
 
     // Set a reward
-    public void Set(LevelData level, int levelNumber, bool unlocked)
+    public void Set(LevelData level, int levelNumber, bool unlocked, Sprite levelIcon)
     {
         // Set level info
+        this.levelIcon.sprite = levelIcon;
         levelText.text = levelNumber.ToString();
         xpAmount.text = level.xpRequirement + "xp";
 
@@ -47,7 +48,7 @@ public class Reward : MonoBehaviour
             }
 
             rewardIcon.sprite = level.arenaReward.iconEnemy;
-            rewardName.text = level.arenaReward.name;
+            rewardName.text = level.arenaReward.name + " Arena";
             rewardDescription.text = level.arenaReward.shortDesc;
             if (unlocked) rewardIcon.color = lightColor;
             else rewardIcon.color = Color.gray;
@@ -61,7 +62,7 @@ public class Reward : MonoBehaviour
             }
 
             rewardIcon.sprite = level.shipReward.glowIcon;
-            rewardName.text = level.shipReward.name;
+            rewardName.text = level.shipReward.name + " Ship";
             rewardDescription.text = level.shipReward.shortDesc;
             if (unlocked) rewardIcon.color = lightColor;
             else rewardIcon.color = Color.gray;
@@ -75,14 +76,14 @@ public class Reward : MonoBehaviour
             }
 
             rewardIcon.sprite = level.rewardIcon;
-            rewardName.text = level.name;
-            rewardDescription.text = level.desc;
+            rewardName.text = level.rewardName;
+            rewardDescription.text = level.rewardDesc;
             if (unlocked) rewardIcon.color = level.rewardColor;
             else rewardIcon.color = Color.gray;
         }
 
         // Set colors
-        levelIcon.color = lightColor;
+        this.levelIcon.color = lightColor;
         border.color = lightColor;
         background.color = darkColor;
         xpAmount.color = darkColor;
