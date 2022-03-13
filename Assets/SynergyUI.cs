@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 public class SynergyUI : MonoBehaviour
 {
+    // Get active instance
+    public static SynergyUI active;
+
     // Debug synergy
     public static CanvasGroup screen;
     public Card cardOne, cardTwo, synergyCard;
@@ -16,11 +19,9 @@ public class SynergyUI : MonoBehaviour
     private float cooldown = 0f;
     private bool synergizing = false;
 
-    // On start get screen
-    public void Start()
-    {
-        screen = GetComponent<CanvasGroup>();
-    }
+    // On awake get active instance
+    public void Awake() { active = this; }
+    public void Start() { screen = GetComponent<CanvasGroup>(); }
 
     // Synergize them cards
     public void Synergize(SynergyData synergy)
@@ -33,11 +34,11 @@ public class SynergyUI : MonoBehaviour
         synergyCard.Set(synergy.outputCard, false, true);
         synergyCard.SetSynergy(synergy);
         synergyCard.canvasGroup.alpha = 0f;
-        LeanTween.alphaCanvas(synergyCard.canvasGroup, 1f, 0.25f).setDelay(fadeInSpeed + moveSpeedDelay + 1f);
+        LeanTween.alphaCanvas(synergyCard.canvasGroup, 1f, 0.25f).setDelay(fadeInSpeed + moveSpeedDelay);
         synergyCard.GetComponent<RectTransform>().localScale = new Vector3(12f, 12f, 12f);
         LeanTween.scale(synergyCard.gameObject, new Vector3(14f, 14f, 1f), 0.5f)
-            .setEase(LeanTweenType.easeInExpo).setDelay(fadeInSpeed + moveSpeedDelay + 1f);
-        cooldown = fadeInSpeed + moveSpeedDelay + 1f;
+            .setEase(LeanTweenType.easeInExpo).setDelay(fadeInSpeed + moveSpeedDelay);
+        cooldown = fadeInSpeed + moveSpeedDelay;
         Dealer.isOpen = true;
     }
 

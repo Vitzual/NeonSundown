@@ -16,6 +16,7 @@ public static class Scriptables
     public static string ArenasPath = "Arenas";
     public static string ShipsPath = "Ships";
     public static string CrystalsPath = "Crystals";
+    public static string SynergiesPath = "Synergies";
 
     // Scriptable dictionaries
     public static Dictionary<string, CardData> cardsDict;
@@ -31,6 +32,7 @@ public static class Scriptables
     public static List<ArenaData> arenas;
     public static List<ShipData> ships;
     public static List<CrystalData> crystals;
+    public static List<SynergyData> synergies;
 
     // Generate scriptables
     public static void GenerateAllScriptables()
@@ -45,6 +47,7 @@ public static class Scriptables
         GenerateArenas();
         GenerateShips();
         GenerateCrystals();
+        GenerateSynergies();
 
         // Set generated to true
         generated = true;
@@ -153,6 +156,21 @@ public static class Scriptables
         {
             crystals.Add(crystal);
             Debug.Log("Loaded " + crystal.name + " with UUID " + crystal.InternalID);
+        }
+    }
+
+    // Generate crystals on startup
+    public static void GenerateSynergies()
+    {
+        synergies = new List<SynergyData>();
+
+        List<SynergyData> loaded = Resources.LoadAll(SynergiesPath, typeof(SynergyData)).Cast<SynergyData>().ToList();
+        Debug.Log("Loaded " + loaded.Count + " synergies from " + SynergiesPath);
+
+        foreach (SynergyData synergy in loaded)
+        {
+            synergies.Add(synergy);
+            Debug.Log("Loaded " + synergy.name + " with UUID " + synergy.InternalID);
         }
     }
 }

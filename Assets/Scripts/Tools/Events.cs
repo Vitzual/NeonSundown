@@ -15,11 +15,19 @@ public class Events : MonoBehaviour
     }
 
     // On boss hurt
+    public event Action onBloodCrystalBroken;
+    public void BloodCrystalBroken()
+    {
+        if (onBloodCrystalBroken != null)
+            onBloodCrystalBroken();
+    }
+
+    // On boss hurt
     public event Action onBossHurt;
     public void BossHurt()
     {
         if (onBossHurt != null)
-            BossHurt();
+            onBossHurt();
     }
 
     // On boss spawned
