@@ -26,6 +26,8 @@ public class LevelData : IdentifiableScriptableObject
     [HideIf("IsRewardPicked", true), BoxGroup("Level Info")]
     public Sprite rewardIcon;
     [HideIf("IsRewardPicked", true), BoxGroup("Level Info")]
+    public Sprite lockedIcon;
+    [HideIf("IsRewardPicked", true), BoxGroup("Level Info")]
     public Color levelColor;
     [HideIf("IsRewardPicked", true), BoxGroup("Level Info")]
     public Color rewardColor;

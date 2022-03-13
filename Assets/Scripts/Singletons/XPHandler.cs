@@ -80,7 +80,7 @@ public class XPHandler : MonoBehaviour
                     {
                         player.AddXP(xpList[a].value);
                         if (SaveSystem.saveData.level < Levels.ranks.Count)
-                            xpRequirement.text = SaveSystem.saveData.xp + " / " + 
+                            xpRequirement.text = Formatter.Round(SaveSystem.saveData.xp) + " / " +
                                 Levels.ranks[SaveSystem.saveData.level].xpRequirement + "xp";
                         if (xpHealing) player.Heal(0.05f);
                         AudioPlayer.Play(xpSound, true, 0.8f, 1.2f, false, 1.5f);
@@ -134,7 +134,8 @@ public class XPHandler : MonoBehaviour
         {
             reward.text = Levels.ranks[SaveSystem.saveData.level].GetName();
             xpRequirement.color = Levels.ranks[SaveSystem.saveData.level].GetColor();
-            xpRequirement.text = SaveSystem.saveData.xp + " / " + Levels.ranks[SaveSystem.saveData.level].xpRequirement + "xp";
+            xpRequirement.text = Formatter.Round(SaveSystem.saveData.xp) + " / " + 
+                Levels.ranks[SaveSystem.saveData.level].xpRequirement + "xp";
         }
         else
         {

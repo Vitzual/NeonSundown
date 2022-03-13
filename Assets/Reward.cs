@@ -73,9 +73,10 @@ public class Reward : MonoBehaviour
             {
                 lightColor = level.levelColor;
                 darkColor = new Color(lightColor.r * 0.2f, lightColor.g * 0.2f, lightColor.b * 0.2f);
+                rewardIcon.sprite = level.rewardIcon;
             }
+            else rewardIcon.sprite = level.lockedIcon;
 
-            rewardIcon.sprite = level.rewardIcon;
             rewardName.text = level.rewardName;
             rewardDescription.text = level.rewardDesc;
             if (unlocked) rewardIcon.color = level.rewardColor;
