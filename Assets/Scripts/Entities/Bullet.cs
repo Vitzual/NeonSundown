@@ -7,10 +7,6 @@ public class Bullet : Entity
     // Weapon data
     protected WeaponData weapon;
 
-    // Prestige object
-    public GameObject baseModel;
-    public GameObject prestigeModel;
-
     // Bullet components 
     public SpriteRenderer sprite;
     public TrailRenderer trail;

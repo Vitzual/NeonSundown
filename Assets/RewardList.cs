@@ -148,7 +148,6 @@ public class RewardList : MonoBehaviour
         {
             useRainbow = true;
             levelText.text = "50";
-            nextUnlock.text = "CONGRATS!";
             unlockName.text = "LEVEL MAX";
             unlockProgress.currentPercent = 100;
         }

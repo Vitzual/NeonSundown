@@ -336,6 +336,7 @@ public class Card : MonoBehaviour
         type.color = card.color;
 
         // Set description
+        image.sprite = card.sprite;
         desc.text = "Card is maxed";
         level.text = "LEVEL MAX";
 

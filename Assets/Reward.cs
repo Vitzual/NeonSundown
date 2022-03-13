@@ -77,7 +77,7 @@ public class Reward : MonoBehaviour
 
             rewardIcon.sprite = level.synergyReward.outputCard.sprite;
             rewardName.text = level.synergyReward.name + " Synergy";
-            rewardDescription.text = level.synergyReward.outputCard.description;
+            rewardDescription.text = level.synergyReward.desc;
             if (unlocked) rewardIcon.color = lightColor;
             else rewardIcon.color = Color.gray;
         }
