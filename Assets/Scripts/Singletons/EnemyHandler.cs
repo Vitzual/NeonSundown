@@ -36,9 +36,6 @@ public class EnemyHandler : MonoBehaviour
     // On awake set active instance
     public void Awake() { active = this; }
 
-    // Start method
-    public void Start() { active = this; }
-
     // Spawn enemies
     public void Update()
     {

@@ -61,4 +61,19 @@ public class LevelData : IdentifiableScriptableObject
         else if (shipReward != null) return shipReward.mainColor;
         else return levelColor;
     }
+
+    // Get icon
+    public Sprite GetIcon()
+    {
+        if (cardReward != null) return cardReward.sprite;
+        else if (arenaReward != null) return arenaReward.iconEnemy;
+        else if (shipReward != null) return shipReward.glowIcon;
+        else return rewardIcon;
+    }
+
+    // Check if should be colored
+    public bool IsColored()
+    {
+        return cardReward != null || arenaReward != null || shipReward != null || redrawReward;
+    }
 } 

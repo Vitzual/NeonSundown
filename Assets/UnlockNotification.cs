@@ -78,5 +78,8 @@ public class UnlockNotification : MonoBehaviour
         notification.OpenNotification();
         audioSource.volume = Settings.sound;
         audioSource.Play();
+
+        // Lean the tween my guy, lean the tween
+        LeanTween.scale(GetComponent<RectTransform>(), new Vector3(0.35f, 0.35f, 0.35f), 0.5f).setEase(LeanTweenType.easeInExpo);
     }
 }

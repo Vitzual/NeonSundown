@@ -61,7 +61,7 @@ public class Enemy : Entity
         material = variantColor.material;
 
         // Set stats
-        health = data.health;
+        health = data.health * EnemySpawner.enemyHealthMultiplier;
         maxHealth = health;
 
         // Set target

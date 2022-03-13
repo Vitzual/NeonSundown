@@ -2,13 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class XPHandler : MonoBehaviour
 {
     // Active instance
     public static XPHandler active;
+    public Image rewardIcon;
     public TextMeshProUGUI reward, xpRequirement;
-    public GameObject lineOne, lineTwo;
+    public GameObject rewardObject;
 
     // XP mover class
     public class XPInstance
@@ -133,16 +135,19 @@ public class XPHandler : MonoBehaviour
         if (SaveSystem.saveData.level < Levels.ranks.Count)
         {
             reward.text = Levels.ranks[SaveSystem.saveData.level].GetName();
-            xpRequirement.color = Levels.ranks[SaveSystem.saveData.level].GetColor();
+            Color color = Levels.ranks[SaveSystem.saveData.level].GetColor();
+            rewardIcon.sprite = Levels.ranks[SaveSystem.saveData.level].GetIcon();
+            if (Levels.ranks[SaveSystem.saveData.level].IsColored()) rewardIcon.color = color;
+            else rewardIcon.color = Color.white;
             xpRequirement.text = Formatter.Round(SaveSystem.saveData.xp) + " / " + 
                 Levels.ranks[SaveSystem.saveData.level].xpRequirement + "xp";
+            xpRequirement.color = color;
         }
         else
         {
             reward.gameObject.SetActive(false);
             xpRequirement.gameObject.SetActive(false);
-            lineOne.SetActive(false);
-            lineTwo.SetActive(true);
+            rewardObject.SetActive(false);
         }
     }
 
