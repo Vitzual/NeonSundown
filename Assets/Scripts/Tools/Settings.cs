@@ -139,13 +139,14 @@ public class Settings
             resolutionY = 1080;
             screenmode = true;
             framerate = 999;
-            glowAmount = 1f;
+            glowAmount = 0.5f;
             lightAmount = 1f;
             shipColoring = true;
             screenShake = true;
             useParticles = true;
             fastCardAnim = false;
             skipCardAnim = false;
+            compoundXP = false;
             musicPitching = true;
         }
     }

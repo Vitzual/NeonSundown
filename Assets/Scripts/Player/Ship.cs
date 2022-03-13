@@ -322,7 +322,6 @@ public class Ship : Weapon
             else Deck.AddAddition(newModule.stat, newModule.value);
             UpdateStat(newModule.stat);
         }
-        Gamemode.modules = new Dictionary<int, ModuleData>();
     }
 
     public static float GetHealth() { return health; }

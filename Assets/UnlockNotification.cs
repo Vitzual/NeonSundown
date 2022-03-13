@@ -63,11 +63,11 @@ public class UnlockNotification : MonoBehaviour
             notification.icon = level.rewardIcon;
             notification.title = level.rewardName;
             notification.description = level.rewardDesc;
-            notification.iconObj.color = level.rewardColor;
+            if (level.IsColored()) notification.iconObj.color = level.rewardColor;
+            else notification.iconObj.color = Color.white;
         }
 
         // Set colors
-        notification.iconObj.color = lightColor;
         levelIcon.color = lightColor;
         border.color = lightColor;
         background.color = darkColor;
@@ -78,8 +78,5 @@ public class UnlockNotification : MonoBehaviour
         notification.OpenNotification();
         audioSource.volume = Settings.sound;
         audioSource.Play();
-
-        // Lean the tween my guy, lean the tween
-        LeanTween.scale(GetComponent<RectTransform>(), new Vector3(0.35f, 0.35f, 0.35f), 0.5f).setEase(LeanTweenType.easeInExpo);
     }
 }

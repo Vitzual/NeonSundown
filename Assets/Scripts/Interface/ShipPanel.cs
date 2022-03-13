@@ -151,8 +151,8 @@ public class ShipPanel : MonoBehaviour
         firerate.color = ship.subColor;
         pierces.color = ship.subColor;
         lifetime.color = ship.subColor;
-        moduleCancelButton.color = ship.subColor;
-        moduleClearButton.color = ship.subColor;
+        //moduleCancelButton.color = ship.subColor;
+        //moduleClearButton.color = ship.subColor;
     }
 
     // Open module list
@@ -214,7 +214,6 @@ public class ShipPanel : MonoBehaviour
                 if (Gamemode.modules[moduleSlot] != null)
                 {
                     UpdateModuleInterface(Gamemode.modules[moduleSlot].stat, true, 0);
-                    SaveSystem.AddModule(Gamemode.modules[moduleSlot].InternalID, 1);
                     if (equippedModules.Contains(Gamemode.modules[moduleSlot]))
                         equippedModules.Remove(Gamemode.modules[moduleSlot]);
                 }
@@ -226,7 +225,6 @@ public class ShipPanel : MonoBehaviour
             if (!isModuleNull)
             {
                 // Remove module from player and apply
-                SaveSystem.AddModule(module.InternalID, -1);
                 ApplyModule(module);
                 equippedModules.Add(module);
 

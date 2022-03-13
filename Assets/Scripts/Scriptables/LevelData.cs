@@ -52,6 +52,7 @@ public class LevelData : IdentifiableScriptableObject
         if (cardReward != null) return cardReward.name;
         else if (arenaReward != null) return arenaReward.name;
         else if (shipReward != null) return shipReward.name;
+        else if (synergyReward != null) return synergyReward.name;
         else return rewardName;
     }
 
@@ -61,6 +62,7 @@ public class LevelData : IdentifiableScriptableObject
         if (cardReward != null) return cardReward.color;
         else if (arenaReward != null) return arenaReward.lightColor;
         else if (shipReward != null) return shipReward.mainColor;
+        else if (synergyReward != null) return synergyReward.outputCard.color;
         else return levelColor;
     }
 
@@ -70,12 +72,13 @@ public class LevelData : IdentifiableScriptableObject
         if (cardReward != null) return cardReward.sprite;
         else if (arenaReward != null) return arenaReward.iconEnemy;
         else if (shipReward != null) return shipReward.glowIcon;
+        else if (synergyReward != null) return synergyReward.outputCard.sprite;
         else return rewardIcon;
     }
 
     // Check if should be colored
     public bool IsColored()
     {
-        return cardReward != null || arenaReward != null || shipReward != null || redrawReward;
+        return cardReward != null || arenaReward != null || shipReward != null || synergyReward != null || redrawReward;
     }
 } 
