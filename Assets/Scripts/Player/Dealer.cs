@@ -196,6 +196,14 @@ public class Dealer : MonoBehaviour
         else CloseDealer();
     }
 
+    // Pick synergy card
+    public void PickSynergyCard(SynergyData data)
+    {
+        SynergyUI.Close();
+        Deck.active.AddCard(data.outputCard);
+        isOpen = false;
+    }
+
     // Re draws a specific card
     public void RedrawCard()
     {

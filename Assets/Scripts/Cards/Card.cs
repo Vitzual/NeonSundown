@@ -11,6 +11,7 @@ public class Card : MonoBehaviour
 
     // Card position
     public Vector3 cardPosition;
+    public Vector3 synergyPosition;
     public float verticalAdjustment = 100f;
     public float animationSpeed = 0.25f;
     public float fadeInSpeed = 0.25f;
@@ -29,6 +30,7 @@ public class Card : MonoBehaviour
     private AudioSource audioSource;
     private bool redraw = false;
     public bool redrawing = false;
+    private SynergyData synergy;
 
     // Get the canvas group
     public void Start() 
@@ -45,7 +47,7 @@ public class Card : MonoBehaviour
     }
 
     // Set card function
-    public void Set(CardData card, bool redrawing = false)
+    public void Set(CardData card, bool redrawing = false, bool synergyCard = false)
     {
         // Set card data
         cardData = card;
@@ -242,45 +244,51 @@ public class Card : MonoBehaviour
         }
 
         // Animate the card
-        if (!redrawing)
+        if (!synergyCard)
         {
-            ResetCard();
+            if (!redrawing)
+            {
+                ResetCard();
 
-            // Set card anim speed
-            if (Settings.skipCardAnim)
-            {
-                transform.localPosition = cardPosition;
-                canvasGroup.alpha = 1f;
-            }
-            else if (Settings.fastCardAnim)
-            {
-                LeanTween.moveLocal(gameObject, cardPosition, animationSpeed / 2f);
-                LeanTween.alphaCanvas(canvasGroup, 1f, fadeInSpeed / 2f);
+                // Set card anim speed
+                if (Settings.skipCardAnim)
+                {
+                    transform.localPosition = cardPosition;
+                    canvasGroup.alpha = 1f;
+                }
+                else if (Settings.fastCardAnim)
+                {
+                    LeanTween.moveLocal(gameObject, cardPosition, animationSpeed / 2f);
+                    LeanTween.alphaCanvas(canvasGroup, 1f, fadeInSpeed / 2f);
+                }
+                else
+                {
+                    LeanTween.moveLocal(gameObject, cardPosition, animationSpeed);
+                    LeanTween.alphaCanvas(canvasGroup, 1f, fadeInSpeed);
+                }
+
+                // Play card sound
+                if (!Settings.skipCardAnim)
+                {
+                    audioSource.volume = Settings.sound;
+                    audioSource.Play();
+                }
             }
             else
             {
-                LeanTween.moveLocal(gameObject, cardPosition, animationSpeed);
-                LeanTween.alphaCanvas(canvasGroup, 1f, fadeInSpeed);
+                this.redrawing = false;
+                LeanTween.rotateLocal(gameObject, Vector3.zero, animationSpeed / 3f);
             }
+        }
 
-            // Play card sound
-            if (!Settings.skipCardAnim)
-            {
-                audioSource.volume = Settings.sound;
-                audioSource.Play();
-            }
-        }
-        else
-        {
-            this.redrawing = false;
-            LeanTween.rotateLocal(gameObject, Vector3.zero, animationSpeed / 3f);
-        }
+        else level.text = "SYNERGY CARD";
     }
 
     // Card clicked
-    public void OnClick()
+    public void OnClick(bool synergy)
     {
-        Dealer.active.PickCard(cardData, redraw, cardNumber);
+        if (synergy) Dealer.active.PickSynergyCard(this.synergy);
+        else Dealer.active.PickCard(cardData, redraw, cardNumber);
     }
 
     // Reset card
@@ -328,4 +336,36 @@ public class Card : MonoBehaviour
         // Return formatted string
         return color + Formatter.Round(total) + ")";
     }
+
+    // Play synergy animation
+    public void Synergize(CardData card, float speed, float moveDelay)
+    {
+        // Set canvas to 0
+        canvasGroup.alpha = 0f;
+
+        // Set card data
+        cardData = card;
+        redraw = false;
+
+        // Set card information
+        model.color = card.color;
+        image.color = card.color;
+        title.text = card.name.ToUpper();
+        title.color = card.color;
+        level.color = card.color;
+        type.color = card.color;
+
+        // Set description
+        desc.text = "Card is maxed";
+        level.text = "LEVEL MAX";
+
+        // Smooth move in
+        transform.localPosition = cardPosition;
+        LeanTween.alphaCanvas(canvasGroup, 1f, speed).setDelay(1f);
+        LeanTween.moveLocal(gameObject, synergyPosition, 0.3f).
+            setEase(LeanTweenType.easeInExpo).setDelay(1f + moveDelay);
+    }
+
+    // Set synergy
+    public void SetSynergy(SynergyData synergy) { this.synergy = synergy; }
 }

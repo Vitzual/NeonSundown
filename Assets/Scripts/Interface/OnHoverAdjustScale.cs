@@ -7,7 +7,8 @@ public class OnHoverAdjustScale : MonoBehaviour, IPointerEnterHandler, IPointerE
 {
     // Hover variables
     public float scaleAdjustment = 0.1f;
-    private Vector3 originalSize;
+    public bool overrideSize = false;
+    public Vector3 originalSize;
     public bool playSound = true;
     private RectTransform rect;
 
@@ -15,7 +16,7 @@ public class OnHoverAdjustScale : MonoBehaviour, IPointerEnterHandler, IPointerE
     public void Start() 
     {
         rect = GetComponent<RectTransform>();
-        originalSize = rect.localScale;
+        if (!overrideSize) originalSize = rect.localScale;
     }
 
     // On mouse enter make local scale bigger
