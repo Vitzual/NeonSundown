@@ -196,7 +196,9 @@ public class Ship : Weapon
     public void AddXP(float amount)
     {
         // Add the XP amount
-        xp += amount * xpMultiplier;
+        float addAmount = amount * xpMultiplier;
+        Levels.AddXP(addAmount);
+        xp += addAmount;
 
         // Check if XP over rankup
         if (xp >= rankup)

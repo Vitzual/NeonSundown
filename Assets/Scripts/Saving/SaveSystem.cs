@@ -132,7 +132,7 @@ public class SaveSystem
     }
 
     // Add a crystal to save
-    public static void AddXP(int amount) { saveData.xp += amount; }
+    public static void AddXP(float amount) { saveData.xp += amount; }
     public static void LevelUp() { saveData.level += 1; }
 
     // Add a crystal to save
@@ -192,6 +192,13 @@ public class SaveSystem
         if (saveData != null && saveData.arenaTimes.ContainsKey(id))
             return saveData.arenaTimes[id];
         else return 0;
+    }
+
+    // Get best time
+    public static void AddRedraws(int amount)
+    {
+        if (saveData != null)
+            saveData.redraws += amount;
     }
 
     // Get best time

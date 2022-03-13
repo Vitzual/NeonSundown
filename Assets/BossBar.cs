@@ -64,4 +64,18 @@ public class BossBar : MonoBehaviour
             }
         }
     }
+
+    // Hide boss bar
+    public void HideBar()
+    {
+        if (isHidden || enemy == null) return;
+        else LeanTween.alphaCanvas(canvasGroup, 0f, 0.25f);
+    }
+
+    // Show boss bar
+    public void ShowBar()
+    {
+        if (isHidden || enemy == null) return;
+        else LeanTween.alphaCanvas(canvasGroup, 1f, 0.25f);
+    }
 }

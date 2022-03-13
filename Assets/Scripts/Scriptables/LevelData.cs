@@ -18,7 +18,7 @@ public class LevelData : IdentifiableScriptableObject
 
     // Rank and reward models
     [BoxGroup("Level Reward")]
-    public float xpRequirement = 2500;
+    public float xpRequirement = 10000;
     [HideIf("IsRewardPicked", true), BoxGroup("Level Info")]
     public string rewardName;
     [HideIf("IsRewardPicked", true), BoxGroup("Level Info")]
@@ -40,5 +40,23 @@ public class LevelData : IdentifiableScriptableObject
     private bool IsOptionalRewardPicked()
     {
         return crystalReward || redrawReward;
+    }
+
+    // Get name
+    public string GetName()
+    {
+        if (cardReward != null) return cardReward.name;
+        else if (arenaReward != null) return arenaReward.name;
+        else if (shipReward != null) return shipReward.name;
+        else return rewardName;
+    }
+
+    // Get color
+    public Color GetColor()
+    {
+        if (cardReward != null) return cardReward.color;
+        else if (arenaReward != null) return arenaReward.lightColor;
+        else if (shipReward != null) return shipReward.mainColor;
+        else return levelColor;
     }
 } 

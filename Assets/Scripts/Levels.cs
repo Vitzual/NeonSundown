@@ -6,7 +6,6 @@ using UnityEngine;
 public class Levels : MonoBehaviour
 {
     public static List<LevelData> ranks;
-    public static int level;
     private static bool generated = false;
 
     // Generate ranks on startup
@@ -16,18 +15,25 @@ public class Levels : MonoBehaviour
         if (generated) return;
         ranks = Resources.LoadAll("Levels", typeof(LevelData)).Cast<LevelData>().ToList();
         Debug.Log("Loaded " + ranks.Count + " levels from resource folder");
+
+        // Create sorted list
+        LevelData[] sortedList = new LevelData[ranks.Count];
+        foreach (LevelData rank in ranks)
+            sortedList[int.Parse(rank.name) - 1] = rank;
+
+        // Set ranks to sorted list
+        ranks = sortedList.ToList();
         generated = true;
     }
 
     // Add XP to the rankup system
-    public static void AddXP(int amount)
+    public static void AddXP(float amount)
     {
         // Check if level less then ranks
-        if (level < ranks.Count)
+        if (SaveSystem.saveData.level < ranks.Count)
         {
-            SaveSystem.AddXP(amount);
-            if (amount > ranks[level].xpRequirement) LevelUp();
-            else SaveSystem.UpdateSave();
+            SaveSystem.saveData.xp += amount;
+            if (SaveSystem.saveData.xp > ranks[SaveSystem.saveData.level].xpRequirement) LevelUp();
         }
     }
 
@@ -35,10 +41,11 @@ public class Levels : MonoBehaviour
     public static void LevelUp()
     {
         // Check if level less then ranks
-        if (level < ranks.Count)
+        if (SaveSystem.saveData.level < ranks.Count)
         {
             // Level up and give rewards
-            LevelData rank = ranks[level];
+            LevelData rank = ranks[SaveSystem.saveData.level];
+            Events.active.LevelUp(rank, SaveSystem.saveData.level);
 
             // Give card reward
             if (rank.cardReward != null)
@@ -53,10 +60,16 @@ public class Levels : MonoBehaviour
                 foreach (CrystalData crystal in Scriptables.crystals)
                     SaveSystem.AddCrystal(crystal.InternalID, 5);
 
+            // Give reroll reward
+            if (rank.redrawReward)
+                SaveSystem.AddRedraws(1);
+
             // Increase level
-            SaveSystem.LevelUp();
+            SaveSystem.saveData.xp -= rank.xpRequirement;
+            SaveSystem.saveData.level += 1;
+            if (XPHandler.active != null) 
+                XPHandler.active.UpdateRewards();
             SaveSystem.UpdateSave();
-            level += 1;
         }
     }
 }

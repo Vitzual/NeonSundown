@@ -9303,17 +9303,17 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1546299622}
-        m_TargetAssemblyTypeName: ArenaPanel, Assembly-CSharp
-        m_MethodName: ViewArena
-        m_Mode: 1
+      - m_Target: {fileID: 1404289901}
+        m_TargetAssemblyTypeName: Menu, Assembly-CSharp
+        m_MethodName: ToggleLevelsPanel
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &320135195
 MonoBehaviour:
@@ -12960,7 +12960,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1404289901}
         m_TargetAssemblyTypeName: Menu, Assembly-CSharp
-        m_MethodName: ToggleCreditsPanel
+        m_MethodName: ToggleLevelsPanel
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -15730,7 +15730,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e5418d1ac335fe428d069483c95ff69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scaleAdjustment: 0.01
+  scaleAdjustment: 0.005
   playSound: 1
 --- !u!114 &563265451
 MonoBehaviour:
@@ -33244,8 +33244,8 @@ CanvasGroup:
   m_GameObject: {fileID: 1221858378}
   m_Enabled: 1
   m_Alpha: 0
-  m_Interactable: 0
-  m_BlocksRaycasts: 0
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
 --- !u!1 &1221953935
 GameObject:

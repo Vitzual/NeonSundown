@@ -6,14 +6,12 @@ public class XP : MonoBehaviour
 {
     // The target in question
     public float startDistance = 5f;
-    private float amount = 1;
     private XPHandler.XPInstance xpReference;
 
     // Start method
-    public void Setup(Vector2 startPos, float value)
+    public void Setup(Vector2 startPos, float amount)
     {
-        xpReference = XPHandler.active.Register(value, transform, startPos);
-        this.amount = value;
+        xpReference = XPHandler.active.Register(amount, transform, startPos);
     }
 
     // On collision with player

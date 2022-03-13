@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class XPHandler : MonoBehaviour
 {
     // Active instance
     public static XPHandler active;
+    public TextMeshProUGUI reward, xpRequirement;
+    public GameObject lineOne, lineTwo;
 
     // XP mover class
     public class XPInstance
@@ -47,7 +50,11 @@ public class XPHandler : MonoBehaviour
     private bool xpHealing = false;
 
     // On start set active
-    public void Start() { active = this; }
+    public void Start() 
+    {
+        active = this;
+        UpdateRewards();
+    }
 
     // Move normal enemies
     public void FixedUpdate()
@@ -72,6 +79,9 @@ public class XPHandler : MonoBehaviour
                     if (Vector2.Distance(xpList[a].transform.position, player.transform.position) < targetDistanceCheck)
                     {
                         player.AddXP(xpList[a].value);
+                        if (SaveSystem.saveData.level < Levels.ranks.Count)
+                            xpRequirement.text = SaveSystem.saveData.xp + " / " + 
+                                Levels.ranks[SaveSystem.saveData.level].xpRequirement + "xp";
                         if (xpHealing) player.Heal(0.05f);
                         AudioPlayer.Play(xpSound, true, 0.8f, 1.2f, false, 1.5f);
                         Destroy(xpList[a].transform.gameObject);
@@ -114,6 +124,24 @@ public class XPHandler : MonoBehaviour
                 xpList.RemoveAt(a);
                 a--;
             }
+        }
+    }
+
+    // Update the interface rewards
+    public void UpdateRewards()
+    {
+        if (SaveSystem.saveData.level < Levels.ranks.Count)
+        {
+            reward.text = Levels.ranks[SaveSystem.saveData.level].GetName();
+            xpRequirement.color = Levels.ranks[SaveSystem.saveData.level].GetColor();
+            xpRequirement.text = SaveSystem.saveData.xp + " / " + Levels.ranks[SaveSystem.saveData.level].xpRequirement + "xp";
+        }
+        else
+        {
+            reward.gameObject.SetActive(false);
+            xpRequirement.gameObject.SetActive(false);
+            lineOne.SetActive(false);
+            lineTwo.SetActive(true);
         }
     }
 

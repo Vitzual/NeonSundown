@@ -23,6 +23,14 @@ public class Events : MonoBehaviour
     }
 
     // On boss spawned
+    public event Action<LevelData, int> onLevelUp;
+    public void LevelUp(LevelData levelData, int level)
+    {
+        if (onLevelUp != null)
+            onLevelUp(levelData, level);
+    }
+
+    // On boss spawned
     public event Action<Boss, Enemy> onBossSpawned;
     public void BossSpawned(Boss boss, Enemy enemy)
     {
