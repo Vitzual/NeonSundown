@@ -161,7 +161,7 @@ public class ShipPanel : MonoBehaviour
         // Update amounts based on save data
         foreach(KeyValuePair<string, int> module in SaveSystem.saveData.modules)
             if (moduleAmounts.ContainsKey(module.Key)) 
-                moduleAmounts[module.Key].text = module.Value + " owned";
+                moduleAmounts[module.Key].text = "OWNED";
 
         // Open modules and set slot
         moduleSlot = slot;

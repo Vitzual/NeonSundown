@@ -224,9 +224,19 @@ public class SaveSystem
     }
 
     // Check if user has crystal
-    public static bool HasCrystal(string id)
+    public static int GetCrystalAmount(string id)
     {
-        return saveData.crystals.ContainsKey(id) && saveData.crystals[id] > 0;
+        if (saveData.crystals.ContainsKey(id))
+            return saveData.crystals[id];
+        else return 0;
+    }
+
+    // Check if user has crystal
+    public static int GetModuleAmount(string id)
+    {
+        if (saveData.modules.ContainsKey(id))
+            return saveData.modules[id];
+        else return 0;
     }
 
     // Checks if a ship is unlocked

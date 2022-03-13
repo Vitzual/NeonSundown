@@ -15,6 +15,7 @@ public class Store : MonoBehaviour
     public new TextMeshProUGUI name;
     public TextMeshProUGUI desc;
     public TextMeshProUGUI owned;
+    public TextMeshProUGUI buttonText;
     public AudioClip purchaseSound;
 
     // Crystal variables
@@ -76,8 +77,15 @@ public class Store : MonoBehaviour
 
         // Set amount owned
         if (SaveSystem.saveData.modules.ContainsKey(module.InternalID))
-            owned.text = SaveSystem.saveData.modules[module.InternalID] + " OWNED";
-        else owned.text = "NONE OWNED";
+        {
+            owned.text = "LEVEL " + SaveSystem.GetModuleAmount(module.InternalID);
+            buttonText.text = "UPGRADE";
+        }
+        else
+        {
+            owned.text = "10x Crystals";
+            buttonText.text = "PURCHASE";
+        }
     }
 
     // Attempt to purchase the module
@@ -86,8 +94,11 @@ public class Store : MonoBehaviour
         // Check if module is assigned
         if (module == null) return;
 
+        // Check if player owns module
+        if (SaveSystem.HasModule(module.InternalID)) return;
+
         // Check if player has enough crystals
-        if (SaveSystem.HasCrystal(module.cost.InternalID))
+        if (SaveSystem.GetCrystalAmount(module.cost.InternalID) > 10)
         {
             // Update the save with new module
             SaveSystem.AddModule(module.InternalID, 1);
