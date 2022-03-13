@@ -5589,6 +5589,14 @@ MonoBehaviour:
   list: {fileID: 334299503}
   normalLevel: {fileID: 21300000, guid: 2459876e9bf66e24cb4e1f10bd9d3277, type: 3}
   specialLevel: {fileID: 21300000, guid: 1a9246a1cc55dd04b8981d4d9da62641, type: 3}
+  levelIcon: {fileID: 2042327780}
+  button: {fileID: 563265451}
+  levelText: {fileID: 991808684}
+  unlockName: {fileID: 1993230384}
+  nextUnlock: {fileID: 44463460}
+  unlockProgress: {fileID: 1714240767}
+  maxColorSpeed: 0.8
+  useRainbow: 0
 --- !u!1 &173493177
 GameObject:
   m_ObjectHideFlags: 0
@@ -31562,7 +31570,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 0%
+  m_text: 15%
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 84dd14695854bbc43a5faa24fcf93d0d, type: 2}
   m_sharedMaterial: {fileID: 21261991626553910, guid: 84dd14695854bbc43a5faa24fcf93d0d, type: 2}
@@ -33243,7 +33251,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1221858378}
   m_Enabled: 1
-  m_Alpha: 0
+  m_Alpha: 1
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -37303,7 +37311,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1997779805}
   m_Direction: 2
   m_Value: 1.0000005
-  m_Size: 0.6543911
+  m_Size: 0.65439105
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -46414,7 +46422,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20c6dbf0102c7bc468113ccdd97dad83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentPercent: 0
+  currentPercent: 15.1
   speed: 5
   minValue: 0
   maxValue: 100
@@ -55868,7 +55876,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 0
+  m_FillAmount: 0.15100001
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -56830,7 +56838,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.12941177, b: 0, a: 1}
+  m_Color: {r: 1, g: 0, b: 0.050980393, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
