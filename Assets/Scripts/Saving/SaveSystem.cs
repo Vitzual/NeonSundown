@@ -176,6 +176,14 @@ public class SaveSystem
     }
 
     // Saves arena time
+    public static void AddSynergyUnlock(string id)
+    {
+        // Update the card unlocks
+        if (!saveData.synergiesUnlocked.Contains(id))
+            saveData.synergiesUnlocked.Add(id);
+    }
+
+    // Saves arena time
     public static void UnlockAchievement(AchievementObject achievement)
     {
         // Give the achievement to the user
@@ -225,4 +233,5 @@ public class SaveSystem
     public static bool IsArenaUnlocked(string id) { return saveData != null && saveData.arenasUnlocked.Contains(id); }
     public static bool IsShipUnlocked(string id) { return saveData != null && saveData.shipsUnlocked.Contains(id); }
     public static bool IsCardUnlocked(string id) { return saveData != null && saveData.cardsUnlocked.Contains(id); }
+    public static bool IsSynergyUnlocked(string id) { return saveData != null && saveData.synergiesUnlocked.Contains(id); }
 }

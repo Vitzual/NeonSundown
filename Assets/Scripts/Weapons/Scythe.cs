@@ -38,10 +38,4 @@ public class Scythe : Weapon
             else AudioPlayer.Play(weapon.onDamageSound);
         }
     }
-
-    // Override upgrade method
-    public override void Upgrade()
-    {
-        base.Upgrade();
-    }
 }

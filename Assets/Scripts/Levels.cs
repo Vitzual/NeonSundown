@@ -52,16 +52,20 @@ public class Levels : MonoBehaviour
                 SaveSystem.AddCardUnlock(rank.cardReward.InternalID);
 
             // Give card reward
-            if (rank.arenaReward != null)
+            else if (rank.arenaReward != null)
                 SaveSystem.AddArenaUnlock(rank.arenaReward.InternalID);
 
+            // Give synergy reward
+            else if(rank.synergyReward != null)
+                SaveSystem.AddSynergyUnlock(rank.synergyReward.InternalID);
+
             // Give card reward
-            if (rank.crystalReward && Scriptables.crystals != null)
+            else if(rank.crystalReward && Scriptables.crystals != null)
                 foreach (CrystalData crystal in Scriptables.crystals)
                     SaveSystem.AddCrystal(crystal.InternalID, 5);
 
             // Give reroll reward
-            if (rank.redrawReward)
+            else if(rank.redrawReward)
                 SaveSystem.AddRedraws(1);
 
             // Increase level

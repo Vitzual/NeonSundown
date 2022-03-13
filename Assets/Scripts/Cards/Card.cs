@@ -75,36 +75,16 @@ public class Card : MonoBehaviour
             if (weapon != null)
             {
                 useBase = false;
-
-                if (weapon.prestige)
+                image.sprite = weaponData.sprite;
+                if (weapon.level == weaponData.baseLevels.Count)
                 {
-                    image.sprite = weaponData.prestigeSprite;
-
-                    if (weapon.level == weaponData.prestigeLevels.Count)
-                    {
-                        desc.text = "Card is maxed";
-                        level.text = "PRESTIGE MAX";
-                    }
-                    else
-                    {
-                        desc.text = weaponData.prestigeLevels[weapon.level].description;
-                        level.text = "PRESTIGE " + weapon.level;
-                    }
+                    desc.text = "Ready for synergy";
+                    level.text = "LEVEL MAX";
                 }
                 else
                 {
-                    image.sprite = weaponData.sprite;
-
-                    if (weapon.level == weaponData.baseLevels.Count)
-                    {
-                        desc.text = "Sacrifice the card to enter prestige levels";
-                        level.text = "LEVEL MAX";
-                    }
-                    else
-                    {
-                        desc.text = weaponData.baseLevels[weapon.level].description;
-                        level.text = "LEVEL " + weapon.level;
-                    }
+                    desc.text = weaponData.baseLevels[weapon.level].description;
+                    level.text = "LEVEL " + weapon.level;
                 }
             }
 

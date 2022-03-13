@@ -62,23 +62,7 @@ public class Crystal : Entity
         health -= amount;
         if (health <= 0)
             Destroy();
-        else
-        {
-            // Do something based on crystal
-            AudioPlayer.Play(crystalSound);
-            switch (crystalData.type)
-            {
-                // If blue crystal, drop XP
-                case CrystalType.blue:
-                    XPHandler.active.Spawn(transform.position, Random.Range(1, 3));
-                    break;
-
-                // If green crystal, heal
-                case CrystalType.green:
-                    Deck.player.Heal(0.25f);
-                    break;
-            }
-        }
+        else AudioPlayer.Play(crystalSound);
     }
 
     // Knockback entity
@@ -93,6 +77,25 @@ public class Crystal : Entity
     {
         // Check if already dead
         if (isDead) return;
+        
+        // Depending on crystal, do stuff
+        switch (crystalData.type)
+        {
+            // If blue crystal, drop XP
+            case CrystalType.blue:
+                XPHandler.active.Spawn(transform.position, Random.Range(50, 100));
+                break;
+
+            // If green crystal, heal
+            case CrystalType.green:
+                Deck.player.Heal(10f);
+                break;
+
+            // If red crystal, heal
+            case CrystalType.red:
+                Events.active.BloodCrystalBroken();
+                break;
+        }
 
         // Add crystal to save data
         SaveSystem.AddCrystal(crystalData.InternalID, 1);

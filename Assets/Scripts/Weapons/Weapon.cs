@@ -8,12 +8,6 @@ public class Weapon : MonoBehaviour
     protected Dictionary<Stat, float> additions = new Dictionary<Stat, float>();
     protected Dictionary<Stat, float> multipliers = new Dictionary<Stat, float>();
 
-    // Prestige and base models
-    [SerializeField]
-    protected GameObject baseModel;
-    [SerializeField]
-    protected GameObject prestigeModel;
-
     // Weapon variables
     [HideInInspector]
     public float damage, cooldown, moveSpeed, bloom, pierces, 
@@ -24,8 +18,6 @@ public class Weapon : MonoBehaviour
     // Weapon level
     [HideInInspector]
     public int level = 0;
-    [HideInInspector]
-    public bool prestige = false;
 
     // Target transform
     protected Transform target;
@@ -52,8 +44,7 @@ public class Weapon : MonoBehaviour
     {
         // Get the current level
         WeaponData.Level newLevel;
-        if (prestige) newLevel = weapon.prestigeLevels[level];
-        else newLevel = weapon.baseLevels[level];
+        newLevel = weapon.baseLevels[level];
 
         // Add the upgrade
         if (newLevel.multiply)
@@ -65,26 +56,6 @@ public class Weapon : MonoBehaviour
 
         // Increase level
         level += 1;
-    }
-
-    // Prestiges a weapon
-    public virtual void Prestige()
-    {
-        // Reset stats and level
-        SetupStats();
-        level = 0;
-        prestige = true;
-
-        // Reset additions and multipliers on the card
-        additions = new Dictionary<Stat, float>();
-        multipliers = new Dictionary<Stat, float>();
-
-        // Set prestige model to true
-        if (prestigeModel != null)
-        {
-            baseModel.SetActive(false);
-            prestigeModel.SetActive(true);
-        }
     }
 
     // Calculate stat

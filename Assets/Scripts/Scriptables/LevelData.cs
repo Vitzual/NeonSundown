@@ -11,14 +11,16 @@ public class LevelData : IdentifiableScriptableObject
     public ArenaData arenaReward;
     [HideIf("IsOptionalRewardPicked", true), BoxGroup("Level Reward")]
     public ShipData shipReward;
+    [HideIf("IsOptionalRewardPicked", true), BoxGroup("Level Reward")]
+    public SynergyData synergyReward;
     [HideIf("redrawReward", true), BoxGroup("Level Reward")]
     public bool crystalReward;
     [HideIf("crystalReward", true), BoxGroup("Level Reward")]
     public bool redrawReward;
-
-    // Rank and reward models
     [BoxGroup("Level Reward")]
     public float xpRequirement = 10000;
+
+    // Rank and reward models
     [HideIf("IsRewardPicked", true), BoxGroup("Level Info")]
     public string rewardName;
     [HideIf("IsRewardPicked", true), BoxGroup("Level Info")]
@@ -35,7 +37,7 @@ public class LevelData : IdentifiableScriptableObject
     // Check if rewards not null
     private bool IsRewardPicked()
     {
-        return cardReward != null || arenaReward != null || shipReward != null;
+        return cardReward != null || arenaReward != null || shipReward != null || synergyReward != null;
     }
 
     // Check if optional flag rewards are picked

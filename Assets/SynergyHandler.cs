@@ -14,19 +14,23 @@ public class SynergyHandler : MonoBehaviour
         maxedCards = new List<CardData>();
         Events.active.onBloodCrystalBroken += Create;
     }
-
+    
     // Add a card to the maxed list
     public static void Add(CardData data)
     {
+        // Add card
         maxedCards.Add(data);
+        Debug.Log(data.name + " is maxed and ready for synergies!");
 
         // Check if synergy available
         foreach (SynergyData synergy in Scriptables.synergies)
         {
-            if (maxedCards.Contains(synergy.cardOne) &&
+            if (SaveSystem.IsSynergyUnlocked(synergy.InternalID) &&
+                maxedCards.Contains(synergy.cardOne) &&
                 maxedCards.Contains(synergy.cardTwo))
             {
                 availableSynergies.Enqueue(synergy);
+                Debug.Log(synergy.name + " synergy is available!");
             }
         }
     }

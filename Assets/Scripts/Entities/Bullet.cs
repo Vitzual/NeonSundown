@@ -44,10 +44,6 @@ public class Bullet : Entity
     {
         // Check if prestiged
         this.parent = parent;
-        if (parent.prestige && prestigeModel != null)
-            prestigeModel.SetActive(true);
-
-        // Set primary weapon SO
         this.weapon = weapon;
 
         // Set target (if there is one)

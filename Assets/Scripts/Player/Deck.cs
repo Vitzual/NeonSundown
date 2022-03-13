@@ -80,22 +80,15 @@ public class Deck : MonoBehaviour
             // If upgradeable, apply to the instance.
             if (upgradeables.ContainsKey(card))
             {
-                WeaponData weaponData = (WeaponData)card;
-
-                if (upgradeables[card].prestige &&
-                    upgradeables[card].level != weaponData.prestigeLevels.Count)
-                    upgradeables[card].Upgrade();
-                else if (!upgradeables[card].prestige &&
-                    upgradeables[card].level != weaponData.baseLevels.Count)
-                    upgradeables[card].Upgrade();
-                else if (!upgradeables[card].prestige &&
-                    upgradeables[card].level == weaponData.baseLevels.Count)
-                    upgradeables[card].Prestige();
-
+                upgradeables[card].Upgrade();
                 return;
             }
         }
         else cards.Add(card, 1);
+
+        // Check if card is maxed
+        if (cards[card] >= card.maximumAmount)
+            SynergyHandler.Add(card);
 
         // Setup the card
         if (card is WeaponData)
