@@ -75,10 +75,10 @@ public class EnemySpawner : MonoBehaviour
                 scaleIncrease = 15f;
                 scaleCalc += 0.25f;
                 enemyHealthMultiplier += 0.15f;
-                enemySpeedMultiplier += 0.1f;
+                enemySpeedMultiplier += 0.05f;
             }
         }
-
+        
         // Set the timer string
         timer.text = Formatter.Time(time);
 

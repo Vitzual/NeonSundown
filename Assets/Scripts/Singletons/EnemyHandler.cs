@@ -112,11 +112,17 @@ public class EnemyHandler : MonoBehaviour
     }
 
     // Creates a new enemy with a specific position
-    public void CreateEnemy(EnemyData enemyData, Variant variant, Vector2 position)
+    public void CreateEnemy(EnemyData enemyData, Variant variant, Vector2 position, bool global = true)
     {
         // Create the tile
-        Vector2 globalPos = new Vector2(player.position.x + position.x, player.position.y + position.y);
-        GameObject lastObj = Instantiate(enemyData.obj, globalPos, Quaternion.identity);
+        Vector2 spawnPos;
+
+        // Get spawn position
+        if (global) spawnPos = new Vector2(player.position.x + position.x, player.position.y + position.y);
+        else spawnPos = position;
+
+        // Spawn the entity
+        GameObject lastObj = Instantiate(enemyData.obj, spawnPos, Quaternion.identity);
         lastObj.name = enemyData.name;
 
         // Rotate to the target
