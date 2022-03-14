@@ -31,6 +31,7 @@ public class Scythe : Weapon
         if (entity != null)
         {
             // Attempt to damage the enemy
+            if (stunLength > 0f) entity.Stun(stunLength);
             entity.Damage(damage, weapon.knockback);
             
             // Play death sound if enemy dies

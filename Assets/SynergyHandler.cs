@@ -40,7 +40,7 @@ public class SynergyHandler : MonoBehaviour
             }
         }
     }
-
+    
     // Create a synergy
     public static void Create()
     {

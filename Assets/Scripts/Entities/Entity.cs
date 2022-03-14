@@ -68,7 +68,6 @@ public class Entity : MonoBehaviour
     // Stun the entity
     public virtual void Stun(float length)
     {
-        stunned = true;
-        stunLength = length;
+        return;
     }
 }

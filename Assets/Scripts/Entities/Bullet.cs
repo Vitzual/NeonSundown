@@ -25,7 +25,6 @@ public class Bullet : Entity
     protected float splitshots;
     public bool explosive;
     public bool stickyImmune;
-    public bool stunEnemies;
     public bool overrideSprite;
 
     // Is a split shot
@@ -72,6 +71,7 @@ public class Bullet : Entity
         knockback = parent.knockback;
         tracking = weapon.trackTarget || Deck.GetFlag(Stat.Tracking);
         splitshots = parent.splitshots;
+        stunLength = parent.stunLength;
         if (!explosive) explosive = parent.explosiveRounds;
 
         // Give bullets a bit of randomness
@@ -122,7 +122,7 @@ public class Bullet : Entity
         // Check if bullet is explosive
         if (explosive)
         {
-            if (stunEnemies) ExplosiveHandler.CreateStun(transform.position, 10f, stunLength, deathMaterial, knockback);
+            if (stunLength > 0) ExplosiveHandler.CreateStun(transform.position, 10f, stunLength, damage, deathMaterial, knockback);
             else ExplosiveHandler.CreateExplosion(transform.position, 10f, damage, knockback, deathMaterial);
         }
         
@@ -159,7 +159,7 @@ public class Bullet : Entity
         entity.Damage(damage, knockback);
 
         // Check if entity dead
-        if (!entity.IsDead() && stunEnemies)
+        if (!entity.IsDead() && stunLength > 0)
             entity.Stun(stunLength);
 
         // Check if bullet has a sound

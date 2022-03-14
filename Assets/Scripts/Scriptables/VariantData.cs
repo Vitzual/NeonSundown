@@ -22,8 +22,6 @@ public class VariantData
     [BoxGroup("Movement Variables")]
     public bool knockback;
     [BoxGroup("Movement Variables")]
-    public bool lockTarget;
-    [BoxGroup("Movement Variables")]
     public bool rotate;
     [BoxGroup("Movement Variables")]
     public float rotateSpeed;

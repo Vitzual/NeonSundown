@@ -85,7 +85,7 @@ public class Ship : Weapon
         xp = 0;
         health = shipData.startingHealth;
         maxHealth = health;
-
+        
         // Setup ship specific variables
         regenAmount = shipData.regenAmount;
 
@@ -433,6 +433,11 @@ public class Ship : Weapon
             case Stat.Size:
                 BulletHandler.bulletSize = Deck.CalculateStat(stat, 1);
                 break;
+
+            // Increases bullet size
+            case Stat.Stun:
+                stunLength = Deck.CalculateStat(stat, weapon.stun);
+                break;
         }
     }
 
@@ -513,6 +518,10 @@ public class Ship : Weapon
             // Get bullet size
             case Stat.Size:
                 return BulletHandler.bulletSize;
+
+            // Get bullet size
+            case Stat.Stun:
+                return stunLength;
 
             // Default case
             default:
@@ -596,6 +605,10 @@ public class Ship : Weapon
             // Increase thing
             case Stat.Size:
                 return 1;
+
+            // Increase thing
+            case Stat.Stun:
+                return weapon.stun;
 
             // Default case
             default:

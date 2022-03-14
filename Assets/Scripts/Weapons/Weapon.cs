@@ -7,11 +7,11 @@ public class Weapon : MonoBehaviour
     // Multipliers 
     protected Dictionary<Stat, float> additions = new Dictionary<Stat, float>();
     protected Dictionary<Stat, float> multipliers = new Dictionary<Stat, float>();
-
+    
     // Weapon variables
     [HideInInspector]
     public float damage, cooldown, moveSpeed, bloom, pierces, 
-        bullets, lifetime, range, knockback, splitshots, size;
+        bullets, lifetime, range, knockback, splitshots, size, stunLength;
     [HideInInspector]
     public bool explosiveRounds;
 
@@ -95,6 +95,10 @@ public class Weapon : MonoBehaviour
                 knockback = (Deck.CalculateStat(type, weapon.knockback) 
                     + GetAdditions(type)) * GetMultiplier(type);
                 break;
+            case Stat.Stun:
+                stunLength = (Deck.CalculateStat(type, weapon.stun)
+                    + GetAdditions(type)) * GetMultiplier(type);
+                break;
         }
     }
 
@@ -110,6 +114,7 @@ public class Weapon : MonoBehaviour
         UpdateStat(Stat.Lifetime);
         UpdateStat(Stat.Range);
         UpdateStat(Stat.Knockback);
+        UpdateStat(Stat.Stun);
     }
 
     // Returns a stat
@@ -148,6 +153,10 @@ public class Weapon : MonoBehaviour
             // Get splitshots
             case Stat.Splitshot:
                 return splitshots;
+
+            // Get splitshots
+            case Stat.Stun:
+                return stunLength;
 
             // Default case
             default:
@@ -188,6 +197,10 @@ public class Weapon : MonoBehaviour
             case Stat.Knockback:
                 return weapon.knockback;
 
+            // Increase regen rate
+            case Stat.Stun:
+                return weapon.stun;
+
             // Default case
             default:
                 return 0;
@@ -221,7 +234,6 @@ public class Weapon : MonoBehaviour
     // Add a multiplier
     protected void AddMultiplier(Stat type, float amount)
     {
-        Debug.Log(type + " added " + amount);
         if (multipliers.ContainsKey(type))
             multipliers[type] += amount;
         else multipliers.Add(type, amount);

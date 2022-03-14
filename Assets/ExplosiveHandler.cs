@@ -118,7 +118,7 @@ public class ExplosiveHandler : MonoBehaviour
         }
     }
 
-    public static void CreateStun(Vector2 origin, float range, float length, Material material, float knockback = -1f)
+    public static void CreateStun(Vector2 origin, float range, float length, float damage, Material material, float knockback = -1f)
     {
         // Get all colliders in range
         Collider2D[] colliders = Physics2D.OverlapCircleAll(origin, range, explosionLayer);
@@ -130,9 +130,19 @@ public class ExplosiveHandler : MonoBehaviour
             Enemy enemy = colliders[i].GetComponent<Enemy>();
             if (enemy != null)
             {
+                enemy.Damage(damage, knockback, origin);
                 enemy.Stun(length);
-                if (knockback != -1)
-                    enemy.Knockback(knockback, origin);
+            }
+
+            // If null, check for crystals
+            else
+            {
+                // Get crystal component
+                Crystal crystal = colliders[i].GetComponent<Crystal>();
+
+                // If crystal not null, apply damage
+                if (crystal != null)
+                    crystal.Damage(damage, knockback, origin);
             }
         }
 
@@ -146,6 +156,6 @@ public class ExplosiveHandler : MonoBehaviour
         }
 
         // Play stun sound
-        AudioPlayer.Play(stunSound);
+        AudioPlayer.Play(stunSound, true, 0.9f, 1.1f, false, 0.5f);
     }
 }

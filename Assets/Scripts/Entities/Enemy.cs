@@ -150,32 +150,19 @@ public class Enemy : Entity
         // Move if target not null
         if (target != null)
         {
-            // Check if target should be locked
-            if (data.lockTarget)
+            // Check if rotating (lock target)
+            if (data.rotate)
             {
-                if (data.rotate)
-                {
-                    // Rotate if it says to 
-                    rotator.Rotate(Vector3.forward, data.rotateSpeed * Time.deltaTime);
-                }
-                else
-                {
-                    // Rotate to the target
-                    float angle = Mathf.Atan2(target.transform.position.y - transform.position.y,
-                        target.transform.position.x - transform.position.x) * Mathf.Rad2Deg;
-                    Quaternion targetRotation = Quaternion.Euler(new Vector3(0, 0, angle - 90f));
-                    transform.rotation = targetRotation;
-                }
-
-                // Move towards the target
+                rotator.Rotate(Vector3.forward, data.rotateSpeed * Time.deltaTime);
                 float step = speed * Time.deltaTime;
                 transform.position = Vector2.MoveTowards(transform.position, target.position, step);
             }
+
+            // Gradually rotate to the target
             else
             {
-                // Gradually rotate to the target
                 float rotateStep = data.rotateSpeed * Time.deltaTime;
-                float angle = Mathf.Atan2(target.transform.position.y - transform.position.y, 
+                float angle = Mathf.Atan2(target.transform.position.y - transform.position.y,
                     target.transform.position.x - transform.position.x) * Mathf.Rad2Deg;
                 Quaternion targetRotation = Quaternion.Euler(new Vector3(0, 0, angle - 90f));
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotateStep);
@@ -218,5 +205,11 @@ public class Enemy : Entity
             bullet.OnHit(this);
             return;
         }
+    }
+
+    public override void Stun(float length)
+    {
+        stunned = true;
+        stunLength = length;
     }
 }
