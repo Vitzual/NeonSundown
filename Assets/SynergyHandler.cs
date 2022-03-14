@@ -35,6 +35,7 @@ public class SynergyHandler : MonoBehaviour
             {
                 availableSynergies.Enqueue(synergy);
                 synergiesMade.Add(synergy);
+                Events.active.SynergyAvailable(synergy);
                 Debug.Log(synergy.name + " synergy is available!");
             }
         }

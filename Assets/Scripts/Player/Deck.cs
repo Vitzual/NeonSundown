@@ -81,7 +81,7 @@ public class Deck : MonoBehaviour
             if (upgradeables.ContainsKey(card))
             {
                 upgradeables[card].Upgrade();
-                if (cards[card] > card.maximumAmount)
+                if (cards[card] >= card.maximumAmount)
                     SynergyHandler.Add(card);
                 return;
             }
@@ -89,7 +89,7 @@ public class Deck : MonoBehaviour
         else cards.Add(card, 1);
 
         // Check if card is maxed
-        if (cards[card] > card.maximumAmount)
+        if (cards[card] >= card.maximumAmount)
             SynergyHandler.Add(card);
 
         // Setup the card
@@ -126,7 +126,7 @@ public class Deck : MonoBehaviour
     {
         if (cards.ContainsKey(card))
             return cards[card];
-        else return 0;
+        else return -1;
     }
 
     // Set passive card slot

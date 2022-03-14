@@ -14,6 +14,14 @@ public class Events : MonoBehaviour
         active = this;
     }
 
+    // Cosmetic applied
+    public event Action<SynergyData> onSynergyAvailable;
+    public void SynergyAvailable(SynergyData synergy)
+    {
+        if (onSynergyAvailable != null)
+            onSynergyAvailable(synergy);
+    }
+
     // On boss hurt
     public event Action onBloodCrystalBroken;
     public void BloodCrystalBroken()

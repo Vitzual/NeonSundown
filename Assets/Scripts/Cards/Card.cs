@@ -19,11 +19,7 @@ public class Card : MonoBehaviour
     // Card elements
     public Image model;
     public Image image;
-    public TextMeshProUGUI title;
-    public TextMeshProUGUI desc;
-    public TextMeshProUGUI level;
-    public TextMeshProUGUI type;
-    public TextMeshProUGUI effectOne, effectTwo;
+    public TextMeshProUGUI title, desc, level, type, effectOne, effectTwo, amount;
 
     // Canvas group
     public CanvasGroup canvasGroup;
@@ -60,8 +56,17 @@ public class Card : MonoBehaviour
         title.color = card.color;
         level.color = card.color;
         type.color = card.color;
+        amount.color = card.color;
 
         bool useBase = true;
+
+        // Show amount
+        if (amount.text != null)
+        {
+            int cardAmount = Deck.active.GetCardAmount(card);
+            if (cardAmount >= 0) amount.text = cardAmount + "/" + card.maximumAmount;
+            else amount.text = "";
+        }
 
         // Check if card is a weapon or not
         if (card is WeaponData)
@@ -84,7 +89,7 @@ public class Card : MonoBehaviour
                 else
                 {
                     desc.text = weaponData.baseLevels[weapon.level].description;
-                    level.text = "LEVEL " + weapon.level;
+                    level.text = "LEVEL " + weapon.level + 1;
                 }
             }
 
@@ -219,8 +224,14 @@ public class Card : MonoBehaviour
             image.sprite = card.sprite;
             desc.text = card.description;
             int cardAmount = Deck.active.GetCardAmount(cardData);
-            if (cardAmount > 0) level.text = cardAmount + " IN DECK";
-            else level.text = "NEW CARD";
+            if (cardAmount > 0)
+            {
+                level.text = cardAmount + " IN DECK";
+            }
+            else
+            {
+                level.text = "NEW CARD";
+            }
         }
 
         // Animate the card

@@ -7,6 +7,7 @@ public class SynergyData : IdentifiableScriptableObject
     public new string name;
     [TextArea]
     public string desc;
+    public Color backgroundColor;
     public CardData cardOne, cardTwo;
     public bool removeCardOne, removeCardTwo;
     public CardData outputCard;

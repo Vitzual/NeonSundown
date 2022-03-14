@@ -10,11 +10,38 @@ public class UnlockNotification : MonoBehaviour
     // Notification elements
     public NotificationManager notification;
     public Image background, border, levelIcon, xpBackground;
-    public TextMeshProUGUI xpAmount, levelText, desc;
+    public TextMeshProUGUI xpAmount, levelText;
     private AudioSource audioSource;
+    public bool synergy = false;
 
     // On start subscribe to level up event
-    public void Start() { Events.active.onLevelUp += Set; audioSource = GetComponent<AudioSource>(); }
+    public void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+
+        if (synergy) Events.active.onSynergyAvailable += SetSynergy;
+        else Events.active.onLevelUp += Set;
+    }
+
+    // Set the synergy thing-a-ma-jig
+    public void SetSynergy(SynergyData synergy)
+    {
+        // Set notification
+        notification.icon = synergy.outputCard.sprite;
+        notification.description = synergy.name;
+
+        // Set colors
+        notification.descriptionObj.color = synergy.outputCard.color;
+        notification.iconObj.color = synergy.outputCard.color;
+        border.color = synergy.outputCard.color;
+        background.color = synergy.backgroundColor;
+
+        // Display notification
+        notification.UpdateUI();
+        notification.OpenNotification();
+        audioSource.volume = Settings.sound;
+        audioSource.Play();
+    }
 
     // Set level notification and display
     public void Set(LevelData level, int levelNumber)
