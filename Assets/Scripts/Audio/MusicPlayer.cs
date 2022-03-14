@@ -35,7 +35,8 @@ public class MusicPlayer : MonoBehaviour
             music.loop = true;
         }
 
-        if(bossMusic != null) bossMusic.volume = Settings.sound;
+        if(bossMusic != null) 
+            bossMusic.volume = Settings.music;
         music.volume = Settings.music;
         music.Play();
     }
@@ -45,13 +46,13 @@ public class MusicPlayer : MonoBehaviour
     {
         music.volume = volume;
         if (bossMusic != null) 
-            bossMusic.volume = Settings.sound;
+            bossMusic.volume = Settings.music;
         StopAllCoroutines();
     }
 
     // Play / Stop the music
     public static void PlayMusic() { music.Play(); }
-    public static void StopMusic() { music.Pause(); }
+    public static void StopMusic() { music.Pause(); bossMusic.Pause(); }
     public static void ResetPitch() { music.pitch = 1f; }
     
     // Play boss music
