@@ -8,6 +8,7 @@ public class SynergyData : IdentifiableScriptableObject
     [TextArea]
     public string desc;
     public CardData cardOne, cardTwo;
+    public bool removeCardOne, removeCardTwo;
     public CardData outputCard;
     public AchievementObject achievement;
 }

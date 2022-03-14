@@ -18,7 +18,7 @@ public class LevelData : IdentifiableScriptableObject
     [HideIf("crystalReward", true), BoxGroup("Level Reward")]
     public bool redrawReward;
     [BoxGroup("Level Reward")]
-    public float xpRequirement = 10000;
+    public float xpRequirement = 25000;
 
     // Rank and reward models
     [HideIf("IsRewardPicked", true), BoxGroup("Level Info")]
