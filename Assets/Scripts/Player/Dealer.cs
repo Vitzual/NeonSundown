@@ -254,7 +254,8 @@ public class Dealer : MonoBehaviour
         if (dropList.Count > 0 && Random.Range(0, 1f) > 0.5f)
         {
             CardData card = dropList[Random.Range(0, dropList.Count)];
-            if (Deck.active.GetCards()[newCard] <= newCard.maximumAmount)
+            Dictionary<CardData, int> deckCards = Deck.active.GetCards();
+            if (!deckCards.ContainsKey(card) || deckCards[card] <= card.maximumAmount)
             {
                 newCard = card;
                 if (dealList.Contains(newCard))

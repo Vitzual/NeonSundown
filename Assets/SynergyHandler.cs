@@ -34,6 +34,7 @@ public class SynergyHandler : MonoBehaviour
                 maxedCards.Contains(synergy.cardTwo))
             {
                 availableSynergies.Enqueue(synergy);
+                synergiesMade.Add(synergy);
                 Debug.Log(synergy.name + " synergy is available!");
             }
         }
@@ -43,10 +44,6 @@ public class SynergyHandler : MonoBehaviour
     public static void Create()
     {
         if (availableSynergies.Count > 0)
-        {
-            SynergyData newSynergy = availableSynergies.Dequeue();
-            synergiesMade.Add(newSynergy);
-            SynergyUI.active.Synergize(newSynergy);
-        }
+            SynergyUI.active.Synergize(availableSynergies.Dequeue());
     }
 }

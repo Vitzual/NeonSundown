@@ -9,7 +9,10 @@ public class Levels : MonoBehaviour
     private static bool generated = false;
 
     // Generate ranks on startup
-    public void Awake() 
+    public void Awake() { GenerateRanks(); }
+
+    // Generate ranks
+    private static void GenerateRanks()
     {
         // Get a list of all ranks
         if (generated) return;
@@ -40,7 +43,10 @@ public class Levels : MonoBehaviour
     // Update levels on load
     public static void UpdateUnlocks()
     {
-        foreach(LevelData level in ranks)
+        if (ranks == null)
+            GenerateRanks();
+
+        foreach (LevelData level in ranks)
         {
             if (level.arenaReward != null && !SaveSystem.IsArenaUnlocked(level.arenaReward.InternalID))
                 SaveSystem.AddArenaUnlock(level.arenaReward.InternalID);
