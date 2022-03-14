@@ -55,6 +55,16 @@ public class UnlockNotification : MonoBehaviour
             notification.description = level.shipReward.shortDesc;
             notification.iconObj.color = lightColor;
         }
+        else if (level.synergyReward != null)
+        {
+            lightColor = level.synergyReward.outputCard.color;
+            darkColor = new Color(lightColor.r * 0.2f, lightColor.g * 0.2f, lightColor.b * 0.2f);
+
+            notification.icon = level.synergyReward.outputCard.sprite;
+            notification.title = level.synergyReward.name + " Synergy";
+            notification.description = level.synergyReward.desc;
+            notification.iconObj.color = lightColor;
+        }
         else
         {
             lightColor = level.levelColor;

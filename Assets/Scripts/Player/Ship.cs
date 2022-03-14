@@ -112,9 +112,6 @@ public class Ship : Weapon
         xpBar.currentPercent = (float)xp / rankup * 100;
         xpBar.UpdateUI();
 
-        // Setup starting cards
-        Deck.active.SetupStartingCards();
-
         // Setup any attached modules
         SetupModules();
     }

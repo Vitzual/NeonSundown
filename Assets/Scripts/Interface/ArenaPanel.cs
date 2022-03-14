@@ -25,23 +25,9 @@ public class ArenaPanel : MonoBehaviour
 
     // Background tilebase
     public Tilemap backgroundTilemap;
-    public List<Card> blacklistCards;
-    public List<Card> startingCards;
 
     // Canvas group
     public Image panelBackground;
-    public CanvasGroup panelGroup;
-    public CanvasGroup selectArena;
-    public CanvasGroup arenaLocked;
-    public Color emptyCardColor;
-
-    // Panel variables
-    public ProgressBar progressBar;
-    public Image barBackground, barFill, titleBarLeft, titleBarRight, arenaViewRules;
-    public TextMeshProUGUI arena, description, timestampOne, timestampTwo, timestampThree,
-        timestampFour, rewardOne, rewardTwo, rewardThree, rewardFour, bestTime;
-    public Image rewardOneImage, rewardTwoImage, rewardThreeImage, rewardFourImage,
-        lineOne, lineTwo, lineThree, lineFour;
 
     // Private internal flag
     private bool arenasGenerated = false;
@@ -102,90 +88,14 @@ public class ArenaPanel : MonoBehaviour
             arenasGenerated = true;
         }
     }
-
+    
     public void SetPanel(ArenaData arena)
     {
         // Set the new arena data
         Gamemode.arena = arena;
 
         // Reset the panel
-        ResetPanel();
-        panelGroup.alpha = 1f;
-        selectArena.alpha = 0f;
         panelBackground.color = arena.buttonColor;
-        barBackground.color = new Color(arena.buttonColor.r, arena.buttonColor.g, arena.buttonColor.b, 0.1f);
-        barFill.color = arena.buttonColor;
-        titleBarLeft.color = arena.buttonColor;
-        titleBarRight.color = arena.buttonColor;
-        arenaViewRules.color = arena.buttonColor;
-
-        // Set arena information
-        this.arena.text = arena.name;
-        description.text = arena.desc;
-
-        // Set best time
-        float time = SaveSystem.GetBestTime(arena.InternalID);
-        float maxTime = arena.objectiveFour.timeRequired;
-        progressBar.maxValue = maxTime;
-        progressBar.currentPercent = time;
-        progressBar.UpdateUI();
-        bestTime.text = "BEST TIME:<br><size=60>" + Formatter.Time(time);
-
-        // Set arena objective one
-        timestampOne.text = Formatter.Time(arena.objectiveOne.timeRequired);
-        rewardOne.text = arena.objectiveOne.rewardName;
-        rewardOneImage.sprite = arena.objectiveOne.rewardImage;
-        rewardOneImage.color = arena.objectiveOne.rewardColor;
-        lineOne.color = arena.lightColor;
-
-        // Set arena objective two
-        timestampTwo.text = Formatter.Time(arena.objectiveTwo.timeRequired);
-        rewardTwo.text = arena.objectiveTwo.rewardName;
-        rewardTwoImage.sprite = arena.objectiveTwo.rewardImage;
-        rewardTwoImage.color = arena.objectiveTwo.rewardColor;
-        lineTwo.color = arena.lightColor;
-
-        // Set arena objective three
-        timestampThree.text = Formatter.Time(arena.objectiveThree.timeRequired);
-        rewardThree.text = arena.objectiveThree.rewardName;
-        rewardThreeImage.sprite = arena.objectiveThree.rewardImage;
-        rewardThreeImage.color = arena.objectiveThree.rewardColor;
-        lineThree.color = arena.lightColor;
-
-        // Set arena objective four
-        timestampFour.text = Formatter.Time(arena.objectiveFour.timeRequired);
-        rewardFour.text = arena.objectiveFour.rewardName;
-        rewardFourImage.sprite = arena.objectiveFour.rewardImage;
-        rewardFourImage.color = arena.objectiveFour.rewardColor;
-        lineFour.color = arena.lightColor;
-
-        // Set starting cards information
-        for (int i = 0; i < startingCards.Count; i++)
-        {
-            if (i < arena.startingCards.Count)
-            {
-                startingCards[i].icon.gameObject.SetActive(true);
-                startingCards[i].amount.gameObject.SetActive(true);
-                startingCards[i].icon.sprite = arena.startingCards[i].card.sprite;
-                startingCards[i].icon.color = arena.startingCards[i].card.color;
-                startingCards[i].model.color = arena.startingCards[i].card.color;
-                startingCards[i].amount.text = "LEVEL " + arena.startingCards[i].amount;
-            }
-            else break;
-        }
-
-        // Set starting cards information
-        for (int i = 0; i < blacklistCards.Count; i++)
-        {
-            if (i < arena.blacklistCards.Count)
-            {
-                blacklistCards[i].icon.gameObject.SetActive(true);
-                blacklistCards[i].icon.sprite = arena.blacklistCards[i].sprite;
-                blacklistCards[i].icon.color = arena.blacklistCards[i].color;
-                blacklistCards[i].model.color = arena.blacklistCards[i].color;
-            }
-            else break;
-        }
 
         // Set menu music
         if (MusicPlayer.isMenu)
@@ -195,32 +105,10 @@ public class ArenaPanel : MonoBehaviour
         }
 
         // Change the background
-        ChangeBackground(arena);
-    }
-
-    public void ViewArena()
-    {
-        stagesPanel.Set(Gamemode.arena);
+        stagesPanel.Set(arena);
         stagesPanel.stageButtonIndex = 0;
         stagesPanel.SwitchStage(0);
-    }
-
-    public void ResetPanel()
-    {
-        // Set starting cards information
-        for (int i = 0; i < startingCards.Count; i++)
-        {
-            startingCards[i].icon.gameObject.SetActive(false);
-            startingCards[i].amount.gameObject.SetActive(false);
-            startingCards[i].model.color = emptyCardColor;
-        }
-
-        // Set starting cards information
-        for (int i = 0; i < blacklistCards.Count; i++)
-        {
-            blacklistCards[i].icon.gameObject.SetActive(false);
-            blacklistCards[i].model.color = emptyCardColor;
-        }
+        ChangeBackground(arena);
     }
 
     public void ChangeBackground(ArenaData arena)

@@ -13,7 +13,7 @@ public class Pulse : Secondary
     // Virtual use method
     public override void Use()
     {
-        if (cooldown <= 0)
+        if (cooldown <= 0 && !Dealer.isOpen)
         {
             cooldown = data.cooldown;
             ExplosiveHandler.CreateKnockback(ship.transform.position, range, minKnockback, maxKnockback);

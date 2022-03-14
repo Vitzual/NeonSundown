@@ -8,28 +8,11 @@ using UnityEngine.Tilemaps;
 public class ArenaData : IdentifiableScriptableObject
 {
     [System.Serializable]
-    public class ArenaObjective
-    {
-        // Objective description
-        public string rewardName;
-        public Sprite rewardImage;
-        public Color rewardColor = Color.white;
-        public float timeRequired;
-
-        // Rewards
-        public ArenaData arenaReward;
-        public ShipData shipReward;
-        public CardData cardReward;
-        public AchievementObject achievementReward;
-    }
-
-    [System.Serializable]
     public class ArenaCard
     {
         // Card data
         public CardData card;
         public int amount;
-        public bool prestige;
     }
 
     // Arena Information
@@ -68,23 +51,9 @@ public class ArenaData : IdentifiableScriptableObject
     [BoxGroup("Arena Stats")]
     public Color lightColor;
 
-    // Arena objectives
-    [BoxGroup("Arena Objective")]
-    public ArenaObjective objectiveOne;
-    [BoxGroup("Arena Objective")]
-    public ArenaObjective objectiveTwo;
-    [BoxGroup("Arena Objective")]
-    public ArenaObjective objectiveThree;
-    [BoxGroup("Arena Objective")]
-    public ArenaObjective objectiveFour;
-
     // Arena rule set
     [BoxGroup("Arena Rules")]
     public List<StageData> stages;
-    [BoxGroup("Arena Rules")]
-    public List<ArenaCard> startingCards;
-    [BoxGroup("Arena Rules")]
-    public List<CardData> blacklistCards;
     [BoxGroup("Arena Rules")]
     public bool useWall = false;
 }

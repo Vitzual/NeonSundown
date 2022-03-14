@@ -67,6 +67,8 @@ public class Dealer : MonoBehaviour
     // Private components 
     private Transform rotator;
     private CanvasGroup canvasGroup;
+    private List<CardData> dropList;
+    private List<CardData> pickedCards;
 
     // On start get private components 
     public void Start()
@@ -74,6 +76,8 @@ public class Dealer : MonoBehaviour
         active = this;
         rotator = transform;
         canvasGroup = GetComponent<CanvasGroup>();
+        dropList = new List<CardData>();
+        pickedCards = new List<CardData>();
     }
 
     // While open, rotate
@@ -187,6 +191,10 @@ public class Dealer : MonoBehaviour
     // Pick the card and add to palyer
     public void PickCard(CardData card, bool redraw, int cardNumber)
     {
+        // Add this to pick list
+        if (!pickedCards.Contains(card))
+            pickedCards.Add(card);
+
         // Check if cards dealt
         if (!cardsDealt || cardSlots[cardNumber].redrawing) return;
         Deck.active.AddCard(card);
@@ -241,8 +249,26 @@ public class Dealer : MonoBehaviour
     public CardData PickNewCard()
     {
         // Take the card and remove it from the list
-        CardData newCard = dealList[Random.Range(0, dealList.Count)];
-        dealList.Remove(newCard);
+        CardData newCard = null;
+
+        if (dropList.Count > 0 && Random.Range(0, 1f) > 0.5f)
+        {
+            CardData card = dropList[Random.Range(0, dropList.Count)];
+            if (Deck.active.GetCards()[newCard] <= newCard.maximumAmount)
+            {
+                newCard = card;
+                if (dealList.Contains(newCard))
+                    dealList.Remove(newCard);
+                dropList.Remove(newCard);
+            }
+        }
+        if (newCard == null)
+        {
+            newCard = dealList[Random.Range(0, dealList.Count)];
+            if (dropList.Contains(newCard))
+                dropList.Remove(newCard);
+            dealList.Remove(newCard);
+        }
         return newCard;
     }
 
@@ -255,6 +281,7 @@ public class Dealer : MonoBehaviour
 
         // Get copy of the scriptables list
         dealList = new List<CardData>(Scriptables.cards);
+        dropList = new List<CardData>(pickedCards);
 
         // Check cards and remove outdated ones
         Dictionary<CardData, int> deckCards = Deck.active.GetCards();
@@ -264,9 +291,8 @@ public class Dealer : MonoBehaviour
             CardData card = dealList[i];
 
             // Remove card if not unlocked
-            if (!card.canDrop || Gamemode.arena.blacklistCards.Contains(card) ||
-                (!card.isUnlocked && !SaveSystem.IsCardUnlocked(card.InternalID)) ||
-                (deckCards.ContainsKey(card) && deckCards[card] >= card.maximumAmount))
+            if (!card.canDrop || (!card.isUnlocked && !SaveSystem.IsCardUnlocked(card.InternalID)) ||
+                (deckCards.ContainsKey(card) && deckCards[card] > card.maximumAmount))
             {
                 dealList.Remove(card);
                 i--;

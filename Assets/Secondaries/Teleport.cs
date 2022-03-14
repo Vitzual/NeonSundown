@@ -20,7 +20,7 @@ public class Teleport : Secondary
     // Teleport the ship to mouse cursor
     public override void Use()
     {
-        if (cooldown <= 0)
+        if (cooldown <= 0 && !Dealer.isOpen)
         {
             // Reset cooldown
             cooldown = customCooldown;

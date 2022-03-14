@@ -55,6 +55,10 @@ public class Levels : MonoBehaviour
             else if (rank.arenaReward != null)
                 SaveSystem.AddArenaUnlock(rank.arenaReward.InternalID);
 
+            // Give card reward
+            else if (rank.shipReward != null)
+                SaveSystem.AddShipUnlock(rank.shipReward.InternalID);
+
             // Give synergy reward
             else if(rank.synergyReward != null)
                 SaveSystem.AddSynergyUnlock(rank.synergyReward.InternalID);

@@ -39,6 +39,9 @@ public class EnemyHandler : MonoBehaviour
     // Spawn enemies
     public void Update()
     {
+        // Check if dealer is open
+        if (Dealer.isOpen) return;
+
         // Check distance of enemy
         if (cullIndex < enemies.Count)
         {
@@ -91,6 +94,9 @@ public class EnemyHandler : MonoBehaviour
     // Create a new active enemy instance
     public void QueueEnemy(EnemyData enemyData, Variant variant, int amount)
     {
+        // Check queue length
+        if (enemyQueue.Count > 1000) return;
+
         // Generate position
         Vector2 position = GeneratePosition();
 
@@ -109,7 +115,8 @@ public class EnemyHandler : MonoBehaviour
     public void CreateEnemy(EnemyData enemyData, Variant variant, Vector2 position)
     {
         // Create the tile
-        GameObject lastObj = Instantiate(enemyData.obj, position, Quaternion.identity);
+        Vector2 globalPos = new Vector2(player.position.x + position.x, player.position.y + position.y);
+        GameObject lastObj = Instantiate(enemyData.obj, globalPos, Quaternion.identity);
         lastObj.name = enemyData.name;
 
         // Rotate to the target
@@ -129,16 +136,19 @@ public class EnemyHandler : MonoBehaviour
     // Generates a random location to spawn
     public Vector2 GeneratePosition()
     {
+        // Create local position
+        Vector2 localPos = new Vector2(0, 0);
+
         // Get location around border
         if (Random.value > 0.5f)
         {
-            if (Random.value > 0.5f) return new Vector2(player.position.x + spawnRange, player.position.y + Random.Range(-spawnRange, spawnRange));
-            else return new Vector2(player.position.x - spawnRange, player.position.y + Random.Range(-spawnRange, spawnRange));
+            if (Random.value > 0.5f) return new Vector2(localPos.x + spawnRange, localPos.y + Random.Range(-spawnRange, spawnRange));
+            else return new Vector2(localPos.x - spawnRange, localPos.y + Random.Range(-spawnRange, spawnRange));
         }
         else
         {
-            if (Random.value > 0.5f) return new Vector2(player.position.x + Random.Range(-spawnRange, spawnRange), player.position.y + spawnRange);
-            else return new Vector2(player.position.x + Random.Range(-spawnRange, spawnRange), player.position.y - spawnRange);
+            if (Random.value > 0.5f) return new Vector2(localPos.x + Random.Range(-spawnRange, spawnRange), localPos.y + spawnRange);
+            else return new Vector2(localPos.x + Random.Range(-spawnRange, spawnRange), localPos.y - spawnRange);
         }
     }
 

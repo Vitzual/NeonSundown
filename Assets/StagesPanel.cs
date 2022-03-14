@@ -15,13 +15,9 @@ public class StagesPanel : MonoBehaviour
     [HideInInspector]
     public int stageButtonIndex = 0;
 
-    // Canvas groups
-    public CanvasGroup arenaPanel;
-    public CanvasGroup stagesPanel;
-
     // Arena info elements
-    public TextMeshProUGUI arenaName, arenaSubtitle, stageTitle, stageTime;
-    public Image arenaIcon, stagesBackground, previous, next;
+    public TextMeshProUGUI stageTitle, stageTime;
+    public Image stagesBackground, previous, next;
 
     // Set the panel
     public void Set(ArenaData arena)
@@ -30,40 +26,9 @@ public class StagesPanel : MonoBehaviour
         this.arena = arena;
 
         // Set the panel
-        arenaName.text = arena.name;
-        arenaSubtitle.color = arena.lightColor;
-        arenaIcon.sprite = arena.icon;
         stagesBackground.color = arena.buttonColor;
         previous.color = arena.buttonColor;
         next.color = arena.buttonColor;
-
-        // Open the panel
-        Toggle(true);
-    }
-
-    // Toggle the panel
-    public void Toggle(bool toggle)
-    {
-        if (toggle)
-        {
-            arenaPanel.alpha = 0f;
-            arenaPanel.interactable = false;
-            arenaPanel.blocksRaycasts = false;
-
-            stagesPanel.alpha = 1f;
-            stagesPanel.interactable = true;
-            stagesPanel.blocksRaycasts = true;
-        }
-        else
-        {
-            stagesPanel.alpha = 0f;
-            stagesPanel.interactable = false;
-            stagesPanel.blocksRaycasts = false;
-
-            arenaPanel.alpha = 1f;
-            arenaPanel.interactable = true;
-            arenaPanel.blocksRaycasts = true;
-        }
     }
 
     // Go to the next stage

@@ -4,7 +4,7 @@ using UnityEngine;
 public class Settings
 {
     // Settings file location
-    private const string SETTINGS_PATH = "/settings.json";
+    private const string SETTINGS_PATH = "/settings_save.json";
 
     // Volume enum
     public enum Volume
@@ -124,10 +124,12 @@ public class Settings
                 Keybinds.SetDefaultKeybinds(); 
             }
 
-
             // Apply settings
             UpdateVideoSettings();
             UpdateVolumeSettings();
+
+            SettingsUI.active.SetGlowAmount(glowAmount);
+            SettingsUI.active.SetLightAmount(lightAmount);
         }
         else
         {
@@ -148,6 +150,9 @@ public class Settings
             skipCardAnim = false;
             compoundXP = false;
             musicPitching = true;
+
+            SettingsUI.active.SetGlowAmount(glowAmount);
+            SettingsUI.active.SetLightAmount(lightAmount);
         }
     }
 

@@ -58,7 +58,6 @@ public class Menu : MonoBehaviour
     {
         Scriptables.GenerateAllScriptables();
         if (!alphaBuild) SaveSystem.GetSave();
-        Settings.LoadSettings();
     }
 
     // On start, try and get meta context
@@ -188,6 +187,7 @@ public class Menu : MonoBehaviour
     // Open arena panel
     public void ToggleArenaPanel(bool toggle)
     {
+        if (Gamemode.arena == null) arenaPanel.SetPanel(alphaArena);
         if (toggle) TogglePanel(arenaGroup, mainGroup);
         else TogglePanel(mainGroup, arenaGroup);
     }

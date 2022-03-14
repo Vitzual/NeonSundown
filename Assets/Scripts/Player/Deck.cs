@@ -81,6 +81,8 @@ public class Deck : MonoBehaviour
             if (upgradeables.ContainsKey(card))
             {
                 upgradeables[card].Upgrade();
+                if (cards[card] >= card.maximumAmount)
+                    SynergyHandler.Add(card);
                 return;
             }
         }
@@ -199,15 +201,6 @@ public class Deck : MonoBehaviour
     {
         Debug.Log("Adding chroma card " + chroma.name + " to deck");
         ChromaHandler.active.Setup(chroma);
-    }
-
-    // Setup starting cards
-    public void SetupStartingCards()
-    {
-        // Add starting card if arena has one
-        for (int a = 0; a < Gamemode.arena.startingCards.Count; a++)
-            for (int b = 0; b < Gamemode.arena.startingCards[a].amount; b++)
-                AddCard(Gamemode.arena.startingCards[a].card);
     }
 
     // Get deck cards

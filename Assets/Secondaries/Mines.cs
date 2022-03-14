@@ -13,7 +13,7 @@ public class Mines : Secondary
     // Virtual use method
     public override void Use()
     {
-        if (cooldown <= 0)
+        if (cooldown <= 0 && !Dealer.isOpen)
         {
             // Reset cooldown
             cooldown = data.cooldown;

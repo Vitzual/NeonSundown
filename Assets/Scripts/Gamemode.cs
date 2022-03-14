@@ -46,31 +46,8 @@ public class Gamemode : MonoBehaviour
         // Get arena time
         float time = EnemySpawner.GetTime();
 
-        // Check rewards
-        if (time >= arena.objectiveOne.timeRequired)
-            RewardObjective(arena.objectiveOne);
-        if (time >= arena.objectiveTwo.timeRequired)
-            RewardObjective(arena.objectiveTwo);
-        if (time >= arena.objectiveThree.timeRequired)
-            RewardObjective(arena.objectiveThree);
-        if (time >= arena.objectiveFour.timeRequired)
-            RewardObjective(arena.objectiveFour);
-
         // Save the game
         SaveSystem.UpdateArena(arena.InternalID, time);
         SaveSystem.UpdateSave();
-    }
-
-    // Reward objective
-    public void RewardObjective(ArenaData.ArenaObjective arenaObjective)
-    {
-        if (arenaObjective.arenaReward != null)
-            SaveSystem.AddArenaUnlock(arenaObjective.arenaReward.InternalID);
-        if (arenaObjective.shipReward != null)
-            SaveSystem.AddShipUnlock(arenaObjective.shipReward.InternalID);
-        if (arenaObjective.cardReward != null)
-            SaveSystem.AddCardUnlock(arenaObjective.cardReward.InternalID);
-        if (arenaObjective.achievementReward != null)
-            SaveSystem.UnlockAchievement(arenaObjective.achievementReward);
     }
 }
