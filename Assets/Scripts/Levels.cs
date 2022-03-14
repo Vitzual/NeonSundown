@@ -37,6 +37,22 @@ public class Levels : MonoBehaviour
         }
     }
 
+    // Update levels on load
+    public static void UpdateUnlocks()
+    {
+        foreach(LevelData level in ranks)
+        {
+            if (level.arenaReward != null && !SaveSystem.IsArenaUnlocked(level.arenaReward.InternalID))
+                SaveSystem.AddArenaUnlock(level.arenaReward.InternalID);
+            else if (level.shipReward != null && !SaveSystem.IsShipUnlocked(level.shipReward.InternalID))
+                SaveSystem.AddShipUnlock(level.shipReward.InternalID);
+            else if(level.cardReward != null && !SaveSystem.IsCardUnlocked(level.cardReward.InternalID))
+                SaveSystem.AddCardUnlock(level.cardReward.InternalID);
+            else if(level.synergyReward != null && !SaveSystem.IsSynergyUnlocked(level.synergyReward.InternalID))
+                SaveSystem.AddSynergyUnlock(level.synergyReward.InternalID);
+        }
+    }
+
     // Level up 
     public static void LevelUp()
     {

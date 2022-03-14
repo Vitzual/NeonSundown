@@ -57,7 +57,8 @@ public class Menu : MonoBehaviour
     public void Awake()
     {
         Scriptables.GenerateAllScriptables();
-        if (!alphaBuild) SaveSystem.GetSave();
+        SaveSystem.GetSave();
+        Levels.UpdateUnlocks();
     }
 
     // On start, try and get meta context
