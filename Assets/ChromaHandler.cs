@@ -27,6 +27,9 @@ public class ChromaHandler : MonoBehaviour
             case ChromaType.XPHealing:
                 XPHandler.active.EnableXPHealing();
                 break;
+            case ChromaType.EnergyBullets:
+                BulletHandler.energyBullets = true;
+                break;
         }
     }
 }

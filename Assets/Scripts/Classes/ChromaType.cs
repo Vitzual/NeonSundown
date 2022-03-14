@@ -2,5 +2,6 @@ public enum ChromaType
 {
     InverseExplosions,
     StickyBullets,
-    XPHealing
+    XPHealing,
+    EnergyBullets
 }

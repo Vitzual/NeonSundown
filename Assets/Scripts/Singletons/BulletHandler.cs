@@ -7,12 +7,15 @@ public class BulletHandler : MonoBehaviour
     // Active instance
     public static BulletHandler active;
     public static bool stickyBullets = false;
+    public static bool energyBullets = false;
+    public static float bulletSize = 1f;
 
     // List of all active bullets
     public List<Bullet> bullets;
+    public Bullet energyBullet;
 
     // Start method
-    public void Start() { active = this; stickyBullets = false; }
+    public void Start() { active = this; stickyBullets = false; energyBullets = false; bulletSize = 1; }
 
     // Move normal enemies
     public void Update()
@@ -36,8 +39,8 @@ public class BulletHandler : MonoBehaviour
     }
 
     // Create a new active bullet instance
-    public void CreateBullet(Weapon parent, WeaponData weapon, Vector2 position, Quaternion rotation, int amount, 
-        Material material, bool overrideAudioCooldown = false, bool explosiveRound = false, Transform target = null)
+    public void CreateBullet(Weapon parent, WeaponData weapon, Vector2 position, Quaternion rotation, int amount, Material material, 
+        bool overrideAudioCooldown = false, bool explosiveRound = false, bool useSize = false, Transform target = null)
     {
         // Loop depending on bullet amount
         for (int i = 0; i < amount; i++)
@@ -45,7 +48,44 @@ public class BulletHandler : MonoBehaviour
             // Create the tile
             GameObject lastObj = Instantiate(weapon.bullet.gameObject, position, rotation);
             lastObj.name = weapon.bullet.gameObject.name;
-            
+
+            // Set size if bigger then 1
+            if (bulletSize > 1 && useSize)
+                lastObj.transform.localScale = new Vector2(bulletSize, bulletSize);
+
+            // Adjust for rotational offset
+            Vector3 rotationOffset = new Vector3(lastObj.transform.eulerAngles.x, lastObj.transform.eulerAngles.y,
+                (lastObj.transform.eulerAngles.z - 90f) + Random.Range(-parent.bloom, parent.bloom));
+            lastObj.transform.eulerAngles = rotationOffset;
+
+            // Attempt to set enemy variant
+            Bullet bullet = lastObj.GetComponent<Bullet>();
+            bullet.Setup(parent, weapon, material, target, false, explosiveRound);
+
+            // Add to enemies list
+            bullets.Add(bullet);
+        }
+
+        // Check if bullet has a sound
+        if (weapon.bulletSound != null)
+            AudioPlayer.Play(weapon.bulletSound, true, weapon.minPitch, weapon.maxPitch, overrideAudioCooldown, weapon.audioScale);
+    }
+
+    // Create a new active bullet instance
+    public void CreateEnergyBullet(Weapon parent, WeaponData weapon, Vector2 position, Quaternion rotation, int amount, Material material,
+        bool overrideAudioCooldown = false, bool explosiveRound = false, bool useSize = false, Transform target = null)
+    {
+        // Loop depending on bullet amount
+        for (int i = 0; i < amount; i++)
+        {
+            // Create the tile
+            GameObject lastObj = Instantiate(energyBullet.gameObject, position, rotation);
+            lastObj.name = weapon.bullet.gameObject.name;
+
+            // Set size if bigger then 1
+            if (bulletSize > 1 && useSize)
+                lastObj.transform.localScale = new Vector2(bulletSize, bulletSize);
+
             // Adjust for rotational offset
             Vector3 rotationOffset = new Vector3(lastObj.transform.eulerAngles.x, lastObj.transform.eulerAngles.y,
                 (lastObj.transform.eulerAngles.z - 90f) + Random.Range(-parent.bloom, parent.bloom));

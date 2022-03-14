@@ -22,8 +22,8 @@ public class AutoShooter : Weapon
             if (weapon.randomDirection)
                 transform.eulerAngles = new Vector3(0, 0, Random.Range(0, 360));
 
-            BulletHandler.active.CreateBullet(this, weapon, transform.position, 
-                transform.rotation, weapon.bullets, weapon.material, false, explosiveRounds);
+            BulletHandler.active.CreateBullet(this, weapon, transform.position, transform.rotation, 
+                weapon.bullets, weapon.material, false, explosiveRounds, true);
             if (cooldown < 0.05f) weaponCooldown = 0.05f;
             else weaponCooldown = cooldown;
         }

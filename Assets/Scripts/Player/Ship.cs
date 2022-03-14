@@ -223,10 +223,20 @@ public class Ship : Weapon
         if (shipCooldown <= 0)
         {
             // Create bullet
-            if (Settings.shipColoring) BulletHandler.active.CreateBullet(this, shipData.weapon, barrel.position,
-                model.rotation, (int)bullets, shipData.weapon.material, true, explosiveRounds);
-            else BulletHandler.active.CreateBullet(this, shipData.weapon, barrel.position,
-                model.rotation, (int)bullets, defaultGlow, true, explosiveRounds);
+            if (BulletHandler.energyBullets)
+            {
+                if (Settings.shipColoring) BulletHandler.active.CreateEnergyBullet(this, shipData.weapon, barrel.position,
+                    model.rotation, (int)bullets, shipData.weapon.material, true, explosiveRounds, true);
+                else BulletHandler.active.CreateEnergyBullet(this, shipData.weapon, barrel.position,
+                    model.rotation, (int)bullets, defaultGlow, true, explosiveRounds, true);
+            }
+            else
+            {
+                if (Settings.shipColoring) BulletHandler.active.CreateBullet(this, shipData.weapon, barrel.position,
+                    model.rotation, (int)bullets, shipData.weapon.material, true, explosiveRounds, true);
+                else BulletHandler.active.CreateBullet(this, shipData.weapon, barrel.position,
+                    model.rotation, (int)bullets, defaultGlow, true, explosiveRounds, true);
+            }
             shipCooldown = cooldown;
         }
     }
@@ -416,7 +426,12 @@ public class Ship : Weapon
 
             // Increase explosive rounds
             case Stat.EnemyDamge:
-                enemyDamage = Deck.CalculateStat(stat, enemyDamage);
+                enemyDamage = Deck.CalculateStat(stat, 1);
+                break;
+
+            // Increases bullet size
+            case Stat.Size:
+                BulletHandler.bulletSize = Deck.CalculateStat(stat, 1);
                 break;
         }
     }
@@ -495,6 +510,10 @@ public class Ship : Weapon
             case Stat.EnemyDamge:
                 return enemyDamage;
 
+            // Get bullet size
+            case Stat.Size:
+                return BulletHandler.bulletSize;
+
             // Default case
             default:
                 return 0;
@@ -512,7 +531,7 @@ public class Ship : Weapon
 
             // Upgrades the view distance
             case Stat.View:
-                return 35f;
+                return 45f;
 
             // Upgrades the speed 
             case Stat.MoveSpeed:
@@ -572,6 +591,10 @@ public class Ship : Weapon
 
             // Increase regen rate
             case Stat.EnemyDamge:
+                return 1;
+
+            // Increase thing
+            case Stat.Size:
                 return 1;
 
             // Default case
