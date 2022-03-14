@@ -34,6 +34,13 @@ public class ExplosiveHandler : MonoBehaviour
             explosionLayer = layer | explosionLayer;
     }
 
+    // Return a list of entities
+    public static Collider2D[] CastForEntities(Vector2 position, float range)
+    {
+        // Get all colliders in range
+        return Physics2D.OverlapCircleAll(position, range, explosionLayer);
+    }
+
     // Create an explosion at a location
     public static void CreateExplosion(Vector2 position, float range, float damage, float knockback, Material material)
     {

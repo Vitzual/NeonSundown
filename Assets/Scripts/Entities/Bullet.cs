@@ -26,6 +26,7 @@ public class Bullet : Entity
     public bool explosive;
     public bool stickyImmune;
     public bool stunEnemies;
+    public bool overrideSprite;
 
     // Is a split shot
     private Weapon parent;
@@ -35,7 +36,7 @@ public class Bullet : Entity
     private Material normalMaterial;
 
     // Set up the bullet
-    public virtual void Setup(Weapon parent, WeaponData weapon, Material material, 
+    public virtual void Setup(Weapon parent, WeaponData weapon, Material material,
         Transform target = null, bool isSplitShot = false, bool explosiveRound = false)
     {
         // Check if prestiged
@@ -51,10 +52,13 @@ public class Bullet : Entity
         else this.target = target;
 
         // Set renderer componenets
-        if (weapon.useMaterial)
-            sprite.material = material;
-        if (weapon.useTrail)
-            trail.material = weapon.trail;
+        if (!overrideSprite)
+        {
+            if (weapon.useMaterial)
+                sprite.material = material;
+            if (weapon.useTrail)
+                trail.material = weapon.trail;
+        }
 
         // Set death materials and effect
         deathMaterial = material;
@@ -132,7 +136,7 @@ public class Bullet : Entity
     }
 
     // On collision
-    public void OnHit(Entity entity)
+    public virtual void OnHit(Entity entity)
     {
         // Check if sticky
         if (BulletHandler.stickyBullets && !stickyImmune && !isSplitShot)
@@ -148,16 +152,6 @@ public class Bullet : Entity
         {
             Destroy();
             return;
-        }
-
-        // Get material to hold
-        Material holder = entity.GetMaterial();
-
-        // Check if entity overrides this particle
-        if (entity.overrideOtherParticles)
-        {
-            deathMaterial = holder;
-            deathEffect = entity.deathEffect;
         }
 
         // Remove pierces
@@ -179,6 +173,16 @@ public class Bullet : Entity
         // Check pierce amount
         if (pierce < 0)
         {
+            // Get material to hold
+            Material holder = entity.GetMaterial();
+
+            // Check if entity overrides this particle
+            if (entity.overrideOtherParticles)
+            {
+                deathMaterial = holder;
+                deathEffect = entity.deathEffect;
+            }
+
             deathMaterial = holder;
             Destroy();
         }
