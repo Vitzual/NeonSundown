@@ -7,8 +7,10 @@ public class MusicPlayer : MonoBehaviour
     // Audio source for music
     public bool useRandomTracks = false;
     public bool _isMenu = false;
+    public AudioSource _bossMusic;
     public static bool isMenu = false;
     public static AudioSource music;
+    private static AudioSource bossMusic;
 
     // Fade in variables
     private static float targetFadeIn = 1f;
@@ -23,6 +25,7 @@ public class MusicPlayer : MonoBehaviour
 
         // Get the audio source
         music = GetComponent<AudioSource>();
+        bossMusic = _bossMusic;
         isMenu = _isMenu;
 
         // Check if is menu
@@ -32,6 +35,7 @@ public class MusicPlayer : MonoBehaviour
             music.loop = true;
         }
 
+        bossMusic.volume = Settings.sound;
         music.volume = Settings.music;
         music.Play();
     }
@@ -40,6 +44,7 @@ public class MusicPlayer : MonoBehaviour
     public void UpdateVolume(float volume)
     {
         music.volume = volume;
+        bossMusic.volume = Settings.sound;
         StopAllCoroutines();
     }
 
@@ -47,6 +52,26 @@ public class MusicPlayer : MonoBehaviour
     public static void PlayMusic() { music.Play(); }
     public static void StopMusic() { music.Pause(); }
     public static void ResetPitch() { music.pitch = 1f; }
+    
+    // Play boss music
+    public static void PlayBossMusic()
+    {
+        if (bossMusic != null)
+        {
+            music.Pause();
+            bossMusic.Play();
+        }
+    }
+
+    // Stop boss music
+    public static void StopBossMusic()
+    {
+        if (bossMusic != null)
+        {
+            music.Play();
+            bossMusic.Stop();
+        }
+    }
 
     // Creates a fade in
     public static IEnumerator FadeIn(float FadeTime, float delay)

@@ -45,6 +45,9 @@ public class BossBar : MonoBehaviour
         // Show the bar
         canvasGroup.alpha = 1f;
         isHidden = false;
+
+        // Do the thing my guy
+        MusicPlayer.PlayBossMusic();
     }
 
     // Update is called once per frame
@@ -59,6 +62,8 @@ public class BossBar : MonoBehaviour
             }
             else
             {
+                // Do the thing my guy
+                MusicPlayer.StopBossMusic();
                 canvasGroup.alpha = 0f;
                 isHidden = true;
             }
