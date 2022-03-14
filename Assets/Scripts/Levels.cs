@@ -12,7 +12,7 @@ public class Levels : MonoBehaviour
     public void Awake() { GenerateRanks(); }
 
     // Generate ranks
-    private static void GenerateRanks()
+    public static void GenerateRanks()
     {
         // Get a list of all ranks
         if (generated) return;
@@ -46,17 +46,23 @@ public class Levels : MonoBehaviour
         if (ranks == null)
             GenerateRanks();
 
-        foreach (LevelData level in ranks)
+        for(int i = 0; i < SaveSystem.saveData.level; i++)
         {
-            if (level.arenaReward != null && !SaveSystem.IsArenaUnlocked(level.arenaReward.InternalID))
-                SaveSystem.AddArenaUnlock(level.arenaReward.InternalID);
-            else if (level.shipReward != null && !SaveSystem.IsShipUnlocked(level.shipReward.InternalID))
-                SaveSystem.AddShipUnlock(level.shipReward.InternalID);
-            else if(level.cardReward != null && !SaveSystem.IsCardUnlocked(level.cardReward.InternalID))
-                SaveSystem.AddCardUnlock(level.cardReward.InternalID);
-            else if(level.synergyReward != null && !SaveSystem.IsSynergyUnlocked(level.synergyReward.InternalID))
-                SaveSystem.AddSynergyUnlock(level.synergyReward.InternalID);
+            if (i < ranks.Count)
+            {
+                LevelData level = ranks[i];
+                if (level.arenaReward != null && !SaveSystem.IsArenaUnlocked(level.arenaReward.InternalID))
+                    SaveSystem.AddArenaUnlock(level.arenaReward.InternalID);
+                else if (level.shipReward != null && !SaveSystem.IsShipUnlocked(level.shipReward.InternalID))
+                    SaveSystem.AddShipUnlock(level.shipReward.InternalID);
+                else if (level.cardReward != null && !SaveSystem.IsCardUnlocked(level.cardReward.InternalID))
+                    SaveSystem.AddCardUnlock(level.cardReward.InternalID);
+                else if (level.synergyReward != null && !SaveSystem.IsSynergyUnlocked(level.synergyReward.InternalID))
+                    SaveSystem.AddSynergyUnlock(level.synergyReward.InternalID);
+            }
         }
+
+        SaveSystem.UpdateSave();
     }
 
     // Level up 

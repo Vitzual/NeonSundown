@@ -11,13 +11,15 @@ public class XPHandler : MonoBehaviour
     public Image rewardIcon;
     public TextMeshProUGUI reward, xpRequirement;
     public GameObject rewardObject;
+    public Material deadXP;
 
     // XP mover class
     public class XPInstance
     {
-        public XPInstance(float value, Transform transform, Vector2 startPos, float speed = 10f, float timer = 15f)
+        public XPInstance(float value, SpriteRenderer xpModel, Transform transform, Vector2 startPos, float speed = 10f, float timer = 15f)
         {
             this.value = value;
+            this.xpModel = xpModel;
             this.transform = transform;
             this.startPos = startPos;
             this.timer = timer;
@@ -29,6 +31,7 @@ public class XPHandler : MonoBehaviour
 
         public float value;
         public Transform transform;
+        public SpriteRenderer xpModel;
         public Vector2 startPos;
         public bool isStarting;
         public bool isMoving;
@@ -115,9 +118,9 @@ public class XPHandler : MonoBehaviour
                     xpList[a].timer -= Time.deltaTime;
                     if (xpList[a].timer < 0f)
                     {
-                        Destroy(xpList[a].transform.gameObject);
-                        xpList.RemoveAt(a);
-                        a--;
+                        xpList[a].isMoving = true;
+                        xpList[a].xpModel.material = deadXP;
+                        xpList[a].value = xpList[a].value / 2f;
                     }
                 }
             }
@@ -132,6 +135,9 @@ public class XPHandler : MonoBehaviour
     // Update the interface rewards
     public void UpdateRewards()
     {
+        if (Levels.ranks == null)
+            Levels.GenerateRanks();
+
         if (SaveSystem.saveData.level < Levels.ranks.Count)
         {
             reward.text = Levels.ranks[SaveSystem.saveData.level].GetName();
@@ -181,9 +187,9 @@ public class XPHandler : MonoBehaviour
     }
 
     // Register mover
-    public XPInstance Register(float value, Transform transform, Vector2 startPos)
+    public XPInstance Register(float value, SpriteRenderer xpModel, Transform transform, Vector2 startPos)
     {
-        XPInstance newXP = new XPInstance(value, transform, startPos);
+        XPInstance newXP = new XPInstance(value, xpModel, transform, startPos);
         xpList.Add(newXP);
         return newXP;
     }

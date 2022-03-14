@@ -35,7 +35,7 @@ public class MusicPlayer : MonoBehaviour
             music.loop = true;
         }
 
-        bossMusic.volume = Settings.sound;
+        if(bossMusic != null) bossMusic.volume = Settings.sound;
         music.volume = Settings.music;
         music.Play();
     }
@@ -44,7 +44,8 @@ public class MusicPlayer : MonoBehaviour
     public void UpdateVolume(float volume)
     {
         music.volume = volume;
-        bossMusic.volume = Settings.sound;
+        if (bossMusic != null) 
+            bossMusic.volume = Settings.sound;
         StopAllCoroutines();
     }
 
