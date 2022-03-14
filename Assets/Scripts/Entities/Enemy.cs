@@ -25,6 +25,7 @@ public class Enemy : Entity
     // Internal runtime variables
     private float health;
     private float maxHealth;
+    private float speed;
 
     // Target transform for moving
     protected Transform target;
@@ -62,6 +63,7 @@ public class Enemy : Entity
 
         // Set stats
         health = data.health * EnemySpawner.enemyHealthMultiplier;
+        speed = data.speed * EnemySpawner.enemySpeedMultiplier;
         maxHealth = health;
 
         // Set target
@@ -166,7 +168,7 @@ public class Enemy : Entity
                 }
 
                 // Move towards the target
-                float step = data.speed * Time.deltaTime;
+                float step = speed * Time.deltaTime;
                 transform.position = Vector2.MoveTowards(transform.position, target.position, step);
             }
             else
@@ -179,7 +181,7 @@ public class Enemy : Entity
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotateStep);
 
                 // Move towards the target
-                float movementStep = data.speed * Time.deltaTime;
+                float movementStep = speed * Time.deltaTime;
                 transform.position += transform.up * movementStep;
             }
         }

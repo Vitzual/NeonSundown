@@ -27,6 +27,7 @@ public class EnemySpawner : MonoBehaviour
     private float scaleCalc = 0;
     private float scaleIncrease = 15;
     public static float enemyHealthMultiplier = 1;
+    public static float enemySpeedMultiplier = 1;
 
     // Spawning flag
     public bool spawnEnemies = true;
@@ -39,6 +40,7 @@ public class EnemySpawner : MonoBehaviour
 
         // Reset the timer
         enemyHealthMultiplier = 1;
+        enemySpeedMultiplier = 1;
         time = 0;
     }
 
@@ -73,6 +75,7 @@ public class EnemySpawner : MonoBehaviour
                 scaleIncrease = 15f;
                 scaleCalc += 0.25f;
                 enemyHealthMultiplier += 0.15f;
+                enemySpeedMultiplier += 0.1f;
             }
         }
 
