@@ -9,8 +9,6 @@ public class ShipData : IdentifiableScriptableObject
     [BoxGroup("Ship Info")]
     public new string name;
     [BoxGroup("Ship Info")]
-    public Sprite icon;
-    [BoxGroup("Ship Info")]
     public Sprite glowIcon;
     [BoxGroup("Ship Info"), TextArea]
     public string desc;

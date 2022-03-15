@@ -31,7 +31,8 @@ public class ShipButton : MonoBehaviour
             name.text = ship.name;
             desc.text = ship.shortDesc;
             desc.color = ship.subColor;
-            icon.sprite = ship.icon;
+            icon.sprite = ship.glowIcon;
+            icon.color = ship.mainColor;
             button.color = ship.mainColor;
         }
         else desc.text = ship.unlockRequirement;

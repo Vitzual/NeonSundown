@@ -102,7 +102,8 @@ public class ShipPanel : MonoBehaviour
         name.text = ship.name;
         subTitle.text = ship.subTitle;
         desc.text = ship.desc;
-        icon.sprite = ship.icon;
+        icon.sprite = ship.glowIcon;
+        icon.color = ship.mainColor;
 
         // Set ship stats
         healthStr = "<b>HEALTH:</b><color=white> " + Formatter.Round(ship.startingHealth) + "hp";
