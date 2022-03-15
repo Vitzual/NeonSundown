@@ -82,27 +82,33 @@ public class Enemy : Entity
     // Damage entity
     public override void Damage(float amount, float knockback = -10f)
     {
-        if (Random.Range(0f, 1f) < DamageHandler.critChance)
-        {
-            dmg = amount * 2f;
-            Damage(dmg, knockback, target.position);
-            DamageHandler.active.CreateNumber(transform.position, dmg, true);
-        }
-        else
-        {
-            Damage(amount, knockback, target.position);
-            DamageHandler.active.CreateNumber(transform.position, amount, false);
-        }
+        if (target != null) Damage(amount, knockback, target.position);
+        else Damage(amount, knockback, Vector3.zero);
     }
 
     // Damage entity
     public void Damage(float amount, float knockback, Vector3 origin)
     {
-        // Apply knockback
-        Knockback(knockback, origin);
+        // Do the damage my guy
+        if (Random.Range(0f, 1f) < DamageHandler.critChance)
+        {
+            // Apply double damage and knockback
+            dmg = amount * 2f;
+            health -= dmg;
+            Knockback(knockback * 1.5f, origin);
+            DamageHandler.active.CreateNumber(transform.position, dmg, true);
+            AudioPlayer.PlayCritSound();
 
-        // Modify internal values
-        health -= amount;
+            // Check if enemy can shake screen
+            if (Settings.screenShake) CameraShake.ShakeAll();
+        }
+        else
+        {
+            // Apply normal damage
+            health -= amount;
+            Knockback(knockback, origin);
+            DamageHandler.active.CreateNumber(transform.position, amount, false);
+        }
         if (IsDead()) Destroy();
     }
 
@@ -134,10 +140,6 @@ public class Enemy : Entity
 
         // Set is destroy to true
         isDestroyed = true;
-
-        // Check if enemy can shake screen on death
-        if (data.shakeScreenOnDeath && Settings.screenShake)
-            CameraShake.ShakeAll();
 
         // Destroy the object
         Destroy(gameObject);

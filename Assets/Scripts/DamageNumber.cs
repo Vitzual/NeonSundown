@@ -12,8 +12,8 @@ public class DamageNumber : MonoBehaviour
     public float speed;
     [HideInInspector]
     public bool isActive = false;
-    public Vector3 increaseScale;
-    public Vector3 decreaseScale;
+    private Vector3 increaseScale;
+    private Vector3 decreaseScale;
 
     public void Set(float dmg, bool crit) 
     {
@@ -27,14 +27,14 @@ public class DamageNumber : MonoBehaviour
             amount.color = critColor;
             transform.localScale = new Vector2(2.5f, 2.5f);
             increaseScale = new Vector3(3f, 3f, 3f);
-            decreaseScale = new Vector3(-4f, -4f, -4f);
+            decreaseScale = new Vector3(-6f, -6f, -6f);
         }
         else 
         { 
             amount.color = Color.white;
             transform.localScale = new Vector2(2f, 2f);
             increaseScale = new Vector3(2f, 2f, 2f);
-            decreaseScale = new Vector3(-3f, -3f, -3f);
+            decreaseScale = new Vector3(-4f, -4f, -4f);
         }
     }
 
