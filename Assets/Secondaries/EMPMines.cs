@@ -34,7 +34,7 @@ public class EMPMines : Mines
         if (level < data.levels.Count)
         {
             StatValue stat = data.levels[level].stat;
-            if (stat.type == Stat.Stun)
+            if (stat.type == Stat.StunLength)
             {
                 if (stat.multiply) stunTime *= stat.modifier;
                 else stunTime += stat.modifier;
@@ -47,7 +47,7 @@ public class EMPMines : Mines
     // Overrides the get stat function
     public override float GetStat(Stat stat)
     {
-        if (stat == Stat.Stun)
+        if (stat == Stat.StunLength)
             return stunTime;
         else return base.GetStat(stat);
     }

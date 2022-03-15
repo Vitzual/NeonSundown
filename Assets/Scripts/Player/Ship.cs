@@ -425,22 +425,22 @@ public class Ship : Weapon
                 break;
 
             // Increase explosive rounds
-            case Stat.EnemyDamage:
+            case Stat.EnemyDmg:
                 enemyDamage = Deck.CalculateStat(stat, 1);
                 break;
 
             // Increases bullet size
-            case Stat.Size:
+            case Stat.BulletSize:
                 BulletHandler.bulletSize = Deck.CalculateStat(stat, 1);
                 break;
 
             // Increases bullet size
-            case Stat.Stun:
+            case Stat.StunLength:
                 stunLength = Deck.CalculateStat(stat, weapon.stun);
                 break;
 
             // Increases bullet size
-            case Stat.Crit:
+            case Stat.Criticals:
                 DamageHandler.critChance = Deck.CalculateStat(stat, 0.1f);
                 break;
 
@@ -522,19 +522,19 @@ public class Ship : Weapon
                 else return 0;
 
             // Get splitshots
-            case Stat.EnemyDamage:
+            case Stat.EnemyDmg:
                 return enemyDamage;
 
             // Get bullet size
-            case Stat.Size:
+            case Stat.BulletSize:
                 return BulletHandler.bulletSize;
 
             // Get bullet size
-            case Stat.Stun:
+            case Stat.StunLength:
                 return stunLength;
 
             // Crit thing
-            case Stat.Crit:
+            case Stat.Criticals:
                 return DamageHandler.critChance;
 
             // Syphon thing
@@ -617,19 +617,19 @@ public class Ship : Weapon
                 return 0;
 
             // Increase regen rate
-            case Stat.EnemyDamage:
+            case Stat.EnemyDmg:
                 return 1;
 
             // Increase thing
-            case Stat.Size:
+            case Stat.BulletSize:
                 return 1;
 
             // Increase thing
-            case Stat.Stun:
+            case Stat.StunLength:
                 return weapon.stun;
 
             // Crit thing
-            case Stat.Crit:
+            case Stat.Criticals:
                 return 0.1f;
 
             // Crit thing

@@ -30,6 +30,7 @@ public class PausedMenu : MonoBehaviour
         canvasGroup.alpha = 1f;
         canvasGroup.interactable = true;
         canvasGroup.blocksRaycasts = true;
+        CardEffects.UpdateEffects();
 
         isOpen = true;
         Dealer.isOpen = true;

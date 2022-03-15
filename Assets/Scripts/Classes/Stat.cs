@@ -20,8 +20,8 @@ public enum Stat
     Evasion,
     Splitshot,
     Explosive,
-    Size,
-    Stun,
-    EnemyDamage,
-    Crit
+    BulletSize,
+    StunLength,
+    EnemyDmg,
+    Criticals
 }

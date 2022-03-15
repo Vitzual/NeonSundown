@@ -95,7 +95,7 @@ public class Weapon : MonoBehaviour
                 knockback = (Deck.CalculateStat(type, weapon.knockback) 
                     + GetAdditions(type)) * GetMultiplier(type);
                 break;
-            case Stat.Stun:
+            case Stat.StunLength:
                 stunLength = (Deck.CalculateStat(type, weapon.stun)
                     + GetAdditions(type)) * GetMultiplier(type);
                 break;
@@ -114,7 +114,7 @@ public class Weapon : MonoBehaviour
         UpdateStat(Stat.Lifetime);
         UpdateStat(Stat.Range);
         UpdateStat(Stat.Knockback);
-        UpdateStat(Stat.Stun);
+        UpdateStat(Stat.StunLength);
     }
 
     // Returns a stat
@@ -155,7 +155,7 @@ public class Weapon : MonoBehaviour
                 return splitshots;
 
             // Get splitshots
-            case Stat.Stun:
+            case Stat.StunLength:
                 return stunLength;
 
             // Default case
@@ -198,7 +198,7 @@ public class Weapon : MonoBehaviour
                 return weapon.knockback;
 
             // Increase regen rate
-            case Stat.Stun:
+            case Stat.StunLength:
                 return weapon.stun;
 
             // Default case
