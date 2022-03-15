@@ -15,17 +15,17 @@ MonoBehaviour:
   internalId: 89037cc1-8bb2-4c3c-b161-94b0498de58a
   createdAtTicks: 637829446600894802
   name: Syphon
-  description: Steals 5% health from every enemy killed
-  sprite: {fileID: 0}
-  color: {r: 0, g: 0, b: 0, a: 0}
-  maximumAmount: 0
+  description: Steals a sliver of health from every enemy killed
+  sprite: {fileID: 21300000, guid: ee3120f9261369b4db7aee73e48f0e52, type: 3}
+  color: {r: 0.9302139, g: 0, b: 1, a: 1}
+  maximumAmount: 5
   dropChance: 1
-  canDrop: 0
+  canDrop: 1
   isUnlocked: 0
   value:
-    type: 0
-    modifier: 0
+    type: 15
+    modifier: 0.05
     multiply: 0
-    positive: 0
+    positive: 1
   applyToCards: 0
-  applyToPlayer: 0
+  applyToPlayer: 1
