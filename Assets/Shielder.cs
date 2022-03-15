@@ -45,4 +45,16 @@ public class Shielder : Enemy
             return;
         }
     }
+
+    // Disable shield
+    public override void Stun(float length)
+    {
+        // Damage shield if active
+        if (shieldActive)
+        {
+            AudioPlayer.Play(shieldSound, true, 0.8f, 0.8f);
+            shieldActive = false;
+            shield.SetActive(false);
+        }
+    }
 }
