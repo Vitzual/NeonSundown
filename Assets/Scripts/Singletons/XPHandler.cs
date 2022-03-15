@@ -13,34 +13,9 @@ public class XPHandler : MonoBehaviour
     public GameObject rewardObject;
     public Material deadXP;
 
-    // XP mover class
-    public class XPInstance
-    {
-        public XPInstance(float value, SpriteRenderer xpModel, Transform transform, Vector2 startPos, float speed = 10f, float timer = 15f)
-        {
-            this.value = value;
-            this.xpModel = xpModel;
-            this.transform = transform;
-            this.startPos = startPos;
-            this.timer = timer;
-            this.speed = speed;
-
-            isStarting = true;
-            isMoving = false;
-        }
-
-        public float value;
-        public Transform transform;
-        public SpriteRenderer xpModel;
-        public Vector2 startPos;
-        public bool isStarting;
-        public bool isMoving;
-        public float timer;
-        public float speed;
-    }
-
     // List of active movers
-    private List<XPInstance> xpList = new List<XPInstance>();
+    private List<XP> activeList = new List<XP>();
+    private List<XP> inactiveList = new List<XP>();
 
     // Target
     public XP xpObject;
@@ -68,62 +43,55 @@ public class XPHandler : MonoBehaviour
         if (Dealer.isOpen) return;
 
         // Move enemies each frame towards their target
-        for (int a = 0; a < xpList.Count; a++)
+        for (int a = 0; a < activeList.Count; a++)
         {
-            if (xpList[a].transform != null)
+            // If moving, aim towards player
+            if (activeList[a].isMoving)
             {
-                // If moving, aim towards player
-                if (xpList[a].isMoving)
+                // Move towards the target
+                float step = activeList[a].speed * Time.deltaTime;
+                activeList[a].transform.position = Vector2.MoveTowards(activeList[a].transform.position, player.transform.position, step);
+                activeList[a].speed += speedIncreaseModifier;
+
+                // Check distance
+                if (Vector2.Distance(activeList[a].transform.position, player.transform.position) < targetDistanceCheck)
                 {
-                    // Move towards the target
-                    float step = xpList[a].speed * Time.deltaTime;
-                    xpList[a].transform.position = Vector2.MoveTowards(xpList[a].transform.position, player.transform.position, step);
-                    xpList[a].speed += speedIncreaseModifier;
-
-                    // Check distance
-                    if (Vector2.Distance(xpList[a].transform.position, player.transform.position) < targetDistanceCheck)
-                    {
-                        player.AddXP(xpList[a].value);
-                        if (SaveSystem.saveData.level < Levels.ranks.Count)
-                            xpRequirement.text = Formatter.Round(SaveSystem.saveData.xp) + " / " +
-                                Levels.ranks[SaveSystem.saveData.level].xpRequirement + "xp";
-                        if (xpHealing) player.Heal(0.05f);
-                        AudioPlayer.Play(xpSound, true, 0.8f, 1.2f, false, 1.5f);
-                        Destroy(xpList[a].transform.gameObject);
-                        xpList.RemoveAt(a);
-                        a--;
-                    }
-                }
-
-                // Check if starting
-                else if (xpList[a].isStarting)
-                {
-                    // Move towards the target
-                    float step = xpList[a].speed * Time.deltaTime;
-                    xpList[a].transform.position = Vector2.MoveTowards(xpList[a].transform.position, xpList[a].startPos, step);
-                    xpList[a].speed -= speedFatigueModifier;
-
-                    // Check distance
-                    if (Vector2.Distance(xpList[a].transform.position, xpList[a].startPos)
-                        < targetDistanceCheck || xpList[a].speed <= 0f)
-                    {
-                        xpList[a].isStarting = false;
-                        xpList[a].speed = 5f;
-                    }
-                }
-
-                // Check if moving
-                else if (!xpList[a].isMoving)
-                {
-                    xpList[a].timer -= Time.deltaTime;
-                    if (xpList[a].timer < 0f)
-                        xpList[a].isMoving = true;
+                    player.AddXP(activeList[a].value);
+                    if (SaveSystem.saveData.level < Levels.ranks.Count)
+                        xpRequirement.text = Formatter.Round(SaveSystem.saveData.xp) + " / " +
+                            Levels.ranks[SaveSystem.saveData.level].xpRequirement + "xp";
+                    if (xpHealing) player.Heal(0.05f);
+                    AudioPlayer.Play(xpSound, true, 0.8f, 1.2f, false, 1.5f);
+                    activeList[a].gameObject.SetActive(false);
+                    inactiveList.Add(activeList[a]);
+                    activeList.RemoveAt(a);
+                    a--;
                 }
             }
-            else
+
+            // Check if starting
+            else if (activeList[a].isStarting)
             {
-                xpList.RemoveAt(a);
-                a--;
+                // Move towards the target
+                float step = activeList[a].speed * Time.deltaTime;
+                activeList[a].transform.position = Vector2.MoveTowards(activeList[a].transform.position, activeList[a].startPos, step);
+                activeList[a].speed -= speedFatigueModifier;
+
+                // Check distance
+                if (Vector2.Distance(activeList[a].transform.position, activeList[a].startPos)
+                    < targetDistanceCheck || activeList[a].speed <= 0f)
+                {
+                    activeList[a].isStarting = false;
+                    activeList[a].speed = 5f;
+                }
+            }
+
+            // Check if moving
+            else if (!activeList[a].isMoving)
+            {
+                activeList[a].timer -= Time.deltaTime;
+                if (activeList[a].timer < 0f)
+                    activeList[a].isMoving = true;
             }
         }
     }
@@ -156,21 +124,56 @@ public class XPHandler : MonoBehaviour
     // Spawn XP
     public void Spawn(Vector2 startPos, int amount, Crystal crystal = null)
     {
-        // Spawn XP
-        if (!Settings.compoundXP)
+        // Amount to spawn
+        int amountToSpawn = amount;
+
+        // Check if XP available in list
+        if (inactiveList.Count > 0)
         {
-            for (int i = 0; i < amount; i++)
+            if (!Settings.compoundXP)
+            {
+                for (int i = 0; i < amountToSpawn; i++)
+                {
+                    XP newXP = inactiveList[0];
+                    newXP.transform.position = startPos;
+                    newXP.Setup(new Vector2(startPos.x + Random.Range(-startDistance, startDistance),
+                                startPos.y + Random.Range(-startDistance, startDistance)), xpValue);
+                    newXP.gameObject.SetActive(true);
+                    activeList.Add(newXP);
+                    inactiveList.RemoveAt(0);
+                    amount -= 1;
+                    if (inactiveList.Count <= 0) break;
+                }
+            }
+            else
+            {
+                XP newXP = inactiveList[0];
+                newXP.transform.position = startPos;
+                newXP.Setup(new Vector2(startPos.x + Random.Range(-startDistance, startDistance),
+                    startPos.y + Random.Range(-startDistance, startDistance)), xpValue * amount);
+                newXP.gameObject.SetActive(true);
+                activeList.Add(newXP);
+                amount = 0;
+            }
+        }
+
+        if (amount > 0)
+        {
+            if (!Settings.compoundXP)
+            {
+                for (int i = 0; i < amount; i++)
+                {
+                    XP newXp = Instantiate(xpObject, startPos, Quaternion.identity);
+                    newXp.Setup(new Vector2(startPos.x + Random.Range(-startDistance, startDistance),
+                        startPos.y + Random.Range(-startDistance, startDistance)), xpValue);
+                }
+            }
+            else
             {
                 XP newXp = Instantiate(xpObject, startPos, Quaternion.identity);
                 newXp.Setup(new Vector2(startPos.x + Random.Range(-startDistance, startDistance),
-                    startPos.y + Random.Range(-startDistance, startDistance)), xpValue);
+                    startPos.y + Random.Range(-startDistance, startDistance)), xpValue * amount);
             }
-        }
-        else
-        {
-            XP newXp = Instantiate(xpObject, startPos, Quaternion.identity);
-            newXp.Setup(new Vector2(startPos.x + Random.Range(-startDistance, startDistance),
-                startPos.y + Random.Range(-startDistance, startDistance)), xpValue * amount);
         }
 
         // If crystal spawn set to true, spawn
@@ -180,14 +183,6 @@ public class XPHandler : MonoBehaviour
             newCrystal.Setup(50);
             newCrystal.SetSpeed();
         }
-    }
-
-    // Register mover
-    public XPInstance Register(float value, SpriteRenderer xpModel, Transform transform, Vector2 startPos)
-    {
-        XPInstance newXP = new XPInstance(value, xpModel, transform, startPos);
-        xpList.Add(newXP);
-        return newXP;
     }
 
     // Enable XP healing

@@ -6,18 +6,23 @@ public class XP : MonoBehaviour
 {
     // The target in question
     public float startDistance = 5f;
-    private XPHandler.XPInstance xpReference;
-    public SpriteRenderer xpModel;
+    [HideInInspector] public bool isMoving, isStarting;
+    [HideInInspector] public float speed, value, timer;
+    [HideInInspector] public Vector2 startPos;
 
     // Start method
-    public void Setup(Vector2 startPos, float amount)
+    public void Setup(Vector2 startPos, float value)
     {
-        xpReference = XPHandler.active.Register(amount, xpModel, transform, startPos);
+        this.startPos = startPos;
+        this.value = value;
+        isMoving = false;
+        isStarting = true;
+        speed = 10;
     }
 
     // On collision with player
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        xpReference.isMoving = true;
+        isMoving = true;
     }
 }
