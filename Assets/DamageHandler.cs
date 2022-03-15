@@ -25,6 +25,9 @@ public class DamageHandler : MonoBehaviour
 
     public void CreateNumber(Vector2 position, float amount, bool crit)
     {
+        // Check if numbers active
+        if (!Settings.damageNumbers) return;
+
         // Attempt to use pooled object
         if (inactiveNumbers.Count > 0)
         {

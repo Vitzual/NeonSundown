@@ -152,7 +152,7 @@ public class Dealer : MonoBehaviour
         cardSlots[number].Set(card);
 
         // Reset card cooldown
-        cardCooldown = 0.2f;
+        cardCooldown = 0.15f;
 
         // Check if that was the last card
         if (number + 1 == cardsToPick)
