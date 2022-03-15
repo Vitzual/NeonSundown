@@ -89,7 +89,7 @@ public class Card : MonoBehaviour
                 else
                 {
                     desc.text = weaponData.baseLevels[weapon.level].description;
-                    level.text = "LEVEL " + weapon.level + 1;
+                    level.text = "LEVEL " + (weapon.level + 1);
                 }
             }
 

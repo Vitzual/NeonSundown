@@ -105,6 +105,24 @@ public class Deck : MonoBehaviour
             SetupChroma((ChromaData)card);
     }
 
+    // Remove da card
+    public void RemoveCard(CardData card)
+    {
+        if (card is WeaponData)
+        {
+            WeaponData weapon = (WeaponData)card;
+            foreach (Weapon data in weaponInstances)
+            {
+                if (data.GetWeapon() == weapon)
+                {
+                    weaponInstances.Remove(data);
+                    break;
+                }
+            }
+            TakeCard(card);
+        }
+    }
+
     // Takes a card
     public void TakeCard(CardData card)
     {

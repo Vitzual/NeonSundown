@@ -238,4 +238,7 @@ public class Weapon : MonoBehaviour
             multipliers[type] += amount;
         else multipliers.Add(type, amount);
     }
+
+    // Get weapon
+    public WeaponData GetWeapon() { return weapon; }
 }

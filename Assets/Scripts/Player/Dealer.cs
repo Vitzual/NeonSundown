@@ -218,6 +218,8 @@ public class Dealer : MonoBehaviour
     {
         SynergyUI.Close();
         Deck.active.AddCard(data.outputCard);
+        if (data.removeCardOne) Deck.active.RemoveCard(data.cardOne);
+        if (data.removeCardTwo) Deck.active.RemoveCard(data.cardTwo);
         isOpen = false;
     }
 

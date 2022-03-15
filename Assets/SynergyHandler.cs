@@ -36,7 +36,6 @@ public class SynergyHandler : MonoBehaviour
                 availableSynergies.Enqueue(synergy);
                 synergiesMade.Add(synergy);
                 Events.active.SynergyAvailable(synergy);
-                Debug.Log(synergy.name + " synergy is available!");
             }
         }
     }
@@ -46,6 +45,7 @@ public class SynergyHandler : MonoBehaviour
     {
         if (availableSynergies.Count > 0)
         {
+            // Add the synergy and unlock
             SynergyData synergy = availableSynergies.Dequeue();
             SynergyUI.active.Synergize(synergy);
             SaveSystem.UnlockAchievement(synergy.achievement);

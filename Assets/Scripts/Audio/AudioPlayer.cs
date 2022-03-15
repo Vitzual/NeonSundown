@@ -85,7 +85,7 @@ public class AudioPlayer : MonoBehaviour
         }
 
         audioSource.volume = Settings.sound;
-        audioSource.pitch = Random.Range(0.9f, 1.1f);
+        audioSource.pitch = Random.Range(0.95f, 1.05f);
         audioSource.PlayOneShot(critSound, 0.5f);
     }
 }
