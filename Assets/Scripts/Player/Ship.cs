@@ -425,7 +425,7 @@ public class Ship : Weapon
                 break;
 
             // Increase explosive rounds
-            case Stat.EnemyDamge:
+            case Stat.EnemyDamage:
                 enemyDamage = Deck.CalculateStat(stat, 1);
                 break;
 
@@ -437,6 +437,11 @@ public class Ship : Weapon
             // Increases bullet size
             case Stat.Stun:
                 stunLength = Deck.CalculateStat(stat, weapon.stun);
+                break;
+
+            // Increases bullet size
+            case Stat.Crit:
+                DamageHandler.critChance = Deck.CalculateStat(stat, 0.1f);
                 break;
         }
     }
@@ -512,7 +517,7 @@ public class Ship : Weapon
                 else return 0;
 
             // Get splitshots
-            case Stat.EnemyDamge:
+            case Stat.EnemyDamage:
                 return enemyDamage;
 
             // Get bullet size
@@ -522,6 +527,10 @@ public class Ship : Weapon
             // Get bullet size
             case Stat.Stun:
                 return stunLength;
+
+            // Crit thing
+            case Stat.Crit:
+                return DamageHandler.critChance;
 
             // Default case
             default:
@@ -599,7 +608,7 @@ public class Ship : Weapon
                 return 0;
 
             // Increase regen rate
-            case Stat.EnemyDamge:
+            case Stat.EnemyDamage:
                 return 1;
 
             // Increase thing
@@ -609,6 +618,10 @@ public class Ship : Weapon
             // Increase thing
             case Stat.Stun:
                 return weapon.stun;
+
+            // Crit thing
+            case Stat.Crit:
+                return 0.1f;
 
             // Default case
             default:

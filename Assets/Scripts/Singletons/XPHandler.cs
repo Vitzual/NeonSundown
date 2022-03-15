@@ -117,11 +117,7 @@ public class XPHandler : MonoBehaviour
                 {
                     xpList[a].timer -= Time.deltaTime;
                     if (xpList[a].timer < 0f)
-                    {
                         xpList[a].isMoving = true;
-                        xpList[a].xpModel.material = deadXP;
-                        xpList[a].value = xpList[a].value / 2f;
-                    }
                 }
             }
             else

@@ -24,7 +24,7 @@ public class Hivemind : Enemy
             cooldown = data.speed;
             Vector2 spawnPos = new Vector2(transform.position.x + Random.Range(-randomizeRange, randomizeRange), 
                 transform.position.y + Random.Range(-randomizeRange, randomizeRange));
-            EnemyHandler.active.CreateEnemy(enemy, variant, spawnPos, false);
+            EnemyHandler.active.CreateEnemy(enemy, variant, spawnPos, false, true, false);
         }
         else cooldown -= Time.deltaTime;
     }

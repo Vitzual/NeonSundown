@@ -56,13 +56,13 @@ public class Card : MonoBehaviour
         title.color = card.color;
         level.color = card.color;
         type.color = card.color;
-        amount.color = card.color;
 
         bool useBase = true;
 
         // Show amount
-        if (amount.text != null)
+        if (amount != null)
         {
+            amount.color = card.color;
             int cardAmount = Deck.active.GetCardAmount(card);
             if (cardAmount >= 0) amount.text = cardAmount + "/" + card.maximumAmount;
             else amount.text = "";

@@ -6,16 +6,20 @@ public class EnemyHandler : MonoBehaviour
     // Custom enemy spawn queue
     public class EnemyQueue
     {
-        public EnemyQueue( EnemyData enemy, Variant variant, Vector2 position)
+        public EnemyQueue(EnemyData enemy, Variant variant, 
+            Vector2 position, bool disableRotation, bool enableLockOn)
         {
             this.variant = variant;
             this.enemy = enemy;
             this.position = position;
+            this.disableRotation = disableRotation;
+            this.enableLockOn = enableLockOn;
         }
 
         public Variant variant;
         public EnemyData enemy;
         public Vector2 position;
+        public bool disableRotation, enableLockOn;
     }
     protected Queue<EnemyQueue> enemyQueue = new Queue<EnemyQueue>();
 
@@ -66,7 +70,8 @@ public class EnemyHandler : MonoBehaviour
         {
             // Dequeue enemy from list
             EnemyQueue newEnemy = enemyQueue.Dequeue();
-            CreateEnemy(newEnemy.enemy, newEnemy.variant, newEnemy.position);
+            CreateEnemy(newEnemy.enemy, newEnemy.variant, newEnemy.position, 
+                newEnemy.disableRotation, newEnemy.enableLockOn, true);
         }
     }
 
@@ -90,9 +95,10 @@ public class EnemyHandler : MonoBehaviour
             }
         }
     }
-
+    
     // Create a new active enemy instance
-    public void QueueEnemy(EnemyData enemyData, Variant variant, int amount)
+    public void QueueEnemy(EnemyData enemyData, Variant variant, 
+        int amount, bool disableRotation, bool enableLockOn)
     {
         // Check queue length
         if (enemyQueue.Count > 1000) return;
@@ -107,12 +113,13 @@ public class EnemyHandler : MonoBehaviour
             if (i > 0) position = new Vector2(position.x + Random.Range(-5f, 5f), position.y + Random.Range(-5f, 5f));
 
             // Create the tile
-            enemyQueue.Enqueue(new EnemyQueue(enemyData, variant, position));
+            enemyQueue.Enqueue(new EnemyQueue(enemyData, variant, position, disableRotation, enableLockOn));
         }
     }
 
     // Creates a new enemy with a specific position
-    public void CreateEnemy(EnemyData enemyData, Variant variant, Vector2 position, bool global = true)
+    public void CreateEnemy(EnemyData enemyData, Variant variant, Vector2 position, 
+        bool disableRotation, bool enableLockOn, bool global)
     {
         // Create the tile
         Vector2 spawnPos;
@@ -134,6 +141,8 @@ public class EnemyHandler : MonoBehaviour
         // Attempt to set enemy variant
         Enemy enemy = lastObj.GetComponent<Enemy>();
         enemy.Setup(enemyData.variants[variant], player);
+        if (enableLockOn) enemy.EnableLockOn();
+        else if (disableRotation) enemy.DisableRotation();
 
         // Add to enemies list
         enemies.Add(enemy);

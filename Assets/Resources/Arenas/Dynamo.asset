@@ -22,50 +22,14 @@ MonoBehaviour:
   shortDesc: Arena comprised of shielded enemies
   arenaBackground: {fileID: 11400000, guid: 212235cec4c12fd42a5384b47c1febca, type: 2}
   arenaMenuPitch: 1
-  arenaMusic: {fileID: 8300000, guid: 760adcc133b79df4aa93117252aa4bc8, type: 3}
+  arenaMusic: {fileID: 8300000, guid: a584ac51fa50a1f468107ef3479baaed, type: 3}
   menuStage: {fileID: 11400000, guid: 9050d9ffa7d4c0c49925120bf802a7f1, type: 2}
   availableInDemo: 0
   unlockByDefault: 0
-  unlockObjective: 'Complete "Bomber Blitz" '
+  unlockObjective: Unlocked at level 25
   order: 3
   buttonColor: {r: 0, g: 0.6497364, b: 1, a: 1}
   lightColor: {r: 0.4764151, g: 0.81725866, b: 1, a: 1}
-  objectiveOne:
-    rewardName: NEW CARD
-    rewardImage: {fileID: 21300000, guid: 0dc4bfc3438db4e41805a34e66bc7b8d, type: 3}
-    rewardColor: {r: 1, g: 0.5647059, b: 0, a: 1}
-    timeRequired: 150
-    arenaReward: {fileID: 0}
-    shipReward: {fileID: 0}
-    cardReward: {fileID: 11400000, guid: 3d3373173462c1e48a69f2d69be0f831, type: 2}
-    achievementReward: {fileID: 0}
-  objectiveTwo:
-    rewardName: NEW ARENA
-    rewardImage: {fileID: 21300000, guid: b630d9252643dcc48ba78cff14e58ab8, type: 3}
-    rewardColor: {r: 1, g: 1, b: 1, a: 1}
-    timeRequired: 300
-    arenaReward: {fileID: 11400000, guid: 7fe1ab745ef0023428cfac666e92bbd5, type: 2}
-    shipReward: {fileID: 0}
-    cardReward: {fileID: 0}
-    achievementReward: {fileID: 0}
-  objectiveThree:
-    rewardName: NEW SHIP
-    rewardImage: {fileID: 21300000, guid: b299a122daf4c3843be6a968b8939e3f, type: 3}
-    rewardColor: {r: 1, g: 1, b: 1, a: 1}
-    timeRequired: 450
-    arenaReward: {fileID: 0}
-    shipReward: {fileID: 11400000, guid: 744961d9e6627c44ba7ecd1806ba9649, type: 2}
-    cardReward: {fileID: 0}
-    achievementReward: {fileID: 0}
-  objectiveFour:
-    rewardName: ACHIEVEMENT
-    rewardImage: {fileID: 21300000, guid: 9e08bdaab5753e04fad6f37676622765, type: 3}
-    rewardColor: {r: 1, g: 1, b: 1, a: 1}
-    timeRequired: 600
-    arenaReward: {fileID: 0}
-    shipReward: {fileID: 0}
-    cardReward: {fileID: 0}
-    achievementReward: {fileID: 3391616857268349422, guid: f589d5fe6376ca443bb8e175e09de7de, type: 2}
   stages:
   - {fileID: 11400000, guid: a0ef91bf259abf743828c959e37a70ad, type: 2}
   - {fileID: 11400000, guid: fd2ef25ba738d6a4eb17540954b121ba, type: 2}
@@ -74,11 +38,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8a4032907ed48244593e94855c8c61c9, type: 2}
   - {fileID: 11400000, guid: 21e4ed3da7740ad40aa3fa93054b7454, type: 2}
   - {fileID: 11400000, guid: 245b9eda40de6754da2f3dd9ba4149b1, type: 2}
-  startingCards:
-  - card: {fileID: 11400000, guid: b308ea3c438b1764fb53ebcc6d48198f, type: 2}
-    amount: 3
-    prestige: 0
-  blacklistCards:
-  - {fileID: 11400000, guid: 3e73f82ae1838654598c10a96338db95, type: 2}
-  - {fileID: 11400000, guid: cf6fb0419a8403940a23b119b9c865db, type: 2}
   useWall: 0

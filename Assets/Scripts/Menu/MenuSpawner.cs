@@ -129,7 +129,7 @@ public class MenuSpawner : MonoBehaviour
         enemy.Setup(enemyData.variants[variant], null);
         enemies.Add(enemy);
     }
-
+    
     // Wipe all enemies
     public void WipeEnemies()
     {

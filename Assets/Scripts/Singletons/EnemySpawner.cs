@@ -100,7 +100,8 @@ public class EnemySpawner : MonoBehaviour
                     if (enemies[enemy.data] < 0.1f)
                         enemies[enemy.data] = 0.1f;
                 }
-                EnemyHandler.active.QueueEnemy(enemy.data, enemy.variant, enemy.amount);
+                EnemyHandler.active.QueueEnemy(enemy.data, enemy.variant, 
+                    enemy.amount, enemy.disableRotation, enemy.enableLockOn);
             }
             else enemies[enemy.data] -= Time.deltaTime;
         }

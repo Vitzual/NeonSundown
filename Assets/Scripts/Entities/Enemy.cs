@@ -14,6 +14,7 @@ public class Enemy : Entity
     public Rigidbody2D rb;
     public bool isCullable = true;
     private bool isDestroyed = false;
+    private bool lockOn = false;
 
     // Transform lists
     public List<TrailRenderer> trails;
@@ -26,6 +27,10 @@ public class Enemy : Entity
     private float health;
     private float maxHealth;
     private float speed;
+    private float rotation;
+
+    // Runtime only variables
+    private float rotateStep, angle, step, dmg;
 
     // Target transform for moving
     protected Transform target;
@@ -65,6 +70,7 @@ public class Enemy : Entity
         health = data.health * EnemySpawner.enemyHealthMultiplier;
         speed = data.speed * EnemySpawner.enemySpeedMultiplier;
         maxHealth = health;
+        rotation = data.rotateSpeed;
 
         // Set target
         target = player;
@@ -76,9 +82,17 @@ public class Enemy : Entity
     // Damage entity
     public override void Damage(float amount, float knockback = -10f)
     {
-        if (target != null)
+        if (Random.Range(0f, 1f) < DamageHandler.critChance)
+        {
+            dmg = amount * 2f;
+            Damage(dmg, knockback, target.position);
+            DamageHandler.active.CreateNumber(transform.position, dmg, true);
+        }
+        else
+        {
             Damage(amount, knockback, target.position);
-        else Damage(amount, knockback, Vector3.zero);
+            DamageHandler.active.CreateNumber(transform.position, amount, false);
+        }
     }
 
     // Damage entity
@@ -150,26 +164,26 @@ public class Enemy : Entity
         // Move if target not null
         if (target != null)
         {
-            // Check if rotating (lock target)
+            // Calculate step
+            step = speed * Time.deltaTime;
+
             if (data.rotate)
             {
+                // Check if rotating (lock target)
                 rotator.Rotate(Vector3.forward, data.rotateSpeed * Time.deltaTime);
-                float step = speed * Time.deltaTime;
                 transform.position = Vector2.MoveTowards(transform.position, target.position, step);
             }
 
-            // Gradually rotate to the target
             else
             {
-                float rotateStep = data.rotateSpeed * Time.deltaTime;
-                float angle = Mathf.Atan2(target.transform.position.y - transform.position.y,
+                // Rotate towards the object
+                rotateStep = rotation * Time.deltaTime;
+                angle = Mathf.Atan2(target.transform.position.y - transform.position.y,
                     target.transform.position.x - transform.position.x) * Mathf.Rad2Deg;
                 Quaternion targetRotation = Quaternion.Euler(new Vector3(0, 0, angle - 90f));
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotateStep);
-
-                // Move towards the target
-                float movementStep = speed * Time.deltaTime;
-                transform.position += transform.up * movementStep;
+                if (lockOn) transform.position = Vector2.MoveTowards(transform.position, target.position, step);
+                else transform.position += transform.up * step;
             }
         }
     }
@@ -211,5 +225,17 @@ public class Enemy : Entity
     {
         stunned = true;
         stunLength = length;
+    }
+
+    public void EnableLockOn()
+    {
+        lockOn = true;
+    }
+
+    public void DisableRotation()
+    {
+        if (hasRigidbody)
+            rb.freezeRotation = true;
+        rotation = 0f;
     }
 }

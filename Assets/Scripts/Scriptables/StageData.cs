@@ -11,6 +11,8 @@ public class StageData : IdentifiableScriptableObject
         public Variant variant;
         public float cooldown;
         public int amount = 1;
+        public bool enableLockOn = false;
+        public bool disableRotation = false;
     }
 
     public new string name;

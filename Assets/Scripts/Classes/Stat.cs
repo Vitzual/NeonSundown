@@ -22,5 +22,6 @@ public enum Stat
     Explosive,
     Size,
     Stun,
-    EnemyDamge
+    EnemyDamage,
+    Crit
 }

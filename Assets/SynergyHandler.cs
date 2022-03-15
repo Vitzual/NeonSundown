@@ -45,6 +45,10 @@ public class SynergyHandler : MonoBehaviour
     public static void Create()
     {
         if (availableSynergies.Count > 0)
-            SynergyUI.active.Synergize(availableSynergies.Dequeue());
+        {
+            SynergyData synergy = availableSynergies.Dequeue();
+            SynergyUI.active.Synergize(synergy);
+            SaveSystem.UnlockAchievement(synergy.achievement);
+        }
     }
 }

@@ -33,7 +33,7 @@ public class Spawner : Enemy
 
             // Check if enemy should be setup with handler
             if (setupWithHandler)
-                EnemyHandler.active.CreateEnemy(enemyToSpawn, variant, spawnPos, false);
+                EnemyHandler.active.CreateEnemy(enemyToSpawn, variant, spawnPos, false, false, false);
 
             // If not, just instantiate it
             else
