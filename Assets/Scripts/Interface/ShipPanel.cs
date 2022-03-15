@@ -249,6 +249,7 @@ public class ShipPanel : MonoBehaviour
             // Toggle modules
             ToggleModules(false);
         }
+        else ToggleModules(false);
     }
     
     // Applies a module to the ship stats

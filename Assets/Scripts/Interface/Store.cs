@@ -79,7 +79,7 @@ public class Store : MonoBehaviour
         if (SaveSystem.saveData.modules.ContainsKey(module.InternalID))
         {
             owned.text = "LEVEL " + SaveSystem.GetModuleAmount(module.InternalID);
-            buttonText.text = "UPGRADE";
+            buttonText.text = "COMING SOON";
         }
         else
         {
@@ -102,7 +102,7 @@ public class Store : MonoBehaviour
         {
             // Update the save with new module
             SaveSystem.AddModule(module.InternalID, 1);
-            SaveSystem.AddCrystal(module.cost.InternalID, -1);
+            SaveSystem.AddCrystal(module.cost.InternalID, -10);
             SaveSystem.UpdateSave();
             UpdateCrystals();
             SetPanel(module);

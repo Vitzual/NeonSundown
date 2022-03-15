@@ -115,6 +115,7 @@ public class Deck : MonoBehaviour
             {
                 if (data.GetWeapon() == weapon)
                 {
+                    Destroy(data.gameObject);
                     weaponInstances.Remove(data);
                     break;
                 }
