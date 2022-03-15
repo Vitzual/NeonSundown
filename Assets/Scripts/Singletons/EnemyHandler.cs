@@ -33,12 +33,14 @@ public class EnemyHandler : MonoBehaviour
 
     // Contains all active enemies in the scene
     public List<Enemy> enemies = new List<Enemy>();
+    public static float syphon = 0f;
 
     // Player transform for targetting
+    public Ship ship;
     public Transform player;
 
     // On awake set active instance
-    public void Awake() { active = this; }
+    public void Awake() { active = this; syphon = 0f; }
 
     // Spawn enemies
     public void Update()
@@ -90,6 +92,7 @@ public class EnemyHandler : MonoBehaviour
             }
             else
             {
+                if (syphon > 0) ship.Heal(syphon);
                 enemies.RemoveAt(a);
                 a--;
             }

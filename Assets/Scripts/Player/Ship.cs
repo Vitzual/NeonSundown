@@ -443,6 +443,11 @@ public class Ship : Weapon
             case Stat.Crit:
                 DamageHandler.critChance = Deck.CalculateStat(stat, 0.1f);
                 break;
+
+            // Increases bullet size
+            case Stat.Syphon:
+                EnemyHandler.syphon = Deck.CalculateStat(stat, 0f);
+                break;
         }
     }
 
@@ -531,6 +536,10 @@ public class Ship : Weapon
             // Crit thing
             case Stat.Crit:
                 return DamageHandler.critChance;
+
+            // Syphon thing
+            case Stat.Syphon:
+                return EnemyHandler.syphon;
 
             // Default case
             default:
@@ -622,6 +631,10 @@ public class Ship : Weapon
             // Crit thing
             case Stat.Crit:
                 return 0.1f;
+
+            // Crit thing
+            case Stat.Syphon:
+                return 0f;
 
             // Default case
             default:
