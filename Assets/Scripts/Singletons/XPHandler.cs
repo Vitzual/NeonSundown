@@ -60,9 +60,10 @@ public class XPHandler : MonoBehaviour
                     if (SaveSystem.saveData.level < Levels.ranks.Count)
                         xpRequirement.text = Formatter.Round(SaveSystem.saveData.xp) + " / " +
                             Levels.ranks[SaveSystem.saveData.level].xpRequirement + "xp";
-                    if (xpHealing) player.Heal(0.05f);
+                    if (xpHealing) player.Heal(0.05f * activeList[a].value);
                     AudioPlayer.Play(xpSound, true, 0.8f, 1.2f, false, 1.5f);
                     activeList[a].gameObject.SetActive(false);
+                    activeList[a].isInactive = true;
                     inactiveList.Add(activeList[a]);
                     activeList.RemoveAt(a);
                     a--;
@@ -124,14 +125,14 @@ public class XPHandler : MonoBehaviour
     // Spawn XP
     public void Spawn(Vector2 startPos, int amount, Crystal crystal = null)
     {
-        // Amount to spawn
-        int amountToSpawn = amount;
-
         // Check if XP available in list
         if (inactiveList.Count > 0)
         {
             if (!Settings.compoundXP)
             {
+                // Amount to spawn
+                int amountToSpawn = amount;
+
                 for (int i = 0; i < amountToSpawn; i++)
                 {
                     XP newXP = inactiveList[0];
@@ -153,6 +154,7 @@ public class XPHandler : MonoBehaviour
                     startPos.y + Random.Range(-startDistance, startDistance)), xpValue * amount);
                 newXP.gameObject.SetActive(true);
                 activeList.Add(newXP);
+                inactiveList.RemoveAt(0);
                 amount = 0;
             }
         }
@@ -166,6 +168,7 @@ public class XPHandler : MonoBehaviour
                     XP newXp = Instantiate(xpObject, startPos, Quaternion.identity);
                     newXp.Setup(new Vector2(startPos.x + Random.Range(-startDistance, startDistance),
                         startPos.y + Random.Range(-startDistance, startDistance)), xpValue);
+                    activeList.Add(newXp);
                 }
             }
             else
@@ -173,6 +176,7 @@ public class XPHandler : MonoBehaviour
                 XP newXp = Instantiate(xpObject, startPos, Quaternion.identity);
                 newXp.Setup(new Vector2(startPos.x + Random.Range(-startDistance, startDistance),
                     startPos.y + Random.Range(-startDistance, startDistance)), xpValue * amount);
+                activeList.Add(newXp);
             }
         }
 
