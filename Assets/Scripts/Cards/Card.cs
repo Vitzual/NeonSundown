@@ -241,29 +241,10 @@ public class Card : MonoBehaviour
             {
                 ResetCard();
 
-                // Set card anim speed
-                if (Settings.skipCardAnim)
-                {
-                    transform.localPosition = cardPosition;
-                    canvasGroup.alpha = 1f;
-                }
-                else if (Settings.fastCardAnim)
-                {
-                    LeanTween.moveLocal(gameObject, cardPosition, animationSpeed / 2f);
-                    LeanTween.alphaCanvas(canvasGroup, 1f, fadeInSpeed / 2f);
-                }
-                else
-                {
-                    LeanTween.moveLocal(gameObject, cardPosition, animationSpeed);
-                    LeanTween.alphaCanvas(canvasGroup, 1f, fadeInSpeed);
-                }
-
-                // Play card sound
-                if (!Settings.skipCardAnim)
-                {
-                    audioSource.volume = Settings.sound;
-                    audioSource.Play();
-                }
+                LeanTween.moveLocal(gameObject, cardPosition, animationSpeed / 2f);
+                LeanTween.alphaCanvas(canvasGroup, 1f, fadeInSpeed / 2f);
+                audioSource.volume = Settings.sound;
+                audioSource.Play();
             }
             else
             {

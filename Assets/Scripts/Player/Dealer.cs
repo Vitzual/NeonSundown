@@ -98,10 +98,8 @@ public class Dealer : MonoBehaviour
         {
             if (background.color.a < 0.5f)
             {
-                if (Settings.skipCardAnim) background.color = new Color(0, 0, 0, 0.5f);
-                else if (Settings.fastCardAnim) background.color = new Color(0, 0, 0, background.color.a + 
+                background.color = new Color(0, 0, 0, background.color.a + 
                     (bgFadeInSpeed * Time.deltaTime * fastDealSpeed));
-                else background.color = new Color(0, 0, 0, background.color.a + (bgFadeInSpeed * Time.deltaTime));
             }
             else
             {
@@ -114,31 +112,14 @@ public class Dealer : MonoBehaviour
         if (isOpen)
         {
             if (Settings.musicPitching && music.pitch > pitchDown)
-            {
-                if (Settings.skipCardAnim) music.pitch = pitchDown;
-                else if (Settings.fastCardAnim) music.pitch -= pitchSpeed * Time.deltaTime * fastDealSpeed;
-                else music.pitch -= pitchSpeed * Time.deltaTime;
-            }
+                music.pitch -= pitchSpeed * Time.deltaTime * fastDealSpeed;
 
             if (!canvasSet && cardsDealt)
             {
                 if (title.alpha < 1f)
                 {
-                    if (Settings.skipCardAnim)
-                    {
-                        title.alpha = 1f;
-                        dealOptions.alpha = 1f;
-                    }
-                    else if (Settings.fastCardAnim)
-                    {
-                        title.alpha += titleFadeInSpeed * Time.deltaTime * fastDealSpeed;
-                        dealOptions.alpha += titleFadeInSpeed * Time.deltaTime * fastDealSpeed;
-                    }
-                    else
-                    {
-                        title.alpha += titleFadeInSpeed * Time.deltaTime;
-                        dealOptions.alpha += titleFadeInSpeed * Time.deltaTime;
-                    }
+                    title.alpha += titleFadeInSpeed * Time.deltaTime * fastDealSpeed;
+                    dealOptions.alpha += titleFadeInSpeed * Time.deltaTime * fastDealSpeed;
                 }
                 else canvasSet = true;
             }
@@ -147,9 +128,7 @@ public class Dealer : MonoBehaviour
         // Pitch back up music after dealign
         else if (music.pitch < 1.0f)
         {
-            if (Settings.skipCardAnim) music.pitch = 1f;
-            else if (Settings.fastCardAnim) music.pitch += pitchSpeed * Time.deltaTime * fastDealSpeed;
-            else music.pitch += pitchSpeed * Time.deltaTime;
+            music.pitch += pitchSpeed * Time.deltaTime * fastDealSpeed;
 
             if (music.pitch >= 1f)
                 music.pitch = 1f;
@@ -173,11 +152,7 @@ public class Dealer : MonoBehaviour
         cardSlots[number].Set(card);
 
         // Reset card cooldown
-        if (!Settings.skipCardAnim)
-        {
-            if (Settings.fastCardAnim) cardCooldown = cardDealSpeed / 4f;
-            else cardCooldown = cardDealSpeed;
-        }
+        cardCooldown = 0.2f;
 
         // Check if that was the last card
         if (number + 1 == cardsToPick)

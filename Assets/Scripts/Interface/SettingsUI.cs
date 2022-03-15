@@ -35,8 +35,8 @@ public class SettingsUI : MonoBehaviour
     public SwitchManager shipColoringSwitch;
     public SwitchManager shakeSwitch;
     public SwitchManager particleSwitch;
-    public SwitchManager fastAnimSwitch;
-    public SwitchManager skipAnimSwitch;
+    public SwitchManager damageNumbers;
+    public SwitchManager compoundXP;
     public SwitchManager musicPitchingSwitch;
 
     // Canvas group
@@ -178,8 +178,8 @@ public class SettingsUI : MonoBehaviour
     public void ShipColoring(bool toggle) { Settings.shipColoring = toggle; Events.active.ShipColoring(toggle); }
     public void ScreenShake(bool toggle) { Settings.screenShake = toggle; }
     public void UseParticles(bool toggle) { Settings.useParticles = toggle; }
-    public void FastAnimation(bool toggle) { Settings.fastCardAnim = toggle; }
-    public void SkipAnimation(bool toggle) { Settings.skipCardAnim = toggle; }
+    public void DamageNumbers(bool toggle) { Settings.damageNumbers = toggle; }
+    public void CompoundXP(bool toggle) { Settings.compoundXP = toggle; }
     public void MusicPitching(bool toggle) { Settings.musicPitching = toggle; Events.active.ResetPitch(); }
 
     // Set glow amount 
@@ -210,8 +210,8 @@ public class SettingsUI : MonoBehaviour
         shipColoringSwitch.isOn = Settings.shipColoring;
         shakeSwitch.isOn = Settings.screenShake;
         particleSwitch.isOn = Settings.useParticles;
-        fastAnimSwitch.isOn = Settings.fastCardAnim;
-        skipAnimSwitch.isOn = Settings.skipCardAnim;
+        damageNumbers.isOn = Settings.damageNumbers;
+        compoundXP.isOn = Settings.compoundXP;
         musicPitchingSwitch.isOn = Settings.musicPitching;
 
         // Update values
@@ -222,8 +222,8 @@ public class SettingsUI : MonoBehaviour
         shipColoringSwitch.UpdateUI();
         shakeSwitch.UpdateUI();
         particleSwitch.UpdateUI();
-        fastAnimSwitch.UpdateUI();
-        skipAnimSwitch.UpdateUI();
+        damageNumbers.UpdateUI();
+        compoundXP.UpdateUI();
         musicPitchingSwitch.UpdateUI();
 
         // Update canvas group

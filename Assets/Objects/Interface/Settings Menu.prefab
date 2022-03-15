@@ -1185,7 +1185,7 @@ GameObject:
   - component: {fileID: 4880844843656373095}
   - component: {fileID: 6116423728269860409}
   m_Layer: 5
-  m_Name: Fast animation
+  m_Name: Damage numbers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1232,7 +1232,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 8838788522258047302}
         m_TargetAssemblyTypeName: SettingsUI, Assembly-CSharp
-        m_MethodName: FastAnimation
+        m_MethodName: DamageNumbers
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1247,7 +1247,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 8838788522258047302}
         m_TargetAssemblyTypeName: SettingsUI, Assembly-CSharp
-        m_MethodName: FastAnimation
+        m_MethodName: DamageNumbers
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2201,7 +2201,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: FAST CARD DRAWS
+  m_text: DAMAGE NUMBERS
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ca60657c190bc8c4e89dfb3e23d76209, type: 2}
   m_sharedMaterial: {fileID: 21131478253023500, guid: ca60657c190bc8c4e89dfb3e23d76209, type: 2}
@@ -5791,7 +5791,7 @@ GameObject:
   - component: {fileID: 4284929486200827945}
   - component: {fileID: 7335060336653075870}
   m_Layer: 5
-  m_Name: Play animation
+  m_Name: Compound XP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5838,7 +5838,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 8838788522258047302}
         m_TargetAssemblyTypeName: SettingsUI, Assembly-CSharp
-        m_MethodName: SkipAnimation
+        m_MethodName: CompoundXP
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5853,7 +5853,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 8838788522258047302}
         m_TargetAssemblyTypeName: SettingsUI, Assembly-CSharp
-        m_MethodName: SkipAnimation
+        m_MethodName: CompoundXP
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6353,7 +6353,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: SKIP CARD DRAWS
+  m_text: COMPOUND XP
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ca60657c190bc8c4e89dfb3e23d76209, type: 2}
   m_sharedMaterial: {fileID: 21131478253023500, guid: ca60657c190bc8c4e89dfb3e23d76209, type: 2}
@@ -10465,6 +10465,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scaleAdjustment: 0.1
+  overrideSize: 0
+  originalSize: {x: 0, y: 0, z: 0}
   playSound: 1
 --- !u!1 &8838788521833995078
 GameObject:
@@ -14092,8 +14094,8 @@ MonoBehaviour:
   shipColoringSwitch: {fileID: 3919209364385537282}
   shakeSwitch: {fileID: 9199939398708565301}
   particleSwitch: {fileID: 8946247118722750582}
-  fastAnimSwitch: {fileID: 5244468130680893526}
-  skipAnimSwitch: {fileID: 163471724544092982}
+  damageNumbers: {fileID: 5244468130680893526}
+  compoundXP: {fileID: 163471724544092982}
   musicPitchingSwitch: {fileID: 4944876622332420048}
   canvasGroup: {fileID: 8838788522258047303}
   menuVolume: {fileID: 11400000, guid: aa7f3a7213b8171429c23e27b9c59739, type: 2}

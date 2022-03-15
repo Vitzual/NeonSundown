@@ -17,8 +17,8 @@ public class SettingsData
     public float lightAmount;
     public bool shipColoring;
     public bool useParticles;
-    public bool fastCardAnim;
-    public bool skipCardAnim;
+    public bool damageNumbers;
+    public bool compoundXP;
     public bool musicPitching;
 
     // Keybinds

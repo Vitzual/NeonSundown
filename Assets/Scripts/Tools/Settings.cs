@@ -28,8 +28,7 @@ public class Settings
     public static bool useParticles = true;
     public static float glowAmount = 1f;
     public static float lightAmount = 1f;
-    public static bool fastCardAnim = false;
-    public static bool skipCardAnim = false;
+    public static bool damageNumbers = false;
     public static bool compoundXP = false;
     public static bool musicPitching = true;
 
@@ -51,8 +50,8 @@ public class Settings
         settingsData.glowAmount = glowAmount;
         settingsData.lightAmount = lightAmount;
         settingsData.useParticles = useParticles;
-        settingsData.fastCardAnim = fastCardAnim;
-        settingsData.skipCardAnim = skipCardAnim;
+        settingsData.damageNumbers = damageNumbers;
+        settingsData.compoundXP = compoundXP;
         settingsData.musicPitching = musicPitching;
 
         // Get keybinds from file
@@ -93,8 +92,8 @@ public class Settings
             shipColoring = settingsData.shipColoring;
             screenShake = settingsData.screenShake;
             useParticles = settingsData.useParticles;
-            fastCardAnim = settingsData.fastCardAnim;
-            skipCardAnim = settingsData.skipCardAnim;
+            damageNumbers = settingsData.damageNumbers;
+            compoundXP = settingsData.compoundXP;
             musicPitching = settingsData.musicPitching;
 
             // Apply glow effect
@@ -146,8 +145,7 @@ public class Settings
             shipColoring = true;
             screenShake = true;
             useParticles = true;
-            fastCardAnim = false;
-            skipCardAnim = false;
+            damageNumbers = true;
             compoundXP = false;
             musicPitching = true;
 
