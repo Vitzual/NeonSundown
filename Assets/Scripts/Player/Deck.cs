@@ -106,7 +106,7 @@ public class Deck : MonoBehaviour
     }
 
     // Remove da card
-    public void RemoveCard(CardData card)
+    public void RemoveInstance(CardData card)
     {
         if (card is WeaponData)
         {
@@ -120,7 +120,6 @@ public class Deck : MonoBehaviour
                     break;
                 }
             }
-            TakeCard(card);
         }
     }
 

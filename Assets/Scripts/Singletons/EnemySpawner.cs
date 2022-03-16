@@ -75,7 +75,7 @@ public class EnemySpawner : MonoBehaviour
             {
                 scaleIncrease = 15f;
                 scaleCalc += 0.25f;
-                enemyHealthMultiplier += 0.15f;
+                enemyHealthMultiplier += 0.2f;
                 enemySpeedMultiplier += 0.02f;
                 enemyDamageMultiplier += 0.1f;
             }
