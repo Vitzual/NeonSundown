@@ -6,6 +6,9 @@ using UnityEngine.UI;
 
 public class ShipPanel : MonoBehaviour
 {
+    // Is loading flag
+    public static bool isLoading = false;
+
     // Module slot on ship panel
     [System.Serializable]
     public class Module
@@ -49,6 +52,9 @@ public class ShipPanel : MonoBehaviour
     // On start, subscribe to ship setup and create buttons
     public void Start()
     {
+        // Set loading to false
+        isLoading = false;
+
         // Get audio source component 
         audioSource = GetComponent<AudioSource>();
 
@@ -236,11 +242,14 @@ public class ShipPanel : MonoBehaviour
                 moduleSlots[moduleSlot].icon.color = module.color;
 
                 // Play module sound
-                Events.active.VolumeChanged(Settings.music / 3f);
-                audioSource.volume = Settings.sound;
-                audioSource.Play();
-                StopAllCoroutines();
-                StartCoroutine(MusicPlayer.FadeIn(1f, 2f));
+                if (!isLoading)
+                {
+                    Events.active.VolumeChanged(Settings.music / 3f);
+                    audioSource.volume = Settings.sound;
+                    audioSource.Play();
+                    StopAllCoroutines();
+                    StartCoroutine(MusicPlayer.FadeIn(1f, 2f));
+                }
             }
             else
             {

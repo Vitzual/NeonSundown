@@ -98,6 +98,7 @@ public class Menu : MonoBehaviour
             if (context.lastModules != null)
             {
                 int index = 0;
+                ShipPanel.isLoading = true;
                 foreach(string id in context.lastModules)
                 {
                     if (Scriptables.modulesDict.ContainsKey(id))
@@ -111,8 +112,8 @@ public class Menu : MonoBehaviour
                     }
                     index += 1;
                 }
+                ShipPanel.isLoading = false;
             }
-
         }
         else shipPanel.Setup(alphaShip);
     }

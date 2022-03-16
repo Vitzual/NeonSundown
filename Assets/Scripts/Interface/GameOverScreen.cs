@@ -25,11 +25,11 @@ public class GameOverScreen : MonoBehaviour
     {
         // Set the runtime stats
         stats.text = Formatter.Time(EnemySpawner.GetTime()) + "<br>" +
-            Formatter.Round(RuntimeStats.totalXP) + "xp<br>" +
+            Formatter.Round(RuntimeStats.totalXP, 0) + "<br>" +
             RuntimeStats.enemiesDestroyed + "<br>" +
             RuntimeStats.bulletsFired + "<br>" +
-            Formatter.Round((float)RuntimeStats.bulletsHit / (float)RuntimeStats.bulletsFired * 100f) + "%<br>" +
-            Formatter.Round(RuntimeStats.damageTaken) + "hp<br>" +
+            Formatter.Round((float)RuntimeStats.bulletsHit / (float)RuntimeStats.bulletsFired * 100f, 0) + "%<br>" +
+            Formatter.Round(RuntimeStats.damageTaken, 0) + "<br>" +
             RuntimeStats.cardsChosen + "<br>" +
             RuntimeStats.synergiesCreated;
 
