@@ -142,6 +142,10 @@ public class Enemy : Entity
         isDestroyed = true;
         RuntimeStats.enemiesDestroyed += 1;
 
+        // Possibly syphon
+        if (EnemyHandler.syphon > 0)
+            Ship.Heal(EnemyHandler.syphon);
+
         // Destroy the object
         Destroy(gameObject);
     }

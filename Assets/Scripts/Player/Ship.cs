@@ -25,8 +25,10 @@ public class Ship : Weapon
     // Health amount
     private static float health;
     private static float maxHealth;
-    public ProgressBar healthBar;
-    public CanvasGroup healthCanvas;
+    public ProgressBar _healthBar;
+    public CanvasGroup _healthCanvas;
+    private static ProgressBar healthBar;
+    private static CanvasGroup healthCanvas;
 
     // XP amount
     public List<float> levels;
@@ -55,6 +57,9 @@ public class Ship : Weapon
     // Subscribe to setup event
     public void Start()
     {
+        healthBar = _healthBar;
+        healthCanvas = _healthCanvas;
+
         if (Gamemode.ship != null)
         {
             Events.active.onSetupShip += Setup;
@@ -245,7 +250,7 @@ public class Ship : Weapon
     }
 
     // Heal amount
-    public void Heal(float amount)
+    public static void Heal(float amount)
     {
         // Update health
         health += amount;
@@ -271,19 +276,16 @@ public class Ship : Weapon
         UpdateHealth();
     }
 
-    private void UpdateHealth()
+    private static void UpdateHealth()
     {
         // Update health UI bar
         healthBar.currentPercent = (float)health / maxHealth * 100;
         healthBar.UpdateUI();
 
         // Show bar for short period of time
-        if (!isDead)
-        {
-            healthCanvas.alpha = 1f;
-            LeanTween.reset();
-            LeanTween.alphaCanvas(healthCanvas, 0f, 0.5f).setDelay(3f);
-        }
+        healthCanvas.alpha = 1f;
+        LeanTween.reset();
+        LeanTween.alphaCanvas(healthCanvas, 0f, 0.5f).setDelay(3f);
     }
 
     // Kill the player

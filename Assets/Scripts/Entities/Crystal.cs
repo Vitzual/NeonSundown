@@ -88,7 +88,7 @@ public class Crystal : Entity
 
             // If green crystal, heal
             case CrystalType.green:
-                Deck.player.Heal(10f);
+                Ship.Heal(10f);
                 break;
 
             // If red crystal, heal

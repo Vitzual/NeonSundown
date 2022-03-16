@@ -18,10 +18,10 @@ MonoBehaviour:
   description: Fires torpedos randomly in all directions
   sprite: {fileID: 21300000, guid: b46d0c8c022681a4085ea02b49eb88c6, type: 3}
   color: {r: 1, g: 0.69146764, b: 0, a: 1}
-  maximumAmount: 10
+  maximumAmount: 5
+  dropChance: 1
   canDrop: 1
   isUnlocked: 1
-  prestigeSprite: {fileID: 21300000, guid: 0a3d7d412c181d74eabda7489ac29172, type: 3}
   baseLevels:
   - stat: 1
     description: Increases damage by 5
@@ -43,27 +43,6 @@ MonoBehaviour:
     description: Decreases cooldown by 0.5s
     multiply: 0
     modifier: -0.5
-  prestigeLevels:
-  - stat: 1
-    description: Increases damage by 15
-    multiply: 0
-    modifier: 15
-  - stat: 2
-    description: Decreases cooldown by 0.8s
-    multiply: 0
-    modifier: -0.8
-  - stat: 7
-    description: Adds piercing to rockets.
-    multiply: 0
-    modifier: 2
-  - stat: 1
-    description: Increases damage by 15
-    multiply: 0
-    modifier: 15
-  - stat: 2
-    description: Decreases cooldown by 0.8s
-    multiply: 0
-    modifier: -0.8
   damage: 10
   cooldown: 2
   moveSpeed: 40
@@ -75,6 +54,7 @@ MonoBehaviour:
   bullets: 1
   knockback: -25
   lifetime: 3
+  stun: 0
   randomDirection: 1
   randomTarget: 1
   trackTarget: 1

@@ -19,7 +19,7 @@ public class DamageNumber : MonoBehaviour
     {
         time = 1f;
         isActive = true;
-        amount.text = Formatter.Round(dmg);
+        amount.text = Formatter.Round(dmg, 1);
 
         // Set crit color
         if (crit)
