@@ -17,6 +17,7 @@ public class Gamemode : MonoBehaviour
     // Setup the game
     public void Awake()
     {
+        RuntimeStats.ResetStats();
         Scriptables.GenerateAllScriptables();
         if (arena == null) arena = _arena;
     }

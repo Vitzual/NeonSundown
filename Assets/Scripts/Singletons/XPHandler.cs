@@ -35,7 +35,7 @@ public class XPHandler : MonoBehaviour
         active = this;
         UpdateRewards();
     }
-
+    
     // Move normal enemies
     public void FixedUpdate()
     {
@@ -57,6 +57,7 @@ public class XPHandler : MonoBehaviour
                 if (Vector2.Distance(activeList[a].transform.position, player.transform.position) < targetDistanceCheck)
                 {
                     player.AddXP(activeList[a].value);
+                    RuntimeStats.totalXP += activeList[a].value;
                     if (SaveSystem.saveData.level < Levels.ranks.Count)
                         xpRequirement.text = Formatter.Round(SaveSystem.saveData.xp) + " / " +
                             Levels.ranks[SaveSystem.saveData.level].xpRequirement + "xp";

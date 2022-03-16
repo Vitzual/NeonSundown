@@ -166,6 +166,9 @@ public class Dealer : MonoBehaviour
     // Pick the card and add to palyer
     public void PickCard(CardData card, bool redraw, int cardNumber)
     {
+        // Add the thing boss man
+        RuntimeStats.cardsChosen += 1;
+
         // Add this to pick list
         if (Deck.active.GetCardAmount(card) + 1 == card.maximumAmount)
         {

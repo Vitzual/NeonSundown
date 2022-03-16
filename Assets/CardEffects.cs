@@ -51,7 +51,7 @@ public class CardEffects : MonoBehaviour
         string color = " <color=green> (";
 
         // Check stat
-        if (difference < 0 && stat != Stat.Cooldown && stat != Stat.Knockback) color = "<color=red> (";
+        if (difference < 0 && stat != Stat.Cooldown && stat != Stat.Knockback && stat != Stat.EnemyDmg) color = "<color=red> (";
         else if (difference >= 0 && stat == Stat.Cooldown && stat == Stat.Knockback) color = "<color=green> (";
         if (difference >= 0) color += "+";
         

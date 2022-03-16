@@ -140,6 +140,7 @@ public class Enemy : Entity
 
         // Set is destroy to true
         isDestroyed = true;
+        RuntimeStats.enemiesDestroyed += 1;
 
         // Destroy the object
         Destroy(gameObject);

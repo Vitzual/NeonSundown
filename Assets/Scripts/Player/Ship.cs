@@ -222,6 +222,9 @@ public class Ship : Weapon
     {
         if (shipCooldown <= 0)
         {
+            // Add bullet fired
+            RuntimeStats.bulletsFired += (int)bullets;
+
             // Create bullet
             if (BulletHandler.energyBullets)
             {
@@ -254,6 +257,9 @@ public class Ship : Weapon
     // Damage method
     public void Damage(float damage)
     {
+        // Add runtime stat
+        RuntimeStats.damageTaken += damage;
+
         // Set enemy damage
         damage = damage * enemyDamage;
 

@@ -26,6 +26,9 @@ public class SynergyUI : MonoBehaviour
     // Synergize them cards
     public void Synergize(SynergyData synergy)
     {
+        // Add the thing boss man
+        RuntimeStats.synergiesCreated += 1;
+
         debugFlag = false;
         synergizing = true;
         LeanTween.alphaCanvas(screen, 1f, 1f);
