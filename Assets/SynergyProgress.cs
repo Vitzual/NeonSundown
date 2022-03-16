@@ -7,54 +7,84 @@ using UnityEngine.UI;
 
 public class SynergyProgress : MonoBehaviour
 {
+    public GameObject locked, unlocked;
     public TextMeshProUGUI synergyName, desc, status, requirementOne, 
-        collectedOne, requirementTwo, collectedTwo;
+        collectedOne, requirementTwo, collectedTwo, unlockReq;
     public Image icon, border, background, statusBackground, iconOne,
         iconTwo, barOne, barBackgroundOne, barTwo, barBackgroundTwo;
     public ProgressBar cardBarOne, cardBarTwo;
+    [HideInInspector] public SynergyData data;
 
     public void Set(SynergyData synergy)
     {
-        // Set text objects
-        synergyName.text = synergy.name;
-        desc.text = synergy.outputCard.description;
-        if (Deck.active.HasCard(synergy.outputCard)) status.text = "ACTIVE";
-        else if (SynergyHandler.availableSynergies.Contains(synergy)) status.text = "READY";
-        else status.text = "NOT READY";
-        requirementOne.text = synergy.cardOne.name;
-        requirementTwo.text = synergy.cardTwo.name;
-        collectedOne.text = Deck.active.GetCardAmount(synergy.cardOne) + 
-            "/" + synergy.cardOne.maximumAmount + " COLLECTED";
-        collectedTwo.text = Deck.active.GetCardAmount(synergy.cardTwo) +
-            "/" + synergy.cardTwo.maximumAmount + " COLLECTED";
+        // Set the synergy data
+        data = synergy;
 
-        // Set the progress bars
-        cardBarOne.currentPercent = (float)Deck.active.GetCardAmount(synergy.cardOne) 
-            / (float)synergy.cardOne.maximumAmount;
-        cardBarTwo.currentPercent = (float)Deck.active.GetCardAmount(synergy.cardTwo)
-            / (float)synergy.cardTwo.maximumAmount;
-        cardBarOne.UpdateUI();
-        cardBarTwo.UpdateUI();
+        // Check if synergy unlocked
+        if (!SaveSystem.IsSynergyUnlocked(synergy.InternalID))
+        {
+            // Set locked to true
+            unlocked.SetActive(false);
+            locked.SetActive(true);
 
-        // Set image components
-        icon.sprite = synergy.achievementIcon;
-        iconOne.sprite = synergy.cardOne.sprite;
-        iconTwo.sprite = synergy.cardTwo.sprite;
+            // Find unlock requirement
+            foreach (LevelData level in Levels.ranks)
+                if (level.synergyReward != null && level.synergyReward.InternalID == synergy.InternalID)
+                    unlockReq.text = "UNLOCKED AT LEVEL " + level.name;
+        }
+        else
+        {
+            // Set locked to false
+            unlocked.SetActive(true);
+            locked.SetActive(false);
 
-        // Set color components
-        desc.color = synergy.primaryColor;
-        background.color = synergy.backgroundColor;
-        border.color = synergy.primaryColor;
-        statusBackground.color = synergy.primaryColor;
-        iconOne.color = synergy.cardOne.color;
-        iconTwo.color = synergy.cardTwo.color;
+            // Set text objects
+            synergyName.text = synergy.name;
+            desc.text = synergy.outputCard.description;
+            if (Deck.active.HasCard(synergy.outputCard)) status.text = "ACTIVE";
+            else if (SynergyHandler.availableSynergies.Contains(synergy)) status.text = "READY";
+            else status.text = "NOT READY";
+            requirementOne.text = synergy.cardOne.name;
+            requirementTwo.text = synergy.cardTwo.name;
+            int amountCollected = Deck.active.GetCardAmount(synergy.cardOne);
 
-        // Set bar colors
-        Color c = synergy.cardOne.color;
-        barBackgroundOne.color = new Color(c.r, c.g, c.b, 0.2f);
-        barOne.color = c;
-        c = synergy.cardTwo.color;
-        barBackgroundTwo.color = new Color(c.r, c.g, c.b, 0.2f);
-        barTwo.color = c;
+            // Set amount collected
+            if (amountCollected < 0) amountCollected = 0;
+            collectedOne.text = amountCollected + "/" + synergy.cardOne.maximumAmount + " COLLECTED";
+            amountCollected = Deck.active.GetCardAmount(synergy.cardTwo);
+            if (amountCollected < 0) amountCollected = 0;
+            collectedTwo.text = amountCollected + "/" + synergy.cardTwo.maximumAmount + " COLLECTED";
+
+            // Set the progress bars
+            cardBarOne.currentPercent = (float)Deck.active.GetCardAmount(synergy.cardOne)
+                / (float)synergy.cardOne.maximumAmount;
+            cardBarTwo.currentPercent = (float)Deck.active.GetCardAmount(synergy.cardTwo)
+                / (float)synergy.cardTwo.maximumAmount;
+            cardBarOne.UpdateUI();
+            cardBarTwo.UpdateUI();
+
+            // Set image components
+            icon.sprite = synergy.outputCard.sprite;
+            iconOne.sprite = synergy.cardOne.sprite;
+            iconTwo.sprite = synergy.cardTwo.sprite;
+
+            // Set color components
+            icon.color = synergy.outputCard.color;
+            status.color = synergy.backgroundColor;
+            desc.color = synergy.outputCard.color;
+            background.color = synergy.backgroundColor;
+            border.color = synergy.outputCard.color;
+            statusBackground.color = synergy.outputCard.color;
+            iconOne.color = synergy.cardOne.color;
+            iconTwo.color = synergy.cardTwo.color;
+
+            // Set bar colors
+            Color c = synergy.cardOne.color;
+            barBackgroundOne.color = new Color(c.r, c.g, c.b, 0.5f);
+            barOne.color = c;
+            c = synergy.cardTwo.color;
+            barBackgroundTwo.color = new Color(c.r, c.g, c.b, 0.5f);
+            barTwo.color = c;
+        }
     }
 }

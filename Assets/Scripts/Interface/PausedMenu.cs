@@ -5,7 +5,7 @@ using UnityEngine;
 public class PausedMenu : MonoBehaviour
 {
     // Pause menu variables
-    private static CanvasGroup canvasGroup;
+    public static CanvasGroup canvasGroup;
     private static bool isOpen = false;
 
     // On start grab the canvas group
