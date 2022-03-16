@@ -17,7 +17,7 @@ public class PausedMenu : MonoBehaviour
     // Start is called before the first frame update
     public void Update()
     {
-        if (Input.GetKeyDown(Keybinds.escape) && !Dealer.isOpen)
+        if (Input.GetKeyDown(Keybinds.escape))
         {
             if (isOpen) Close();
             else Open();
