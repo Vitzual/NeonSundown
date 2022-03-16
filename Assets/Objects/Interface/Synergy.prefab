@@ -504,6 +504,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1056822261989159631}
   - component: {fileID: 1056822261989159633}
+  - component: {fileID: 2569372064628814509}
   m_Layer: 5
   m_Name: Synergy
   m_TagString: Untagged
@@ -530,6 +531,7 @@ RectTransform:
   - {fileID: 206292606801866755}
   - {fileID: 6485981549471913709}
   - {fileID: 6485981548894535319}
+  - {fileID: 6447657765500016362}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -546,6 +548,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1056822261989159630}
   m_CullTransparentMesh: 1
+--- !u!114 &2569372064628814509
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1056822261989159630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5947de00d49ffa64eb5195a46a710a3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  synergyName: {fileID: 1056822260896448437}
+  desc: {fileID: 6485981549196032275}
+  status: {fileID: 206292606012326299}
+  requirementOne: {fileID: 6485981549003453417}
+  collectedOne: {fileID: 6485981548991032187}
+  requirementTwo: {fileID: 6485981549681321517}
+  collectedTwo: {fileID: 6485981549123777601}
+  icon: {fileID: 1056822261670119953}
+  border: {fileID: 1056822259991362639}
+  background: {fileID: 6485981549026733800}
+  statusBackground: {fileID: 206292606801866754}
+  iconOne: {fileID: 6485981549471913710}
+  iconTwo: {fileID: 6485981548894535304}
+  barOne: {fileID: 6485981548846750932}
+  barBackgroundOne: {fileID: 6485981549568050682}
+  barTwo: {fileID: 6485981549108968580}
+  barBackgroundTwo: {fileID: 6485981548534393987}
+  cardBarOne: {fileID: 6485981549271089739}
+  cardBarTwo: {fileID: 6485981549845829617}
 --- !u!1 &6485981547998252158
 GameObject:
   m_ObjectHideFlags: 0
@@ -611,7 +644,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 25%
+  m_text: 1%
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 84dd14695854bbc43a5faa24fcf93d0d, type: 2}
   m_sharedMaterial: {fileID: 21261991626553910, guid: 84dd14695854bbc43a5faa24fcf93d0d, type: 2}
@@ -821,7 +854,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 25%
+  m_text: 1
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 84dd14695854bbc43a5faa24fcf93d0d, type: 2}
   m_sharedMaterial: {fileID: 21261991626553910, guid: 84dd14695854bbc43a5faa24fcf93d0d, type: 2}
@@ -1140,7 +1173,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 0.25
+  m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -1636,7 +1669,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 0.25
+  m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -1960,18 +1993,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20c6dbf0102c7bc468113ccdd97dad83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentPercent: 25
+  currentPercent: 1
   speed: 5
   minValue: 0
-  maxValue: 100
+  maxValue: 1
   valueLimit: 100
   loadingBar: {fileID: 6485981548846750932}
   textPercent: {fileID: 6485981548659266739}
-  isOn: 1
-  restart: 1
+  isOn: 0
+  restart: 0
   invert: 0
   addPrefix: 0
-  addSuffix: 1
+  addSuffix: 0
   prefix: 
   suffix: '%'
   isLooped: 0
@@ -2338,18 +2371,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20c6dbf0102c7bc468113ccdd97dad83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentPercent: 25
+  currentPercent: 1
   speed: 5
   minValue: 0
-  maxValue: 100
+  maxValue: 1
   valueLimit: 100
   loadingBar: {fileID: 6485981549108968580}
   textPercent: {fileID: 6485981547998252144}
-  isOn: 1
-  restart: 1
+  isOn: 0
+  restart: 0
   invert: 0
   addPrefix: 0
-  addSuffix: 1
+  addSuffix: 0
   prefix: 
   suffix: '%'
   isLooped: 0
@@ -2377,3 +2410,38 @@ MonoBehaviour:
   bar: {fileID: 6485981549108968580}
   background: {fileID: 6485981548534393987}
   label: {fileID: 6485981547998252144}
+--- !u!1 &7528223742085044051
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6447657765500016362}
+  m_Layer: 5
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &6447657765500016362
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7528223742085044051}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1056822261989159631}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}

@@ -147,6 +147,12 @@ public class Deck : MonoBehaviour
         else return -1;
     }
 
+    // Get an amount of a card
+    public bool HasCard(CardData card)
+    {
+        return cards.ContainsKey(card);
+    }
+
     // Set passive card slot
     public void SetupPassive(WeaponData weapon)
     {

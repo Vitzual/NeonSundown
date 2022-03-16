@@ -6,7 +6,7 @@ public class SynergyHandler : MonoBehaviour
 {
     // List of max cards
     public static List<CardData> maxedCards;
-    private static Queue<SynergyData> availableSynergies;
+    public static Queue<SynergyData> availableSynergies;
     private static List<SynergyData> synergiesMade;
 
     // On start subscribe to crystal break
