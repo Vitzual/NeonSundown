@@ -28,6 +28,7 @@ public class Enemy : Entity
     private float maxHealth;
     private float speed;
     private float rotation;
+    private float damage;
 
     // Runtime only variables
     private float rotateStep, angle, step, dmg;
@@ -69,6 +70,7 @@ public class Enemy : Entity
         // Set stats
         health = data.health * EnemySpawner.enemyHealthMultiplier;
         speed = data.speed * EnemySpawner.enemySpeedMultiplier;
+        damage = data.damage * EnemySpawner.enemyDamageMultiplier;
         maxHealth = health;
         rotation = data.rotateSpeed;
 
@@ -153,7 +155,7 @@ public class Enemy : Entity
     // Called when a player hits this enemy
     public virtual void OnHitPlayer(Ship player)
     {
-        player.Damage(data.damage);
+        player.Damage(damage);
         Destroy();
     }
 
