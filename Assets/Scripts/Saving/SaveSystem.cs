@@ -14,13 +14,13 @@ public class SaveSystem
     public static SaveData saveData;
 
     // Sets the meta context
-    public static void SetMetacontext(string arena, string ship, List<string> blacklist)
+    public static void SetMetacontext(string arena, string ship, List<string> modules)
     {
         // Log to the thing
         Debug.Log("[SAVE] Setting meta context...");
 
         // Create new meta context
-        MetaContext context = new MetaContext(arena, ship, blacklist);
+        MetaContext context = new MetaContext(arena, ship, modules);
 
         // Overwrite previous context
         string newData = JsonUtility.ToJson(context);

@@ -93,6 +93,26 @@ public class Menu : MonoBehaviour
                 else shipPanel.Setup(alphaShip);
             }
             else shipPanel.Setup(alphaShip);
+
+            // Attempt to grab last modules
+            if (context.lastModules != null)
+            {
+                int index = 0;
+                foreach(string id in context.lastModules)
+                {
+                    if (Scriptables.modulesDict.ContainsKey(id))
+                    {
+                        ModuleData module = Scriptables.modulesDict[id];
+                        if (module != null)
+                        {
+                            shipPanel.moduleSlot = index;
+                            shipPanel.SetModule(module);
+                        }
+                    }
+                    index += 1;
+                }
+            }
+
         }
         else shipPanel.Setup(alphaShip);
     }
@@ -233,8 +253,13 @@ public class Menu : MonoBehaviour
         // Save game to update modules
         SaveSystem.UpdateSave();
 
+        // Get the equipped modules
+        List<string> moduleIDs = new List<string>();
+        foreach (KeyValuePair<int, ModuleData> module in Gamemode.modules)
+            moduleIDs.Add(module.Value.InternalID);
+
         // Set context and load the scene
-        SaveSystem.SetMetacontext(Gamemode.arena.InternalID, Gamemode.ship.InternalID, null);
+        SaveSystem.SetMetacontext(Gamemode.arena.InternalID, Gamemode.ship.InternalID, moduleIDs);
         SceneManager.LoadScene("Main");
     }
 

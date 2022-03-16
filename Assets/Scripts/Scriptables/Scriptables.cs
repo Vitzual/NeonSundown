@@ -17,6 +17,7 @@ public static class Scriptables
     public static string ShipsPath = "Ships";
     public static string CrystalsPath = "Crystals";
     public static string SynergiesPath = "Synergies";
+    public static string ModulesPath = "Modules";
 
     // Scriptable dictionaries
     public static Dictionary<string, CardData> cardsDict;
@@ -24,6 +25,7 @@ public static class Scriptables
     public static Dictionary<string, StageData> stagesDict;
     public static Dictionary<string, ArenaData> arenasDict;
     public static Dictionary<string, ShipData> shipsDict;
+    public static Dictionary<string, ModuleData> modulesDict;
 
     // Scriptable lists
     public static List<CardData> cards;
@@ -33,6 +35,7 @@ public static class Scriptables
     public static List<ShipData> ships;
     public static List<CrystalData> crystals;
     public static List<SynergyData> synergies;
+    public static List<ModuleData> modules;
 
     // Generate scriptables
     public static void GenerateAllScriptables()
@@ -48,6 +51,7 @@ public static class Scriptables
         GenerateShips();
         GenerateCrystals();
         GenerateSynergies();
+        GenerateModules();
 
         // Set generated to true
         generated = true;
@@ -171,6 +175,23 @@ public static class Scriptables
         {
             synergies.Add(synergy);
             Debug.Log("Loaded " + synergy.name + " with UUID " + synergy.InternalID);
+        }
+    }
+
+    // Generate crystals on startup
+    public static void GenerateModules()
+    {
+        modulesDict = new Dictionary<string, ModuleData>();
+        modules = new List<ModuleData>();
+
+        List<ModuleData> loaded = Resources.LoadAll(ModulesPath, typeof(ModuleData)).Cast<ModuleData>().ToList();
+        Debug.Log("Loaded " + loaded.Count + " modules from " + ModulesPath);
+
+        foreach (ModuleData module in loaded)
+        {
+            modules.Add(module);
+            modulesDict.Add(module.InternalID, module);
+            Debug.Log("Loaded " + module.name + " with UUID " + module.InternalID);
         }
     }
 }

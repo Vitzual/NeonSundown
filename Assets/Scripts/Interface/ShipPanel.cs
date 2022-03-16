@@ -32,7 +32,8 @@ public class ShipPanel : MonoBehaviour
     public CanvasGroup shipCanvas;
     public CanvasGroup moduleCanvas;
     private List<ShipButton> buttons;
-    private int moduleSlot = 0;
+    [HideInInspector]
+    public int moduleSlot = 0;
     public AudioClip moduleSound;
     private AudioSource audioSource;
 

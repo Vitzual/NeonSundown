@@ -92,7 +92,6 @@ public class EnemyHandler : MonoBehaviour
             }
             else
             {
-                if (syphon > 0) ship.Heal(syphon);
                 enemies.RemoveAt(a);
                 a--;
             }

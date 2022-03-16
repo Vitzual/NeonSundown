@@ -29,7 +29,7 @@ public class GameOverScreen : MonoBehaviour
             RuntimeStats.enemiesDestroyed + "<br>" +
             RuntimeStats.bulletsFired + "<br>" +
             Formatter.Round((float)RuntimeStats.bulletsHit / (float)RuntimeStats.bulletsFired * 100f) + "%<br>" +
-            RuntimeStats.damageTaken + "hp<br>" +
+            Formatter.Round(RuntimeStats.damageTaken) + "hp<br>" +
             RuntimeStats.cardsChosen + "<br>" +
             RuntimeStats.synergiesCreated;
 
