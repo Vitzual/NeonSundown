@@ -15,10 +15,14 @@ MonoBehaviour:
   internalId: 41a6562b-137a-42fa-995e-c436714671b1
   createdAtTicks: 637806124378633069
   name: XP Range
-  desc: Increases ship XP gathering range by 100%
+  desc: Increases ship XP gathering range by {value}%
   icon: {fileID: 21300000, guid: d66762d3b6b26434d846fbf031a4512d, type: 3}
   color: {r: 0, g: 0.7271333, b: 1, a: 1}
   stat: 13
-  value: 2
+  values:
+  - 2
+  - 2.25
+  - 2.5
+  - 2.75
   multi: 1
   cost: {fileID: 11400000, guid: 166e382c5fd0e3f49a60c8c2e7c82ae4, type: 2}

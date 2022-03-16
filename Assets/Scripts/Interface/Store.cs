@@ -41,18 +41,31 @@ public class Store : MonoBehaviour
     public void UpdateCrystals()
     {
         // Update blue crystals
+        int amount;
         if (SaveSystem.saveData.crystals.ContainsKey(blueCrystal.InternalID))
-            blueCrystalAmount.text = SaveSystem.saveData.crystals[blueCrystal.InternalID].ToString();
+        {
+            amount = SaveSystem.saveData.crystals[blueCrystal.InternalID];
+            if (amount > 99) blueCrystalAmount.text = "99+";
+            else blueCrystalAmount.text = amount.ToString();
+        }
         else blueCrystalAmount.text = "0";
 
         // Update green crystals
         if (SaveSystem.saveData.crystals.ContainsKey(greenCrystal.InternalID))
-            greenCrystalAmount.text = SaveSystem.saveData.crystals[greenCrystal.InternalID].ToString();
+        {
+            amount = SaveSystem.saveData.crystals[greenCrystal.InternalID];
+            if (amount > 99) greenCrystalAmount.text = "99+";
+            else greenCrystalAmount.text = amount.ToString();
+        }
         else greenCrystalAmount.text = "0";
 
         // Update red crystals
         if (SaveSystem.saveData.crystals.ContainsKey(redCrystal.InternalID))
-            redCrystalAmount.text = SaveSystem.saveData.crystals[redCrystal.InternalID].ToString();
+        {
+            amount = SaveSystem.saveData.crystals[redCrystal.InternalID];
+            if (amount > 99) redCrystalAmount.text = "99+";
+            else redCrystalAmount.text = amount.ToString();
+        }
         else redCrystalAmount.text = "0";
     }
 
@@ -71,21 +84,34 @@ public class Store : MonoBehaviour
         panelButton.color = module.color;
         owned.color = module.color;
 
-        // Set panel info
-        name.text = module.name;
-        desc.text = module.desc;
+        // Get value
+        float value = module.values[0];
 
         // Set amount owned
         if (SaveSystem.saveData.modules.ContainsKey(module.InternalID))
         {
-            owned.text = "LEVEL " + SaveSystem.GetModuleAmount(module.InternalID);
-            buttonText.text = "COMING SOON";
+            int amount = SaveSystem.GetModuleAmount(module.InternalID);
+            value = module.values[amount];
+            if (amount > 2)
+            {
+                owned.text = "MAX LEVEL";
+                buttonText.text = "MAX LEVEL";
+            }
+            else
+            {
+                owned.text = module.GetCost(amount) + "x Crystals";
+                buttonText.text = "UPGRADE";
+            }
         }
         else
         {
-            owned.text = "10x Crystals";
+            owned.text = module.GetCost(-1) + "x Crystals";
             buttonText.text = "PURCHASE";
         }
+
+        // Set panel info
+        name.text = module.name;
+        desc.text = module.desc.Replace("{value}", value.ToString());
     }
 
     // Attempt to purchase the module
@@ -95,14 +121,15 @@ public class Store : MonoBehaviour
         if (module == null) return;
 
         // Check if player owns module
-        if (SaveSystem.HasModule(module.InternalID)) return;
+        if (SaveSystem.GetModuleAmount(module.InternalID) > 2) return;
 
         // Check if player has enough crystals
-        if (SaveSystem.GetCrystalAmount(module.cost.InternalID) > 10)
+        if (SaveSystem.GetCrystalAmount(module.cost.InternalID) >= 
+            module.GetCost(SaveSystem.GetModuleAmount(module.InternalID)))
         {
             // Update the save with new module
-            SaveSystem.AddModule(module.InternalID, 1);
-            SaveSystem.AddCrystal(module.cost.InternalID, -10);
+            SaveSystem.AddCrystal(module.cost.InternalID, -module.GetCost(SaveSystem.GetModuleAmount(module.InternalID)));
+            SaveSystem.AddModule(module.InternalID);
             SaveSystem.UpdateSave();
             UpdateCrystals();
             SetPanel(module);

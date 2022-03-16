@@ -15,10 +15,14 @@ MonoBehaviour:
   internalId: 7fe2d157-3fdd-48b6-895b-20c0ade1ec4b
   createdAtTicks: 637806117414075865
   name: Mobility
-  desc: Increases ship movement and dash speed by 20%
+  desc: Increases ship movement and dash speed by {value}%
   icon: {fileID: 21300000, guid: 42e74e9a9fdc8cc4291162210eec8b16, type: 3}
   color: {r: 0, g: 0.7271333, b: 1, a: 1}
   stat: 3
-  value: 1.2
+  values:
+  - 1.1
+  - 1.2
+  - 1.3
+  - 1.4
   multi: 1
   cost: {fileID: 11400000, guid: 166e382c5fd0e3f49a60c8c2e7c82ae4, type: 2}

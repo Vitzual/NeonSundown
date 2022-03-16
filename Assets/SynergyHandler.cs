@@ -48,7 +48,8 @@ public class SynergyHandler : MonoBehaviour
             // Add the synergy and unlock
             SynergyData synergy = availableSynergies.Dequeue();
             SynergyUI.active.Synergize(synergy);
-            SaveSystem.UnlockAchievement(synergy.achievement);
+            if (synergy.achievement != null)
+                SaveSystem.UnlockAchievement(synergy.achievement);
         }
     }
 }

@@ -15,10 +15,14 @@ MonoBehaviour:
   internalId: ee0d94eb-9358-400f-bc2b-789ed7c8f064
   createdAtTicks: 637806128685669021
   name: Stun
-  desc: Stuns enemies for 0.5s when they get hit
+  desc: Stuns enemies for {value}s when they get hit
   icon: {fileID: 21300000, guid: 9322a6f8f8f704a4cb7d19ce4a254921, type: 3}
   color: {r: 0.061807394, g: 1, b: 0, a: 1}
   stat: 21
-  value: 0.5
+  values:
+  - 0.1
+  - 0.2
+  - 0.3
+  - 0.4
   multi: 0
   cost: {fileID: 11400000, guid: ed656c671e61d5f4aa41b7e29192edf7, type: 2}

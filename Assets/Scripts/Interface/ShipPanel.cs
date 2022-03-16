@@ -270,7 +270,7 @@ public class ShipPanel : MonoBehaviour
         if (Gamemode.modules.ContainsKey(moduleSlot))
             Gamemode.modules[moduleSlot] = module;
         else Gamemode.modules.Add(moduleSlot, module);
-        UpdateModuleInterface(module.stat, false, module.value);
+        UpdateModuleInterface(module.stat, false, module.values[SaveSystem.GetModuleAmount(module.InternalID)]);
     }
 
     // Toggle module list

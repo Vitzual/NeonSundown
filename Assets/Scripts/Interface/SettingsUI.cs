@@ -51,11 +51,16 @@ public class SettingsUI : MonoBehaviour
     {
         active = this;
         canvasGroup = GetComponent<CanvasGroup>();
-        Settings.LoadSettings();
 
         light.mainSlider.minValue = 0.5f;
         light.mainSlider.maxValue = 1f;
         light.UpdateUI();
+    }
+
+    // On start get the stuff
+    public void Start()
+    {
+        Settings.LoadSettings();
     }
 
     // Get input from player

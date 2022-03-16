@@ -332,9 +332,10 @@ public class Ship : Weapon
 
             // Setup the module
             ModuleData newModule = module.Value;
-            Debug.Log("Setting up module " + newModule.name + " with value " + newModule.value);
-            if (module.Value.multi) Deck.AddMultiplier(newModule.stat, newModule.value);
-            else Deck.AddAddition(newModule.stat, newModule.value);
+            float value = newModule.values[SaveSystem.GetModuleAmount(newModule.InternalID)];
+            Debug.Log("Setting up module " + newModule.name + " with value " + value);
+            if (module.Value.multi) Deck.AddMultiplier(newModule.stat, value);
+            else Deck.AddAddition(newModule.stat, value);
             UpdateStat(newModule.stat);
         }
     }

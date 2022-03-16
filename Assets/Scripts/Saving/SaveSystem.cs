@@ -136,11 +136,11 @@ public class SaveSystem
     public static void LevelUp() { saveData.level += 1; }
 
     // Add a crystal to save
-    public static void AddModule(string id, int amount)
+    public static void AddModule(string id)
     {
         if (saveData.modules.ContainsKey(id))
-            saveData.modules[id] += amount;
-        else if (amount > 0) saveData.modules.Add(id, amount);
+            saveData.modules[id] += 1;
+        else saveData.modules.Add(id, 0);
     }
 
     // Add a crystal to save
@@ -220,7 +220,7 @@ public class SaveSystem
     // Check if user has module
     public static bool HasModule(string id)
     {
-        return saveData.modules.ContainsKey(id) && saveData.modules[id] > 0;
+        return saveData.modules.ContainsKey(id);
     }
 
     // Check if user has crystal
@@ -235,8 +235,11 @@ public class SaveSystem
     public static int GetModuleAmount(string id)
     {
         if (saveData.modules.ContainsKey(id))
-            return saveData.modules[id];
-        else return 0;
+        {
+            if (saveData.modules[id] > 3) return 3;
+            else return saveData.modules[id];
+        }
+        else return -1;
     }
 
     // Checks if a ship is unlocked

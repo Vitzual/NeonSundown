@@ -15,10 +15,14 @@ MonoBehaviour:
   internalId: 65a4ae29-111e-4fa8-bcb8-2027fc5b180d
   createdAtTicks: 637806968472548800
   name: Range
-  desc: Increases bullet lifetime by 20%
+  desc: Increases bullet lifetime by {value}s
   icon: {fileID: 21300000, guid: 176490883beb38b4fa6a5e34db378dcf, type: 3}
   color: {r: 1, g: 0, b: 0, a: 1}
   stat: 10
-  value: 1.2
+  values:
+  - 0.2
+  - 0.3
+  - 0.4
+  - 0.5
   multi: 1
   cost: {fileID: 11400000, guid: 532e0828db94e4c4e85d39a0b75aa195, type: 2}

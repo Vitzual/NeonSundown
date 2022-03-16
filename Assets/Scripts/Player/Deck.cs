@@ -150,7 +150,9 @@ public class Deck : MonoBehaviour
     // Get an amount of a card
     public bool HasCard(CardData card)
     {
-        return cards.ContainsKey(card);
+        if (cards != null)
+            return cards.ContainsKey(card);
+        else return false;
     }
 
     // Set passive card slot
