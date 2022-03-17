@@ -257,7 +257,7 @@ public class Menu : MonoBehaviour
         // Get the equipped modules
         List<string> moduleIDs = new List<string>();
         foreach (KeyValuePair<int, ModuleData> module in Gamemode.modules)
-            moduleIDs.Add(module.Value.InternalID);
+            if (module.Value != null) moduleIDs.Add(module.Value.InternalID);
 
         // Set context and load the scene
         SaveSystem.SetMetacontext(Gamemode.arena.InternalID, Gamemode.ship.InternalID, moduleIDs);

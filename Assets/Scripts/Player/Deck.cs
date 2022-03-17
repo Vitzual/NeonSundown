@@ -30,13 +30,6 @@ public class Deck : MonoBehaviour
         // Set active instance
         active = this;
         secondary = null;
-    }
-
-    // On start, create decks
-    public void Start()
-    {
-        // Get player instance on the object
-        player = GetComponent<Ship>();
 
         // Set new card dictionary
         cards = new Dictionary<CardData, int>();
@@ -49,6 +42,13 @@ public class Deck : MonoBehaviour
 
         // Create starting slots
         weaponInstances = new List<Weapon>();
+    }
+
+    // On start, create decks
+    public void Start()
+    {
+        // Get player instance on the object
+        player = GetComponent<Ship>();
 
         // Setup ship
         Events.active.SetupShip(Gamemode.ship);

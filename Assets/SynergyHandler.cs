@@ -9,13 +9,18 @@ public class SynergyHandler : MonoBehaviour
     public static Queue<SynergyData> availableSynergies;
     private static List<SynergyData> synergiesMade;
 
+    // Create new list instances
+    public void Awake()
+    {
+        maxedCards = new List<CardData>();
+        availableSynergies = new Queue<SynergyData>();
+        synergiesMade = new List<SynergyData>();
+    }
+
     // On start subscribe to crystal break
     public void Start()
     {
-        maxedCards = new List<CardData>();
         Events.active.onBloodCrystalBroken += Create;
-        availableSynergies = new Queue<SynergyData>();
-        synergiesMade = new List<SynergyData>();
     }
     
     // Add a card to the maxed list

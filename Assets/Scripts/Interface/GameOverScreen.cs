@@ -21,8 +21,11 @@ public class GameOverScreen : MonoBehaviour
     }
 
     // Update is called once per frame
-    private void ShowScreen()
+    public void ShowScreen()
     {
+        // Log ending game
+        Debug.Log("Ending game!");
+
         // Set the runtime stats
         stats.text = Formatter.Time(EnemySpawner.GetTime()) + "<br>" +
             Formatter.Round(RuntimeStats.totalXP, 0) + "<br>" +
@@ -32,10 +35,6 @@ public class GameOverScreen : MonoBehaviour
             Formatter.Round(RuntimeStats.damageTaken, 0) + "<br>" +
             RuntimeStats.cardsChosen + "<br>" +
             RuntimeStats.synergiesCreated;
-
-        // Stop music and pause game
-        MusicPlayer.StopMusic();
-        Dealer.isOpen = true;
 
         // Setup animations
         LeanTween.alphaCanvas(gameOverScreen, 1f, 1f);
@@ -49,5 +48,9 @@ public class GameOverScreen : MonoBehaviour
         mainScreen.interactable = true;
         mainScreen.blocksRaycasts = true;
         AudioPlayer.Play(gameOverSound, false);
+
+        // Stop music and pause game
+        MusicPlayer.StopMusic();
+        Dealer.isOpen = true;
     }
 }
