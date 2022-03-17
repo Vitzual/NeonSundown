@@ -96,15 +96,18 @@ public class Ship : Weapon
         regenAmount = shipData.regenAmount;
 
         // Set weapon variables
-        damage = shipData.weapon.damage;
-        cooldown = shipData.weapon.cooldown;
-        moveSpeed = shipData.weapon.moveSpeed;
-        range = shipData.weapon.range;
-        bloom = shipData.weapon.bloom;
-        pierces = shipData.weapon.pierces;
-        bullets = shipData.weapon.bullets;
-        lifetime = shipData.weapon.lifetime;
-        knockback = shipData.weapon.knockback;
+        if (shipData.weapon != null)
+        {
+            damage = shipData.weapon.damage;
+            cooldown = shipData.weapon.cooldown;
+            moveSpeed = shipData.weapon.moveSpeed;
+            range = shipData.weapon.range;
+            bloom = shipData.weapon.bloom;
+            pierces = shipData.weapon.pierces;
+            bullets = shipData.weapon.bullets;
+            lifetime = shipData.weapon.lifetime;
+            knockback = shipData.weapon.knockback;
+        }
         splitshots = 0;
 
         // Set starting rankup cost
@@ -176,7 +179,7 @@ public class Ship : Weapon
 
         // If player can rotate, rotate
         if (!shipData.playerControlledRotation)
-            model.Rotate(Vector3.forward, weapon.rotateSpeed * Time.deltaTime);
+            model.Rotate(Vector3.forward, 60 * Time.deltaTime);
     }
 
     // Set the secondary weapon

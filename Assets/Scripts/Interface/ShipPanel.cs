@@ -196,8 +196,11 @@ public class ShipPanel : MonoBehaviour
         // Check if ship is null
         if (Gamemode.ship == null) return;
 
+        // Is the module null
+        bool isModuleNull = module == null;
+
         // Check if the module is valid 
-        if (Gamemode.ship.weapon == null)
+        if (Gamemode.ship.weapon == null && !isModuleNull)
         {
             if (module.stat == Stat.Damage || module.stat == Stat.Range || module.stat == Stat.Cooldown ||
                 module.stat == Stat.Bullets || module.stat == Stat.Pierces || module.stat == Stat.Lifetime)
@@ -209,9 +212,6 @@ public class ShipPanel : MonoBehaviour
 
         // Check if module is already applied
         if (equippedModules.Contains(module)) return;
-
-        // Is the module null
-        bool isModuleNull = module == null;
 
         // Check if user has enough modules
         if (isModuleNull || SaveSystem.HasModule(module.InternalID))
