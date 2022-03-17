@@ -38,8 +38,8 @@ public class Controller : MonoBehaviour
     private bool dashQuickReset = false;
 
     // Internal input measurements
-    private float horizontal;
-    private float vertical;
+    public static float horizontal;
+    public static float vertical;
     private float dash;
     private float speed;
 
@@ -48,9 +48,6 @@ public class Controller : MonoBehaviour
     public CursorMode cursorMode = CursorMode.Auto;
     public Vector2 hotSpot = Vector2.zero;
 
-    // Controller flag
-    private bool isControllerConnected;
-
     // Called on start
     void Start()
     {
@@ -58,14 +55,13 @@ public class Controller : MonoBehaviour
         body = GetComponent<Rigidbody2D>();
         lastMousePos = Vector2.zero;
         controller = _controller;
+        horizontal = 0;
+        vertical = 0;
     }
 
     // Normal frame update
     void Update()
     {
-        // Check if controller connected
-        isControllerConnected = Input.GetJoystickNames().Length > 0;
-
         // Check if something is open
         if (Dealer.isOpen)
         {
@@ -149,7 +145,7 @@ public class Controller : MonoBehaviour
         if (horizontal != 0 || vertical != 0)
         {
             if (!controller.activeSelf) controller.SetActive(true);
-            controller.transform.localPosition = new Vector2(horizontal * 30, vertical * 30);
+            controller.transform.localPosition = new Vector2(horizontal * 35, vertical * 35);
             float angle = Mathf.Atan2(controller.transform.localPosition.y, controller.transform.localPosition.x) * Mathf.Rad2Deg;
             rotator.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
         }

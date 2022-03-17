@@ -1,0 +1,78 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 153c17b437486e247978b2d4dcab4b10, type: 3}
+  m_Name: Atomic Daggers
+  m_EditorClassIdentifier: 
+  internalId: 03aa9c08-62ab-41b4-98d7-826424ca276e
+  createdAtTicks: 637831165078563093
+  name: Atomic Daggers
+  description: Fires daggers in the direction your ship is moving
+  sprite: {fileID: 21300000, guid: ce6c3b1f50cda2746b5442176f3ff39f, type: 3}
+  color: {r: 0, g: 1, b: 0.559567, a: 1}
+  maximumAmount: 0
+  dropChance: 1
+  canDrop: 1
+  isUnlocked: 1
+  baseLevels:
+  - stat: 1
+    description: Increases damage by 10%
+    multiply: 1
+    modifier: 1.1
+  - stat: 2
+    description: Decreases cooldown by 15%
+    multiply: 1
+    modifier: 0.85
+  - stat: 1
+    description: Increases damage by 10%
+    multiply: 1
+    modifier: 1.1
+  - stat: 2
+    description: Decreases cooldown by 15%
+    multiply: 1
+    modifier: 0.85
+  - stat: 1
+    description: Increases damage by 10%
+    multiply: 1
+    modifier: 1.1
+  damage: 5
+  cooldown: 0.8
+  moveSpeed: 120
+  rotate: 0
+  rotateSpeed: 0
+  range: 0
+  bloom: 0
+  pierces: 100
+  bullets: 1
+  knockback: -500
+  lifetime: 1
+  stun: 0
+  randomDirection: 0
+  randomTarget: 0
+  trackTarget: 0
+  lockTarget: 0
+  bullet: {fileID: 5224849746800538397, guid: 423fb29091cc29e4eba4e11086bbb932, type: 3}
+  bulletSound: {fileID: 0}
+  obj: {fileID: 649058797943903191, guid: 4cf86e87db440044398a93f1d2f6872f, type: 3}
+  onDamageSound: {fileID: 8300000, guid: 0715b57e752ed024eb9a01ce4ef0b730, type: 3}
+  onDeathSound: {fileID: 8300000, guid: b142fdd4a1c20914b9f21f47abfe125b, type: 3}
+  minPitch: 0.9
+  maxPitch: 1.1
+  audioScale: 1
+  setPlayerAsParent: 1
+  useMaterial: 0
+  useTrail: 0
+  useParticle: 0
+  material: {fileID: 0}
+  trail: {fileID: 0}
+  particle: {fileID: 0}
+  shakeScreenOnSpawn: 0
+  shakeScreenOnDeath: 0

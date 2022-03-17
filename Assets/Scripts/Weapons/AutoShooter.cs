@@ -12,15 +12,20 @@ public class AutoShooter : Weapon
     {
         base.Setup(data, target);
     }
-
+    
     // Shoots projectiles
     public override void Use()
     {
         weaponCooldown -= Time.deltaTime;
         if (weaponCooldown <= 0)
         {
-            if (weapon.randomDirection)
+            if (weapon.randomDirection) 
                 transform.eulerAngles = new Vector3(0, 0, Random.Range(0, 360));
+            else 
+            {
+                float angle = Mathf.Atan2(Controller.vertical, Controller.horizontal) * Mathf.Rad2Deg;
+                transform.eulerAngles = new Vector3(0, 0, angle);
+            }
 
             BulletHandler.active.CreateBullet(this, weapon, transform.position, transform.rotation, 
                 weapon.bullets, weapon.material, false, explosiveRounds, true);
