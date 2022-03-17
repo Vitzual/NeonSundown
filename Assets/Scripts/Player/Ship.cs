@@ -283,9 +283,12 @@ public class Ship : Weapon
         healthBar.UpdateUI();
 
         // Show bar for short period of time
-        healthCanvas.alpha = 1f;
-        LeanTween.reset();
-        LeanTween.alphaCanvas(healthCanvas, 0f, 0.5f).setDelay(3f);
+        if (!GameOverScreen.isActive)
+        {
+            healthCanvas.alpha = 1f;
+            LeanTween.reset();
+            LeanTween.alphaCanvas(healthCanvas, 0f, 0.5f).setDelay(3f);
+        }
     }
 
     // Kill the player

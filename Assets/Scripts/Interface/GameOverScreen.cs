@@ -13,17 +13,20 @@ public class GameOverScreen : MonoBehaviour
     public CanvasGroup button;
     public AudioClip gameOverSound;
     public TextMeshProUGUI stats;
+    public static bool isActive = false;
     
     // Start is called before the first frame update
     public void Start()
     {
         Events.active.onShipDestroyed += ShowScreen;
+        isActive = false;
     }
 
     // Update is called once per frame
     public void ShowScreen()
     {
         // Log ending game
+        isActive = true;
         Debug.Log("Ending game!");
 
         // Set the runtime stats
