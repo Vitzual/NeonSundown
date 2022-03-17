@@ -149,11 +149,12 @@ public class Controller : MonoBehaviour
         if (horizontal != 0 || vertical != 0)
         {
             if (!controller.activeSelf) controller.SetActive(true);
-            controller.transform.localPosition = new Vector2(horizontal * 40, vertical * 40);
+            controller.transform.localPosition = new Vector2(horizontal * 30, vertical * 30);
             float angle = Mathf.Atan2(controller.transform.localPosition.y, controller.transform.localPosition.x) * Mathf.Rad2Deg;
             rotator.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
         }
-        
+        else if (controller.activeSelf) controller.SetActive(false);
+
         // Get mouse pos
         Vector3 mousePos = Input.mousePosition;
         if (mousePos != lastMousePos)

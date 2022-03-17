@@ -6,6 +6,15 @@ using UnityEngine.UI;
 
 public class Store : MonoBehaviour
 {
+    // List of level icons 
+    [System.Serializable]
+    public class ModuleLevels
+    {
+        public ModuleData module;
+        public List<Image> levelIcon;
+    }
+    public List<ModuleLevels> moduleLevels;
+
     // Interface variables
     public Image moduleIcon;
     public Image moduleBorderOne;
@@ -35,6 +44,20 @@ public class Store : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
         audioSource.clip = purchaseSound;
+
+        // Setup level icons
+        foreach(ModuleLevels level in moduleLevels)
+        {
+            int amount = SaveSystem.GetModuleAmount(module.InternalID);
+            int totalColored = 0;
+            for (int i = 0; i < amount; i++)
+            {
+                level.levelIcon[i].color = module.color;
+                totalColored += 1;
+            }
+            for (int i = totalColored; i < level.levelIcon.Count; i++)
+                level.levelIcon[i].color = module.darkColor;
+        }
     }
 
     // Update the crystal amounts
@@ -133,6 +156,7 @@ public class Store : MonoBehaviour
             SaveSystem.UpdateSave();
             UpdateCrystals();
             SetPanel(module);
+            UpdateLevels(module);
 
             // Play sound
             Events.active.VolumeChanged(Settings.music / 3f);
@@ -148,6 +172,28 @@ public class Store : MonoBehaviour
         {
             Debug.Log("Player does not have enough crystals to buy " + module.name);
             return;
+        }
+    }
+
+    // Updates a specific module
+    public void UpdateLevels(ModuleData module)
+    {
+        // Setup level icons
+        foreach (ModuleLevels level in moduleLevels)
+        {
+            if (level.module == module)
+            {
+                int amount = SaveSystem.GetModuleAmount(module.InternalID);
+                int totalColored = 0;
+                for (int i = 0; i < amount; i++)
+                {
+                    level.levelIcon[i].color = module.color;
+                    totalColored += 1;
+                }
+                for (int i = totalColored; i < level.levelIcon.Count; i++)
+                    level.levelIcon[i].color = module.darkColor;
+                return;
+            }
         }
     }
 }

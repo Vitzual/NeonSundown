@@ -10,6 +10,7 @@ public class ModuleData : IdentifiableScriptableObject
     [TextArea] public string desc;
     public Sprite icon;
     public Color color;
+    public Color darkColor;
     public Stat stat;
     public List<float> values;
     public bool multi;

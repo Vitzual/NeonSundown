@@ -19,13 +19,23 @@ public class OnHoverAdjustScale : MonoBehaviour, IPointerEnterHandler, IPointerE
         if (!overrideSize) originalSize = rect.localScale;
     }
 
+    // Set the scale
+    public void SetScale(bool big)
+    {
+        if (big) 
+        {
+            rect.localScale = originalSize;
+            rect.localScale = new Vector3(rect.localScale.x + scaleAdjustment,
+                                          rect.localScale.y + scaleAdjustment,
+                                          rect.localScale.z + scaleAdjustment);
+        }
+        else rect.localScale = originalSize;
+    }
+
     // On mouse enter make local scale bigger
     public void OnPointerEnter(PointerEventData eventData)
     {
-        rect.localScale = originalSize;
-        rect.localScale = new Vector3(rect.localScale.x + scaleAdjustment,
-                                      rect.localScale.y + scaleAdjustment,
-                                      rect.localScale.z + scaleAdjustment);
+        SetScale(true);
         if (playSound)
             AudioPlayer.PlayButton();
     }
@@ -33,6 +43,6 @@ public class OnHoverAdjustScale : MonoBehaviour, IPointerEnterHandler, IPointerE
     // On mouse exit make local scale smaller
     public void OnPointerExit(PointerEventData eventData)
     {
-        rect.localScale = originalSize;
+        SetScale(false);
     }
 }
