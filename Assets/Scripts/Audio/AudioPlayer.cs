@@ -70,7 +70,7 @@ public class AudioPlayer : MonoBehaviour
         if (buttonSound != null)
         {
             audioSource.volume = Settings.sound;
-            audioSource.PlayOneShot(buttonSound);
+            audioSource.PlayOneShot(buttonSound, 0.5f);
         }
     }
 

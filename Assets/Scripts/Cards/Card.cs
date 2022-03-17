@@ -25,6 +25,7 @@ public class Card : MonoBehaviour
     public CanvasGroup canvasGroup;
     private AudioSource audioSource;
     private bool redraw = false;
+    private float cooldown = 0f;
     public bool redrawing = false;
     private SynergyData synergy;
 
@@ -38,8 +39,12 @@ public class Card : MonoBehaviour
     // Check for redraw
     public void Update()
     {
-        if (redrawing && !LeanTween.isTweening())
-            Set(redrawCard, true);
+        if (redrawing)
+        {
+            if (!LeanTween.isTweening() || cooldown <= 0)
+                Set(redrawCard, true);
+            cooldown -= Time.deltaTime;
+        }
     }
 
     // Set card function
@@ -273,11 +278,15 @@ public class Card : MonoBehaviour
     // Redraw card
     public void RedrawCard(CardData newCard)
     {
-        redrawCard = newCard;
-        LeanTween.rotateLocal(gameObject, new Vector3(0, 90f, 0), animationSpeed / 3f);
-        audioSource.volume = Settings.sound;
-        audioSource.Play();
-        redrawing = true;
+        if (!redrawing)
+        {
+            redrawCard = newCard;
+            LeanTween.rotateLocal(gameObject, new Vector3(0, 90f, 0), animationSpeed / 3f);
+            cooldown = animationSpeed / 3f;
+            audioSource.volume = Settings.sound;
+            audioSource.Play();
+            redrawing = true;
+        }
     }
 
     // Calculate stat

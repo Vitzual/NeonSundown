@@ -93,6 +93,10 @@ public class Dealer : MonoBehaviour
             debugSwitch = false;
         }
 
+        // Check background
+        if (background.color.a < 0.49f)
+            background.color = new Color(0, 0, 0, 0.5f);
+
         // If dealing, fade in background and deal cards
         if (dealCards)
         {
