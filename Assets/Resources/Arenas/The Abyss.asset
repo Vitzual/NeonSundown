@@ -16,54 +16,23 @@ MonoBehaviour:
   createdAtTicks: 637801297251146925
   name: The Abyss
   icon: {fileID: 21300000, guid: c80a8d95872da5e4fb3a054214547c60, type: 3}
+  iconEnemy: {fileID: 0}
   desc: The starting arena. Although it's mostly comprised of weak enemies, it is
     guarded by the DREADNAUGHT.
+  shortDesc: 
   arenaBackground: {fileID: 11400000, guid: b08ebedb5432ea04fa93879ef2011108, type: 2}
   arenaMenuPitch: 1
   arenaMusic: {fileID: 8300000, guid: f24370469b5308c4fb5d5aef97315735, type: 3}
   menuStage: {fileID: 11400000, guid: f6b857027ee9aef49bf2472479e1744f, type: 2}
   availableInDemo: 1
+  achievementObjective: Survive for 10 minutes
+  achievementTime: 600
+  achievement: {fileID: 2121078758520861789, guid: f589d5fe6376ca443bb8e175e09de7de, type: 2}
   unlockByDefault: 1
   unlockObjective: Unlocked by default
   order: 0
   buttonColor: {r: 1, g: 0, b: 0, a: 1}
   lightColor: {r: 1, g: 0.4575472, b: 0.4575472, a: 1}
-  objectiveOne:
-    rewardName: NEW SHIP
-    rewardImage: {fileID: 21300000, guid: ee3f96a2ebe7ebc498c5871d3b0e6367, type: 3}
-    rewardColor: {r: 1, g: 1, b: 1, a: 1}
-    timeRequired: 150
-    arenaReward: {fileID: 0}
-    shipReward: {fileID: 11400000, guid: 249653bf22762f14197e7285bb50a574, type: 2}
-    cardReward: {fileID: 0}
-    achievementReward: {fileID: 0}
-  objectiveTwo:
-    rewardName: NEW ARENA
-    rewardImage: {fileID: 21300000, guid: 57021c907bdc4ad48a8d3c0344a22eca, type: 3}
-    rewardColor: {r: 1, g: 1, b: 1, a: 1}
-    timeRequired: 300
-    arenaReward: {fileID: 11400000, guid: de60c29b8a696df49adc0977addb8216, type: 2}
-    shipReward: {fileID: 0}
-    cardReward: {fileID: 0}
-    achievementReward: {fileID: 0}
-  objectiveThree:
-    rewardName: NEW CARD
-    rewardImage: {fileID: 21300000, guid: 95bff4e7468b7ae4b9292774e0aa52e8, type: 3}
-    rewardColor: {r: 0.65882355, g: 0.5254902, b: 1, a: 1}
-    timeRequired: 450
-    arenaReward: {fileID: 0}
-    shipReward: {fileID: 0}
-    cardReward: {fileID: 11400000, guid: 91fcd69764e8265499069148c124b679, type: 2}
-    achievementReward: {fileID: 0}
-  objectiveFour:
-    rewardName: ACHIEVEMENT
-    rewardImage: {fileID: 21300000, guid: c80a8d95872da5e4fb3a054214547c60, type: 3}
-    rewardColor: {r: 1, g: 1, b: 1, a: 1}
-    timeRequired: 600
-    arenaReward: {fileID: 0}
-    shipReward: {fileID: 0}
-    cardReward: {fileID: 0}
-    achievementReward: {fileID: 2121078758520861789, guid: f589d5fe6376ca443bb8e175e09de7de, type: 2}
   stages:
   - {fileID: 11400000, guid: 1f5cdefd64e41f94881a4244522d9755, type: 2}
   - {fileID: 11400000, guid: 66d72e738a50efd4c9dcba6609960954, type: 2}
@@ -77,6 +46,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 288a2357a547d1246a5375e91df14f82, type: 2}
   - {fileID: 11400000, guid: b11ec4b10fdbfb6488c4c61f1bbf398d, type: 2}
   - {fileID: 11400000, guid: ba4ee68ec80a17b46b030cf86440a6f9, type: 2}
-  startingCards: []
-  blacklistCards: []
   useWall: 0

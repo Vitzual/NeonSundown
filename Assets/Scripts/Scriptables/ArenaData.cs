@@ -36,9 +36,13 @@ public class ArenaData : IdentifiableScriptableObject
     public StageData menuStage;
     [BoxGroup("Arena Info")]
     public bool availableInDemo;
-    [BoxGroup("Arena Info")]
+
+
+    [BoxGroup("Achievement Info")]
+    public string achievementObjective;
+    [BoxGroup("Achievement Info")]
     public float achievementTime;
-    [BoxGroup("Arena Info")]
+    [BoxGroup("Achievement Info")]
     public AchievementObject achievement;
 
     // Other information

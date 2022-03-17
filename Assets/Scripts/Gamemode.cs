@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Gamemode : MonoBehaviour
 {
@@ -13,6 +15,12 @@ public class Gamemode : MonoBehaviour
     public static ShipData ship;
     public static Dictionary<int, ModuleData> modules;
     public static bool isAlphaBuild;
+
+    // Arena interface variables
+    public GameObject arenaInfo;
+    public Image arenaIcon;
+    public TextMeshProUGUI arenaName, arenaDesc;
+    public bool useArenaInfo = false;
 
     // Setup the game
     public void Awake()
@@ -28,6 +36,17 @@ public class Gamemode : MonoBehaviour
         // Check if save data exists
         if (SaveSystem.saveData == null)
             SaveSystem.GetSave();
+
+        // Check if use arena info
+        if (useArenaInfo && arenaIcon != null)
+        {
+            arenaIcon.sprite = arena.icon;
+            arenaName.text = arena.name;
+            arenaDesc.text = arena.achievementObjective;
+            arenaDesc.color = arena.lightColor;
+            LeanTween.moveLocal(arenaInfo, new Vector2(0, -50), 1.5f).setEase(LeanTweenType.easeOutExpo).setDelay(1f);
+            LeanTween.moveLocal(arenaInfo, new Vector2(0, 50), 0.5f).setEase(LeanTweenType.easeInExpo).setDelay(4f);
+        }
     }
 
     // Load menu

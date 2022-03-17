@@ -21,7 +21,7 @@ public class GameOverScreen : MonoBehaviour
         Events.active.onShipDestroyed += ShowScreen;
         isActive = false;
     }
-
+    
     // Update is called once per frame
     public void ShowScreen()
     {
