@@ -29,6 +29,7 @@ public class Ship : Weapon
     public CanvasGroup _healthCanvas;
     private static ProgressBar healthBar;
     private static CanvasGroup healthCanvas;
+    public AudioClip damageSound; 
 
     // XP amount
     public List<float> levels;
@@ -271,6 +272,9 @@ public class Ship : Weapon
         // Update health
         health -= damage;
         if (health <= 0) Kill();
+
+        // Play audio clip
+        AudioPlayer.Play(damageSound);
 
         // Update health UI bar
         UpdateHealth();

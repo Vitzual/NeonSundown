@@ -15,6 +15,7 @@ public class Controller : MonoBehaviour
 
     // Dashing sound
     public AudioClip dashSound;
+    public AudioSource audioSource;
 
     // GameObject child transforms
     private Rigidbody2D body;
@@ -131,6 +132,11 @@ public class Controller : MonoBehaviour
             dash = dashTimer;
             speed = dashSpeed;
             dashQuickReset = false;
+
+            // Set volume and pitch
+            audioSource.volume = Settings.sound;
+            audioSource.pitch = UnityEngine.Random.Range(0.9f, 1.1f);
+            audioSource.PlayOneShot(dashSound, 0.7f);
         }
     }
 
