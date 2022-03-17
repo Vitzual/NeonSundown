@@ -32,12 +32,14 @@ public class EnemySpawner : MonoBehaviour
 
     // Spawning flag
     public bool spawnEnemies = true;
+    private bool awardGiven = false;
 
     // On awake set instance
     private void Awake()
     {
         // Set active instance
         active = this;
+        awardGiven = false;
 
         // Reset the timer
         enemyHealthMultiplier = 1;
@@ -83,6 +85,16 @@ public class EnemySpawner : MonoBehaviour
         
         // Set the timer string
         timer.text = Formatter.Time(time);
+        if (time > Gamemode.arena.achievementTime && !awardGiven)
+        {
+            awardGiven = true;
+            if (!Gamemode.arena.achievement.IsAchieved)
+            {
+                Gamemode.arena.achievement.Unlock();
+                Gamemode.arena.achievement.Store();
+            }
+            else Debug.Log("Achievement has already been given!");
+        }
 
         // Check if next stage should start
         if (stagesLeft && stageTime <= 0) NextStage();

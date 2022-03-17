@@ -48,15 +48,15 @@ public class Store : MonoBehaviour
         // Setup level icons
         foreach(ModuleLevels level in moduleLevels)
         {
-            int amount = SaveSystem.GetModuleAmount(module.InternalID);
+            int amount = SaveSystem.GetModuleAmount(level.module.InternalID);
             int totalColored = 0;
-            for (int i = 0; i < amount; i++)
+            for (int i = 0; i <= amount; i++)
             {
-                level.levelIcon[i].color = module.color;
+                level.levelIcon[i].color = level.module.color;
                 totalColored += 1;
             }
             for (int i = totalColored; i < level.levelIcon.Count; i++)
-                level.levelIcon[i].color = module.darkColor;
+                level.levelIcon[i].color = level.module.cost.darkColor;
         }
     }
 
@@ -185,13 +185,13 @@ public class Store : MonoBehaviour
             {
                 int amount = SaveSystem.GetModuleAmount(module.InternalID);
                 int totalColored = 0;
-                for (int i = 0; i < amount; i++)
+                for (int i = 0; i <= amount; i++)
                 {
                     level.levelIcon[i].color = module.color;
                     totalColored += 1;
                 }
                 for (int i = totalColored; i < level.levelIcon.Count; i++)
-                    level.levelIcon[i].color = module.darkColor;
+                    level.levelIcon[i].color = module.cost.darkColor;
                 return;
             }
         }

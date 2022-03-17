@@ -7,4 +7,5 @@ public class CrystalData : IdentifiableScriptableObject
 {
     public CrystalType type;
     public Material color;
+    public Color darkColor;
 }

@@ -91,6 +91,9 @@ public class Enemy : Entity
     // Damage entity
     public void Damage(float amount, float knockback, Vector3 origin)
     {
+        // Add to total damage done
+        RuntimeStats.damageGiven += amount;
+
         // Do the damage my guy
         if (Random.Range(0f, 1f) < DamageHandler.critChance)
         {

@@ -138,9 +138,6 @@ public class Bullet : Entity
     // On collision
     public virtual void OnHit(Entity entity)
     {
-        // Ehhhhh
-        RuntimeStats.bulletsHit += 1;
-
         // Check if sticky
         if (BulletHandler.stickyBullets && !stickyImmune && !isSplitShot)
         {
