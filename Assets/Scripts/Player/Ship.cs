@@ -293,7 +293,7 @@ public class Ship : Weapon
         if (!GameOverScreen.isActive)
         {
             healthCanvas.alpha = 1f;
-            LeanTween.reset();
+            LeanTween.cancel(healthCanvas.gameObject);
             LeanTween.alphaCanvas(healthCanvas, 0f, 0.5f).setDelay(3f);
         }
     }
