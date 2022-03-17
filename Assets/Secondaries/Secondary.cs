@@ -26,7 +26,7 @@ public class Secondary : MonoBehaviour
             cooldown -= Time.deltaTime;
         if (Input.GetKey(Keybinds.secondary) || Input.GetAxis("Secondary") > 0.5) Use();
     }
-
+    
     // Virtual use method
     public virtual void Use()
     {
