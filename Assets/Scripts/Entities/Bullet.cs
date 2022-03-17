@@ -27,7 +27,7 @@ public class Bullet : Entity
     public bool overrideSprite;
 
     // Is a split shot
-    private Weapon parent;
+    protected Weapon parent;
     [HideInInspector]
     public bool isSplitShot = false;
     private Material normalMaterial;
