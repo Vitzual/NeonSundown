@@ -27,10 +27,17 @@ public class Teleport : Secondary
 
             // Create particle at location
             Instantiate(particle, transform.position, Quaternion.identity);
-            
+
             // Move ship to cursor
-            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            ship.transform.position = mousePos;
+            if (Controller.controller.activeSelf)
+            {
+                ship.transform.position = Controller.controller.transform.position;
+            }
+            else
+            {
+                Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                ship.transform.position = mousePos;
+            }
 
             // Create particle at new location
             Instantiate(particle, transform.position, Quaternion.identity);

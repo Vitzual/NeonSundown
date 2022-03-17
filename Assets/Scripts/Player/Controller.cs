@@ -1,9 +1,15 @@
+using System;
 using UnityEngine;
 
 // Handles anything player-input related
 
 public class Controller : MonoBehaviour
 {
+    // Controller object
+    public GameObject _controller;
+    public static GameObject controller;
+    private Vector3 lastMousePos;
+
     // Transform that rotates
     public Transform rotator;
 
@@ -42,16 +48,24 @@ public class Controller : MonoBehaviour
     public CursorMode cursorMode = CursorMode.Auto;
     public Vector2 hotSpot = Vector2.zero;
 
+    // Controller flag
+    private bool isControllerConnected;
+
     // Called on start
     void Start()
     {
         // Start for everyone
         body = GetComponent<Rigidbody2D>();
+        lastMousePos = Vector2.zero;
+        controller = _controller;
     }
 
     // Normal frame update
     void Update()
     {
+        // Check if controller connected
+        isControllerConnected = Input.GetJoystickNames().Length > 0;
+
         // Check if something is open
         if (Dealer.isOpen)
         {
@@ -81,15 +95,19 @@ public class Controller : MonoBehaviour
     // Checks for movement input
     private void CheckMovementInput()
     {
-        // Vertical Movement
-        vertical = 0;
-        vertical += Input.GetKey(Keybinds.move_up) ? 1 : 0;
-        vertical -= Input.GetKey(Keybinds.move_down) ? 1 : 0;
-
         // Horizontal Movement
         horizontal = 0;
+        horizontal += Input.GetAxis("L-Stick X");
         horizontal += Input.GetKey(Keybinds.move_right) ? 1 : 0;
         horizontal -= Input.GetKey(Keybinds.move_left) ? 1 : 0;
+        horizontal = Mathf.Clamp(horizontal, -1, 1);
+
+        // Vertical Movement
+        vertical = 0;
+        vertical += Input.GetAxis("L-Stick Y");
+        vertical += Input.GetKey(Keybinds.move_up) ? 1 : 0;
+        vertical -= Input.GetKey(Keybinds.move_down) ? 1 : 0;
+        vertical = Mathf.Clamp(vertical, -1, 1);
 
         // Check if dashing
         if (isDashing)
@@ -111,7 +129,7 @@ public class Controller : MonoBehaviour
         }
 
         // Check if dash pressed
-        else if (Input.GetKey(Keybinds.dash))
+        else if (Input.GetKey(Keybinds.dash) || Input.GetKey(KeyCode.Joystick1Button4))
         {
             isDashing = true;
             dash = dashTimer;
@@ -123,14 +141,34 @@ public class Controller : MonoBehaviour
     // Rotates the players head towards the mouse
     private void RotateToMouse()
     {
+        // Controller input
+        float horizontal = Input.GetAxis("R-Stick X");
+        float vertical = Input.GetAxis("R-Stick Y");
+
+        // Check horizontal and vertical
+        if (horizontal != 0 || vertical != 0)
+        {
+            if (!controller.activeSelf) controller.SetActive(true);
+            controller.transform.localPosition = new Vector2(horizontal * 30, vertical * 30);
+            float angle = Mathf.Atan2(controller.transform.localPosition.y, controller.transform.localPosition.x) * Mathf.Rad2Deg;
+            rotator.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+        }
+        
+        // Get mouse pos
         Vector3 mousePos = Input.mousePosition;
-        Vector3 objectPos = Camera.main.WorldToScreenPoint(rotator.position);
+        if (mousePos != lastMousePos)
+        {
+            if (controller.activeSelf) controller.SetActive(false);
 
-        mousePos.x -= objectPos.x;
-        mousePos.y -= objectPos.y;
+            lastMousePos = mousePos;
+            Vector3 objectPos = Camera.main.WorldToScreenPoint(rotator.position);
 
-        float angle = Mathf.Atan2(mousePos.y, mousePos.x) * Mathf.Rad2Deg;
-        rotator.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+            mousePos.x -= objectPos.x;
+            mousePos.y -= objectPos.y;
+
+            float angle = Mathf.Atan2(mousePos.y, mousePos.x) * Mathf.Rad2Deg;
+            rotator.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+        }
     }
 
     //public void OnMouseEnter() { Cursor.SetCursor(cursorTexture, hotSpot, cursorMode); }

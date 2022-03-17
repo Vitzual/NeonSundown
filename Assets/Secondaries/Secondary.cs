@@ -24,7 +24,7 @@ public class Secondary : MonoBehaviour
         // Update secondary instance
         if (!Dealer.isOpen && cooldown > 0)
             cooldown -= Time.deltaTime;
-        if (Input.GetKey(Keybinds.secondary)) Use();
+        if (Input.GetKey(Keybinds.secondary) || Input.GetAxis("Secondary") > 0.5) Use();
     }
 
     // Virtual use method
