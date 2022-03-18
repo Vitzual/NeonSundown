@@ -25,6 +25,7 @@ public class Bullet : Entity
     protected float splitshots;
     public bool explosive;
     public bool overrideSprite;
+    public float explosionSize = 10f;
 
     // Is a split shot
     protected Weapon parent;
@@ -113,8 +114,8 @@ public class Bullet : Entity
         // Check if bullet is explosive
         if (explosive)
         {
-            if (stunLength > 0) ExplosiveHandler.CreateStun(transform.position, 10f, stunLength, damage, deathMaterial, knockback);
-            else ExplosiveHandler.CreateExplosion(transform.position, 10f, damage, knockback, deathMaterial);
+            if (stunLength > 0) ExplosiveHandler.CreateStun(transform.position, explosionSize, stunLength, damage, deathMaterial, knockback);
+            else ExplosiveHandler.CreateExplosion(transform.position, explosionSize, damage, knockback, deathMaterial);
         }
         
         // Check if bullet has splitshots

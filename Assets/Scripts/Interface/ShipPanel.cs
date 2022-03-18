@@ -167,9 +167,13 @@ public class ShipPanel : MonoBehaviour
     public void OpenModules(int slot)
     {
         // Update amounts based on save data
-        foreach(KeyValuePair<string, int> module in SaveSystem.saveData.modules)
-            if (moduleAmounts.ContainsKey(module.Key)) 
-                moduleAmounts[module.Key].text = "OWNED";
+        foreach (KeyValuePair<string, int> module in SaveSystem.saveData.modules)
+        {
+            int amount = SaveSystem.GetModuleAmount(module.Key);
+            if (amount == -1) moduleAmounts[module.Key].text = "NOT OWNED";
+            else if (amount == 3) moduleAmounts[module.Key].text = "LEVEL MAX";
+            else moduleAmounts[module.Key].text = "LEVEL " + (amount + 1);
+        }
 
         // Open modules and set slot
         moduleSlot = slot;

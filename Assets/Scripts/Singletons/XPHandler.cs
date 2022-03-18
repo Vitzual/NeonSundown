@@ -193,7 +193,6 @@ public class XPHandler : MonoBehaviour
     // Enable XP healing
     public void EnableXPHealing()
     {
-        xpValue = xpValue / 2;
         xpHealing = true;
     }
 }

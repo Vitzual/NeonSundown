@@ -26,7 +26,7 @@ public class Menu : MonoBehaviour
     public CanvasGroup titleGroup;
     public CanvasGroup pressSpace;
     public CanvasGroup alphaGroup;
-    public CanvasGroup roadmapGroup;
+    public CanvasGroup changelogGroup;
     public CanvasGroup creditsGroup;
     public CanvasGroup roadmapWarningGroup;
     public CanvasGroup levelsGroup;
@@ -169,19 +169,10 @@ public class Menu : MonoBehaviour
     }
 
     // Open arena panel
-    public void ToggleRoadmapPanel(bool toggle)
+    public void ToggleChangelog(bool toggle)
     {
-        if (!roadmapWarningShown)
-        {
-            roadmapWarningShown = true;
-            TogglePanel(roadmapWarningGroup, mainGroup);
-        }
-        else
-        {
-            DisableRoadmapWarning();
-            if (toggle) TogglePanel(roadmapGroup, mainGroup);
-            else TogglePanel(mainGroup, roadmapGroup);
-        }
+        if (toggle) TogglePanel(changelogGroup, mainGroup);
+        else TogglePanel(mainGroup, changelogGroup);
     }
 
     // Disable roadmap panel
