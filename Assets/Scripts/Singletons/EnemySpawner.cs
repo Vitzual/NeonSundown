@@ -44,6 +44,7 @@ public class EnemySpawner : MonoBehaviour
         // Reset the timer
         enemyHealthMultiplier = 1;
         enemySpeedMultiplier = 1;
+        enemyDamageMultiplier = 1;
         time = 0;
     }
 
