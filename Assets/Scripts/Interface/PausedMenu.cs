@@ -17,10 +17,23 @@ public class PausedMenu : MonoBehaviour
     // Start is called before the first frame update
     public void Update()
     {
-        if (Input.GetKeyDown(Keybinds.escape) && !Dealer.isOpen)
+        if (Input.GetKeyDown(Keybinds.escape))
         {
-            if (isOpen) Close();
-            else Open();
+            if (!Dealer.isOpen)
+            {
+                if (isOpen) Close();
+                else Open();
+            }
+            else if (canvasGroup.alpha == 1f) Close();
+        }
+        else if (Input.GetKeyDown(KeyCode.JoystickButton7))
+        {
+            if (!Dealer.isOpen)
+            {
+                if (isOpen) Close();
+                else Open();
+            }
+            else if (canvasGroup.alpha == 1f) Close();
         }
     }
 

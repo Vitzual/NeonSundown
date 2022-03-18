@@ -12,6 +12,11 @@ public class Dealer : MonoBehaviour
     public static Dealer active;
     public static bool isOpen;
 
+    // Gameobject for controls
+    public GameObject controlsOne;
+    public GameObject controlsTwo;
+    public GameObject controlsThree;
+
     // List of card slots
     [BoxGroup("Card Options")]
     public List<Card> cardSlots;
@@ -115,6 +120,9 @@ public class Dealer : MonoBehaviour
         // Pitch down music
         if (isOpen)
         {
+            // Check the connected controller
+            if (Controller.isControllerConnected && cardsDealt) CheckController();
+
             if (Settings.musicPitching && music.pitch > pitchDown)
                 music.pitch -= pitchSpeed * Time.deltaTime * fastDealSpeed;
 
@@ -137,6 +145,21 @@ public class Dealer : MonoBehaviour
             if (music.pitch >= 1f)
                 music.pitch = 1f;
         }
+    }
+
+    // Check controller
+    public void CheckController()
+    {
+        // Check for redraws
+        if (Input.GetAxis("D-Pad X") < 0) Redraw(cardSlots[0]);
+        else if (Input.GetAxis("D-Pad X") > 0) Redraw(cardSlots[2]);
+        else if (Input.GetAxis("D-Pad Y") < 0) Redraw(cardSlots[1]);
+        else if (Input.GetAxis("D-Pad Y") > 0) CloseDealer();
+
+        // Check for pick cards
+        if (Input.GetKeyDown(KeyCode.JoystickButton0)) cardSlots[1].OnClick(false);
+        else if (Input.GetKeyDown(KeyCode.JoystickButton1)) cardSlots[2].OnClick(false);
+        else if (Input.GetKeyDown(KeyCode.JoystickButton2)) cardSlots[0].OnClick(false);
     }
 
     // Deal cards
@@ -222,18 +245,24 @@ public class Dealer : MonoBehaviour
         foreach (RaycastResult result in results)
         {
             Card card = result.gameObject.GetComponent<Card>();
-            if (card != null && !card.redrawing)
+            Redraw(card);
+        }
+    }
+
+    // Redraws a card
+    public void Redraw(Card card)
+    {
+        if (card != null && !card.redrawing)
+        {
+            // Check to make sure enough cards are in the list
+            if (dealList.Count == 0) redraws.text = "No Cards Left!";
+            else if (redrawsLeft <= 0) redraws.text = "0 Remaining";
+            else
             {
-                // Check to make sure enough cards are in the list
-                if (dealList.Count == 0) redraws.text = "No Cards Left!";
-                else if (redrawsLeft <= 0) redraws.text = "0 Remaining";
-                else
-                {
-                    redrawsLeft -= 1;
-                    card.RedrawCard(PickNewCard());
-                    redraws.text = redrawsLeft + " Remaining";
-                    return;
-                }
+                redrawsLeft -= 1;
+                card.RedrawCard(PickNewCard());
+                redraws.text = redrawsLeft + " Remaining";
+                return;
             }
         }
     }
@@ -269,6 +298,11 @@ public class Dealer : MonoBehaviour
     // Open dealer
     public void OpenDealer()
     {
+        // Set controller controls
+        controlsOne.SetActive(Controller.isControllerConnected);
+        controlsTwo.SetActive(Controller.isControllerConnected);
+        controlsThree.SetActive(Controller.isControllerConnected);
+
         // Reset all cards
         foreach (Card card in cardSlots)
             card.canvasGroup.alpha = 0f;

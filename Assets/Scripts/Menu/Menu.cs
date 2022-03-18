@@ -25,10 +25,9 @@ public class Menu : MonoBehaviour
     public CanvasGroup socialsGroup;
     public CanvasGroup titleGroup;
     public CanvasGroup pressSpace;
-    public CanvasGroup alphaGroup;
+    public CanvasGroup firstTimeGroup;
     public CanvasGroup changelogGroup;
     public CanvasGroup creditsGroup;
-    public CanvasGroup roadmapWarningGroup;
     public CanvasGroup levelsGroup;
     public Image pressSpaceBg;
 
@@ -123,13 +122,11 @@ public class Menu : MonoBehaviour
     {
         if (!spacePressed && Input.anyKey)
         {
-            if (alphaBuild)
+            if (!SaveSystem.HasSave())
             {
-                LeanTween.alphaCanvas(alphaGroup, 1f, titleAnimSpeed);
-                alphaGroup.interactable = true;
-                alphaGroup.blocksRaycasts = true;
-                Gamemode.arena = alphaArena;
-                Gamemode.ship = alphaShip;
+                LeanTween.alphaCanvas(firstTimeGroup, 1f, titleAnimSpeed);
+                firstTimeGroup.interactable = true;
+                firstTimeGroup.blocksRaycasts = true;
             }
             else OpenMain();
         }
@@ -169,18 +166,17 @@ public class Menu : MonoBehaviour
     }
 
     // Open arena panel
+    public void DisableFirstOpen()
+    {
+        TogglePanel(mainGroup, firstTimeGroup);
+        OpenMain();
+    }
+
+    // Open arena panel
     public void ToggleChangelog(bool toggle)
     {
         if (toggle) TogglePanel(changelogGroup, mainGroup);
         else TogglePanel(mainGroup, changelogGroup);
-    }
-
-    // Disable roadmap panel
-    public void DisableRoadmapWarning()
-    {
-        LeanTween.alphaCanvas(roadmapWarningGroup, 0f, 0.35f);
-        roadmapWarningGroup.interactable = false;
-        roadmapWarningGroup.blocksRaycasts = false;
     }
 
     // Open arena panel

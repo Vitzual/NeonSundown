@@ -5,6 +5,10 @@ using UnityEngine;
 
 public class Controller : MonoBehaviour
 {
+    // Controller associated with the player
+    public static bool isControllerConnected;
+    public GameObject controllerIcon;
+
     // Controller object
     public GameObject _controller;
     public static GameObject controller;
@@ -126,7 +130,7 @@ public class Controller : MonoBehaviour
         }
 
         // Check if dash pressed
-        else if (Input.GetKey(Keybinds.dash) || Input.GetKey(KeyCode.Joystick1Button4))
+        else if (Input.GetKey(Keybinds.dash) || Input.GetKey(KeyCode.JoystickButton4))
         {
             isDashing = true;
             dash = dashTimer;
@@ -150,7 +154,13 @@ public class Controller : MonoBehaviour
         // Check horizontal and vertical
         if (horizontal != 0 || vertical != 0)
         {
-            if (!controller.activeSelf) controller.SetActive(true);
+            if (!controller.activeSelf)
+            {
+                // Check if controller is connected
+                isControllerConnected = true;
+                controllerIcon.SetActive(true);
+                controller.SetActive(true);
+            }
             controller.transform.localPosition = new Vector2(horizontal * 35, vertical * 35);
             float angle = Mathf.Atan2(controller.transform.localPosition.y, controller.transform.localPosition.x) * Mathf.Rad2Deg;
             rotator.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
@@ -161,7 +171,13 @@ public class Controller : MonoBehaviour
         Vector3 mousePos = Input.mousePosition;
         if (mousePos != lastMousePos)
         {
-            if (controller.activeSelf) controller.SetActive(false);
+            if (isControllerConnected)
+            {
+                // Check if controller is connected
+                isControllerConnected = false;
+                controllerIcon.SetActive(false);
+                controller.SetActive(false);
+            }
 
             lastMousePos = mousePos;
             Vector3 objectPos = Camera.main.WorldToScreenPoint(rotator.position);

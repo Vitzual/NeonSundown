@@ -18,6 +18,7 @@ public class SynergyUI : MonoBehaviour
     public Vector3 movePosition;
     private float cooldown = 0f;
     private bool synergizing = false;
+    private static bool listenForController = false;
 
     // On awake get active instance
     public void Awake() { active = this; }
@@ -50,12 +51,18 @@ public class SynergyUI : MonoBehaviour
     {
         if (debugFlag) Synergize(debugTest);
 
+        if (listenForController && Input.GetKeyDown(KeyCode.JoystickButton0)) 
+        {
+            synergyCard.OnClick(true); 
+        }
+
         if (synergizing)
         {
             if (cooldown > 0f)
                 cooldown -= Time.deltaTime;
             else
             {
+                listenForController = true;
                 screen.interactable = true;
                 screen.blocksRaycasts = true;
                 synergizing = false;
@@ -72,5 +79,6 @@ public class SynergyUI : MonoBehaviour
         screen.alpha = 0f;
         screen.interactable = false;
         screen.blocksRaycasts = false;
+        listenForController = false;
     }
 }

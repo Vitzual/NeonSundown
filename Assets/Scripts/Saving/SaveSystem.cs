@@ -95,6 +95,16 @@ public class SaveSystem
         else GenerateSave();
     }
 
+    // Check if save exists
+    public static bool HasSave()
+    {
+        // Grab the persistent data path
+        string path = Application.persistentDataPath + META_PATH;
+
+        // Check if file exists
+        return File.Exists(path);
+    }
+
     // Generate a new save
     public static void GenerateSave()
     {
