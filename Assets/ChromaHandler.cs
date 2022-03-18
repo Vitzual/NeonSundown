@@ -30,7 +30,7 @@ public class ChromaHandler : MonoBehaviour
             case ChromaType.EnergyBullets:
                 BulletHandler.energyBullets = true;
                 Deck.player.pierces += 10;
-                Deck.player.stunLength += 0.25f;
+                Deck.player.stunLength += 0.2f;
                 break;
         }      
     }
