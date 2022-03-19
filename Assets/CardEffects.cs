@@ -26,7 +26,7 @@ public class CardEffects : MonoBehaviour
 
             // Get stat
             Stat stat = (Stat)i;
-            if (stat == Stat.Evasion || stat == Stat.DashSpeed || stat == Stat.XPRange ||
+            if (stat == Stat.Evasion || stat == Stat.DashSpeed || stat == Stat.AutoCollect ||
                 stat == Stat.View || stat == Stat.Tracking || stat == Stat.Explosive)
             {
                 totalSkipped += 1;

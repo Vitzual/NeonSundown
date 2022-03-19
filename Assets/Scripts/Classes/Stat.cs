@@ -13,7 +13,7 @@ public enum Stat
     Lifetime,
     Knockback,
     XPGain,
-    XPRange,
+    AutoCollect,
     View,
     Syphon,
     Regen,

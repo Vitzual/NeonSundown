@@ -453,7 +453,7 @@ public class Ship : Weapon
                 break;
 
             // Increase XP range
-            case Stat.XPRange:
+            case Stat.AutoCollect:
                 xpRange.radius = Deck.CalculateStat(stat, 15);
                 break;
 
@@ -554,7 +554,7 @@ public class Ship : Weapon
                 return xpMultiplier;
 
             // Increase XP range
-            case Stat.XPRange:
+            case Stat.AutoCollect:
                 return xpRange.radius;
 
             // Increase regen rate
@@ -650,7 +650,7 @@ public class Ship : Weapon
                 return 1f;
 
             // Increase XP range
-            case Stat.XPRange:
+            case Stat.AutoCollect:
                 return 15f;
 
             // Increase regen rate
