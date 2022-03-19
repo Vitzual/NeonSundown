@@ -38,6 +38,7 @@ public class SettingsUI : MonoBehaviour
     public SwitchManager damageNumbers;
     public SwitchManager compoundXP;
     public SwitchManager musicPitchingSwitch;
+    public SwitchManager alwaysShowHealth;
 
     // Canvas group
     public CanvasGroup canvasGroup;
@@ -180,6 +181,7 @@ public class SettingsUI : MonoBehaviour
     }
 
     // Set screen shake flag
+    public void AlwaysShowHP(bool toggle) { Settings.alwaysShowHP = toggle; Events.active.UpdateShowHP(toggle); }
     public void ShipColoring(bool toggle) { Settings.shipColoring = toggle; Events.active.ShipColoring(toggle); }
     public void ScreenShake(bool toggle) { Settings.screenShake = toggle; }
     public void UseParticles(bool toggle) { Settings.useParticles = toggle; }

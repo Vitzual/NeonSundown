@@ -62,6 +62,8 @@ public class Ship : Weapon
         healthBar = _healthBar;
         healthCanvas = _healthCanvas;
 
+        Events.active.onUpdateShowHP += UpdateShowHP;
+
         if (Gamemode.ship != null)
         {
             Events.active.onSetupShip += Setup;
@@ -284,6 +286,12 @@ public class Ship : Weapon
         UpdateHealth();
     }
 
+    public void UpdateShowHP(bool toggle)
+    {
+        if (toggle) healthCanvas.alpha = 1f;
+        else healthCanvas.alpha = 0f;
+    }
+
     private static void UpdateHealth()
     {
         // Update health UI bar
@@ -291,7 +299,7 @@ public class Ship : Weapon
         healthBar.UpdateUI();
 
         // Show bar for short period of time
-        if (!GameOverScreen.isActive)
+        if (!GameOverScreen.isActive && !Settings.alwaysShowHP)
         {
             healthCanvas.alpha = 1f;
             LeanTween.cancel(healthCanvas.gameObject);

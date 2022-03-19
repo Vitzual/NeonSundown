@@ -101,7 +101,7 @@ public class Events : MonoBehaviour
         if (onMusicPitchChanged != null)
             onMusicPitchChanged();
     }
-
+    
     // Cosmetic applied
     public event Action<float> onLightChanged;
     public void LightChanged(float volume)
@@ -116,5 +116,13 @@ public class Events : MonoBehaviour
     {
         if (onShipColoringChange != null)
             onShipColoringChange(toggle);
+    }
+
+    // Ship coloring change
+    public event Action<bool> onUpdateShowHP;
+    public void UpdateShowHP(bool toggle)
+    {
+        if (onUpdateShowHP != null)
+            onUpdateShowHP(toggle);
     }
 }
