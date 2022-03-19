@@ -26,6 +26,7 @@ public class Settings
     public static bool shipColoring = true;
     public static bool screenShake = true;
     public static bool useParticles = true;
+    public static bool alwaysShowHP = false;
     public static float glowAmount = 1f;
     public static float lightAmount = 1f;
     public static bool damageNumbers = false;
@@ -50,6 +51,7 @@ public class Settings
         settingsData.glowAmount = glowAmount;
         settingsData.lightAmount = lightAmount;
         settingsData.useParticles = useParticles;
+        settingsData.alwaysShowHP = alwaysShowHP;
         settingsData.damageNumbers = damageNumbers;
         settingsData.compoundXP = compoundXP;
         settingsData.musicPitching = musicPitching;
@@ -63,6 +65,7 @@ public class Settings
         settingsData.keybind_primary = Keybinds.primary.ToString();
         settingsData.keybind_secondary = Keybinds.secondary.ToString();
         settingsData.keybind_escape = Keybinds.escape.ToString();
+        settingsData.keybind_stats = Keybinds.stats.ToString();
 
         // Convert to json and save
         string data = JsonUtility.ToJson(settingsData);
@@ -92,10 +95,11 @@ public class Settings
             shipColoring = settingsData.shipColoring;
             screenShake = settingsData.screenShake;
             useParticles = settingsData.useParticles;
+            alwaysShowHP = settingsData.alwaysShowHP;
             damageNumbers = settingsData.damageNumbers;
             compoundXP = settingsData.compoundXP;
             musicPitching = settingsData.musicPitching;
-
+            
             // Apply glow effect
             glowAmount = settingsData.glowAmount;
             if (glowAmount > 1f) glowAmount = 1f;
@@ -123,6 +127,10 @@ public class Settings
                 Keybinds.SetDefaultKeybinds(); 
             }
 
+            // Try catch debug seperately as it's a post launch keybind
+            try { Keybinds.stats = (KeyCode)System.Enum.Parse(typeof(KeyCode), settingsData.keybind_stats); }
+            catch { Keybinds.stats = KeyCode.Tab; }
+
             // Apply settings
             UpdateVideoSettings();
             UpdateVolumeSettings();
@@ -145,6 +153,7 @@ public class Settings
             shipColoring = true;
             screenShake = true;
             useParticles = true;
+            alwaysShowHP = false;
             damageNumbers = true;
             compoundXP = false;
             musicPitching = true;

@@ -11,6 +11,7 @@ public class Keybinds
     public static KeyCode secondary { get; set; }
     public static KeyCode escape { get; set; }
     public static KeyCode debug { get; set; }
+    public static KeyCode stats { get; set; }
 
     public static void SetKeybind(Key key, KeyCode value)
     {
@@ -47,6 +48,10 @@ public class Keybinds
             case Key.escape:
                 escape = value;
                 break;
+
+            case Key.stats:
+                escape = value;
+                break;
         }
     }
 
@@ -78,11 +83,14 @@ public class Keybinds
             case Key.escape:
                 return escape;
 
+            case Key.stats:
+                return stats;
+
             default:
                 return move_up;
         }
     }
-
+    
     public static void SetDefaultKeybinds()
     {
         move_up = KeyCode.W;
@@ -94,5 +102,6 @@ public class Keybinds
         secondary = KeyCode.Mouse1;
         escape = KeyCode.Escape;
         debug = KeyCode.Q;
+        stats = KeyCode.Tab;
     }
 }

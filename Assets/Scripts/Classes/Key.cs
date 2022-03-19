@@ -7,5 +7,6 @@ public enum Key
     dash,
     primary,
     escape,
-    secondary
+    secondary,
+    stats
 }

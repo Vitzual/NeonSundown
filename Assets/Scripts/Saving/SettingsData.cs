@@ -17,6 +17,7 @@ public class SettingsData
     public float lightAmount;
     public bool shipColoring;
     public bool useParticles;
+    public bool alwaysShowHP;
     public bool damageNumbers;
     public bool compoundXP;
     public bool musicPitching;
@@ -31,4 +32,5 @@ public class SettingsData
     public string keybind_secondary;
     public string keybind_escape;
     public string keybind_debug;
+    public string keybind_stats;
 }
