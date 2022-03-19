@@ -12,8 +12,8 @@ public class ElectroBullet : Bullet
     {
         stunLength = 3f;
         ParticleSystemRenderer electroRenderer = electroParticle.GetComponent<ParticleSystemRenderer>();
-        electroRenderer.material = material;
-        electroRenderer.trailMaterial = material;
+        electroRenderer.material = weapon.material;
+        electroRenderer.trailMaterial = weapon.material;
         base.Setup(parent, weapon, material, target, isSplitShot, explosiveRound);
     }
 

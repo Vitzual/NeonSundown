@@ -68,7 +68,7 @@ public class Store : MonoBehaviour
         if (SaveSystem.saveData.crystals.ContainsKey(blueCrystal.InternalID))
         {
             amount = SaveSystem.saveData.crystals[blueCrystal.InternalID];
-            if (amount > 99) blueCrystalAmount.text = "99+";
+            if (amount > 999) blueCrystalAmount.text = "999";
             else blueCrystalAmount.text = amount.ToString();
         }
         else blueCrystalAmount.text = "0";
@@ -77,7 +77,7 @@ public class Store : MonoBehaviour
         if (SaveSystem.saveData.crystals.ContainsKey(greenCrystal.InternalID))
         {
             amount = SaveSystem.saveData.crystals[greenCrystal.InternalID];
-            if (amount > 99) greenCrystalAmount.text = "99+";
+            if (amount > 999) greenCrystalAmount.text = "999";
             else greenCrystalAmount.text = amount.ToString();
         }
         else greenCrystalAmount.text = "0";
@@ -86,7 +86,7 @@ public class Store : MonoBehaviour
         if (SaveSystem.saveData.crystals.ContainsKey(redCrystal.InternalID))
         {
             amount = SaveSystem.saveData.crystals[redCrystal.InternalID];
-            if (amount > 99) redCrystalAmount.text = "99+";
+            if (amount > 999) redCrystalAmount.text = "999";
             else redCrystalAmount.text = amount.ToString();
         }
         else redCrystalAmount.text = "0";

@@ -20,11 +20,11 @@ public class ModuleData : IdentifiableScriptableObject
         switch(level)
         {
             case 0:
-                return 15;
-            case 1:
                 return 25;
-            case 2:
+            case 1:
                 return 50;
+            case 2:
+                return 100;
             default:
                 return 10;
         }

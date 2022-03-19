@@ -41,8 +41,8 @@ public class SynergyProgress : MonoBehaviour
             // Set text objects
             synergyName.text = synergy.name;
             desc.text = synergy.outputCard.description;
-            if (Deck.active.HasCard(synergy.outputCard)) status.text = "ACTIVE";
-            else if (SynergyHandler.availableSynergies.Contains(synergy)) status.text = "READY";
+            if (Deck.active.HasCard(synergy.outputCard)) status.text = "CURRENTLY ACTIVE";
+            else if (SynergyHandler.availableSynergies.Contains(synergy)) status.text = "BREAK RED CRYSTAL";
             else status.text = "NOT READY";
             requirementOne.text = synergy.cardOne.name;
             requirementTwo.text = synergy.cardTwo.name;
