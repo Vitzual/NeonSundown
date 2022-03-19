@@ -113,7 +113,7 @@ public class ExplosiveHandler : MonoBehaviour
             {
                 // Get crystal component
                 Crystal crystal = colliders[i].GetComponent<Crystal>();
-                crystal.Knockback(Random.Range(minKnockback, maxKnockback), origin);
+                if (crystal != null) crystal.Knockback(Random.Range(minKnockback, maxKnockback), origin);
             }
         }
     }
