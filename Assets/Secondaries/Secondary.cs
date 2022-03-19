@@ -3,6 +3,7 @@ using UnityEngine;
 public class Secondary : MonoBehaviour
 {
     // Ship instance
+    public bool useCustomUpdate = false;
     public AudioClip sound;
     protected Ship ship;
     [HideInInspector]
@@ -25,8 +26,17 @@ public class Secondary : MonoBehaviour
         if (!Dealer.isOpen && cooldown > 0)
             cooldown -= Time.deltaTime;
         if (Input.GetKey(Keybinds.secondary) || Input.GetAxis("Secondary") > 0.5) Use();
+
+        // Check if secondary has custom update
+        if (useCustomUpdate) CustomUpdate();
     }
     
+    // Custom update method
+    public virtual void CustomUpdate()
+    {
+
+    }
+
     // Virtual use method
     public virtual void Use()
     {

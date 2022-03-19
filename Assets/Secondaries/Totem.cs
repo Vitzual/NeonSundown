@@ -15,12 +15,24 @@ public class Totem : MonoBehaviour
     public Transform radius;
     public float targetRadius;
     public float scaleSpeed;
+    private float cooldown;
+    private bool isHealing;
 
     // On start, play animation
     public void Update()
     {
         if (radius.localScale.x < targetRadius)
             radius.localScale = new Vector2(radius.localScale.x, radius.localScale.y) * scaleSpeed * Time.deltaTime;
+
+        if (cooldown <= 0)
+        {
+            if (isHealing)
+            {
+                Ship.Heal(totemController.healAmount);
+                cooldown = totemController.healCooldown;
+            }
+        }
+        else cooldown -= Time.deltaTime;
     }
 
     // On collision with enemy, apply damage
@@ -31,7 +43,7 @@ public class Totem : MonoBehaviour
         if (ship != null)
         {
             AudioPlayer.Play(sound, false, 1f, 1f, false, 0.6f);
-            totemController.isHealing = true;
+            isHealing = true;
         }
     }
 
@@ -43,7 +55,7 @@ public class Totem : MonoBehaviour
         if (ship != null)
         {
             AudioPlayer.Play(sound, false, 0.8f, 0.8f, false, 0.6f);
-            totemController.isHealing = false;
+            isHealing = false;
         }
     }
 }

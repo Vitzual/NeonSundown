@@ -6,6 +6,9 @@ using UnityEngine.UI;
 
 public class Ship : Weapon
 {
+    // Auto collect XP flag
+    public static bool autoCollectXP = false;
+
     // Controller associated with the player
     private Controller controller;
     public GameObject autoFireObj;
@@ -61,6 +64,7 @@ public class Ship : Weapon
     // Subscribe to setup event
     public void Start()
     {
+        autoCollectXP = false;
         healthBar = _healthBar;
         healthCanvas = _healthCanvas;
 

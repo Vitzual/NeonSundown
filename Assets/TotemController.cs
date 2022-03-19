@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class TotemController : Secondary
 {
-    public bool isHealing;
     public Totem newTotem;
     public Totem oldTotem;
     public float healAmount;
