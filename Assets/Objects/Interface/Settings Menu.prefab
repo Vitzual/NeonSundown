@@ -6295,7 +6295,7 @@ GameObject:
   - component: {fileID: 8074958031051481760}
   - component: {fileID: 7841417823612129161}
   m_Layer: 5
-  m_Name: Show XP Bar
+  m_Name: Show HP Bar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6342,7 +6342,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 8838788522258047302}
         m_TargetAssemblyTypeName: SettingsUI, Assembly-CSharp
-        m_MethodName: UseParticles
+        m_MethodName: AlwaysShowHP
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6357,7 +6357,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 8838788522258047302}
         m_TargetAssemblyTypeName: SettingsUI, Assembly-CSharp
-        m_MethodName: UseParticles
+        m_MethodName: AlwaysShowHP
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -15366,6 +15366,7 @@ MonoBehaviour:
   damageNumbers: {fileID: 5244468130680893526}
   compoundXP: {fileID: 163471724544092982}
   musicPitchingSwitch: {fileID: 4944876622332420048}
+  alwaysShowHealth: {fileID: 0}
   canvasGroup: {fileID: 8838788522258047303}
   menuVolume: {fileID: 11400000, guid: aa7f3a7213b8171429c23e27b9c59739, type: 2}
   mainVolume: {fileID: 11400000, guid: d9ab61d1d454d7244a5bd2fe43730c83, type: 2}

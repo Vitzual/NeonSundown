@@ -288,6 +288,9 @@ public class Ship : Weapon
 
     public void UpdateShowHP(bool toggle)
     {
+        if (!GameOverScreen.isActive)
+            LeanTween.cancel(healthCanvas.gameObject);
+
         if (toggle) healthCanvas.alpha = 1f;
         else healthCanvas.alpha = 0f;
     }

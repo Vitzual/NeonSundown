@@ -50,7 +50,7 @@ public class Keybinds
                 break;
 
             case Key.stats:
-                escape = value;
+                stats = value;
                 break;
         }
     }
