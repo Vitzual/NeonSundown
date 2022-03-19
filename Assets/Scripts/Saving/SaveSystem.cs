@@ -9,8 +9,6 @@ public class SaveSystem
     // Save path
     private const string SAVE_PATH = "/player_save.json";
     private const string META_PATH = "/context_save.json";
-    private const string EXPERIMENTAL_SAVE_PATH = "/experimental_player_save.json";
-    private const string EXPERIMENTAL_META_PATH = "/experimental_context_save.json";
 
     // Most up-to-date data
     public static SaveData saveData;

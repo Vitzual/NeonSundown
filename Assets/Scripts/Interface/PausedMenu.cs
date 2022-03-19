@@ -20,12 +20,15 @@ public class PausedMenu : MonoBehaviour
     // Start is called before the first frame update
     public void Update()
     {
-        if (Input.GetKeyDown(Keybinds.stats))
+        if (!isOpen)
         {
-            CardEffects.UpdateEffects();
-            stats.alpha = 1f;
+            if (Input.GetKeyDown(Keybinds.stats))
+            {
+                CardEffects.UpdateEffects();
+                stats.alpha = 1f;
+            }
+            else if (Input.GetKeyUp(Keybinds.stats)) stats.alpha = 0f;
         }
-        else if (Input.GetKeyUp(Keybinds.stats)) stats.alpha = 0f;
 
         if (Input.GetKeyDown(Keybinds.escape))
         {
