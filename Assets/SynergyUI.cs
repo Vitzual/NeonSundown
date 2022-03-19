@@ -35,7 +35,7 @@ public class SynergyUI : MonoBehaviour
         LeanTween.alphaCanvas(screen, 1f, 1f);
         cardOne.Synergize(synergy.cardOne, fadeInSpeed, moveSpeedDelay);
         cardTwo.Synergize(synergy.cardTwo, fadeInSpeed, moveSpeedDelay);
-        synergyCard.Set(synergy.outputCard, false, true);
+        synergyCard.Set(synergy.outputCard, false, true, synergy.tier);
         synergyCard.SetSynergy(synergy);
         synergyCard.canvasGroup.alpha = 0f;
         LeanTween.alphaCanvas(synergyCard.canvasGroup, 1f, 0.25f).setDelay(fadeInSpeed + moveSpeedDelay);

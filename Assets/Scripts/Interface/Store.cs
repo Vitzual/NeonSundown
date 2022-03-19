@@ -136,7 +136,7 @@ public class Store : MonoBehaviour
         name.text = module.name;
         desc.text = module.desc.Replace("{value}", value.ToString());
     }
-
+    
     // Attempt to purchase the module
     public void PurchaseModule()
     {

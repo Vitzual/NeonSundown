@@ -48,7 +48,7 @@ public class Card : MonoBehaviour
     }
 
     // Set card function
-    public void Set(CardData card, bool redrawing = false, bool synergyCard = false)
+    public void Set(CardData card, bool redrawing = false, bool synergyCard = false, int synergyTier = 1)
     {
         // Set card data
         cardData = card;
@@ -258,7 +258,7 @@ public class Card : MonoBehaviour
             }
         }
 
-        else level.text = "SYNERGY CARD";
+        else level.text = "TIER " + synergyTier + " SYNERGY";
     }
 
     // Card clicked
