@@ -66,6 +66,7 @@ public class Settings
         settingsData.keybind_secondary = Keybinds.secondary.ToString();
         settingsData.keybind_escape = Keybinds.escape.ToString();
         settingsData.keybind_stats = Keybinds.stats.ToString();
+        settingsData.keybind_autofire = Keybinds.autofire.ToString();
 
         // Convert to json and save
         string data = JsonUtility.ToJson(settingsData);
@@ -131,12 +132,18 @@ public class Settings
             try { Keybinds.stats = (KeyCode)System.Enum.Parse(typeof(KeyCode), settingsData.keybind_stats); }
             catch { Keybinds.stats = KeyCode.Tab; }
 
+            // Try catch debug seperately as it's a post launch keybind
+            try { Keybinds.autofire = (KeyCode)System.Enum.Parse(typeof(KeyCode), settingsData.keybind_autofire); }
+            catch { Keybinds.autofire = KeyCode.Space; }
+
             // Apply settings
             UpdateVideoSettings();
             UpdateVolumeSettings();
 
             SettingsUI.active.SetGlowAmount(glowAmount);
             SettingsUI.active.SetLightAmount(lightAmount);
+
+            Events.active.UpdateShowHP(alwaysShowHP);
         }
         else
         {
@@ -208,7 +215,7 @@ public class Settings
 
         UpdateVideoSettings();
     }
-
+    
     // Apply settings
     public static void UpdateVideoSettings()
     {

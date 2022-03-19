@@ -8,5 +8,6 @@ public enum Key
     primary,
     escape,
     secondary,
-    stats
+    stats,
+    autofire
 }

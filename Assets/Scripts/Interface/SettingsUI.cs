@@ -15,7 +15,7 @@ public class SettingsUI : MonoBehaviour
         public Key key;
         public ButtonManagerBasic button;
     }
-
+    
     public List<Keybind> keybinds;
     private Key listeningForKey;
     private bool listeningForInput = false;
@@ -217,6 +217,7 @@ public class SettingsUI : MonoBehaviour
         shipColoringSwitch.isOn = Settings.shipColoring;
         shakeSwitch.isOn = Settings.screenShake;
         particleSwitch.isOn = Settings.useParticles;
+        alwaysShowHealth.isOn = Settings.alwaysShowHP;
         damageNumbers.isOn = Settings.damageNumbers;
         compoundXP.isOn = Settings.compoundXP;
         musicPitchingSwitch.isOn = Settings.musicPitching;
@@ -229,6 +230,7 @@ public class SettingsUI : MonoBehaviour
         shipColoringSwitch.UpdateUI();
         shakeSwitch.UpdateUI();
         particleSwitch.UpdateUI();
+        alwaysShowHealth.UpdateUI();
         damageNumbers.UpdateUI();
         compoundXP.UpdateUI();
         musicPitchingSwitch.UpdateUI();

@@ -33,4 +33,5 @@ public class SettingsData
     public string keybind_escape;
     public string keybind_debug;
     public string keybind_stats;
+    public string keybind_autofire;
 }

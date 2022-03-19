@@ -12,6 +12,7 @@ public class Keybinds
     public static KeyCode escape { get; set; }
     public static KeyCode debug { get; set; }
     public static KeyCode stats { get; set; }
+    public static KeyCode autofire { get; set; }
 
     public static void SetKeybind(Key key, KeyCode value)
     {
@@ -52,6 +53,10 @@ public class Keybinds
             case Key.stats:
                 stats = value;
                 break;
+
+            case Key.autofire:
+                autofire = value;
+                break;
         }
     }
 
@@ -86,6 +91,9 @@ public class Keybinds
             case Key.stats:
                 return stats;
 
+            case Key.autofire:
+                return autofire;
+
             default:
                 return move_up;
         }
@@ -103,5 +111,6 @@ public class Keybinds
         escape = KeyCode.Escape;
         debug = KeyCode.Q;
         stats = KeyCode.Tab;
+        autofire = KeyCode.Space;
     }
 }
