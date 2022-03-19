@@ -10,8 +10,8 @@ public class Weapon : MonoBehaviour
     
     // Weapon variables
     [HideInInspector]
-    public float damage, cooldown, moveSpeed, bloom, pierces, 
-        bullets, lifetime, range, knockback, splitshots, size, stunLength;
+    public float damage, cooldown, moveSpeed, bloom, pierces, bullets, lifetime,
+        range, knockback, splitshots, size, stunLength, critical;
     [HideInInspector]
     public bool explosiveRounds;
 
@@ -99,6 +99,9 @@ public class Weapon : MonoBehaviour
                 stunLength = (Deck.CalculateStat(type, weapon.stun)
                     + GetAdditions(type)) * GetMultiplier(type);
                 break;
+            case Stat.Criticals:
+                critical = (Deck.CalculateStat(type, 0) + GetAdditions(type)) * GetMultiplier(type);
+                break;
         }
     }
 
@@ -158,6 +161,10 @@ public class Weapon : MonoBehaviour
             case Stat.StunLength:
                 return stunLength;
 
+            // Get crit
+            case Stat.Criticals:
+                return critical;
+
             // Default case
             default:
                 return 0;
@@ -200,6 +207,10 @@ public class Weapon : MonoBehaviour
             // Increase regen rate
             case Stat.StunLength:
                 return weapon.stun;
+
+            // Get crit
+            case Stat.Criticals:
+                return 0;
 
             // Default case
             default:

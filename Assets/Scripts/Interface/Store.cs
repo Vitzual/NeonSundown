@@ -115,7 +115,7 @@ public class Store : MonoBehaviour
         {
             int amount = SaveSystem.GetModuleAmount(module.InternalID);
             value = module.values[amount];
-            if (amount > 2)
+            if (amount > 3)
             {
                 owned.text = "MAX LEVEL";
                 buttonText.text = "MAX LEVEL";
@@ -144,7 +144,7 @@ public class Store : MonoBehaviour
         if (module == null) return;
 
         // Check if player owns module
-        if (SaveSystem.GetModuleAmount(module.InternalID) > 2) return;
+        if (SaveSystem.GetModuleAmount(module.InternalID) > 3) return;
 
         // Check if player has enough crystals
         if (SaveSystem.GetCrystalAmount(module.cost.InternalID) >= 

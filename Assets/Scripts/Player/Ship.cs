@@ -363,7 +363,13 @@ public class Ship : Weapon
 
             // Setup the module
             ModuleData newModule = module.Value;
-            float value = newModule.values[SaveSystem.GetModuleAmount(newModule.InternalID)];
+            int amount = SaveSystem.GetModuleAmount(newModule.InternalID);
+            if (amount >= newModule.values.Count)
+            {
+                Debug.Log("Module amount exceeds values setup!");
+                amount = newModule.values.Count - 1;
+            }
+            float value = newModule.values[amount];
             Debug.Log("Setting up module " + newModule.name + " with value " + value);
             if (module.Value.multi) Deck.AddMultiplier(newModule.stat, value);
             else Deck.AddAddition(newModule.stat, value);

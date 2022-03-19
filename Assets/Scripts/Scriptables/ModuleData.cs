@@ -25,6 +25,8 @@ public class ModuleData : IdentifiableScriptableObject
                 return 25;
             case 2:
                 return 50;
+            case 3:
+                return 80;
             default:
                 return 5;
         }
