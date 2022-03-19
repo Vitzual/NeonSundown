@@ -8,6 +8,8 @@ public class Ship : Weapon
 {
     // Controller associated with the player
     private Controller controller;
+    public GameObject autoFireObj;
+    private bool autoFire = false;
 
     // Player model and data
     public ShipData shipData;
@@ -163,8 +165,15 @@ public class Ship : Weapon
         // Check if deck is open
         if (Dealer.isOpen) return;
 
+        // Check if space pressed for auto fire
+        if (Input.GetKeyDown(Keybinds.autofire))
+        {
+            autoFire = !autoFire;
+            autoFireObj.SetActive(autoFire);
+        }
+
         // Check if LMB input detected
-        if ((Input.GetKey(Keybinds.primary) || Input.GetAxis("Primary") > 0.5) && shipData.canFire) Use();
+        if ((autoFire || Input.GetKey(Keybinds.primary) || Input.GetAxis("Primary") > 0.5) && shipData.canFire) Use();
         if (shipCooldown > 0) shipCooldown -= Time.deltaTime;
         
         // If can regen, regenerate

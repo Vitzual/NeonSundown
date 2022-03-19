@@ -21,6 +21,7 @@ public class SettingsData
     public bool damageNumbers;
     public bool compoundXP;
     public bool musicPitching;
+    public bool verticalsync;
 
     // Keybinds
     public string keybind_move_up;

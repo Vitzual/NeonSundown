@@ -39,6 +39,7 @@ public class SettingsUI : MonoBehaviour
     public SwitchManager compoundXP;
     public SwitchManager musicPitchingSwitch;
     public SwitchManager alwaysShowHealth;
+    public SwitchManager verticalSync;
 
     // Canvas group
     public CanvasGroup canvasGroup;
@@ -142,6 +143,7 @@ public class SettingsUI : MonoBehaviour
 
     // Set video settings methods
     public void SwitchScreenmode(bool fullscreen) { Settings.SetScreenMode(fullscreen); }
+    public void SwitchVerticalSync(bool toggle) { Settings.SetVerticalSync(toggle); }
     public void SwitchFramerate(int amount) { Settings.SetFramerate(amount); }
 
     // Switch resolution
@@ -221,6 +223,7 @@ public class SettingsUI : MonoBehaviour
         damageNumbers.isOn = Settings.damageNumbers;
         compoundXP.isOn = Settings.compoundXP;
         musicPitchingSwitch.isOn = Settings.musicPitching;
+        verticalSync.isOn = Settings.verticalsync;
 
         // Update values
         music.UpdateUI();
@@ -234,6 +237,7 @@ public class SettingsUI : MonoBehaviour
         damageNumbers.UpdateUI();
         compoundXP.UpdateUI();
         musicPitchingSwitch.UpdateUI();
+        verticalSync.UpdateUI();
 
         // Update canvas group
         canvasGroup.alpha = 1f;

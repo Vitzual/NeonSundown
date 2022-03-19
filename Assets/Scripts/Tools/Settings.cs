@@ -32,6 +32,7 @@ public class Settings
     public static bool damageNumbers = false;
     public static bool compoundXP = false;
     public static bool musicPitching = true;
+    public static bool verticalsync = false;
 
     // Save settings
     public static void SaveSettings()
@@ -55,6 +56,7 @@ public class Settings
         settingsData.damageNumbers = damageNumbers;
         settingsData.compoundXP = compoundXP;
         settingsData.musicPitching = musicPitching;
+        settingsData.verticalsync = verticalsync;
 
         // Get keybinds from file
         settingsData.keybind_move_up = Keybinds.move_up.ToString();
@@ -100,7 +102,8 @@ public class Settings
             damageNumbers = settingsData.damageNumbers;
             compoundXP = settingsData.compoundXP;
             musicPitching = settingsData.musicPitching;
-            
+            verticalsync = settingsData.verticalsync;
+
             // Apply glow effect
             glowAmount = settingsData.glowAmount;
             if (glowAmount > 1f) glowAmount = 1f;
@@ -164,6 +167,7 @@ public class Settings
             damageNumbers = true;
             compoundXP = false;
             musicPitching = true;
+            verticalsync = false;
 
             SettingsUI.active.SetGlowAmount(glowAmount);
             SettingsUI.active.SetLightAmount(lightAmount);
@@ -206,19 +210,23 @@ public class Settings
     public static void SetFramerate(int amount)
     { 
         // Set frame rate
-        if (amount >= 30) 
-            framerate = amount;
-
-        // Check if vsync should be applied
-        if (amount <= 144) QualitySettings.vSyncCount = 1;
-        else QualitySettings.vSyncCount = 0;
-
+        if (amount >= 30) framerate = amount;
         UpdateVideoSettings();
     }
-    
+
+    // Set video componenets
+    public static void SetVerticalSync(bool toggle)
+    {
+        // Check if vsync should be applied
+        if (toggle) QualitySettings.vSyncCount = 1;
+        else QualitySettings.vSyncCount = 0;
+        verticalsync = toggle;
+    }
+
     // Apply settings
     public static void UpdateVideoSettings()
     {
+        SetVerticalSync(verticalsync);
         Screen.SetResolution(resolutionX, resolutionY, screenmode, framerate);
         Application.targetFrameRate = framerate;
     }
