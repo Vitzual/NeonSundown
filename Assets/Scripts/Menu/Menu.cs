@@ -7,6 +7,11 @@ using UnityEngine.UI;
 
 public class Menu : MonoBehaviour
 {
+    // Is experimental build
+    public bool _isExperimental;
+    public static bool isExperimental;
+    public GameObject experimental;
+
     // Menu panels
     public ArenaPanel arenaPanel;
     public ShipPanel shipPanel;
@@ -55,6 +60,7 @@ public class Menu : MonoBehaviour
     // Start is called before the first frame update
     public void Awake()
     {
+        isExperimental = _isExperimental;
         Scriptables.GenerateAllScriptables();
         SaveSystem.GetSave();
         Levels.UpdateUnlocks();
@@ -63,6 +69,10 @@ public class Menu : MonoBehaviour
     // On start, try and get meta context
     public void Start()
     {
+        // Check if experimental
+        if (isExperimental) experimental.SetActive(true);
+        else experimental.SetActive(false);
+
         // Reset module slots if applicable
         Gamemode.modules = new Dictionary<int, ModuleData>();
 
