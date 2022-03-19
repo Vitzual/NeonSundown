@@ -8,6 +8,7 @@ public class Scythe : Weapon
     public Transform rotator;
     public float xOffset = 0;
     public float yOffset = 0;
+    public bool heal = false;
 
     // Override default setup
     public override void Setup(WeaponData data, Transform target = null)
@@ -33,7 +34,8 @@ public class Scythe : Weapon
             // Attempt to damage the enemy
             if (stunLength > 0f) entity.Stun(stunLength);
             entity.Damage(damage, weapon.knockback);
-            
+            if (heal) Ship.Heal(0.01f);
+
             // Play death sound if enemy dies
             if (entity.IsDead()) AudioPlayer.Play(weapon.onDeathSound, true, 0.9f, 1.1f, false, weapon.audioScale);
             else AudioPlayer.Play(weapon.onDamageSound);
