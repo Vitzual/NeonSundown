@@ -291,6 +291,9 @@ public class Ship : Weapon
         // Play audio clip
         AudioPlayer.Play(damageSound);
 
+        // Unleash pulse
+        ExplosiveHandler.CreateKnockback(transform.position, 20f, -1000f, -1500f);
+
         // Update health UI bar
         UpdateHealth();
     }
