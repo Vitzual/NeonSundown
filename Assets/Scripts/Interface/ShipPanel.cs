@@ -171,7 +171,7 @@ public class ShipPanel : MonoBehaviour
         {
             int amount = SaveSystem.GetModuleAmount(module.Key);
             if (amount == -1) moduleAmounts[module.Key].text = "NOT OWNED";
-            else if (amount == 3) moduleAmounts[module.Key].text = "LEVEL MAX";
+            else if (amount == 4) moduleAmounts[module.Key].text = "LEVEL MAX";
             else moduleAmounts[module.Key].text = "LEVEL " + (amount + 1);
         }
 

@@ -296,7 +296,7 @@ public class SaveSystem
     {
         if (saveData.modules.ContainsKey(id))
         {
-            if (saveData.modules[id] > 3) return 3;
+            if (saveData.modules[id] > 4) return 4;
             else return saveData.modules[id];
         }
         else return -1;
