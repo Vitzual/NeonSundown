@@ -130,13 +130,6 @@ public class Bullet : Entity
     // On collision
     public virtual void OnHit(Entity entity)
     {
-        // Check if explosive
-        if (explosive)
-        {
-            Destroy();
-            return;
-        }
-
         // Remove pierces
         pierce -= 1;
         entity.Damage(damage, knockback);
