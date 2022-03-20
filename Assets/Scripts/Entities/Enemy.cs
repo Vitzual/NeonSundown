@@ -31,7 +31,7 @@ public class Enemy : Entity
     private float damage;
 
     // Runtime only variables
-    private float rotateStep, angle, step, dmg;
+    private float rotateStep, angle, step, dmg, stunImmunity;
 
     // Target transform for moving
     protected Transform target;
@@ -169,9 +169,16 @@ public class Enemy : Entity
         if (stunned)
         {
             stunLength -= Time.deltaTime;
-            if (stunLength <= 0f) stunned = false;
+            if (stunLength <= 0f)
+            {
+                stunned = false;
+                stunImmunity = 0.5f;
+            }
             return;
         }
+
+        // Check if stun immunity is active
+        if (stunImmunity > 0f) stunImmunity -= Time.deltaTime;
 
         // Move if target not null
         if (target != null)
@@ -235,8 +242,11 @@ public class Enemy : Entity
 
     public override void Stun(float length)
     {
-        stunned = true;
-        stunLength = length;
+        if (stunImmunity <= 0)
+        {
+            stunned = true;
+            stunLength = length;
+        }
     }
 
     public void EnableLockOn()
