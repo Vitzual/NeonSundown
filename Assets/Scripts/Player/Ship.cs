@@ -35,7 +35,8 @@ public class Ship : Weapon
     public CanvasGroup _healthCanvas;
     private static ProgressBar healthBar;
     private static CanvasGroup healthCanvas;
-    public AudioClip damageSound; 
+    public AudioClip damageSound;
+    public AudioClip warriorSound;
 
     // XP amount
     public List<float> levels;
@@ -286,7 +287,12 @@ public class Ship : Weapon
     public void Damage(float damage)
     {
         // Check if warrior active
-        if (warrior && controller.isDashing) return;
+        if (warrior && controller.isDashing)
+        {
+            // Play audio clip
+            AudioPlayer.Play(warriorSound, true, 0.8f, 1.2f, false, 0.8f);
+            return;
+        }
 
         // Add runtime stat
         RuntimeStats.damageTaken += damage;

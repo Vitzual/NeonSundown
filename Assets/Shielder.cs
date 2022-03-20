@@ -39,10 +39,18 @@ public class Shielder : Enemy
         // If is bullet, invoke on hit method
         if (bullet != null)
         {
-            bullet.deathMaterial = material;
-            Damage(bullet.GetDamage());
-            bullet.Destroy();
-            return;
+            if (shieldActive)
+            {
+                Vector3 currentRotation = bullet.transform.eulerAngles;
+                bullet.transform.eulerAngles = new Vector3(-currentRotation.x, -currentRotation.y, currentRotation.z);
+            }
+            else
+            {
+                bullet.deathMaterial = material;
+                Damage(bullet.GetDamage());
+                bullet.Destroy();
+                return;
+            }
         }
     }
 

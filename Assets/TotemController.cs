@@ -18,7 +18,13 @@ public class TotemController : Secondary
         redeployCooldown = data.cooldown;
         base.Setup(ship, data);
     }
-    
+
+    // Move totem around randomly
+    public override void CustomUpdate()
+    {
+        
+    }
+
     // Teleport the ship to mouse cursor
     public override void Use()
     {
