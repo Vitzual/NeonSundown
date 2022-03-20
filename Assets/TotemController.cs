@@ -5,7 +5,7 @@ using UnityEngine;
 public class TotemController : Secondary
 {
     public Totem newTotem;
-    public Totem oldTotem;
+    private Totem oldTotem;
     public float healAmount;
     public float healCooldown;
     public float redeployCooldown;
@@ -28,15 +28,12 @@ public class TotemController : Secondary
             cooldown = redeployCooldown;
 
             // Create particle at location
-            if (oldTotem != null) Destroy(oldTotem);
+            if (oldTotem != null) Destroy(oldTotem.gameObject);
 
             // Create totem at mouse location
             if (Controller.controller.activeSelf) oldTotem = Instantiate(newTotem, Controller.controller.transform.position, Quaternion.identity);
             else oldTotem = Instantiate(newTotem, Camera.main.ScreenToWorldPoint(Input.mousePosition), Quaternion.identity);
-
-            // Play sound
-            audioSource.volume = Settings.sound;
-            audioSource.Play();
+            oldTotem.totemController = this;
         }
     }
 
@@ -63,5 +60,12 @@ public class TotemController : Secondary
         if (stat == Stat.Cooldown)
             return healCooldown;
         else return -1;
+    }
+
+    // Override destroy
+    public override void Destroy()
+    {
+        if (oldTotem != null) Destroy(oldTotem.gameObject);
+        base.Destroy();
     }
 }

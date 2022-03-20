@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 489216570430884860}
   - component: {fileID: 2757573815633067961}
-  m_Layer: 16
+  m_Layer: 18
   m_Name: Shield
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 2445373732656338912}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalScale: {x: 0, y: 0, z: 1}
   m_Children:
   - {fileID: 7101643840350762861}
   - {fileID: 1103665895507488070}
@@ -44,7 +44,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -237,7 +237,7 @@ ParticleSystem:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  moveWithTransform: 0
+  moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
   randomSeed: 0
@@ -5278,7 +5278,7 @@ GameObject:
   - component: {fileID: 4319089354695385822}
   - component: {fileID: 8448323221370727098}
   - component: {fileID: 1406367762303667352}
-  m_Layer: 11
+  m_Layer: 19
   m_Name: Totem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5313,6 +5313,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16ee4a02be461b845a913cbed440fb6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 0
+  totemController: {fileID: 0}
+  sound: {fileID: 8300000, guid: 9de4e4139c6ee8144bc3d644232e3b58, type: 3}
+  radius: {fileID: 489216570430884860}
+  targetRadius: 2
+  scaleSpeed: {x: 5, y: 5, z: 1}
 --- !u!50 &8448323221370727098
 Rigidbody2D:
   serializedVersion: 4

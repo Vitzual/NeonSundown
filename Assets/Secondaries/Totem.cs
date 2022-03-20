@@ -14,15 +14,17 @@ public class Totem : MonoBehaviour
     public AudioClip sound;
     public Transform radius;
     public float targetRadius;
-    public float scaleSpeed;
+    public Vector3 scaleSpeed;
     private float cooldown;
     private bool isHealing;
 
     // On start, play animation
     public void Update()
     {
+        if (Dealer.isOpen) return;
+
         if (radius.localScale.x < targetRadius)
-            radius.localScale = new Vector2(radius.localScale.x, radius.localScale.y) * scaleSpeed * Time.deltaTime;
+            radius.localScale += scaleSpeed * Time.deltaTime;
 
         if (cooldown <= 0)
         {
@@ -39,23 +41,15 @@ public class Totem : MonoBehaviour
     public void OnTriggerEnter2D(Collider2D collision)
     {
         // Get the enemy component
-        Ship ship = collision.GetComponent<Ship>();
-        if (ship != null)
-        {
-            AudioPlayer.Play(sound, false, 1f, 1f, false, 0.6f);
-            isHealing = true;
-        }
+        AudioPlayer.Play(sound, false, 1f, 1f, false, 0.6f);
+        isHealing = true;
     }
 
     // On collision with enemy, apply damage
     public void OnTriggerExit2D(Collider2D collision)
     {
         // Get the enemy component
-        Ship ship = collision.GetComponent<Ship>();
-        if (ship != null)
-        {
-            AudioPlayer.Play(sound, false, 0.8f, 0.8f, false, 0.6f);
-            isHealing = false;
-        }
+        AudioPlayer.Play(sound, false, 0.8f, 0.8f, false, 0.6f);
+        isHealing = false;
     }
 }
