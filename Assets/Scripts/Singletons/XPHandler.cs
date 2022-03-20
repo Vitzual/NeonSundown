@@ -61,7 +61,7 @@ public class XPHandler : MonoBehaviour
                     if (SaveSystem.saveData.level < Levels.ranks.Count)
                         xpRequirement.text = Formatter.Round(SaveSystem.saveData.xp) + " / " +
                             Levels.ranks[SaveSystem.saveData.level].xpRequirement + "xp";
-                    if (xpHealing) Ship.Heal(0.02f * activeList[a].value);
+                    if (xpHealing) Ship.Heal(0.01f * activeList[a].value);
                     AudioPlayer.Play(xpSound, true, 0.8f, 1.2f, false, 1.5f);
                     activeList[a].gameObject.SetActive(false);
                     activeList[a].isInactive = true;
