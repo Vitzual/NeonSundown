@@ -1,12 +1,15 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
-using UnityEngine;
 
 public class SaveData
 {
     // Constructor
     public SaveData()
     {
+        // Get epoch second
+        DateTimeOffset now = DateTimeOffset.UtcNow;
+        epochMillisecond = now.ToUnixTimeMilliseconds();
+
         xp = 0;
         level = 0;
         redraws = 1;
@@ -19,6 +22,7 @@ public class SaveData
         modules = new SerializableDictionary<string, int>();
     }
 
+    public long epochMillisecond;
     public float xp;
     public int redraws, level;
     public List<string> arenasUnlocked;
