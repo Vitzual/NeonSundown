@@ -136,7 +136,7 @@ public class Enemy : Entity
         {
             if (data.canDropCrystal)
             {
-                if (Random.Range(0, 1f) < data.crystalDropChance)
+                if (Random.Range(0, 1f) < (data.crystalDropChance * EnemySpawner.crystalDropChance))
                     XPHandler.active.Spawn(transform.position, data.minXP, data.crystal);
                 else XPHandler.active.Spawn(transform.position, data.minXP);
             }

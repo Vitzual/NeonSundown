@@ -227,7 +227,11 @@ public class Ship : Weapon
             // Increase level
             level += 1;
             xp -= rankup;
-            if (levels.Count <= level) rankup = (int)(rankup * rankupMultiplier);
+            if (levels.Count <= level)
+            {
+                rankup = (int)(rankup * rankupMultiplier);
+                if (rankup > 25000) rankup = 25000;
+            }
             else rankup = levels[level];
 
             // Set text

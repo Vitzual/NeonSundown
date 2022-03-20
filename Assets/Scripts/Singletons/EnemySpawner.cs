@@ -29,6 +29,7 @@ public class EnemySpawner : MonoBehaviour
     public static float enemyHealthMultiplier = 1;
     public static float enemySpeedMultiplier = 1;
     public static float enemyDamageMultiplier = 1;
+    public static float crystalDropChance = 1;
 
     // Spawning flag
     public bool spawnEnemies = true;
@@ -45,6 +46,7 @@ public class EnemySpawner : MonoBehaviour
         enemyHealthMultiplier = 1;
         enemySpeedMultiplier = 1;
         enemyDamageMultiplier = 1;
+        crystalDropChance = 1;
         time = 0;
     }
 
@@ -81,6 +83,8 @@ public class EnemySpawner : MonoBehaviour
                 enemyHealthMultiplier += 0.2f;
                 enemySpeedMultiplier += 0.02f;
                 enemyDamageMultiplier += 0.1f;
+                if (crystalDropChance > 0.5f)
+                    crystalDropChance -= 0.02f;
             }
         }
         
