@@ -38,7 +38,8 @@ public class Controller : MonoBehaviour
 
     // Dash flag
     public bool canRotate = true;
-    private bool isDashing = false;
+    [HideInInspector]
+    public bool isDashing = false;
     private bool dashOnCooldown = false;
     private bool dashQuickReset = false;
 

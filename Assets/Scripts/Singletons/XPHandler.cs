@@ -83,6 +83,7 @@ public class XPHandler : MonoBehaviour
                 if (Vector2.Distance(activeList[a].transform.position, activeList[a].startPos)
                     < targetDistanceCheck || activeList[a].speed <= 0f)
                 {
+                    if (Ship.autoCollectXP) activeList[a].isMoving = true;
                     activeList[a].isStarting = false;
                     activeList[a].speed = 5f;
                 }

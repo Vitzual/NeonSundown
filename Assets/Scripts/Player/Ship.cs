@@ -8,6 +8,7 @@ public class Ship : Weapon
 {
     // Auto collect XP flag
     public static bool autoCollectXP = false;
+    public static bool warrior = false;
 
     // Controller associated with the player
     private Controller controller;
@@ -64,6 +65,7 @@ public class Ship : Weapon
     // Subscribe to setup event
     public void Start()
     {
+        warrior = false;
         autoCollectXP = false;
         healthBar = _healthBar;
         healthCanvas = _healthCanvas;
@@ -282,6 +284,9 @@ public class Ship : Weapon
     // Damage method
     public void Damage(float damage)
     {
+        // Check if warrior active
+        if (warrior && controller.isDashing) return;
+
         // Add runtime stat
         RuntimeStats.damageTaken += damage;
 

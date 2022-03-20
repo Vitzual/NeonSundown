@@ -64,7 +64,7 @@ public class SettingsUI : MonoBehaviour
     {
         Settings.LoadSettings();
     }
-
+    
     // Get input from player
     public void Update()
     {

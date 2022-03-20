@@ -4,5 +4,6 @@ public enum ChromaType
     StickyBullets,
     XPHealing,
     EnergyBullets,
-    Warrior
+    Warrior,
+    AutoCollect
 }
