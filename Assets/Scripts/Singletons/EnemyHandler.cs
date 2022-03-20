@@ -155,17 +155,18 @@ public class EnemyHandler : MonoBehaviour
     {
         // Create local position
         Vector2 localPos = new Vector2(0, 0);
+        float newSpawnRange = spawnRange + Deck.GetStat(Stat.View);
 
         // Get location around border
         if (Random.value > 0.5f)
         {
-            if (Random.value > 0.5f) return new Vector2(localPos.x + spawnRange, localPos.y + Random.Range(-spawnRange, spawnRange));
-            else return new Vector2(localPos.x - spawnRange, localPos.y + Random.Range(-spawnRange, spawnRange));
+            if (Random.value > 0.5f) return new Vector2(localPos.x + newSpawnRange, localPos.y + Random.Range(-newSpawnRange, newSpawnRange));
+            else return new Vector2(localPos.x - newSpawnRange, localPos.y + Random.Range(-newSpawnRange, newSpawnRange));
         }
         else
         {
-            if (Random.value > 0.5f) return new Vector2(localPos.x + Random.Range(-spawnRange, spawnRange), localPos.y + spawnRange);
-            else return new Vector2(localPos.x + Random.Range(-spawnRange, spawnRange), localPos.y - spawnRange);
+            if (Random.value > 0.5f) return new Vector2(localPos.x + Random.Range(-newSpawnRange, newSpawnRange), localPos.y + newSpawnRange);
+            else return new Vector2(localPos.x + Random.Range(-newSpawnRange, newSpawnRange), localPos.y - newSpawnRange);
         }
     }
 

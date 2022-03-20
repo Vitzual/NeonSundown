@@ -80,10 +80,10 @@ public class SynergyProgress : MonoBehaviour
 
             // Set bar colors
             Color c = synergy.cardOne.color;
-            barBackgroundOne.color = new Color(c.r, c.g, c.b, 0.5f);
+            barBackgroundOne.color = new Color(c.r - 0.5f, c.g - 0.5f, c.b - 0.5f);
             barOne.color = c;
             c = synergy.cardTwo.color;
-            barBackgroundTwo.color = new Color(c.r, c.g, c.b, 0.5f);
+            barBackgroundTwo.color = new Color(c.r - 0.5f, c.g - 0.5f, c.b - 0.5f);
             barTwo.color = c;
         }
     }
