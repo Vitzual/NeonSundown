@@ -44,12 +44,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 753cbbabf66c8e04a80e9fa6f9bdb80d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
-  totemController: {fileID: 0}
+  useCustomUpdate: 0
   sound: {fileID: 0}
-  radius: {fileID: 0}
-  targetRadius: 0
-  scaleSpeed: {x: 0, y: 0, z: 0}
+  data: {fileID: 0}
+  level: 0
+  newWall: {fileID: 4687169673451553047, guid: 028906b969a63af499fc65a63969551c, type: 3}
+  wallObj: {fileID: 0}
+  redeployCooldown: 2
 --- !u!82 &-757001269659395278
 AudioSource:
   m_ObjectHideFlags: 0

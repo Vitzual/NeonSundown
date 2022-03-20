@@ -18,6 +18,8 @@ public class Totem : MonoBehaviour
     private float cooldown;
     private bool isHealing;
 
+    public Transform rotator;
+
     // On start, play animation
     public void Update()
     {

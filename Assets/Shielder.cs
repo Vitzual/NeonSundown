@@ -8,6 +8,7 @@ public class Shielder : Enemy
     public GameObject shield;
     public float shieldHealth;
     public AudioClip shieldSound;
+    public AudioClip reflectSound;
     private bool shieldActive = true;
 
     // Damage entity
@@ -43,6 +44,7 @@ public class Shielder : Enemy
             {
                 Vector3 currentRotation = bullet.transform.eulerAngles;
                 bullet.transform.eulerAngles = new Vector3(-currentRotation.x, -currentRotation.y, currentRotation.z);
+                AudioPlayer.Play(reflectSound);
             }
             else
             {

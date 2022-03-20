@@ -9,20 +9,36 @@ public class TotemController : Secondary
     public float healAmount;
     public float healCooldown;
     public float redeployCooldown;
-    private AudioSource audioSource;
+
+    public float movementSpeed;
+    public float rotationSpeed;
+    private float directionCooldown;
 
     // Get the audio source
     public override void Setup(Ship ship, SecondaryData data)
     {
-        audioSource = GetComponent<AudioSource>();
         redeployCooldown = data.cooldown;
         base.Setup(ship, data);
     }
 
     // Move totem around randomly
-    public override void CustomUpdate()
+    public void FixedUpdate()
     {
-        
+        // Check if old totem null
+        if (oldTotem == null || Dealer.isOpen) return;
+
+        // Check if rotating (lock target)
+        oldTotem.transform.Rotate(Vector3.forward, rotationSpeed * Time.deltaTime);
+        oldTotem.transform.position += oldTotem.transform.up * movementSpeed * Time.fixedDeltaTime;
+
+        // Check direction cooldown
+        if (directionCooldown <= 0f)
+        {
+            if (Random.Range(0f, 1f) > 0.5f) rotationSpeed = Random.Range(-80f, -40f);
+            else rotationSpeed = Random.Range(40f, 80f);
+            directionCooldown = 3f;
+        }
+        else directionCooldown -= Time.deltaTime;
     }
 
     // Teleport the ship to mouse cursor

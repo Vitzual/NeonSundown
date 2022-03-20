@@ -4,6 +4,20 @@ using UnityEngine;
 
 public class WallObj : MonoBehaviour
 {
+    public AudioClip sound;
+    public Transform radius;
+    public float targetRadius;
+    public Vector3 scaleSpeed;
+
+    // On start, play animation
+    public void Update()
+    {
+        if (Dealer.isOpen) return;
+
+        if (radius.localScale.x < targetRadius)
+            radius.localScale += scaleSpeed * Time.deltaTime;
+    }
+
     // On collision with enemy, apply damage
     public void OnTriggerEnter2D(Collider2D collision)
     {
