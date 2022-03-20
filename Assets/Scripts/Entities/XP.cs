@@ -6,8 +6,8 @@ public class XP : MonoBehaviour
 {
     // The target in question
     public float startDistance = 5f;
-    [HideInInspector] public bool isMoving, isStarting, isInactive;
-    [HideInInspector] public float speed, value, timer;
+    [HideInInspector] public bool isMoving, isStarting;
+    [HideInInspector] public float speed, value;
     [HideInInspector] public Vector2 startPos;
 
     // Start method
@@ -17,15 +17,6 @@ public class XP : MonoBehaviour
         this.value = value;
         isMoving = false;
         isStarting = true;
-        isInactive = false;
-        timer = 10;
         speed = 10;
-    }
-
-    // On collision with player
-    public void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (!isInactive)
-            isMoving = true;
     }
 }

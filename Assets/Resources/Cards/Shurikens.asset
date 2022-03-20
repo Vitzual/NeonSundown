@@ -24,27 +24,27 @@ MonoBehaviour:
   isUnlocked: 1
   baseLevels:
   - stat: 2
-    description: Decreases cooldown rate by 0.25s
-    multiply: 0
-    modifier: -0.25
+    description: Decreases cooldown by 10%
+    multiply: 1
+    modifier: 0.9
   - stat: 1
-    description: Increases damage by 2
+    description: Increases damage by 5
     multiply: 0
-    modifier: 2
+    modifier: 5
   - stat: 2
-    description: Decreases cooldown rate by 0.25s
-    multiply: 0
-    modifier: -0.25
+    description: Decreases cooldown by 10%
+    multiply: 1
+    modifier: 0.9
   - stat: 1
-    description: Increases damage by 3
+    description: Increases damage by 5
     multiply: 0
-    modifier: 3
+    modifier: 5
   - stat: 2
-    description: Decreases cooldown rate by 0.25s
-    multiply: 0
-    modifier: -0.25
-  damage: 2
-  cooldown: 1
+    description: Decreases cooldown by 10%
+    multiply: 1
+    modifier: 0.9
+  damage: 3
+  cooldown: 0.5
   moveSpeed: 120
   rotate: 1
   rotateSpeed: 180
@@ -56,7 +56,7 @@ MonoBehaviour:
   lifetime: 1
   stun: 0
   randomDirection: 1
-  randomTarget: 0
+  randomTarget: 1
   trackTarget: 0
   lockTarget: 0
   bullet: {fileID: 5224849746800538397, guid: b37fa456f5aa9d44396aa6eadbfaedac, type: 3}

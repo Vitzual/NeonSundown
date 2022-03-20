@@ -64,7 +64,6 @@ public class XPHandler : MonoBehaviour
                     if (xpHealing) Ship.Heal(0.01f * activeList[a].value);
                     AudioPlayer.Play(xpSound, true, 0.8f, 1.2f, false, 1.5f);
                     activeList[a].gameObject.SetActive(false);
-                    activeList[a].isInactive = true;
                     inactiveList.Add(activeList[a]);
                     activeList.RemoveAt(a);
                     a--;
@@ -83,18 +82,10 @@ public class XPHandler : MonoBehaviour
                 if (Vector2.Distance(activeList[a].transform.position, activeList[a].startPos)
                     < targetDistanceCheck || activeList[a].speed <= 0f)
                 {
-                    if (Ship.autoCollectXP) activeList[a].isMoving = true;
+                    activeList[a].isMoving = true;
                     activeList[a].isStarting = false;
                     activeList[a].speed = 5f;
                 }
-            }
-
-            // Check if moving
-            else if (!activeList[a].isMoving)
-            {
-                activeList[a].timer -= Time.deltaTime;
-                if (activeList[a].timer < 0f)
-                    activeList[a].isMoving = true;
             }
         }
     }

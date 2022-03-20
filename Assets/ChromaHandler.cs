@@ -35,9 +35,6 @@ public class ChromaHandler : MonoBehaviour
             case ChromaType.Warrior:
                 Ship.warrior = true;
                 break;
-            case ChromaType.AutoCollect:
-                Ship.autoCollectXP = true;
-                break;
         }      
     }
 }

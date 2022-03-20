@@ -7,7 +7,6 @@ using UnityEngine.UI;
 public class Ship : Weapon
 {
     // Auto collect XP flag
-    public static bool autoCollectXP = false;
     public static bool warrior = false;
 
     // Controller associated with the player
@@ -46,7 +45,6 @@ public class Ship : Weapon
     private float enemyDamage = 1;
     public float rankupMultiplier;
     public ProgressBar xpBar;
-    public CircleCollider2D xpRange;
     public TextMeshProUGUI levelText;
     public TextMeshProUGUI xpText;
 
@@ -66,7 +64,6 @@ public class Ship : Weapon
     public void Start()
     {
         warrior = false;
-        autoCollectXP = false;
         healthBar = _healthBar;
         healthCanvas = _healthCanvas;
 
@@ -457,11 +454,6 @@ public class Ship : Weapon
                 xpMultiplier = Deck.CalculateStat(stat, 1);
                 break;
 
-            // Increase XP range
-            case Stat.AutoCollect:
-                xpRange.radius = Deck.CalculateStat(stat, 15);
-                break;
-
             // Increase regen rate
             case Stat.Regen:
                 regenAmount = Deck.CalculateStat(stat, shipData.regenAmount);
@@ -557,10 +549,6 @@ public class Ship : Weapon
             // Increase XP gain
             case Stat.XPGain:
                 return xpMultiplier;
-
-            // Increase XP range
-            case Stat.AutoCollect:
-                return xpRange.radius;
 
             // Increase regen rate
             case Stat.Regen:
