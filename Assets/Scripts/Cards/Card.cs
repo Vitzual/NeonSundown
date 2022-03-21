@@ -216,6 +216,35 @@ public class Card : MonoBehaviour
             }
         }
 
+        else if (card is HelperData)
+        {
+            // Set type
+            type.text = "Helper";
+            type.color = card.color;
+
+            HelperData helperData = (HelperData)card;
+            Helper helper = Deck.active.GetHelperInstance(helperData);
+            if (helper != null)
+            {
+                useBase = false;
+                image.sprite = helperData.sprite;
+                if (helper.level == helperData.levels.Count)
+                {
+                    desc.text = "Ready for synergy";
+                    level.text = "LEVEL MAX";
+                }
+                else
+                {
+                    desc.text = helperData.levels[helper.level].description;
+                    level.text = "LEVEL " + (helper.level + 1);
+                }
+            }
+
+            // Set effects
+            effectOne.gameObject.SetActive(false);
+            effectTwo.gameObject.SetActive(false);
+        }
+
         else if (card is ChromaData)
         {
             // Set type

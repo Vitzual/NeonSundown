@@ -16,6 +16,9 @@ public class Helper : MonoBehaviour
         this.data = data;
     }
 
+    // Custom update
+    public virtual void CustomUpdate() { }
+
     // Destroys the instance
     public virtual void Destroy()
     {

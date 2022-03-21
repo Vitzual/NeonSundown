@@ -15,6 +15,7 @@ public class Deck : MonoBehaviour
     // Cards in deck
     private static Dictionary<CardData, int> cards;
     private static Dictionary<CardData, Weapon> upgradeables;
+    private static Dictionary<CardData, Helper> helperUpgrades;
 
     // Multipliers 
     public static Dictionary<Stat, float> additions;
@@ -23,6 +24,7 @@ public class Deck : MonoBehaviour
 
     // Scriptable and weapon reference
     private List<Weapon> weaponInstances = new List<Weapon>();
+    private List<Helper> helperInstances = new List<Helper>();
 
     // On awake, setup instance
     public void Awake()
@@ -42,8 +44,9 @@ public class Deck : MonoBehaviour
 
         // Create starting slots
         weaponInstances = new List<Weapon>();
+        helperInstances = new List<Helper>();
     }
-
+    
     // On start, create decks
     public void Start()
     {
@@ -66,6 +69,13 @@ public class Deck : MonoBehaviour
             if (weaponInstances[i] != null)
                 weaponInstances[i].Use();
         }
+
+        // Iterate through all weapon instances
+        for (int i = 0; i < helperInstances.Count; i++)
+        {
+            if (helperInstances[i] != null)
+                helperInstances[i].CustomUpdate();
+        }
     }
 
     // Set weapon card slot
@@ -81,6 +91,15 @@ public class Deck : MonoBehaviour
             if (upgradeables.ContainsKey(card))
             {
                 upgradeables[card].Upgrade();
+                if (cards[card] >= card.maximumAmount)
+                    SynergyHandler.Add(card);
+                return;
+            }
+
+            // If helper, apply to the instance
+            if (helperUpgrades.ContainsKey(card))
+            {
+                helperUpgrades[card].Upgrade();
                 if (cards[card] >= card.maximumAmount)
                     SynergyHandler.Add(card);
                 return;
@@ -103,6 +122,8 @@ public class Deck : MonoBehaviour
             SetupSecondary((SecondaryData)card);
         else if (card is ChromaData)
             SetupChroma((ChromaData)card);
+        else if (card is HelperData)
+            SetupHelper((HelperData)card);
     }
 
     // Remove da card
@@ -117,6 +138,19 @@ public class Deck : MonoBehaviour
                 {
                     Destroy(data.gameObject);
                     weaponInstances.Remove(data);
+                    break;
+                }
+            }
+        }
+        else if (card is HelperData)
+        {
+            HelperData helperData = (HelperData)card;
+            foreach (Helper helper in helperInstances)
+            {
+                if (helper.data == helperData)
+                {
+                    helper.Destroy();
+                    helperInstances.Remove(helper);
                     break;
                 }
             }
@@ -136,6 +170,14 @@ public class Deck : MonoBehaviour
     {
         if (upgradeables.ContainsKey(card))
             return upgradeables[card];
+        else return null;
+    }
+
+    // Returns a helper card instance
+    public Helper GetHelperInstance(HelperData card)
+    {
+        if (helperUpgrades.ContainsKey(card))
+            return helperUpgrades[card];
         else return null;
     }
 
@@ -214,6 +256,15 @@ public class Deck : MonoBehaviour
             player.SetSecondary(secondary);
             Deck.secondary = secondary;
         }
+    }
+
+    // Set passive card slot
+    public void SetupHelper(HelperData helper)
+    {
+        Debug.Log("Adding helper card " + helper.name + " to deck");
+        Helper newHelper = Instantiate(helper.obj, transform.position, Quaternion.identity).GetComponent<Helper>();
+        newHelper.Setup(player, helper);
+        helperInstances.Add(newHelper);
     }
 
     // Get secondary instance

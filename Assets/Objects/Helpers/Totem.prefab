@@ -5310,16 +5310,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 8448323221370727103}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16ee4a02be461b845a913cbed440fb6f, type: 3}
+  m_Script: {fileID: 11500000, guid: 06a6091a4ff89b2409c62ee76f9a4a50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
-  totemController: {fileID: 0}
-  sound: {fileID: 8300000, guid: 9de4e4139c6ee8144bc3d644232e3b58, type: 3}
+  data: {fileID: 0}
+  level: 0
+  healSound: {fileID: 8300000, guid: 9de4e4139c6ee8144bc3d644232e3b58, type: 3}
+  healAmount: 0.25
+  healCooldown: 1
+  movementSpeed: 15
+  rotationSpeed: 80
   radius: {fileID: 489216570430884860}
   targetRadius: 2
   scaleSpeed: {x: 5, y: 5, z: 1}
-  rotator: {fileID: 8448323219929391264}
 --- !u!50 &8448323221370727098
 Rigidbody2D:
   serializedVersion: 4

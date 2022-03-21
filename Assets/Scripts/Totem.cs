@@ -8,7 +8,6 @@ public class Totem : Helper
 
     public float healAmount;
     public float healCooldown;
-    public float redeployCooldown;
 
     public float movementSpeed;
     public float rotationSpeed;
@@ -17,11 +16,11 @@ public class Totem : Helper
     public Transform radius;
     public float targetRadius;
     public Vector3 scaleSpeed;
-    public float cooldown;
-    public bool isHealing;
+    private float cooldown;
+    private bool isHealing;
 
     // On start, play animation
-    public void Update()
+    public override void CustomUpdate()
     {
         if (Dealer.isOpen) return;
 

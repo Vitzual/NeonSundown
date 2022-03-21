@@ -2,14 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WallObj : Helper{
+public class Wall : Helper
+{
     public AudioClip sound;
     public Transform radius;
     public float targetRadius;
     public Vector3 scaleSpeed;
 
     // On start, play animation
-    public void Update()
+    public override void CustomUpdate()
     {
         if (Dealer.isOpen) return;
 
