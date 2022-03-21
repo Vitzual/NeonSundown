@@ -231,7 +231,7 @@ public class Ship : Weapon
             if (levels.Count <= level)
             {
                 rankup = (int)(rankup * rankupMultiplier);
-                if (rankup > 25000) rankup = 25000;
+                if (rankup > 50000) rankup = 50000;
             }
             else rankup = levels[level];
 

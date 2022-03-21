@@ -16,7 +16,7 @@ public class XPHandler : MonoBehaviour
     // List of active movers
     private List<XP> activeList = new List<XP>();
     private List<XP> inactiveList = new List<XP>();
-
+    
     // Target
     public XP xpObject;
     public AudioClip xpSound;
