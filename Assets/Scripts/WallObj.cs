@@ -2,8 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WallObj : MonoBehaviour
-{
+public class WallObj : Helper{
     public AudioClip sound;
     public Transform radius;
     public float targetRadius;

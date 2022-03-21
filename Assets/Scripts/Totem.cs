@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TotemController : Secondary
+public class Totem : Helper
 {
-    public Totem newTotem;
-    private Totem oldTotem;
+    public AudioClip healSound;
+
     public float healAmount;
     public float healCooldown;
     public float redeployCooldown;
@@ -14,22 +14,37 @@ public class TotemController : Secondary
     public float rotationSpeed;
     private float directionCooldown;
 
-    // Get the audio source
-    public override void Setup(Ship ship, SecondaryData data)
+    public Transform radius;
+    public float targetRadius;
+    public Vector3 scaleSpeed;
+    public float cooldown;
+    public bool isHealing;
+
+    // On start, play animation
+    public void Update()
     {
-        redeployCooldown = data.cooldown;
-        base.Setup(ship, data);
+        if (Dealer.isOpen) return;
+
+        if (radius.localScale.x < targetRadius)
+            radius.localScale += scaleSpeed * Time.deltaTime;
+
+        if (cooldown <= 0)
+        {
+            if (isHealing)
+            {
+                Ship.Heal(healAmount);
+                cooldown = healCooldown;
+            }
+        }
+        else cooldown -= Time.deltaTime;
     }
 
     // Move totem around randomly
     public void FixedUpdate()
     {
-        // Check if old totem null
-        if (oldTotem == null || Dealer.isOpen) return;
-
         // Check if rotating (lock target)
-        oldTotem.transform.Rotate(Vector3.forward, rotationSpeed * Time.deltaTime);
-        oldTotem.transform.position += oldTotem.transform.up * movementSpeed * Time.fixedDeltaTime;
+        transform.Rotate(Vector3.forward, rotationSpeed * Time.deltaTime);
+        transform.position += transform.up * movementSpeed * Time.fixedDeltaTime;
 
         // Check direction cooldown
         if (directionCooldown <= 0f)
@@ -39,24 +54,6 @@ public class TotemController : Secondary
             directionCooldown = 3f;
         }
         else directionCooldown -= Time.deltaTime;
-    }
-
-    // Teleport the ship to mouse cursor
-    public override void Use()
-    {
-        if (cooldown <= 0 && !Dealer.isOpen)
-        {
-            // Reset cooldown
-            cooldown = redeployCooldown;
-
-            // Create particle at location
-            if (oldTotem != null) Destroy(oldTotem.gameObject);
-
-            // Create totem at mouse location
-            if (Controller.controller.activeSelf) oldTotem = Instantiate(newTotem, Controller.controller.transform.position, Quaternion.identity);
-            else oldTotem = Instantiate(newTotem, Camera.main.ScreenToWorldPoint(Input.mousePosition), Quaternion.identity);
-            oldTotem.totemController = this;
-        }
     }
 
     // Upgrade (literally just for cooldown)
@@ -84,10 +81,19 @@ public class TotemController : Secondary
         else return -1;
     }
 
-    // Override destroy
-    public override void Destroy()
+    // On collision with enemy, apply damage
+    public void OnTriggerEnter2D(Collider2D collision)
     {
-        if (oldTotem != null) Destroy(oldTotem.gameObject);
-        base.Destroy();
+        // Get the enemy component
+        AudioPlayer.Play(healSound, false, 1f, 1f, false, 0.6f);
+        isHealing = true;
+    }
+
+    // On collision with enemy, apply damage
+    public void OnTriggerExit2D(Collider2D collision)
+    {
+        // Get the enemy component
+        AudioPlayer.Play(healSound, false, 0.8f, 0.8f, false, 0.6f);
+        isHealing = false;
     }
 }
