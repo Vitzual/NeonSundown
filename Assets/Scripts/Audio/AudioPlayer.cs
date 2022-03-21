@@ -7,6 +7,7 @@ public class AudioPlayer : MonoBehaviour
     // Button sound
     public AudioClip _buttonSound;
     public AudioClip _stickySound;
+    public AudioClip _reflectSound;
 
     // List of audio sources
     public static List<AudioClip> audioClips;
@@ -14,12 +15,14 @@ public class AudioPlayer : MonoBehaviour
     public static AudioSource audioSource;
     public static AudioClip buttonSound;
     public static AudioClip critSound;
+    public static AudioClip reflectSound;
 
     // Set audio sources
     public void Awake()
     {
         buttonSound = _buttonSound;
         critSound = _stickySound;
+        reflectSound = _reflectSound;
         audioClips = new List<AudioClip>();
         cooldowns = new List<float>();
         audioSource = GetComponent<AudioSource>();
@@ -87,5 +90,20 @@ public class AudioPlayer : MonoBehaviour
         audioSource.volume = Settings.sound;
         audioSource.pitch = Random.Range(0.95f, 1.05f);
         audioSource.PlayOneShot(critSound, 0.4f);
+    }
+
+    // Plays a button sound on hover
+    public static void PlayReflectSound()
+    {
+        if (audioClips.Contains(reflectSound)) return;
+        else
+        {
+            audioClips.Add(reflectSound);
+            cooldowns.Add(0.1f);
+        }
+
+        audioSource.volume = Settings.sound;
+        audioSource.pitch = Random.Range(0.95f, 1.05f);
+        audioSource.PlayOneShot(reflectSound, 0.4f);
     }
 }

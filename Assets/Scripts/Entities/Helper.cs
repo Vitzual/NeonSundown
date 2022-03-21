@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Helper : MonoBehaviour
+public class Helper : Entity
 {
     // Ship instance
     protected Ship ship;
@@ -18,12 +18,6 @@ public class Helper : MonoBehaviour
 
     // Custom update
     public virtual void CustomUpdate() { }
-
-    // Destroys the instance
-    public virtual void Destroy()
-    {
-        Destroy(gameObject);
-    }
 
     // Upgrades the card
     public virtual void Upgrade()

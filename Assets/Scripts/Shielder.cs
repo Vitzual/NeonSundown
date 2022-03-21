@@ -5,27 +5,26 @@ using UnityEngine;
 public class Shielder : Enemy
 {
     // Shield stats
-    public GameObject shield;
-    public float shieldHealth;
+    public Transform shield;
+    public ParticleSystem _particle;
+    private ParticleSystem.MainModule particle;
     public AudioClip shieldSound;
     public AudioClip reflectSound;
     private bool shieldActive = true;
+    private float initialSize = 7f;
+
+    // Get initial shield size
+    public override void Setup(VariantData data, Transform player)
+    {
+        initialSize = shield.localScale.x;
+        base.Setup(data, player);
+    }
 
     // Damage entity
     public override void Damage(float amount, float knockback = 0f)
     {
         // Damage shield if active
-        if (shieldActive)
-        {
-            shieldHealth -= amount;
-            if (shieldHealth <= 0)
-            {
-                AudioPlayer.Play(shieldSound, true, 0.8f, 0.8f);
-                shieldActive = false;
-                shield.SetActive(false);
-            }
-        }
-        else base.Damage(amount);
+        if (!shieldActive) base.Damage(amount);
     }
 
     // On collision
@@ -42,16 +41,19 @@ public class Shielder : Enemy
         {
             if (shieldActive)
             {
-                Vector3 currentRotation = bullet.transform.eulerAngles;
-                bullet.transform.eulerAngles = new Vector3(-currentRotation.x, -currentRotation.y, currentRotation.z);
-                AudioPlayer.Play(reflectSound);
+                bullet.ReverseBullet();
+                float adjust = bullet.GetDamage() / 10;
+                shield.localScale = new Vector3(shield.localScale.x 
+                    - adjust, shield.localScale.y - adjust, 1);
+                particle = _particle.main;
+                particle.startLifetime = (shield.localScale.x / initialSize) - 0.25f;
+                if (shield.localScale.x < 2f) DisableShield();
             }
             else
             {
                 bullet.deathMaterial = material;
                 Damage(bullet.GetDamage());
                 bullet.Destroy();
-                return;
             }
         }
     }
@@ -60,11 +62,15 @@ public class Shielder : Enemy
     public override void Stun(float length)
     {
         // Damage shield if active
-        if (shieldActive)
-        {
-            AudioPlayer.Play(shieldSound, true, 0.8f, 0.8f);
-            shieldActive = false;
-            shield.SetActive(false);
-        }
+        if (shieldActive) DisableShield();
+    }
+
+    // Turn off shield
+    public void DisableShield()
+    {
+        shield.localScale = new Vector3(1f, 1f, 1f);
+        AudioPlayer.Play(shieldSound, true, 0.8f, 0.8f);
+        shield.gameObject.SetActive(false);
+        shieldActive = false;
     }
 }

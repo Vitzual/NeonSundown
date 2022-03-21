@@ -16,6 +16,7 @@ public class Totem : Helper
     public Transform radius;
     public float targetRadius;
     public Vector3 scaleSpeed;
+    public float maxDistance;
     private float cooldown;
     private bool isHealing;
 
@@ -41,18 +42,36 @@ public class Totem : Helper
     // Move totem around randomly
     public void FixedUpdate()
     {
-        // Check if rotating (lock target)
-        transform.Rotate(Vector3.forward, rotationSpeed * Time.deltaTime);
-        transform.position += transform.up * movementSpeed * Time.fixedDeltaTime;
+        // Check if dealer is open
+        if (Dealer.isOpen) return;
 
-        // Check direction cooldown
-        if (directionCooldown <= 0f)
+        // Check position relative to player
+        if (Vector2.Distance(transform.position, ship.transform.position) > 25f)
         {
-            if (Random.Range(0f, 1f) > 0.5f) rotationSpeed = Random.Range(-80f, -40f);
-            else rotationSpeed = Random.Range(40f, 80f);
-            directionCooldown = 3f;
+            // Rotate towards the object
+            float angle = Mathf.Atan2(transform.position.y - ship.transform.position.y,
+                transform.position.x - ship.transform.position.x) * Mathf.Rad2Deg;
+            Quaternion targetRotation = Quaternion.Euler(new Vector3(0, 0, angle - 90f));
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
         }
-        else directionCooldown -= Time.deltaTime;
+
+        else
+        {
+            // Rotate randomly
+            transform.Rotate(Vector3.forward, rotationSpeed * Time.deltaTime);
+
+            // Check direction cooldown
+            if (directionCooldown <= 0f)
+            {
+                if (Random.Range(0f, 1f) > 0.5f) rotationSpeed = Random.Range(-80f, -40f);
+                else rotationSpeed = Random.Range(40f, 80f);
+                directionCooldown = 3f;
+            }
+            else directionCooldown -= Time.deltaTime;
+        }
+
+        // Move forward
+        transform.position += transform.up * movementSpeed * Time.fixedDeltaTime;
     }
 
     // Upgrade (literally just for cooldown)

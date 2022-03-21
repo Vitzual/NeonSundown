@@ -26,6 +26,7 @@ public class Bullet : Entity
     public bool explosive;
     public bool overrideSprite;
     public float explosionSize = 10f;
+    private bool isReversed = false;
 
     // Is a split shot
     protected Weapon parent;
@@ -78,6 +79,9 @@ public class Bullet : Entity
         float highValue = parent.lifetime + 0.05f;
         if (lowValue <= 0f) lowValue = 0.001f;
         lifetime = Random.Range(lowValue, highValue);
+
+        // If splitshot, divide health
+        if (isSplitShot) lifetime /= 2;
 
         // Check if splitshot
         this.isSplitShot = isSplitShot;
@@ -183,4 +187,15 @@ public class Bullet : Entity
 
     // Get the damage
     public float GetDamage() { return damage; }
+
+    // Reverse bullet
+    public void ReverseBullet()
+    {
+        if (!isReversed)
+        {
+            transform.eulerAngles = new Vector3(0, 0, transform.eulerAngles.z - 180f);
+            AudioPlayer.PlayReflectSound();
+            isReversed = true;
+        }
+    }
 }

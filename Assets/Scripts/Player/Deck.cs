@@ -32,10 +32,11 @@ public class Deck : MonoBehaviour
         // Set active instance
         active = this;
         secondary = null;
-
+        
         // Set new card dictionary
         cards = new Dictionary<CardData, int>();
         upgradeables = new Dictionary<CardData, Weapon>();
+        helperUpgrades = new Dictionary<CardData, Helper>();
 
         // Create new dictionaries
         additions = new Dictionary<Stat, float>();
@@ -265,6 +266,7 @@ public class Deck : MonoBehaviour
         Helper newHelper = Instantiate(helper.obj, transform.position, Quaternion.identity).GetComponent<Helper>();
         newHelper.Setup(player, helper);
         helperInstances.Add(newHelper);
+        helperUpgrades.Add(helper, newHelper);
     }
 
     // Get secondary instance
