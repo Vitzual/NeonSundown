@@ -140,24 +140,25 @@ public class BulletHandler : MonoBehaviour
     }
 
     // Creates a laser bullet
-    public void CreateLaserBullet(Weapon parent, WeaponData weapon, Quaternion rotation, Material material,
-        float damage, float knockback, float duration, float length, int amount, bool useSize = false)
+    public void CreateLaserBullet(Weapon parent, Transform barrel, Quaternion rotation, Material material,
+        AudioClip sound, AudioClip hitSound, float damage, float knockback, float duration, float length, int amount)
     {
         // Draw the line (cosmetic only)
-        if (bulletSize > 1 && useSize) LineDrawer.active.DrawFromParent(parent.transform, 
-            rotation, material, bulletSize, duration, length);
-        else LineDrawer.active.DrawFromParent(parent.transform, rotation,
+        LineDrawer.active.DrawFromParent(parent.transform, rotation,
             material, 1f, duration, length);
 
         // Raycast for enemies
-        RaycastHit2D[] hits = Physics2D.RaycastAll(parent.transform.position, 
-            transform.right, Mathf.Infinity, laserLayers);
+        RaycastHit2D[] hits = Physics2D.RaycastAll(barrel.position, barrel.up, Mathf.Infinity, laserLayers);
+        if (hits.Length > 0) AudioPlayer.Play(hitSound);
 
         // Loop through all hits and apply damage
-        foreach(RaycastHit2D hit in hits)
+        foreach (RaycastHit2D hit in hits)
         {
             Entity entity = hit.collider.GetComponent<Entity>();
             if (entity != null) entity.Damage(damage, knockback);
         }
+
+        // Play the sound
+        AudioPlayer.Play(sound, true, 0.9f, 1.1f, true, 0.7f);
     }
 }

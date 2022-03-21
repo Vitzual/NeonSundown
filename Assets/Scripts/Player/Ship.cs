@@ -40,6 +40,7 @@ public class Ship : Weapon
     private static CanvasGroup healthCanvas;
     public AudioClip damageSound;
     public AudioClip warriorSound;
+    public AudioClip laserSound;
 
     // XP amount
     public List<float> levels;
@@ -262,10 +263,10 @@ public class Ship : Weapon
             // Create bullet
             if (lasers)
             {
-                if (Settings.shipColoring) BulletHandler.active.CreateLaserBullet(this, shipData.weapon, model.rotation, 
-                    shipData.weapon.material, damage, knockback, 0.1f, 100f, (int)bullets, true);
-                else BulletHandler.active.CreateLaserBullet(this, shipData.weapon, model.rotation, 
-                    defaultGlow, damage, knockback, 0.1f, 100f, (int)bullets, true);
+                if (Settings.shipColoring) BulletHandler.active.CreateLaserBullet(this, barrel, model.rotation, 
+                    shipData.weapon.material, laserSound, shipData.weapon.onDamageSound, damage, knockback, 0.1f, 100f, (int)bullets);
+                else BulletHandler.active.CreateLaserBullet(this, barrel, model.rotation, 
+                    defaultGlow, laserSound, shipData.weapon.onDamageSound, damage, knockback, 0.1f, 100f, (int)bullets);
             }
             else if (BulletHandler.energyBullets)
             {

@@ -33,8 +33,8 @@ public class LineDrawer : MonoBehaviour
         lineRenderer.SetPosition(0, Vector3.zero);
         lineRenderer.SetPosition(1, myLine.transform.right * length);
         lineRenderer.material = material;
-        lineRenderer.startWidth = size;
-        lineRenderer.endWidth = size;
+        lineRenderer.startWidth = size / 2f;
+        lineRenderer.endWidth = size / 2f;
         Destroy(myLine, duration);
     }
 }

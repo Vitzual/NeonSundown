@@ -146,11 +146,11 @@ public class Bullet : Entity
             entity.Stun(stunLength);
 
         // Check if bullet has a sound
-        if (weapon.onDamageSound != null)
+        if (weapon != null && weapon.onDamageSound != null)
             AudioPlayer.Play(weapon.onDamageSound, true, weapon.minPitch, weapon.maxPitch);
 
         // Check if bullet has a sound
-        if (weapon.onDeathSound != null && entity.IsDead())
+        if (weapon != null && weapon.onDeathSound != null && entity.IsDead())
             AudioPlayer.Play(weapon.onDeathSound, true, weapon.minPitch, weapon.maxPitch);
 
         // Check pierce amount
