@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3000125525197935227}
   - component: {fileID: 6729913443774272429}
   m_Layer: 9
-  m_Name: Pulse
+  m_Name: Earthquake
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -49,10 +49,10 @@ MonoBehaviour:
   sound: {fileID: 8300000, guid: 80dc5768281f3744c824f15453ff38e7, type: 3}
   data: {fileID: 0}
   level: 0
-  minKnockback: -1500
-  maxKnockback: -5000
-  damage: 0
-  range: 25
+  minKnockback: -4000
+  maxKnockback: -6000
+  damage: 15
+  range: 40
   particle: {fileID: 3000125525197935227}
 --- !u!198 &3000125525197935227
 ParticleSystem:
@@ -306,7 +306,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 35
+      scalar: 150
       minScalar: 1
       maxCurve:
         serializedVersion: 2

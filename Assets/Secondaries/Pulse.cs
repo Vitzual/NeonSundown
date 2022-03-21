@@ -7,6 +7,7 @@ public class Pulse : Secondary
     // Knockback effect
     public float minKnockback = -350f;
     public float maxKnockback = -1000f;
+    public float damage = 0;
     public float range = 15f;
     public ParticleSystem particle;
 
@@ -16,10 +17,10 @@ public class Pulse : Secondary
         if (cooldown <= 0 && !Dealer.isOpen)
         {
             cooldown = data.cooldown;
-            ExplosiveHandler.CreateKnockback(ship.transform.position, range, minKnockback, maxKnockback);
+            ExplosiveHandler.CreateKnockback(ship.transform.position, range, minKnockback, maxKnockback, damage);
             AudioPlayer.Play(sound);
             particle.Play();
-        }
+        }   
     }
 
     // Upgrade pulse

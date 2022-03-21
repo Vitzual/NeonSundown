@@ -1,4 +1,5 @@
 using HeathenEngineering.SteamworksIntegration;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Synergy", menuName = "Cards/Synergy")]
@@ -13,4 +14,8 @@ public class SynergyData : IdentifiableScriptableObject
     public bool removeCardOne, removeCardTwo;
     public CardData outputCard;
     public AchievementObject achievement;
+    [HideIf("IsTierOne", true)]
+    public SynergyData synergyOne, synergyTwo;
+
+    public bool IsTierOne() { return tier <= 1; }
 }

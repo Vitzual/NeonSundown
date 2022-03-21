@@ -6,8 +6,8 @@ public class SynergyTracker : MonoBehaviour
 {
     // Synergy progress
     public static bool isActive = false;
-    public SynergyProgress synergyProgress;
-    public List<SynergyProgress> synergies;
+    public SynergyElement synergyElement;
+    public List<SynergyElement> synergies;
     public CanvasGroup canvasGroup;
     public Transform list;
 
@@ -17,9 +17,9 @@ public class SynergyTracker : MonoBehaviour
         // Create all the synergies
         foreach(LevelData level in Levels.ranks)
         {
-            if (level.synergyReward != null)
+            if (level.synergyReward != null && !level.synergyReward.IsTierOne())
             {
-                SynergyProgress newSynergy = Instantiate(synergyProgress, Vector2.zero, Quaternion.identity);
+                SynergyElement newSynergy = Instantiate(synergyElement, Vector2.zero, Quaternion.identity);
                 newSynergy.transform.SetParent(list);
                 newSynergy.transform.localScale = Vector3.one;
                 newSynergy.Set(level.synergyReward);
@@ -31,8 +31,8 @@ public class SynergyTracker : MonoBehaviour
     // Update the synergies
     public void UpdateSynergies()
     {
-        foreach (SynergyProgress synergy in synergies)
-            synergy.Set(synergy.data);
+        foreach (SynergyElement synergy in synergies)
+            synergy.UpdateSynergies();
     }
 
     // Open and close my guy
