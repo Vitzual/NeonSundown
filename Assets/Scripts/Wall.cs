@@ -27,7 +27,7 @@ public class Wall : Helper
     {
         // Get the enemy component
         Bullet bullet = collision.GetComponent<Bullet>();
-        if (bullet != null) bullet.Destroy();
+        if (bullet != null && !bullet.canPassBarriers) bullet.Destroy();
     }
 
     // On collision with bullet, destroy it

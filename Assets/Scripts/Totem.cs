@@ -46,15 +46,16 @@ public class Totem : Helper
         if (Dealer.isOpen) return;
 
         // Check position relative to player
-        if (Vector2.Distance(transform.position, ship.transform.position) > 25f)
+        if (Vector2.Distance(transform.position, ship.transform.position) > 35f)
         {
             // Rotate towards the object
-            float angle = Mathf.Atan2(transform.position.y - ship.transform.position.y,
-                transform.position.x - ship.transform.position.x) * Mathf.Rad2Deg;
+            if (rotationSpeed != 60f) rotationSpeed = 60f;
+            float angle = Mathf.Atan2(ship.transform.position.y - transform.position.y,
+                ship.transform.position.x - transform.position.x) * Mathf.Rad2Deg;
             Quaternion targetRotation = Quaternion.Euler(new Vector3(0, 0, angle - 90f));
             transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
         }
-
+        
         else
         {
             // Rotate randomly

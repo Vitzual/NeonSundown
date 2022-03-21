@@ -26,7 +26,10 @@ public class Bullet : Entity
     public bool explosive;
     public bool overrideSprite;
     public float explosionSize = 10f;
+    public bool chainTarget = false;
+    public float castRange = 0;
     private bool isReversed = false;
+    public bool canPassBarriers = false;
 
     // Is a split shot
     protected Weapon parent;
@@ -166,6 +169,9 @@ public class Bullet : Entity
             deathMaterial = holder;
             Destroy();
         }
+
+        // If not dead, chain target
+        else if (chainTarget) FindChainTarget(castRange);
     }
 
     // Rotate to target
@@ -197,5 +203,26 @@ public class Bullet : Entity
             AudioPlayer.PlayReflectSound();
             isReversed = true;
         }
+    }
+
+    // Find chain target
+    public void FindChainTarget(float castRange)
+    {
+        // Set target to null and cast for entities
+        Collider2D[] colliders = ExplosiveHandler.CastForEntities(transform.position, castRange);
+
+        // Loop through colliders to find new target
+        bool newTargetFound = false;
+        for (int i = 0; i < colliders.Length; i++)
+        {
+            Transform newTarget = colliders[i].GetComponent<Transform>();
+            if (newTarget != target)
+            {
+                newTargetFound = true;
+                target = newTarget;
+                break;
+            }
+        }
+        if (!newTargetFound) target = null;
     }
 }

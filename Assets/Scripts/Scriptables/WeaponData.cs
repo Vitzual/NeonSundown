@@ -45,6 +45,8 @@ public class WeaponData : CardData
     public float stun;
     [BoxGroup("Bullet Stats"), Tooltip("Points the weapon in random directions.")]
     public bool randomDirection;
+    [BoxGroup("Bullet Stats"), Tooltip("Rotates the weapon to the target on spawn.")]
+    public bool rotateOnSpawn;
     [BoxGroup("Bullet Stats"), Tooltip("Chooses a random enemy to target.")]
     public bool randomTarget;
     [BoxGroup("Bullet Stats"), Tooltip("Determins if a bullet should follow its target.")]
