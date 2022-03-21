@@ -5,5 +5,7 @@ public enum ChromaType
     XPHealing,
     EnergyBullets,
     Warrior,
-    AutoCollect
+    AutoCollect,
+    Champion,
+    Lasers
 }

@@ -35,6 +35,12 @@ public class ChromaHandler : MonoBehaviour
             case ChromaType.Warrior:
                 Ship.warrior = true;
                 break;
+            case ChromaType.Champion:
+                Ship.champion = true;
+                break;
+            case ChromaType.Lasers:
+                Ship.lasers = true;
+                break;
         }      
     }
 }

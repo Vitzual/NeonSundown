@@ -13,9 +13,20 @@ public class BulletHandler : MonoBehaviour
     // List of all active bullets
     public List<Bullet> bullets;
     public Bullet energyBullet;
+    public List<LayerMask> _laserLayers;
+    private LayerMask laserLayers;
 
     // Start method
-    public void Start() { active = this; stickyBullets = false; energyBullets = false; bulletSize = 1; }
+    public void Start() 
+    {
+        active = this; 
+        stickyBullets = false;
+        energyBullets = false;
+        bulletSize = 1;
+
+        foreach (LayerMask layer in _laserLayers)
+            laserLayers = layer | laserLayers;
+    }
 
     // Move normal enemies
     public void Update()
@@ -125,6 +136,28 @@ public class BulletHandler : MonoBehaviour
 
             // Add to enemies list
             bullets.Add(bullet);
+        }
+    }
+
+    // Creates a laser bullet
+    public void CreateLaserBullet(Weapon parent, WeaponData weapon, Quaternion rotation, Material material,
+        float damage, float knockback, float duration, float length, int amount, bool useSize = false)
+    {
+        // Draw the line (cosmetic only)
+        if (bulletSize > 1 && useSize) LineDrawer.active.DrawFromParent(parent.transform, 
+            rotation, material, bulletSize, duration, length);
+        else LineDrawer.active.DrawFromParent(parent.transform, rotation,
+            material, 1f, duration, length);
+
+        // Raycast for enemies
+        RaycastHit2D[] hits = Physics2D.RaycastAll(parent.transform.position, 
+            transform.right, Mathf.Infinity, laserLayers);
+
+        // Loop through all hits and apply damage
+        foreach(RaycastHit2D hit in hits)
+        {
+            Entity entity = hit.collider.GetComponent<Entity>();
+            if (entity != null) entity.Damage(damage, knockback);
         }
     }
 }

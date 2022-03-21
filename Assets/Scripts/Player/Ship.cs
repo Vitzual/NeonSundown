@@ -8,11 +8,14 @@ public class Ship : Weapon
 {
     // Auto collect XP flag
     public static bool warrior = false;
+    public static bool champion = false;
+    public static bool lasers = false;
 
     // Controller associated with the player
     private Controller controller;
     public GameObject autoFireObj;
     private bool autoFire = false;
+    public bool _lasers = false;
 
     // Player model and data
     public ShipData shipData;
@@ -65,6 +68,8 @@ public class Ship : Weapon
     public void Start()
     {
         warrior = false;
+        champion = false;
+        lasers = _lasers;
         healthBar = _healthBar;
         healthCanvas = _healthCanvas;
 
@@ -255,7 +260,14 @@ public class Ship : Weapon
             RuntimeStats.bulletsFired += (int)bullets;
 
             // Create bullet
-            if (BulletHandler.energyBullets)
+            if (lasers)
+            {
+                if (Settings.shipColoring) BulletHandler.active.CreateLaserBullet(this, shipData.weapon, model.rotation, 
+                    shipData.weapon.material, damage, knockback, 0.1f, 100f, (int)bullets, true);
+                else BulletHandler.active.CreateLaserBullet(this, shipData.weapon, model.rotation, 
+                    defaultGlow, damage, knockback, 0.1f, 100f, (int)bullets, true);
+            }
+            else if (BulletHandler.energyBullets)
             {
                 if (Settings.shipColoring) BulletHandler.active.CreateEnergyBullet(this, shipData.weapon, barrel.position,
                     model.rotation, (int)bullets, shipData.weapon.material, true, explosiveRounds, true);
@@ -287,7 +299,14 @@ public class Ship : Weapon
     public void Damage(float damage)
     {
         // Check if warrior active
-        if (warrior && controller.isDashing)
+        if (champion && controller.isDashing)
+        {
+            // Play audio clip
+            ExplosiveHandler.CreateKnockback(transform.position, 20f, -2000f, -2500f, 25);
+            AudioPlayer.Play(warriorSound, true, 0.8f, 1.2f, false, 0.8f);
+            return;
+        }
+        else if (warrior && controller.isDashing)
         {
             // Play audio clip
             AudioPlayer.Play(warriorSound, true, 0.8f, 1.2f, false, 0.8f);
