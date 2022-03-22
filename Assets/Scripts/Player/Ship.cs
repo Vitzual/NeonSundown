@@ -264,9 +264,9 @@ public class Ship : Weapon
             if (lasers)
             {
                 if (Settings.shipColoring) BulletHandler.active.CreateLaserBullet(this, barrel, model.rotation, 
-                    shipData.weapon.material, laserSound, shipData.weapon.onDamageSound, damage, knockback, 0.1f, 100f, (int)bullets);
+                    shipData.weapon.material, laserSound, shipData.weapon.onDamageSound, damage, knockback, 0.2f, 100f, (int)bullets);
                 else BulletHandler.active.CreateLaserBullet(this, barrel, model.rotation, 
-                    defaultGlow, laserSound, shipData.weapon.onDamageSound, damage, knockback, 0.1f, 100f, (int)bullets);
+                    defaultGlow, laserSound, shipData.weapon.onDamageSound, damage, knockback, 0.2f, 100f, (int)bullets);
             }
             else if (BulletHandler.energyBullets)
             {

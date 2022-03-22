@@ -10619,7 +10619,7 @@ MonoBehaviour:
   explosiveRounds: 0
   level: 0
   autoFireObj: {fileID: 843932847}
-  _lasers: 1
+  _lasers: 0
   shipData: {fileID: 11400000, guid: b1370a648ab4cb542922d56a80462803, type: 2}
   border: {fileID: 1048120583}
   fill: {fileID: 1168927202}
@@ -18824,6 +18824,12 @@ MonoBehaviour:
     lightColor: {r: 0.5754717, g: 0.5754717, b: 0.5754717, a: 1}
     material: {fileID: 2100000, guid: 4ab3027e425e85946b39bff6ca3ab165, type: 2}
     deathParticle: {fileID: 993855083006936043, guid: 01c48aa84a2ea6c49901482836dcdd15, type: 3}
+  - type: 6
+    fillColor: {r: 0.14253712, g: 0, b: 1, a: 1}
+    borderColor: {r: 0.4798003, g: 0.3915094, b: 1, a: 1}
+    lightColor: {r: 0.70562345, g: 0.6556604, b: 1, a: 1}
+    material: {fileID: 2100000, guid: 02afb73aa6c059d4694afa3e3f4af9ae, type: 2}
+    deathParticle: {fileID: 2055333318299029104, guid: db7f2bd89549db747aade2de38a9a6d3, type: 3}
 --- !u!4 &1440029482
 Transform:
   m_ObjectHideFlags: 0
@@ -24225,6 +24231,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16d18c66c9966ff409aa4c9d1be276c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  laserSpeed: 5
+  debug: 0
 --- !u!4 &1918491736
 Transform:
   m_ObjectHideFlags: 0
