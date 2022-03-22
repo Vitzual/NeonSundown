@@ -80,10 +80,10 @@ public class EnemySpawner : MonoBehaviour
             {
                 scaleIncrease = 15f;
                 scaleCalc += 0.25f;
-                enemyHealthMultiplier += 0.2f;
+                enemyHealthMultiplier += 0.25f;
                 enemySpeedMultiplier += 0.02f;
                 enemyDamageMultiplier += 0.1f;
-                if (crystalDropChance > 0.5f)
+                if (crystalDropChance > 0.25f)
                     crystalDropChance -= 0.02f;
             }
         }
