@@ -128,12 +128,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83b4a6d62eaea864e826931f2a511f80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  immune: 1
   overrideOtherParticles: 0
   rotateParticle: 0
   deathMaterial: {fileID: 0}
   deathEffect: {fileID: 0}
   rb: {fileID: 0}
-  isCullable: 1
+  isCullable: 0
   trails: []
   glows:
   - {fileID: 8071768146122005031}
@@ -180,8 +181,8 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 50
-  m_LinearDrag: 0
-  m_AngularDrag: 1
+  m_LinearDrag: 10
+  m_AngularDrag: 10
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0

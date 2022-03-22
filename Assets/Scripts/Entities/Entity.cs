@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Entity : MonoBehaviour
 {
+    // Is the enemy immune to all damage
+    public bool immune = false;
+
     // The particle effect for this bullet
     public bool overrideOtherParticles = false;
     public bool rotateParticle = false;

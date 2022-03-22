@@ -38,6 +38,17 @@ public class DamageNumber : MonoBehaviour
         }
     }
 
+    public void SetText(string name, Color color)
+    {
+        time = 1f;
+        isActive = true;
+        amount.text = name;
+        amount.color = color;
+        transform.localScale = new Vector2(2f, 2f);
+        increaseScale = new Vector3(2f, 2f, 2f);
+        decreaseScale = new Vector3(-4f, -4f, -4f);
+    }
+
     public void Move()
     {
         // Move the object up

@@ -143,19 +143,29 @@ public class BulletHandler : MonoBehaviour
     public void CreateLaserBullet(Weapon parent, Transform barrel, Quaternion rotation, Material material,
         AudioClip sound, AudioClip hitSound, float damage, float knockback, float duration, float length, int amount)
     {
-        // Draw the line (cosmetic only)
-        LineDrawer.active.DrawFromParent(parent.transform, rotation,
-            material, 1f, duration, length);
-
-        // Raycast for enemies
-        RaycastHit2D[] hits = Physics2D.RaycastAll(barrel.position, barrel.up, Mathf.Infinity, laserLayers);
-        if (hits.Length > 0) AudioPlayer.Play(hitSound);
-
-        // Loop through all hits and apply damage
-        foreach (RaycastHit2D hit in hits)
+        // Loop through stated amount times
+        for (int i = 0; i < amount; i++)
         {
-            Entity entity = hit.collider.GetComponent<Entity>();
-            if (entity != null) entity.Damage(damage, knockback);
+            // Offset rotation slightly
+            Vector3 rotationOffset = new Vector3(rotation.eulerAngles.x, rotation.eulerAngles.y,
+                rotation.eulerAngles.z + Random.Range(-parent.bloom, parent.bloom));
+            Quaternion newRotation = new Quaternion();
+            newRotation.eulerAngles = rotationOffset;
+
+            // Draw the line (cosmetic only)
+            LineDrawer.active.DrawFromParent(parent.transform, newRotation,
+                material, 1f, duration, length);
+
+            // Raycast for enemies
+            RaycastHit2D[] hits = Physics2D.RaycastAll(barrel.position, barrel.up, Mathf.Infinity, laserLayers);
+            if (hits.Length > 0) AudioPlayer.Play(hitSound);
+
+            // Loop through all hits and apply damage
+            foreach (RaycastHit2D hit in hits)
+            {
+                Entity entity = hit.collider.GetComponent<Entity>();
+                if (entity != null) entity.Damage(damage, knockback);
+            }
         }
 
         // Play the sound

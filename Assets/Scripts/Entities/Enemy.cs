@@ -91,6 +91,13 @@ public class Enemy : Entity
     // Damage entity
     public void Damage(float amount, float knockback, Vector3 origin)
     {
+        // Check if immune
+        if (immune)
+        {
+            DamageHandler.active.CreateImmune(transform.position);
+            return;
+        }
+
         // Add to total damage done
         RuntimeStats.damageGiven += amount;
 
@@ -128,6 +135,9 @@ public class Enemy : Entity
     // Destroy entity
     public override void Destroy()
     {
+        // Check if immune
+        if (immune) return;
+
         // Create particle
         CreateParticle();
 
@@ -158,6 +168,7 @@ public class Enemy : Entity
     // Called when a player hits this enemy
     public virtual void OnHitPlayer(Ship player)
     {
+        if (immune) { player.Kill(); return; }
         player.Damage(damage);
         Destroy();
     }

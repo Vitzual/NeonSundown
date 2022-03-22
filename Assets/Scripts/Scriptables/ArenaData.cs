@@ -63,5 +63,13 @@ public class ArenaData : IdentifiableScriptableObject
     [BoxGroup("Arena Rules")]
     public List<StageData> stages;
     [BoxGroup("Arena Rules")]
-    public bool useWall = false;
+    public bool useWall;
+    [HideIf("NoWall"), BoxGroup("Arena Rules")]
+    public Material wallBorder;
+    [HideIf("NoWall"), BoxGroup("Arena Rules")]
+    public Color wallFill;
+    [HideIf("NoWall"), BoxGroup("Arena Rules")]
+    public float wallAdjustment;
+
+    public bool NoWall() { return !useWall; }
 }

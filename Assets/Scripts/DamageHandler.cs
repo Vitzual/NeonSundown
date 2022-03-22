@@ -45,6 +45,28 @@ public class DamageHandler : MonoBehaviour
         }
     }
 
+    public void CreateImmune(Vector2 position)
+    {
+        // Check if numbers active
+        if (!Settings.damageNumbers) return;
+
+        // Attempt to use pooled object
+        if (inactiveNumbers.Count > 0)
+        {
+            inactiveNumbers[0].transform.position = position;
+            inactiveNumbers[0].gameObject.SetActive(true);
+            inactiveNumbers[0].SetText("Immune", Color.white);
+            activeNumbers.Add(inactiveNumbers[0]);
+            inactiveNumbers.RemoveAt(0);
+        }
+        else
+        {
+            newNumber = Instantiate(damageNumber, position, Quaternion.identity);
+            newNumber.SetText("Immune", Color.white);
+            activeNumbers.Add(newNumber);
+        }
+    }
+
     public void Update()
     {
         for (int i = 0; i < activeNumbers.Count; i++)

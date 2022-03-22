@@ -63,8 +63,6 @@ public class Ship : Weapon
     private float shipCooldown;
     private float regenCooldown;
 
-    private bool isDead = false;
-
     // Subscribe to setup event
     public void Start()
     {
@@ -363,9 +361,6 @@ public class Ship : Weapon
     {
         // Open game over screen
         Events.active.ShipDestroyed();
-
-        // Set is dead flag to true
-        isDead = true;
     }
 
     public void OnCollisionEnter2D(Collision2D collision)

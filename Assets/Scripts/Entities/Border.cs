@@ -6,7 +6,7 @@ public class Border : MonoBehaviour
 {
     // Start is called before the first frame update
     public GameObject theWall;
-
+    
     public void Start()
     {
         if (Gamemode.arena.useWall)
