@@ -147,8 +147,8 @@ public class RewardList : MonoBehaviour
         else
         {
             useRainbow = true;
-            levelText.text = "45tea";
-            unlockName.text = "LEVEL MAX";
+            levelText.text = "45";
+            unlockName.text = "RANK MAX";
             unlockProgress.currentPercent = 100;
         }
     }

@@ -181,10 +181,7 @@ public class Enemy : Entity
         {
             stunLength -= Time.deltaTime;
             if (stunLength <= 0f)
-            {
                 stunned = false;
-                stunImmunity = 0.5f;
-            }
             return;
         }
 
@@ -253,10 +250,11 @@ public class Enemy : Entity
 
     public override void Stun(float length)
     {
-        if (stunImmunity <= 0)
+        if (stunImmunity <= 0f)
         {
             stunned = true;
             stunLength = length;
+            stunImmunity = 0.5f;
         }
     }
 

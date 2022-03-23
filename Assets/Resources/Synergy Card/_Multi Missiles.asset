@@ -18,12 +18,12 @@ MonoBehaviour:
   description: Piercing missiles that fires torpedos as they travel
   sprite: {fileID: 21300000, guid: 0a3d7d412c181d74eabda7489ac29172, type: 3}
   color: {r: 0.54898274, g: 0.21226418, b: 1, a: 1}
-  maximumAmount: 0
+  maximumAmount: 1
   dropChance: 1
   canDrop: 0
   isUnlocked: 0
   baseLevels: []
-  damage: 80
+  damage: 150
   cooldown: 1
   moveSpeed: 60
   rotate: 0
@@ -32,10 +32,11 @@ MonoBehaviour:
   bloom: 0
   pierces: 100
   bullets: 1
-  knockback: -1000
+  knockback: -2000
   lifetime: 3
   stun: 0
   randomDirection: 1
+  rotateOnSpawn: 0
   randomTarget: 1
   trackTarget: 1
   lockTarget: 0

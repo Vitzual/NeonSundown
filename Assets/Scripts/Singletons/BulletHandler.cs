@@ -164,8 +164,13 @@ public class BulletHandler : MonoBehaviour
             foreach (RaycastHit2D hit in hits)
             {
                 Entity entity = hit.collider.GetComponent<Entity>();
-                if (entity != null) entity.Damage(damage, knockback);
-            }
+                if (entity != null)
+                {
+                    // Set target to null and cast for entities
+                    ExplosiveHandler.CreateKnockback(entity.transform.position, 10f, -1000, -1500, 25);
+                    entity.Damage(damage, knockback);
+                }
+            }            
         }
 
         // Play the sound

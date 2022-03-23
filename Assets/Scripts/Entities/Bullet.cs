@@ -220,9 +220,14 @@ public class Bullet : Entity
             {
                 newTargetFound = true;
                 target = newTarget;
+                tracking = true;
                 break;
             }
         }
-        if (!newTargetFound) target = null;
+        if (!newTargetFound)
+        {
+            target = null;
+            tracking = false;
+        }
     }
 }

@@ -9,7 +9,9 @@ public class SaveSystem
 {
     // Save path
     private const string CLOUD_SAVE_NAME = "player_save.json";
+    private const string CLOUD_TIMES_NAME = "player_times.json";
     private const string SAVE_PATH = "/player_save.json";
+    private const string TIMES_PATH = "/player_times.json";
     private const string META_PATH = "/context_save.json";
 
     // Most up-to-date data

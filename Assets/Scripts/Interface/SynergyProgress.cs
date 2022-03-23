@@ -30,7 +30,7 @@ public class SynergyProgress : MonoBehaviour
             // Find unlock requirement
             foreach (LevelData level in Levels.ranks)
                 if (level.synergyReward != null && level.synergyReward.InternalID == synergy.InternalID)
-                    unlockReq.text = "UNLOCKED AT LEVEL " + level.name;
+                    unlockReq.text = "UNLOCKED AT RANK " + level.name;
         }
         else
         {
