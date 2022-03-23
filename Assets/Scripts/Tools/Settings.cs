@@ -33,6 +33,7 @@ public class Settings
     public static bool compoundXP = false;
     public static bool musicPitching = true;
     public static bool verticalsync = false;
+    public static bool controllerInput = true;
 
     // Save settings
     public static void SaveSettings()
@@ -57,6 +58,7 @@ public class Settings
         settingsData.compoundXP = compoundXP;
         settingsData.musicPitching = musicPitching;
         settingsData.verticalsync = verticalsync;
+        settingsData.controllerInput = controllerInput;
 
         // Get keybinds from file
         settingsData.keybind_move_up = Keybinds.move_up.ToString();
@@ -103,6 +105,7 @@ public class Settings
             compoundXP = settingsData.compoundXP;
             musicPitching = settingsData.musicPitching;
             verticalsync = settingsData.verticalsync;
+            controllerInput = settingsData.controllerInput;
 
             // Apply glow effect
             glowAmount = settingsData.glowAmount;
@@ -168,6 +171,7 @@ public class Settings
             compoundXP = false;
             musicPitching = true;
             verticalsync = false;
+            controllerInput = true;
 
             SettingsUI.active.SetGlowAmount(glowAmount);
             SettingsUI.active.SetLightAmount(lightAmount);

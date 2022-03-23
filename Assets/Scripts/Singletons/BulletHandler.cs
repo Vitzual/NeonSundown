@@ -167,8 +167,8 @@ public class BulletHandler : MonoBehaviour
                 if (entity != null)
                 {
                     // Set target to null and cast for entities
-                    ExplosiveHandler.CreateKnockback(entity.transform.position, 10f, -1000, -1500, 25);
-                    entity.Damage(damage, knockback);
+                    entity.Damage(damage * 2, knockback * 2);
+                    ExplosiveHandler.CreateKnockback(entity.transform.position, 10f, -1000, -1500, 50);
                 }
             }            
         }

@@ -22,6 +22,7 @@ public class SettingsData
     public bool compoundXP;
     public bool musicPitching;
     public bool verticalsync;
+    public bool controllerInput = true;
 
     // Keybinds
     public string keybind_move_up;

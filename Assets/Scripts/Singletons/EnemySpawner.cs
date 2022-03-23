@@ -10,7 +10,7 @@ public class EnemySpawner : MonoBehaviour
     public static EnemySpawner active;
 
     // List of all stages
-    private StageData activeStage;
+    public StageData activeStage;
     private int nextStageIndex = 0;
     private bool stagesLeft = true;
 
@@ -84,7 +84,7 @@ public class EnemySpawner : MonoBehaviour
                 enemySpeedMultiplier += 0.02f;
                 enemyDamageMultiplier += 0.1f;
                 if (crystalDropChance > 0.25f)
-                    crystalDropChance -= 0.02f;
+                    crystalDropChance -= 0.01f;
             }
         }
         

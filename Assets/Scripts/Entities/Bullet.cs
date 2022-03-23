@@ -212,22 +212,19 @@ public class Bullet : Entity
         Collider2D[] colliders = ExplosiveHandler.CastForEntities(transform.position, castRange);
 
         // Loop through colliders to find new target
-        bool newTargetFound = false;
         for (int i = 0; i < colliders.Length; i++)
         {
             Transform newTarget = colliders[i].GetComponent<Transform>();
             if (newTarget != target)
             {
-                newTargetFound = true;
                 target = newTarget;
                 tracking = true;
-                break;
+                return;
             }
         }
-        if (!newTargetFound)
-        {
-            target = null;
-            tracking = false;
-        }
+
+        // If no target found, set target to null
+        target = null;
+        tracking = false;
     }
 }

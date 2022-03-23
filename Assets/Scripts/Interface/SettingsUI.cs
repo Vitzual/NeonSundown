@@ -40,6 +40,7 @@ public class SettingsUI : MonoBehaviour
     public SwitchManager musicPitchingSwitch;
     public SwitchManager alwaysShowHealth;
     public SwitchManager verticalSync;
+    public SwitchManager controllerInput;
 
     // Canvas group
     public CanvasGroup canvasGroup;
@@ -145,6 +146,7 @@ public class SettingsUI : MonoBehaviour
     public void SwitchScreenmode(bool fullscreen) { Settings.SetScreenMode(fullscreen); }
     public void SwitchVerticalSync(bool toggle) { Settings.SetVerticalSync(toggle); }
     public void SwitchFramerate(int amount) { Settings.SetFramerate(amount); }
+    public void AllowControllerInput(bool toggle) { Settings.controllerInput = toggle; }
 
     // Switch resolution
     public void SwitchResolution(int option)
@@ -224,6 +226,7 @@ public class SettingsUI : MonoBehaviour
         compoundXP.isOn = Settings.compoundXP;
         musicPitchingSwitch.isOn = Settings.musicPitching;
         verticalSync.isOn = Settings.verticalsync;
+        controllerInput.isOn = Settings.controllerInput;
 
         // Update values
         music.UpdateUI();
@@ -238,6 +241,7 @@ public class SettingsUI : MonoBehaviour
         compoundXP.UpdateUI();
         musicPitchingSwitch.UpdateUI();
         verticalSync.UpdateUI();
+        controllerInput.UpdateUI();
 
         // Update canvas group
         canvasGroup.alpha = 1f;

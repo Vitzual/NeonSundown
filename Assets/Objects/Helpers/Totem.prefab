@@ -5313,16 +5313,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06a6091a4ff89b2409c62ee76f9a4a50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  immune: 0
+  overrideOtherParticles: 0
+  rotateParticle: 0
+  deathMaterial: {fileID: 0}
+  deathEffect: {fileID: 0}
   data: {fileID: 0}
   level: 0
-  healSound: {fileID: 8300000, guid: 9de4e4139c6ee8144bc3d644232e3b58, type: 3}
-  healAmount: 0.25
-  healCooldown: 1
   movementSpeed: 15
   rotationSpeed: 80
+  healSound: {fileID: 8300000, guid: 9de4e4139c6ee8144bc3d644232e3b58, type: 3}
+  healAmount: 0.5
+  healCooldown: 1
   radius: {fileID: 489216570430884860}
   targetRadius: 2
   scaleSpeed: {x: 5, y: 5, z: 1}
+  maxDistance: 0
 --- !u!50 &8448323221370727098
 Rigidbody2D:
   serializedVersion: 4

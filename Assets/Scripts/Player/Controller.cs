@@ -99,14 +99,14 @@ public class Controller : MonoBehaviour
     {
         // Horizontal Movement
         horizontal = 0;
-        horizontal += Input.GetAxis("L-Stick X");
+        if (Settings.controllerInput) horizontal += Input.GetAxis("L-Stick X");
         horizontal += Input.GetKey(Keybinds.move_right) ? 1 : 0;
         horizontal -= Input.GetKey(Keybinds.move_left) ? 1 : 0;
         horizontal = Mathf.Clamp(horizontal, -1, 1);
 
         // Vertical Movement
         vertical = 0;
-        vertical += Input.GetAxis("L-Stick Y");
+        if (Settings.controllerInput) vertical += Input.GetAxis("L-Stick Y");
         vertical += Input.GetKey(Keybinds.move_up) ? 1 : 0;
         vertical -= Input.GetKey(Keybinds.move_down) ? 1 : 0;
         vertical = Mathf.Clamp(vertical, -1, 1);
@@ -131,7 +131,7 @@ public class Controller : MonoBehaviour
         }
 
         // Check if dash pressed
-        else if (Input.GetKey(Keybinds.dash) || Input.GetKey(KeyCode.JoystickButton4))
+        else if (Input.GetKey(Keybinds.dash) || (Settings.controllerInput && Input.GetKey(KeyCode.JoystickButton4)))
         {
             isDashing = true;
             dash = dashTimer;
@@ -148,25 +148,29 @@ public class Controller : MonoBehaviour
     // Rotates the players head towards the mouse
     private void RotateToMouse()
     {
-        // Controller input
-        float horizontal = Input.GetAxis("R-Stick X");
-        float vertical = Input.GetAxis("R-Stick Y");
-
-        // Check horizontal and vertical
-        if (horizontal != 0 || vertical != 0)
+        // Check if controller input allowed
+        if (Settings.controllerInput)
         {
-            if (!controller.activeSelf)
+            // Controller input
+            float horizontal = Input.GetAxis("R-Stick X");
+            float vertical = Input.GetAxis("R-Stick Y");
+
+            // Check horizontal and vertical
+            if (horizontal != 0 || vertical != 0)
             {
-                // Check if controller is connected
-                isControllerConnected = true;
-                controllerIcon.SetActive(true);
-                controller.SetActive(true);
+                if (!controller.activeSelf)
+                {
+                    // Check if controller is connected
+                    isControllerConnected = true;
+                    controllerIcon.SetActive(true);
+                    controller.SetActive(true);
+                }
+                controller.transform.localPosition = new Vector2(horizontal * 35, vertical * 35);
+                float angle = Mathf.Atan2(controller.transform.localPosition.y, controller.transform.localPosition.x) * Mathf.Rad2Deg;
+                rotator.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
             }
-            controller.transform.localPosition = new Vector2(horizontal * 35, vertical * 35);
-            float angle = Mathf.Atan2(controller.transform.localPosition.y, controller.transform.localPosition.x) * Mathf.Rad2Deg;
-            rotator.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+            else if (controller.activeSelf) controller.SetActive(false);
         }
-        else if (controller.activeSelf) controller.SetActive(false);
 
         // Get mouse pos
         Vector3 mousePos = Input.mousePosition;
