@@ -7,6 +7,7 @@ public class Drone : Helper
     // Drone variables
     public float movementSpeed;
     public float rotationSpeed;
+    public float range = 35f;
     private float directionCooldown;
 
     // Move totem around randomly
@@ -16,7 +17,7 @@ public class Drone : Helper
         if (Dealer.isOpen) return;
 
         // Check position relative to player
-        if (Vector2.Distance(transform.position, ship.transform.position) > 35f)
+        if (Vector2.Distance(transform.position, ship.transform.position) > range)
         {
             // Rotate towards the object
             if (rotationSpeed != 60f) rotationSpeed = 60f;
