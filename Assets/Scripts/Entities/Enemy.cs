@@ -73,6 +73,7 @@ public class Enemy : Entity
         damage = data.damage * EnemySpawner.enemyDamageMultiplier;
         maxHealth = health;
         rotation = data.rotateSpeed;
+        immune = data.immune;
 
         // Set target
         target = player;

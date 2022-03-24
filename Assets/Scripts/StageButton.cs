@@ -25,9 +25,18 @@ public class StageButton : MonoBehaviour
         // Set all enemy information
         name.text = enemy.data.name;
         rate.text = enemy.amount + "x / " + enemy.cooldown + seconds;
-        stats.text = "<b>HEALTH:</b> " + enemy.data.variants[enemy.variant].health +
-                     "  |  <b>DAMAGE:</b> " + enemy.data.variants[enemy.variant].damage +
-                     "  |  <b>SPEED:</b> " + enemy.data.variants[enemy.variant].speed;
+        if (enemy.data.variants[enemy.variant].immune)
+        {
+            stats.text = "<b>HEALTH:</b> INFINITE" +
+             "  |  <b>DAMAGE:</b> INSTA-KILL" +
+             "  |  <b>SPEED:</b> " + enemy.data.variants[enemy.variant].speed;
+        }
+        else
+        {
+            stats.text = "<b>HEALTH:</b> " + enemy.data.variants[enemy.variant].health +
+                         "  |  <b>DAMAGE:</b> " + enemy.data.variants[enemy.variant].damage +
+                         "  |  <b>SPEED:</b> " + enemy.data.variants[enemy.variant].speed;
+        }
         stats.color = secondaryColor;
         icon.sprite = enemy.data.icon;
         icon.color = primaryColor;

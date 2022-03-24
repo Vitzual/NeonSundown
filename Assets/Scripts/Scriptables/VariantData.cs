@@ -18,6 +18,8 @@ public class VariantData
     public Crystal crystal;
     [BoxGroup("Variant Stats")]
     public float crystalDropChance;
+    [BoxGroup("Variant Stats")]
+    public bool immune = false;
 
     [BoxGroup("Movement Variables")]
     public bool knockback;
