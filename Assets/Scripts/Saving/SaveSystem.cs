@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using HeathenEngineering.SteamworksIntegration.API;
+using System.Linq;
 
 public class SaveSystem
 {
@@ -13,6 +14,7 @@ public class SaveSystem
     private const string SAVE_PATH = "/player_save.json";
     private const string TIMES_PATH = "/player_times.json";
     private const string META_PATH = "/context_save.json";
+    private const int MAX_ARENA_TIMES = 10;
 
     // Most up-to-date data
     public static SaveData saveData;
@@ -192,9 +194,33 @@ public class SaveSystem
         // Update the arena time
         if (saveData.arenaTimes.ContainsKey(id))
         {
+            // Create new time data instance
+            SerializableDictionary<string, int> cards = new SerializableDictionary<string, int>();
+            foreach (KeyValuePair<CardData, int> card in Deck.active.GetCards())
+                if (!cards.ContainsKey(card.Key.InternalID)) cards.Add(card.Key.InternalID, card.Value);
+            TimeData newData = new TimeData(time, Gamemode.ship.InternalID, cards);
+
+            // Keep track of total times
+            int totalTimes = 0;
+
             // Check if best time achieved
-            if (saveData.arenaTimes[id] < time)
-                saveData.arenaTimes[id] = time;
+            for (int i = 0; i < saveData.newArenaTimes[id].Count; i++)
+            {
+                // Check if total times over max amount
+                if (saveData.newArenaTimes[id][i].time < time)
+                {
+                    TimeData holder = saveData.newArenaTimes[id][i];
+                    saveData.newArenaTimes[id][i] = newData;
+                    newData = holder;
+                }
+
+                // Increase total times
+                totalTimes += 1;
+                if (totalTimes >= MAX_ARENA_TIMES) break;
+            }
+
+            // Check if total times reached max, and if not create new best time
+            if (totalTimes < MAX_ARENA_TIMES) saveData.newArenaTimes[id][totalTimes] = newData;
         }
 
         // If arena does not exist, create new instance

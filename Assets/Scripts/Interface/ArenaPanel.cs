@@ -57,10 +57,10 @@ public class ArenaPanel : MonoBehaviour
                 // Check if save is unlocked, and if so set time
                 if (arena.unlockByDefault || SaveSystem.IsArenaUnlocked(arena.InternalID))
                 {
-                    if (SaveSystem.saveData.arenaTimes.ContainsKey(arena.InternalID))
+                    if (SaveSystem.saveData.newArenaTimes.ContainsKey(arena.InternalID))
                     {
                         newButton.Set(arena, "<b>Best Run:</b> " + Formatter.Time
-                            (SaveSystem.saveData.arenaTimes[arena.InternalID]));
+                            (SaveSystem.saveData.newArenaTimes[arena.InternalID][0].time));
                     }
                     else newButton.Set(arena, "<b>Best Run:</b> 0:00");
                 }
