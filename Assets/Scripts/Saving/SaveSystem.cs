@@ -145,6 +145,12 @@ public class SaveSystem
 
         // If save data not loaded, generate new save
         if (saveData == null) GenerateSave();
+
+        // Else check for leaderboard update
+        else
+        {
+
+        }
     }
 
     // Check if save exists
@@ -191,15 +197,15 @@ public class SaveSystem
     // Saves arena time
     public static void UpdateArena(string id, float time)
     {
+        // Create new time data instance
+        SerializableDictionary<string, int> cards = new SerializableDictionary<string, int>();
+        foreach (KeyValuePair<CardData, int> card in Deck.active.GetCards())
+            if (!cards.ContainsKey(card.Key.InternalID)) cards.Add(card.Key.InternalID, card.Value);
+        TimeData newData = new TimeData(time, Gamemode.ship.InternalID, cards);
+
         // Update the arena time
         if (saveData.arenaTimes.ContainsKey(id))
         {
-            // Create new time data instance
-            SerializableDictionary<string, int> cards = new SerializableDictionary<string, int>();
-            foreach (KeyValuePair<CardData, int> card in Deck.active.GetCards())
-                if (!cards.ContainsKey(card.Key.InternalID)) cards.Add(card.Key.InternalID, card.Value);
-            TimeData newData = new TimeData(time, Gamemode.ship.InternalID, cards);
-
             // Keep track of total times
             int totalTimes = 0;
 
@@ -226,7 +232,9 @@ public class SaveSystem
         // If arena does not exist, create new instance
         else
         {
-            saveData.arenaTimes.Add(id, time);
+            List<TimeData> newList = new List<TimeData>();
+            newList.Add(newData);
+            saveData.newArenaTimes.Add(id, newList);
             Debug.Log("Created arena " + id);
         }
     }

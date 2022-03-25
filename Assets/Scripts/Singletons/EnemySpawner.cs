@@ -80,11 +80,26 @@ public class EnemySpawner : MonoBehaviour
             {
                 scaleIncrease = 15f;
                 scaleCalc += 0.25f;
-                enemyHealthMultiplier += 0.25f;
-                enemySpeedMultiplier += 0.02f;
-                enemyDamageMultiplier += 0.1f;
+
+                // At 10 minutes, start really ramping it up
+                if (time > 600)
+                {
+                    enemyHealthMultiplier += 0.5f;
+                    enemySpeedMultiplier += 0.04f;
+                    enemyDamageMultiplier += 0.25f;
+                }
+
+                // Before 10 minutes, ramp up slowly
+                else
+                {
+                    enemyHealthMultiplier += 0.25f;
+                    enemySpeedMultiplier += 0.02f;
+                    enemyDamageMultiplier += 0.1f;
+                }
+
+                // Lower crystal drop rate
                 if (crystalDropChance > 0.25f)
-                    crystalDropChance -= 0.01f;
+                    crystalDropChance -= 0.015f;
             }
         }
         

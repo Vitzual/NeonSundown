@@ -21,6 +21,7 @@ public class SaveData
         newArenaTimes = new SerializableDictionary<string, List<TimeData>>();
         crystals = new SerializableDictionary<string, int>();
         modules = new SerializableDictionary<string, int>();
+        tempArenaTimeConverted = true;
     }
 
     public long epochMillisecond;
@@ -34,4 +35,6 @@ public class SaveData
     public SerializableDictionary<string, List<TimeData>> newArenaTimes;
     public SerializableDictionary<string, int> crystals;
     public SerializableDictionary<string, int> modules;
+
+    public bool tempArenaTimeConverted = false;
 }
