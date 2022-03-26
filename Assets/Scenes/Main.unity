@@ -4945,6 +4945,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2deef0deb0021b84ca4c25c7dcdc8201, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  activeStage: {fileID: 0}
   timer: {fileID: 812923217}
   stageText: {fileID: 936299803}
   spawnEnemies: 1
@@ -8372,15 +8373,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bullets: []
   energyBullet: {fileID: 8504961700337211377, guid: 8f54ee3f289e0be49ae3fd9daf94cce8, type: 3}
-  _laserLayers:
-  - serializedVersion: 2
-    m_Bits: 128
-  - serializedVersion: 2
-    m_Bits: 8192
-  - serializedVersion: 2
-    m_Bits: 65536
-  - serializedVersion: 2
-    m_Bits: 131072
+  laserBullet: {fileID: 1208324690606921437, guid: 80385df3537d56442b5405a95e593219, type: 3}
 --- !u!4 &710871635
 Transform:
   m_ObjectHideFlags: 0
@@ -10618,7 +10611,7 @@ MonoBehaviour:
   explosiveRounds: 0
   level: 0
   autoFireObj: {fileID: 843932847}
-  _lasers: 0
+  _lasers: 1
   shipData: {fileID: 11400000, guid: b1370a648ab4cb542922d56a80462803, type: 2}
   border: {fileID: 1048120583}
   fill: {fileID: 1168927202}
@@ -24230,8 +24223,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16d18c66c9966ff409aa4c9d1be276c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  laserPrefab: {fileID: 1208324690606921437, guid: 80385df3537d56442b5405a95e593219, type: 3}
   laserSpeed: 5
-  debug: 0
+  debug: 1
 --- !u!4 &1918491736
 Transform:
   m_ObjectHideFlags: 0

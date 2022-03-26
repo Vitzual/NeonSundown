@@ -261,17 +261,17 @@ public class Ship : Weapon
             // Create bullet
             if (lasers)
             {
-                if (Settings.shipColoring) BulletHandler.active.CreateLaserBullet(this, barrel, model.rotation, 
-                    shipData.weapon.material, laserSound, shipData.weapon.onDamageSound, damage, knockback, 0.2f, 100f, (int)bullets);
-                else BulletHandler.active.CreateLaserBullet(this, barrel, model.rotation, 
-                    defaultGlow, laserSound, shipData.weapon.onDamageSound, damage, knockback, 0.2f, 100f, (int)bullets);
+                if (Settings.shipColoring) BulletHandler.active.CreateLaserBullet(this, shipData.weapon, shipData.weapon.material, 
+                    barrel, 100f, (int)bullets, explosiveRounds);
+                else BulletHandler.active.CreateLaserBullet(this, shipData.weapon, defaultGlow,
+                    barrel, 100f, (int)bullets, explosiveRounds);
             }
             else if (BulletHandler.energyBullets)
             {
                 if (Settings.shipColoring) BulletHandler.active.CreateEnergyBullet(this, shipData.weapon, barrel.position,
-                    model.rotation, (int)bullets, shipData.weapon.material, true, explosiveRounds, true);
+                    model.rotation, (int)bullets, shipData.weapon.material, true, explosiveRounds, false);
                 else BulletHandler.active.CreateEnergyBullet(this, shipData.weapon, barrel.position,
-                    model.rotation, (int)bullets, defaultGlow, true, explosiveRounds, true);
+                    model.rotation, (int)bullets, defaultGlow, true, explosiveRounds, false);
             }
             else
             {

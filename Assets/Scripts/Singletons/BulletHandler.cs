@@ -13,8 +13,7 @@ public class BulletHandler : MonoBehaviour
     // List of all active bullets
     public List<Bullet> bullets;
     public Bullet energyBullet;
-    public List<LayerMask> _laserLayers;
-    private LayerMask laserLayers;
+    public Laser laserBullet;
 
     // Start method
     public void Start() 
@@ -23,9 +22,6 @@ public class BulletHandler : MonoBehaviour
         stickyBullets = false;
         energyBullets = false;
         bulletSize = 1;
-
-        foreach (LayerMask layer in _laserLayers)
-            laserLayers = layer | laserLayers;
     }
 
     // Move normal enemies
@@ -48,6 +44,7 @@ public class BulletHandler : MonoBehaviour
             }
         }
     }
+
 
     // Create a new active bullet instance
     public void CreateBullet(Weapon parent, WeaponData weapon, Vector2 position, Quaternion rotation, int amount, Material material, 
@@ -140,40 +137,17 @@ public class BulletHandler : MonoBehaviour
     }
 
     // Creates a laser bullet
-    public void CreateLaserBullet(Weapon parent, Transform barrel, Quaternion rotation, Material material,
-        AudioClip sound, AudioClip hitSound, float damage, float knockback, float duration, float length, int amount)
+    public void CreateLaserBullet(Weapon parent, WeaponData weapon, Material material, Transform barrel, 
+        float length, int amount, bool explosive)
     {
         // Loop through stated amount times
         for (int i = 0; i < amount; i++)
         {
-            // Offset rotation slightly
-            Vector3 rotationOffset = new Vector3(rotation.eulerAngles.x, rotation.eulerAngles.y,
-                rotation.eulerAngles.z + Random.Range(-parent.bloom, parent.bloom));
-            Quaternion newRotation = new Quaternion();
-            newRotation.eulerAngles = rotationOffset;
-
-            // Draw the line (cosmetic only)
-            LineDrawer.active.DrawFromParent(parent.transform, newRotation,
-                material, 1f, duration, length);
-
-            // Raycast for enemies
-            RaycastHit2D[] hits = Physics2D.RaycastAll(barrel.position, barrel.up, Mathf.Infinity, laserLayers);
-            if (hits.Length > 0) AudioPlayer.Play(hitSound);
-
-            // Loop through all hits and apply damage
-            foreach (RaycastHit2D hit in hits)
-            {
-                Entity entity = hit.collider.GetComponent<Entity>();
-                if (entity != null)
-                {
-                    // Set target to null and cast for entities
-                    entity.Damage(damage * 2, knockback * 2);
-                    ExplosiveHandler.CreateKnockback(entity.transform.position, 10f, -1000, -1500, 50);
-                }
-            }            
+            // Create line
+            Laser newLaser = Instantiate(laserBullet, Vector3.zero, Quaternion.identity);
+            newLaser.SetupLaser(barrel, bulletSize, length, parent.bloom);
+            newLaser.Setup(parent, weapon, material, null, false, explosive);
+            bullets.Add(newLaser);
         }
-
-        // Play the sound
-        AudioPlayer.Play(sound, true, 0.9f, 1.1f, true, 0.7f);
     }
 }
