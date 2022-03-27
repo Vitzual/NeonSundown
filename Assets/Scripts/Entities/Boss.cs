@@ -9,14 +9,18 @@ public class Boss : MonoBehaviour
     public Gunner gunner;
     protected Enemy enemy;
 
+    // On start call setup
+    public void Start() { Setup(); }
+
     // On start, get reference to enemy script
-    public void Start()
+    public virtual void Setup()
     {
         // Get enemy and target reference
         enemy = GetComponent<Enemy>();
 
         // Setup gunner
-        gunner.Setup(enemy.deathMaterial);
+        if (gunner != null)
+            gunner.Setup(enemy.deathMaterial);
 
         // Set the boss bar
         Events.active.BossSpawned(this, enemy);
