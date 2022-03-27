@@ -9,12 +9,10 @@ using System.Linq;
 public class SaveSystem
 {
     // Save path
+    private const string DEFAULT_SHIP_ID = "f197973c-7b65-48a5-9bb8-c84fcbac01e6";
     private const string CLOUD_SAVE_NAME = "player_save.json";
-    private const string CLOUD_TIMES_NAME = "player_times.json";
     private const string SAVE_PATH = "/player_save.json";
-    private const string TIMES_PATH = "/player_times.json";
     private const string META_PATH = "/context_save.json";
-    private const string EXPERIMENTAL_PATH = "/experimental.json";
     private const int MAX_ARENA_TIMES = 10;
 
     // Most up-to-date data
@@ -154,7 +152,7 @@ public class SaveSystem
             {
                 // Setup the new list
                 TimeData[] newList = new TimeData[10];
-                newList[0] = new TimeData(time.Value, Gamemode.ship.InternalID, new SerializableDictionary<string, int>());
+                newList[0] = new TimeData(time.Value, DEFAULT_SHIP_ID, new SerializableDictionary<string, int>());
                 saveData.newArenaTimes.Add(time.Key, newList);
                 Debug.Log("[LEADERBOARD] Transfered arena " + time.Key);
             }
@@ -209,6 +207,13 @@ public class SaveSystem
     // Saves arena time
     public static void UpdateArena(string id, float time)
     {
+        // Check if gamemode ship null
+        if (Gamemode.ship == null)
+        {
+            Debug.Log("[WARNING] Gamemode ship was null! Cannot save.");
+            return;
+        }
+
         // Create new time data instance
         SerializableDictionary<string, int> cards = new SerializableDictionary<string, int>();
         foreach (KeyValuePair<CardData, int> card in Deck.active.GetCards())

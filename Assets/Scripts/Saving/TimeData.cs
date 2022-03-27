@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEngine;
 
 [System.Serializable]
 public class TimeData
@@ -10,7 +11,7 @@ public class TimeData
         this.cards = cards;
     }
 
-    public float time;
-    public string ship;
-    public SerializableDictionary<string, int> cards;
+    [SerializeField] public float time;
+    [SerializeField] public string ship;
+    [SerializeField] public SerializableDictionary<string, int> cards;
 }
