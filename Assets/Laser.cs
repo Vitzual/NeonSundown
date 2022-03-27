@@ -25,7 +25,7 @@ public class Laser : Bullet
     // Lower laser size
     public override void Move()
     {
-        if (transform.localScale.x > 0f)
+        if (transform.localScale.x > 0.2f)
         {
             transform.localScale = new Vector2(transform.localScale.x -
                 (Time.deltaTime * laserSpeed), transform.localScale.y);

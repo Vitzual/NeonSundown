@@ -14,6 +14,7 @@ public class BulletHandler : MonoBehaviour
     public List<Bullet> bullets;
     public Bullet energyBullet;
     public Laser laserBullet;
+    public AudioClip laserSound;
 
     // Start method
     public void Start() 
@@ -149,5 +150,8 @@ public class BulletHandler : MonoBehaviour
             newLaser.Setup(parent, weapon, material, null, false, explosive);
             bullets.Add(newLaser);
         }
+
+        // Play laser sound
+        AudioPlayer.Play(laserSound, true, 0.8f, 1.2f, true, 0.8f);
     }
 }
