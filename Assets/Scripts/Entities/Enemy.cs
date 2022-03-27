@@ -15,6 +15,7 @@ public class Enemy : Entity
     public bool isCullable = true;
     private bool isDestroyed = false;
     private bool lockOn = false;
+    public bool isBoss = false;
 
     // Transform lists
     public List<TrailRenderer> trails;
@@ -138,6 +139,9 @@ public class Enemy : Entity
     {
         // Check if immune
         if (immune) return;
+
+        // Check if boss
+        if (isBoss) Events.active.BossDestroyed();
 
         // Create particle
         CreateParticle();

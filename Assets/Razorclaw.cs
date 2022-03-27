@@ -31,7 +31,7 @@ public class Razorclaw : Boss
         if (cooldown <= 0f)
         {
             animator.SetInteger("Attack", Random.Range(0, attacks.Count));
-            cooldown = 5f;
+            cooldown = 3f;
         }
         else
         {

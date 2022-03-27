@@ -38,6 +38,14 @@ public class Events : MonoBehaviour
             onBossHurt();
     }
 
+    // On boss hurt
+    public event Action onBossDestroyed;
+    public void BossDestroyed()
+    {
+        if (onBossDestroyed != null)
+            onBossDestroyed();
+    }
+
     // On boss spawned
     public event Action<LevelData, int> onLevelUp;
     public void LevelUp(LevelData levelData, int level)

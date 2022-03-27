@@ -105,7 +105,7 @@ public class EnemySpawner : MonoBehaviour
         
         // Set the timer string
         timer.text = Formatter.Time(time);
-        if (time > Gamemode.arena.achievementTime && !awardGiven)
+        if (Gamemode.arena.useAchievementTime && time > Gamemode.arena.achievementTime && !awardGiven)
         {
             Debug.Log("Awarding achievement!");
             awardGiven = true;

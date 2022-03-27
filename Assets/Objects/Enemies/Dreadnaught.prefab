@@ -209,8 +209,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29175697697d4c143861aeed1fb61cb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseModel: {fileID: 0}
-  prestigeModel: {fileID: 0}
   damage: 0
   cooldown: 0
   moveSpeed: 0
@@ -219,8 +217,13 @@ MonoBehaviour:
   bullets: 0
   lifetime: 0
   range: 0
+  knockback: 0
+  splitshots: 0
+  size: 0
+  stunLength: 0
+  critical: 0
+  explosiveRounds: 0
   level: 0
-  prestige: 0
 --- !u!1 &1743150381147831445
 GameObject:
   m_ObjectHideFlags: 0
@@ -486,8 +489,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29175697697d4c143861aeed1fb61cb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseModel: {fileID: 0}
-  prestigeModel: {fileID: 0}
   damage: 0
   cooldown: 0
   moveSpeed: 0
@@ -496,8 +497,13 @@ MonoBehaviour:
   bullets: 0
   lifetime: 0
   range: 0
+  knockback: 0
+  splitshots: 0
+  size: 0
+  stunLength: 0
+  critical: 0
+  explosiveRounds: 0
   level: 0
-  prestige: 0
 --- !u!1 &3524994086802456275
 GameObject:
   m_ObjectHideFlags: 0
@@ -743,8 +749,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29175697697d4c143861aeed1fb61cb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseModel: {fileID: 0}
-  prestigeModel: {fileID: 0}
   damage: 0
   cooldown: 0
   moveSpeed: 0
@@ -753,8 +757,13 @@ MonoBehaviour:
   bullets: 0
   lifetime: 0
   range: 0
+  knockback: 0
+  splitshots: 0
+  size: 0
+  stunLength: 0
+  critical: 0
+  explosiveRounds: 0
   level: 0
-  prestige: 0
 --- !u!1 &5589361978027629846
 GameObject:
   m_ObjectHideFlags: 0
@@ -1266,8 +1275,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29175697697d4c143861aeed1fb61cb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseModel: {fileID: 0}
-  prestigeModel: {fileID: 0}
   damage: 0
   cooldown: 0
   moveSpeed: 0
@@ -1276,8 +1283,13 @@ MonoBehaviour:
   bullets: 0
   lifetime: 0
   range: 0
+  knockback: 0
+  splitshots: 0
+  size: 0
+  stunLength: 0
+  critical: 0
+  explosiveRounds: 0
   level: 0
-  prestige: 0
 --- !u!1 &7443617223363050223
 GameObject:
   m_ObjectHideFlags: 0
@@ -1564,6 +1576,7 @@ MonoBehaviour:
   deathEffect: {fileID: 0}
   rb: {fileID: 8071768145869598020}
   isCullable: 0
+  isBoss: 1
   trails:
   - {fileID: 494578481779488574}
   - {fileID: 3977316763941719576}
