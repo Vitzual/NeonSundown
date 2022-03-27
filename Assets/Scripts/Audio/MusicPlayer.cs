@@ -56,11 +56,12 @@ public class MusicPlayer : MonoBehaviour
     public static void ResetPitch() { music.pitch = 1f; }
     
     // Play boss music
-    public static void PlayBossMusic()
+    public static void PlayBossMusic(AudioClip newMusic)
     {
         if (bossMusic != null)
         {
             music.Pause();
+            bossMusic.clip = newMusic;
             bossMusic.Play();
         }
     }

@@ -47,7 +47,7 @@ public class BossBar : MonoBehaviour
         isHidden = false;
 
         // Do the thing my guy
-        MusicPlayer.PlayBossMusic();
+        MusicPlayer.PlayBossMusic(boss.music);
     }
 
     // Update is called once per frame

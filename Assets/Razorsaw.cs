@@ -12,7 +12,7 @@ public class Razorsaw : MonoBehaviour
         else
         {
             Ship ship = collision.GetComponent<Ship>();
-            if (ship != null) ship.Damage(5f);
+            if (ship != null) ship.Damage(10f);
         }
     }
 }

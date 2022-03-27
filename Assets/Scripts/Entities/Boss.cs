@@ -7,6 +7,7 @@ public class Boss : MonoBehaviour
     // Reference the main enemy script
     public Sprite bossModel;
     public Gunner gunner;
+    public AudioClip music;
     protected Enemy enemy;
 
     // On start call setup
