@@ -16,6 +16,7 @@ public class Enemy : Entity
     private bool isDestroyed = false;
     private bool lockOn = false;
     public bool isBoss = false;
+    public bool dieOnCollision = true;
 
     // Transform lists
     public List<TrailRenderer> trails;
@@ -175,7 +176,7 @@ public class Enemy : Entity
     {
         if (immune) { player.Kill(); return; }
         player.Damage(damage);
-        Destroy();
+        if (dieOnCollision) Destroy();
     }
 
     // Move towards the target
