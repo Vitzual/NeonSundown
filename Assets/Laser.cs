@@ -6,6 +6,7 @@ public class Laser : Bullet
 {
     // Laser descrease speed
     public float laserSpeed;
+    public bool enemyLaser;
 
     public void SetupLaser(Transform parent, float width, float length, float bloom)
     {
@@ -36,6 +37,9 @@ public class Laser : Bullet
     // On hit, apply damage
     public override void OnHit(Entity entity)
     {
+        // Check if enemy laser
+        if (enemyLaser) return;
+
         // Remove pierces
         entity.Damage(damage, knockback);
 
@@ -51,9 +55,23 @@ public class Laser : Bullet
         }
     }
 
+    // On thing
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        // Check if enemy laser
+        if (enemyLaser)
+        {
+            Ship ship = collision.GetComponent<Ship>();
+            if (ship != null) ship.Damage(5f);
+        }
+    }
+
     // Override destroy
     public override void Destroy()
     {
+        // Check if enemy laser
+        if (enemyLaser) return;
+
         Destroy(gameObject);
     }
 }
