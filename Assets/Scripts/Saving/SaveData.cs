@@ -19,7 +19,6 @@ public class SaveData
         cardsUnlocked = new List<string>();
         synergiesUnlocked = new List<string>();
         arenaTimes = new SerializableDictionary<string, float>();
-        newArenaTimes = new SerializableDictionary<string, TimeData[]>();
         crystals = new SerializableDictionary<string, int>();
         modules = new SerializableDictionary<string, int>();
         tempArenaTimeConverted = true;
@@ -33,7 +32,6 @@ public class SaveData
     public List<string> cardsUnlocked;
     public List<string> synergiesUnlocked;
     public SerializableDictionary<string, float> arenaTimes;
-    public SerializableDictionary<string, TimeData[]> newArenaTimes;
     public SerializableDictionary<string, int> crystals;
     public SerializableDictionary<string, int> modules;
 

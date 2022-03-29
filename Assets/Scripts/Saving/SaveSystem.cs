@@ -9,7 +9,6 @@ using System.Linq;
 public class SaveSystem
 {
     // Save path
-    private const string DEFAULT_SHIP_ID = "f197973c-7b65-48a5-9bb8-c84fcbac01e6";
     private const string CLOUD_SAVE_NAME = "player_save.json";
     private const string SAVE_PATH = "/player_save.json";
     private const string META_PATH = "/context_save.json";
@@ -144,23 +143,6 @@ public class SaveSystem
 
         // If save data not loaded, generate new save
         if (saveData == null) GenerateSave();
-
-        // Else check for leaderboard update
-        else if (!saveData.tempArenaTimeConverted)
-        {
-            foreach(KeyValuePair<string, float> time in saveData.arenaTimes)
-            {
-                // Setup the new list
-                TimeData[] newList = new TimeData[10];
-                newList[0] = new TimeData(time.Value, DEFAULT_SHIP_ID, new SerializableDictionary<string, int>());
-                saveData.newArenaTimes.Add(time.Key, newList);
-                Debug.Log("[LEADERBOARD] Transfered arena " + time.Key);
-            }
-            saveData.tempArenaTimeConverted = true;
-            UpdateSave();
-
-            Debug.Log("[LEADERBOARD] All times transferred to new arena times");
-        }
     }
 
     // Check if save exists
@@ -214,16 +196,10 @@ public class SaveSystem
             return;
         }
 
-        // Create new time data instance
-        SerializableDictionary<string, int> cards = new SerializableDictionary<string, int>();
-        foreach (KeyValuePair<CardData, int> card in Deck.active.GetCards())
-            if (!cards.ContainsKey(card.Key.InternalID)) cards.Add(card.Key.InternalID, card.Value);
-        TimeData newData = new TimeData(time, Gamemode.ship.InternalID, cards);
-
         // Update the arena time
-        if (saveData.newArenaTimes.ContainsKey(id))
+        if (saveData.arenaTimes.ContainsKey(id))
         {
-            // Keep track of total times
+            /* Keep track of total times
             int totalTimes = 0;
 
             // Check if best time achieved
@@ -245,14 +221,13 @@ public class SaveSystem
 
             // Check if total times reached max, and if not create new best time
             if (totalTimes < MAX_ARENA_TIMES) saveData.newArenaTimes[id][totalTimes] = newData;
+            */
         }
 
         // If arena does not exist, create new instance
         else
         {
-            TimeData[] newList = new TimeData[10];
-            newList[0] = newData;
-            saveData.newArenaTimes.Add(id, newList);
+            
             Debug.Log("Created arena " + id);
         }
     }
