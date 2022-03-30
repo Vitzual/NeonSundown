@@ -16,14 +16,15 @@ public class Crystal : Entity
     private float health = 50;
     private bool isDead = false;
 
-    public void Setup(float health)
+    public void Setup(float health, CrystalData crystalType = null)
     {
         // Set entity stats
         this.health = health;
         isDead = false;
 
         // Select a crystal at random
-        crystalData = crystals[Random.Range(0, crystals.Count)];
+        if (crystalType == null) crystalData = crystals[Random.Range(0, crystals.Count)];
+        else crystalData = crystalType;
         crystalBorder.material = crystalData.color;
         deathMaterial = crystalData.color;
     }

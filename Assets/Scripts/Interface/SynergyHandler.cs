@@ -8,10 +8,12 @@ public class SynergyHandler : MonoBehaviour
     public static List<CardData> maxedCards;
     public static Queue<SynergyData> availableSynergies;
     private static List<SynergyData> synergiesMade;
+    public static int synergyCrystalOverride = 0;
 
     // Create new list instances
     public void Awake()
     {
+        synergyCrystalOverride = 0;
         maxedCards = new List<CardData>();
         availableSynergies = new Queue<SynergyData>();
         synergiesMade = new List<SynergyData>();
@@ -40,6 +42,7 @@ public class SynergyHandler : MonoBehaviour
             {
                 availableSynergies.Enqueue(synergy);
                 synergiesMade.Add(synergy);
+                synergyCrystalOverride += 1;
                 Events.active.SynergyAvailable(synergy);
             }
         }

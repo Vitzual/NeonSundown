@@ -12,6 +12,7 @@ public class XPHandler : MonoBehaviour
     public TextMeshProUGUI reward, xpRequirement;
     public GameObject rewardObject;
     public Material deadXP;
+    public CrystalData redCrystal;
 
     // List of active movers
     private List<XP> activeList = new List<XP>();
@@ -176,8 +177,15 @@ public class XPHandler : MonoBehaviour
         // If crystal spawn set to true, spawn
         if (crystal != null)
         {
+            // Check if synergy is available
             Crystal newCrystal = Instantiate(crystal, startPos, Quaternion.identity).GetComponent<Crystal>();
-            newCrystal.Setup(50);
+            if (SynergyHandler.synergyCrystalOverride > 0)
+            {
+                SynergyHandler.synergyCrystalOverride -= 1;
+                newCrystal.Setup(50, redCrystal);
+            }
+            else newCrystal.Setup(50);
+
             newCrystal.SetSpeed();
         }
     }
