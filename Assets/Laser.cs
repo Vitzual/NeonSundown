@@ -53,6 +53,10 @@ public class Laser : Bullet
             if (stunLength > 0) ExplosiveHandler.CreateStun(entity.transform.position, explosionSize, stunLength, damage, deathMaterial, knockback);
             else ExplosiveHandler.CreateExplosion(entity.transform.position, explosionSize, damage, knockback, deathMaterial);
         }
+
+        // Check if bullet is splitshot
+        if (!isSplitShot) BulletHandler.active.CreateSplitshot(parent, weapon, transform.position,
+            transform.rotation, (int)splitshots, normalMaterial, 360f, explosive);
     }
 
     // On thing

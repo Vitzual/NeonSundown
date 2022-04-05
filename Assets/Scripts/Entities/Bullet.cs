@@ -35,7 +35,7 @@ public class Bullet : Entity
     protected Weapon parent;
     [HideInInspector]
     public bool isSplitShot = false;
-    private Material normalMaterial;
+    protected Material normalMaterial;
 
     // Set up the bullet
     public virtual void Setup(Weapon parent, WeaponData weapon, Material material,

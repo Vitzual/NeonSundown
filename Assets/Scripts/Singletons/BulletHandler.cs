@@ -141,13 +141,17 @@ public class BulletHandler : MonoBehaviour
     public void CreateLaserBullet(Weapon parent, WeaponData weapon, Material material, Transform barrel, 
         float length, int amount, bool explosive)
     {
-        // Create line
-        Laser newLaser = Instantiate(laserBullet, Vector3.zero, Quaternion.identity);
-        newLaser.SetupLaser(barrel, bulletSize, length, parent.bloom);
-        newLaser.Setup(parent, weapon, material, null, false, explosive);
-        bullets.Add(newLaser);
+        // Create laser shots
+        for (int i = 0; i < amount; i++)
+        {
+            // Create line
+            Laser newLaser = Instantiate(laserBullet, Vector3.zero, Quaternion.identity);
+            newLaser.SetupLaser(barrel, bulletSize, length, 0f);
+            newLaser.Setup(parent, weapon, material, null, false, explosive);
+            bullets.Add(newLaser);
 
-        // Play laser sound
-        AudioPlayer.Play(laserSound, true, 0.8f, 1.2f, true, 0.8f);
+            // Play laser sound
+            AudioPlayer.Play(laserSound, true, 0.8f, 1.2f, true, 0.8f);
+        }
     }
 }
