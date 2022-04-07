@@ -7,20 +7,22 @@ public class Laser : Bullet
     // Laser descrease speed
     public float laserSpeed;
     public bool enemyLaser;
+    public Transform rotationPoint;
+    public Transform laserPoint;
 
     public void SetupLaser(Transform parent, float width, float length, float bloom)
     {
+        // Set rotation
+        rotationPoint.SetParent(parent.transform);
+        rotationPoint.localPosition = Vector3.zero;
+        rotationPoint.rotation = parent.transform.rotation;
+        laserPoint.localScale = new Vector2(width, length);
+        laserPoint.localPosition = new Vector2(0, length / 2);
+
         // Offset rotation slightly
         Vector3 rotationOffset = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y,
-            transform.eulerAngles.z + Random.Range(-bloom, bloom));
-        transform.eulerAngles = rotationOffset;
-
-        // Set rotation
-        transform.SetParent(parent.transform);
-        transform.localPosition = Vector3.zero;
-        transform.rotation = parent.transform.rotation;
-        transform.localScale = new Vector2(width, length);
-        transform.localPosition = new Vector2(0, length / 2);
+            transform.eulerAngles.z + bloom);
+        rotationPoint.eulerAngles = rotationOffset;
     }
 
     // Lower laser size
