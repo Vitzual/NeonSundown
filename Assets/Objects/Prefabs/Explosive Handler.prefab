@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2589205180221821713
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2589205180221821719}
+  - component: {fileID: 2589205180221821712}
+  m_Layer: 0
+  m_Name: Explosive Handler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!4 &2589205180221821719
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2589205180221821713}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2589205180221821712
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2589205180221821713}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ada1b35dce6dc7840b26b456c040066e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _explosionSound: {fileID: 8300000, guid: a46b7b40ba19a95448a2d30d4b9c4f2a, type: 3}
+  _stunSound: {fileID: 8300000, guid: c93ed2a9def40a34ea4c7b8f3ab0e33b, type: 3}
+  _explosionParticle: {fileID: 993855083006936043, guid: 01c48aa84a2ea6c49901482836dcdd15, type: 3}
+  _inverseParticle: {fileID: 9117130875708306464, guid: 62ce11d33dabbc841bb07321b7d1c3d2, type: 3}
+  _stunParticle: {fileID: 5849526890374745854, guid: c900be1a1779b9a46ab12fb9e8ba36bd, type: 3}
+  _explosionLayers:
+  - serializedVersion: 2
+    m_Bits: 128
+  - serializedVersion: 2
+    m_Bits: 8192
+  - serializedVersion: 2
+    m_Bits: 65536
+  - serializedVersion: 2
+    m_Bits: 131072
+  - serializedVersion: 2
+    m_Bits: 2048

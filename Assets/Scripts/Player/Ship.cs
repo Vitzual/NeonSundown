@@ -11,6 +11,12 @@ public class Ship : Weapon
     public static bool champion = false;
     public static bool lasers = false;
 
+    // Custom cursor textures
+    public Texture2D normalMouse;
+    public Texture2D crosshairMouse;
+    public Vector2 crosshairOffset;
+    private bool crosshairOn = true;
+
     // Controller associated with the player
     private Controller controller;
     public GameObject autoFireObj;
@@ -66,6 +72,9 @@ public class Ship : Weapon
     // Subscribe to setup event
     public void Start()
     {
+        // Set crosshair cursor
+        Cursor.SetCursor(crosshairMouse, crosshairOffset, CursorMode.Auto);
+
         warrior = false;
         champion = false;
         lasers = _lasers;
@@ -171,7 +180,20 @@ public class Ship : Weapon
     public void Update()
     {
         // Check if deck is open
-        if (Dealer.isOpen) return;
+        if (Dealer.isOpen)
+        {
+            if (crosshairOn)
+            {
+                Cursor.SetCursor(normalMouse, Vector2.zero, CursorMode.Auto);
+                crosshairOn = false;
+            }
+            return;
+        }
+        else if (!crosshairOn)
+        {
+            Cursor.SetCursor(crosshairMouse, crosshairOffset, CursorMode.Auto);
+            crosshairOn = true;
+        }
 
         // Check if space pressed for auto fire
         if (Input.GetKeyDown(Keybinds.autofire))
