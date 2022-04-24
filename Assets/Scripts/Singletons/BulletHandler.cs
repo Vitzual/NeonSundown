@@ -91,10 +91,6 @@ public class BulletHandler : MonoBehaviour
             GameObject lastObj = Instantiate(energyBullet.gameObject, position, rotation);
             lastObj.name = weapon.bullet.gameObject.name;
 
-            // Set size if bigger then 1
-            if (bulletSize > 1 && useSize)
-                lastObj.transform.localScale = new Vector2(bulletSize, bulletSize);
-
             // Adjust for rotational offset
             Vector3 rotationOffset = new Vector3(lastObj.transform.eulerAngles.x, lastObj.transform.eulerAngles.y,
                 (lastObj.transform.eulerAngles.z - 90f) + Random.Range(-parent.bloom, parent.bloom));
@@ -145,7 +141,7 @@ public class BulletHandler : MonoBehaviour
         float spread = 0;
 
         // Check if amount greater than 1
-        if (amount > 1) spread -= (5f * amount);
+        if (amount > 1) spread -= (2.5f * amount) -2.5f;
 
         // Create laser shots
         for (int i = 0; i < amount; i++)
@@ -155,7 +151,7 @@ public class BulletHandler : MonoBehaviour
             newLaser.SetupLaser(barrel, bulletSize, length, spread);
             newLaser.Setup(parent, weapon, material, null, false, explosive);
             bullets.Add(newLaser);
-            spread += 10f;
+            spread += 5f;
         }
 
         // Play laser sound
