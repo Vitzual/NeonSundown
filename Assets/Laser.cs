@@ -61,23 +61,11 @@ public class Laser : Bullet
             transform.rotation, (int)splitshots, normalMaterial, 360f, explosive);
     }
 
-    // On thing
-    public void OnTriggerEnter2D(Collider2D collision)
-    {
-        // Check if enemy laser
-        if (enemyLaser)
-        {
-            Ship ship = collision.GetComponent<Ship>();
-            if (ship != null) ship.Damage(5f);
-        }
-    }
-
     // Override destroy
     public override void Destroy()
     {
         // Check if enemy laser
         if (enemyLaser) return;
-
         Destroy(gameObject);
     }
 }
