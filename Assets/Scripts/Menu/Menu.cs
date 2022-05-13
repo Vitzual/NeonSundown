@@ -26,6 +26,8 @@ public class Menu : MonoBehaviour
     public CanvasGroup planningGroup;
     public CanvasGroup catalogGroup;
     public CanvasGroup storeGroup;
+    public CanvasGroup blackmarketGroup;
+    public CanvasGroup crystalsGroup;
     public CanvasGroup buttonsGroup;
     public CanvasGroup socialsGroup;
     public CanvasGroup titleGroup;
@@ -221,13 +223,27 @@ public class Menu : MonoBehaviour
     // Open store panel
     public void ToggleStorePanel(bool toggle)
     {
+        if (toggle) TogglePanel(storeGroup, mainGroup);
+        else TogglePanel(mainGroup, storeGroup);
+    }
+
+    // Open crystals panel
+    public void ToggleCrystalsPanel(bool toggle)
+    {
         if (toggle)
         {
-            TogglePanel(storeGroup, mainGroup);
+            TogglePanel(crystalsGroup, storeGroup);
             storePanel.UpdateCrystals();
             storePanel.SetPanel(defaultStoreModule);
         }
-        else TogglePanel(mainGroup, storeGroup);
+        else TogglePanel(storeGroup, crystalsGroup);
+    }
+
+    // Open black market panel
+    public void ToggleBlackmarketPanel(bool toggle)
+    {
+        if (toggle) TogglePanel(blackmarketGroup, storeGroup);
+        else TogglePanel(storeGroup, blackmarketGroup);
     }
 
     // Update menu
