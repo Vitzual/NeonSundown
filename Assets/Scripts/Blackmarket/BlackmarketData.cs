@@ -29,6 +29,8 @@ public class BlackmarketData : IdentifiableScriptableObject
     public ChipData chip;
 
     [BoxGroup("Item Info")]
+    public Sprite icon;
+    [BoxGroup("Item Info")]
     public new string name;
     [BoxGroup("Item Info"), TextArea]
     public string desc;
