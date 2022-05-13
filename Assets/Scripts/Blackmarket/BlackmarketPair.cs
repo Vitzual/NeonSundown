@@ -4,14 +4,10 @@ using UnityEngine;
 
 public class BlackmarketPair : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    // Top and bottom items
+    public BlackmarketItem topItem, bottomItem;
 
-    // Update is called once per frame
-    void Update()
+    public void Setup(BlackmarketData top, BlackmarketData bottom)
     {
         
     }
