@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Sirenix.OdinInspector;
 
 public class Menu : MonoBehaviour
 {
@@ -287,5 +288,37 @@ public class Menu : MonoBehaviour
     public void OpenLink(string link)
     {
         Application.OpenURL(link);
+    }
+
+    // Editor controls - collapse if expanded
+    [DisableInPlayMode, Button] private void SetTitlePositionToEnd()
+    {
+        title.localPosition = titleTargetPos;
+        title.localScale = titleTargetSize;
+        pressSpace.alpha = 0f;
+        buttonsGroup.alpha = 1f;
+        socialsGroup.alpha = 1f;
+        mainBackground.alpha = 1f;
+        levelGroup.alpha = 1f;
+        buttonsGroup.interactable = true;
+        buttonsGroup.blocksRaycasts = true;
+        socialsGroup.interactable = true;
+        socialsGroup.blocksRaycasts = true;
+        spacePressed = true;
+    }
+    [DisableInPlayMode, Button] private void SetTitlePositionToStart()
+    {
+        title.localPosition = Vector3.zero;
+        title.localScale = new Vector3(0.95f, 0.95f, 0.95f);
+        pressSpace.alpha = 1f;
+        buttonsGroup.alpha = 0f;
+        socialsGroup.alpha = 0f;
+        mainBackground.alpha = 0f;
+        levelGroup.alpha = 0f;
+        buttonsGroup.interactable = false;
+        buttonsGroup.blocksRaycasts = false;
+        socialsGroup.interactable = false;
+        socialsGroup.blocksRaycasts = false;
+        spacePressed = false;
     }
 }
