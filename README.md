@@ -12,6 +12,8 @@ This repository contains external assets from the Unity asset store, as well as 
 # External Assets
 Below is a list of all the assets used in the project, along with whether or not they're required for the game to run properly in the editor. Though the game is comprised almost completely of my own work, I do use these assets to save development time as well as for QOL purposes. 
 
+The source code in this repository is freely available under the [MIT license](https://github.com/Vitzual/NeonSundown/blob/main/LICENSE), but you must obtain the below assets yourself if you wish to fully compile the game.
+
 **Paid Assets:**
 - [**Modern UI Pack |** $30 (Recommended)](https://assetstore.unity.com/packages/tools/gui/modern-ui-pack-150824) - Used for a few in-game UI prefabs
 - [**Odin Inspector |** $55 (Optional)](https://assetstore.unity.com/packages/tools/utilities/odin-inspector-and-serializer-89041) - Used to beautify Unity's interface
