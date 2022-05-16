@@ -42,10 +42,10 @@ public class ShipButton : MonoBehaviour
             desc.color = ship.lightColor;
             shipIcon.sprite = ship.glowIcon;
             shipIcon.color = ship.mainColor;
-            shipBackground.color = ship.darkColor;
+            shipBackground.color = ship.veryDarkColor;
             shipBorder.color = ship.mainColor;
             buttonBorder.color = ship.mainColor;
-            buttonBackground.color = ship.veryDarkColor;
+            buttonBackground.color = ship.darkColor;
         }
         else
         {
