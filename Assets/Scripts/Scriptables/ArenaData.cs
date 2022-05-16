@@ -64,6 +64,8 @@ public class ArenaData : IdentifiableScriptableObject
     public Color buttonColor;
     [BoxGroup("Arena Stats")]
     public Color lightColor;
+    [BoxGroup("Arena Stats")]
+    public Color darkColor;
 
     // Arena rule set
     [BoxGroup("Arena Rules")]

@@ -15,8 +15,9 @@ MonoBehaviour:
   internalId: c13f1f74-0250-4bfc-bb55-90f1cde35f52
   createdAtTicks: 637801297251146925
   name: The Abyss
-  icon: {fileID: 21300000, guid: c80a8d95872da5e4fb3a054214547c60, type: 3}
-  iconEnemy: {fileID: 0}
+  enemyIcon: {fileID: 21300000, guid: 17d0b761ec6fbce4f83dad7f8d0da900, type: 3}
+  unlockedIcon: {fileID: 21300000, guid: c80a8d95872da5e4fb3a054214547c60, type: 3}
+  lockedIcon: {fileID: 21300000, guid: eaba2f811da76864585ac14b7bcdd083, type: 3}
   desc: The starting arena. Although it's mostly comprised of weak enemies, it is
     guarded by the DREADNAUGHT.
   shortDesc: 
@@ -29,13 +30,13 @@ MonoBehaviour:
   useAchievementTime: 1
   achievementTime: 600
   useAchievementBoss: 0
-  achievementBoss: {fileID: 0}
   achievement: {fileID: 2121078758520861789, guid: f589d5fe6376ca443bb8e175e09de7de, type: 2}
   unlockByDefault: 1
   unlockObjective: Unlocked by default
   order: 0
   buttonColor: {r: 1, g: 0, b: 0, a: 1}
   lightColor: {r: 1, g: 0.4575472, b: 0.4575472, a: 1}
+  darkColor: {r: 0.3490566, g: 0, b: 0, a: 1}
   stages:
   - {fileID: 11400000, guid: 1f5cdefd64e41f94881a4244522d9755, type: 2}
   - {fileID: 11400000, guid: 66d72e738a50efd4c9dcba6609960954, type: 2}

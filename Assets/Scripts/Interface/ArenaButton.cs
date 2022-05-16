@@ -37,8 +37,7 @@ public class ArenaButton : MonoBehaviour
         desc.color = arena.lightColor;
         icon.sprite = arena.unlockedIcon;
         iconBorder.color = arena.buttonColor;
-        buttonBackground.color = new Color(arena.buttonColor.r, 
-            arena.buttonColor.g, arena.buttonColor.b, 0.2f);
+        buttonBackground.color = arena.darkColor;
         buttonBorder.color = arena.buttonColor;
 
         // Reset the rect transform

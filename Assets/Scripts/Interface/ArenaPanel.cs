@@ -27,7 +27,8 @@ public class ArenaPanel : MonoBehaviour
     public Tilemap backgroundTilemap;
 
     // Canvas group
-    public Image panelBackground;
+    public Image panelBackgrounder;
+    public Image panelBorder;
 
     // Private internal flag
     private bool arenasGenerated = false;
@@ -95,7 +96,8 @@ public class ArenaPanel : MonoBehaviour
         Gamemode.arena = arena;
 
         // Reset the panel
-        panelBackground.color = arena.buttonColor;
+        panelBorder.color = arena.buttonColor;
+        panelBackgrounder.color = arena.darkColor;
 
         // Set menu music
         if (MusicPlayer.isMenu)
