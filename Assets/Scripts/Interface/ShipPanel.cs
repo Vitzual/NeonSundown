@@ -149,16 +149,16 @@ public class ShipPanel : MonoBehaviour
         leftLine.color = ship.mainColor;
         rightLine.color = ship.mainColor;
         bottomLine.color = ship.mainColor;
-        modules.color = ship.subColor;
-        subTitle.color = ship.subColor;
-        health.color = ship.subColor;
-        regen.color = ship.subColor;
-        speed.color = ship.subColor;
-        dash.color = ship.subColor;
-        damage.color = ship.subColor;
-        firerate.color = ship.subColor;
-        pierces.color = ship.subColor;
-        lifetime.color = ship.subColor;
+        modules.color = ship.lightColor;
+        subTitle.color = ship.lightColor;
+        health.color = ship.lightColor;
+        regen.color = ship.lightColor;
+        speed.color = ship.lightColor;
+        dash.color = ship.lightColor;
+        damage.color = ship.lightColor;
+        firerate.color = ship.lightColor;
+        pierces.color = ship.lightColor;
+        lifetime.color = ship.lightColor;
         //moduleCancelButton.color = ship.subColor;
         //moduleClearButton.color = ship.subColor;
     }

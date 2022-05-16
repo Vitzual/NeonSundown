@@ -167,7 +167,7 @@ public class Ship : Weapon
         if (useColoring)
         {
             border.material = shipData.borderMaterial;
-            fill.color = shipData.fillColor;
+            fill.color = shipData.mainColor;
         }
         else
         {

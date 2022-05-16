@@ -7,11 +7,20 @@ using UnityEngine.UI;
 public class ShipButton : MonoBehaviour
 {
     // Interface variables
+    [Header("Button Variables")]
     public new TextMeshProUGUI name;
     public TextMeshProUGUI desc;
-    public Image icon, button;
+    public Image shipIcon, shipBackground, shipBorder, buttonBorder, buttonBackground;
     [HideInInspector]
     public ShipData ship;
+
+    // Options for the button
+    [Header("Button Options")]
+    public Color lockedDescColor;
+    public Color lockedBorderColor;
+    public Color lockedBackgroundColor;
+    public Color lockedShipColor;
+    public Color lockedShipBackgroundColor;
 
     // Internal flags
     private bool isUnlocked;
@@ -30,12 +39,26 @@ public class ShipButton : MonoBehaviour
         {
             name.text = ship.name;
             desc.text = ship.shortDesc;
-            desc.color = ship.subColor;
-            icon.sprite = ship.glowIcon;
-            icon.color = ship.mainColor;
-            button.color = ship.mainColor;
+            desc.color = ship.lightColor;
+            shipIcon.sprite = ship.glowIcon;
+            shipIcon.color = ship.mainColor;
+            shipBackground.color = ship.darkColor;
+            shipBorder.color = ship.mainColor;
+            buttonBorder.color = ship.mainColor;
+            buttonBackground.color = ship.veryDarkColor;
         }
-        else desc.text = ship.unlockRequirement;
+        else
+        {
+            name.text = "LOCKED";
+            desc.text = ship.unlockRequirement;
+            desc.color = lockedDescColor;
+            shipIcon.sprite = ship.glowIcon;
+            shipIcon.color = Color.white;
+            shipBackground.color = lockedShipBackgroundColor;
+            shipBorder.color = lockedBorderColor;
+            buttonBorder.color = lockedBorderColor;
+            buttonBackground.color = lockedBackgroundColor;
+        }
 
         // Set sibling index
         transform.SetSiblingIndex(ship.listOrder);

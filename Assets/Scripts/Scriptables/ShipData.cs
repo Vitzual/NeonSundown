@@ -20,7 +20,7 @@ public class ShipData : IdentifiableScriptableObject
     [BoxGroup("Ship Selection Variables")]
     public string subTitle, shortDesc;
     [BoxGroup("Ship Selection Variables")]
-    public Color mainColor, subColor;
+    public Color mainColor, lightColor, darkColor, veryDarkColor;
     [BoxGroup("Ship Selection Variables")]
     public int listOrder;
 
@@ -32,8 +32,6 @@ public class ShipData : IdentifiableScriptableObject
     public Sprite fill;
     [BoxGroup("Ship Model")]
     public Material borderMaterial;
-    [BoxGroup("Ship Model")]
-    public Color fillColor;
     [BoxGroup("Ship Model")]
     public Vector2 playerSize;
     [BoxGroup("Ship Model")]
