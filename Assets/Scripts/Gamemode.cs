@@ -41,7 +41,7 @@ public class Gamemode : MonoBehaviour
         // Check if use arena info
         if (useArenaInfo && arenaIcon != null)
         {
-            arenaIcon.sprite = arena.icon;
+            arenaIcon.sprite = arena.unlockedIcon;
             arenaName.text = arena.name;
             arenaDesc.text = arena.achievementObjective;
             arenaDesc.color = arena.lightColor;

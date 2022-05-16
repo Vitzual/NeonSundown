@@ -19,9 +19,11 @@ public class ArenaData : IdentifiableScriptableObject
     [BoxGroup("Arena Info")]
     public new string name;
     [BoxGroup("Arena Info")]
-    public Sprite icon;
+    public Sprite enemyIcon;
     [BoxGroup("Arena Info")]
-    public Sprite iconEnemy;
+    public Sprite unlockedIcon;
+    [BoxGroup("Arena Info")]
+    public Sprite lockedIcon;
     [BoxGroup("Arena Info"), TextArea]
     public string desc;
     [BoxGroup("Arena Info")]

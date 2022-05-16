@@ -9,12 +9,21 @@ public class ArenaButton : MonoBehaviour
     // Arena data
     [HideInInspector]
     public ArenaData arena;
+
+    [Header("Button variables")]
     public new TextMeshProUGUI name;
-    public TextMeshProUGUI bestRun;
-    public TextMeshProUGUI unlockReq;
-    public Image buttonImage;
-    public GameObject locked;
+    public TextMeshProUGUI desc;
+    public Image icon;
+    public Image iconBorder;
+    public Image buttonBackground;
+    public Image buttonBorder;
     private bool isLocked = false;
+
+    // Button vairables
+    [Header("Button customization")]
+    public Color lockedBackgroundColor;
+    public Color lockedBorderColor;
+    public Color lockedObjectiveColor;
     
     // Generates at runtime
     public void Set(ArenaData arena, string bestRun)
@@ -22,8 +31,15 @@ public class ArenaButton : MonoBehaviour
         // Set arena info
         this.arena = arena;
         name.text = arena.name.ToUpper();
-        this.bestRun.text = bestRun;
-        buttonImage.color = arena.buttonColor;
+        desc.text = bestRun;
+
+        // Set button colors
+        desc.color = arena.lightColor;
+        icon.sprite = arena.unlockedIcon;
+        iconBorder.color = arena.buttonColor;
+        buttonBackground.color = new Color(arena.buttonColor.r, 
+            arena.buttonColor.g, arena.buttonColor.b, 0.2f);
+        buttonBorder.color = arena.buttonColor;
 
         // Reset the rect transform
         RectTransform rect = GetComponent<RectTransform>();
@@ -43,11 +59,21 @@ public class ArenaButton : MonoBehaviour
         // Set is locked flag
         isLocked = true;
 
-        // Set button state to locked
+        // Set hover adjust
+        OnHoverAdjustScale onHover = GetComponent<OnHoverAdjustScale>();
+        if (onHover != null) onHover.enabled = false;
+
+        // Set arena info
         this.arena = arena;
-        buttonImage.enabled = false;
-        unlockReq.text = arena.unlockObjective;
-        locked.SetActive(true);
+        name.text = arena.name.ToUpper();
+        desc.text = arena.unlockObjective;
+
+        // Set button colors
+        desc.color = lockedObjectiveColor;
+        icon.sprite = arena.lockedIcon;
+        iconBorder.color = lockedBorderColor;
+        buttonBackground.color = lockedBackgroundColor;
+        buttonBorder.color = lockedBorderColor;
 
         // Reset the rect transform
         RectTransform rect = GetComponent<RectTransform>();

@@ -67,7 +67,7 @@ public class UnlockNotification : MonoBehaviour
             lightColor = level.arenaReward.lightColor;
             darkColor = new Color(lightColor.r * 0.2f, lightColor.g * 0.2f, lightColor.b * 0.2f);
 
-            notification.icon = level.arenaReward.iconEnemy;
+            notification.icon = level.arenaReward.enemyIcon;
             notification.title = level.arenaReward.name + " Arena";
             notification.description = level.arenaReward.shortDesc;
             notification.iconObj.color = lightColor;

@@ -47,7 +47,7 @@ public class Reward : MonoBehaviour
                 darkColor = new Color(lightColor.r * 0.2f, lightColor.g * 0.2f, lightColor.b * 0.2f);
             }
 
-            rewardIcon.sprite = level.arenaReward.iconEnemy;
+            rewardIcon.sprite = level.arenaReward.enemyIcon;
             rewardName.text = level.arenaReward.name + " Arena";
             rewardDescription.text = level.arenaReward.shortDesc;
             if (unlocked) rewardIcon.color = lightColor;

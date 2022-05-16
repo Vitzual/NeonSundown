@@ -70,7 +70,7 @@ public class LevelData : IdentifiableScriptableObject
     public Sprite GetIcon()
     {
         if (cardReward != null) return cardReward.sprite;
-        else if (arenaReward != null) return arenaReward.iconEnemy;
+        else if (arenaReward != null) return arenaReward.enemyIcon;
         else if (shipReward != null) return shipReward.glowIcon;
         else if (synergyReward != null) return synergyReward.outputCard.sprite;
         else return rewardIcon;

@@ -185,6 +185,7 @@ RectTransform:
   - {fileID: 2564481044359000552}
   - {fileID: 1132211698536471233}
   - {fileID: 6645356832479871358}
+  - {fileID: 6645356834030386651}
   - {fileID: 6645356833620606919}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -216,10 +217,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   arena: {fileID: 0}
   name: {fileID: 6645356832479871359}
-  bestRun: {fileID: 6645356834030386628}
-  unlockReq: {fileID: 0}
-  buttonImage: {fileID: 9158319450259139977}
-  locked: {fileID: 0}
+  desc: {fileID: 6645356834030386628}
+  icon: {fileID: 1132211699295663383}
+  iconBorder: {fileID: 7913006993672258346}
+  buttonBackground: {fileID: 9158319450259139977}
+  buttonBorder: {fileID: 1132211698536471232}
+  lockedBackgroundColor: {r: 0, g: 0, b: 0, a: 0.1764706}
+  lockedBorderColor: {r: 1, g: 1, b: 1, a: 1}
+  lockedObjectiveColor: {r: 1, g: 0.41960788, b: 0.41960788, a: 1}
 --- !u!114 &9158319450259139977
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -294,8 +299,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
-  m_Children:
-  - {fileID: 6645356834030386651}
+  m_Children: []
   m_Father: {fileID: 6645356832037178862}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -432,7 +436,7 @@ RectTransform:
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 6645356832037178862}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -545,7 +549,7 @@ GameObject:
   - component: {fileID: 6645356834030386629}
   - component: {fileID: 6645356834030386628}
   m_Layer: 5
-  m_Name: BestRun
+  m_Name: Desc
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -560,14 +564,14 @@ RectTransform:
   m_GameObject: {fileID: 6645356834030386650}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
-  m_Father: {fileID: 6645356832479871358}
-  m_RootOrder: 0
+  m_Father: {fileID: 6645356832037178862}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.000022888, y: -19.993198}
+  m_AnchoredPosition: {x: 80.29406, y: -30.091404}
   m_SizeDelta: {x: 231.46, y: 53.3707}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6645356834030386629
@@ -679,7 +683,7 @@ GameObject:
   - component: {fileID: 4327969552803130321}
   - component: {fileID: 7913006993672258346}
   m_Layer: 5
-  m_Name: Border
+  m_Name: Icon Border
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
