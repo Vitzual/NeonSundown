@@ -85,14 +85,6 @@ public class ShipPanel : MonoBehaviour
         // After creating, set ordering
         foreach (ShipButton button in buttons)
             button.gameObject.transform.SetSiblingIndex(button.ship.listOrder);
-
-        // After creating, set ordering
-        foreach (ShipButton button in buttons)
-            button.gameObject.transform.SetSiblingIndex(button.ship.listOrder);
-
-        // After creating, set ordering
-        foreach (ShipButton button in buttons)
-            button.gameObject.transform.SetSiblingIndex(button.ship.listOrder);
     }
 
     // Update the ships
