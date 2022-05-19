@@ -6,6 +6,9 @@ Welcome to the source code for Neon Sundown!
 - [Discord](https://discord.gg/NHnR7zcaCc)
 - [Reddit](https://www.reddit.com/r/NeonSundown/)
 
+**Looking for the sprite asset files?**
+- [Neon Sundown - Assets](https://github.com/Vitzual/NeonSundownAssets)
+
 # Note about this repository
 This repository contains external assets from the Unity asset store, as well as licensed sounds and music that I am not able to share. I recommend treating this repository as something you can reference for your own projects, though if you wish to get the game running in the Unity editor it is still possible (with or without them)
 
