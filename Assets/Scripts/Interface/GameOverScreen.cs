@@ -11,11 +11,9 @@ public class GameOverScreen : MonoBehaviour
     public CanvasGroup gameOverScreen;
     public CanvasGroup runtimeStats;
     public CanvasGroup button;
-    public AudioClip gameOverSound;
     public TextMeshProUGUI stats;
     public static bool isActive = false;
-    public AudioSource audioSource;
-
+    
     // Start is called before the first frame update
     public void Start()
     {
@@ -51,8 +49,7 @@ public class GameOverScreen : MonoBehaviour
         mainScreen.alpha = 1f;
         mainScreen.interactable = true;
         mainScreen.blocksRaycasts = true;
-        audioSource.volume = Settings.sound;
-        audioSource.Play();
+        AudioPlayer.PlayGameOverSound();
 
         // Stop music and pause game
         MusicPlayer.StopMusic();

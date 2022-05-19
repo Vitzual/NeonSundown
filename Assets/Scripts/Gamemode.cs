@@ -42,8 +42,8 @@ public class Gamemode : MonoBehaviour
         if (useArenaInfo && arenaIcon != null)
         {
             arenaIcon.sprite = arena.unlockedIcon;
-            arenaName.text = arena.name;
-            arenaDesc.text = arena.achievementObjective;
+            arenaName.text = arena.name.ToUpper();
+            arenaDesc.text = arena.achievementObjective.ToUpper();
             arenaDesc.color = arena.lightColor;
             LeanTween.moveLocal(arenaInfo, new Vector2(0, -50), 1.5f).setEase(LeanTweenType.easeOutExpo).setDelay(1f);
             LeanTween.moveLocal(arenaInfo, new Vector2(0, 50), 0.5f).setEase(LeanTweenType.easeInExpo).setDelay(4f);

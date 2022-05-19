@@ -60,10 +60,9 @@ public class XPHandler : MonoBehaviour
                     player.AddXP(activeList[a].value);
                     RuntimeStats.totalXP += activeList[a].value;
                     if (SaveSystem.saveData.level < Levels.ranks.Count)
-                        xpRequirement.text = Formatter.Round(SaveSystem.saveData.xp) + " / " +
+                        xpRequirement.text = Formatter.Round(SaveSystem.saveData.xp, 0) + " / " +
                             Levels.ranks[SaveSystem.saveData.level].xpRequirement + "xp";
                     if (xpHealing) Ship.Heal(0.01f * activeList[a].value);
-                    AudioPlayer.Play(xpSound, true, 0.8f, 1.2f, false, 1.5f);
                     activeList[a].gameObject.SetActive(false);
                     inactiveList.Add(activeList[a]);
                     activeList.RemoveAt(a);
@@ -100,7 +99,7 @@ public class XPHandler : MonoBehaviour
 
         if (SaveSystem.saveData.level < Levels.ranks.Count)
         {
-            reward.text = Levels.ranks[SaveSystem.saveData.level].GetName();
+            reward.text = Levels.ranks[SaveSystem.saveData.level].GetName().ToUpper();
             Color color = Levels.ranks[SaveSystem.saveData.level].GetColor();
             rewardIcon.sprite = Levels.ranks[SaveSystem.saveData.level].GetIcon();
             if (Levels.ranks[SaveSystem.saveData.level].IsColored()) rewardIcon.color = color;

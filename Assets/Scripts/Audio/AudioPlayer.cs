@@ -8,14 +8,24 @@ public class AudioPlayer : MonoBehaviour
     public AudioClip _buttonSound;
     public AudioClip _stickySound;
     public AudioClip _reflectSound;
+    public AudioClip _hurtSound;
+    public AudioClip _gameOverSound;
+
+    // Audio sources
+    public AudioSource _hurtSource;
+    public AudioSource _gameOverSource;
 
     // List of audio sources
     public static List<AudioClip> audioClips;
     public static List<float> cooldowns;
     public static AudioSource audioSource;
+    public static AudioSource hurtSource;
+    public static AudioSource gameOverSource;
     public static AudioClip buttonSound;
     public static AudioClip critSound;
     public static AudioClip reflectSound;
+    public static AudioClip hurtSound;
+    public static AudioClip gameOverSound;
 
     // Set audio sources
     public void Awake()
@@ -23,6 +33,10 @@ public class AudioPlayer : MonoBehaviour
         buttonSound = _buttonSound;
         critSound = _stickySound;
         reflectSound = _reflectSound;
+        hurtSound = _hurtSound;
+        gameOverSound = _gameOverSound;
+        hurtSource = _hurtSource;
+        gameOverSource = _gameOverSource;
         audioClips = new List<AudioClip>();
         cooldowns = new List<float>();
         audioSource = GetComponent<AudioSource>();
@@ -105,5 +119,19 @@ public class AudioPlayer : MonoBehaviour
         audioSource.volume = Settings.sound;
         audioSource.pitch = Random.Range(0.95f, 1.05f);
         audioSource.PlayOneShot(reflectSound, 0.4f);
+    }
+
+    // Plays a button sound on hover
+    public static void PlayHurtSound()
+    {
+        hurtSource.volume = Settings.sound;
+        hurtSource.PlayOneShot(hurtSound, 2f);
+    }
+
+    // Plays a button sound on hover
+    public static void PlayGameOverSound()
+    {
+        gameOverSource.volume = Settings.sound;
+        gameOverSource.Play();
     }
 }

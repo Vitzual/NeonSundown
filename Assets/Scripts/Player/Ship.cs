@@ -32,6 +32,8 @@ public class Ship : Weapon
     // Default player models
     public Material defaultGlow;
     public Color defaultColor;
+    public ParticleSystem deathParticle;
+    public AudioClip deathSound;
 
     // Barrel location
     public Transform barrel;
@@ -139,7 +141,7 @@ public class Ship : Weapon
 
         // Update UI element
         levelText.text = "LEVEL " + level;
-        xpText.text = Mathf.Round(xp) + " / " + Mathf.Round(rankup);
+        xpText.text = Mathf.Round(xp) + " / " + Mathf.Round(rankup) + "xp";
         xpBar.currentPercent = (float)xp / rankup * 100;
         xpBar.UpdateUI();
 
@@ -267,7 +269,7 @@ public class Ship : Weapon
         }
 
         // Set XP bar
-        xpText.text = Mathf.Round(xp) + " / " + Mathf.Round(rankup);
+        xpText.text = Mathf.Round(xp) + " / " + Mathf.Round(rankup) + "xp";
         xpBar.currentPercent = (float)xp / rankup * 100;
         xpBar.UpdateUI();
     }
@@ -342,16 +344,29 @@ public class Ship : Weapon
 
         // Update health
         health -= damage;
-        if (health <= 0) Kill();
+        if (health <= 0)
+        {
+            // Unleash pulse
+            ExplosiveHandler.CreateKnockback(transform.position, 100f, -2000f, -2500f);
 
-        // Play audio clip
-        AudioPlayer.Play(damageSound);
+            // Disable health bar
+            LeanTween.cancel(healthCanvas.gameObject);
+            healthCanvas.alpha = 0f;
 
-        // Unleash pulse
-        ExplosiveHandler.CreateKnockback(transform.position, 20f, -1000f, -1500f);
+            // Kill the player
+            Kill();
+        }
+        else
+        {
+            // Unleash pulse
+            ExplosiveHandler.CreateKnockback(transform.position, 20f, -1000f, -1500f);
 
-        // Update health UI bar
-        UpdateHealth();
+            // Play hurt sound
+            AudioPlayer.PlayHurtSound();
+
+            // Update health UI bar
+            UpdateHealth();
+        }
     }
 
     public void UpdateShowHP(bool toggle)
@@ -381,6 +396,15 @@ public class Ship : Weapon
     // Kill the player
     public void Kill()
     {
+        // Play death effect
+        ParticleSystem newParticle = Instantiate(deathParticle, transform.position, Quaternion.identity);
+        ParticleSystemRenderer renderer = newParticle.GetComponent<ParticleSystemRenderer>();
+
+        // Set death material
+        renderer.material = border.material;
+        border.enabled = false;
+        fill.enabled = false;
+
         // Open game over screen
         Events.active.ShipDestroyed();
     }
