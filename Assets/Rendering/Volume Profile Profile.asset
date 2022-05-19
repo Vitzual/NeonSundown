@@ -54,7 +54,7 @@ MonoBehaviour:
     max: 10
   bloomIntensity:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 0.5189821
   allowLensSurface:
     m_OverrideState: 1
     m_Value: 0
@@ -82,14 +82,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29fa0085f50d5e54f8144f766051a691, type: 3}
   m_Name: FilmGrain
   m_EditorClassIdentifier: 
-  active: 0
+  active: 1
   m_AdvancedMode: 0
   type:
     m_OverrideState: 1
-    m_Value: 8
+    m_Value: 7
   intensity:
     m_OverrideState: 1
-    m_Value: 0.62
+    m_Value: 0.273
     min: 0
     max: 1
   response:
@@ -113,7 +113,6 @@ MonoBehaviour:
   m_Name: Volume Profile Profile
   m_EditorClassIdentifier: 
   components:
-  - {fileID: 3019238075306212863}
   - {fileID: -710491242790024279}
   - {fileID: 8939743874006871491}
   - {fileID: -4450423044713455107}
@@ -187,43 +186,6 @@ MonoBehaviour:
   lensSurfaceDiffractionIntensity:
     m_OverrideState: 1
     m_Value: 2
---- !u!114 &3019238075306212863
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c5e1dc532bcb41949b58bc4f2abfbb7e, type: 3}
-  m_Name: LensDistortion
-  m_EditorClassIdentifier: 
-  active: 1
-  m_AdvancedMode: 0
-  intensity:
-    m_OverrideState: 1
-    m_Value: 0.05
-    min: -1
-    max: 1
-  xMultiplier:
-    m_OverrideState: 0
-    m_Value: 1
-    min: 0
-    max: 1
-  yMultiplier:
-    m_OverrideState: 0
-    m_Value: 1
-    min: 0
-    max: 1
-  center:
-    m_OverrideState: 0
-    m_Value: {x: 0.5, y: 0.5}
-  scale:
-    m_OverrideState: 0
-    m_Value: 1
-    min: 0.01
-    max: 5
 --- !u!114 &8939743874006871491
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -249,7 +211,7 @@ MonoBehaviour:
     m_Value: {x: 0.5, y: 0.5}
   intensity:
     m_OverrideState: 1
-    m_Value: 0.343
+    m_Value: 0.45
     min: 0
     max: 1
   smoothness:

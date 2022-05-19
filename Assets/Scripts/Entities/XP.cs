@@ -14,6 +14,7 @@ public class XP : MonoBehaviour
     // Start method
     public void Setup(Vector2 startPos, float value)
     {
+        trail.Clear();
         trail.enabled = false;
         this.startPos = startPos;
         this.value = value;
