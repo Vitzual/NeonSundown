@@ -86,6 +86,7 @@ public class XPHandler : MonoBehaviour
                     activeList[a].isMoving = true;
                     activeList[a].isStarting = false;
                     activeList[a].speed = 5f;
+                    activeList[a].trail.enabled = true;
                 }
             }
         }
