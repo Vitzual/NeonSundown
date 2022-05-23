@@ -24,8 +24,6 @@ public class ArenaData : IdentifiableScriptableObject
     public Sprite unlockedIcon;
     [BoxGroup("Arena Info")]
     public Sprite lockedIcon;
-    [BoxGroup("Arena Info"), TextArea]
-    public string desc;
     [BoxGroup("Arena Info")]
     public string shortDesc;
     [BoxGroup("Arena Info")]
