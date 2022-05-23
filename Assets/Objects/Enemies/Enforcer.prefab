@@ -684,7 +684,7 @@ Transform:
   m_GameObject: {fileID: 8071768145869598022}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 1}
   m_Children:
   - {fileID: 8071768146122005024}
   m_Father: {fileID: 0}
@@ -712,11 +712,15 @@ MonoBehaviour:
   dieOnCollision: 1
   trails: []
   glows:
-  - {fileID: 8142517138090812674}
-  - {fileID: 0}
-  fills:
-  - {fileID: 5580957980583115629}
   - {fileID: 8071768145815941773}
+  - {fileID: 5580957980583115629}
+  - {fileID: 7143294705297784238}
+  - {fileID: 9192126712636474183}
+  fills:
+  - {fileID: 8142517138090812674}
+  - {fileID: 3602401876144587032}
+  - {fileID: 2882160030999128867}
+  - {fileID: 5380504750056109884}
   particles: []
   rotator: {fileID: 0}
 --- !u!50 &8071768145869598020
@@ -731,7 +735,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 2
+  m_Mass: 50
   m_LinearDrag: 1
   m_AngularDrag: 2
   m_GravityScale: 0
