@@ -273,8 +273,12 @@ public class Menu : MonoBehaviour
         foreach (KeyValuePair<int, ModuleData> module in Gamemode.modules)
             if (module.Value != null) moduleIDs.Add(module.Value.InternalID);
 
-        // Set context and load the scene
-        SaveSystem.SetMetacontext(Gamemode.arena.InternalID, Gamemode.ship.InternalID, moduleIDs);
+        // Set meta context and save
+        if (Gamemode.arena == null) Debug.Log("[ERROR] Arena is null!");
+        else if (Gamemode.ship == null) Debug.Log("[ERROR] Ship is null!");
+        else SaveSystem.SetMetacontext(Gamemode.arena.InternalID, Gamemode.ship.InternalID, moduleIDs);
+
+        // Load the main scene
         SceneManager.LoadScene("Main");
     }
 
