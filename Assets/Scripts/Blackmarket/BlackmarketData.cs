@@ -41,4 +41,11 @@ public class BlackmarketData : IdentifiableScriptableObject
     public CrystalType crystal;
     [BoxGroup("Item Cost")]
     public int amountRequired;
+
+    [BoxGroup("Item Color")]
+    public Color lightColor;
+    [BoxGroup("Item Color")]
+    public Color darkColor;
+    [BoxGroup("Item Color")]
+    public bool useLightColorOnIcon;
 }

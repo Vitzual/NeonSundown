@@ -18,6 +18,7 @@ public static class Scriptables
     public static string CrystalsPath = "Crystals";
     public static string SynergiesPath = "Synergies";
     public static string ModulesPath = "Modules";
+    public static string BlackmarketPath = "Blackmarket";
 
     // Scriptable dictionaries
     public static Dictionary<string, CardData> cardsDict;
@@ -26,6 +27,7 @@ public static class Scriptables
     public static Dictionary<string, ArenaData> arenasDict;
     public static Dictionary<string, ShipData> shipsDict;
     public static Dictionary<string, ModuleData> modulesDict;
+    public static Dictionary<string, BlackmarketData> blackmarketDict;
 
     // Scriptable lists
     public static List<CardData> cards;
@@ -36,6 +38,7 @@ public static class Scriptables
     public static List<CrystalData> crystals;
     public static List<SynergyData> synergies;
     public static List<ModuleData> modules;
+    public static List<BlackmarketData> blackmarketItems;
 
     // Generate scriptables
     public static void GenerateAllScriptables()
@@ -52,6 +55,7 @@ public static class Scriptables
         GenerateCrystals();
         GenerateSynergies();
         GenerateModules();
+        GenerateBlackmarketItems();
 
         // Set generated to true
         generated = true;
@@ -163,7 +167,7 @@ public static class Scriptables
         }
     }
 
-    // Generate crystals on startup
+    // Generate synergies on startup
     public static void GenerateSynergies()
     {
         synergies = new List<SynergyData>();
@@ -178,7 +182,7 @@ public static class Scriptables
         }
     }
 
-    // Generate crystals on startup
+    // Generate modules on startup
     public static void GenerateModules()
     {
         modulesDict = new Dictionary<string, ModuleData>();
@@ -192,6 +196,23 @@ public static class Scriptables
             modules.Add(module);
             modulesDict.Add(module.InternalID, module);
             Debug.Log("Loaded " + module.name + " with UUID " + module.InternalID);
+        }
+    }
+
+    // Generate blackmarket items on startup
+    public static void GenerateBlackmarketItems()
+    {
+        blackmarketDict = new Dictionary<string, BlackmarketData>();
+        blackmarketItems = new List<BlackmarketData>();
+
+        List<BlackmarketData> loaded = Resources.LoadAll(BlackmarketPath, typeof(BlackmarketData)).Cast<BlackmarketData>().ToList();
+        Debug.Log("Loaded " + loaded.Count + " blackmarket items from " + BlackmarketPath);
+
+        foreach (BlackmarketData item in loaded)
+        {
+            blackmarketItems.Add(item);
+            blackmarketDict.Add(item.InternalID, item);
+            Debug.Log("Loaded " + item.name + " with UUID " + item.InternalID);
         }
     }
 }

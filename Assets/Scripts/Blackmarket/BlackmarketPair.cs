@@ -7,7 +7,8 @@ public class BlackmarketPair : MonoBehaviour
     // Top and bottom items
     public BlackmarketItem topItem, bottomItem;
 
-    public void Setup(BlackmarketData top, BlackmarketData bottom)
+    // Setup a new pair
+    public void Setup(BlackmarketData data, bool top)
     {
         
     }
