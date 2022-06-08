@@ -10,7 +10,7 @@ public class RewardList : MonoBehaviour
     public Transform list;
     public Sprite normalLevel;
     public Sprite specialLevel;
-    public Image levelIcon, button;
+    public Image levelIcon, buttonBorder, buttonBackground;
     public TextMeshProUGUI levelText, unlockName, nextUnlock;
     public ProgressBar unlockProgress;
     private float r = 1, g = 0, b = 0;
@@ -123,8 +123,9 @@ public class RewardList : MonoBehaviour
         levelIcon.color = color;
         unlockName.color = color;
         nextUnlock.color = color;
-        button.color = color;
-        unlockProgress.loadingBar.color = color;
+        buttonBorder.color = color;
+        buttonBackground.color = new Color(color.r, color.g, color.b, 0.2f);
+        unlockProgress.loadingBar.color = buttonBackground.color;
     }
 
     // Set progress information
@@ -137,9 +138,10 @@ public class RewardList : MonoBehaviour
             levelText.text = currentLevel.ToString();
             levelIcon.color = color;
             nextUnlock.color = color;
-            unlockName.text = Levels.ranks[currentLevel].GetName();
-            button.color = color;
-            unlockProgress.loadingBar.color = color;
+            unlockName.text = Levels.ranks[currentLevel].GetName().ToUpper();
+            buttonBorder.color = color;
+            buttonBackground.color = new Color(color.r, color.g, color.b, 0.2f);
+            unlockProgress.loadingBar.color = buttonBackground.color;
             unlockProgress.currentPercent = (SaveSystem.saveData.xp / 
                 Levels.ranks[currentLevel].xpRequirement) * 100;
             unlockProgress.UpdateUI();
@@ -147,7 +149,7 @@ public class RewardList : MonoBehaviour
         else
         {
             useRainbow = true;
-            levelText.text = "45";
+            levelText.text = "50";
             unlockName.text = "RANK MAX";
             unlockProgress.currentPercent = 100;
         }
