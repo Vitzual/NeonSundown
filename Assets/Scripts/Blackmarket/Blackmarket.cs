@@ -14,7 +14,11 @@ public class Blackmarket : MonoBehaviour
     // On start generate listing 
     public void Start()
     {
+        // Setup new dictionary
+        genPair = new Dictionary<BlackmarketData.Type, BlackmarketPair>();
 
+        // Update black market listings
+        UpdateListings();
     }
 
     // On open, update listings
@@ -41,7 +45,9 @@ public class Blackmarket : MonoBehaviour
             }
             else
             {
-
+                BlackmarketPair newPair = Instantiate(blackmarketPair, listings[blackmarketItem.type]);
+                genPair.Add(blackmarketItem.type, newPair);
+                newPair.Setup(blackmarketItem, true);
             }
         }
     }

@@ -58,7 +58,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.94509804, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -268,7 +268,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.019607844, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -295,17 +295,17 @@ GameObject:
   m_Component:
   - component: {fileID: 532673763206359580}
   - component: {fileID: 532673763206359568}
+  - component: {fileID: 7116670234128340413}
   - component: {fileID: 532673763206359569}
   - component: {fileID: 532673763206359582}
   - component: {fileID: 532673763206359583}
-  - component: {fileID: 7116670234128340413}
   m_Layer: 5
   m_Name: Bottom Item
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &532673763206359580
 RectTransform:
   m_ObjectHideFlags: 0
@@ -339,6 +339,28 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 532673763206359581}
   m_CullTransparentMesh: 0
+--- !u!114 &7116670234128340413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 532673763206359581}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 881cd17e13948914692907ccc995e1a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  border: {fileID: 532673763046600914}
+  background: {fileID: 532673763206359583}
+  icon: {fileID: 532673764138665351}
+  crystal: {fileID: 532673763138604908}
+  name: {fileID: 532673764429085636}
+  desc: {fileID: 532673764287323833}
+  amount: {fileID: 532673763759237320}
+  blueCrystal: {r: 0, g: 0.55032945, b: 1, a: 1}
+  redCrystal: {r: 1, g: 0, b: 0, a: 1}
+  greenCrystal: {r: 0, g: 1, b: 0.06529045, a: 1}
 --- !u!114 &532673763206359569
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -398,11 +420,11 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0.22745098, g: 0.21568628, b: 0, a: 0.5882353}
-    m_HighlightedColor: {r: 0.22745098, g: 0.21568628, b: 0, a: 0.6666667}
-    m_PressedColor: {r: 0.22745098, g: 0.21568628, b: 0, a: 0.74509805}
-    m_SelectedColor: {r: 0.22745098, g: 0.21568628, b: 0, a: 0.8235294}
-    m_DisabledColor: {r: 0.22745098, g: 0.21568628, b: 0, a: 0.5882353}
+    m_NormalColor: {r: 0.25490198, g: 0.25490198, b: 0.25490198, a: 0.5882353}
+    m_HighlightedColor: {r: 0.21568628, g: 0.21568628, b: 0.21568628, a: 0.6666667}
+    m_PressedColor: {r: 0.20784314, g: 0.20784314, b: 0.20784314, a: 0.74509805}
+    m_SelectedColor: {r: 0.23529412, g: 0.23529412, b: 0.23529412, a: 0.8235294}
+    m_DisabledColor: {r: 0.25490198, g: 0.25490198, b: 0.25490198, a: 0.5882353}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -451,18 +473,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 18
---- !u!114 &7116670234128340413
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 532673763206359581}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 881cd17e13948914692907ccc995e1a3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &532673763239790702
 GameObject:
   m_ObjectHideFlags: 0
@@ -617,7 +627,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &532673763528789743
 RectTransform:
   m_ObjectHideFlags: 0
@@ -663,6 +673,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 881cd17e13948914692907ccc995e1a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  border: {fileID: 532673763763775027}
+  background: {fileID: 532673763528789729}
+  icon: {fileID: 532673763713362806}
+  crystal: {fileID: 532673764548014184}
+  name: {fileID: 532673764198706757}
+  desc: {fileID: 532673764352578749}
+  amount: {fileID: 532673763562293352}
+  blueCrystal: {r: 0, g: 0.55032945, b: 1, a: 1}
+  redCrystal: {r: 1, g: 0, b: 0, a: 1}
+  greenCrystal: {r: 0, g: 1, b: 0.06529045, a: 1}
 --- !u!114 &532673763528789731
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -722,11 +742,11 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0.25490198, g: 0.07058824, b: 0, a: 0.5882353}
-    m_HighlightedColor: {r: 0.25490198, g: 0.07058824, b: 0, a: 0.6666667}
-    m_PressedColor: {r: 0.25490198, g: 0.07058824, b: 0, a: 0.74509805}
-    m_SelectedColor: {r: 0.25490198, g: 0.07058824, b: 0, a: 0.8235294}
-    m_DisabledColor: {r: 0.25490198, g: 0.07058824, b: 0, a: 0.5882353}
+    m_NormalColor: {r: 0.25490198, g: 0.25490198, b: 0.25490198, a: 0.5882353}
+    m_HighlightedColor: {r: 0.21568628, g: 0.21568628, b: 0.21568628, a: 0.6666667}
+    m_PressedColor: {r: 0.20784314, g: 0.20784314, b: 0.20784314, a: 0.74509805}
+    m_SelectedColor: {r: 0.23529412, g: 0.23529412, b: 0.23529412, a: 0.8235294}
+    m_DisabledColor: {r: 0.25490198, g: 0.25490198, b: 0.25490198, a: 0.5882353}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -840,7 +860,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: <b>COST:</b><size=15> 150 Crystals
+  m_text: <b>COST:</b><size=15> Unknown
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 84dd14695854bbc43a5faa24fcf93d0d, type: 2}
   m_sharedMaterial: {fileID: 21261991626553910, guid: 84dd14695854bbc43a5faa24fcf93d0d, type: 2}
@@ -1020,14 +1040,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.27058825, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 0df2d408d0579fb4ca65149bafe80697, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9322a6f8f8f704a4cb7d19ce4a254921, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1102,7 +1122,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: <b>COST:</b><size=15> 150 Crystals
+  m_text: <b>COST:</b><size=15> Unknown
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 84dd14695854bbc43a5faa24fcf93d0d, type: 2}
   m_sharedMaterial: {fileID: 21261991626553910, guid: 84dd14695854bbc43a5faa24fcf93d0d, type: 2}
@@ -1229,7 +1249,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.27450982, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1304,14 +1324,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.94509804, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 0c3a775d79d416643aa393736ec53ab9, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9322a6f8f8f704a4cb7d19ce4a254921, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1386,7 +1406,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: HARBINGER
+  m_text: NOT AVAILABLE
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fbd0826d5f870a245830ecb8c53e3ecd, type: 2}
   m_sharedMaterial: {fileID: 3787058409296609082, guid: fbd0826d5f870a245830ecb8c53e3ecd, type: 2}
@@ -1395,8 +1415,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278207999
-  m_fontColor: {r: 1, g: 0.27058825, b: 0, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1520,7 +1540,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: THIS IS A DESCRIPTION FOR THIS BLACK MARKET ITEM
+  m_text: THIS ITEM IS NOT AVAILABLE, PLEASE CHECK BACK LATER
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 84dd14695854bbc43a5faa24fcf93d0d, type: 2}
   m_sharedMaterial: {fileID: 21261991626553910, guid: 84dd14695854bbc43a5faa24fcf93d0d, type: 2}
@@ -1654,7 +1674,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: THIS IS A DESCRIPTION FOR THIS BLACK MARKET ITEM
+  m_text: THIS ITEM IS NOT AVAILABLE, PLEASE CHECK BACK LATER
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 84dd14695854bbc43a5faa24fcf93d0d, type: 2}
   m_sharedMaterial: {fileID: 21261991626553910, guid: 84dd14695854bbc43a5faa24fcf93d0d, type: 2}
@@ -1788,7 +1808,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: HORNET
+  m_text: NOT AVAILABLE
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fbd0826d5f870a245830ecb8c53e3ecd, type: 2}
   m_sharedMaterial: {fileID: 3787058409296609082, guid: fbd0826d5f870a245830ecb8c53e3ecd, type: 2}
@@ -1797,8 +1817,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278252031
-  m_fontColor: {r: 1, g: 0.94509804, b: 0, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1916,7 +1936,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.019607844, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

@@ -10,6 +10,15 @@ public class BlackmarketPair : MonoBehaviour
     // Setup a new pair
     public void Setup(BlackmarketData data, bool top)
     {
-        
+        if (top)
+        {
+            topItem.Set(data);
+            topItem.gameObject.SetActive(true);
+        }
+        else
+        {
+            bottomItem.Set(data);
+            bottomItem.gameObject.SetActive(true);
+        }
     }
 }
