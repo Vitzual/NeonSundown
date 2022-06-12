@@ -9,7 +9,7 @@ public class StageButton : MonoBehaviour
     // Interface elements
     public new TextMeshProUGUI name;
     public TextMeshProUGUI rate, stats;
-    public Image icon, border;
+    public Image icon, border, background;
 
     // Update is called once per frame
     public void Set(StageData.Enemy enemy)
@@ -23,7 +23,7 @@ public class StageButton : MonoBehaviour
         if (enemy.cooldown == 1) seconds = " second";
 
         // Set all enemy information
-        name.text = enemy.data.name;
+        name.text = enemy.data.name.ToUpper();
         rate.text = enemy.amount + "x / " + enemy.cooldown + seconds;
         if (enemy.data.variants[enemy.variant].immune)
         {
@@ -41,5 +41,6 @@ public class StageButton : MonoBehaviour
         icon.sprite = enemy.data.icon;
         icon.color = primaryColor;
         border.color = primaryColor;
+        background.color = new Color(primaryColor.r, primaryColor.g, primaryColor.b, 0.2f);
     }
 }

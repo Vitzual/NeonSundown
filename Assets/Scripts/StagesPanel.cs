@@ -17,7 +17,7 @@ public class StagesPanel : MonoBehaviour
 
     // Arena info elements
     public TextMeshProUGUI stageTitle, stageTime;
-    public Image previous, next;
+    public Image nextBorder, nextBackground, previousBorder, previousBackground;
 
     // Set the panel
     public void Set(ArenaData arena)
@@ -26,8 +26,10 @@ public class StagesPanel : MonoBehaviour
         this.arena = arena;
 
         // Set the panel
-        previous.color = arena.buttonColor;
-        next.color = arena.buttonColor;
+        nextBorder.color = arena.buttonColor;
+        previousBorder.color = nextBorder.color;
+        nextBackground.color = new Color(arena.buttonColor.r, arena.buttonColor.g, arena.buttonColor.b, 0.2f);
+        previousBackground.color = nextBackground.color;
     }
 
     // Go to the next stage
