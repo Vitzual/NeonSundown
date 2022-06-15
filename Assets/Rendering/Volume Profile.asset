@@ -79,9 +79,50 @@ MonoBehaviour:
   m_Name: Volume Profile
   m_EditorClassIdentifier: 
   components:
-  - {fileID: -1469688595575588826}
   - {fileID: 7045360901505016617}
+  - {fileID: 6340015317657609719}
+  - {fileID: -1469688595575588826}
   - {fileID: -4244925970645146958}
+--- !u!114 &6340015317657609719
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: baefd3c1c47f54fe19f095166c0dd36f, type: 3}
+  m_Name: Limitless_Glitch3
+  m_EditorClassIdentifier: 
+  active: 1
+  m_AdvancedMode: 0
+  enable:
+    m_OverrideState: 1
+    m_Value: 0
+  speed:
+    m_OverrideState: 1
+    m_Value: 13
+    min: 0
+    max: 50
+  blockSize:
+    m_OverrideState: 0
+    m_Value: 1
+    min: 0
+    max: 505
+  maxOffsetX:
+    m_OverrideState: 1
+    m_Value: 0.75
+    min: 0
+    max: 25
+  maxOffsetY:
+    m_OverrideState: 1
+    m_Value: 0.75
+    min: 0
+    max: 25
+  mask:
+    m_OverrideState: 0
+    m_Value: {fileID: 0}
 --- !u!114 &7045360901505016617
 MonoBehaviour:
   m_ObjectHideFlags: 3

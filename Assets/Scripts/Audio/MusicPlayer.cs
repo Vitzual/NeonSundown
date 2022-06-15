@@ -11,7 +11,7 @@ public class MusicPlayer : MonoBehaviour
     public static bool isMenu = false;
     public static AudioSource music;
     private static AudioSource bossMusic;
-
+    
     // Fade in variables
     private static float targetFadeIn = 1f;
     private static float targetFadeOut = 0.5f;
@@ -54,6 +54,7 @@ public class MusicPlayer : MonoBehaviour
     public static void PlayMusic() { music.Play(); }
     public static void StopMusic() { music.Pause(); bossMusic.Pause(); }
     public static void ResetPitch() { music.pitch = 1f; }
+    public static void SetPitch(float pitch) { music.pitch = pitch; }
     
     // Play boss music
     public static void PlayBossMusic(AudioClip newMusic)

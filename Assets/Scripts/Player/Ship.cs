@@ -358,6 +358,13 @@ public class Ship : Weapon
         }
         else
         {
+            // Check if under 25%
+            if (health / maxHealth <= 0.25f)
+            {
+                MusicPlayer.SetPitch(1.15f);
+
+            }
+
             // Unleash pulse
             ExplosiveHandler.CreateKnockback(transform.position, 20f, -1000f, -1500f);
 

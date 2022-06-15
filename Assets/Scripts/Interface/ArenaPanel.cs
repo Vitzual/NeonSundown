@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.Tilemaps;
 using UnityEngine.UI;
 
@@ -16,6 +17,9 @@ public class ArenaPanel : MonoBehaviour
         public Image model;
         public TextMeshProUGUI modifier, amount;
     }
+
+    // Menu volume profile
+    public VolumeProfile menuVolume;
 
     // Stages panel
     public StagesPanel stagesPanel;
@@ -131,7 +135,20 @@ public class ArenaPanel : MonoBehaviour
 
         // Check if nightmare
         if (arena.difficulty == Difficulty.Nightmare)
-            AudioPlayer.Play(nightmareArenaSound, false, 1f, 1f, true, 2f);
+        {
+            // Play nightmare sound
+            //AudioPlayer.Play(nightmareArenaSound, false, 1f, 1f, true, 2f);        
+            
+            // Set glitch effect
+            Limitless_Glitch3 glitchEffect = (Limitless_Glitch3)menuVolume.components[1];
+            glitchEffect.enable.value = true;
+        }
+        else
+        {
+            // Set glitch effect
+            Limitless_Glitch3 glitchEffect = (Limitless_Glitch3)menuVolume.components[1];
+            glitchEffect.enable.value = false;
+        }
 
         // Set arena objective
         objective.text = arena.achievementObjective.ToUpper();

@@ -196,9 +196,9 @@ public class SettingsUI : MonoBehaviour
     // Set glow amount 
     public void SetGlowAmount(float amount)
     {
-        MKGlowLite mkg = (MKGlowLite)menuVolume.components[1];
+        MKGlowLite mkg = (MKGlowLite)menuVolume.components[0];
         if (mkg != null) mkg.bloomIntensity.value = amount;
-        mkg = (MKGlowLite)mainVolume.components[3];
+        mkg = (MKGlowLite)mainVolume.components[0];
         if (mkg != null) mkg.bloomIntensity.value = amount;
         Settings.glowAmount = amount;
     }
