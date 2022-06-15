@@ -18,19 +18,19 @@ MonoBehaviour:
   enemyIcon: {fileID: 21300000, guid: 24ee4be1d0bcd824faef9d042167a9ad, type: 3}
   unlockedIcon: {fileID: 21300000, guid: 9e08bdaab5753e04fad6f37676622765, type: 3}
   lockedIcon: {fileID: 21300000, guid: 5dbecd5674b4f564ea54bd3180d1ba8f, type: 3}
-  desc: 
-  shortDesc: Arena comprised of shielded enemies.
+  shortDesc: Futuristic enemies that are able to deploy bullet shields and fire back.
+    Don't get hit!
   arenaBackground: {fileID: 11400000, guid: 212235cec4c12fd42a5384b47c1febca, type: 2}
   arenaMenuPitch: 1
   arenaMusic: {fileID: 8300000, guid: a584ac51fa50a1f468107ef3479baaed, type: 3}
   menuStage: {fileID: 11400000, guid: 9050d9ffa7d4c0c49925120bf802a7f1, type: 2}
-  availableInDemo: 0
+  difficulty: 2
   achievementObjective: Defeat Dualwing
   useAchievementTime: 0
   achievementTime: 0
   useAchievementBoss: 1
   achievement: {fileID: 3391616857268349422, guid: f589d5fe6376ca443bb8e175e09de7de, type: 2}
-  unlockByDefault: 0
+  unlockByDefault: 1
   unlockObjective: Unlocked at rank 25
   order: 3
   buttonColor: {r: 0, g: 0.6497364, b: 1, a: 1}
@@ -44,6 +44,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8a4032907ed48244593e94855c8c61c9, type: 2}
   - {fileID: 11400000, guid: 21e4ed3da7740ad40aa3fa93054b7454, type: 2}
   - {fileID: 11400000, guid: 245b9eda40de6754da2f3dd9ba4149b1, type: 2}
+  blacklistCards: []
   useWall: 0
   wallBorder: {fileID: 0}
   wallFill: {r: 0, g: 0, b: 0, a: 0}

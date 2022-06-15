@@ -18,13 +18,13 @@ MonoBehaviour:
   enemyIcon: {fileID: 21300000, guid: 79b66a381d120e14aa48546d99bd0789, type: 3}
   unlockedIcon: {fileID: 21300000, guid: 091ffb3a3fd9d7d4d995e056ce8fdb75, type: 3}
   lockedIcon: {fileID: 21300000, guid: 361c9830b663ea0409bd2bd9c5b51201, type: 3}
-  desc: 
-  shortDesc: Arena full of explosive bombs. Tread carefully!
+  shortDesc: Arena full of explosive bombs. Limited arena size, touching the border
+    will kill you.
   arenaBackground: {fileID: 11400000, guid: 78b14405765f3a14495ef54a3a0159fc, type: 2}
   arenaMenuPitch: 1
   arenaMusic: {fileID: 8300000, guid: da056ee86462c8d43a98ee628fe628e1, type: 3}
   menuStage: {fileID: 11400000, guid: b8f5eff5fd0d534438c8a4fa2029d331, type: 2}
-  availableInDemo: 0
+  difficulty: 0
   achievementObjective: Survive for 10 minutes
   useAchievementTime: 1
   achievementTime: 600
@@ -40,6 +40,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: bdd4544bf19ea204f8b88edc39051cb1, type: 2}
   - {fileID: 11400000, guid: bd657337d09123f4bb3967de40f4765d, type: 2}
   - {fileID: 11400000, guid: de34f29741d5d8d4fab67e4ce2f1eb73, type: 2}
+  blacklistCards: []
   useWall: 1
   wallBorder: {fileID: 2100000, guid: 4b02bf1bd62576c4db90bf7824c03559, type: 2}
   wallFill: {r: 0.39607844, g: 0.19607843, b: 0, a: 1}

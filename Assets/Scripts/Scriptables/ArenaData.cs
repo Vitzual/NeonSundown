@@ -80,5 +80,5 @@ public class ArenaData : IdentifiableScriptableObject
 
     public bool NoWall() { return !useWall; }
 
-    public bool IsAchievementUnlocked() { return achievement.IsAchieved; }
+    public bool IsAchievementUnlocked() { return achievement != null && achievement.IsAchieved; }
 }

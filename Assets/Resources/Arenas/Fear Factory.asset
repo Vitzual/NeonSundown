@@ -18,19 +18,19 @@ MonoBehaviour:
   enemyIcon: {fileID: 21300000, guid: ebf170662cc497b4785393976227260e, type: 3}
   unlockedIcon: {fileID: 21300000, guid: 57021c907bdc4ad48a8d3c0344a22eca, type: 3}
   lockedIcon: {fileID: 21300000, guid: 85e14bb8cd9313044ba97514a0558ab3, type: 3}
-  desc: 
-  shortDesc: Arena comprised of small fast enemies.
+  shortDesc: Arena comprised of small fast enemies. Try and use cards that can deal
+    area damage.
   arenaBackground: {fileID: 11400000, guid: bf8da83d748b7e944b74db83fbf1ee52, type: 2}
   arenaMenuPitch: 1
   arenaMusic: {fileID: 8300000, guid: fd78f0da95799524d9114149f6f79544, type: 3}
   menuStage: {fileID: 11400000, guid: 710ec9da504aab442bc32b8df9ab4e08, type: 2}
-  availableInDemo: 0
+  difficulty: 0
   achievementObjective: Defeat Razorclaw
   useAchievementTime: 0
   achievementTime: 600
   useAchievementBoss: 1
   achievement: {fileID: -5388829342435185633, guid: f589d5fe6376ca443bb8e175e09de7de, type: 2}
-  unlockByDefault: 0
+  unlockByDefault: 1
   unlockObjective: Unlocked at rank 5
   order: 1
   buttonColor: {r: 0.6022401, g: 0, b: 1, a: 1}
@@ -45,6 +45,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 59aa75267ea5418419a8c11e3087ff4b, type: 2}
   - {fileID: 11400000, guid: 3db6b38b109fb8d4389d950f6493fa7a, type: 2}
   - {fileID: 11400000, guid: 4a9ebb4d466a463478ab6a494807785b, type: 2}
+  blacklistCards: []
   useWall: 0
   wallBorder: {fileID: 0}
   wallFill: {r: 0, g: 0, b: 0, a: 0}
