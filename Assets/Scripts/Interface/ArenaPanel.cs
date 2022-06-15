@@ -137,18 +137,12 @@ public class ArenaPanel : MonoBehaviour
         if (arena.difficulty == Difficulty.Nightmare)
         {
             // Play nightmare sound
-            //AudioPlayer.Play(nightmareArenaSound, false, 1f, 1f, true, 2f);        
-            
+            AudioPlayer.Play(nightmareArenaSound, false, 1f, 1f, true, 2f);
+
             // Set glitch effect
-            Limitless_Glitch3 glitchEffect = (Limitless_Glitch3)menuVolume.components[1];
-            glitchEffect.enable.value = true;
+            Effects.ToggleMenuGlitchEffect(true);
         }
-        else
-        {
-            // Set glitch effect
-            Limitless_Glitch3 glitchEffect = (Limitless_Glitch3)menuVolume.components[1];
-            glitchEffect.enable.value = false;
-        }
+        else Effects.ToggleMenuGlitchEffect(false);
 
         // Set arena objective
         objective.text = arena.achievementObjective.ToUpper();

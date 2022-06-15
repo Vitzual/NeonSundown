@@ -45,10 +45,6 @@ public class SettingsUI : MonoBehaviour
     // Canvas group
     public CanvasGroup canvasGroup;
 
-    // Volume component
-    public VolumeProfile menuVolume;
-    public VolumeProfile mainVolume;
-
     // Get active instance
     public void Awake()
     {
@@ -196,10 +192,7 @@ public class SettingsUI : MonoBehaviour
     // Set glow amount 
     public void SetGlowAmount(float amount)
     {
-        MKGlowLite mkg = (MKGlowLite)menuVolume.components[0];
-        if (mkg != null) mkg.bloomIntensity.value = amount;
-        mkg = (MKGlowLite)mainVolume.components[0];
-        if (mkg != null) mkg.bloomIntensity.value = amount;
+        Effects.SetGlowAmount(amount);
         Settings.glowAmount = amount;
     }
 

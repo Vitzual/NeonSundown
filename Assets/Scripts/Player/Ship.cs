@@ -22,6 +22,7 @@ public class Ship : Weapon
     public GameObject autoFireObj;
     private bool autoFire = false;
     public bool _lasers = false;
+    private bool lowHealth = false;
 
     // Player model and data
     public ShipData shipData;
@@ -352,17 +353,24 @@ public class Ship : Weapon
             // Disable health bar
             LeanTween.cancel(healthCanvas.gameObject);
             healthCanvas.alpha = 0f;
-
+            
             // Kill the player
             Kill();
         }
         else
         {
             // Check if under 25%
-            if (health / maxHealth <= 0.25f)
+            if (!lowHealth && health / maxHealth <= 0.25f)
             {
                 MusicPlayer.SetPitch(1.15f);
-
+                Effects.TogglMainGlitchEffect(true);
+                lowHealth = true;
+            }
+            else if (lowHealth && health / maxHealth > 0.25f)
+            {
+                MusicPlayer.SetPitch(1f);
+                Effects.TogglMainGlitchEffect(false);
+                lowHealth = false;
             }
 
             // Unleash pulse
