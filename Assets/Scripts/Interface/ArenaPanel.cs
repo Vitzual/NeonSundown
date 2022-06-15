@@ -9,11 +9,12 @@ using UnityEngine.UI;
 public class ArenaPanel : MonoBehaviour
 {
     [System.Serializable]
-    public class Card
+    public class Chip
     {
+        public GameObject obj;
         public Image icon;
         public Image model;
-        public TextMeshProUGUI amount;
+        public TextMeshProUGUI modifier, amount;
     }
 
     // Stages panel
@@ -21,16 +22,33 @@ public class ArenaPanel : MonoBehaviour
 
     // Arena elements
     public ArenaButton arenaButton;
-    public Transform arenaList;
+    public Transform arenaList, cardList;
 
     // Background tilebase
     public Tilemap backgroundTilemap;
 
-    // Canvas group
-    public Image arenaIcon, panelBackground, panelBorder;
+    // Card and chip slots
+    public BlacklistCard blacklistCard;
+    public List<Chip> chipSlots;
+    public SerializableDictionary<Difficulty, Color> difficultyColors;
+    public AudioClip nightmareArenaSound;
+    private List<GameObject> activeBlacklistCards;
+
+    // Objective sprite options
+    public Color incompleteObjectiveColor, completeObjectiveColor;
+    public Sprite incompleteObjectiveIcon, completeObjectiveIcon;
+
+    // Image components
+    public Image arenaIcon, panelBackground, panelBorder, objectiveIcon;
+
+    // Text components
+    public TextMeshProUGUI arenaName, arenaDesc, arenaTime, objective;
+
+    // Game object components
+    public GameObject blacklistEmpty, chipsLocked;
 
     // Private internal flag
-    private bool arenasGenerated = false;
+    private bool arenasGenerated = false, chipsActivated = false;
 
     // Subscribe to the arena button event
     public void Start()
@@ -94,10 +112,75 @@ public class ArenaPanel : MonoBehaviour
         // Set the new arena data
         Gamemode.arena = arena;
 
-        // Reset the panel
+        // Reset the panel colors
         arenaIcon.sprite = arena.unlockedIcon;
         panelBorder.color = arena.buttonColor;
         panelBackground.color = arena.darkColor;
+
+        // Set arena information
+        arenaName.text = arena.name.ToUpper();
+        arenaDesc.text = arena.shortDesc;
+        arenaTime.text = "<b>BEST RUN:</b> " + Formatter.Time(SaveSystem.GetBestTime(arena.InternalID));
+
+        // Set arena difficulty
+        if (difficultyColors.ContainsKey(arena.difficulty))
+        {
+            arenaName.text += " <size=18><color=#" + ColorUtility.ToHtmlStringRGB(difficultyColors[arena.difficulty])
+                + ">" + arena.difficulty.ToString().ToUpper();
+        }
+
+        // Check if nightmare
+        if (arena.difficulty == Difficulty.Nightmare)
+            AudioPlayer.Play(nightmareArenaSound, false, 1f, 1f, true, 2f);
+
+        // Set arena objective
+        objective.text = arena.achievementObjective.ToUpper();
+        if (arena.IsAchievementUnlocked())
+        {
+            objectiveIcon.sprite = completeObjectiveIcon;
+            objectiveIcon.color = completeObjectiveColor;
+        }
+        else
+        {
+            objectiveIcon.sprite = incompleteObjectiveIcon;
+            objectiveIcon.color = incompleteObjectiveColor;
+        }
+
+        // Iterate through blacklist slots
+        if (arena.blacklistCards.Count > 0)
+        {
+            // Remove previous blacklist cards
+            RemoveBlacklistCards();
+
+            // Set no blacklist object to false
+            if (blacklistEmpty.activeSelf)
+                blacklistEmpty.SetActive(false);
+
+            // Iterate through and create cards
+            foreach(CardData card in arena.blacklistCards)
+            {
+                BlacklistCard newCard = Instantiate(blacklistCard, cardList);
+                activeBlacklistCards.Add(newCard.gameObject);
+                newCard.Set(card);
+            }
+        }
+        else
+        {
+            // Remove previous blacklist cards
+            RemoveBlacklistCards();
+
+            // Set no blacklist object to true
+            if (!blacklistEmpty.activeSelf)
+                blacklistEmpty.SetActive(true);
+        }
+
+        // Enable chips if player is max
+        if (!chipsActivated && SaveSystem.IsPlayerMaxLevel())
+        {
+            chipsActivated = true;
+            foreach (Chip chip in chipSlots)
+                chip.obj.SetActive(true);
+        }
 
         // Set menu music
         if (MusicPlayer.isMenu)
@@ -129,4 +212,24 @@ public class ArenaPanel : MonoBehaviour
             for (int y = -4; y < 4; y++)
                 backgroundTilemap.SetTile(new Vector3Int(x, y, 0), arena.arenaBackground);
      }
+
+    /// <summary>
+    /// Removes all instantiated blacklist cards
+    /// </summary>
+    public void RemoveBlacklistCards()
+    {
+        // Remove previous blacklist cards
+        if (activeBlacklistCards != null)
+        {
+            for (int i = 0; i < activeBlacklistCards.Count; i++)
+            {
+                Destroy(activeBlacklistCards[i]);
+                activeBlacklistCards.RemoveAt(i);
+                i--;
+            }
+        }
+        
+        // Create new active list
+        activeBlacklistCards = new List<GameObject>();
+    }
 }

@@ -24,7 +24,7 @@ public class ArenaData : IdentifiableScriptableObject
     public Sprite unlockedIcon;
     [BoxGroup("Arena Info")]
     public Sprite lockedIcon;
-    [BoxGroup("Arena Info")]
+    [BoxGroup("Arena Info"), TextArea]
     public string shortDesc;
     [BoxGroup("Arena Info")]
     public TileBase arenaBackground;
@@ -35,8 +35,7 @@ public class ArenaData : IdentifiableScriptableObject
     [BoxGroup("Arena Info")]
     public StageData menuStage;
     [BoxGroup("Arena Info")]
-    public bool availableInDemo;
-
+    public Difficulty difficulty;
 
     [BoxGroup("Achievement Info")]
     public string achievementObjective;
@@ -69,6 +68,8 @@ public class ArenaData : IdentifiableScriptableObject
     [BoxGroup("Arena Rules")]
     public List<StageData> stages;
     [BoxGroup("Arena Rules")]
+    public List<CardData> blacklistCards;
+    [BoxGroup("Arena Rules")]
     public bool useWall;
     [HideIf("NoWall"), BoxGroup("Arena Rules")]
     public Material wallBorder;
@@ -78,4 +79,6 @@ public class ArenaData : IdentifiableScriptableObject
     public float wallAdjustment;
 
     public bool NoWall() { return !useWall; }
+
+    public bool IsAchievementUnlocked() { return achievement.IsAchieved; }
 }

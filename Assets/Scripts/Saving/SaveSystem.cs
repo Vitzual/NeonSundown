@@ -343,9 +343,18 @@ public class SaveSystem
         else return -1;
     }
 
+    // Returns the players level
+    public static int GetPlayerLevel() 
+    {
+        if (saveData != null)
+            return saveData.level;
+        else return 1;
+    }
+    
     // Checks if a ship is unlocked
     public static bool IsArenaUnlocked(string id) { return saveData != null && saveData.arenasUnlocked.Contains(id); }
     public static bool IsShipUnlocked(string id) { return saveData != null && saveData.shipsUnlocked.Contains(id); }
     public static bool IsCardUnlocked(string id) { return saveData != null && saveData.cardsUnlocked.Contains(id); }
     public static bool IsSynergyUnlocked(string id) { return saveData != null && saveData.synergiesUnlocked.Contains(id); }
+    public static bool IsPlayerMaxLevel() { return saveData != null && saveData.level >= Levels.ranks.Count; }
 }
