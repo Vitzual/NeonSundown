@@ -12,14 +12,22 @@ public class Effects : MonoBehaviour
     public int _mkGlowIndex = 0, _menuGlitchIndex = 1, _mainGlitchIndex = 1;
     private static int mkGlowIndex = 0, menuGlitchIndex = 1, mainGlitchIndex = 1;
 
+    // Flag for if the effects class was already started
+    private static bool isSetup = false;
+
     // On start, setup effects
     public void Awake()
     {
-        menuVolumeProfile = _menuVolumeProfile;
-        mainVolumeProfile = _mainVolumeProfile;
-        mkGlowIndex = _mkGlowIndex;
-        menuGlitchIndex = _menuGlitchIndex;
-        mainGlitchIndex = _mainGlitchIndex;
+        if (!isSetup)
+        {
+            menuVolumeProfile = _menuVolumeProfile;
+            mainVolumeProfile = _mainVolumeProfile;
+            mkGlowIndex = _mkGlowIndex;
+            menuGlitchIndex = _menuGlitchIndex;
+            mainGlitchIndex = _mainGlitchIndex;
+            isSetup = true;
+        }
+        else Debug.Log("[EFFECTS] The effects class is already setup! This class should only be in the bootstrap scene.");
     }
     
     /// <summary>
@@ -44,13 +52,13 @@ public class Effects : MonoBehaviour
         Limitless_Glitch3 glitchEffect = (Limitless_Glitch3)menuVolumeProfile.components[menuGlitchIndex];
         if (glitchEffect.enable.value != toggle) glitchEffect.enable.value = toggle;
     }
-
+    
     /// <summary>
     /// Toggles the main glitch effect
     /// </summary>
     public static void TogglMainGlitchEffect(bool toggle)
     {
-        Limitless_Glitch3 glitchEffect = (Limitless_Glitch3)mainVolumeProfile.components[mainGlitchIndex];
+        LimitlessGlitch7 glitchEffect = (LimitlessGlitch7)mainVolumeProfile.components[mainGlitchIndex];
         if (glitchEffect.enable.value != toggle) glitchEffect.enable.value = toggle;
     }
 }

@@ -22,7 +22,7 @@ public class Ship : Weapon
     public GameObject autoFireObj;
     private bool autoFire = false;
     public bool _lasers = false;
-    private bool lowHealth = false;
+    private static bool lowHealth = false;
 
     // Player model and data
     public ShipData shipData;
@@ -78,6 +78,7 @@ public class Ship : Weapon
         // Set crosshair cursor
         Cursor.SetCursor(crosshairMouse, crosshairOffset, CursorMode.Auto);
 
+        lowHealth = false;
         warrior = false;
         champion = false;
         lasers = _lasers;
@@ -317,6 +318,14 @@ public class Ship : Weapon
         if (health > maxHealth)
             health = maxHealth;
         UpdateHealth();
+
+        // Check if low health
+        if (lowHealth && health / maxHealth > 0.25f)
+        {
+            MusicPlayer.SetPitch(1f);
+            Effects.TogglMainGlitchEffect(false);
+            lowHealth = false;
+        }
     }
 
     // Damage method
@@ -362,7 +371,7 @@ public class Ship : Weapon
             // Check if under 25%
             if (!lowHealth && health / maxHealth <= 0.25f)
             {
-                MusicPlayer.SetPitch(1.15f);
+                MusicPlayer.SetPitch(1.1f);
                 Effects.TogglMainGlitchEffect(true);
                 lowHealth = true;
             }

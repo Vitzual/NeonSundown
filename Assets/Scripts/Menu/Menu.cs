@@ -78,7 +78,8 @@ public class Menu : MonoBehaviour
 
         // Reset module slots if applicable
         Gamemode.modules = new Dictionary<int, ModuleData>();
-        
+        Effects.TogglMainGlitchEffect(false);
+
         // Attempt to get the metacontext on file
         MetaContext context = SaveSystem.GetMetacontext();
 
