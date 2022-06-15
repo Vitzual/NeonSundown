@@ -18,7 +18,8 @@ MonoBehaviour:
   enemyIcon: {fileID: 21300000, guid: b17f37e01fdf5ca4db35042212eef598, type: 3}
   unlockedIcon: {fileID: 21300000, guid: b630d9252643dcc48ba78cff14e58ab8, type: 3}
   lockedIcon: {fileID: 21300000, guid: 713598d0e1c4fdf4a89e1d03a6c6f09c, type: 3}
-  shortDesc: A toxic wasteland full of Cocoons
+  shortDesc: A toxic wasteland. All primary healing cards have been blacklisted from
+    this arena.
   arenaBackground: {fileID: 11400000, guid: 4625e127b0d022b46b568cb04d72cc1f, type: 2}
   arenaMenuPitch: 1
   arenaMusic: {fileID: 8300000, guid: ca8bbdd3e67ec284ebff51e2c04abc63, type: 3}
@@ -41,7 +42,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f19aad76c54d2144bba3f8ef000066f1, type: 2}
   - {fileID: 11400000, guid: 174c47a3c82194a488f0e93e245c0807, type: 2}
   - {fileID: 11400000, guid: 435dcce5cb548554895babdb3563c3ce, type: 2}
-  blacklistCards: []
+  blacklistCards:
+  - {fileID: 11400000, guid: 947dacff39571a542990ac4222fbfc17, type: 2}
+  - {fileID: 11400000, guid: 0956276e4a4877441b63be455bde49d4, type: 2}
+  - {fileID: 11400000, guid: 00a48d5498e3041409693bf6b0062c35, type: 2}
   useWall: 0
   wallBorder: {fileID: 0}
   wallFill: {r: 0, g: 0, b: 0, a: 0}
