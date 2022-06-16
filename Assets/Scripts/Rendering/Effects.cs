@@ -58,7 +58,7 @@ public class Effects : MonoBehaviour
     /// </summary>
     public static void TogglMainGlitchEffect(bool toggle)
     {
-        LimitlessGlitch6 glitchEffect = (LimitlessGlitch6)mainVolumeProfile.components[mainGlitchIndex];
+        LimitlessGlitch7 glitchEffect = (LimitlessGlitch7)mainVolumeProfile.components[mainGlitchIndex];
         if (glitchEffect.enable.value != toggle) glitchEffect.enable.value = toggle;
     }
 }
