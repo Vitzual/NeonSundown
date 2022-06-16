@@ -323,7 +323,6 @@ public class Ship : Weapon
         if (lowHealth && health / maxHealth > 0.25f)
         {
             MusicPlayer.SetPitch(1f);
-            Effects.TogglMainGlitchEffect(false);
             lowHealth = false;
         }
     }
@@ -372,13 +371,11 @@ public class Ship : Weapon
             if (!lowHealth && health / maxHealth <= 0.25f)
             {
                 MusicPlayer.SetPitch(1.1f);
-                Effects.TogglMainGlitchEffect(true);
                 lowHealth = true;
             }
             else if (lowHealth && health / maxHealth > 0.25f)
             {
                 MusicPlayer.SetPitch(1f);
-                Effects.TogglMainGlitchEffect(false);
                 lowHealth = false;
             }
 

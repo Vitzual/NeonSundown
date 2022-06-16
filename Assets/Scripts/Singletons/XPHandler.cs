@@ -9,10 +9,12 @@ public class XPHandler : MonoBehaviour
     // Active instance
     public static XPHandler active;
     public Image rewardIcon;
-    public TextMeshProUGUI reward, xpRequirement;
+    public TextMeshProUGUI reward, xpRequirement, blueCrystals, greenCrystals, redCrystals;
     public GameObject rewardObject;
     public Material deadXP;
-    public CrystalData redCrystal;
+    public CrystalData blueCrystal, greenCrystal, redCrystal;
+    public Transform crystalsTransform;
+    public Vector2 crystalMaxLevelPosition, crystalNormalPosition;
 
     // List of active movers
     private List<XP> activeList = new List<XP>();
@@ -35,6 +37,9 @@ public class XPHandler : MonoBehaviour
     {
         active = this;
         UpdateRewards();
+        UpdateCrystals();
+
+        Events.active.onCrystalBroken += UpdateCrystals;
     }
     
     // Move normal enemies
@@ -99,6 +104,7 @@ public class XPHandler : MonoBehaviour
 
         if (SaveSystem.saveData.level < Levels.ranks.Count)
         {
+            crystalsTransform.position = crystalNormalPosition;
             reward.text = Levels.ranks[SaveSystem.saveData.level].GetName().ToUpper();
             Color color = Levels.ranks[SaveSystem.saveData.level].GetColor();
             rewardIcon.sprite = Levels.ranks[SaveSystem.saveData.level].GetIcon();
@@ -110,10 +116,19 @@ public class XPHandler : MonoBehaviour
         }
         else
         {
+            crystalsTransform.position = crystalMaxLevelPosition;
             reward.gameObject.SetActive(false);
             xpRequirement.gameObject.SetActive(false);
             rewardObject.SetActive(false);
         }
+    }
+
+    // Update crystals
+    public void UpdateCrystals()
+    {
+        blueCrystals.text = SaveSystem.GetCrystalAmount(blueCrystal.InternalID).ToString();
+        greenCrystals.text = SaveSystem.GetCrystalAmount(greenCrystal.InternalID).ToString();
+        redCrystals.text = SaveSystem.GetCrystalAmount(redCrystal.InternalID).ToString();
     }
 
     // Spawn XP

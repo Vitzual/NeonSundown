@@ -101,6 +101,9 @@ public class Crystal : Entity
         // Add crystal to save data
         SaveSystem.AddCrystal(crystalData.InternalID, 1);
 
+        // Fire off crystal event
+        Events.active.CrystalBroken();
+
         // Set is dead flag
         isDead = true;
 

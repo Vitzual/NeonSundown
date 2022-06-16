@@ -52,13 +52,4 @@ public class Effects : MonoBehaviour
         Limitless_Glitch3 glitchEffect = (Limitless_Glitch3)menuVolumeProfile.components[menuGlitchIndex];
         if (glitchEffect.enable.value != toggle) glitchEffect.enable.value = toggle;
     }
-    
-    /// <summary>
-    /// Toggles the main glitch effect
-    /// </summary>
-    public static void TogglMainGlitchEffect(bool toggle)
-    {
-        LimitlessGlitch7 glitchEffect = (LimitlessGlitch7)mainVolumeProfile.components[mainGlitchIndex];
-        if (glitchEffect.enable.value != toggle) glitchEffect.enable.value = toggle;
-    }
 }

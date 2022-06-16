@@ -22,7 +22,15 @@ public class Events : MonoBehaviour
             onSynergyAvailable(synergy);
     }
 
-    // On boss hurt
+    // On crystal broken
+    public event Action onCrystalBroken;
+    public void CrystalBroken()
+    {
+        if (onCrystalBroken != null)
+            onCrystalBroken();
+    }
+
+    // On blood crystal broken 
     public event Action onBloodCrystalBroken;
     public void BloodCrystalBroken()
     {
