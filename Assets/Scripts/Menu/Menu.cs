@@ -72,6 +72,9 @@ public class Menu : MonoBehaviour
     // On start, try and get meta context
     public void Start()
     {
+        // Reset effects always
+        Effects.ToggleMainGlitchEffect(false);
+
         // Check if experimental
         if (isExperimental) experimental.SetActive(true);
         else experimental.SetActive(false);

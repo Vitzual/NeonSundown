@@ -13,8 +13,8 @@ public class XPHandler : MonoBehaviour
     public GameObject rewardObject;
     public Material deadXP;
     public CrystalData blueCrystal, greenCrystal, redCrystal;
-    public Transform crystalsTransform;
-    public Vector2 crystalMaxLevelPosition, crystalNormalPosition;
+    public RectTransform crystalsTransform;
+    public Vector3 crystalMaxLevelPosition, crystalNormalPosition;
 
     // List of active movers
     private List<XP> activeList = new List<XP>();
@@ -104,7 +104,7 @@ public class XPHandler : MonoBehaviour
 
         if (SaveSystem.saveData.level < Levels.ranks.Count)
         {
-            crystalsTransform.position = crystalNormalPosition;
+            //crystalsTransform.localPosition = crystalNormalPosition;
             reward.text = Levels.ranks[SaveSystem.saveData.level].GetName().ToUpper();
             Color color = Levels.ranks[SaveSystem.saveData.level].GetColor();
             rewardIcon.sprite = Levels.ranks[SaveSystem.saveData.level].GetIcon();
@@ -116,7 +116,7 @@ public class XPHandler : MonoBehaviour
         }
         else
         {
-            crystalsTransform.position = crystalMaxLevelPosition;
+            //crystalsTransform.localPosition = crystalMaxLevelPosition;
             reward.gameObject.SetActive(false);
             xpRequirement.gameObject.SetActive(false);
             rewardObject.SetActive(false);

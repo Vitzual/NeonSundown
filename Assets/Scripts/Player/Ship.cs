@@ -50,6 +50,8 @@ public class Ship : Weapon
     public AudioClip damageSound;
     public AudioClip warriorSound;
     public AudioClip laserSound;
+    public AudioClip nearDeathSound;
+    public AudioSource deathMusic; // i know im bad putting this here
 
     // XP amount
     public List<float> levels;
@@ -75,6 +77,9 @@ public class Ship : Weapon
     // Subscribe to setup event
     public void Start()
     {
+        // Reset effects always
+        Effects.ToggleMainGlitchEffect(false);
+
         // Set crosshair cursor
         Cursor.SetCursor(crosshairMouse, crosshairOffset, CursorMode.Auto);
 
@@ -370,6 +375,9 @@ public class Ship : Weapon
             // Check if under 25%
             if (!lowHealth && health / maxHealth <= 0.25f)
             {
+                // Unleash pulse
+                ExplosiveHandler.CreateKnockback(transform.position, 200f, -3000f, -3500f);
+                AudioPlayer.Play(nearDeathSound, false, 1f, 1f, true, 1f);
                 MusicPlayer.SetPitch(1.1f);
                 lowHealth = true;
             }
@@ -428,6 +436,10 @@ public class Ship : Weapon
 
         // Open game over screen
         Events.active.ShipDestroyed();
+
+        // I'll make this event later
+        Effects.ToggleMainGlitchEffect(true);
+        deathMusic.Play();
     }
 
     public void OnCollisionEnter2D(Collision2D collision)

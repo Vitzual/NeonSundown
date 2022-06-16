@@ -114,6 +114,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   components:
   - {fileID: -4450423044713455107}
+  - {fileID: 4403475115030769350}
   - {fileID: -710491242790024279}
   - {fileID: 8939743874006871491}
 --- !u!114 &1666397460150417148
@@ -186,6 +187,44 @@ MonoBehaviour:
   lensSurfaceDiffractionIntensity:
     m_OverrideState: 1
     m_Value: 2
+--- !u!114 &4403475115030769350
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bae5ef5e700a4208be7236164f4ff60, type: 3}
+  m_Name: LimitlessGlitch7
+  m_EditorClassIdentifier: 
+  active: 1
+  m_AdvancedMode: 0
+  enable:
+    m_OverrideState: 1
+    m_Value: 0
+  Fade:
+    m_OverrideState: 0
+    m_Value: 1
+    min: 0
+    max: 1
+  Speed:
+    m_OverrideState: 0
+    m_Value: 1
+    min: 0
+    max: 1
+  Amount:
+    m_OverrideState: 0
+    m_Value: 1
+    min: 0
+    max: 10
+  unscaledTime:
+    m_OverrideState: 0
+    m_Value: 0
+  mask:
+    m_OverrideState: 0
+    m_Value: {fileID: 0}
 --- !u!114 &8939743874006871491
 MonoBehaviour:
   m_ObjectHideFlags: 3

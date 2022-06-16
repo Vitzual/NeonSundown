@@ -40,7 +40,7 @@ public class GameOverScreen : MonoBehaviour
 
         // Setup animations
         LeanTween.alphaCanvas(gameOverScreen, 1f, 1f);
-        LeanTween.moveLocal(gameOverTitle, new Vector2(0, 90), 0.5f)
+        LeanTween.moveLocal(gameOverTitle, new Vector2(0, 95), 0.5f)
             .setEase(LeanTweenType.easeInExpo).setDelay(1f);
         LeanTween.alphaCanvas(runtimeStats, 1f, 0.5f).setDelay(1.25f);
         LeanTween.alphaCanvas(button, 1f, 0.5f).setDelay(1.25f);
