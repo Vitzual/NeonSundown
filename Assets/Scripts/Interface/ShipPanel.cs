@@ -13,8 +13,8 @@ public class ShipPanel : MonoBehaviour
     [System.Serializable]
     public class Module
     {
-        public Image module;
-        public Image icon;
+        public Image module, icon;
+        public TextMeshProUGUI name, amount;
     }
     public List<Module> moduleSlots;
 
@@ -42,12 +42,11 @@ public class ShipPanel : MonoBehaviour
 
     // Panel elements
     public new TextMeshProUGUI name;
-    public TextMeshProUGUI modules, subTitle, desc, health, regen,
-        speed, dash, damage, firerate, pierces, lifetime;
+    public TextMeshProUGUI desc, health, regen, speed, dash, 
+        damage, firerate, pierces, lifetime;
     private string healthStr, regenStr, speedStr, dashStr, 
         damageStr, firerateStr, piercesStr, lifetimeStr;
-    public Image icon, leftLine, rightLine, bottomLine, panel,
-        moduleCancelButton, moduleClearButton;
+    public Image icon, panel, moduleCancelButton, moduleClearButton;
 
     // On start, subscribe to ship setup and create buttons
     public void Start()
@@ -98,8 +97,8 @@ public class ShipPanel : MonoBehaviour
         Gamemode.ship = ship;
 
         // Set all information
-        name.text = ship.name;
-        subTitle.text = ship.subTitle;
+        name.text = ship.name + " <size=18><color=#" + ColorUtility.ToHtmlStringRGB(
+            ship.lightColor) + ">" + ship.subTitle;
         desc.text = ship.desc;
         icon.sprite = ship.glowIcon;
         icon.color = ship.mainColor;
@@ -138,11 +137,6 @@ public class ShipPanel : MonoBehaviour
 
         // Set all colors
         panel.color = ship.mainColor;
-        leftLine.color = ship.mainColor;
-        rightLine.color = ship.mainColor;
-        bottomLine.color = ship.mainColor;
-        modules.color = ship.lightColor;
-        subTitle.color = ship.lightColor;
         health.color = ship.lightColor;
         regen.color = ship.lightColor;
         speed.color = ship.lightColor;
@@ -232,6 +226,11 @@ public class ShipPanel : MonoBehaviour
                 ApplyModule(module);
                 equippedModules.Add(module);
 
+                // Set module names
+                moduleSlots[moduleSlot].name.text = module.name.ToUpper();
+                moduleSlots[moduleSlot].amount.text = module.values[SaveSystem.GetModuleAmount(module.InternalID)].ToString();
+                if (module.multi) moduleSlots[moduleSlot].amount.text += "x";
+
                 // Set module colors
                 moduleSlots[moduleSlot].module.color = module.color;
                 moduleSlots[moduleSlot].icon.sprite = module.icon;
@@ -249,6 +248,8 @@ public class ShipPanel : MonoBehaviour
             }
             else
             {
+                moduleSlots[moduleSlot].name.text = "EMPTY";
+                moduleSlots[moduleSlot].amount.text = "SLOT";
                 moduleSlots[moduleSlot].module.color = Color.white;
                 moduleSlots[moduleSlot].icon.color = new Color(0, 0, 0, 0);
             }
