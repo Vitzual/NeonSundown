@@ -142,7 +142,7 @@ public class EnemyHandler : MonoBehaviour
 
         // Attempt to set enemy variant
         Enemy enemy = lastObj.GetComponent<Enemy>();
-        enemy.Setup(enemyData.variants[variant], player);
+        enemy.Setup(enemyData, variant, player);
         if (enableLockOn) enemy.EnableLockOn();
         else if (disableRotation) enemy.DisableRotation();
 

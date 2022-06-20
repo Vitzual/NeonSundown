@@ -14,10 +14,10 @@ public class Spawner : Enemy
     public Vector2 spawnOffset;
     private float spawnTimer;
 
-    public override void Setup(VariantData data, Transform player)
+    public override void Setup(EnemyData data, Variant variant, Transform target)
     {
         spawnTimer = spawnCooldown;
-        base.Setup(data, player);
+        base.Setup(data, variant, target);
     }
 
     public override void Move()
@@ -39,7 +39,7 @@ public class Spawner : Enemy
             else
             {
                 Enemy newEnemy = Instantiate(enemyToSpawn.obj, spawnPos, transform.rotation).GetComponent<Enemy>();
-                newEnemy.Setup(enemyToSpawn.variants[data.variant], null);
+                newEnemy.Setup(enemyToSpawn, variant, target);
             }
         }
 
@@ -47,14 +47,14 @@ public class Spawner : Enemy
         if (circlePlayer)
         {
             // Gradually rotate to the target
-            float rotateStep = data.rotateSpeed * Time.deltaTime;
+            float rotateStep = variantData.rotateSpeed * Time.deltaTime;
             float angle = Mathf.Atan2(target.transform.position.y - transform.position.y,
                 target.transform.position.x - transform.position.x) * Mathf.Rad2Deg;
             Quaternion targetRotation = Quaternion.Euler(new Vector3(0, 0, angle));
             transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotateStep);
 
             // Move towards the target
-            float movementStep = data.speed * Time.deltaTime;
+            float movementStep = variantData.speed * Time.deltaTime;
             transform.position += transform.up * movementStep;
         }
 

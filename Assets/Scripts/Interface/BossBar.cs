@@ -37,7 +37,7 @@ public class BossBar : MonoBehaviour
         icon.sprite = boss.bossModel;
 
         // Set the colors
-        Color color = VariantPalette.GetPrimaryColor(enemy.GetData().variant);
+        Color color = VariantPalette.GetPrimaryColor(enemy.GetVariantData().variant);
         background.color = new Color(color.r, color.g, color.b, 0.075f);
         icon.color = color;
         fill.color = color;

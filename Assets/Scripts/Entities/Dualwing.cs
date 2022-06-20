@@ -11,6 +11,6 @@ public class Dualwing : Boss
         Ship ship = collision.GetComponent<Ship>();
 
         // If is bullet, invoke on hit method
-        if (ship != null) ship.Damage(enemy.GetData().damage);
+        if (ship != null) ship.Damage(enemy.GetVariantData().damage);
     }
 }

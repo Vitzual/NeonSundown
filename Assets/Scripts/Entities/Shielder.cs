@@ -14,10 +14,10 @@ public class Shielder : Enemy
     private float initialSize = 7f;
 
     // Get initial shield size
-    public override void Setup(VariantData data, Transform player)
+    public override void Setup(EnemyData data, Variant variant, Transform target)
     {
         initialSize = shield.localScale.x;
-        base.Setup(data, player);
+        base.Setup(data, variant, target);
     }
 
     // Damage entity

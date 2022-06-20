@@ -10,10 +10,10 @@ public class Hivemind : Enemy
     private float cooldown;
 
     // Setup the hivemind
-    public override void Setup(VariantData data, Transform player)
+    public override void Setup(EnemyData data, Variant variant, Transform target)
     {
-        cooldown = data.speed;
-        base.Setup(data, player);
+        cooldown = data.variants[variant].speed;
+        base.Setup(data, variant, target);
     }
 
     // Start is called before the first frame update
@@ -21,7 +21,7 @@ public class Hivemind : Enemy
     {
         if (cooldown <= 0)
         {
-            cooldown = data.speed;
+            cooldown = variantData.speed;
             Vector2 spawnPos = new Vector2(transform.position.x + Random.Range(-randomizeRange, randomizeRange), 
                 transform.position.y + Random.Range(-randomizeRange, randomizeRange));
             EnemyHandler.active.CreateEnemy(enemy, variant, spawnPos, false, true, false);

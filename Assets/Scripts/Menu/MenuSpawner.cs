@@ -78,7 +78,7 @@ public class MenuSpawner : MonoBehaviour
             if (enemies[a] != null)
             {
                 // Rotate if it says to 
-                VariantData data = enemies[a].GetData();
+                VariantData data = enemies[a].GetVariantData();
                 if (data.rotate) enemies[a].rotator.Rotate(Vector3.forward, data.rotateSpeed * Time.deltaTime);
 
                 // Move towards the target
@@ -126,7 +126,7 @@ public class MenuSpawner : MonoBehaviour
         Enemy enemy = Instantiate(enemyData.obj, position, Quaternion.identity).GetComponent<Enemy>();
         Rigidbody2D rb = enemy.GetComponent<Rigidbody2D>();
         if (rb != null) rb.freezeRotation = true;
-        enemy.Setup(enemyData.variants[variant], null);
+        enemy.Setup(enemyData, variant, null);
         enemies.Add(enemy);
     }
     

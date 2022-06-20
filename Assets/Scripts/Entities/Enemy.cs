@@ -7,7 +7,8 @@ public class Enemy : Entity
 {
     // Scriptable object
     protected Variant variant;
-    protected VariantData data;
+    protected VariantData variantData;
+    protected EnemyData enemyData;
     protected Material material;
 
     // Rigidbody attached to the enemy
@@ -16,6 +17,7 @@ public class Enemy : Entity
     private bool isDestroyed = false;
     private bool lockOn = false;
     public bool isBoss = false;
+    public bool isClone = false;
     public bool dieOnCollision = true;
 
     // Transform lists
@@ -40,10 +42,15 @@ public class Enemy : Entity
     protected bool hasRigidbody;
     
     // Setup the enemy
-    public virtual void Setup(VariantData data, Transform player)
+    public virtual void Setup(EnemyData data, Variant variant, Transform target)
     {
+        // Set scriptable
+        enemyData = data;
+        this.variant = variant;
+        variantData = enemyData.variants[variant];
+
         // Get the variant color
-        VariantColor variantColor = VariantPalette.GetVariantColor(data.variant);
+        VariantColor variantColor = VariantPalette.GetVariantColor(variant);
 
         // Loop through all glows and fills
         foreach (TrailRenderer trail in trails) 
@@ -60,25 +67,21 @@ public class Enemy : Entity
             particle.trailMaterial = variantColor.material;
         }
 
-        // Set scriptable
-        variant = data.variant;
-        this.data = data;
-
         // Set material / particle
         deathEffect = variantColor.deathParticle;
         deathMaterial = variantColor.material;
         material = variantColor.material;
 
         // Set stats
-        health = data.health * EnemySpawner.enemyHealthMultiplier;
-        speed = data.speed * EnemySpawner.enemySpeedMultiplier;
-        damage = data.damage * EnemySpawner.enemyDamageMultiplier;
+        health = variantData.health * EnemySpawner.enemyHealthMultiplier;
+        speed = variantData.speed * EnemySpawner.enemySpeedMultiplier;
+        damage = variantData.damage * EnemySpawner.enemyDamageMultiplier;
         maxHealth = health;
-        rotation = data.rotateSpeed;
-        immune = data.immune;
+        rotation = variantData.rotateSpeed;
+        immune = variantData.immune;
 
         // Set target
-        target = player;
+        this.target = target;
 
         // Set rigidbody flag
         hasRigidbody = rb != null;
@@ -131,7 +134,7 @@ public class Enemy : Entity
     public override void Knockback(float amount, Vector3 origin)
     {
         // Apply knockback
-        if (hasRigidbody && data.knockback)
+        if (hasRigidbody && variantData.knockback)
             rb.AddForce(Vector3.Normalize(origin - transform.position) * amount);
     }
 
@@ -150,13 +153,13 @@ public class Enemy : Entity
         // Spawn XP and possibly crystal
         if (!isDestroyed)
         {
-            if (data.canDropCrystal)
+            if (variantData.canDropCrystal)
             {
-                if (Random.Range(0, 1f) < (data.crystalDropChance * EnemySpawner.crystalDropChance))
-                    XPHandler.active.Spawn(transform.position, data.minXP, data.crystal);
-                else XPHandler.active.Spawn(transform.position, data.minXP);
+                if (Random.Range(0, 1f) < (variantData.crystalDropChance * EnemySpawner.crystalDropChance))
+                    XPHandler.active.Spawn(transform.position, variantData.minXP, variantData.crystal);
+                else XPHandler.active.Spawn(transform.position, variantData.minXP);
             }
-            else XPHandler.active.Spawn(transform.position, data.minXP);
+            else XPHandler.active.Spawn(transform.position, variantData.minXP);
         }
 
         // Set is destroy to true
@@ -200,10 +203,10 @@ public class Enemy : Entity
             // Calculate step
             step = speed * Time.deltaTime;
 
-            if (data.rotate)
+            if (variantData.rotate)
             {
                 // Check if rotating (lock target)
-                rotator.Rotate(Vector3.forward, data.rotateSpeed * Time.deltaTime);
+                rotator.Rotate(Vector3.forward, variantData.rotateSpeed * Time.deltaTime);
                 transform.position = Vector2.MoveTowards(transform.position, target.position, step);
             }
 
@@ -233,8 +236,11 @@ public class Enemy : Entity
         return health <= 0;
     }
 
-    // Get enemy data
-    public VariantData GetData() { return data; }
+    // Get object data
+    public Variant GetVariant() { return variant; }
+    public EnemyData GetEnemyData() { return enemyData; }
+    public VariantData GetVariantData() { return variantData; }
+
 
     // Get health variables
     public float GetHealth() { return health; }
