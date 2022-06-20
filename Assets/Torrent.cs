@@ -7,13 +7,14 @@ public class Torrent : Enemy
     // List of enemies 
     private List<Enemy> enemies;
     public float dupeCooldown = 1;
-    private float cooldown;
+    private float cooldown = 1, spawns = 0;
 
     // Setup new enemies list
     public override void Setup(EnemyData data, Variant variant, Transform target)
     {
         enemies = new List<Enemy>();
         cooldown = dupeCooldown;
+        spawns = 0;
         base.Setup(data, variant, target);
     }
 
@@ -22,7 +23,7 @@ public class Torrent : Enemy
     {
         // Check if enemies should be duped
         cooldown -= Time.deltaTime;
-        if (cooldown <= 0)
+        if (spawns <= 50 && cooldown <= 0)
         {
             cooldown = dupeCooldown;
             for (int i = 0; i < enemies.Count; i++)
@@ -30,7 +31,7 @@ public class Torrent : Enemy
                 if (enemies[i] != null)
                 {
                     EnemyHandler.active.CreateEnemy(enemies[i].GetEnemyData(), enemies[i].GetVariant(),
-                        enemies[i].transform.position, enemies[i].RotationEnabled(), enemies[i].LockOnEnabled(), true);
+                        transform.position, enemies[i].RotationEnabled(), false, false, true);
                 }
                 else
                 {
@@ -39,7 +40,6 @@ public class Torrent : Enemy
                 }
             }
         }
-
 
         base.Move();
     }
@@ -78,7 +78,7 @@ public class Torrent : Enemy
         Enemy enemy = collision.GetComponent<Enemy>();
 
         // Check if enemy is null
-        if (enemy != null && enemy.isClone && enemies.Contains(enemy))
+        if (enemy != null && enemies.Contains(enemy))
         {
             enemies.Remove(enemy);
             enemy.isClone = false;

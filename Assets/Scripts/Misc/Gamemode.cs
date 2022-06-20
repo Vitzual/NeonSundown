@@ -21,7 +21,12 @@ public class Gamemode : MonoBehaviour
     public Image arenaIcon;
     public TextMeshProUGUI arenaName, arenaDesc;
     public bool useArenaInfo = false;
-    private bool awardGiven = false;
+    private static bool awardGiven = false;
+
+    // Enemies objective tracking
+    public static bool killEnemiesObjective;
+    public static EnemyData enemyObjective;
+    private static int objectiveAmountKilled = 0;
 
     // Setup the game
     public void Awake()
@@ -48,9 +53,6 @@ public class Gamemode : MonoBehaviour
             LeanTween.moveLocal(arenaInfo, new Vector2(0, -50), 1.5f).setEase(LeanTweenType.easeOutExpo).setDelay(1f);
             LeanTween.moveLocal(arenaInfo, new Vector2(0, 50), 0.5f).setEase(LeanTweenType.easeInExpo).setDelay(4f);
         }
-
-        // Set boss destroyed event
-        Events.active.onBossDestroyed += BossDestroyed;
     }
 
     // Load menu
@@ -76,11 +78,11 @@ public class Gamemode : MonoBehaviour
     }
 
     // Defeat boss
-    public void BossDestroyed()
+    public static void ObjectiveEnemyKilled()
     {
-        if (arena.useAchievementBoss && !awardGiven)
+        objectiveAmountKilled += 1;
+        if (objectiveAmountKilled > arena.amountToKill && !awardGiven)
         {
-            Debug.Log("Awarding boss achievement!");
             awardGiven = true;
             if (!arena.achievement.IsAchieved)
             {

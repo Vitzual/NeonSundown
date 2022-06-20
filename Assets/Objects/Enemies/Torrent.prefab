@@ -5103,7 +5103,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -5524,6 +5524,7 @@ MonoBehaviour:
   rb: {fileID: 8071768145869598020}
   isCullable: 1
   isBoss: 0
+  isClone: 0
   dieOnCollision: 1
   trails: []
   glows:
@@ -5539,6 +5540,7 @@ MonoBehaviour:
   particles:
   - {fileID: 295038748528815169}
   rotator: {fileID: 8071768146122005024}
+  dupeCooldown: 0.5
 --- !u!50 &8071768145869598020
 Rigidbody2D:
   serializedVersion: 4

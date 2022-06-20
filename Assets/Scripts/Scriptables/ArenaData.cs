@@ -39,12 +39,16 @@ public class ArenaData : IdentifiableScriptableObject
 
     [BoxGroup("Achievement Info")]
     public string achievementObjective;
-    [BoxGroup("Achievement Info"), HideIf("useAchievementBoss", true)]
+    [BoxGroup("Achievement Info"), HideIf("useAchievementKills", true)]
     public bool useAchievementTime;
-    [BoxGroup("Achievement Info"), HideIf("useAchievementBoss", true)]
+    [BoxGroup("Achievement Info"), ShowIf("useAchievementTime", true)]
     public float achievementTime;
     [BoxGroup("Achievement Info"), HideIf("useAchievementTime", true)]
-    public bool useAchievementBoss;
+    public bool useAchievementKills;
+    [BoxGroup("Achievement Info"), ShowIf("useAchievementKills", true)]
+    public EnemyData enemyToKill;
+    [BoxGroup("Achievement Info"), ShowIf("useAchievementKills", true)]
+    public int amountToKill;
     [BoxGroup("Achievement Info")]
     public AchievementObject achievement;
 

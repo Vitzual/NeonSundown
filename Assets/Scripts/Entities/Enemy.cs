@@ -144,6 +144,11 @@ public class Enemy : Entity
         // Check if immune
         if (immune) return;
 
+        // Check objective status
+        if (Gamemode.killEnemiesObjective && 
+            Gamemode.enemyObjective == enemyData)
+            Gamemode.ObjectiveEnemyKilled();
+
         // Check if boss
         if (isBoss) Events.active.BossDestroyed();
 
