@@ -4,10 +4,10 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class EnemySpawner : MonoBehaviour
+public class ArenaController : MonoBehaviour
 {
     // Static instance
-    public static EnemySpawner active;
+    public static ArenaController active;
 
     // List of all stages
     public StageData activeStage;

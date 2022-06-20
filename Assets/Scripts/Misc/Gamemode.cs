@@ -68,7 +68,7 @@ public class Gamemode : MonoBehaviour
         if (isAlphaBuild) return;
 
         // Get arena time
-        float time = EnemySpawner.GetTime();
+        float time = ArenaController.GetTime();
 
         // Save the game
         SaveSystem.UpdateArena(arena.InternalID, time);

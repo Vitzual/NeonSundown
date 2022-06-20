@@ -29,7 +29,7 @@ public class GameOverScreen : MonoBehaviour
         Debug.Log("Ending game!");
 
         // Set the runtime stats
-        stats.text = Formatter.Time(EnemySpawner.GetTime()) + "<br>" +
+        stats.text = Formatter.Time(ArenaController.GetTime()) + "<br>" +
             Formatter.Round(RuntimeStats.totalXP, 0) + "<br>" +
             RuntimeStats.enemiesDestroyed + "<br>" +
             RuntimeStats.bulletsFired + "<br>" +

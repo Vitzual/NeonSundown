@@ -73,9 +73,9 @@ public class Enemy : Entity
         material = variantColor.material;
 
         // Set stats
-        health = variantData.health * EnemySpawner.enemyHealthMultiplier;
-        speed = variantData.speed * EnemySpawner.enemySpeedMultiplier;
-        damage = variantData.damage * EnemySpawner.enemyDamageMultiplier;
+        health = variantData.health * ArenaController.enemyHealthMultiplier;
+        speed = variantData.speed * ArenaController.enemySpeedMultiplier;
+        damage = variantData.damage * ArenaController.enemyDamageMultiplier;
         maxHealth = health;
         rotation = variantData.rotateSpeed;
         immune = variantData.immune;
@@ -155,7 +155,7 @@ public class Enemy : Entity
         {
             if (variantData.canDropCrystal)
             {
-                if (Random.Range(0, 1f) < (variantData.crystalDropChance * EnemySpawner.crystalDropChance))
+                if (Random.Range(0, 1f) < (variantData.crystalDropChance * ArenaController.crystalDropChance))
                     XPHandler.active.Spawn(transform.position, variantData.minXP, variantData.crystal);
                 else XPHandler.active.Spawn(transform.position, variantData.minXP);
             }
