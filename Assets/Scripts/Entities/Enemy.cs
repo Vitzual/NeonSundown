@@ -245,6 +245,8 @@ public class Enemy : Entity
     // Get health variables
     public float GetHealth() { return health; }
     public float GetMaxHealth() { return maxHealth; }
+    public bool LockOnEnabled() { return lockOn; }
+    public bool RotationEnabled() { return !rb.freezeRotation; }
 
     // On collision
     public virtual void OnTriggerEnter2D(Collider2D collision)

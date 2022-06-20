@@ -98,7 +98,14 @@ public class EnemyHandler : MonoBehaviour
         }
     }
     
-    // Create a new active enemy instance
+    /// <summary>
+    /// Queues a new enemy for the arena to spawn
+    /// </summary>
+    /// <param name="enemyData"></param>
+    /// <param name="variant"></param>
+    /// <param name="amount"></param>
+    /// <param name="disableRotation"></param>
+    /// <param name="enableLockOn"></param>
     public void QueueEnemy(EnemyData enemyData, Variant variant, 
         int amount, bool disableRotation, bool enableLockOn)
     {
@@ -119,9 +126,17 @@ public class EnemyHandler : MonoBehaviour
         }
     }
 
-    // Creates a new enemy with a specific position
+    /// <summary>
+    /// Creates a new enemy at the specified location
+    /// </summary>
+    /// <param name="enemyData"></param>
+    /// <param name="variant"></param>
+    /// <param name="position"></param>
+    /// <param name="disableRotation"></param>
+    /// <param name="enableLockOn"></param>
+    /// <param name="global"></param>
     public void CreateEnemy(EnemyData enemyData, Variant variant, Vector2 position, 
-        bool disableRotation, bool enableLockOn, bool global)
+        bool disableRotation, bool enableLockOn, bool global, bool isClone = false)
     {
         // Create the tile
         Vector2 spawnPos;
@@ -143,6 +158,7 @@ public class EnemyHandler : MonoBehaviour
         // Attempt to set enemy variant
         Enemy enemy = lastObj.GetComponent<Enemy>();
         enemy.Setup(enemyData, variant, player);
+        if (isClone) enemy.isClone = true;
         if (enableLockOn) enemy.EnableLockOn();
         else if (disableRotation) enemy.DisableRotation();
 

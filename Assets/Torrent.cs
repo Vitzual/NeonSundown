@@ -29,10 +29,8 @@ public class Torrent : Enemy
             {
                 if (enemies[i] != null)
                 {
-                    
-
                     EnemyHandler.active.CreateEnemy(enemies[i].GetEnemyData(), enemies[i].GetVariant(),
-                        enemies[i].transform.position, false, false, false);
+                        enemies[i].transform.position, enemies[i].RotationEnabled(), enemies[i].LockOnEnabled(), true);
                 }
                 else
                 {
