@@ -103,7 +103,7 @@ public class ShipPanel : MonoBehaviour
         icon.sprite = ship.glowIcon;
         icon.color = ship.mainColor;
         panelBackground.color = ship.darkColor;
-        panelBackground.color = ship.mainColor;
+        panelBorder.color = ship.mainColor;
     }
 
     // Open module list
