@@ -67,7 +67,7 @@ public class ShipButton : MonoBehaviour
     // Select ship
     public void SelectShip()
     {
-        if (isUnlocked)
-            Events.active.SetupShip(ship);
+        Debug.Log("Selecing ship " + ship.name);
+        Events.active.SetupShip(ship);
     }
 }

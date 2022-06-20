@@ -46,7 +46,7 @@ public class ShipPanel : MonoBehaviour
         damage, firerate, pierces, lifetime;
     private string healthStr, regenStr, speedStr, dashStr, 
         damageStr, firerateStr, piercesStr, lifetimeStr;
-    public Image icon, panel, moduleCancelButton, moduleClearButton;
+    public Image icon, panelBackground, panelBorder, moduleCancelButton, moduleClearButton;
 
     // On start, subscribe to ship setup and create buttons
     public void Start()
@@ -90,8 +90,8 @@ public class ShipPanel : MonoBehaviour
     public void Setup(ShipData ship)
     {
         // Set modules to false
-        ToggleModules(false);
-        ClearModule(true);
+        //ToggleModules(false);
+        //ClearModule(true);
 
         // Set the ship
         Gamemode.ship = ship;
@@ -102,51 +102,8 @@ public class ShipPanel : MonoBehaviour
         desc.text = ship.desc;
         icon.sprite = ship.glowIcon;
         icon.color = ship.mainColor;
-
-        // Set ship stats
-        healthStr = "<b>HEALTH:</b><color=white> " + Formatter.Round(ship.startingHealth) + "hp";
-        regenStr = "<b>REGEN:</b><color=white> " + Formatter.Round(ship.regenAmount) + " / second";
-        speedStr = "<b>SPEED:</b><color=white> " + Formatter.Round(ship.playerSpeed) + " km/h";
-        dashStr = "<b>DASH:</b><color=white> " + Formatter.Round(ship.dashSpeed) + " km/h";
-
-        // Set weapon stats
-        if (ship.weapon != null)
-        {
-            damageStr = "<b>DAMAGE:</b><color=white> " + Formatter.Round(ship.weapon.damage) + "hp / shot";
-            firerateStr = "<b>COOLDOWN:</b><color=white> " + Formatter.Round(ship.weapon.cooldown) + " seconds";
-            piercesStr = "<b>PIERCES:</b><color=white> " + Formatter.Round(ship.weapon.pierces) + " / shot";
-            lifetimeStr = "<b>LIFETIME:</b><color=white> " + Formatter.Round(ship.weapon.lifetime) + " seconds";
-        }
-        else
-        {
-            damageStr = "<b>DAMAGE:</b><color=white> N/A";
-            firerateStr = "<b>COOLDOWN:</b><color=white> N/A";
-            piercesStr = "<b>PIERCES:</b><color=white> N/A";
-            lifetimeStr = "<b>LIFETIME:</b><color=white> N/A";
-        }
-
-        // Set elements based off new strings
-        health.text = healthStr;
-        regen.text = regenStr;
-        speed.text = speedStr;
-        dash.text = dashStr;
-        damage.text = damageStr;
-        firerate.text = firerateStr;
-        pierces.text = piercesStr;
-        lifetime.text = lifetimeStr;
-
-        // Set all colors
-        panel.color = ship.mainColor;
-        health.color = ship.lightColor;
-        regen.color = ship.lightColor;
-        speed.color = ship.lightColor;
-        dash.color = ship.lightColor;
-        damage.color = ship.lightColor;
-        firerate.color = ship.lightColor;
-        pierces.color = ship.lightColor;
-        lifetime.color = ship.lightColor;
-        //moduleCancelButton.color = ship.subColor;
-        //moduleClearButton.color = ship.subColor;
+        panelBackground.color = ship.darkColor;
+        panelBackground.color = ship.mainColor;
     }
 
     // Open module list
