@@ -97,7 +97,7 @@ public class ShipPanel : MonoBehaviour
         Gamemode.ship = ship;
 
         // Set all information
-        name.text = ship.name + " <size=18><color=#" + ColorUtility.ToHtmlStringRGB(
+        name.text = ship.name.ToUpper() + " <size=18><color=#" + ColorUtility.ToHtmlStringRGB(
             ship.lightColor) + ">" + ship.subTitle;
         desc.text = ship.desc;
         icon.sprite = ship.glowIcon;
