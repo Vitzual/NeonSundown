@@ -141,7 +141,7 @@ public class Card : MonoBehaviour
             // Calculate effect
             StatValue statType = statData.value;
             effectOne.gameObject.SetActive(true);
-            effectOne.text = statType.type.ToString() + ": " + Formatter.Round(
+            effectOne.text = "<b>" + statType.type.ToString() + ":</b> " + Formatter.Round(
                 Deck.GetStat(statType.type)) + GetDifference(statType);
             effectTwo.gameObject.SetActive(false);
         }
@@ -155,7 +155,7 @@ public class Card : MonoBehaviour
             // Calculate effect
             StatValue statType = primary.stats[0];
             effectOne.gameObject.SetActive(true);
-            effectOne.text = statType.type.ToString() + ": " + Formatter.Round(
+            effectOne.text = "<b>" + statType.type.ToString() + ":</b> " + Formatter.Round(
                 Deck.GetStat(statType.type)) + GetDifference(statType);
             
             // Check if second effect available
@@ -164,7 +164,7 @@ public class Card : MonoBehaviour
                 // Show effect
                 statType = primary.stats[1];
                 effectTwo.gameObject.SetActive(true);
-                effectTwo.text = statType.type.ToString() + ": " + Formatter.Round(
+                effectTwo.text = "<b>" + statType.type.ToString() + ":</b> " + Formatter.Round(
                     Deck.GetStat(statType.type)) + GetDifference(statType);
             }
             else effectTwo.gameObject.SetActive(false);
@@ -189,7 +189,7 @@ public class Card : MonoBehaviour
                 {
                     redraw = true;
                     effectOne.gameObject.SetActive(true);
-                    effectOne.text = "<color=orange>Will replace " + Deck.secondary.name + "!";
+                    effectOne.text = "<b><color=orange>Will replace " + Deck.secondary.name + "!</b>";
                     effectTwo.gameObject.SetActive(true);
                     effectTwo.text = "<color=white>Free draw if picked!";
                 }

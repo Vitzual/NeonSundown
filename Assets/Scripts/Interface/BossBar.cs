@@ -33,7 +33,7 @@ public class BossBar : MonoBehaviour
         this.enemy = enemy;
 
         // Set the new enemy info
-        name.text = enemy.name;
+        name.text = enemy.name.ToUpper();
         icon.sprite = boss.bossModel;
 
         // Set the colors

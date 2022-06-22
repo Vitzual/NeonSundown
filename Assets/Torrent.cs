@@ -23,15 +23,21 @@ public class Torrent : Enemy
     {
         // Check if enemies should be duped
         cooldown -= Time.deltaTime;
-        if (spawns <= 50 && cooldown <= 0)
+        spawns = 0;
+        if (cooldown <= 0)
         {
             cooldown = dupeCooldown;
             for (int i = 0; i < enemies.Count; i++)
             {
+                // Break loop after 10 spawns
+                if (spawns >= 10) break;
+
+                // Spawn enemies
                 if (enemies[i] != null)
                 {
                     EnemyHandler.active.CreateEnemy(enemies[i].GetEnemyData(), enemies[i].GetVariant(),
-                        transform.position, enemies[i].RotationEnabled(), false, false, true);
+                        transform.position, enemies[i].RotationEnabled(), enemies[i].LockOnEnabled(), false, true);
+                    spawns += 1;
                 }
                 else
                 {
