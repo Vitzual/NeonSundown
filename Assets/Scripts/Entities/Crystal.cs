@@ -42,9 +42,24 @@ public class Crystal : Entity
         // Get the other enemy component
         Bullet bullet = collision.GetComponent<Bullet>();
 
-        // If is enemy, damage
+        // If is bullet, invoke on hit method
         if (bullet != null)
+        {
             bullet.OnHit(this);
+            return;
+        }
+        else
+        {
+            // Get the other enemy component
+            bullet = collision.transform.parent.GetComponent<Bullet>();
+
+            // If is bullet, invoke on hit method
+            if (bullet != null)
+            {
+                bullet.OnHit(this);
+                return;
+            }
+        }
     }
 
     // On collision

@@ -55,7 +55,7 @@ MonoBehaviour:
   sprite: {fileID: 4619522053647639269}
   trail: {fileID: 0}
   rotator: {fileID: 0}
-  autoLockRange: {fileID: 7802285239407524791}
+  autoLockRange: {fileID: 0}
   explosive: 1
   overrideSprite: 0
   explosionSize: 20
@@ -192,7 +192,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6511554077911064688}
   - component: {fileID: 7802285239407524791}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Auto Lock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -223,7 +223,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}

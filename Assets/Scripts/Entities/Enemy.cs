@@ -265,6 +265,18 @@ public class Enemy : Entity
             bullet.OnHit(this);
             return;
         }
+        else
+        {
+            // Get the other enemy component
+            bullet = collision.transform.parent.GetComponent<Bullet>();
+
+            // If is bullet, invoke on hit method
+            if (bullet != null)
+            {
+                bullet.OnHit(this);
+                return;
+            }
+        }
     }
 
     public override void Stun(float length)

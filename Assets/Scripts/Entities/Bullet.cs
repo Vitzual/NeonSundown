@@ -11,7 +11,7 @@ public class Bullet : Entity
     public SpriteRenderer sprite;
     public TrailRenderer trail;
     public Transform rotator;
-    public CircleCollider2D autoLockRange;
+    public GameObject autoLockRange;
 
     // The bullets target
     protected Transform target;
@@ -32,6 +32,7 @@ public class Bullet : Entity
     private bool isReversed = false;
     public bool canPassBarriers = false;
     private bool autoLock = false;
+    private bool lockTarget = false;
 
     // Is a split shot
     protected Weapon parent;
@@ -44,11 +45,13 @@ public class Bullet : Entity
         bool isSplitShot = false, bool explosiveRound = false, bool autoLock = false)
     {
         // Check if auto lock being used
-        if (autoLock)
+        if (autoLock && autoLockRange != null)
         {
-            this.autoLock = autoLock;
-            autoLockRange.gameObject.SetActive(true);
+            this.autoLock = true;
+            lockTarget = true;
+            autoLockRange.SetActive(true);
         }
+        else lockTarget = weapon.lockTarget;
 
         // Check if prestiged
         this.parent = parent;
@@ -113,7 +116,7 @@ public class Bullet : Entity
             if (target == null) tracking = false;
 
             // Rotate randomly and move forward
-            else RotateToTarget(weapon.lockTarget);
+            else RotateToTarget(lockTarget);
         }
         
         // Move forward
@@ -149,7 +152,7 @@ public class Bullet : Entity
         // Check if locked
         if (autoLock)
         {
-            autoLockRange.enabled = false;
+            autoLockRange.SetActive(false);
             target = entity.transform;
             tracking = true;
             autoLock = false;
