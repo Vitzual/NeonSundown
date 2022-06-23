@@ -41,6 +41,9 @@ public class ChromaHandler : MonoBehaviour
             case ChromaType.Lasers:
                 Ship.lasers = true;
                 break;
+            case ChromaType.AutoLock:
+                BulletHandler.autoLockBullets = true;
+                break;
         }      
     }
 }

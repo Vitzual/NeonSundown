@@ -8,6 +8,7 @@ public class BulletHandler : MonoBehaviour
     public static BulletHandler active;
     public static bool stickyBullets = false;
     public static bool energyBullets = false;
+    public static bool autoLockBullets = false;
     public static float bulletSize = 1f;
 
     // List of all active bullets
@@ -46,7 +47,6 @@ public class BulletHandler : MonoBehaviour
         }
     }
 
-
     // Create a new active bullet instance
     public void CreateBullet(Weapon parent, WeaponData weapon, Vector2 position, Quaternion rotation, int amount, Material material, 
         bool overrideAudioCooldown = false, bool explosiveRound = false, bool useSize = false, Transform target = null)
@@ -69,7 +69,7 @@ public class BulletHandler : MonoBehaviour
 
             // Attempt to set enemy variant
             Bullet bullet = lastObj.GetComponent<Bullet>();
-            bullet.Setup(parent, weapon, material, target, false, explosiveRound);
+            bullet.Setup(parent, weapon, material, target, false, explosiveRound, autoLockBullets);
 
             // Add to enemies list
             bullets.Add(bullet);
@@ -98,7 +98,7 @@ public class BulletHandler : MonoBehaviour
 
             // Attempt to set enemy variant
             Bullet bullet = lastObj.GetComponent<Bullet>();
-            bullet.Setup(parent, weapon, material, target, false, explosiveRound);
+            bullet.Setup(parent, weapon, material, target, false, explosiveRound, autoLockBullets);
 
             // Add to enemies list
             bullets.Add(bullet);
@@ -123,10 +123,10 @@ public class BulletHandler : MonoBehaviour
             // Adjust for rotational offset
             lastObj.transform.rotation = rotation;
             lastObj.transform.eulerAngles = new Vector3(0, 0, Random.Range(0, rotationAmount));
-
+            
             // Attempt to set enemy variant
             Bullet bullet = lastObj.GetComponent<Bullet>();
-            bullet.Setup(parent, weapon, material, null, true, explosiveRound);
+            bullet.Setup(parent, weapon, material, null, true, explosiveRound, autoLockBullets);
 
             // Add to enemies list
             bullets.Add(bullet);

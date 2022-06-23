@@ -7,13 +7,15 @@ public class ElectroBullet : Bullet
     public ParticleSystem electroParticle;
 
     public override void Setup(Weapon parent, WeaponData weapon, Material material, Transform target = null, 
-        bool isSplitShot = false, bool explosiveRound = false)
+        bool isSplitShot = false, bool explosiveRound = false, bool autoLock = false)
     {
+        // Set electric bullet variables
         stunLength = 3f;
         ParticleSystemRenderer electroRenderer = electroParticle.GetComponent<ParticleSystemRenderer>();
         electroRenderer.material = weapon.material;
         electroRenderer.trailMaterial = weapon.material;
-        base.Setup(parent, weapon, material, target, isSplitShot, explosiveRound);
+
+        base.Setup(parent, weapon, material, target, isSplitShot, explosiveRound, autoLock);
     }
 
     public override void Move()

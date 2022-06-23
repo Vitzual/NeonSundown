@@ -11,6 +11,7 @@ public class Bullet : Entity
     public SpriteRenderer sprite;
     public TrailRenderer trail;
     public Transform rotator;
+    public CircleCollider2D autoLockRange;
 
     // The bullets target
     protected Transform target;
@@ -30,6 +31,7 @@ public class Bullet : Entity
     public float castRange = 0;
     private bool isReversed = false;
     public bool canPassBarriers = false;
+    private bool autoLock = false;
 
     // Is a split shot
     protected Weapon parent;
@@ -38,9 +40,16 @@ public class Bullet : Entity
     protected Material normalMaterial;
 
     // Set up the bullet
-    public virtual void Setup(Weapon parent, WeaponData weapon, Material material,
-        Transform target = null, bool isSplitShot = false, bool explosiveRound = false)
+    public virtual void Setup(Weapon parent, WeaponData weapon, Material material, Transform target = null, 
+        bool isSplitShot = false, bool explosiveRound = false, bool autoLock = false)
     {
+        // Check if auto lock being used
+        if (autoLock)
+        {
+            this.autoLock = autoLock;
+            autoLockRange.gameObject.SetActive(true);
+        }
+
         // Check if prestiged
         this.parent = parent;
         this.weapon = weapon;
@@ -137,41 +146,52 @@ public class Bullet : Entity
     // On collision
     public virtual void OnHit(Entity entity)
     {
-        // Remove pierces
-        pierce -= 1;
-        entity.Damage(damage, knockback);
-
-        // Check if entity dead
-        if (!entity.IsDead() && stunLength > 0)
-            entity.Stun(stunLength);
-
-        // Check if bullet has a sound
-        if (weapon != null && weapon.onDamageSound != null)
-            AudioPlayer.Play(weapon.onDamageSound, true, weapon.minPitch, weapon.maxPitch);
-
-        // Check if bullet has a sound
-        if (weapon != null && weapon.onDeathSound != null && entity.IsDead())
-            AudioPlayer.Play(weapon.onDeathSound, true, weapon.minPitch, weapon.maxPitch);
-
-        // Check pierce amount
-        if (pierce < 0)
+        // Check if locked
+        if (autoLock)
         {
-            // Get material to hold
-            Material holder = entity.GetMaterial();
+            autoLockRange.enabled = false;
+            target = entity.transform;
+            tracking = true;
+            autoLock = false;
+        }
+        else
+        {
+            // Remove pierces
+            pierce -= 1;
+            entity.Damage(damage, knockback);
 
-            // Check if entity overrides this particle
-            if (entity.overrideOtherParticles)
+            // Check if entity dead
+            if (!entity.IsDead() && stunLength > 0)
+                entity.Stun(stunLength);
+
+            // Check if bullet has a sound
+            if (weapon != null && weapon.onDamageSound != null)
+                AudioPlayer.Play(weapon.onDamageSound, true, weapon.minPitch, weapon.maxPitch);
+
+            // Check if bullet has a sound
+            if (weapon != null && weapon.onDeathSound != null && entity.IsDead())
+                AudioPlayer.Play(weapon.onDeathSound, true, weapon.minPitch, weapon.maxPitch);
+
+            // Check pierce amount
+            if (pierce < 0)
             {
+                // Get material to hold
+                Material holder = entity.GetMaterial();
+
+                // Check if entity overrides this particle
+                if (entity.overrideOtherParticles)
+                {
+                    deathMaterial = holder;
+                    deathEffect = entity.deathEffect;
+                }
+
                 deathMaterial = holder;
-                deathEffect = entity.deathEffect;
+                Destroy();
             }
 
-            deathMaterial = holder;
-            Destroy();
+            // If not dead, chain target
+            else if (chainTarget) FindChainTarget(castRange);
         }
-
-        // If not dead, chain target
-        else if (chainTarget) FindChainTarget(castRange);
     }
 
     // Rotate to target

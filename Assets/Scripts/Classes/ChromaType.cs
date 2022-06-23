@@ -7,5 +7,6 @@ public enum ChromaType
     Warrior,
     AutoCollect,
     Champion,
-    Lasers
+    Lasers,
+    AutoLock
 }
