@@ -23,5 +23,6 @@ public enum Stat
     BulletSize,
     StunLength,
     EnemyDmg,
-    Criticals
+    Criticals,
+    Buckshot
 }

@@ -33,7 +33,6 @@ public class Menu : MonoBehaviour
     public CanvasGroup socialsGroup;
     public CanvasGroup titleGroup;
     public CanvasGroup pressSpace;
-    public CanvasGroup firstTimeGroup;
     public CanvasGroup changelogGroup;
     public CanvasGroup creditsGroup;
     public CanvasGroup levelsGroup;
@@ -136,16 +135,7 @@ public class Menu : MonoBehaviour
     // Update user input
     public void Update()
     {
-        if (!spacePressed && Input.anyKey)
-        {
-            if (!SaveSystem.HasSave())
-            {
-                LeanTween.alphaCanvas(firstTimeGroup, 1f, titleAnimSpeed);
-                firstTimeGroup.interactable = true;
-                firstTimeGroup.blocksRaycasts = true;
-            }
-            else OpenMain();
-        }
+        if (!spacePressed && Input.anyKey) OpenMain();
     }
 
     // Open main panel
@@ -179,13 +169,6 @@ public class Menu : MonoBehaviour
         close.interactable = false;
         close.blocksRaycasts = false;
         AudioPlayer.Play(buttonSound, false);
-    }
-
-    // Open arena panel
-    public void DisableFirstOpen()
-    {
-        TogglePanel(mainGroup, firstTimeGroup);
-        OpenMain();
     }
 
     // Open arena panel
