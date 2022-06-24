@@ -13,10 +13,12 @@ public class LevelData : IdentifiableScriptableObject
     public ShipData shipReward;
     [HideIf("IsOptionalRewardPicked", true), BoxGroup("Level Reward")]
     public SynergyData synergyReward;
-    [HideIf("redrawReward", true), BoxGroup("Level Reward")]
+    [HideIf("redrawReward", true), HideIf("marketReward", true), BoxGroup("Level Reward")]
     public bool crystalReward;
-    [HideIf("crystalReward", true), BoxGroup("Level Reward")]
+    [HideIf("crystalReward", true), HideIf("marketReward", true), BoxGroup("Level Reward")]
     public bool redrawReward;
+    [HideIf("crystalReward", true), HideIf("redrawReward", true), BoxGroup("Level Reward")]
+    public bool marketReward;
     [BoxGroup("Level Reward")]
     public float xpRequirement = 25000;
 
