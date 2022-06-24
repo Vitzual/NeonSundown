@@ -149,6 +149,9 @@ public class Bullet : Entity
     // On collision
     public virtual void OnHit(Entity entity)
     {
+        // Check if entity is dead
+        if (entity.IsDead()) return;
+
         // Check if locked
         if (autoLock)
         {

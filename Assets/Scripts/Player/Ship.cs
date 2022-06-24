@@ -51,6 +51,7 @@ public class Ship : Weapon
     public AudioClip warriorSound;
     public AudioClip laserSound;
     public AudioClip nearDeathSound;
+    public AudioClip buckshotSound;
     public AudioSource deathMusic; // i know im bad putting this here
 
     // XP amount
@@ -59,6 +60,8 @@ public class Ship : Weapon
     private float rankup = 50;
     private float xpMultiplier = 1;
     private float enemyDamage = 1;
+    private int buckshots = 0;
+    private int buckshotCountdown = 4;
     public float rankupMultiplier;
     public ProgressBar xpBar;
     public TextMeshProUGUI levelText;
@@ -286,30 +289,48 @@ public class Ship : Weapon
     {
         if (shipCooldown <= 0)
         {
+            // Bullets to fire variable
+            int bulletsToFire = (int)bullets;
+            RuntimeStats.bulletsFired += bulletsToFire;
+
             // Add bullet fired
-            RuntimeStats.bulletsFired += (int)bullets;
+            if (buckshots > 0)
+            {
+                if (buckshotCountdown != 0)
+                {
+                    buckshotCountdown -= 1;
+                }
+                else
+                {
+                    bulletsToFire += buckshots;
+                    RuntimeStats.bulletsFired += buckshots;
+                    buckshotCountdown = 4;
+
+                    AudioPlayer.Play(buckshotSound, true, 0.9f, 1.1f, true, 0.5f);
+                }
+            }
 
             // Create bullet
             if (lasers)
             {
-                if (Settings.shipColoring) BulletHandler.active.CreateLaserBullet(this, shipData.weapon, shipData.weapon.material, 
-                    barrel, 100f, (int)bullets, explosiveRounds);
+                if (Settings.shipColoring) BulletHandler.active.CreateLaserBullet(this, shipData.weapon, shipData.weapon.material,
+                    barrel, 100f, bulletsToFire, explosiveRounds);
                 else BulletHandler.active.CreateLaserBullet(this, shipData.weapon, defaultGlow,
-                    barrel, 100f, (int)bullets, explosiveRounds);
+                    barrel, 100f, bulletsToFire, explosiveRounds);
             }
             else if (BulletHandler.energyBullets)
             {
                 if (Settings.shipColoring) BulletHandler.active.CreateEnergyBullet(this, shipData.weapon, barrel.position,
-                    model.rotation, (int)bullets, shipData.weapon.material, true, explosiveRounds, false);
+                    model.rotation, bulletsToFire, shipData.weapon.material, true, explosiveRounds, false);
                 else BulletHandler.active.CreateEnergyBullet(this, shipData.weapon, barrel.position,
-                    model.rotation, (int)bullets, defaultGlow, true, explosiveRounds, false);
+                    model.rotation, bulletsToFire, defaultGlow, true, explosiveRounds, false);
             }
             else
             {
                 if (Settings.shipColoring) BulletHandler.active.CreateBullet(this, shipData.weapon, barrel.position,
-                    model.rotation, (int)bullets, shipData.weapon.material, true, explosiveRounds, true);
+                    model.rotation, bulletsToFire, shipData.weapon.material, true, explosiveRounds, true);
                 else BulletHandler.active.CreateBullet(this, shipData.weapon, barrel.position,
-                    model.rotation, (int)bullets, defaultGlow, true, explosiveRounds, true);
+                    model.rotation, bulletsToFire, defaultGlow, true, explosiveRounds, true);
             }
             shipCooldown = cooldown;
         }
@@ -602,6 +623,11 @@ public class Ship : Weapon
             case Stat.Syphon:
                 EnemyHandler.syphon = Deck.CalculateStat(stat, 0f);
                 break;
+
+            // Increases bullet size
+            case Stat.Buckshot:
+                buckshots = (int)Deck.CalculateStat(stat, 0f);
+                break;
         }
     }
 
@@ -690,6 +716,10 @@ public class Ship : Weapon
             // Syphon thing
             case Stat.Syphon:
                 return EnemyHandler.syphon;
+
+            // Syphon thing
+            case Stat.Buckshot:
+                return buckshots;
 
             // Default case
             default:
@@ -785,6 +815,10 @@ public class Ship : Weapon
             // Crit thing
             case Stat.Syphon:
                 return 0f;
+
+            // Crit thing
+            case Stat.Buckshot:
+                return 0;
 
             // Default case
             default:
