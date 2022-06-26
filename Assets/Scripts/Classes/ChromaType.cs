@@ -8,5 +8,6 @@ public enum ChromaType
     AutoCollect,
     Champion,
     Lasers,
-    AutoLock
+    AutoLock,
+    Marksman
 }
