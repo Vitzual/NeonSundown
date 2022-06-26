@@ -28,7 +28,7 @@ public class AutoShooter : Weapon
             }
 
             BulletHandler.active.CreateBullet(this, weapon, transform.position, transform.rotation, 
-                weapon.bullets, weapon.material, false, explosiveRounds, true);
+                weapon.bullets, weapon.bloom, weapon.material, false, explosiveRounds, true);
             if (cooldown < 0.05f) weaponCooldown = 0.05f;
             else weaponCooldown = cooldown;
         }

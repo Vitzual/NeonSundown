@@ -15,7 +15,7 @@ public class MultiMissile : Bullet
         {
             cooldown = 0.5f;
             BulletHandler.active.CreateBullet(parent, torpedo, transform.position, transform.rotation,
-                weapon.bullets, weapon.material);
+                weapon.bullets, weapon.bloom, weapon.material);
         }
         else cooldown -= Time.deltaTime;
 

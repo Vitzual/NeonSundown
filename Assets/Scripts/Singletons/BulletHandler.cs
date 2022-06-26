@@ -48,8 +48,8 @@ public class BulletHandler : MonoBehaviour
     }
 
     // Create a new active bullet instance
-    public void CreateBullet(Weapon parent, WeaponData weapon, Vector2 position, Quaternion rotation, int amount, Material material, 
-        bool overrideAudioCooldown = false, bool explosiveRound = false, bool useSize = false, Transform target = null)
+    public void CreateBullet(Weapon parent, WeaponData weapon, Vector2 position, Quaternion rotation, int amount, float bloom,
+        Material material, bool overrideAudioCooldown = false, bool explosiveRound = false, bool useSize = false, Transform target = null)
     {
         // Loop depending on bullet amount
         for (int i = 0; i < amount; i++)
@@ -64,7 +64,7 @@ public class BulletHandler : MonoBehaviour
 
             // Adjust for rotational offset
             Vector3 rotationOffset = new Vector3(lastObj.transform.eulerAngles.x, lastObj.transform.eulerAngles.y,
-                (lastObj.transform.eulerAngles.z - 90f) + Random.Range(-parent.bloom, parent.bloom));
+                (lastObj.transform.eulerAngles.z - 90f) + Random.Range(-bloom, bloom));
             lastObj.transform.eulerAngles = rotationOffset;
 
             // Attempt to set enemy variant
@@ -81,8 +81,8 @@ public class BulletHandler : MonoBehaviour
     }
 
     // Create a new active bullet instance
-    public void CreateEnergyBullet(Weapon parent, WeaponData weapon, Vector2 position, Quaternion rotation, int amount, Material material,
-        bool overrideAudioCooldown = false, bool explosiveRound = false, bool useSize = false, Transform target = null)
+    public void CreateEnergyBullet(Weapon parent, WeaponData weapon, Vector2 position, Quaternion rotation, int amount, float bloom,
+        Material material, bool overrideAudioCooldown = false, bool explosiveRound = false, bool useSize = false, Transform target = null)
     {
         // Loop depending on bullet amount
         for (int i = 0; i < amount; i++)
@@ -93,7 +93,7 @@ public class BulletHandler : MonoBehaviour
 
             // Adjust for rotational offset
             Vector3 rotationOffset = new Vector3(lastObj.transform.eulerAngles.x, lastObj.transform.eulerAngles.y,
-                (lastObj.transform.eulerAngles.z - 90f) + Random.Range(-parent.bloom, parent.bloom));
+                (lastObj.transform.eulerAngles.z - 90f) + Random.Range(-bloom, bloom));
             lastObj.transform.eulerAngles = rotationOffset;
 
             // Attempt to set enemy variant
@@ -134,7 +134,7 @@ public class BulletHandler : MonoBehaviour
     }
 
     // Creates a laser bullet
-    public void CreateLaserBullet(Weapon parent, WeaponData weapon, Material material, Transform barrel, 
+    public void CreateLaserBullet(Weapon parent, WeaponData weapon, Material material, Transform barrel,
         float length, int amount, bool explosive)
     {
         // Calculate spread

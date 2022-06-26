@@ -292,6 +292,7 @@ public class Ship : Weapon
             // Bullets to fire variable
             int bulletsToFire = (int)bullets;
             RuntimeStats.bulletsFired += bulletsToFire;
+            float bloom = weapon.bloom;
 
             // Add bullet fired
             if (buckshots > 0)
@@ -305,6 +306,7 @@ public class Ship : Weapon
                     bulletsToFire += buckshots;
                     RuntimeStats.bulletsFired += buckshots;
                     buckshotCountdown = 4;
+                    bloom *= 2;
 
                     AudioPlayer.Play(buckshotSound, true, 0.9f, 1.1f, true, 0.5f);
                 }
@@ -321,16 +323,16 @@ public class Ship : Weapon
             else if (BulletHandler.energyBullets)
             {
                 if (Settings.shipColoring) BulletHandler.active.CreateEnergyBullet(this, shipData.weapon, barrel.position,
-                    model.rotation, bulletsToFire, shipData.weapon.material, true, explosiveRounds, false);
+                    model.rotation, bulletsToFire, bloom, shipData.weapon.material, true, explosiveRounds, false);
                 else BulletHandler.active.CreateEnergyBullet(this, shipData.weapon, barrel.position,
-                    model.rotation, bulletsToFire, defaultGlow, true, explosiveRounds, false);
+                    model.rotation, bulletsToFire, bloom, defaultGlow, true, explosiveRounds, false);
             }
             else
             {
                 if (Settings.shipColoring) BulletHandler.active.CreateBullet(this, shipData.weapon, barrel.position,
-                    model.rotation, bulletsToFire, shipData.weapon.material, true, explosiveRounds, true);
+                    model.rotation, bulletsToFire, bloom, shipData.weapon.material, true, explosiveRounds, true);
                 else BulletHandler.active.CreateBullet(this, shipData.weapon, barrel.position,
-                    model.rotation, bulletsToFire, defaultGlow, true, explosiveRounds, true);
+                    model.rotation, bulletsToFire, bloom, defaultGlow, true, explosiveRounds, true);
             }
             shipCooldown = cooldown;
         }
