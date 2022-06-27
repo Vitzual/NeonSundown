@@ -4,20 +4,21 @@ using UnityEngine;
 
 public class DualReaper : Weapon
 {
-    public Scythe scytheOne, scytheTwo;
+    public List<Scythe> scythes;
 
     // Override default setup
     public override void Setup(WeaponData data, Transform target = null)
     {
-        scytheOne.Setup(data, transform);
-        scytheTwo.Setup(data, transform);
+        foreach (Scythe scythe in scythes)
+            scythe.Setup(data, target);
+
         base.Setup(data, target);
     }
 
     // Rotates around the player
     public override void Use()
     {
-        scytheOne.Use();
-        scytheTwo.Use();
+        foreach (Scythe scythe in scythes)
+            scythe.Use();
     }
 }

@@ -77,6 +77,9 @@ public class Ship : Weapon
     private float shipCooldown;
     private float regenCooldown;
 
+    // Debug car
+    public CardData debugCard;
+
     // Subscribe to setup event
     public void Start()
     {
@@ -157,6 +160,10 @@ public class Ship : Weapon
 
         // Setup any attached modules
         SetupModules();
+
+        // Add debug card 
+        if (debugCard != null)
+            Deck.active.AddCard(debugCard);
     }
 
     // Setup ship model
