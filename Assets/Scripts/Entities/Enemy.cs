@@ -227,6 +227,10 @@ public class Enemy : Entity
                 else transform.position += transform.up * step;
             }
         }
+        else if (EnemyHandler.active.player != null)
+        {
+            target = EnemyHandler.active.player;
+        }
     }
 
     // Get material function
@@ -240,6 +244,9 @@ public class Enemy : Entity
     {
         return health <= 0;
     }
+
+    // Set target
+    public void SetTarget(Transform newTarget) { target = newTarget; }
 
     // Get object data
     public Variant GetVariant() { return variant; }
