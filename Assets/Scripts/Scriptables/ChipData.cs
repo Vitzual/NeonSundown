@@ -16,6 +16,5 @@ public class ChipData : IdentifiableScriptableObject
 
     public Stat stat;
     public CrystalType crystal;
-    public Difficulty difficulty;
     public List<Tier> tiers;
 }
