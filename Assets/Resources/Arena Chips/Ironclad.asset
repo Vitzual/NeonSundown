@@ -10,12 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c44049936d8d33e4cad2d73f4bfd00bc, type: 3}
-  m_Name: Ironclad I
+  m_Name: Ironclad
   m_EditorClassIdentifier: 
   internalId: e991516b-bc33-4fe6-b06d-923fcb4ddabd
   createdAtTicks: 637920230250038670
   stat: 0
-  effect: 1.05
   crystal: 2
-  cost: 1
   difficulty: 0
+  tiers:
+  - cost: 1
+    modifier: 1.05
+  - cost: 3
+    modifier: 1.15
+  - cost: 5
+    modifier: 1.25

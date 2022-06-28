@@ -10,12 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c44049936d8d33e4cad2d73f4bfd00bc, type: 3}
-  m_Name: Ironclad III
+  m_Name: Bane
   m_EditorClassIdentifier: 
-  internalId: e1fa4a34-1e20-48ad-892c-3af3a283510e
-  createdAtTicks: 637920236165730887
+  internalId: f40be925-991f-4a1c-b90c-3d451747127c
+  createdAtTicks: 637920240810442831
   stat: 0
-  effect: 1.15
-  crystal: 2
-  cost: 5
-  difficulty: 2
+  crystal: 1
+  difficulty: 0
+  tiers:
+  - cost: 1
+    modifier: 1.05
+  - cost: 3
+    modifier: 1.15
+  - cost: 5
+    modifier: 1.25
