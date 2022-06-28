@@ -10,6 +10,8 @@ public class ChipData : IdentifiableScriptableObject
     {
         public int cost;
         public float modifier;
+        public float xpBoost;
+        public float crystalBoost;
     }
 
     public Stat stat;
