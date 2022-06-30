@@ -37,8 +37,8 @@ public class ShipButton : MonoBehaviour
         // If not locked, set variables
         if (isUnlocked)
         {
-            name.text = ship.name;
-            desc.text = ship.shortDesc;
+            name.text = ship.name.ToUpper();
+            desc.text = ship.subTitle.ToUpper();
             desc.color = ship.lightColor;
             shipIcon.sprite = ship.glowIcon;
             shipIcon.color = ship.mainColor;
@@ -49,8 +49,8 @@ public class ShipButton : MonoBehaviour
         }
         else
         {
-            name.text = "LOCKED";
-            desc.text = ship.unlockRequirement;
+            name.text = ship.name.ToUpper();
+            desc.text = ship.unlockRequirement.ToUpper();
             desc.color = lockedDescColor;
             shipIcon.sprite = ship.glowIcon;
             shipIcon.color = Color.white;

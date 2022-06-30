@@ -31,7 +31,7 @@ public class ArenaButton : MonoBehaviour
         // Set arena info
         this.arena = arena;
         name.text = arena.name.ToUpper();
-        desc.text = bestRun;
+        desc.text = bestRun.ToUpper();
 
         // Set button colors
         desc.color = arena.lightColor;
@@ -65,7 +65,7 @@ public class ArenaButton : MonoBehaviour
         // Set arena info
         this.arena = arena;
         name.text = arena.name.ToUpper();
-        desc.text = arena.unlockObjective;
+        desc.text = arena.unlockObjective.ToUpper();
 
         // Set button colors
         desc.color = lockedObjectiveColor;

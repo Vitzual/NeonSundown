@@ -18,7 +18,7 @@ public class BlackmarketItem : MonoBehaviour
     public void Set(BlackmarketData data)
     {
         // Set UI components
-        name.text = data.name;
+        name.text = data.name.ToUpper();
         desc.text = data.desc;
         icon.sprite = data.icon;
         amount.text = data.amountRequired + " CRYSTALS";
