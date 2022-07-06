@@ -2857,12 +2857,13 @@ GameObject:
   m_Component:
   - component: {fileID: 6979550966972753}
   - component: {fileID: 6803789810265296511}
+  - component: {fileID: 1018859127954581675}
   m_Layer: 0
   m_Name: The Vault
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &6979550966972753
 Transform:
@@ -2894,3 +2895,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d931148ba0ac5b43814581dd80b1fc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!61 &1018859127954581675
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8979542884903010153}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 9, y: 9}
+  m_EdgeRadius: 0

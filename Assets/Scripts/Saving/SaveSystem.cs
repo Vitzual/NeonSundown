@@ -190,7 +190,7 @@ public class SaveSystem
     public static void UpdateArena(string id, float time)
     {
         // Check if gamemode ship null
-        if (Gamemode.ship == null)
+        if (Gamemode.shipData == null)
         {
             Debug.Log("[WARNING] Gamemode ship was null! Cannot save.");
             return;

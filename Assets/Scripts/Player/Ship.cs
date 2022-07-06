@@ -98,7 +98,7 @@ public class Ship : Weapon
 
         Events.active.onUpdateShowHP += UpdateShowHP;
 
-        if (Gamemode.ship != null)
+        if (Gamemode.shipData != null)
         {
             Events.active.onSetupShip += Setup;
             Events.active.onShipColoringChange += SetupShipColoring;

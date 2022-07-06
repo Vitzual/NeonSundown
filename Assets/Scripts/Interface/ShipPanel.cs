@@ -94,7 +94,7 @@ public class ShipPanel : MonoBehaviour
         //ClearModule(true);
 
         // Set the ship
-        Gamemode.ship = ship;
+        Gamemode.shipData = ship;
 
         // Set all information
         name.text = ship.name.ToUpper() + " <size=18><color=#" + ColorUtility.ToHtmlStringRGB(
@@ -141,18 +141,18 @@ public class ShipPanel : MonoBehaviour
     public void SetModule(ModuleData module)
     {
         // Check if ship is null
-        if (Gamemode.ship == null) return;
+        if (Gamemode.shipData == null) return;
 
         // Is the module null
         bool isModuleNull = module == null;
 
         // Check if the module is valid 
-        if (Gamemode.ship.weapon == null && !isModuleNull)
+        if (Gamemode.shipData.weapon == null && !isModuleNull)
         {
             if (module.stat == Stat.Damage || module.stat == Stat.Range || module.stat == Stat.Cooldown ||
                 module.stat == Stat.Bullets || module.stat == Stat.Pierces || module.stat == Stat.Lifetime)
             {
-                Debug.Log(module.name + " cannot be applied to " + Gamemode.ship.name + "!");
+                Debug.Log(module.name + " cannot be applied to " + Gamemode.shipData.name + "!");
                 return;
             }
         }
@@ -256,7 +256,7 @@ public class ShipPanel : MonoBehaviour
     public void UpdateModuleInterface(Stat stat, bool clear, float val)
     {
         // Check if stat is no longer applied
-        ShipData ship = Gamemode.ship;
+        ShipData ship = Gamemode.shipData;
 
         // Update the UI elements
         switch (stat)

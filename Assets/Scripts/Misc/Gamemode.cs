@@ -11,8 +11,9 @@ public class Gamemode : MonoBehaviour
     public ArenaData _arena;
 
     // Static arena being used
+    public Ship ship;
     public static ArenaData arena;
-    public static ShipData ship;
+    public static ShipData shipData;
     public static Dictionary<int, ModuleData> modules;
     public static bool isAlphaBuild;
 
@@ -27,6 +28,11 @@ public class Gamemode : MonoBehaviour
     public static bool killEnemiesObjective;
     public static EnemyData enemyObjective;
     private static int objectiveAmountKilled = 0;
+
+    // Arena specific modifiers
+    public Vault vault;
+    public Vector2 vaultPosition;
+    public Vector2 vaultPlayerPosition;
 
     // Setup the game
     public void Awake()
@@ -52,6 +58,13 @@ public class Gamemode : MonoBehaviour
             arenaDesc.color = arena.lightColor;
             LeanTween.moveLocal(arenaInfo, new Vector2(0, -50), 1.5f).setEase(LeanTweenType.easeOutExpo).setDelay(1f);
             LeanTween.moveLocal(arenaInfo, new Vector2(0, 50), 0.5f).setEase(LeanTweenType.easeInExpo).setDelay(4f);
+        }
+
+        // Check if use vault
+        if (arena.useVault)
+        {
+            Vault newVault = Instantiate(vault, vaultPosition, Quaternion.identity);
+            ship.transform.position = vaultPlayerPosition;
         }
     }
 

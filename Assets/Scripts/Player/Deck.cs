@@ -55,7 +55,7 @@ public class Deck : MonoBehaviour
         player = GetComponent<Ship>();
 
         // Setup ship
-        Events.active.SetupShip(Gamemode.ship);
+        Events.active.SetupShip(Gamemode.shipData);
     }
 
     // Calculate cooldown
