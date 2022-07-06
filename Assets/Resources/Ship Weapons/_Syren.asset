@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 153c17b437486e247978b2d4dcab4b10, type: 3}
-  m_Name: _Caster
+  m_Name: _Syren
   m_EditorClassIdentifier: 
-  internalId: 809469f9-e8d2-4eea-b9e0-60741665af07
-  createdAtTicks: 637804460402739868
+  internalId: 4d2c2530-eddb-4716-ad56-0872941c46ba
+  createdAtTicks: 637927007626126465
   name: 
   description: 
   sprite: {fileID: 0}
@@ -23,9 +23,9 @@ MonoBehaviour:
   canDrop: 0
   isUnlocked: 0
   baseLevels: []
-  damage: 10
-  cooldown: 0.5
-  moveSpeed: 200
+  damage: 0
+  cooldown: 1
+  moveSpeed: 150
   rotate: 0
   rotateSpeed: 500
   range: 0
@@ -34,27 +34,27 @@ MonoBehaviour:
   pierces: 0
   bullets: 1
   knockback: -500
-  lifetime: 0.3
-  stun: 0
+  lifetime: 1
+  stun: 2
   randomDirection: 0
   rotateOnSpawn: 0
   randomTarget: 0
   trackTarget: 0
   lockTarget: 0
-  bullet: {fileID: 4616838733166897725, guid: afcb6e3c47783de4080790735a569129, type: 3}
-  bulletSound: {fileID: 8300000, guid: 88d1cd910f4853b41b47fb1520c9ea49, type: 3}
+  bullet: {fileID: 4616838733166897725, guid: 89783b352b211694e8eda2366563639a, type: 3}
+  bulletSound: {fileID: 8300000, guid: 3bd795b682c5bb345b5eb736f284a12c, type: 3}
   obj: {fileID: 0}
   onDamageSound: {fileID: 8300000, guid: 55ccd25efa4ef2e4cb4854f42f47b0a6, type: 3}
   onDeathSound: {fileID: 8300000, guid: eb8d849ee191e0641b37d170b52e6de7, type: 3}
-  minPitch: 0.9
-  maxPitch: 1.1
+  minPitch: 0.85
+  maxPitch: 1.15
   audioScale: 1
   setPlayerAsParent: 0
-  useMaterial: 1
+  useMaterial: 0
   useTrail: 0
-  useParticle: 1
+  useParticle: 0
   material: {fileID: 2100000, guid: 11704204528017449aef7314f9c036c4, type: 2}
   trail: {fileID: 0}
-  particle: {fileID: 993855083006936043, guid: a7ee5d8a639bfaf46b6b6b5c20865b97, type: 3}
+  particle: {fileID: 8187003936069489464, guid: 4a1a5940497995c4e85df4b56439db61, type: 3}
   shakeScreenOnSpawn: 0
-  shakeScreenOnDeath: 1
+  shakeScreenOnDeath: 0
