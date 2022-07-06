@@ -10,30 +10,42 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 74bee22c4c15df545aab77de393cc123, type: 3}
-  m_Name: V4
+  m_Name: V Menu
   m_EditorClassIdentifier: 
-  internalId: dc7698ea-ba0f-4ee5-9a39-cca62fa676cb
-  createdAtTicks: 637926380553933942
-  name: PHASE 3
+  internalId: 938ddd5d-9998-4fe6-b4d0-51d9401aeefb
+  createdAtTicks: 637926389021237269
+  name: V Menu
   isMenuStage: 0
   enemyScaling: 0
   enemies:
-  - data: {fileID: 11400000, guid: 4450b0e67d8c81f46b87d6ad461fcdf8, type: 2}
+  - data: {fileID: 11400000, guid: 2c18b086e6c46204f98450b96d455551, type: 2}
     variant: 5
-    cooldown: 1
-    amount: 5
+    cooldown: 5
+    amount: 3
+    enableLockOn: 0
+    disableRotation: 0
+  - data: {fileID: 11400000, guid: 93a6ee9e8a156aa4cb5d660915aca99e, type: 2}
+    variant: 5
+    cooldown: 2
+    amount: 1
     enableLockOn: 0
     disableRotation: 0
   - data: {fileID: 11400000, guid: 31309ad257c223f49917d49d350b3979, type: 2}
     variant: 5
-    cooldown: 1
-    amount: 1
+    cooldown: 5
+    amount: 10
     enableLockOn: 0
     disableRotation: 0
   - data: {fileID: 11400000, guid: 69b4bcad7988c7946afad1e08f97a5c4, type: 2}
+    variant: 5
+    cooldown: 3
+    amount: 5
+    enableLockOn: 0
+    disableRotation: 0
+  - data: {fileID: 11400000, guid: 4450b0e67d8c81f46b87d6ad461fcdf8, type: 2}
     variant: 5
     cooldown: 1
     amount: 1
     enableLockOn: 0
     disableRotation: 0
-  time: 90
+  time: 0

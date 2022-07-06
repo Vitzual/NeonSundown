@@ -74,6 +74,8 @@ public class ArenaData : IdentifiableScriptableObject
     [BoxGroup("Arena Rules")]
     public List<CardData> blacklistCards;
     [BoxGroup("Arena Rules")]
+    public bool useVault;
+    [BoxGroup("Arena Rules")]
     public bool useWall;
     [HideIf("NoWall"), BoxGroup("Arena Rules")]
     public Material wallBorder;
