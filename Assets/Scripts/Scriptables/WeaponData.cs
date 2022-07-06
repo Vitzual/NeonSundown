@@ -32,6 +32,8 @@ public class WeaponData : CardData
     public float range;
 
     [BoxGroup("Bullet Stats")]
+    public float bulletSize;
+    [BoxGroup("Bullet Stats")]
     public float bloom;
     [BoxGroup("Bullet Stats")]
     public float pierces;

@@ -24,6 +24,7 @@ public class Bullet : Entity
     protected float lifetime;
     protected float knockback;
     protected float splitshots;
+    protected float bulletSize;
     public bool explosive;
     public bool overrideSprite;
     public float explosionSize = 10f;
@@ -87,6 +88,7 @@ public class Bullet : Entity
         tracking = weapon.trackTarget || Deck.GetFlag(Stat.Tracking);
         splitshots = parent.splitshots;
         stunLength = parent.stunLength;
+        bulletSize = parent.size;
         if (!explosive) explosive = parent.explosiveRounds;
 
         // Give bullets a bit of randomness
@@ -139,7 +141,7 @@ public class Bullet : Entity
         
         // Check if bullet has splitshots
         if (!isSplitShot) BulletHandler.active.CreateSplitshot(parent, weapon, transform.position,
-            transform.rotation, (int)splitshots, normalMaterial, 360f, explosive);
+            transform.rotation, bulletSize, (int)splitshots, normalMaterial, 360f, explosive);
 
         // Destroy the bullet
         if (!explosive && weapon.useParticle) CreateParticle();

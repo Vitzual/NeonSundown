@@ -48,7 +48,7 @@ public class Turret : Weapon
     public void Fire()
     {
         // Creat the bullet
-        BulletHandler.active.CreateBullet(this, weapon, transform.position, 
-            transform.rotation, 1, weapon.bloom, material, false, false, false, null);
+        BulletHandler.active.CreateBullet(this, weapon, transform.position, transform.rotation, 
+            1, weapon.bloom, weapon.bulletSize, material, false, false, null);
     }
 }

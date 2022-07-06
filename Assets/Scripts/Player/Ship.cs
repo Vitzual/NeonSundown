@@ -144,6 +144,7 @@ public class Ship : Weapon
             bullets = shipData.weapon.bullets;
             lifetime = shipData.weapon.lifetime;
             knockback = shipData.weapon.knockback;
+            size = shipData.weapon.bulletSize;
         }
         splitshots = 0;
 
@@ -323,23 +324,23 @@ public class Ship : Weapon
             if (lasers)
             {
                 if (Settings.shipColoring) BulletHandler.active.CreateLaserBullet(this, shipData.weapon, shipData.weapon.material,
-                    barrel, 100f, bulletsToFire, explosiveRounds);
+                    barrel, size, 100f, bulletsToFire, explosiveRounds);
                 else BulletHandler.active.CreateLaserBullet(this, shipData.weapon, defaultGlow,
-                    barrel, 100f, bulletsToFire, explosiveRounds);
+                    barrel, size, 100f, bulletsToFire, explosiveRounds);
             }
             else if (BulletHandler.energyBullets)
             {
                 if (Settings.shipColoring) BulletHandler.active.CreateEnergyBullet(this, shipData.weapon, barrel.position,
-                    model.rotation, bulletsToFire, bloom, shipData.weapon.material, true, explosiveRounds, false);
+                    model.rotation, bulletsToFire, bloom, size, shipData.weapon.material, explosiveRounds, false);
                 else BulletHandler.active.CreateEnergyBullet(this, shipData.weapon, barrel.position,
-                    model.rotation, bulletsToFire, bloom, defaultGlow, true, explosiveRounds, false);
+                    model.rotation, bulletsToFire, bloom, size, defaultGlow, explosiveRounds, false);
             }
             else
             {
                 if (Settings.shipColoring) BulletHandler.active.CreateBullet(this, shipData.weapon, barrel.position,
-                    model.rotation, bulletsToFire, bloom, shipData.weapon.material, true, explosiveRounds, true);
+                    model.rotation, bulletsToFire, bloom, size, shipData.weapon.material, explosiveRounds, true);
                 else BulletHandler.active.CreateBullet(this, shipData.weapon, barrel.position,
-                    model.rotation, bulletsToFire, bloom, defaultGlow, true, explosiveRounds, true);
+                    model.rotation, bulletsToFire, bloom, size, defaultGlow, explosiveRounds, true);
             }
             shipCooldown = cooldown;
         }
@@ -615,7 +616,8 @@ public class Ship : Weapon
 
             // Increases bullet size
             case Stat.BulletSize:
-                BulletHandler.bulletSize = Deck.CalculateStat(stat, 1);
+                BulletHandler.projectileSize = Deck.CalculateStat(stat, 1);
+                size = weapon.bulletSize + BulletHandler.projectileSize - 1;
                 break;
 
             // Increases bullet size
@@ -712,7 +714,7 @@ public class Ship : Weapon
 
             // Get bullet size
             case Stat.BulletSize:
-                return BulletHandler.bulletSize;
+                return BulletHandler.projectileSize;
 
             // Get bullet size
             case Stat.StunLength:

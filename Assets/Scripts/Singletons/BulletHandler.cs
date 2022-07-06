@@ -9,7 +9,7 @@ public class BulletHandler : MonoBehaviour
     public static bool stickyBullets = false;
     public static bool energyBullets = false;
     public static bool autoLockBullets = false;
-    public static float bulletSize = 1f;
+    public static float projectileSize = 1f;
 
     // List of all active bullets
     public List<Bullet> bullets;
@@ -23,7 +23,7 @@ public class BulletHandler : MonoBehaviour
         active = this; 
         stickyBullets = false;
         energyBullets = false;
-        bulletSize = 1;
+        projectileSize = 1f;
     }
 
     // Move normal enemies
@@ -48,8 +48,8 @@ public class BulletHandler : MonoBehaviour
     }
 
     // Create a new active bullet instance
-    public void CreateBullet(Weapon parent, WeaponData weapon, Vector2 position, Quaternion rotation, int amount, float bloom,
-        Material material, bool overrideAudioCooldown = false, bool explosiveRound = false, bool useSize = false, Transform target = null)
+    public void CreateBullet(Weapon parent, WeaponData weapon, Vector2 position, Quaternion rotation, int amount, float bloom, 
+        float bulletSize, Material material, bool overrideAudioCooldown = false, bool explosiveRound = false, Transform target = null)
     {
         // Loop depending on bullet amount
         for (int i = 0; i < amount; i++)
@@ -59,8 +59,7 @@ public class BulletHandler : MonoBehaviour
             lastObj.name = weapon.bullet.gameObject.name;
 
             // Set size if bigger then 1
-            if (bulletSize > 1 && useSize)
-                lastObj.transform.localScale = new Vector2(bulletSize, bulletSize);
+            lastObj.transform.localScale = new Vector2(bulletSize, bulletSize);
 
             // Adjust for rotational offset
             Vector3 rotationOffset = new Vector3(lastObj.transform.eulerAngles.x, lastObj.transform.eulerAngles.y,
@@ -81,8 +80,8 @@ public class BulletHandler : MonoBehaviour
     }
 
     // Create a new active bullet instance
-    public void CreateEnergyBullet(Weapon parent, WeaponData weapon, Vector2 position, Quaternion rotation, int amount, float bloom,
-        Material material, bool overrideAudioCooldown = false, bool explosiveRound = false, bool useSize = false, Transform target = null)
+    public void CreateEnergyBullet(Weapon parent, WeaponData weapon, Vector2 position, Quaternion rotation, int amount, float bloom, 
+        float bulletSize, Material material, bool overrideAudioCooldown = false, bool explosiveRound = false, Transform target = null)
     {
         // Loop depending on bullet amount
         for (int i = 0; i < amount; i++)
@@ -90,6 +89,9 @@ public class BulletHandler : MonoBehaviour
             // Create the tile
             GameObject lastObj = Instantiate(energyBullet.gameObject, position, rotation);
             lastObj.name = weapon.bullet.gameObject.name;
+
+            // Set size if bigger then 1
+            lastObj.transform.localScale = new Vector2(bulletSize, bulletSize);
 
             // Adjust for rotational offset
             Vector3 rotationOffset = new Vector3(lastObj.transform.eulerAngles.x, lastObj.transform.eulerAngles.y,
@@ -110,8 +112,8 @@ public class BulletHandler : MonoBehaviour
     }
 
     // Creates a splitshot bullet instance
-    public void CreateSplitshot(Weapon parent, WeaponData weapon, Vector2 position, Quaternion rotation,
-    int amount, Material material, float rotationAmount, bool explosiveRound = false)
+    public void CreateSplitshot(Weapon parent, WeaponData weapon, Vector2 position, Quaternion rotation, float bulletSize,
+        int amount, Material material, float rotationAmount, bool explosiveRound = false)
     {
         // Loop depending on bullet amount
         for (int i = 0; i < amount; i++)
@@ -119,6 +121,9 @@ public class BulletHandler : MonoBehaviour
             // Create the tile
             GameObject lastObj = Instantiate(weapon.bullet.gameObject, position, rotation);
             lastObj.name = weapon.bullet.gameObject.name;
+
+            // Set size if bigger then 1
+            lastObj.transform.localScale = new Vector2(bulletSize, bulletSize);
 
             // Adjust for rotational offset
             lastObj.transform.rotation = rotation;
@@ -134,7 +139,7 @@ public class BulletHandler : MonoBehaviour
     }
 
     // Creates a laser bullet
-    public void CreateLaserBullet(Weapon parent, WeaponData weapon, Material material, Transform barrel,
+    public void CreateLaserBullet(Weapon parent, WeaponData weapon, Material material, Transform barrel, float bulletSize,
         float length, int amount, bool explosive)
     {
         // Calculate spread

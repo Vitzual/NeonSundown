@@ -99,6 +99,10 @@ public class Weapon : MonoBehaviour
                 stunLength = (Deck.CalculateStat(type, weapon.stun)
                     + GetAdditions(type)) * GetMultiplier(type);
                 break;
+            case Stat.BulletSize:
+                size = (Deck.CalculateStat(type, weapon.bulletSize)
+                    + GetAdditions(type)) * GetMultiplier(type);
+                break;
             case Stat.Criticals:
                 critical = (Deck.CalculateStat(type, 0) + GetAdditions(type)) * GetMultiplier(type);
                 break;
@@ -118,6 +122,7 @@ public class Weapon : MonoBehaviour
         UpdateStat(Stat.Range);
         UpdateStat(Stat.Knockback);
         UpdateStat(Stat.StunLength);
+        UpdateStat(Stat.BulletSize);
     }
 
     // Returns a stat
@@ -165,6 +170,10 @@ public class Weapon : MonoBehaviour
             case Stat.Criticals:
                 return critical;
 
+            // Get bullet size
+            case Stat.BulletSize:
+                return size;
+
             // Default case
             default:
                 return 0;
@@ -211,6 +220,10 @@ public class Weapon : MonoBehaviour
             // Get crit
             case Stat.Criticals:
                 return 0;
+
+            // Get bullet size
+            case Stat.BulletSize:
+                return weapon.bulletSize;
 
             // Default case
             default:

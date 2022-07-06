@@ -58,7 +58,7 @@ public class Laser : Bullet
 
         // Check if bullet is splitshot
         if (!isSplitShot) BulletHandler.active.CreateSplitshot(parent, weapon, transform.position,
-            transform.rotation, (int)splitshots, normalMaterial, 360f, explosive);
+            transform.rotation, bulletSize / 2, (int)splitshots, normalMaterial, 360f, explosive);
     }
 
     // Override destroy
