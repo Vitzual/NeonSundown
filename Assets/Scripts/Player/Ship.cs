@@ -78,6 +78,9 @@ public class Ship : Weapon
     private float shipCooldown;
     private float regenCooldown;
 
+    // List of drones
+    private List<Drone> drones;
+
     // Debug car
     public CardData debugCard;
 
@@ -163,6 +166,20 @@ public class Ship : Weapon
 
         // Setup any attached modules
         SetupModules();
+
+        // Check if ship is drone ship
+        if (shipData.droneShip)
+        {
+            drones = new List<Drone>();
+
+            for (int i = 0; i < shipData.droneAmount; i += 1)
+            {
+                Drone newDrone = Instantiate(shipData.drone.obj, transform.position, 
+                    transform.rotation).GetComponent<Drone>();
+                newDrone.Setup(this, shipData.drone);
+                drones.Add(newDrone);
+            }
+        }
 
         // Add debug card 
         if (debugCard != null)
