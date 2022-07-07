@@ -15,7 +15,12 @@ public class Drone : Helper
     {
         // Check if dealer is open
         if (Dealer.isOpen) return;
+        else Move();
+    }
 
+    // Moves the drone
+    public virtual void Move()
+    {
         // Check position relative to player
         if (Vector2.Distance(transform.position, ship.transform.position) > range)
         {

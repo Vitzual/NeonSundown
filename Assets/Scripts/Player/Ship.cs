@@ -66,6 +66,7 @@ public class Ship : Weapon
     public ProgressBar xpBar;
     public TextMeshProUGUI levelText;
     public TextMeshProUGUI xpText;
+    public bool droneShip = false;
 
     // Ship specific stats
     private float regenAmount;
@@ -145,6 +146,7 @@ public class Ship : Weapon
             lifetime = shipData.weapon.lifetime;
             knockback = shipData.weapon.knockback;
             size = shipData.weapon.bulletSize;
+            rotateSpeed = shipData.weapon.rotateSpeed;
         }
         splitshots = 0;
 

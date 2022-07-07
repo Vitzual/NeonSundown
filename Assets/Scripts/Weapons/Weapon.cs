@@ -11,7 +11,7 @@ public class Weapon : MonoBehaviour
     // Weapon variables
     [HideInInspector]
     public float damage, cooldown, moveSpeed, bloom, pierces, bullets, lifetime,
-        range, knockback, splitshots, size, stunLength, critical;
+        range, knockback, splitshots, size, stunLength, critical, rotateSpeed;
     [HideInInspector]
     public bool explosiveRounds;
 

@@ -40,6 +40,12 @@ public class ShipData : IdentifiableScriptableObject
     public Vector2 modelOffset;
 
     [BoxGroup("Ship Data")]
+    public bool droneShip;
+    [BoxGroup("Ship Data"), ShowIf("droneShip", true)]
+    public HelperData drone;
+    [BoxGroup("Ship Data"), ShowIf("droneShip", true)]
+    public int droneAmount;
+    [BoxGroup("Ship Data")]
     public WeaponData weapon;
     [BoxGroup("Ship Data")]
     public bool playerControlledRotation;
