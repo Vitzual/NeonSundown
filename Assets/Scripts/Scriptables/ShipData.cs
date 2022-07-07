@@ -45,6 +45,12 @@ public class ShipData : IdentifiableScriptableObject
     public HelperData drone;
     [BoxGroup("Ship Data"), ShowIf("droneShip", true)]
     public int droneAmount;
+    [BoxGroup("Ship Data"), ShowIf("droneShip", true)]
+    public float droneDamage;
+    [BoxGroup("Ship Data"), ShowIf("droneShip", true)]
+    public float droneMoveSpeed;
+    [BoxGroup("Ship Data"), ShowIf("droneShip", true)]
+    public float droneRotateSpeed;
     [BoxGroup("Ship Data")]
     public WeaponData weapon;
     [BoxGroup("Ship Data")]

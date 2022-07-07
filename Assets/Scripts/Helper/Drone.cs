@@ -5,6 +5,7 @@ using UnityEngine;
 public class Drone : Helper
 {
     // Drone variables
+    public float damage;
     public float movementSpeed;
     public float rotationSpeed;
     public float range = 35f;

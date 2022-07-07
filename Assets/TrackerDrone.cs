@@ -7,6 +7,14 @@ public class TrackerDrone : Drone
     // Runtime references
     public Entity target;
 
+    // Set damage
+    public override void Setup(Ship ship, HelperData data)
+    {
+        // dumb. this should be its own SO
+        damage = ship.shipData.droneDamage;
+        base.Setup(ship, data);
+    }
+
     // Move drone towards target
     public override void Move()
     {
@@ -14,16 +22,19 @@ public class TrackerDrone : Drone
         if (target == null) base.Move();
 
         // If target not null, move
-        float angle = Mathf.Atan2(target.transform.position.y - transform.position.y,
-            target.transform.position.x - transform.position.x) * Mathf.Rad2Deg;
-        Quaternion targetRotation = Quaternion.Euler(new Vector3(0, 0, angle - 90f));
+        else
+        {
+            float angle = Mathf.Atan2(target.transform.position.y - transform.position.y,
+                target.transform.position.x - transform.position.x) * Mathf.Rad2Deg;
+            Quaternion targetRotation = Quaternion.Euler(new Vector3(0, 0, angle - 90f));
 
-        // Rotate to target
-        transform.rotation = Quaternion.RotateTowards(transform.rotation,
-            targetRotation, ship.rotateSpeed * Time.deltaTime);
+            // Rotate to target
+            transform.rotation = Quaternion.RotateTowards(transform.rotation,
+                targetRotation, ship.rotateSpeed * Time.deltaTime);
 
-        // Move forward
-        transform.position += transform.up * movementSpeed * Time.fixedDeltaTime;
+            // Move forward
+            transform.position += transform.up * movementSpeed * Time.fixedDeltaTime;
+        }
     }
 
 
@@ -35,7 +46,7 @@ public class TrackerDrone : Drone
         // Check if enemy is not null
         if (enemy != null)
         {
-            enemy.Damage(ship.damage, -1500f);
+            enemy.Damage(damage, -1500f);
             Knockback(-1500f, enemy.transform.position);
         }
         else

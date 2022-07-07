@@ -176,6 +176,8 @@ public class Ship : Weapon
             {
                 Drone newDrone = Instantiate(shipData.drone.obj, transform.position, 
                     transform.rotation).GetComponent<Drone>();
+                newDrone.movementSpeed = shipData.droneMoveSpeed;
+                newDrone.rotationSpeed = shipData.droneRotateSpeed;
                 newDrone.Setup(this, shipData.drone);
                 drones.Add(newDrone);
             }
@@ -574,6 +576,16 @@ public class Ship : Weapon
             // Upgrades the damage 
             case Stat.Damage:
                 damage = Deck.CalculateStat(stat, weapon.damage);
+                if (drones != null)
+                {
+                    float droneDamage = Deck.CalculateStat(stat, shipData.droneDamage);
+                    foreach (Drone drone in drones)
+                    {
+                        if (drone != null)
+                            drone.damage = droneDamage;
+                    }
+                }
+
                 break;
 
             // Increases firerate 
