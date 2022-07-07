@@ -56,6 +56,7 @@ MonoBehaviour:
   size: 0
   stunLength: 0
   critical: 0
+  rotateSpeed: 0
   explosiveRounds: 0
   level: 0
 --- !u!1 &2629815514678944784
@@ -196,6 +197,7 @@ MonoBehaviour:
   size: 0
   stunLength: 0
   critical: 0
+  rotateSpeed: 0
   explosiveRounds: 0
   level: 0
 --- !u!1 &8448323220291423393
@@ -329,6 +331,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f29552cc2091d8249b76300be1fa539a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  overrideOtherParticles: 0
+  rotateParticle: 0
+  deathMaterial: {fileID: 0}
+  deathEffect: {fileID: 0}
+  data: {fileID: 0}
+  level: 0
+  damage: 0
+  movementSpeed: 0
+  rotationSpeed: 0
+  range: 5
+  rb: {fileID: 8448323221370727098}
+  target: {fileID: 0}
+  hitSound: {fileID: 8300000, guid: 645bdcce8963e6049a99ba6cc52390a3, type: 3}
 --- !u!50 &8448323221370727098
 Rigidbody2D:
   serializedVersion: 4

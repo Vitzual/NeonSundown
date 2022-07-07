@@ -9,7 +9,7 @@ public class Drone : Helper
     public float movementSpeed;
     public float rotationSpeed;
     public float range = 35f;
-    private float directionCooldown;
+    protected float directionCooldown;
 
     // Move totem around randomly
     public void FixedUpdate()
