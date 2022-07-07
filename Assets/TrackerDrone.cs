@@ -15,13 +15,11 @@ public class TrackerDrone : Drone
     // Move drone towards target
     public override void Move()
     {
-        /* Check if on cooldown
         if (cooldown > 0f)
         {
             cooldown -= Time.deltaTime;
             return;
         }
-        */
 
         // Check if target is null
         if (target == null) target = ship.transform;
@@ -48,6 +46,7 @@ public class TrackerDrone : Drone
         // Check if enemy is not null
         if (enemy != null)
         {
+            cooldown = 1f;
             enemy.Damage(damage, -1500f);
             Knockback(-1500f, enemy.transform.position);
             if (hitSound != null) AudioPlayer.Play(hitSound);

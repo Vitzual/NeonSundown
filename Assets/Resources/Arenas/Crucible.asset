@@ -18,21 +18,20 @@ MonoBehaviour:
   enemyIcon: {fileID: 0}
   unlockedIcon: {fileID: 0}
   lockedIcon: {fileID: 0}
-  shortDesc: How many waves of enemies can you survive in the Crucible? Timer is
-    deactivated in this arena.
-  arenaBackground: {fileID: 0}
+  shortDesc: 'Limited arena size and '
+  arenaBackground: {fileID: 11400000, guid: 5bd6569aa1a55204f924b02aa6d57810, type: 2}
   arenaMenuPitch: 1
-  arenaMusic: {fileID: 0}
+  arenaMusic: {fileID: 8300000, guid: efb017532c0b8d64385468c88b516b20, type: 3}
   menuStage: {fileID: 0}
   difficulty: 1
-  achievementObjective: 
-  useAchievementTime: 0
-  achievementTime: 0
+  achievementObjective: Survive for 10 minutes
+  useAchievementTime: 1
+  achievementTime: 600
   useAchievementKills: 0
   enemyToKill: {fileID: 0}
   amountToKill: 0
   achievement: {fileID: 0}
-  unlockByDefault: 0
+  unlockByDefault: 1
   unlockObjective: Black Market Arena
   order: 9
   buttonColor: {r: 1, g: 0.8514392, b: 0, a: 1}
@@ -40,7 +39,8 @@ MonoBehaviour:
   darkColor: {r: 0.3679245, g: 0.3145394, b: 0, a: 1}
   stages: []
   blacklistCards: []
-  useWall: 0
-  wallBorder: {fileID: 0}
-  wallFill: {r: 0, g: 0, b: 0, a: 0}
-  wallAdjustment: 0
+  useVault: 0
+  useWall: 1
+  wallBorder: {fileID: 2100000, guid: 2acce2318e344e24bbf3b0cc69b0278f, type: 2}
+  wallFill: {r: 0.3018868, g: 0.25585344, b: 0, a: 1}
+  wallAdjustment: 1
