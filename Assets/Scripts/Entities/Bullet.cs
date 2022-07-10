@@ -81,7 +81,11 @@ public class Bullet : Entity
         deathEffect = weapon.particle;
 
         // Set bullet stats
-        damage = parent.damage;
+        if (parent.speedAffectsDamage) damage = parent.damage * 
+                (parent.speedDamageMultiplier * Controller.speed); 
+        else damage = parent.damage;
+
+        // Set other variable stats
         speed = parent.moveSpeed;
         pierce = parent.pierces;
         knockback = parent.knockback;

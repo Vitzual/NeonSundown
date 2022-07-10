@@ -46,8 +46,8 @@ public class Controller : MonoBehaviour
     // Internal input measurements
     public static float horizontal;
     public static float vertical;
+    public static float speed;
     private float dash;
-    private float speed;
 
     // Cursor variables
     public Texture2D cursorTexture;
@@ -89,6 +89,8 @@ public class Controller : MonoBehaviour
         if (isDashing && speed > moveSpeed) 
             speed -= dashFatigue;
         else speed = moveSpeed;
+
+        Debug.Log(speed);
 
         // Set rigidbody velocity
         body.velocity = new Vector2(horizontal * speed, vertical * speed);

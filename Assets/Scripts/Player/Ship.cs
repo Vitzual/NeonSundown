@@ -150,6 +150,8 @@ public class Ship : Weapon
             knockback = shipData.weapon.knockback;
             size = shipData.weapon.bulletSize;
             rotateSpeed = shipData.weapon.rotateSpeed;
+            speedAffectsDamage = shipData.speedAffectsDamage;
+            speedDamageMultiplier = shipData.speedDamageMultiplier;
         }
         splitshots = 0;
 

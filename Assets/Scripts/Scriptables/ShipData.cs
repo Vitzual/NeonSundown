@@ -51,6 +51,21 @@ public class ShipData : IdentifiableScriptableObject
     public float droneMoveSpeed;
     [BoxGroup("Ship Data"), ShowIf("droneShip", true)]
     public float droneRotateSpeed;
+
+    [BoxGroup("Ship Data")]
+    public bool chargingShip;
+    [BoxGroup("Ship Data"), ShowIf("chargingShip", true)]
+    public float maxChargeTime;
+    [BoxGroup("Ship Data"), ShowIf("chargingShip", true)]
+    public float chargeSpeed;
+    [BoxGroup("Ship Data"), ShowIf("chargingShip", true)]
+    public float chargeDamage;
+
+    [BoxGroup("Ship Data")]
+    public bool speedAffectsDamage;
+    [BoxGroup("Ship Data"), ShowIf("speedAffectsDamage", true)]
+    public float speedDamageMultiplier;
+
     [BoxGroup("Ship Data")]
     public WeaponData weapon;
     [BoxGroup("Ship Data")]

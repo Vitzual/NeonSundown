@@ -23,7 +23,7 @@ MonoBehaviour:
   canDrop: 0
   isUnlocked: 0
   baseLevels: []
-  damage: 1
+  damage: 0.5
   cooldown: 0.15
   moveSpeed: 200
   rotate: 0
@@ -42,7 +42,7 @@ MonoBehaviour:
   trackTarget: 0
   lockTarget: 0
   bullet: {fileID: 4616838733166897725, guid: afcb6e3c47783de4080790735a569129, type: 3}
-  bulletSound: {fileID: 0}
+  bulletSound: {fileID: 8300000, guid: 68d07ae6e3738284bbe68416a3035e7d, type: 3}
   obj: {fileID: 0}
   onDamageSound: {fileID: 0}
   onDeathSound: {fileID: 0}
@@ -50,11 +50,11 @@ MonoBehaviour:
   maxPitch: 1.1
   audioScale: 1
   setPlayerAsParent: 0
-  useMaterial: 0
+  useMaterial: 1
   useTrail: 0
-  useParticle: 0
-  material: {fileID: 0}
+  useParticle: 1
+  material: {fileID: 2100000, guid: 81797efe039f2124eaf21df71f39403d, type: 2}
   trail: {fileID: 0}
-  particle: {fileID: 0}
+  particle: {fileID: 8187003936069489464, guid: ca8dd1dc0d1584743b0edd08671aa666, type: 3}
   shakeScreenOnSpawn: 0
   shakeScreenOnDeath: 0
