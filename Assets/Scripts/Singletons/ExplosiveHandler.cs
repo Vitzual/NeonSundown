@@ -96,7 +96,8 @@ public class ExplosiveHandler : MonoBehaviour
     }
 
     // Create a knockback without explosion
-    public static void CreateKnockback(Vector2 origin, float range, float minKnockback, float maxKnockback, float damage = 0f)
+    public static void CreateKnockback(Vector2 origin, float range, float minKnockback, 
+        float maxKnockback, float damage = 0f, bool forceKnockback = false)
     {
         // Get all colliders in range
         Collider2D[] colliders = Physics2D.OverlapCircleAll(origin, range, explosionLayer);
@@ -108,7 +109,7 @@ public class ExplosiveHandler : MonoBehaviour
             Enemy enemy = colliders[i].GetComponent<Enemy>();
             if (enemy != null)
             {
-                enemy.Knockback(Random.Range(minKnockback, maxKnockback), origin);
+                enemy.Knockback(Random.Range(minKnockback, maxKnockback), origin, forceKnockback);
                 if (damage > 0) enemy.Damage(damage);
             }
 
@@ -119,7 +120,7 @@ public class ExplosiveHandler : MonoBehaviour
                 Crystal crystal = colliders[i].GetComponent<Crystal>();
                 if (crystal != null)
                 {
-                    crystal.Knockback(Random.Range(minKnockback, maxKnockback), origin);
+                    crystal.Knockback(Random.Range(minKnockback, maxKnockback), origin, forceKnockback);
                     if (damage > 0) crystal.Damage(damage);
                 }
             }

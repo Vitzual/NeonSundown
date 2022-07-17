@@ -50,7 +50,7 @@ public class Entity : MonoBehaviour
     }
 
     // Knockback entity
-    public virtual void Knockback(float amount, Vector3 origin)
+    public virtual void Knockback(float amount, Vector3 origin, bool forceKnockback = false)
     {
 
     }

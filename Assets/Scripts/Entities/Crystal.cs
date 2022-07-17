@@ -82,7 +82,7 @@ public class Crystal : Entity
     }
 
     // Knockback entity
-    public override void Knockback(float amount, Vector3 origin)
+    public override void Knockback(float amount, Vector3 origin, bool forceKnockback = false)
     {
         // Apply knockback
         rb.AddForce(Vector3.Normalize(origin - transform.position) * amount);

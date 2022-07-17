@@ -15,16 +15,16 @@ MonoBehaviour:
   internalId: 9ea6c870-301b-4c9f-be27-3765e749d10a
   createdAtTicks: 637916178950930392
   name: Bloodlust
-  enemyIcon: {fileID: 0}
-  unlockedIcon: {fileID: 0}
-  lockedIcon: {fileID: 0}
+  enemyIcon: {fileID: 21300000, guid: a9dde90cff4c9664d97d2adc6c7a61e9, type: 3}
+  unlockedIcon: {fileID: 21300000, guid: dc311ddf48d0ae64c9e046a00c9ab50f, type: 3}
+  lockedIcon: {fileID: 21300000, guid: 0ed8717a529aa9d42b66f0b313c915cf, type: 3}
   shortDesc: A fast-paced arena with thousands of fast weak enemies. Get ready to
     run fast!
-  arenaBackground: {fileID: 0}
+  arenaBackground: {fileID: 11400000, guid: 22ad62c0c7785fb4d994c5e929801bb4, type: 2}
   arenaMenuPitch: 1
-  arenaMusic: {fileID: 8300000, guid: 3ad15b08e5e9ffd4ab612a73be1e1360, type: 3}
-  menuStage: {fileID: 0}
-  difficulty: 3
+  arenaMusic: {fileID: 8300000, guid: 4d3ea5ed5a337fb488fbb059525ff725, type: 3}
+  menuStage: {fileID: 11400000, guid: 2035fb3d7b44cf94f8967af7f1f55dc5, type: 2}
+  difficulty: 2
   achievementObjective: 
   useAchievementTime: 0
   achievementTime: 0
@@ -32,13 +32,14 @@ MonoBehaviour:
   enemyToKill: {fileID: 0}
   amountToKill: 0
   achievement: {fileID: 0}
-  unlockByDefault: 0
+  unlockByDefault: 1
   unlockObjective: Black Market Arena
   order: 8
   buttonColor: {r: 1, g: 0.0000002304713, b: 0, a: 1}
   lightColor: {r: 1, g: 0.4009434, b: 0.4009434, a: 1}
   darkColor: {r: 0.33962262, g: 0, b: 0, a: 1}
-  stages: []
+  stages:
+  - {fileID: 11400000, guid: 2035fb3d7b44cf94f8967af7f1f55dc5, type: 2}
   blacklistCards: []
   useVault: 0
   useWall: 0

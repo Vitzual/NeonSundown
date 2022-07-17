@@ -30,8 +30,8 @@ public class Enemy : Entity
     // Internal runtime variables
     private float health;
     private float maxHealth;
-    private float speed;
-    private float rotation;
+    protected float moveSpeed;
+    protected float rotateSpeed;
     private float damage;
 
     // Runtime only variables
@@ -74,10 +74,10 @@ public class Enemy : Entity
 
         // Set stats
         health = variantData.health * ArenaController.enemyHealthMultiplier;
-        speed = variantData.speed * ArenaController.enemySpeedMultiplier;
+        moveSpeed = variantData.speed * ArenaController.enemySpeedMultiplier;
         damage = variantData.damage * ArenaController.enemyDamageMultiplier;
         maxHealth = health;
-        rotation = variantData.rotateSpeed;
+        rotateSpeed = variantData.rotateSpeed;
         immune = variantData.immune;
 
         // Set target
@@ -131,10 +131,10 @@ public class Enemy : Entity
     }
 
     // Knockback entity
-    public override void Knockback(float amount, Vector3 origin)
+    public override void Knockback(float amount, Vector3 origin, bool forceKnockback = false)
     {
         // Apply knockback
-        if (hasRigidbody && variantData.knockback)
+        if (hasRigidbody && (variantData.knockback || forceKnockback))
             rb.AddForce(Vector3.Normalize(origin - transform.position) * amount);
     }
 
@@ -206,7 +206,7 @@ public class Enemy : Entity
         if (target != null)
         {
             // Calculate step
-            step = speed * Time.deltaTime;
+            step = moveSpeed * Time.deltaTime;
 
             if (variantData.rotate)
             {
@@ -218,7 +218,7 @@ public class Enemy : Entity
             else
             {
                 // Rotate towards the object
-                rotateStep = rotation * Time.deltaTime;
+                rotateStep = rotateSpeed * Time.deltaTime;
                 angle = Mathf.Atan2(target.transform.position.y - transform.position.y,
                     target.transform.position.x - transform.position.x) * Mathf.Rad2Deg;
                 Quaternion targetRotation = Quaternion.Euler(new Vector3(0, 0, angle - 90f));
@@ -272,7 +272,7 @@ public class Enemy : Entity
             bullet.OnHit(this);
             return;
         }
-        else
+        else if (collision.transform.parent != null)
         {
             // Get the other enemy component
             bullet = collision.transform.parent.GetComponent<Bullet>();
@@ -305,6 +305,6 @@ public class Enemy : Entity
     {
         if (hasRigidbody)
             rb.freezeRotation = true;
-        rotation = 0f;
+        rotateSpeed = 0f;
     }
 }

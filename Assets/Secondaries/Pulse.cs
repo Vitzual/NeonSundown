@@ -9,6 +9,7 @@ public class Pulse : Secondary
     public float maxKnockback = -1000f;
     public float damage = 0;
     public float range = 15f;
+    public bool forceKnockback = true;
     public ParticleSystem particle;
 
     // Virtual use method
@@ -17,7 +18,8 @@ public class Pulse : Secondary
         if (cooldown <= 0 && !Dealer.isOpen)
         {
             cooldown = data.cooldown;
-            ExplosiveHandler.CreateKnockback(ship.transform.position, range, minKnockback, maxKnockback, damage);
+            ExplosiveHandler.CreateKnockback(ship.transform.position, range, 
+                minKnockback, maxKnockback, damage, forceKnockback);
             AudioPlayer.Play(sound);
             particle.Play();
         }   

@@ -90,8 +90,6 @@ public class Controller : MonoBehaviour
             speed -= dashFatigue;
         else speed = moveSpeed;
 
-        Debug.Log(speed);
-
         // Set rigidbody velocity
         body.velocity = new Vector2(horizontal * speed, vertical * speed);
     }

@@ -355,16 +355,16 @@ public class Ship : Weapon
             else if (BulletHandler.energyBullets)
             {
                 if (Settings.shipColoring) BulletHandler.active.CreateEnergyBullet(this, shipData.weapon, barrel.position,
-                    model.rotation, bulletsToFire, bloom, size, shipData.weapon.material, explosiveRounds, false);
+                    model.rotation, bulletsToFire, bloom, size, shipData.weapon.material, true, explosiveRounds);
                 else BulletHandler.active.CreateEnergyBullet(this, shipData.weapon, barrel.position,
-                    model.rotation, bulletsToFire, bloom, size, defaultGlow, explosiveRounds, false);
+                    model.rotation, bulletsToFire, bloom, size, defaultGlow, true, explosiveRounds);
             }
             else
             {
                 if (Settings.shipColoring) BulletHandler.active.CreateBullet(this, shipData.weapon, barrel.position,
-                    model.rotation, bulletsToFire, bloom, size, shipData.weapon.material, explosiveRounds, true);
+                    model.rotation, bulletsToFire, bloom, size, shipData.weapon.material, true, explosiveRounds);
                 else BulletHandler.active.CreateBullet(this, shipData.weapon, barrel.position,
-                    model.rotation, bulletsToFire, bloom, size, defaultGlow, explosiveRounds, true);
+                    model.rotation, bulletsToFire, bloom, size, defaultGlow, true, explosiveRounds);
             }
             shipCooldown = cooldown;
         }

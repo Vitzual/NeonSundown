@@ -2,19 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Totem : Drone
+public class HealingTotem : BaseTotem
 {
-    public AudioClip healSound;
-
+    // Healing variables
     public float healAmount;
     public float healCooldown;
-
-    public Transform radius;
-    public float targetRadius;
-    public Vector3 scaleSpeed;
-    public float maxDistance;
-    private float cooldown;
-    private bool isHealing;
 
     // On start, play animation
     public override void CustomUpdate()
@@ -26,7 +18,7 @@ public class Totem : Drone
 
         if (cooldown <= 0)
         {
-            if (isHealing)
+            if (shipInsideRange)
             {
                 Ship.Heal(healAmount);
                 cooldown = healCooldown;
@@ -58,21 +50,5 @@ public class Totem : Drone
         if (stat == Stat.Cooldown)
             return healCooldown;
         else return -1;
-    }
-
-    // On collision with enemy, apply damage
-    public void OnTriggerEnter2D(Collider2D collision)
-    {
-        // Get the enemy component
-        AudioPlayer.Play(healSound, false, 1f, 1f, false, 0.6f);
-        isHealing = true;
-    }
-
-    // On collision with enemy, apply damage
-    public void OnTriggerExit2D(Collider2D collision)
-    {
-        // Get the enemy component
-        AudioPlayer.Play(healSound, false, 0.8f, 0.8f, false, 0.6f);
-        isHealing = false;
     }
 }

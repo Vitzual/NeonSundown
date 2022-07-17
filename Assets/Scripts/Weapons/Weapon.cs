@@ -10,9 +10,8 @@ public class Weapon : MonoBehaviour
     
     // Weapon variables
     [HideInInspector]
-    public float damage, cooldown, moveSpeed, bloom, pierces, bullets, lifetime,
-        range, knockback, splitshots, size, stunLength, critical, rotateSpeed,
-        speedDamageMultiplier;
+    public float damage, damageMultiplier = 1f, cooldown, moveSpeed, bloom, pierces, bullets, lifetime,
+        range, knockback, splitshots, size, stunLength, critical, rotateSpeed, speedDamageMultiplier;
     [HideInInspector]
     public bool explosiveRounds, speedAffectsDamage = false;
 
@@ -31,6 +30,7 @@ public class Weapon : MonoBehaviour
     {
         this.target = target;
         weapon = data;
+        damageMultiplier = 1f;
         SetupStats();
     }
     

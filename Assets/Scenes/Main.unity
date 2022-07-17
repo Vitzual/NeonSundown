@@ -13940,6 +13940,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 0
+  damageMultiplier: 1
   cooldown: 0
   moveSpeed: 0
   bloom: 0
@@ -13952,7 +13953,10 @@ MonoBehaviour:
   size: 0
   stunLength: 0
   critical: 0
+  rotateSpeed: 0
+  speedDamageMultiplier: 0
   explosiveRounds: 0
+  speedAffectsDamage: 0
   level: 0
   normalMouse: {fileID: 2800000, guid: c27a1bb75344731438af61a83e9b5b41, type: 3}
   crosshairMouse: {fileID: 2800000, guid: 347780322b1cab849a8dddfae00ddc35, type: 3}
@@ -13998,6 +14002,7 @@ MonoBehaviour:
   xpBar: {fileID: 26750952}
   levelText: {fileID: 2015260872}
   xpText: {fileID: 1219155500}
+  droneShip: 0
   cam: {fileID: 519420031}
   debugCard: {fileID: 0}
 --- !u!82 &872257027
