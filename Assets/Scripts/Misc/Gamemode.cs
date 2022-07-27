@@ -34,6 +34,9 @@ public class Gamemode : MonoBehaviour
     public Vector2 vaultPosition;
     public Vector2 vaultPlayerPosition;
 
+    // Reference to in-game camera
+    public new Camera camera;
+
     // Setup the game
     public void Awake()
     {
@@ -66,6 +69,9 @@ public class Gamemode : MonoBehaviour
             Vault newVault = Instantiate(vault, vaultPosition, Quaternion.identity);
             ship.transform.position = vaultPlayerPosition;
         }
+
+        // Set camera viewing range
+        if (camera != null) camera.orthographicSize = arena.startingViewRange;
     }
 
     // Load menu

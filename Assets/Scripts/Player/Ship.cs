@@ -562,7 +562,7 @@ public class Ship : Weapon
 
             // Upgrades the view distance
             case Stat.View:
-                cam.orthographicSize = Deck.CalculateStat(stat, 45);
+                cam.orthographicSize = Deck.CalculateStat(stat, Gamemode.arena.startingViewRange);
                 break;
 
             // Upgrades the speed 

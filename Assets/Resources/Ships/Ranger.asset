@@ -34,10 +34,22 @@ MonoBehaviour:
   playerSize: {x: 1.25, y: 1.25}
   barrelPosition: {x: 0, y: 0}
   modelOffset: {x: 0, y: 0}
+  droneShip: 0
+  drone: {fileID: 0}
+  droneAmount: 0
+  droneDamage: 0
+  droneMoveSpeed: 0
+  droneRotateSpeed: 0
+  chargingShip: 0
+  maxChargeTime: 0
+  chargeSpeed: 0
+  chargeDamage: 0
+  speedAffectsDamage: 0
+  speedDamageMultiplier: 0
   weapon: {fileID: 11400000, guid: 101873819e8d33f48a5eb181b1423d9b, type: 2}
   playerControlledRotation: 1
   canFire: 1
   regenAmount: 0
   playerSpeed: 25
-  dashSpeed: 70
+  dashSpeed: 85
   startingHealth: 20

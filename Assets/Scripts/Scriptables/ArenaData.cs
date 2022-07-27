@@ -36,6 +36,8 @@ public class ArenaData : IdentifiableScriptableObject
     public StageData menuStage;
     [BoxGroup("Arena Info")]
     public Difficulty difficulty;
+    [BoxGroup("Arena Info")]
+    public float startingViewRange = 45f;
 
     [BoxGroup("Achievement Info")]
     public string achievementObjective;

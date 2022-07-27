@@ -20,6 +20,7 @@ public class Store : MonoBehaviour
     public Image moduleBorderOne;
     public Image moduleBorderTwo;
     public Image panelBorder;
+    public Image panelBackground;
     public Image panelButton;
     public new TextMeshProUGUI name;
     public TextMeshProUGUI desc;
@@ -104,6 +105,7 @@ public class Store : MonoBehaviour
         moduleBorderOne.color = module.color;
         moduleBorderTwo.color = module.color;
         panelBorder.color = module.color;
+        panelBackground.color = new Color(module.color.r, module.color.g, module.color.b, 0.25f);
         panelButton.color = module.color;
         owned.color = module.color;
 
