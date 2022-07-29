@@ -35,8 +35,8 @@ public class Reward : MonoBehaviour
             }
 
             rewardIcon.sprite = level.cardReward.sprite;
-            rewardName.text = level.cardReward.name + " Card";
-            rewardDescription.text = level.cardReward.description;
+            rewardName.text = level.cardReward.name + " CARD".ToUpper();
+            rewardDescription.text = level.cardReward.description.ToUpper();
             rewardIcon.color = lightColor;
         }
         else if (level.arenaReward != null)
@@ -48,8 +48,8 @@ public class Reward : MonoBehaviour
             }
 
             rewardIcon.sprite = level.arenaReward.enemyIcon;
-            rewardName.text = level.arenaReward.name + " Arena";
-            rewardDescription.text = level.arenaReward.shortDesc;
+            rewardName.text = level.arenaReward.name + " ARENA".ToUpper();
+            rewardDescription.text = level.arenaReward.shortDesc.ToUpper();
             if (unlocked) rewardIcon.color = lightColor;
             else rewardIcon.color = Color.gray;
         }
@@ -62,8 +62,8 @@ public class Reward : MonoBehaviour
             }
 
             rewardIcon.sprite = level.shipReward.glowIcon;
-            rewardName.text = level.shipReward.name + " Ship";
-            rewardDescription.text = level.shipReward.shortDesc;
+            rewardName.text = level.shipReward.name + " SHIP".ToUpper();
+            rewardDescription.text = level.shipReward.shortDesc.ToUpper();
             if (unlocked) rewardIcon.color = lightColor;
             else rewardIcon.color = Color.gray;
         }
@@ -76,8 +76,8 @@ public class Reward : MonoBehaviour
             }
 
             rewardIcon.sprite = level.synergyReward.outputCard.sprite;
-            rewardName.text = level.synergyReward.name + " Synergy";
-            rewardDescription.text = level.synergyReward.desc;
+            rewardName.text = level.synergyReward.name + " SYNERGY".ToUpper();
+            rewardDescription.text = level.synergyReward.desc.ToUpper();
             if (unlocked) rewardIcon.color = lightColor;
             else rewardIcon.color = Color.gray;
         }
@@ -91,8 +91,8 @@ public class Reward : MonoBehaviour
             }
             else rewardIcon.sprite = level.lockedIcon;
 
-            rewardName.text = level.rewardName;
-            rewardDescription.text = level.rewardDesc;
+            rewardName.text = level.rewardName.ToUpper();
+            rewardDescription.text = level.rewardDesc.ToUpper();
             if (unlocked) rewardIcon.color = level.rewardColor;
             else rewardIcon.color = Color.gray;
         }
