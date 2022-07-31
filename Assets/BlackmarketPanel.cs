@@ -39,12 +39,11 @@ public class BlackmarketPanel : MonoBehaviour
 
     // Data holder
     private BlackmarketData data;
-    private bool alreadyPurchased = false;
+    private bool alreadyPurchased = false, isPreviewing = false;
 
     public void Start()
     {
         Events.active.onBlackmarketItemClicked += SetItem;
-
         UpdateProgress();
     }
 
@@ -94,14 +93,14 @@ public class BlackmarketPanel : MonoBehaviour
         notSelectedView.gameObject.SetActive(true);
         selectedView.gameObject.SetActive(false);
         blackmarket.UpdateListings();
-        CancelPreview();
+        if (isPreviewing) CancelPreview();
         UpdateProgress();
     }
 
     public void SetItem(BlackmarketData data)
     {
         // Cancel preview
-        CancelPreview();
+        if (isPreviewing) CancelPreview();
 
         // Set data object
         this.data = data;
@@ -120,12 +119,17 @@ public class BlackmarketPanel : MonoBehaviour
         // Set text
         title.text = data.name.ToUpper();
         desc.text = data.desc.ToUpper();
-        amount.text = amount + " CRYSTALS";
+        amount.text = data.amountRequired + " CRYSTALS";
+        icon.sprite = data.icon;
 
         // Set colors
         border.color = data.lightColor;
         background.color = data.darkColor;
         title.color = data.lightColor;
+        buyButton.color = data.lightColor;
+        testButton.color = data.lightColor;
+        if (data.useLightColorOnIcon)
+            icon.color = data.lightColor;
 
         // Set crystal color
         switch (data.crystal)
@@ -201,6 +205,7 @@ public class BlackmarketPanel : MonoBehaviour
     {
         // Cancel preview
         CancelPreview();
+        isPreviewing = true;
 
         // Set button thing
         switch (data.type)

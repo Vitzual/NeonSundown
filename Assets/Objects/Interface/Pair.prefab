@@ -364,6 +364,7 @@ MonoBehaviour:
   blueCrystal: {r: 0, g: 0.55032945, b: 1, a: 1}
   redCrystal: {r: 1, g: 0, b: 0, a: 1}
   greenCrystal: {r: 0, g: 1, b: 0.06529045, a: 1}
+  data: {fileID: 0}
 --- !u!114 &532673763206359569
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -379,7 +380,19 @@ MonoBehaviour:
   buttonText: EXAMPLE
   clickEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7116670234128340413}
+        m_TargetAssemblyTypeName: BlackmarketItem, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   hoverEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -689,6 +702,7 @@ MonoBehaviour:
   blueCrystal: {r: 0, g: 0.55032945, b: 1, a: 1}
   redCrystal: {r: 1, g: 0, b: 0, a: 1}
   greenCrystal: {r: 0, g: 1, b: 0.06529045, a: 1}
+  data: {fileID: 0}
 --- !u!114 &532673763528789731
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -704,7 +718,19 @@ MonoBehaviour:
   buttonText: EXAMPLE
   clickEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 811827351392074192}
+        m_TargetAssemblyTypeName: BlackmarketItem, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   hoverEvent:
     m_PersistentCalls:
       m_Calls: []
