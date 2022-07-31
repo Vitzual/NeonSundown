@@ -27,6 +27,8 @@ public class BlackmarketData : IdentifiableScriptableObject
     public ArenaData arena;
     [ShowIf("type", Type.Chip), BoxGroup("Item Type")]
     public ChipData chip;
+    [BoxGroup("Item Type")]
+    public bool hideInExperimental;
 
     [BoxGroup("Item Info")]
     public Sprite icon;

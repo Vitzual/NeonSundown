@@ -18,6 +18,8 @@ public class SaveData
         shipsUnlocked = new List<string>();
         cardsUnlocked = new List<string>();
         synergiesUnlocked = new List<string>();
+        audioModsUnlocked = new List<string>();
+        blackmarketItemsPurchased = new List<string>();
         arenaTimes = new SerializableDictionary<string, float>();
         crystals = new SerializableDictionary<string, int>();
         modules = new SerializableDictionary<string, int>();
@@ -31,6 +33,8 @@ public class SaveData
     public List<string> shipsUnlocked;
     public List<string> cardsUnlocked;
     public List<string> synergiesUnlocked;
+    public List<string> audioModsUnlocked;
+    public List<string> blackmarketItemsPurchased;
     public SerializableDictionary<string, float> arenaTimes;
     public SerializableDictionary<string, int> crystals;
     public SerializableDictionary<string, int> modules;

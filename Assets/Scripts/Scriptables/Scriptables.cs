@@ -19,6 +19,7 @@ public static class Scriptables
     public static string SynergiesPath = "Synergies";
     public static string ModulesPath = "Modules";
     public static string BlackmarketPath = "Blackmarket";
+    public static string AudioModsPath = "Audio";
 
     // Scriptable dictionaries
     public static Dictionary<string, CardData> cardsDict;
@@ -27,6 +28,7 @@ public static class Scriptables
     public static Dictionary<string, ArenaData> arenasDict;
     public static Dictionary<string, ShipData> shipsDict;
     public static Dictionary<string, ModuleData> modulesDict;
+    public static Dictionary<string, AudioData> audioModsDict;
     public static Dictionary<string, BlackmarketData> blackmarketDict;
 
     // Scriptable lists
@@ -38,6 +40,7 @@ public static class Scriptables
     public static List<CrystalData> crystals;
     public static List<SynergyData> synergies;
     public static List<ModuleData> modules;
+    public static List<AudioData> audioMods;
     public static List<BlackmarketData> blackmarketItems;
 
     // Generate scriptables
@@ -56,6 +59,7 @@ public static class Scriptables
         GenerateSynergies();
         GenerateModules();
         GenerateBlackmarketItems();
+        GenerateAudioMods();
 
         // Set generated to true
         generated = true;
@@ -196,6 +200,23 @@ public static class Scriptables
             modules.Add(module);
             modulesDict.Add(module.InternalID, module);
             Debug.Log("Loaded " + module.name + " with UUID " + module.InternalID);
+        }
+    }
+
+    // Generate modules on startup
+    public static void GenerateAudioMods()
+    {
+        audioModsDict = new Dictionary<string, AudioData>();
+        audioMods = new List<AudioData>();
+
+        List<AudioData> loaded = Resources.LoadAll(AudioModsPath, typeof(AudioData)).Cast<AudioData>().ToList();
+        Debug.Log("Loaded " + loaded.Count + " modules from " + AudioModsPath);
+
+        foreach (AudioData audio in loaded)
+        {
+            audioMods.Add(audio);
+            audioModsDict.Add(audio.InternalID, audio);
+            Debug.Log("Loaded " + audio.name + " with UUID " + audio.InternalID);
         }
     }
 

@@ -141,4 +141,11 @@ public class Events : MonoBehaviour
         if (onUpdateShowHP != null)
             onUpdateShowHP(toggle);
     }
+
+    public event Action<BlackmarketData> onBlackmarketItemClicked;
+    public void BlackmarketItemClicked(BlackmarketData data)
+    {
+        if (onBlackmarketItemClicked != null)
+            onBlackmarketItemClicked(data);
+    }
 }

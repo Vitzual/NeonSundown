@@ -9,9 +9,9 @@ using System.Linq;
 public class SaveSystem
 {
     // Save path
-    private const string CLOUD_SAVE_NAME = "player_save.json";
-    private const string SAVE_PATH = "/player_save.json";
-    private const string META_PATH = "/context_save.json";
+    private const string CLOUD_SAVE_NAME = "experimental_player_save.json";
+    private const string SAVE_PATH = "/experimental_player_save.json";
+    private const string META_PATH = "/experimental_context_save.json";
     private const int MAX_ARENA_TIMES = 10;
 
     // Most up-to-date data
@@ -232,6 +232,13 @@ public class SaveSystem
         }
     }
 
+    // Fully resets a save
+    public static void ResetSave()
+    {
+        GenerateSave();
+        Debug.Log("Reset save!");
+    }
+
     // Add a crystal to save
     public static void AddXP(float amount) { saveData.xp += amount; }
     public static void LevelUp() { saveData.level += 1; }
@@ -282,6 +289,20 @@ public class SaveSystem
         // Update the card unlocks
         if (!saveData.synergiesUnlocked.Contains(id))
             saveData.synergiesUnlocked.Add(id);
+    }
+    
+    // Unlocks a blackmarket item
+    public static void AddBlackmarketItem(string id)
+    {
+        if (!saveData.blackmarketItemsPurchased.Contains(id))
+            saveData.blackmarketItemsPurchased.Add(id);
+    }
+
+    // Unlocks a blackmarket item
+    public static void AddAudioMod(string id)
+    {
+        if (!saveData.audioModsUnlocked.Contains(id))
+            saveData.audioModsUnlocked.Add(id);
     }
 
     // Saves arena time
@@ -356,5 +377,7 @@ public class SaveSystem
     public static bool IsShipUnlocked(string id) { return saveData != null && saveData.shipsUnlocked.Contains(id); }
     public static bool IsCardUnlocked(string id) { return saveData != null && saveData.cardsUnlocked.Contains(id); }
     public static bool IsSynergyUnlocked(string id) { return saveData != null && saveData.synergiesUnlocked.Contains(id); }
+    public static bool IsAudioModUnlocked(string id) { return saveData != null && saveData.audioModsUnlocked.Contains(id); }
+    public static bool IsBlackmarketItemUnlocked(string id) { return saveData != null && saveData.blackmarketItemsPurchased.Contains(id); }
     public static bool IsPlayerMaxLevel() { return saveData != null && saveData.level >= Levels.ranks.Count; }
 }
