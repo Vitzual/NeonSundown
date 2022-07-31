@@ -5,7 +5,8 @@ using UnityEngine;
 public class MusicPlayer : MonoBehaviour
 {
     // Audio mod
-    public AudioData menuMusic;
+    public AudioData _menuMusic;
+    private static AudioData menuMusic;
 
     // Audio source for music
     public bool useRandomTracks = false;
@@ -22,6 +23,9 @@ public class MusicPlayer : MonoBehaviour
     // Start is called before the first frame update
     public void Start()
     {
+        // Set static instance
+        menuMusic = _menuMusic;
+
         // Subscribe to volume change event
         Events.active.onVolumeChanged += UpdateVolume;
         Events.active.onMusicPitchChanged += ResetPitch;
@@ -63,7 +67,21 @@ public class MusicPlayer : MonoBehaviour
     public static void StopMusic() { music.Pause(); bossMusic.Pause(); }
     public static void ResetPitch() { music.pitch = 1f; }
     public static void SetPitch(float pitch) { music.pitch = pitch; }
-    
+
+    // Plays a specific song
+    public static void PlaySong(AudioClip clip)
+    {
+        music.Stop();
+        music.clip = clip;
+        music.Play();
+    }
+
+    // Resets the song
+    public static void ResetSong() 
+    {
+        PlaySong(menuMusic.audio);
+    }
+
     // Play boss music
     public static void PlayBossMusic(AudioClip newMusic)
     {

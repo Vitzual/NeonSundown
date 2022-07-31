@@ -15,7 +15,8 @@ public class BlackmarketItem : MonoBehaviour
     public Color blueCrystal, redCrystal, greenCrystal;
 
     // Blackmarket data 
-    private BlackmarketData data;
+    [HideInInspector]
+    public BlackmarketData data;
     private bool isUnlocked = false;
 
     // Set the item component

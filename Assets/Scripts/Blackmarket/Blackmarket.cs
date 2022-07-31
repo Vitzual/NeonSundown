@@ -18,10 +18,12 @@ public class Blackmarket : MonoBehaviour
         public int index;
     }
 
+    // List of all blackmarket things
+    private List<BlackmarketPair> pairs;
+
     // Dictionary of lists
     public SerializableDictionary<BlackmarketData.Type, Transform> listings;
     private Dictionary<BlackmarketData.Type, BlackmarketPair> genPair;
-    private Dictionary<BlackmarketData.Type, int> typeIndex;
 
     // Blackmarket pair prefab
     public BlackmarketPair blackmarketPair;
@@ -30,15 +32,15 @@ public class Blackmarket : MonoBehaviour
     public void Start()
     {
         // Setup new dictionary
+        pairs = new List<BlackmarketPair>();
         genPair = new Dictionary<BlackmarketData.Type, BlackmarketPair>();
-        typeIndex = new Dictionary<BlackmarketData.Type, int>();
 
         // Update black market listings
-        UpdateListings();
+        GenerateListings();
     }
 
     // On open, update listings
-    public void UpdateListings()
+    public void GenerateListings()
     {
         // List of organized items
         BlackmarketData[] blackmarketItems = new BlackmarketData[Scriptables.blackmarketItems.Count];
@@ -82,6 +84,7 @@ public class Blackmarket : MonoBehaviour
                     BlackmarketPair newPair = Instantiate(blackmarketPair, listings[blackmarketItem.type]);
                     genPair[blackmarketItem.type] = newPair;
                     newPair.Setup(blackmarketItem, true);
+                    pairs.Add(newPair);
                 }
             }
             else
@@ -89,7 +92,15 @@ public class Blackmarket : MonoBehaviour
                 BlackmarketPair newPair = Instantiate(blackmarketPair, listings[blackmarketItem.type]);
                 genPair.Add(blackmarketItem.type, newPair);
                 newPair.Setup(blackmarketItem, true);
+                pairs.Add(newPair);
             }
         }
+    }
+
+    // Force update listing
+    public void UpdateListings()
+    {
+        foreach (BlackmarketPair pair in pairs)
+            pair.UpdatePairs();
     }
 }

@@ -52056,7 +52056,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e7b2adda83349c45a4958d8e313ab5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  menuMusic: {fileID: 11400000, guid: 17091283da2ea9e41b87166eb885070c, type: 2}
+  _menuMusic: {fileID: 0}
   useRandomTracks: 0
   _isMenu: 1
   _bossMusic: {fileID: 0}
@@ -93534,6 +93534,9 @@ MonoBehaviour:
   - type: 4
     amount: {fileID: 586444499}
     bar: {fileID: 1932900954}
+  defaultShip: {fileID: 11400000, guid: b1370a648ab4cb542922d56a80462803, type: 2}
+  labs: {fileID: 11400000, guid: 996ea70cdc8c94344bbe96fedae2ef30, type: 2}
+  blackmarket: {fileID: 347118498}
   title: {fileID: 1765580524}
   desc: {fileID: 646525272}
   amount: {fileID: 1586721884}
@@ -93545,6 +93548,8 @@ MonoBehaviour:
   background: {fileID: 1938429943}
   buyButton: {fileID: 583370332}
   testButton: {fileID: 1848076569}
+  notSelectedView: {fileID: 93873646}
+  selectedView: {fileID: 1799853410}
   blueCrystal: {r: 0, g: 0.55032945, b: 1, a: 1}
   redCrystal: {r: 1, g: 0.050477777, b: 0, a: 1}
   greenCrystal: {r: 0, g: 1, b: 0.13914847, a: 1}

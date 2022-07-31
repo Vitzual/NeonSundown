@@ -21,4 +21,10 @@ public class BlackmarketPair : MonoBehaviour
             bottomItem.gameObject.SetActive(true);
         }
     }
+
+    public void UpdatePairs()
+    {
+        if (topItem != null && topItem.data != null) topItem.Set(topItem.data);
+        if (bottomItem != null && bottomItem.data != null) bottomItem.Set(bottomItem.data);
+    }
 }

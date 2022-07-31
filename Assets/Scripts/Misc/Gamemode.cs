@@ -15,6 +15,8 @@ public class Gamemode : MonoBehaviour
     public static ArenaData arena;
     public static ShipData shipData;
     public static Dictionary<int, ModuleData> modules;
+    public static List<CardData> startingCards;
+    public static List<CardData> blacklistCards;
     public static bool isAlphaBuild;
 
     // Arena interface variables
@@ -42,6 +44,8 @@ public class Gamemode : MonoBehaviour
     {
         RuntimeStats.ResetStats();
         Scriptables.GenerateAllScriptables();
+        startingCards = new List<CardData>();
+        blacklistCards = new List<CardData>();
         if (arena == null) arena = _arena;
     }
 

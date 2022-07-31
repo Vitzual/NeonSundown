@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class BlackmarketPanel : MonoBehaviour
@@ -20,7 +21,11 @@ public class BlackmarketPanel : MonoBehaviour
     public List<Progress> progress;
 
     // Labs stage
+    public ShipData defaultShip;
     public ArenaData labs;
+
+    // Reference to blackmarket
+    public Blackmarket blackmarket;
 
     // Panel components 
     public TextMeshProUGUI title, desc, amount,
@@ -39,6 +44,48 @@ public class BlackmarketPanel : MonoBehaviour
     public void Start()
     {
         Events.active.onBlackmarketItemClicked += SetItem;
+
+        UpdateProgress();
+    }
+
+    public void UpdateProgress()
+    {
+        // Dictionary of types
+        Dictionary<BlackmarketData.Type, int> totalAmount = new Dictionary<BlackmarketData.Type, int>();
+        Dictionary<BlackmarketData.Type, int> progressAmount = new Dictionary<BlackmarketData.Type, int>();
+
+        // Iterate through all 
+        foreach (BlackmarketData data in Scriptables.blackmarketItems)
+        {
+            if (totalAmount.ContainsKey(data.type))
+            {
+                totalAmount[data.type] += 1;
+                if (SaveSystem.IsBlackmarketItemUnlocked(data.InternalID))
+                    progressAmount[data.type] += 1;
+            }
+            else
+            {
+                totalAmount.Add(data.type, 1);
+                progressAmount.Add(data.type, 0);
+                if (SaveSystem.IsBlackmarketItemUnlocked(data.InternalID))
+                    progressAmount[data.type] += 1;
+            }
+        }
+
+        // Set progress bars
+        foreach (KeyValuePair<BlackmarketData.Type, int> amount in totalAmount)
+        {
+            foreach (Progress pro in progress)
+            {
+                if (pro.type == amount.Key)
+                {
+                    pro.amount.text = progressAmount[amount.Key] + "/" + amount.Value;
+                    pro.bar.maxValue = amount.Value;
+                    pro.bar.currentPercent = progressAmount[amount.Key];
+                    break;
+                }
+            }
+        }
     }
 
     public void ResetPanel()
@@ -46,10 +93,16 @@ public class BlackmarketPanel : MonoBehaviour
         // Set selected view
         notSelectedView.gameObject.SetActive(true);
         selectedView.gameObject.SetActive(false);
+        blackmarket.UpdateListings();
+        CancelPreview();
+        UpdateProgress();
     }
 
     public void SetItem(BlackmarketData data)
     {
+        // Cancel preview
+        CancelPreview();
+
         // Set data object
         this.data = data;
 
@@ -110,10 +163,70 @@ public class BlackmarketPanel : MonoBehaviour
     {
         // Check if already purchased
         if (alreadyPurchased) return;
+
+        // If not already purchased, unlock and reset panels
+        if (!SaveSystem.IsBlackmarketItemUnlocked(data.InternalID))
+        {
+            // Depending on type, unlock new content
+            switch (data.type)
+            {
+                case BlackmarketData.Type.Ship:
+                    if (data.ship != null && !SaveSystem.IsShipUnlocked(data.ship.InternalID))
+                        SaveSystem.AddShipUnlock(data.ship.InternalID);
+                    break;
+                case BlackmarketData.Type.Arena:
+                    if (data.arena != null && !SaveSystem.IsArenaUnlocked(data.arena.InternalID))
+                        SaveSystem.AddArenaUnlock(data.arena.InternalID);
+                    break;
+                case BlackmarketData.Type.Card:
+                    if (data.card != null && !SaveSystem.IsCardUnlocked(data.card.InternalID))
+                        SaveSystem.AddCardUnlock(data.card.InternalID);
+                    break;
+                case BlackmarketData.Type.Audio:
+                    if (data.audio != null && !SaveSystem.IsAudioModUnlocked(data.audio.InternalID))
+                        SaveSystem.AddAudioMod(data.audio.InternalID);
+                    break;
+            }
+
+            // Add blackmarket internal ID
+            SaveSystem.AddBlackmarketItem(data.InternalID);
+        }
+
+        // Reset the panel
+        ResetPanel();
     }
 
+    // Depending on item, preview it
     public void PreviewItem()
     {
+        // Cancel preview
+        CancelPreview();
 
+        // Set button thing
+        switch (data.type)
+        {
+            case BlackmarketData.Type.Ship:
+                Gamemode.shipData = data.ship;
+                Gamemode.arena = labs;
+                SceneManager.LoadScene("Main");
+                break;
+            case BlackmarketData.Type.Arena:
+                MusicPlayer.PlaySong(data.arena.arenaMusic);
+                break;
+            case BlackmarketData.Type.Card:
+                Gamemode.shipData = defaultShip;
+                Gamemode.arena = labs;
+                Gamemode.startingCards.Add(data.card);
+                SceneManager.LoadScene("Main");
+                break;
+            case BlackmarketData.Type.Audio:
+                MusicPlayer.PlaySong(data.audio.audio);
+                break;
+        }
+    }
+
+    public void CancelPreview()
+    {
+        MusicPlayer.ResetSong();
     }
 }
