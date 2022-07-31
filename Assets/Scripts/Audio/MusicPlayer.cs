@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class MusicPlayer : MonoBehaviour
 {
+    // Audio mod
+    public AudioData menuMusic;
+
     // Audio source for music
     public bool useRandomTracks = false;
     public bool _isMenu = false;
@@ -33,6 +36,11 @@ public class MusicPlayer : MonoBehaviour
         {
             music.clip = Gamemode.arena.arenaMusic;
             music.loop = true;
+        }
+        else
+        {
+            // Set menu music
+            music.clip = menuMusic.audio;
         }
 
         if(bossMusic != null) 

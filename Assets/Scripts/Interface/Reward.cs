@@ -35,7 +35,7 @@ public class Reward : MonoBehaviour
             }
 
             rewardIcon.sprite = level.cardReward.sprite;
-            rewardName.text = level.cardReward.name + " CARD".ToUpper();
+            rewardName.text = level.cardReward.name.ToUpper() + " CARD";
             rewardDescription.text = level.cardReward.description.ToUpper();
             rewardIcon.color = lightColor;
         }
@@ -48,8 +48,8 @@ public class Reward : MonoBehaviour
             }
 
             rewardIcon.sprite = level.arenaReward.enemyIcon;
-            rewardName.text = level.arenaReward.name + " ARENA".ToUpper();
-            rewardDescription.text = level.arenaReward.shortDesc.ToUpper();
+            rewardName.text = level.arenaReward.name.ToUpper() + " ARENA";
+            rewardDescription.text = "Unlocks a new arena to take on";
             if (unlocked) rewardIcon.color = lightColor;
             else rewardIcon.color = Color.gray;
         }
@@ -62,7 +62,7 @@ public class Reward : MonoBehaviour
             }
 
             rewardIcon.sprite = level.shipReward.glowIcon;
-            rewardName.text = level.shipReward.name + " SHIP".ToUpper();
+            rewardName.text = level.shipReward.name.ToUpper() + " SHIP";
             rewardDescription.text = level.shipReward.shortDesc.ToUpper();
             if (unlocked) rewardIcon.color = lightColor;
             else rewardIcon.color = Color.gray;
@@ -76,7 +76,7 @@ public class Reward : MonoBehaviour
             }
 
             rewardIcon.sprite = level.synergyReward.outputCard.sprite;
-            rewardName.text = level.synergyReward.name + " SYNERGY".ToUpper();
+            rewardName.text = level.synergyReward.name.ToUpper() + " SYNERGY";
             rewardDescription.text = level.synergyReward.desc.ToUpper();
             if (unlocked) rewardIcon.color = lightColor;
             else rewardIcon.color = Color.gray;

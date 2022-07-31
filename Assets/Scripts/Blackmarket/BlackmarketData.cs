@@ -27,6 +27,8 @@ public class BlackmarketData : IdentifiableScriptableObject
     public ArenaData arena;
     [ShowIf("type", Type.Chip), BoxGroup("Item Type")]
     public ChipData chip;
+    [ShowIf("type", Type.Audio), BoxGroup("Item Type")]
+    public AudioData audio;
     [BoxGroup("Item Type")]
     public bool hideInExperimental;
 
