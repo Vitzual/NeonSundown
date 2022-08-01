@@ -40,13 +40,32 @@ public class BlackmarketItem : MonoBehaviour
         icon.sprite = data.icon;
 
         // Set amount text
-        if (SaveSystem.IsBlackmarketItemUnlocked(data.InternalID))
+        if (data.unlockByDefault || SaveSystem.IsBlackmarketItemUnlocked(data.InternalID))
         {
             amount.gameObject.SetActive(false);
             crystal.gameObject.SetActive(false);
-            purchased.gameObject.SetActive(true);
-            purchased.color = data.lightColor;
             isUnlocked = true;
+
+            // Set button thing
+            bool isEquipped = false;
+            switch (data.type)
+            {
+                case BlackmarketData.Type.Ship:
+                    isEquipped = data.ship == Gamemode.shipData;
+                    break;
+                case BlackmarketData.Type.Arena:
+                    isEquipped = data.arena == Gamemode.arena;
+                    break;
+                case BlackmarketData.Type.Audio:
+                    isEquipped = data.audio == MusicPlayer.GetMusicData();
+                    break;
+            }
+
+            // Check if equipped
+            if (isEquipped) purchased.text = "EQUIPPED";
+            else purchased.text = "OWNED";
+            purchased.color = data.lightColor;
+            purchased.gameObject.SetActive(true);
         }
         else
         {
@@ -80,7 +99,7 @@ public class BlackmarketItem : MonoBehaviour
 
     public void OnClick()
     {
-        if (data != null && !isUnlocked)
+        if (data != null)
             Events.active.BlackmarketItemClicked(data);
     }
 }

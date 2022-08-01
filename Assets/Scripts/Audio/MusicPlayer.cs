@@ -20,12 +20,16 @@ public class MusicPlayer : MonoBehaviour
     private static float targetFadeIn = 1f;
     private static float targetFadeOut = 0.5f;
 
-    // Start is called before the first frame update
-    public void Start()
+    // On awake set static instances
+    public void Awake()
     {
         // Set static instance
         menuMusic = _menuMusic;
+    }
 
+    // Start is called before the first frame update
+    public void Start()
+    {
         // Subscribe to volume change event
         Events.active.onVolumeChanged += UpdateVolume;
         Events.active.onMusicPitchChanged += ResetPitch;
@@ -138,5 +142,17 @@ public class MusicPlayer : MonoBehaviour
         }
 
         music.volume = targetFadeOut;
+    }
+
+    // Set the new music data
+    public static void SetMusicData(AudioData newMusic)
+    {
+        menuMusic = newMusic;
+        ResetSong();
+    }
+
+    public static AudioData GetMusicData()
+    {
+        return menuMusic;
     }
 }

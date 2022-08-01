@@ -30,6 +30,8 @@ public class BlackmarketData : IdentifiableScriptableObject
     [ShowIf("type", Type.Audio), BoxGroup("Item Type")]
     public AudioData audio;
     [BoxGroup("Item Type")]
+    public bool unlockByDefault;
+    [BoxGroup("Item Type")]
     public bool hideInExperimental;
 
     [BoxGroup("Item Info")]

@@ -8,11 +8,6 @@ using Sirenix.OdinInspector;
 
 public class Menu : MonoBehaviour
 {
-    // Is experimental build
-    public bool _isExperimental;
-    public static bool isExperimental;
-    public GameObject experimental;
-
     // Menu panels
     public ArenaPanel arenaPanel;
     public ShipPanel shipPanel;
@@ -62,7 +57,6 @@ public class Menu : MonoBehaviour
     // Start is called before the first frame update
     public void Awake()
     {
-        isExperimental = _isExperimental;
         Scriptables.GenerateAllScriptables();
         SaveSystem.GetSave();
         Levels.UpdateUnlocks();
@@ -73,10 +67,6 @@ public class Menu : MonoBehaviour
     {
         // Reset effects always
         Effects.ToggleMainGlitchEffect(false);
-
-        // Check if experimental
-        if (isExperimental) experimental.SetActive(true);
-        else experimental.SetActive(false);
 
         // Reset module slots if applicable
         Gamemode.modules = new Dictionary<int, ModuleData>();
@@ -107,6 +97,13 @@ public class Menu : MonoBehaviour
                 else shipPanel.Setup(alphaShip);
             }
             else shipPanel.Setup(alphaShip);
+
+            // Attempt to grab last audio mod
+            if (Scriptables.audioModsDict.ContainsKey(context.lastSong))
+            {
+                AudioData music = Scriptables.audioModsDict[context.lastSong];
+                if (music != null) MusicPlayer.SetMusicData(music);
+            }
 
             // Attempt to grab last modules
             if (context.lastModules != null)
@@ -262,7 +259,8 @@ public class Menu : MonoBehaviour
         // Set meta context and save
         if (Gamemode.arena == null) Debug.Log("[ERROR] Arena is null!");
         else if (Gamemode.shipData == null) Debug.Log("[ERROR] Ship is null!");
-        else SaveSystem.SetMetacontext(Gamemode.arena.InternalID, Gamemode.shipData.InternalID, moduleIDs);
+        else SaveSystem.SetMetacontext(Gamemode.arena.InternalID, Gamemode.shipData.InternalID, 
+            MusicPlayer.GetMusicData().InternalID, moduleIDs);
 
         // Load the main scene
         SceneManager.LoadScene("Main");

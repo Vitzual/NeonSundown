@@ -41,8 +41,13 @@ public class BlackmarketPanel : MonoBehaviour
     private BlackmarketData data;
     private bool alreadyPurchased = false, isPreviewing = false;
 
+    // Equip sound
+    public AudioClip equipSound, buySound;
+    private AudioSource audioSource;
+
     public void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         Events.active.onBlackmarketItemClicked += SetItem;
         UpdateProgress();
     }
@@ -81,6 +86,7 @@ public class BlackmarketPanel : MonoBehaviour
                     pro.amount.text = progressAmount[amount.Key] + "/" + amount.Value;
                     pro.bar.maxValue = amount.Value;
                     pro.bar.currentPercent = progressAmount[amount.Key];
+                    pro.bar.UpdateUI();
                     break;
                 }
             }
@@ -106,10 +112,37 @@ public class BlackmarketPanel : MonoBehaviour
         this.data = data;
 
         // Check if already purchased
-        alreadyPurchased = SaveSystem.IsBlackmarketItemUnlocked(data.InternalID);
+        alreadyPurchased = data.unlockByDefault || SaveSystem.IsBlackmarketItemUnlocked(data.InternalID);
 
         // If already purchased, display
-        if (alreadyPurchased) buy.text = "ALREADY PURCHASED";
+        if (alreadyPurchased)
+        {
+            if (data.type == BlackmarketData.Type.Card)
+            {
+                buy.text = "OWNED";
+            }
+            else
+            {
+                // Set button thing
+                bool isEquipped = false;
+                switch (data.type)
+                {
+                    case BlackmarketData.Type.Ship:
+                        isEquipped = data.ship == Gamemode.shipData;
+                        break;
+                    case BlackmarketData.Type.Arena:
+                        isEquipped = data.arena == Gamemode.arena;
+                        break;
+                    case BlackmarketData.Type.Audio:
+                        isEquipped = data.audio == MusicPlayer.GetMusicData();
+                        break;
+                }
+
+                // Check if equipped
+                if (isEquipped) buy.text = "EQUIPPED";
+                else buy.text = "EQUIP";
+            }
+        }
         else buy.text = "PURCHASE";
 
         // Set selected view
@@ -166,7 +199,12 @@ public class BlackmarketPanel : MonoBehaviour
     public void BuyItem()
     {
         // Check if already purchased
-        if (alreadyPurchased) return;
+        if (alreadyPurchased)
+        {
+            // Depending on type, unlock new content
+            if (EquipItem(data)) ResetPanel();
+            return;
+        }
 
         // If not already purchased, unlock and reset panels
         if (!SaveSystem.IsBlackmarketItemUnlocked(data.InternalID))
@@ -177,27 +215,43 @@ public class BlackmarketPanel : MonoBehaviour
                 case BlackmarketData.Type.Ship:
                     if (data.ship != null && !SaveSystem.IsShipUnlocked(data.ship.InternalID))
                         SaveSystem.AddShipUnlock(data.ship.InternalID);
+                    else Debug.Log(data.name + " is already unlocked!");
                     break;
                 case BlackmarketData.Type.Arena:
                     if (data.arena != null && !SaveSystem.IsArenaUnlocked(data.arena.InternalID))
                         SaveSystem.AddArenaUnlock(data.arena.InternalID);
+                    else Debug.Log(data.name + " is already unlocked!");
                     break;
                 case BlackmarketData.Type.Card:
                     if (data.card != null && !SaveSystem.IsCardUnlocked(data.card.InternalID))
                         SaveSystem.AddCardUnlock(data.card.InternalID);
+                    else Debug.Log(data.name + " is already unlocked!");
                     break;
                 case BlackmarketData.Type.Audio:
                     if (data.audio != null && !SaveSystem.IsAudioModUnlocked(data.audio.InternalID))
                         SaveSystem.AddAudioMod(data.audio.InternalID);
+                    else Debug.Log(data.name + " is already unlocked!");
                     break;
             }
 
             // Add blackmarket internal ID
             SaveSystem.AddBlackmarketItem(data.InternalID);
-        }
 
-        // Reset the panel
-        ResetPanel();
+            // Update the save
+            SaveSystem.UpdateSave();
+
+            // Play equip sound
+            if (audioSource != null)
+            {
+                audioSource.volume = Settings.sound;
+                audioSource.clip = buySound;
+                audioSource.Play();
+            }
+
+            // Equip the new item
+            if (EquipItem(data, false)) ResetPanel();
+        }
+        else Debug.Log(data.name + " is already purchased!");
     }
 
     // Depending on item, preview it
@@ -205,7 +259,6 @@ public class BlackmarketPanel : MonoBehaviour
     {
         // Cancel preview
         CancelPreview();
-        isPreviewing = true;
 
         // Set button thing
         switch (data.type)
@@ -217,6 +270,7 @@ public class BlackmarketPanel : MonoBehaviour
                 break;
             case BlackmarketData.Type.Arena:
                 MusicPlayer.PlaySong(data.arena.arenaMusic);
+                isPreviewing = true;
                 break;
             case BlackmarketData.Type.Card:
                 Gamemode.shipData = defaultShip;
@@ -225,13 +279,49 @@ public class BlackmarketPanel : MonoBehaviour
                 SceneManager.LoadScene("Main");
                 break;
             case BlackmarketData.Type.Audio:
+                if (data.audio == MusicPlayer.GetMusicData()) return;
                 MusicPlayer.PlaySong(data.audio.audio);
+                isPreviewing = true;
                 break;
         }
     }
 
     public void CancelPreview()
     {
+        isPreviewing = false;
         MusicPlayer.ResetSong();
+    }
+
+    public bool EquipItem(BlackmarketData data, bool playSound = true)
+    {
+        // Depending on type, unlock new content
+        switch (data.type)
+        {
+            case BlackmarketData.Type.Ship:
+                if (data.ship == Gamemode.shipData) return false;
+                Events.active.SetupShip(data.ship);
+                break;
+            case BlackmarketData.Type.Arena:
+                if (data.arena == Gamemode.arena) return false;
+                Events.active.ArenaButtonClicked(data.arena);
+                break;
+            case BlackmarketData.Type.Audio:
+                if (data.audio == MusicPlayer.GetMusicData()) return false;
+                MusicPlayer.SetMusicData(data.audio);
+                break;
+            default:
+                return false;
+        }
+
+        // Play equip sound
+        if (playSound && audioSource != null)
+        {
+            audioSource.volume = Settings.sound;
+            audioSource.clip = equipSound;
+            audioSource.Play();
+        }
+
+        // Return true
+        return true;
     }
 }
