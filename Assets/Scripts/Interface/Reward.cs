@@ -35,8 +35,8 @@ public class Reward : MonoBehaviour
             }
 
             rewardIcon.sprite = level.cardReward.sprite;
-            rewardName.text = level.cardReward.name.ToUpper() + " CARD";
-            rewardDescription.text = level.cardReward.description.ToUpper();
+            rewardName.text = level.cardReward.name.ToUpper();
+            rewardDescription.text = "UNLOCKS A NEW CARD TO FIND IN RUNS";
             rewardIcon.color = lightColor;
         }
         else if (level.arenaReward != null)
@@ -48,8 +48,8 @@ public class Reward : MonoBehaviour
             }
 
             rewardIcon.sprite = level.arenaReward.enemyIcon;
-            rewardName.text = level.arenaReward.name.ToUpper() + " ARENA";
-            rewardDescription.text = "Unlocks a new arena to take on";
+            rewardName.text = level.arenaReward.name.ToUpper();
+            rewardDescription.text = "UNLOCKS A NEW ARENA TO TAKE ON";
             if (unlocked) rewardIcon.color = lightColor;
             else rewardIcon.color = Color.gray;
         }
@@ -62,8 +62,8 @@ public class Reward : MonoBehaviour
             }
 
             rewardIcon.sprite = level.shipReward.glowIcon;
-            rewardName.text = level.shipReward.name.ToUpper() + " SHIP";
-            rewardDescription.text = level.shipReward.shortDesc.ToUpper();
+            rewardName.text = level.shipReward.name.ToUpper();
+            rewardDescription.text = "UNLOCKS A NEW SHIP TO USE IN RUNS";
             if (unlocked) rewardIcon.color = lightColor;
             else rewardIcon.color = Color.gray;
         }
@@ -76,8 +76,8 @@ public class Reward : MonoBehaviour
             }
 
             rewardIcon.sprite = level.synergyReward.outputCard.sprite;
-            rewardName.text = level.synergyReward.name.ToUpper() + " SYNERGY";
-            rewardDescription.text = level.synergyReward.desc.ToUpper();
+            rewardName.text = level.synergyReward.name.ToUpper();
+            rewardDescription.text = "UNLOCKS A NEW SYNERGY TO CREATE IN RUNS";
             if (unlocked) rewardIcon.color = lightColor;
             else rewardIcon.color = Color.gray;
         }

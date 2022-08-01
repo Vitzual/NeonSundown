@@ -365,6 +365,11 @@ public class SaveSystem
         else return -1;
     }
 
+    public static int GetBlackmarketItemsUnlocked()
+    {
+        return saveData.blackmarketItemsPurchased.Count;
+    }
+
     // Returns the players level
     public static int GetPlayerLevel() 
     {

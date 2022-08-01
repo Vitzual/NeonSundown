@@ -40,6 +40,7 @@ public class BlackmarketPanel : MonoBehaviour
     // Data holder
     private BlackmarketData data;
     private bool alreadyPurchased = false, isPreviewing = false;
+    private int totalAmountOfItems = 0;
 
     // Equip sound
     public AudioClip equipSound, buySound;
@@ -61,6 +62,9 @@ public class BlackmarketPanel : MonoBehaviour
 
     public void UpdateProgress()
     {
+        // Reset total amount
+        totalAmountOfItems = 0;
+
         // Dictionary of types
         Dictionary<BlackmarketData.Type, int> totalAmount = new Dictionary<BlackmarketData.Type, int>();
         Dictionary<BlackmarketData.Type, int> progressAmount = new Dictionary<BlackmarketData.Type, int>();
@@ -70,13 +74,14 @@ public class BlackmarketPanel : MonoBehaviour
         {
             if (totalAmount.ContainsKey(data.type))
             {
-                totalAmount[data.type] += 1;
+                if (!data.unlockByDefault) totalAmount[data.type] += 1;
                 if (SaveSystem.IsBlackmarketItemUnlocked(data.InternalID))
                     progressAmount[data.type] += 1;
             }
             else
             {
-                totalAmount.Add(data.type, 1);
+                if (!data.unlockByDefault) totalAmount.Add(data.type, 1);
+                else totalAmount.Add(data.type, 0);
                 progressAmount.Add(data.type, 0);
                 if (SaveSystem.IsBlackmarketItemUnlocked(data.InternalID))
                     progressAmount[data.type] += 1;
@@ -97,6 +102,8 @@ public class BlackmarketPanel : MonoBehaviour
                     break;
                 }
             }
+
+            totalAmountOfItems += amount.Value;
         }
     }
 
@@ -331,5 +338,10 @@ public class BlackmarketPanel : MonoBehaviour
 
         // Return true
         return true;
+    }
+
+    public int GetTotalAmountOfItems()
+    {
+        return totalAmountOfItems;
     }
 }

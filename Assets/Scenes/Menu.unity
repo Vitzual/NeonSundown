@@ -39953,7 +39953,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e5418d1ac335fe428d069483c95ff69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scaleAdjustment: 0.02
+  scaleAdjustment: 0.005
   overrideSize: 0
   originalSize: {x: 0, y: 0, z: 0}
   playSound: 1
@@ -51799,9 +51799,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1404289901}
-        m_TargetAssemblyTypeName: Menu, Assembly-CSharp
-        m_MethodName: ToggleStorePanel
+      - m_Target: {fileID: 1048804812}
+        m_TargetAssemblyTypeName: StoreSelection, Assembly-CSharp
+        m_MethodName: ToggleStore
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -52879,6 +52879,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1048804809}
+  - component: {fileID: 1048804812}
   - component: {fileID: 1048804811}
   - component: {fileID: 1048804810}
   m_Layer: 5
@@ -53021,6 +53022,26 @@ CanvasGroup:
   m_Interactable: 0
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
+--- !u!114 &1048804812
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1048804808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 809ea4a88a6589e45b6df75c17d0b037, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  menu: {fileID: 1404289901}
+  panel: {fileID: 1897112334}
+  blackmarketLocked: {fileID: 589397974}
+  blackmarketProgress: {fileID: 1272385639}
+  moduleBar: {fileID: 158894268}
+  blackmarketBar: {fileID: 1272385642}
+  moduleAmount: {fileID: 1477016518}
+  blackmarketAmount: {fileID: 55700912}
 --- !u!1 &1049429517
 GameObject:
   m_ObjectHideFlags: 0
@@ -73421,7 +73442,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e5418d1ac335fe428d069483c95ff69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scaleAdjustment: 0.02
+  scaleAdjustment: 0.005
   overrideSize: 0
   originalSize: {x: 0, y: 0, z: 0}
   playSound: 1
@@ -77536,9 +77557,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1404289901}
-        m_TargetAssemblyTypeName: Menu, Assembly-CSharp
-        m_MethodName: ToggleStorePanel
+      - m_Target: {fileID: 1048804812}
+        m_TargetAssemblyTypeName: StoreSelection, Assembly-CSharp
+        m_MethodName: ToggleStore
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -80678,9 +80699,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1404289901}
-        m_TargetAssemblyTypeName: Menu, Assembly-CSharp
-        m_MethodName: ToggleCrystalsPanel
+      - m_Target: {fileID: 1048804812}
+        m_TargetAssemblyTypeName: StoreSelection, Assembly-CSharp
+        m_MethodName: ToggleModules
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -82774,7 +82795,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e5418d1ac335fe428d069483c95ff69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scaleAdjustment: 0.02
+  scaleAdjustment: 0.005
   overrideSize: 0
   originalSize: {x: 0, y: 0, z: 0}
   playSound: 1
@@ -86461,22 +86482,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1404289901}
-        m_TargetAssemblyTypeName: Menu, Assembly-CSharp
-        m_MethodName: ToggleBlackmarketPanel
+      - m_Target: {fileID: 1048804812}
+        m_TargetAssemblyTypeName: StoreSelection, Assembly-CSharp
+        m_MethodName: ToggleBlackmarket
         m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1897112334}
-        m_TargetAssemblyTypeName: BlackmarketPanel, Assembly-CSharp
-        m_MethodName: CancelPreview
-        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -86755,9 +86764,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1404289901}
-        m_TargetAssemblyTypeName: Menu, Assembly-CSharp
-        m_MethodName: ToggleCrystalsPanel
+      - m_Target: {fileID: 1048804812}
+        m_TargetAssemblyTypeName: StoreSelection, Assembly-CSharp
+        m_MethodName: ToggleModules
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -87334,21 +87343,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1897112334}
-        m_TargetAssemblyTypeName: BlackmarketPanel, Assembly-CSharp
-        m_MethodName: UpdateResources
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 1404289901}
-        m_TargetAssemblyTypeName: Menu, Assembly-CSharp
-        m_MethodName: ToggleBlackmarketPanel
+      - m_Target: {fileID: 1048804812}
+        m_TargetAssemblyTypeName: StoreSelection, Assembly-CSharp
+        m_MethodName: ToggleBlackmarket
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -104162,7 +104159,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e5418d1ac335fe428d069483c95ff69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scaleAdjustment: 0.02
+  scaleAdjustment: 0.005
   overrideSize: 0
   originalSize: {x: 0, y: 0, z: 0}
   playSound: 1
