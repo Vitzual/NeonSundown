@@ -28,14 +28,14 @@ public class BlackmarketPanel : MonoBehaviour
     public Blackmarket blackmarket;
 
     // Panel components 
-    public TextMeshProUGUI title, desc, amount,
-        buy, test;
+    public TextMeshProUGUI title, desc, amount, buy, 
+        test, redCrystals, greenCrystals, blueCrystals;
     public Image icon, crystal, border, background,
         buyButton, testButton;
     public GameObject notSelectedView, selectedView;
 
     // Color settings
-    public Color blueCrystal, redCrystal, greenCrystal;
+    public CrystalData blueCrystal, redCrystal, greenCrystal;
 
     // Data holder
     private BlackmarketData data;
@@ -50,6 +50,13 @@ public class BlackmarketPanel : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         Events.active.onBlackmarketItemClicked += SetItem;
         UpdateProgress();
+    }
+
+    public void UpdateResources()
+    {
+        redCrystals.text = SaveSystem.GetCrystalAmount(redCrystal.InternalID).ToString();
+        greenCrystals.text = SaveSystem.GetCrystalAmount(greenCrystal.InternalID).ToString();
+        blueCrystals.text = SaveSystem.GetCrystalAmount(blueCrystal.InternalID).ToString();
     }
 
     public void UpdateProgress()
@@ -99,14 +106,13 @@ public class BlackmarketPanel : MonoBehaviour
         notSelectedView.gameObject.SetActive(true);
         selectedView.gameObject.SetActive(false);
         blackmarket.UpdateListings();
-        if (isPreviewing) CancelPreview();
-        UpdateProgress();
+        CancelPreview();
     }
 
     public void SetItem(BlackmarketData data)
     {
         // Cancel preview
-        if (isPreviewing) CancelPreview();
+        CancelPreview();
 
         // Set data object
         this.data = data;
@@ -165,18 +171,7 @@ public class BlackmarketPanel : MonoBehaviour
             icon.color = data.lightColor;
 
         // Set crystal color
-        switch (data.crystal)
-        {
-            case CrystalType.blue:
-                crystal.color = blueCrystal;
-                break;
-            case CrystalType.green:
-                crystal.color = greenCrystal;
-                break;
-            case CrystalType.red:
-                crystal.color = redCrystal;
-                break;
-        }
+        crystal.color = data.crystal.lightColor;
 
         // Set button thing
         switch (data.type)
@@ -207,7 +202,8 @@ public class BlackmarketPanel : MonoBehaviour
         }
 
         // If not already purchased, unlock and reset panels
-        if (!SaveSystem.IsBlackmarketItemUnlocked(data.InternalID))
+        if (!SaveSystem.IsBlackmarketItemUnlocked(data.InternalID) &&
+            SaveSystem.GetCrystalAmount(data.crystal.InternalID) >= data.amountRequired)
         {
             // Depending on type, unlock new content
             switch (data.type)
@@ -237,6 +233,9 @@ public class BlackmarketPanel : MonoBehaviour
             // Add blackmarket internal ID
             SaveSystem.AddBlackmarketItem(data.InternalID);
 
+            // Remove crystals from player
+            SaveSystem.AddCrystal(data.InternalID, -data.amountRequired);
+
             // Update the save
             SaveSystem.UpdateSave();
 
@@ -249,9 +248,13 @@ public class BlackmarketPanel : MonoBehaviour
             }
 
             // Equip the new item
-            if (EquipItem(data, false)) ResetPanel();
+            EquipItem(data, false);
+
+            // Reset the panel
+            ResetPanel();
+            UpdateProgress();
+            UpdateResources();
         }
-        else Debug.Log(data.name + " is already purchased!");
     }
 
     // Depending on item, preview it
@@ -280,6 +283,7 @@ public class BlackmarketPanel : MonoBehaviour
                 break;
             case BlackmarketData.Type.Audio:
                 if (data.audio == MusicPlayer.GetMusicData()) return;
+                MusicPlayer.music.pitch = 1f;
                 MusicPlayer.PlaySong(data.audio.audio);
                 isPreviewing = true;
                 break;
@@ -288,8 +292,12 @@ public class BlackmarketPanel : MonoBehaviour
 
     public void CancelPreview()
     {
-        isPreviewing = false;
-        MusicPlayer.ResetSong();
+        if (isPreviewing)
+        {
+            isPreviewing = false;
+            MusicPlayer.music.pitch = Gamemode.arena.arenaMenuPitch;
+            MusicPlayer.ResetSong();
+        }
     }
 
     public bool EquipItem(BlackmarketData data, bool playSound = true)

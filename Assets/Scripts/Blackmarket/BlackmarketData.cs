@@ -44,7 +44,7 @@ public class BlackmarketData : IdentifiableScriptableObject
     public int order;
 
     [BoxGroup("Item Cost")]
-    public CrystalType crystal;
+    public CrystalData crystal;
     [BoxGroup("Item Cost")]
     public int amountRequired;
 

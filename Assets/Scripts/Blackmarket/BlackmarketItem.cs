@@ -73,18 +73,7 @@ public class BlackmarketItem : MonoBehaviour
             amount.text = data.amountRequired + " CRYSTALS";
 
             // Set crystal color
-            switch (data.crystal)
-            {
-                case CrystalType.blue:
-                    crystal.color = blueCrystal;
-                    break;
-                case CrystalType.green:
-                    crystal.color = greenCrystal;
-                    break;
-                case CrystalType.red:
-                    crystal.color = redCrystal;
-                    break;
-            }
+            crystal.color = data.crystal.lightColor;
         }
 
         // Set colors
