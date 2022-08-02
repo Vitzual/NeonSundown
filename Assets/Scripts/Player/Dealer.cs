@@ -43,6 +43,8 @@ public class Dealer : MonoBehaviour
     [BoxGroup("Interface Options")]
     public TextMeshProUGUI redraws;
     [BoxGroup("Interface Options")]
+    public TextMeshProUGUI burns;
+    [BoxGroup("Interface Options")]
     public CanvasGroup dealOptions;
     [BoxGroup("Interface Options")]
     public float titleFadeInSpeed = 0.01f;
@@ -68,6 +70,7 @@ public class Dealer : MonoBehaviour
     private float cardCooldown = 0.5f;
     private int cardNumber = 0;
     private int redrawsLeft = 0;
+    private int burnsLeft = 1;
 
     // Private components 
     private Transform rotator;
@@ -90,6 +93,7 @@ public class Dealer : MonoBehaviour
     {
         // Check if input from re-draw
         if (isOpen && cardsDealt && Input.GetKeyDown(Keybinds.secondary)) RedrawCard();
+        else if (isOpen && cardsDealt && Input.GetKeyDown(Keybinds.middle)) BurnCard();
 
         // If debug switch set to true, deal cards
         if (debugSwitch)
@@ -228,6 +232,27 @@ public class Dealer : MonoBehaviour
         isOpen = false;
     }
 
+    // Burns a specific card
+    public void BurnCard()
+    {
+        // Raycast for card on interface layer
+        PointerEventData m_PointerEventData = new PointerEventData(eventSystem);
+        m_PointerEventData.position = Input.mousePosition;
+
+        //Create a list of Raycast Results
+        List<RaycastResult> results = new List<RaycastResult>();
+
+        //Raycast using the Graphics Raycaster and mouse click position
+        eventRaycaster.Raycast(m_PointerEventData, results);
+
+        // Debug the result
+        foreach (RaycastResult result in results)
+        {
+            Card card = result.gameObject.GetComponent<Card>();
+            Burn(card);
+        }
+    }
+
     // Re draws a specific card
     public void RedrawCard()
     {
@@ -246,6 +271,25 @@ public class Dealer : MonoBehaviour
         {
             Card card = result.gameObject.GetComponent<Card>();
             Redraw(card);
+        }
+    }
+
+    // Burns a card
+    public void Burn(Card card)
+    {
+        if (card != null && !card.redrawing)
+        {
+            // Check to make sure enough cards are in the list
+            if (dealList.Count == 0) burns.text = "No Cards Left!";
+            else if (burnsLeft <= 0) burns.text = "0 Remaining";
+            else
+            {
+                burnsLeft -= 1;
+                Gamemode.blacklistCards.Add(card.GetCard());
+                card.RedrawCard(PickNewCard());
+                burns.text = burnsLeft + " Remaining";
+                return;
+            }
         }
     }
 
@@ -320,7 +364,8 @@ public class Dealer : MonoBehaviour
 
             // Remove card if not unlocked
             if (!card.canDrop || (!card.isUnlocked && !SaveSystem.IsCardUnlocked(card.InternalID)) ||
-                (deckCards.ContainsKey(card) && deckCards[card] >= card.maximumAmount))
+                (deckCards.ContainsKey(card) && deckCards[card] >= card.maximumAmount) ||
+                Gamemode.blacklistCards.Contains(card))
             {
                 dealList.Remove(card);
                 i--;

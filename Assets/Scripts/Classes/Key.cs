@@ -9,5 +9,6 @@ public enum Key
     escape,
     secondary,
     stats,
-    autofire
+    autofire,
+    middle
 }

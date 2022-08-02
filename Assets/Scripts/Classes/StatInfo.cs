@@ -1,10 +1,11 @@
 using UnityEngine;
 
+[System.Serializable]
 public class StatInfo
 {
     // Stat info
     public Stat stat;
-    public string name;
+    public string name, prefix;
     public Sprite sprite;
 
     // Stat values (calculated at runtime)

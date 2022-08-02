@@ -379,4 +379,5 @@ public class Card : MonoBehaviour
 
     // Set synergy
     public void SetSynergy(SynergyData synergy) { this.synergy = synergy; }
+    public CardData GetCard() { return cardData; }
 }

@@ -18,6 +18,8 @@ MonoBehaviour:
   glowIcon: {fileID: 21300000, guid: 1bc1774ce3dd9544888a2e7e5edf7375, type: 3}
   desc: Agile stealth ship that can replicate a decoy of itself and turn invisible
     instead of dash.
+  hasPassive: 1
+  passive: VANISH
   unlockRequirement: Black Market Ship
   unlocked: 0
   subTitle: STEALTH SHIP
@@ -34,6 +36,18 @@ MonoBehaviour:
   playerSize: {x: 1, y: 1}
   barrelPosition: {x: 0, y: 0}
   modelOffset: {x: 0, y: 0}
+  droneShip: 0
+  drone: {fileID: 0}
+  droneAmount: 0
+  droneDamage: 0
+  droneMoveSpeed: 0
+  droneRotateSpeed: 0
+  chargingShip: 0
+  maxChargeTime: 0
+  chargeSpeed: 0
+  chargeDamage: 0
+  speedAffectsDamage: 0
+  speedDamageMultiplier: 0
   weapon: {fileID: 11400000, guid: 0c79ae1fa44eee04084c758c5900891d, type: 2}
   playerControlledRotation: 1
   canFire: 1

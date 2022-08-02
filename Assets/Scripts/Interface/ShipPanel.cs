@@ -13,10 +13,10 @@ public class ShipPanel : MonoBehaviour
 
     // Stat info list
     public StatUI statUI;
+    public Transform statList;
     public List<StatInfo> statInfoList;
     private Dictionary<Stat, StatInfo> statInfo;
     private Dictionary<Stat, StatUI> stats;
-    public Transform statList;
 
     // Module slot on ship panel
     [System.Serializable]
@@ -51,8 +51,11 @@ public class ShipPanel : MonoBehaviour
 
     // Panel elements
     public new TextMeshProUGUI name;
-    public TextMeshProUGUI desc;
-    public Image icon, panelBackground, panelBorder, moduleCancelButton, moduleClearButton;
+    public TextMeshProUGUI desc, passiveAbility;
+    public Image icon, panelBackground, panelBorder, moduleCancelButton,
+        moduleClearButton, passiveAbilityIcon;
+    public Sprite hasPassiveSprite, noPassiveSprite;
+    public Color hasPassiveColor, noPassiveColor;
 
     // On awake generate stat info list
     public void Awake()
@@ -119,6 +122,20 @@ public class ShipPanel : MonoBehaviour
         icon.color = ship.mainColor;
         panelBackground.color = ship.darkColor;
         panelBorder.color = ship.mainColor;
+        
+        // Set passive ability
+        if (ship.hasPassive)
+        {
+            passiveAbility.text = ship.passive;
+            passiveAbilityIcon.sprite = hasPassiveSprite;
+            passiveAbilityIcon.color = hasPassiveColor;
+        }
+        else
+        {
+            passiveAbility.text = "SHIP HAS NO ABILITIES";
+            passiveAbilityIcon.sprite = noPassiveSprite;
+            passiveAbilityIcon.color = noPassiveColor;
+        }
 
         // Set stats
         SetStats(ship);
@@ -142,7 +159,7 @@ public class ShipPanel : MonoBehaviour
             foreach (StatInfo stat in statInfoList)
             {
                 StatUI newStat = Instantiate(statUI, statList);
-                newStat.Set(stat, ship.GetStat(stat.stat));
+                newStat.Set(stat, ship.GetStat(stat.stat), ship.lightColor);
                 stats.Add(stat.stat, newStat);
             }
         }
@@ -152,12 +169,12 @@ public class ShipPanel : MonoBehaviour
             {
                 if (stats.ContainsKey(stat.stat))
                 {
-                    stats[stat.stat].Set(stat, ship.GetStat(stat.stat));
+                    stats[stat.stat].Set(stat, ship.GetStat(stat.stat), ship.lightColor);
                 }
                 else
                 {
                     StatUI newStat = Instantiate(statUI, statList);
-                    newStat.Set(stat, ship.GetStat(stat.stat));
+                    newStat.Set(stat, ship.GetStat(stat.stat), ship.lightColor);
                     stats.Add(stat.stat, newStat);
                 }
             }
@@ -226,7 +243,7 @@ public class ShipPanel : MonoBehaviour
             {
                 if (Gamemode.modules[moduleSlot] != null)
                 {
-                    UpdateModuleInterface(Gamemode.modules[moduleSlot].stat, true, 0);
+                    UpdateModuleInterface(Gamemode.modules[moduleSlot], true, 0, moduleSlot);
                     if (equippedModules.Contains(Gamemode.modules[moduleSlot]))
                         equippedModules.Remove(Gamemode.modules[moduleSlot]);
                 }
@@ -282,7 +299,7 @@ public class ShipPanel : MonoBehaviour
         if (Gamemode.modules.ContainsKey(moduleSlot))
             Gamemode.modules[moduleSlot] = module;
         else Gamemode.modules.Add(moduleSlot, module);
-        UpdateModuleInterface(module.stat, false, module.values[SaveSystem.GetModuleAmount(module.InternalID)]);
+        UpdateModuleInterface(module, false, module.values[SaveSystem.GetModuleAmount(module.InternalID)], moduleSlot);
     }
 
     // Toggle module list

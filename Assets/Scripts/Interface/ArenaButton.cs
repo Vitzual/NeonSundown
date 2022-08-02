@@ -64,7 +64,7 @@ public class ArenaButton : MonoBehaviour
 
         // Set arena info
         this.arena = arena;
-        name.text = arena.name.ToUpper();
+        name.text = "LOCKED";
         desc.text = arena.unlockObjective.ToUpper();
 
         // Set button colors

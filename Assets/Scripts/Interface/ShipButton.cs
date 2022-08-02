@@ -49,7 +49,7 @@ public class ShipButton : MonoBehaviour
         }
         else
         {
-            name.text = ship.name.ToUpper();
+            name.text = "LOCKED";
             desc.text = ship.unlockRequirement.ToUpper();
             desc.color = lockedDescColor;
             shipIcon.sprite = ship.glowIcon;
@@ -67,7 +67,7 @@ public class ShipButton : MonoBehaviour
     // Select ship
     public void SelectShip()
     {
-        Debug.Log("Selecing ship " + ship.name);
-        Events.active.SetupShip(ship);
+        if (isUnlocked)
+            Events.active.SetupShip(ship);
     }
 }

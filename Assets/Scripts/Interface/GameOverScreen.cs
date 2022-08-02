@@ -27,12 +27,12 @@ public class GameOverScreen : MonoBehaviour
         // Log ending game
         isActive = true;
         Debug.Log("Ending game!");
-
+        
         // Set the runtime stats
         stats.text = Formatter.Time(ArenaController.GetTime()) + "<br>" +
             Formatter.Round(RuntimeStats.totalXP, 0) + "<br>" +
+            Formatter.Round(RuntimeStats.crystalsBroken, 0) + "<br>" +
             RuntimeStats.enemiesDestroyed + "<br>" +
-            RuntimeStats.bulletsFired + "<br>" +
             Formatter.Round(RuntimeStats.damageGiven, 0) + "<br>" +
             Formatter.Round(RuntimeStats.damageTaken, 0) + "<br>" +
             RuntimeStats.cardsChosen + "<br>" +

@@ -122,6 +122,9 @@ public class Crystal : Entity
         // Set is dead flag
         isDead = true;
 
+        // Add runtime stat
+        RuntimeStats.crystalsBroken += 1;
+
         // Destroy the crystal
         AudioPlayer.Play(crystalDestroy);
         Destroy(gameObject);

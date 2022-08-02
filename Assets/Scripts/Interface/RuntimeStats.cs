@@ -5,13 +5,14 @@ using UnityEngine;
 public class RuntimeStats : MonoBehaviour
 {
     // Start is called before the first frame update
-    public static int enemiesDestroyed, bulletsFired, cardsChosen, synergiesCreated;
+    public static int enemiesDestroyed, bulletsFired, cardsChosen, synergiesCreated, crystalsBroken;
     public static float totalXP, damageGiven, damageTaken;
 
     // Reset stats
     public static void ResetStats()
     {
         totalXP = 0;
+        crystalsBroken = 0;
         enemiesDestroyed = 0;
         bulletsFired = 0;
         damageGiven = 0;

@@ -31,6 +31,7 @@ public class Menu : MonoBehaviour
     public CanvasGroup changelogGroup;
     public CanvasGroup creditsGroup;
     public CanvasGroup levelsGroup;
+    public CanvasGroup warningGroup;
     public Image pressSpaceBg;
 
     // Other interface options
@@ -43,7 +44,8 @@ public class Menu : MonoBehaviour
     // Press space text element
     public TextMeshProUGUI pressSpaceText;
     public bool increaseAlpha = false;
-    public bool alphaBuild = false;
+    public bool _showWarning = false;
+    private static bool showWarning;
     public static bool roadmapWarningShown = false;
     public ArenaData alphaArena;
     public ShipData alphaShip;
@@ -57,6 +59,7 @@ public class Menu : MonoBehaviour
     // Start is called before the first frame update
     public void Awake()
     {
+        showWarning = _showWarning;
         Scriptables.GenerateAllScriptables();
         SaveSystem.GetSave();
         Levels.UpdateUnlocks();
@@ -70,6 +73,8 @@ public class Menu : MonoBehaviour
 
         // Reset module slots if applicable
         Gamemode.modules = new Dictionary<int, ModuleData>();
+        Gamemode.startingCards = new List<CardData>();
+        Gamemode.blacklistCards = new List<CardData>();
 
         // Attempt to get the metacontext on file
         MetaContext context = SaveSystem.GetMetacontext();
@@ -138,22 +143,32 @@ public class Menu : MonoBehaviour
     // Open main panel
     public void OpenMain()
     {
-        LeanTween.scale(title, titleTargetSize, titleSizeSpeed).setEase(LeanTweenType.easeInExpo).setDelay(0.2f);
-        LeanTween.moveLocal(title.gameObject, titleTargetPos, titleAnimSpeed).setEase(LeanTweenType.easeInExpo).setDelay(0.2f);
-        LeanTween.alphaCanvas(pressSpace, 0f, titleAnimSpeed);
-        LeanTween.alphaCanvas(buttonsGroup, 1f, titleAnimSpeed).setDelay(titleAnimSpeed);
-        LeanTween.alphaCanvas(socialsGroup, 1f, titleAnimSpeed).setDelay(titleAnimSpeed);
-        LeanTween.alphaCanvas(mainBackground, 1f, titleAnimSpeed).setDelay(titleAnimSpeed);
-        LeanTween.alphaCanvas(levelGroup, 1f, titleAnimSpeed).setDelay(titleAnimSpeed);
-        buttonsGroup.interactable = true;
-        buttonsGroup.blocksRaycasts = true;
-        socialsGroup.interactable = true;
-        socialsGroup.blocksRaycasts = true;
-        spacePressed = true;
+        if (showWarning)
+        {
+            TogglePanel(warningGroup, mainGroup, false);
+            showWarning = false;
+            spacePressed = true;
+        }
+        else
+        {
+            if (_showWarning) TogglePanel(mainGroup, warningGroup);
+            LeanTween.scale(title, titleTargetSize, titleSizeSpeed).setEase(LeanTweenType.easeInExpo).setDelay(0.2f);
+            LeanTween.moveLocal(title.gameObject, titleTargetPos, titleAnimSpeed).setEase(LeanTweenType.easeInExpo).setDelay(0.2f);
+            LeanTween.alphaCanvas(pressSpace, 0f, titleAnimSpeed);
+            LeanTween.alphaCanvas(buttonsGroup, 1f, titleAnimSpeed).setDelay(titleAnimSpeed);
+            LeanTween.alphaCanvas(socialsGroup, 1f, titleAnimSpeed).setDelay(titleAnimSpeed);
+            LeanTween.alphaCanvas(mainBackground, 1f, titleAnimSpeed).setDelay(titleAnimSpeed);
+            LeanTween.alphaCanvas(levelGroup, 1f, titleAnimSpeed).setDelay(titleAnimSpeed);
+            buttonsGroup.interactable = true;
+            buttonsGroup.blocksRaycasts = true;
+            socialsGroup.interactable = true;
+            socialsGroup.blocksRaycasts = true;
+            spacePressed = true;
+        }
     }
 
     // Open canvas group panel
-    public void TogglePanel(CanvasGroup open, CanvasGroup close)
+    public void TogglePanel(CanvasGroup open, CanvasGroup close, bool playSound = true)
     {
         // Toggle the panels
         LeanTween.cancel(open.gameObject);
@@ -165,7 +180,7 @@ public class Menu : MonoBehaviour
         LeanTween.alphaCanvas(close, 0f, 0.35f);
         close.interactable = false;
         close.blocksRaycasts = false;
-        AudioPlayer.Play(buttonSound, false);
+        if (playSound) AudioPlayer.Play(buttonSound, false);
     }
 
     // Open arena panel
@@ -257,9 +272,17 @@ public class Menu : MonoBehaviour
             if (module.Value != null) moduleIDs.Add(module.Value.InternalID);
 
         // Set meta context and save
-        if (Gamemode.arena == null) Debug.Log("[ERROR] Arena is null!");
-        else if (Gamemode.shipData == null) Debug.Log("[ERROR] Ship is null!");
-        else SaveSystem.SetMetacontext(Gamemode.arena.InternalID, Gamemode.shipData.InternalID, 
+        if (Gamemode.arena == null) 
+        {
+            Debug.Log("[ERROR] Arena is null!");
+            return; 
+        }
+        else if (Gamemode.shipData == null)
+        { 
+            Debug.Log("[ERROR] Ship is null!");
+            return; 
+        }
+        else SaveSystem.SetMetacontext(Gamemode.arena.InternalID, Gamemode.shipData.InternalID,
             MusicPlayer.GetMusicData().InternalID, moduleIDs);
 
         // Load the main scene

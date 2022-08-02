@@ -44,14 +44,20 @@ public class Gamemode : MonoBehaviour
     {
         RuntimeStats.ResetStats();
         Scriptables.GenerateAllScriptables();
-        startingCards = new List<CardData>();
-        blacklistCards = new List<CardData>();
         if (arena == null) arena = _arena;
     }
 
     // On start pass data
     public void Start()
     {
+        // Add starting cards
+        if (startingCards == null) startingCards = new List<CardData>();
+        else foreach (CardData card in startingCards) Deck.active.AddCard(card);
+
+        // Add blacklist cards
+        if (blacklistCards == null) blacklistCards = new List<CardData>();
+        else foreach (CardData card in arena.blacklistCards) blacklistCards.Add(card);
+
         // Check if save data exists
         if (SaveSystem.saveData == null)
             SaveSystem.GetSave();
