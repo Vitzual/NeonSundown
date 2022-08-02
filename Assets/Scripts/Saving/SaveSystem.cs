@@ -189,46 +189,21 @@ public class SaveSystem
     // Saves arena time
     public static void UpdateArena(string id, float time)
     {
-        // Check if gamemode ship null
-        if (Gamemode.shipData == null)
-        {
-            Debug.Log("[WARNING] Gamemode ship was null! Cannot save.");
-            return;
-        }
-
         // Update the arena time
         if (saveData.arenaTimes.ContainsKey(id))
         {
-            /* Keep track of total times
-            int totalTimes = 0;
-
-            // Check if best time achieved
-            for (int i = 0; i < saveData.newArenaTimes[id].Length; i++)
+            if (time > saveData.arenaTimes[id])
             {
-                // Check if total times over max amount
-                if (saveData.newArenaTimes[id][i] != null && 
-                    saveData.newArenaTimes[id][i].time < time)
-                {
-                    TimeData holder = saveData.newArenaTimes[id][i];
-                    saveData.newArenaTimes[id][i] = newData;
-                    newData = holder;
-                }
-
-                // Increase total times
-                totalTimes += 1;
-                if (totalTimes >= MAX_ARENA_TIMES) break;
+                saveData.arenaTimes[id] = time;
+                UpdateSave();
             }
-
-            // Check if total times reached max, and if not create new best time
-            if (totalTimes < MAX_ARENA_TIMES) saveData.newArenaTimes[id][totalTimes] = newData;
-            */
         }
 
         // If arena does not exist, create new instance
         else
         {
-            
-            Debug.Log("Created arena " + id);
+            saveData.arenaTimes.Add(id, time);
+            UpdateSave();
         }
     }
 

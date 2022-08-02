@@ -55,6 +55,8 @@ public class WeaponData : CardData
     public bool trackTarget;
     [BoxGroup("Bullet Stats"), Tooltip("Locks rotation to a target. Only applied if track target is true.")]
     public bool lockTarget;
+    [BoxGroup("Bullet Stats"), Tooltip("Tells parent when it hits an entity.")]
+    public bool informOnHit = false;
 
     [BoxGroup("Object Instances"), Tooltip("The bullet object associated with this SO. Optional.")]
     public Bullet bullet;

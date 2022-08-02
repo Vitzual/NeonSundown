@@ -27,9 +27,17 @@ public class SynergyTracker : MonoBehaviour
             }
         }
 
-        // Organize synergies
+        // Organize synergies (going to update this later)
         foreach (SynergyElement element in synergies)
-            element.transform.SetSiblingIndex(element.synergyData.order + 100);
+            element.transform.SetSiblingIndex(element.synergyData.order);
+        foreach (SynergyElement element in synergies)
+            element.transform.SetSiblingIndex(element.synergyData.order);
+        foreach (SynergyElement element in synergies)
+            element.transform.SetSiblingIndex(element.synergyData.order);
+        foreach (SynergyElement element in synergies)
+            element.transform.SetSiblingIndex(element.synergyData.order);
+        foreach (SynergyElement element in synergies)
+            element.transform.SetSiblingIndex(element.synergyData.order);
     }
 
     // Update the synergies

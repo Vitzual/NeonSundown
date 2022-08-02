@@ -6,7 +6,7 @@ public class Bullet : Entity
 {
     // Weapon data
     protected WeaponData weapon;
-
+    
     // Bullet components 
     public SpriteRenderer sprite;
     public TrailRenderer trail;
@@ -34,6 +34,7 @@ public class Bullet : Entity
     public bool canPassBarriers = false;
     private bool autoLock = false;
     private bool lockTarget = false;
+    private bool informOnHit = false;
 
     // Is a split shot
     protected Weapon parent;
@@ -96,6 +97,7 @@ public class Bullet : Entity
         splitshots = parent.splitshots;
         stunLength = parent.stunLength;
         bulletSize = parent.size;
+        informOnHit = parent.informOnHit;
         if (!explosive) explosive = parent.explosiveRounds;
 
         // Give bullets a bit of randomness
@@ -176,8 +178,11 @@ public class Bullet : Entity
             entity.Damage(damage, knockback);
 
             // Check if entity dead
-            if (!entity.IsDead() && stunLength > 0)
-                entity.Stun(stunLength);
+            if (!entity.IsDead()) 
+            {
+                if (stunLength > 0) entity.Stun(stunLength);
+                if (informOnHit) parent.TargetHit(entity);
+            }
 
             // Check if bullet has a sound
             if (weapon != null && weapon.onDamageSound != null)

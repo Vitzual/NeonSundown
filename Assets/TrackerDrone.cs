@@ -46,7 +46,7 @@ public class TrackerDrone : Drone
         // Check if enemy is not null
         if (enemy != null)
         {
-            cooldown = 1f;
+            cooldown = 0.5f;
             enemy.Damage(damage, -1500f);
             Knockback(-1500f, enemy.transform.position);
             if (hitSound != null) AudioPlayer.Play(hitSound);
@@ -66,5 +66,11 @@ public class TrackerDrone : Drone
     {
         // Apply knockback
         rb.AddForce(Vector3.Normalize(origin - transform.position) * amount);
+    }
+
+    // Set taregt
+    public override void SetTarget(Entity entity)
+    {
+        target = entity.transform;
     }
 }

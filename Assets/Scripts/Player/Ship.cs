@@ -10,7 +10,7 @@ public class Ship : Weapon
     public static bool warrior = false;
     public static bool champion = false;
     public static bool lasers = false;
-
+    
     // Custom cursor textures
     public Texture2D normalMouse;
     public Texture2D crosshairMouse;
@@ -126,6 +126,11 @@ public class Ship : Weapon
         controller.dashSpeed = shipData.dashSpeed;
         controller.dashSpeed = shipData.dashSpeed;
         controller.canRotate = shipData.playerControlledRotation;
+        controller.isChargeShip = shipData.chargingShip;
+        
+        // Check if charing ship
+        if (shipData.chargingShip)
+            ChromaHandler.active.Setup(ChromaType.Warrior);
 
         // Setup base stuff
         level = 0;
@@ -152,6 +157,7 @@ public class Ship : Weapon
             rotateSpeed = shipData.weapon.rotateSpeed;
             speedAffectsDamage = shipData.speedAffectsDamage;
             speedDamageMultiplier = shipData.speedDamageMultiplier;
+            informOnHit = shipData.weapon.informOnHit;
         }
         splitshots = 0;
 
@@ -173,6 +179,7 @@ public class Ship : Weapon
         if (shipData.droneShip)
         {
             drones = new List<Drone>();
+            droneShip = true;
 
             for (int i = 0; i < shipData.droneAmount; i += 1)
             {
@@ -238,7 +245,7 @@ public class Ship : Weapon
             Cursor.SetCursor(crosshairMouse, crosshairOffset, CursorMode.Auto);
             crosshairOn = true;
         }
-
+        
         // Check if space pressed for auto fire
         if (Input.GetKeyDown(Keybinds.autofire))
         {
@@ -367,6 +374,16 @@ public class Ship : Weapon
                     model.rotation, bulletsToFire, bloom, size, defaultGlow, true, explosiveRounds);
             }
             shipCooldown = cooldown;
+        }
+    }
+
+    // If bullet informs parent of hit, set drone targets
+    public override void TargetHit(Entity entity)
+    {
+        if (droneShip)
+        {
+            foreach (Drone drone in drones)
+                drone.SetTarget(entity);
         }
     }
 

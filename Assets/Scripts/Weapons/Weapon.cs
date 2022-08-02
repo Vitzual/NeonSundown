@@ -13,7 +13,7 @@ public class Weapon : MonoBehaviour
     public float damage, damageMultiplier = 1f, cooldown, moveSpeed, bloom, pierces, bullets, lifetime,
         range, knockback, splitshots, size, stunLength, critical, rotateSpeed, speedDamageMultiplier;
     [HideInInspector]
-    public bool explosiveRounds, speedAffectsDamage = false;
+    public bool explosiveRounds, speedAffectsDamage = false, informOnHit = false;
 
     // Weapon level
     [HideInInspector]
@@ -31,6 +31,7 @@ public class Weapon : MonoBehaviour
         this.target = target;
         weapon = data;
         damageMultiplier = 1f;
+        informOnHit = data.informOnHit;
         SetupStats();
     }
     
@@ -266,4 +267,10 @@ public class Weapon : MonoBehaviour
 
     // Get weapon
     public WeaponData GetWeapon() { return weapon; }
+
+    // Called if bullet is instructed to inform parent of hits
+    public virtual void TargetHit(Entity entity)
+    {
+
+    }
 }

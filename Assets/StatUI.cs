@@ -10,7 +10,7 @@ public class StatUI : MonoBehaviour
     public Image icon;
     public TextMeshProUGUI value, average, lowest, highest;
     public ProgressBar bar;
-
+    
     public void Set(StatInfo info, float amount, Color color)
     {
         icon.sprite = info.sprite;

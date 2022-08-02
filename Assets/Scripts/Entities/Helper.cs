@@ -39,4 +39,9 @@ public class Helper : Entity
     {
         return 0;
     }
+
+    public virtual void SetTarget(Entity entity)
+    {
+        // Do nothing on base
+    }
 }

@@ -23,7 +23,7 @@ public class Controller : MonoBehaviour
 
     // GameObject child transforms
     private Rigidbody2D body;
-
+    
     // Base stat variables
     public float dashDamage = 3f;
     public float dashTimeSlowdown = 0.8f;
@@ -35,11 +35,14 @@ public class Controller : MonoBehaviour
     public float dashTimer = 0.5f;
     public float dashCooldown = 1f;
     public float dashFatigue = 0.1f;
+    private float chargeAmount = 0f;
+    private float moveSpeedHolder = 5f;
 
     // Dash flag
     public bool canRotate = true;
     [HideInInspector]
     public bool isDashing = false;
+    public bool isChargeShip = false, charging = false;
     private bool dashOnCooldown = false;
     private bool dashQuickReset = false;
 
@@ -133,9 +136,42 @@ public class Controller : MonoBehaviour
         // Check if dash pressed
         else if (Input.GetKey(Keybinds.dash) || (Settings.controllerInput && Input.GetKey(KeyCode.JoystickButton4)))
         {
+            // Check if dash ship
+            if (isChargeShip)
+            {
+                if (!charging) moveSpeedHolder = moveSpeed;
+                if (chargeAmount < 1)
+                {
+                    chargeAmount += Time.deltaTime;
+                    moveSpeed *= (1 - chargeAmount);
+                }
+                charging = true;
+            }
+            else
+            {
+                // Set dashing to true
+                isDashing = true;
+                dash = dashTimer;
+                speed = dashSpeed;
+                dashQuickReset = false;
+
+                // Set volume and pitch
+                audioSource.volume = Settings.sound;
+                audioSource.pitch = UnityEngine.Random.Range(0.9f, 1.1f);
+                audioSource.PlayOneShot(dashSound, 0.7f);
+            }
+        }
+
+        // Release charge
+        else if (charging)
+        {
+            // Set dashing to true
+            charging = false;
             isDashing = true;
-            dash = dashTimer;
-            speed = dashSpeed;
+            dash = dashTimer + (chargeAmount / 2);
+            speed = dashSpeed * (chargeAmount + 1 * 2);
+            moveSpeed = moveSpeedHolder;
+            chargeAmount = 0;
             dashQuickReset = false;
 
             // Set volume and pitch

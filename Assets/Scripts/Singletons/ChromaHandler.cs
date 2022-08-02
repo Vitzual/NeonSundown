@@ -14,9 +14,9 @@ public class ChromaHandler : MonoBehaviour
     }
 
     // Setup chroma card
-    public void Setup(ChromaData chroma)
+    public void Setup(ChromaType chroma)
     {
-        switch(chroma.type)
+        switch(chroma)
         {
             case ChromaType.InverseExplosions:
                 ExplosiveHandler.inverse = true;

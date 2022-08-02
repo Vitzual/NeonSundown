@@ -279,7 +279,7 @@ public class Deck : MonoBehaviour
     public void SetupChroma(ChromaData chroma)
     {
         Debug.Log("Adding chroma card " + chroma.name + " to deck");
-        ChromaHandler.active.Setup(chroma);
+        ChromaHandler.active.Setup(chroma.type);
     }
 
     // Get deck cards
