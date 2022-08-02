@@ -16,7 +16,9 @@ public class SynergyData : IdentifiableScriptableObject
     [HideIf("tier", 3)]
     public CardData cardTwo;
     [ShowIf("tier", 3)]
-    public List<ChipData> arenaChips;
+    public float requiredXP;
+    [ShowIf("tier", 3)]
+    public int order;
     public bool removeCardOne;
     [HideIf("tier", 3)]
     public bool removeCardTwo;
@@ -24,6 +26,8 @@ public class SynergyData : IdentifiableScriptableObject
     public AchievementObject achievement;
     [ShowIf("tier", 2)]
     public SynergyData synergyOne, synergyTwo;
+    [ShowIf("tier", 3)]
+    public SynergyData baseSynergy;
 
-    public bool IsTierOne() { return tier <= 1; }
+    public bool IsMasterSynergy() { return tier == 3; }
 }

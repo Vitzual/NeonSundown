@@ -13,6 +13,10 @@ public class ShipData : IdentifiableScriptableObject
     [BoxGroup("Ship Info"), TextArea]
     public string desc;
     [BoxGroup("Ship Info")]
+    public bool hasPassive;
+    [BoxGroup("Ship Info"), ShowIf("hasPassive")]
+    public string passive;
+    [BoxGroup("Ship Info")]
     public string unlockRequirement;
     [BoxGroup("Ship Info")]
     public bool unlocked;
@@ -85,5 +89,23 @@ public class ShipData : IdentifiableScriptableObject
     public bool IsUnlocked()
     {
         return unlocked || SaveSystem.IsShipUnlocked(InternalID);
+    }
+
+    // Returns a stat
+    public float GetStat(Stat stat)
+    {
+        switch (stat)
+        {
+            case Stat.Health:
+                return startingHealth;
+            case Stat.MoveSpeed:
+                return playerSpeed;
+            case Stat.DashSpeed:
+                return dashSpeed;
+            case Stat.Regen:
+                return regenAmount;
+            default:
+                return weapon.GetStat(stat);
+        }
     }
 }

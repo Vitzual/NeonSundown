@@ -15,17 +15,21 @@ public class SynergyTracker : MonoBehaviour
     public void Start()
     {
         // Create all the synergies
-        foreach(LevelData level in Levels.ranks)
+        foreach (SynergyData synergy in Scriptables.synergies)
         {
-            if (level.synergyReward != null && !level.synergyReward.IsTierOne())
+            if (synergy.IsMasterSynergy())
             {
                 SynergyElement newSynergy = Instantiate(synergyElement, Vector2.zero, Quaternion.identity);
                 newSynergy.transform.SetParent(list);
                 newSynergy.transform.localScale = Vector3.one;
-                newSynergy.Set(level.synergyReward);
+                newSynergy.Set(synergy);
                 synergies.Add(newSynergy);
             }
         }
+
+        // Organize synergies
+        foreach (SynergyElement element in synergies)
+            element.transform.SetSiblingIndex(element.synergyData.order + 100);
     }
 
     // Update the synergies

@@ -1,29 +1,38 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+
+/// <summary>
+/// I am not happy with the way this works
+/// </summary>
 
 public class SynergyElement : MonoBehaviour
 {
     // Start is called before the first frame update
-    public SynergyProgress topSynergy;
-    public SynergyProgress bottomSynergy;
-    public SynergyProgress rightSynergy;
-    public SynergyData synergyData;
+    public SynergyProgress basicSynergyOne;
+    public SynergyProgress basicSynergyTwo;
+    public SynergyProgress advancedSynergy;
+    [HideInInspector] public SynergyData synergyData;
+
+    // Overarching synergy variables
+    public TextMeshProUGUI treeName;
 
     // Setup the synergy
-    public void Set(SynergyData synergy)
+    public void Set(SynergyData tree)
     {
-        synergyData = synergy;
-        topSynergy.Set(synergy.synergyOne);
-        bottomSynergy.Set(synergy.synergyTwo);
-        rightSynergy.Set(synergy);
+        synergyData = tree;
+        basicSynergyOne.Set(tree.baseSynergy.synergyOne);
+        basicSynergyTwo.Set(tree.baseSynergy.synergyTwo);
+        advancedSynergy.Set(tree.baseSynergy);
+        treeName.text = tree.name.ToUpper();
     }
 
     // Update the synergies
     public void UpdateSynergies()
     {
-        topSynergy.Set(synergyData.synergyOne);
-        bottomSynergy.Set(synergyData.synergyTwo);
-        rightSynergy.Set(synergyData);
+        basicSynergyOne.Set(synergyData.baseSynergy.synergyOne);
+        basicSynergyTwo.Set(synergyData.baseSynergy.synergyTwo);
+        advancedSynergy.Set(synergyData.baseSynergy);
     }
 }

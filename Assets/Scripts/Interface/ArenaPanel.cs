@@ -33,7 +33,6 @@ public class ArenaPanel : MonoBehaviour
 
     // Card and chip slots
     public BlacklistCard blacklistCard;
-    public List<Chip> chipSlots;
     public SerializableDictionary<Difficulty, Color> difficultyColors;
     public AudioClip nightmareArenaSound;
     private List<GameObject> activeBlacklistCards;
@@ -183,14 +182,6 @@ public class ArenaPanel : MonoBehaviour
             // Set no blacklist object to true
             if (!blacklistEmpty.activeSelf)
                 blacklistEmpty.SetActive(true);
-        }
-
-        // Enable chips if player is max
-        if (!chipsActivated && SaveSystem.IsPlayerMaxLevel())
-        {
-            chipsActivated = true;
-            foreach (Chip chip in chipSlots)
-                chip.obj.SetActive(true);
         }
 
         // Set menu music

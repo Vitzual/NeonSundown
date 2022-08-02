@@ -93,4 +93,36 @@ public class WeaponData : CardData
     public bool shakeScreenOnSpawn;
     [BoxGroup("Effect Variables"), Tooltip("Shakes the screen on death")]
     public bool shakeScreenOnDeath;
+
+    // Returns a stat
+    public float GetStat(Stat stat)
+    {
+        switch (stat)
+        {
+            case Stat.Damage:
+                return damage;
+            case Stat.Cooldown:
+                return cooldown;
+            case Stat.MoveSpeed:
+                return moveSpeed;
+            case Stat.Range:
+                return range;
+            case Stat.BulletSize:
+                return bulletSize;
+            case Stat.Bullets:
+                return bullets;
+            case Stat.Spread:
+                return bloom;
+            case Stat.Pierces:
+                return pierces;
+            case Stat.Knockback:
+                return knockback;
+            case Stat.Lifetime:
+                return lifetime;
+            case Stat.StunLength:
+                return stun;
+            default:
+                return 0;
+        }
+    }
 }

@@ -57,7 +57,7 @@ public class Gamemode : MonoBehaviour
             SaveSystem.GetSave();
 
         // Check if use arena info
-        if (useArenaInfo && arenaIcon != null)
+        if (arena.showObjectiveOnStart)
         {
             arenaIcon.sprite = arena.unlockedIcon;
             arenaName.text = arena.name.ToUpper();

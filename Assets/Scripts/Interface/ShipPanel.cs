@@ -4,10 +4,19 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+// This is now a stupid class
+
 public class ShipPanel : MonoBehaviour
 {
     // Is loading flag
     public static bool isLoading = false;
+
+    // Stat info list
+    public StatUI statUI;
+    public List<StatInfo> statInfoList;
+    private Dictionary<Stat, StatInfo> statInfo;
+    private Dictionary<Stat, StatUI> stats;
+    public Transform statList;
 
     // Module slot on ship panel
     [System.Serializable]
@@ -42,11 +51,16 @@ public class ShipPanel : MonoBehaviour
 
     // Panel elements
     public new TextMeshProUGUI name;
-    public TextMeshProUGUI desc, health, regen, speed, dash, 
-        damage, firerate, pierces, lifetime;
-    private string healthStr, regenStr, speedStr, dashStr, 
-        damageStr, firerateStr, piercesStr, lifetimeStr;
+    public TextMeshProUGUI desc;
     public Image icon, panelBackground, panelBorder, moduleCancelButton, moduleClearButton;
+
+    // On awake generate stat info list
+    public void Awake()
+    {
+        statInfo = new Dictionary<Stat, StatInfo>();
+        foreach (StatInfo stat in statInfoList)
+            statInfo.Add(stat.stat, stat);
+    }
 
     // On start, subscribe to ship setup and create buttons
     public void Start()
@@ -70,16 +84,17 @@ public class ShipPanel : MonoBehaviour
         // Create ship buttons
         foreach (ShipData ship in Scriptables.ships)
         {
+            // Create ship buttons
             ShipButton button = Instantiate(shipButton, Vector2.zero, Quaternion.identity);
             button.transform.SetParent(shipList);
             RectTransform rect = button.GetComponent<RectTransform>();
             rect.localScale = new Vector3(1, 1, 1);
             button.Set(ship);
             buttons.Add(button);
-        }
 
-        // I'll come back to this later. Unity is being a dummy and
-        // not giving two shits about setting the sibling index
+            // Set stats
+            GenerateStats(ship);
+        }
 
         // After creating, set ordering
         foreach (ShipButton button in buttons)
@@ -90,8 +105,8 @@ public class ShipPanel : MonoBehaviour
     public void Setup(ShipData ship)
     {
         // Set modules to false
-        //ToggleModules(false);
-        //ClearModule(true);
+        ToggleModules(false);
+        ClearModule(true);
 
         // Set the ship
         Gamemode.shipData = ship;
@@ -104,6 +119,49 @@ public class ShipPanel : MonoBehaviour
         icon.color = ship.mainColor;
         panelBackground.color = ship.darkColor;
         panelBorder.color = ship.mainColor;
+
+        // Set stats
+        SetStats(ship);
+    }
+     
+    // Generates the stats for a ship
+    public void GenerateStats(ShipData ship)
+    {
+        // Run through and generate all stats
+        foreach (StatInfo stat in statInfoList)
+            stat.AddValue(ship.GetStat(stat.stat));
+    }
+
+    // Sets the ship stats
+    public void SetStats(ShipData ship)
+    {
+        // Set the stats for a specified ship
+        if (stats == null)
+        {
+            stats = new Dictionary<Stat, StatUI>();
+            foreach (StatInfo stat in statInfoList)
+            {
+                StatUI newStat = Instantiate(statUI, statList);
+                newStat.Set(stat, ship.GetStat(stat.stat));
+                stats.Add(stat.stat, newStat);
+            }
+        }
+        else
+        {
+            foreach (StatInfo stat in statInfoList)
+            {
+                if (stats.ContainsKey(stat.stat))
+                {
+                    stats[stat.stat].Set(stat, ship.GetStat(stat.stat));
+                }
+                else
+                {
+                    StatUI newStat = Instantiate(statUI, statList);
+                    newStat.Set(stat, ship.GetStat(stat.stat));
+                    stats.Add(stat.stat, newStat);
+                }
+            }
+        }
     }
 
     // Open module list
@@ -253,47 +311,28 @@ public class ShipPanel : MonoBehaviour
     }
 
     // Update interface
-    public void UpdateModuleInterface(Stat stat, bool clear, float val)
+    public void UpdateModuleInterface(ModuleData module, bool clear, float val, int slot)
     {
         // Check if stat is no longer applied
         ShipData ship = Gamemode.shipData;
 
-        // Update the UI elements
-        switch (stat)
+        // Check if clear
+        if (clear)
         {
-            case Stat.Health:
-                if (clear) health.text = healthStr;
-                else health.text = healthStr + "<color=green> (+" + Formatter.Round(
-                    (ship.startingHealth + val) - ship.startingHealth) + ")";
-                break;
-            case Stat.Regen:
-                if (clear) regen.text = regenStr;
-                else regen.text = regenStr + "<color=green> (+" + val + ")";
-                break;
-            case Stat.MoveSpeed:
-                if (clear) speed.text = speedStr;
-                else speed.text = speedStr + "<color=green> (+" + Formatter.Round(
-                    (ship.playerSpeed * val) - ship.playerSpeed) + ")";
-                break;
-            case Stat.Damage:
-                if (clear) damage.text = damageStr;
-                else damage.text = damageStr + "<color=green> (+" + Formatter.Round(
-                    (ship.weapon.damage * val) - ship.weapon.damage) + ")";
-                break;
-            case Stat.Cooldown:
-                if (clear) firerate.text = firerateStr;
-                else firerate.text = firerateStr + "<color=green> (-" + Formatter.Round(
-                    ship.weapon.cooldown - (ship.weapon.cooldown * val)) + ")";
-                break;
-            case Stat.Pierces:
-                if (clear) pierces.text = piercesStr;
-                else pierces.text = piercesStr + "<color=green> (+" + val + ")";
-                break;
-            case Stat.Lifetime:
-                if (clear) lifetime.text = lifetimeStr;
-                else lifetime.text = lifetimeStr + "<color=green> (+" + Formatter.Round(
-                    (ship.weapon.lifetime * val) - ship.weapon.lifetime) + ")";
-                break;
+            moduleSlots[slot].icon.sprite = null;
+            moduleSlots[slot].name.text = "EMPTY";
+            moduleSlots[slot].amount.text = "SLOT";
+            moduleSlots[slot].amount.color = ship.lightColor;
+        }
+
+        // Update the UI elements
+        else
+        {
+            moduleSlots[slot].icon.sprite = statInfo[module.stat].sprite;
+            moduleSlots[slot].name.text = statInfo[module.stat].name.ToUpper();
+            moduleSlots[slot].amount.text = "+" + Formatter.Round(val);
+            if (module.multi) moduleSlots[slot].amount.text += "%";
+            moduleSlots[slot].amount.color = ship.lightColor;
         }
     }
 }

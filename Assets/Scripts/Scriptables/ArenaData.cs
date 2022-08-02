@@ -41,6 +41,8 @@ public class ArenaData : IdentifiableScriptableObject
 
     [BoxGroup("Achievement Info")]
     public string achievementObjective;
+    [BoxGroup("Achievement Info")]
+    public bool showObjectiveOnStart = true;
     [BoxGroup("Achievement Info"), HideIf("useAchievementKills", true)]
     public bool useAchievementTime;
     [BoxGroup("Achievement Info"), ShowIf("useAchievementTime", true)]
