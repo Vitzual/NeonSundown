@@ -93,7 +93,7 @@ public class Dealer : MonoBehaviour
     {
         // Check if input from re-draw
         if (isOpen && cardsDealt && Input.GetKeyDown(Keybinds.secondary)) RedrawCard();
-        else if (isOpen && cardsDealt && Input.GetKeyDown(Keybinds.middle)) BurnCard();
+        else if (isOpen && cardsDealt && Input.GetKeyDown(Keybinds.burn)) BurnCard();
 
         // If debug switch set to true, deal cards
         if (debugSwitch)

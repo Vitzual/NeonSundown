@@ -58,8 +58,8 @@ public class UnlockNotification : MonoBehaviour
             darkColor = new Color(lightColor.r * 0.2f, lightColor.g * 0.2f, lightColor.b * 0.2f);
 
             notification.icon = level.cardReward.sprite;
-            notification.title = level.cardReward.name + " Card";
-            notification.description = level.cardReward.description;
+            notification.title = level.cardReward.name.ToUpper();
+            notification.description = "A NEW CARD IS NOW AVAILABLE!";
             notification.iconObj.color = lightColor;
         }
         else if (level.arenaReward != null)
@@ -68,8 +68,8 @@ public class UnlockNotification : MonoBehaviour
             darkColor = new Color(lightColor.r * 0.2f, lightColor.g * 0.2f, lightColor.b * 0.2f);
 
             notification.icon = level.arenaReward.enemyIcon;
-            notification.title = level.arenaReward.name + " Arena";
-            notification.description = level.arenaReward.shortDesc;
+            notification.title = level.arenaReward.name.ToUpper();
+            notification.description = "A NEW ARENA IS NOW AVAILABLE!";
             notification.iconObj.color = lightColor;
         }
         else if (level.shipReward != null)
@@ -78,8 +78,8 @@ public class UnlockNotification : MonoBehaviour
             darkColor = new Color(lightColor.r * 0.2f, lightColor.g * 0.2f, lightColor.b * 0.2f);
 
             notification.icon = level.shipReward.glowIcon;
-            notification.title = level.shipReward.name + " Ship";
-            notification.description = level.shipReward.shortDesc;
+            notification.title = level.shipReward.name.ToUpper();
+            notification.description = "A NEW SHIP IS NOW AVAILABLE!";
             notification.iconObj.color = lightColor;
         }
         else if (level.synergyReward != null)
@@ -88,8 +88,8 @@ public class UnlockNotification : MonoBehaviour
             darkColor = new Color(lightColor.r * 0.2f, lightColor.g * 0.2f, lightColor.b * 0.2f);
 
             notification.icon = level.synergyReward.outputCard.sprite;
-            notification.title = level.synergyReward.name + " Synergy";
-            notification.description = level.synergyReward.desc;
+            notification.title = level.synergyReward.name.ToUpper();
+            notification.description = "A NEW SYNERGY IS NOW AVAILABLE!";
             notification.iconObj.color = lightColor;
         }
         else
@@ -98,8 +98,8 @@ public class UnlockNotification : MonoBehaviour
             darkColor = new Color(lightColor.r * 0.2f, lightColor.g * 0.2f, lightColor.b * 0.2f);
 
             notification.icon = level.rewardIcon;
-            notification.title = level.rewardName;
-            notification.description = level.rewardDesc;
+            notification.title = level.rewardName.ToUpper();
+            notification.description = level.rewardDesc.ToUpper();
             if (level.IsColored()) notification.iconObj.color = level.rewardColor;
             else notification.iconObj.color = Color.white;
         }

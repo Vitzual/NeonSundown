@@ -13,6 +13,7 @@ public class ShipButton : MonoBehaviour
     public Image shipIcon, shipBackground, shipBorder, buttonBorder, buttonBackground;
     [HideInInspector]
     public ShipData ship;
+    public OnHoverAdjustScale onHoverAdjustScale;
 
     // Options for the button
     [Header("Button Options")]
@@ -46,6 +47,7 @@ public class ShipButton : MonoBehaviour
             shipBorder.color = ship.mainColor;
             buttonBorder.color = ship.mainColor;
             buttonBackground.color = ship.darkColor;
+            onHoverAdjustScale.enabled = true;
         }
         else
         {
@@ -58,6 +60,7 @@ public class ShipButton : MonoBehaviour
             shipBorder.color = lockedBorderColor;
             buttonBorder.color = lockedBorderColor;
             buttonBackground.color = lockedBackgroundColor;
+            onHoverAdjustScale.enabled = false;
         }
 
         // Set sibling index

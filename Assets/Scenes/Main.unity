@@ -6373,10 +6373,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 33134246}
-        m_TargetAssemblyTypeName: SynergyTracker, Assembly-CSharp
-        m_MethodName: Toggle
-        m_Mode: 6
+      - m_Target: {fileID: 1046696078}
+        m_TargetAssemblyTypeName: Dealer, Assembly-CSharp
+        m_MethodName: CloseDealer
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -14218,6 +14218,8 @@ MonoBehaviour:
   dashFatigue: 4
   canRotate: 1
   isDashing: 0
+  isChargeShip: 0
+  charging: 0
   cursorTexture: {fileID: 2800000, guid: 176490883beb38b4fa6a5e34db378dcf, type: 3}
   cursorMode: 1
   hotSpot: {x: 0, y: 0}
@@ -14305,6 +14307,7 @@ MonoBehaviour:
   speedDamageMultiplier: 0
   explosiveRounds: 0
   speedAffectsDamage: 0
+  informOnHit: 0
   level: 0
   normalMouse: {fileID: 2800000, guid: c27a1bb75344731438af61a83e9b5b41, type: 3}
   crosshairMouse: {fileID: 2800000, guid: 347780322b1cab849a8dddfae00ddc35, type: 3}
@@ -20095,8 +20098,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 14.953, y: -6.2694354}
-  m_SizeDelta: {x: 110.25, y: 14.58}
+  m_AnchoredPosition: {x: 28.629, y: -6.2694354}
+  m_SizeDelta: {x: 137.6, y: 14.58}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1235877335
 MonoBehaviour:
@@ -30960,8 +30963,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 150, y: 35}
+  m_AnchoredPosition: {x: 13.6355, y: 0}
+  m_SizeDelta: {x: 177.2708, y: 35}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1913220088
 MonoBehaviour:
@@ -34010,8 +34013,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 14.953, y: 4.4311395}
-  m_SizeDelta: {x: 110.25, y: 19.0833}
+  m_AnchoredPosition: {x: 28.628683, y: 4.4311395}
+  m_SizeDelta: {x: 137.6014, y: 19.0833}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2083711053
 MonoBehaviour:
@@ -34033,7 +34036,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: EYESIGHT CARD
+  m_text: "EYESIGHT\t"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ca60657c190bc8c4e89dfb3e23d76209, type: 2}
   m_sharedMaterial: {fileID: 21131478253023500, guid: ca60657c190bc8c4e89dfb3e23d76209, type: 2}

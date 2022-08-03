@@ -41,6 +41,7 @@ public class SettingsUI : MonoBehaviour
     public SwitchManager alwaysShowHealth;
     public SwitchManager verticalSync;
     public SwitchManager controllerInput;
+    public SwitchManager xpTrails;
 
     // Canvas group
     public CanvasGroup canvasGroup;
@@ -188,6 +189,7 @@ public class SettingsUI : MonoBehaviour
     public void DamageNumbers(bool toggle) { Settings.damageNumbers = toggle; }
     public void CompoundXP(bool toggle) { Settings.compoundXP = toggle; }
     public void MusicPitching(bool toggle) { Settings.musicPitching = toggle; Events.active.ResetPitch(); }
+    public void XPTrails(bool toggle) { Settings.xpTrails = toggle; }
 
     // Set glow amount 
     public void SetGlowAmount(float amount)
@@ -220,6 +222,7 @@ public class SettingsUI : MonoBehaviour
         musicPitchingSwitch.isOn = Settings.musicPitching;
         verticalSync.isOn = Settings.verticalsync;
         controllerInput.isOn = Settings.controllerInput;
+        xpTrails.isOn = Settings.xpTrails;
 
         // Update values
         music.UpdateUI();
@@ -235,6 +238,7 @@ public class SettingsUI : MonoBehaviour
         musicPitchingSwitch.UpdateUI();
         verticalSync.UpdateUI();
         controllerInput.UpdateUI();
+        xpTrails.UpdateUI();
 
         // Update canvas group
         canvasGroup.alpha = 1f;

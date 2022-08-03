@@ -9,7 +9,7 @@ public class Keybinds
     public static KeyCode dash { get; set; }
     public static KeyCode primary { get; set; }
     public static KeyCode secondary { get; set; }
-    public static KeyCode middle { get; set; }
+    public static KeyCode burn { get; set; }
     public static KeyCode escape { get; set; }
     public static KeyCode debug { get; set; }
     public static KeyCode stats { get; set; }
@@ -48,7 +48,7 @@ public class Keybinds
                 break;
 
             case Key.middle:
-                middle = value;
+                burn = value;
                 break;
 
             case Key.escape:
@@ -91,7 +91,7 @@ public class Keybinds
                 return secondary;
 
             case Key.middle:
-                return middle;
+                return burn;
 
             case Key.escape:
                 return escape;
@@ -116,7 +116,7 @@ public class Keybinds
         dash = KeyCode.LeftShift;
         primary = KeyCode.Mouse0;
         secondary = KeyCode.Mouse1;
-        middle = KeyCode.Mouse2;
+        burn = KeyCode.Mouse2;
         escape = KeyCode.Escape;
         debug = KeyCode.Q;
         stats = KeyCode.Tab;

@@ -23,6 +23,7 @@ public class SettingsData
     public bool musicPitching;
     public bool verticalsync;
     public bool controllerInput = true;
+    public bool xpTrails = true;
 
     // Keybinds
     public string keybind_move_up;
@@ -32,6 +33,7 @@ public class SettingsData
     public string keybind_dash;
     public string keybind_primary;
     public string keybind_secondary;
+    public string keybind_burn;
     public string keybind_escape;
     public string keybind_debug;
     public string keybind_stats;

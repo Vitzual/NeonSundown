@@ -34,6 +34,7 @@ public class Settings
     public static bool musicPitching = true;
     public static bool verticalsync = false;
     public static bool controllerInput = true;
+    public static bool xpTrails = true;
 
     // Save settings
     public static void SaveSettings()
@@ -59,6 +60,7 @@ public class Settings
         settingsData.musicPitching = musicPitching;
         settingsData.verticalsync = verticalsync;
         settingsData.controllerInput = controllerInput;
+        settingsData.xpTrails = xpTrails;
 
         // Get keybinds from file
         settingsData.keybind_move_up = Keybinds.move_up.ToString();
@@ -68,6 +70,7 @@ public class Settings
         settingsData.keybind_dash = Keybinds.dash.ToString();
         settingsData.keybind_primary = Keybinds.primary.ToString();
         settingsData.keybind_secondary = Keybinds.secondary.ToString();
+        settingsData.keybind_burn = Keybinds.burn.ToString();
         settingsData.keybind_escape = Keybinds.escape.ToString();
         settingsData.keybind_stats = Keybinds.stats.ToString();
         settingsData.keybind_autofire = Keybinds.autofire.ToString();
@@ -106,6 +109,7 @@ public class Settings
             musicPitching = settingsData.musicPitching;
             verticalsync = settingsData.verticalsync;
             controllerInput = settingsData.controllerInput;
+            xpTrails = settingsData.xpTrails;
 
             // Apply glow effect
             glowAmount = settingsData.glowAmount;
@@ -126,7 +130,10 @@ public class Settings
                 Keybinds.dash = (KeyCode)System.Enum.Parse(typeof(KeyCode), settingsData.keybind_dash);
                 Keybinds.primary = (KeyCode)System.Enum.Parse(typeof(KeyCode), settingsData.keybind_primary);
                 Keybinds.secondary = (KeyCode)System.Enum.Parse(typeof(KeyCode), settingsData.keybind_secondary);
+                Keybinds.burn = (KeyCode)System.Enum.Parse(typeof(KeyCode), settingsData.keybind_burn);
                 Keybinds.escape = (KeyCode)System.Enum.Parse(typeof(KeyCode), settingsData.keybind_escape);
+                Keybinds.stats = (KeyCode)System.Enum.Parse(typeof(KeyCode), settingsData.keybind_stats);
+                Keybinds.autofire = (KeyCode)System.Enum.Parse(typeof(KeyCode), settingsData.keybind_autofire);
             }
             catch 
             {
@@ -172,6 +179,7 @@ public class Settings
             musicPitching = true;
             verticalsync = false;
             controllerInput = true;
+            xpTrails = true;
 
             SettingsUI.active.SetGlowAmount(glowAmount);
             SettingsUI.active.SetLightAmount(lightAmount);
