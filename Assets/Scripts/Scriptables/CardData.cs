@@ -20,4 +20,6 @@ public class CardData : IdentifiableScriptableObject
     public bool canDrop;
     [BoxGroup("Card Info")]
     public bool isUnlocked;
+    [BoxGroup("Card Info")]
+    public bool isShipOnlyCard;
 }

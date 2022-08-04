@@ -22,6 +22,7 @@ MonoBehaviour:
   dropChance: 1
   canDrop: 1
   isUnlocked: 0
+  isShipOnlyCard: 1
   baseLevels:
   - stat: 1
     description: Increases damage by 10%
@@ -43,22 +44,25 @@ MonoBehaviour:
     description: Increases damage by 10%
     multiply: 1
     modifier: 1.1
-  damage: 15
+  damage: 3
   cooldown: 0.8
   moveSpeed: 120
   rotate: 0
   rotateSpeed: 0
   range: 0
-  bloom: 0
+  bulletSize: 0
+  bloom: 15
   pierces: 100
   bullets: 1
   knockback: -500
   lifetime: 1
   stun: 0
   randomDirection: 0
+  rotateOnSpawn: 0
   randomTarget: 0
   trackTarget: 0
   lockTarget: 0
+  informOnHit: 0
   bullet: {fileID: 5224849746800538397, guid: 423fb29091cc29e4eba4e11086bbb932, type: 3}
   bulletSound: {fileID: 0}
   obj: {fileID: 649058797943903191, guid: 4cf86e87db440044398a93f1d2f6872f, type: 3}

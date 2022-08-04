@@ -23,7 +23,7 @@ public class XPHandler : MonoBehaviour
     // Target
     public XP xpObject;
     public AudioClip xpSound;
-    public Ship player;
+    public XPReceiver xpReceiver;
     public float startSpeed = 5f;
     public float startDistance = 10f;
     public float speedFatigueModifier = 0.1f;
@@ -41,6 +41,12 @@ public class XPHandler : MonoBehaviour
 
         Events.active.onCrystalBroken += UpdateCrystals;
     }
+
+    public void SetXPReceiver(XPReceiver xpReceiver)
+    {
+        Debug.Log("Setting receiver to " + xpReceiver.transform.name);
+        this.xpReceiver = xpReceiver;
+    }
     
     // Move normal enemies
     public void FixedUpdate()
@@ -56,13 +62,13 @@ public class XPHandler : MonoBehaviour
             {
                 // Move towards the target
                 float step = activeList[a].speed * Time.deltaTime;
-                activeList[a].transform.position = Vector2.MoveTowards(activeList[a].transform.position, player.transform.position, step);
+                activeList[a].transform.position = Vector2.MoveTowards(activeList[a].transform.position, xpReceiver.transform.position, step);
                 activeList[a].speed += speedIncreaseModifier;
 
                 // Check distance
-                if (Vector2.Distance(activeList[a].transform.position, player.transform.position) < targetDistanceCheck)
+                if (Vector2.Distance(activeList[a].transform.position, xpReceiver.transform.position) < targetDistanceCheck)
                 {
-                    player.AddXP(activeList[a].value);
+                    xpReceiver.AddXP(activeList[a].value);
                     RuntimeStats.totalXP += activeList[a].value;
                     if (SaveSystem.saveData.level < Levels.ranks.Count)
                         xpRequirement.text = Formatter.Round(SaveSystem.saveData.xp, 0) + " / " +

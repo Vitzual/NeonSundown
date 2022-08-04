@@ -9,21 +9,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 03b23b43cf5929d49b3e2a80b1a27393, type: 3}
+  m_Script: {fileID: 11500000, guid: 0925d96b6a4d4f946b07a62b119a696e, type: 3}
   m_Name: Buckshot
   m_EditorClassIdentifier: 
   internalId: 6443a405-612d-45fb-8f30-b3a1e9e36f0f
   createdAtTicks: 637916603976626929
   name: Buckshot
-  description: Every 5th shot splits into multiple bullets
+  description: Every 5th projectile shot splits, but decreases firerate by 10%
   sprite: {fileID: 21300000, guid: 592ce682506d67b4a8703d5a1dd85be9, type: 3}
   color: {r: 1, g: 0, b: 0, a: 1}
   maximumAmount: 3
   dropChance: 1
   canDrop: 1
   isUnlocked: 0
+  isShipOnlyCard: 0
   stats:
   - type: 24
     modifier: 2
     multiply: 0
     positive: 1
+  - type: 2
+    modifier: 1.1
+    multiply: 1
+    positive: 0

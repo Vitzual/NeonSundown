@@ -14,6 +14,30 @@ public class Events : MonoBehaviour
         active = this;
     }
 
+    // Card added event
+    public event Action<CardData> onAddCard;
+    public void AddCard(CardData card)
+    {
+        if (onAddCard != null)
+            onAddCard(card);
+    }
+
+    // Synergy added event
+    public event Action<SynergyData> onAddSynergy;
+    public void AddSynergy(SynergyData card)
+    {
+        if (onAddSynergy != null)
+            onAddSynergy(card);
+    }
+
+    // Synergy added event
+    public event Action<XPReceiver> onXPReceiverStart;
+    public void XPReceiverStart(XPReceiver xpReceiver)
+    {
+        if (onXPReceiverStart != null)
+            onXPReceiverStart(xpReceiver);
+    }
+
     // Cosmetic applied
     public event Action<SynergyData> onSynergyAvailable;
     public void SynergyAvailable(SynergyData synergy)

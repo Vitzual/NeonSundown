@@ -15,17 +15,16 @@ MonoBehaviour:
   internalId: f265bcf6-7b09-454f-92bd-e3f07bbb6e78
   createdAtTicks: 637828544477000146
   name: Impact
-  description: Increases all projectile knockback by 10%
+  description: Increases knockback on all weapons by 10%
   sprite: {fileID: 21300000, guid: b5e45c59a59e8c04aa58dee21ffac7d0, type: 3}
   color: {r: 0.34015664, g: 0.5042642, b: 0.7924528, a: 1}
   maximumAmount: 3
   dropChance: 1
   canDrop: 1
   isUnlocked: 0
-  value:
-    type: 11
+  isShipOnlyCard: 0
+  stats:
+  - type: 11
     modifier: 1.1
     multiply: 1
     positive: 1
-  applyToCards: 1
-  applyToPlayer: 1

@@ -15,17 +15,16 @@ MonoBehaviour:
   internalId: a2dbfb4b-2b1c-40ff-bd22-7506ccc323f6
   createdAtTicks: 637795926687771000
   name: Eagle Eyes
-  description: Increases viewing range.
+  description: Increases ship viewing range by 15%
   sprite: {fileID: 21300000, guid: 95bff4e7468b7ae4b9292774e0aa52e8, type: 3}
   color: {r: 0.65894425, g: 0.5235849, b: 1, a: 1}
-  maximumAmount: 1
+  maximumAmount: 3
   dropChance: 1
   canDrop: 1
   isUnlocked: 0
-  value:
-    type: 14
-    modifier: 5
-    multiply: 0
+  isShipOnlyCard: 1
+  stats:
+  - type: 14
+    modifier: 1.15
+    multiply: 1
     positive: 1
-  applyToCards: 0
-  applyToPlayer: 1

@@ -22,7 +22,7 @@ MonoBehaviour:
   dropChance: 1
   canDrop: 1
   isUnlocked: 1
-  prestigeSprite: {fileID: 21300000, guid: c5b78cf61808e5c458e00271391be3ba, type: 3}
+  isShipOnlyCard: 1
   baseLevels:
   - stat: 1
     description: Increases damage by 2
@@ -44,42 +44,25 @@ MonoBehaviour:
     description: Increases damage by 2
     multiply: 0
     modifier: 2
-  prestigeLevels:
-  - stat: 1
-    description: Increases damage by 10
-    multiply: 0
-    modifier: 10
-  - stat: 3
-    description: Increases orbital speed by 25%
-    multiply: 0
-    modifier: 50
-  - stat: 1
-    description: Increases damage by 10
-    multiply: 0
-    modifier: 10
-  - stat: 3
-    description: Increases orbital speed by 25%
-    multiply: 0
-    modifier: 50
-  - stat: 1
-    description: Increases damage by 10
-    multiply: 0
-    modifier: 10
   damage: 2
   cooldown: 0
   moveSpeed: 300
   rotate: 0
   rotateSpeed: 600
   range: 0
+  bulletSize: 0
   bloom: 0
   pierces: 0
   bullets: 0
   knockback: -700
   lifetime: 0
+  stun: 0
   randomDirection: 0
+  rotateOnSpawn: 0
   randomTarget: 0
   trackTarget: 0
   lockTarget: 0
+  informOnHit: 0
   bullet: {fileID: 0}
   bulletSound: {fileID: 0}
   obj: {fileID: 838190405679987182, guid: 24d18b76fa599134aad309b14868aa5d, type: 3}

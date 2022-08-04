@@ -9,25 +9,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 03b23b43cf5929d49b3e2a80b1a27393, type: 3}
+  m_Script: {fileID: 11500000, guid: 0925d96b6a4d4f946b07a62b119a696e, type: 3}
   m_Name: Explosives
   m_EditorClassIdentifier: 
   internalId: 27065005-87c8-4670-b97a-58d62731058d
   createdAtTicks: 637822401349395075
   name: Explosives
-  description: Bullets explode on impact, but increases cooldown
+  description: Enables explosive weapons, but lowers damage by 35%
   sprite: {fileID: 21300000, guid: f6eb501f7687bde438e30627cd738902, type: 3}
   color: {r: 1, g: 0.62409055, b: 0.2783019, a: 1}
   maximumAmount: 1
   dropChance: 0.5
   canDrop: 1
   isUnlocked: 0
+  isShipOnlyCard: 0
   stats:
   - type: 19
     modifier: 1
     multiply: 0
     positive: 1
-  - type: 2
-    modifier: 1.5
+  - type: 1
+    modifier: 0.65
     multiply: 1
     positive: 0

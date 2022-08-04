@@ -22,13 +22,15 @@ MonoBehaviour:
   dropChance: 1
   canDrop: 0
   isUnlocked: 0
+  isShipOnlyCard: 0
   baseLevels: []
-  damage: 100
+  damage: 10
   cooldown: 0.2
   moveSpeed: 120
   rotate: 1
   rotateSpeed: 180
   range: 0
+  bulletSize: 0
   bloom: 0
   pierces: 1
   bullets: 1
@@ -36,9 +38,11 @@ MonoBehaviour:
   lifetime: 1
   stun: 0
   randomDirection: 1
+  rotateOnSpawn: 0
   randomTarget: 0
   trackTarget: 0
   lockTarget: 0
+  informOnHit: 0
   bullet: {fileID: 5224849746800538397, guid: 41d25c54a53f5fe4cb4e8faca6ee7de3, type: 3}
   bulletSound: {fileID: 0}
   obj: {fileID: 649058797943903191, guid: 4cf86e87db440044398a93f1d2f6872f, type: 3}

@@ -80,22 +80,13 @@ public class Card : MonoBehaviour
             type.text = "Weapon";
             type.color = card.color;
 
-            WeaponData weaponData = (WeaponData)card;
-            Weapon weapon = Deck.active.GetWeaponInstance(weaponData);
-            if (weapon != null)
+            // Enable new upgrade
+            if (Deck.active.HasCard(card))
             {
                 useBase = false;
-                image.sprite = weaponData.sprite;
-                if (weapon.level == weaponData.baseLevels.Count)
-                {
-                    desc.text = "Ready for synergy";
-                    level.text = "LEVEL MAX";
-                }
-                else
-                {
-                    desc.text = weaponData.baseLevels[weapon.level].description;
-                    level.text = "LEVEL " + (weapon.level + 1);
-                }
+                image.sprite = card.sprite;
+                desc.text = card.description;
+                level.text = "UPGRADE AVAILABLE!";
             }
 
             // Set effects
@@ -109,22 +100,13 @@ public class Card : MonoBehaviour
             type.text = "Helper";
             type.color = card.color;
 
-            HelperData helperData = (HelperData)card;
-            Helper helper = Deck.active.GetHelperInstance(helperData);
-            if (helper != null)
+            // Enable new upgrade
+            if (Deck.active.HasCard(card))
             {
                 useBase = false;
-                image.sprite = helperData.sprite;
-                if (helper.level == helperData.levels.Count)
-                {
-                    desc.text = "Ready for synergy";
-                    level.text = "LEVEL MAX";
-                }
-                else
-                {
-                    desc.text = helperData.levels[helper.level].description;
-                    level.text = "LEVEL " + (helper.level + 1);
-                }
+                image.sprite = card.sprite;
+                desc.text = card.description;
+                level.text = "UPGRADE AVAILABLE!";
             }
 
             // Set effects
@@ -135,34 +117,20 @@ public class Card : MonoBehaviour
         else if (card is StatData)
         {
             // Set type
-            StatData statData = (StatData)card;
+            StatData stat = (StatData)card;
             type.text = "Stat";
 
             // Calculate effect
-            StatValue statType = statData.value;
-            effectOne.gameObject.SetActive(true);
-            effectOne.text = "<b>" + statType.type.ToString() + ":</b> " + Formatter.Round(
-                Deck.GetStat(statType.type)) + GetDifference(statType);
-            effectTwo.gameObject.SetActive(false);
-        }
-
-        else if (card is PrimaryData)
-        {
-            // Set type
-            PrimaryData primary = (PrimaryData)card;
-            type.text = "Primary";
-
-            // Calculate effect
-            StatValue statType = primary.stats[0];
+            StatValue statType = stat.stats[0];
             effectOne.gameObject.SetActive(true);
             effectOne.text = "<b>" + statType.type.ToString() + ":</b> " + Formatter.Round(
                 Deck.GetStat(statType.type)) + GetDifference(statType);
             
             // Check if second effect available
-            if (primary.stats.Count >= 2)
+            if (stat.stats.Count >= 2)
             {
                 // Show effect
-                statType = primary.stats[1];
+                statType = stat.stats[1];
                 effectTwo.gameObject.SetActive(true);
                 effectTwo.text = "<b>" + statType.type.ToString() + ":</b> " + Formatter.Round(
                     Deck.GetStat(statType.type)) + GetDifference(statType);

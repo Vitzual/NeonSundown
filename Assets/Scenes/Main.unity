@@ -14179,6 +14179,7 @@ GameObject:
   m_Component:
   - component: {fileID: 872257023}
   - component: {fileID: 872257026}
+  - component: {fileID: 872257029}
   - component: {fileID: 872257022}
   - component: {fileID: 872257028}
   - component: {fileID: 872257025}
@@ -14309,9 +14310,6 @@ MonoBehaviour:
   speedAffectsDamage: 0
   informOnHit: 0
   level: 0
-  normalMouse: {fileID: 2800000, guid: c27a1bb75344731438af61a83e9b5b41, type: 3}
-  crosshairMouse: {fileID: 2800000, guid: 347780322b1cab849a8dddfae00ddc35, type: 3}
-  crosshairOffset: {x: 250, y: 250}
   autoFireObj: {fileID: 843932847}
   _lasers: 0
   shipData: {fileID: 11400000, guid: b1370a648ab4cb542922d56a80462803, type: 2}
@@ -14331,31 +14329,8 @@ MonoBehaviour:
   nearDeathSound: {fileID: 8300000, guid: 590bda6f1cbc9ae4bbf6284474966831, type: 3}
   buckshotSound: {fileID: 8300000, guid: ffc6c01b2a8242545b670bd1e36d849f, type: 3}
   deathMusic: {fileID: 685540763}
-  levels:
-  - 10
-  - 25
-  - 50
-  - 75
-  - 100
-  - 125
-  - 150
-  - 175
-  - 200
-  - 225
-  - 250
-  - 275
-  - 300
-  - 350
-  - 400
-  - 450
-  - 500
-  rankupMultiplier: 1.15
-  xpBar: {fileID: 26750952}
-  levelText: {fileID: 2015260872}
-  xpText: {fileID: 1219155500}
-  droneShip: 0
   cam: {fileID: 519420031}
-  debugCard: {fileID: 0}
+  debugCard: {fileID: 11400000, guid: 3a08125ecbed8a242bfd6c08bf19bcff, type: 2}
 --- !u!82 &872257027
 AudioSource:
   m_ObjectHideFlags: 0
@@ -14464,6 +14439,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f189636dd780b324eb326819ce02cf3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &872257029
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 872257021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6be1751b613415a489b83f9480de50f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levels:
+  - 10
+  - 25
+  - 50
+  - 75
+  - 100
+  - 125
+  - 150
+  - 175
+  - 200
+  - 225
+  - 250
+  - 275
+  - 300
+  - 350
+  - 400
+  - 450
+  - 500
+  rankupMultiplier: 1.15
+  xpBar: {fileID: 26750952}
+  levelText: {fileID: 2015260872}
+  xpText: {fileID: 1219155500}
 --- !u!1 &872817167
 GameObject:
   m_ObjectHideFlags: 0
@@ -31647,7 +31656,7 @@ MonoBehaviour:
   crystalNormalPosition: {x: 0, y: -130, z: 0}
   xpObject: {fileID: 5649815641690287147, guid: be305456129db3f44b2fdf698645631c, type: 3}
   xpSound: {fileID: 8300000, guid: 18761abab3975f745a2a1d77a361bd14, type: 3}
-  player: {fileID: 872257026}
+  xpReceiver: {fileID: 872257029}
   startSpeed: 10
   startDistance: 10
   speedFatigueModifier: 0.15

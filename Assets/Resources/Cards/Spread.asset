@@ -15,17 +15,16 @@ MonoBehaviour:
   internalId: 41abf3bf-5116-400c-83e2-d8e5c46500b1
   createdAtTicks: 637827641619554941
   name: Bullet Spread
-  description: Increases bullet spread by 25%
+  description: Increases bullet spread by 25% for wider range
   sprite: {fileID: 21300000, guid: 633fbbcf8baa3a1408a263196375d9f8, type: 3}
   color: {r: 0, g: 0.66164064, b: 1, a: 1}
   maximumAmount: 3
   dropChance: 1
   canDrop: 1
   isUnlocked: 1
-  value:
-    type: 5
+  isShipOnlyCard: 0
+  stats:
+  - type: 5
     modifier: 1.25
     multiply: 1
     positive: 1
-  applyToCards: 0
-  applyToPlayer: 1

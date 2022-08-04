@@ -15,17 +15,16 @@ MonoBehaviour:
   internalId: 3bcdecba-0270-445f-b6f9-a097d13bb0fc
   createdAtTicks: 637804344951073455
   name: Range
-  description: Increases the lifetime of all projectiles by 0.1s
+  description: Increases the lifetime of all projectiles by 25%
   sprite: {fileID: 21300000, guid: 176490883beb38b4fa6a5e34db378dcf, type: 3}
   color: {r: 0, g: 0.7075472, b: 0.50690246, a: 1}
-  maximumAmount: 5
+  maximumAmount: 3
   dropChance: 1
-  canDrop: 0
-  isUnlocked: 0
-  value:
-    type: 8
-    modifier: 0.1
-    multiply: 0
+  canDrop: 1
+  isUnlocked: 1
+  isShipOnlyCard: 0
+  stats:
+  - type: 10
+    modifier: 1.25
+    multiply: 1
     positive: 1
-  applyToCards: 1
-  applyToPlayer: 1

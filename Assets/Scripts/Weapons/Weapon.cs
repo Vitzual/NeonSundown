@@ -28,6 +28,7 @@ public class Weapon : MonoBehaviour
     // Set the weapon data
     public virtual void Setup(WeaponData data, Transform target = null)
     {
+        Events.active.onAddCard += AddCard;
         this.target = target;
         weapon = data;
         damageMultiplier = 1f;
@@ -58,6 +59,17 @@ public class Weapon : MonoBehaviour
 
         // Increase level
         level += 1;
+    }
+
+    // On add card event
+    public virtual void AddCard(CardData card)
+    {
+        if (card is StatData)
+        {
+            StatData statData = (StatData)card;
+            foreach (StatValue stat in statData.stats)
+                UpdateStat(stat.type);
+        }
     }
 
     // Calculate stat
@@ -125,6 +137,7 @@ public class Weapon : MonoBehaviour
         UpdateStat(Stat.Knockback);
         UpdateStat(Stat.StunLength);
         UpdateStat(Stat.BulletSize);
+        UpdateStat(Stat.Bullets);
     }
 
     // Returns a stat

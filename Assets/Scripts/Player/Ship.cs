@@ -11,14 +11,9 @@ public class Ship : Weapon
     public static bool champion = false;
     public static bool lasers = false;
     
-    // Custom cursor textures
-    public Texture2D normalMouse;
-    public Texture2D crosshairMouse;
-    public Vector2 crosshairOffset;
-    private bool crosshairOn = true;
-
     // Controller associated with the player
     private Controller controller;
+    private XPReceiver xpReceiver;
     public GameObject autoFireObj;
     private bool autoFire = false;
     public bool _lasers = false;
@@ -54,19 +49,11 @@ public class Ship : Weapon
     public AudioClip buckshotSound;
     public AudioSource deathMusic; // i know im bad putting this here
 
-    // XP amount
-    public List<float> levels;
-    private float xp = 0;
-    private float rankup = 50;
-    private float xpMultiplier = 1;
-    private float enemyDamage = 1;
+    // Multipliers
+    private float enemyDamageMultiplier = 1;
     private int buckshots = 0;
     private int buckshotCountdown = 4;
-    public float rankupMultiplier;
-    public ProgressBar xpBar;
-    public TextMeshProUGUI levelText;
-    public TextMeshProUGUI xpText;
-    public bool droneShip = false;
+    private bool droneShip = false;
 
     // Ship specific stats
     private float regenAmount;
@@ -81,8 +68,22 @@ public class Ship : Weapon
     // List of drones
     private List<Drone> drones;
 
+    // Scriptable and weapon reference
+    private List<Weapon> weaponInstances;
+    private List<Helper> helperInstances;
+
     // Debug car
     public CardData debugCard;
+
+    // Create new instances
+    public void Awake()
+    {
+        // Create starting slots
+        drones = new List<Drone>();
+        weaponInstances = new List<Weapon>();
+        helperInstances = new List<Helper>();
+        xpReceiver = GetComponent<XPReceiver>();
+    }
 
     // Subscribe to setup event
     public void Start()
@@ -90,9 +91,7 @@ public class Ship : Weapon
         // Reset effects always
         Effects.ToggleMainGlitchEffect(false);
 
-        // Set crosshair cursor
-        Cursor.SetCursor(crosshairMouse, crosshairOffset, CursorMode.Auto);
-
+        // Reset ship flags
         lowHealth = false;
         warrior = false;
         champion = false;
@@ -114,6 +113,9 @@ public class Ship : Weapon
     // On start, setup
     public void Setup(ShipData data)
     {
+        // Subscribe to add card event
+        Events.active.onAddCard += AddCard;
+
         // Setup the ship data
         shipData = data;
         weapon = data.weapon;
@@ -133,8 +135,6 @@ public class Ship : Weapon
             ChromaHandler.active.Setup(ChromaType.Warrior);
 
         // Setup base stuff
-        level = 0;
-        xp = 0;
         health = shipData.startingHealth;
         maxHealth = health;
         
@@ -160,17 +160,6 @@ public class Ship : Weapon
             informOnHit = shipData.weapon.informOnHit;
         }
         splitshots = 0;
-
-        // Set starting rankup cost
-        if (levels.Count > 0)
-            rankup = levels[0];
-        else rankup = 25;
-
-        // Update UI element
-        levelText.text = "LEVEL " + level;
-        xpText.text = Mathf.Round(xp) + " / " + Mathf.Round(rankup) + "xp";
-        xpBar.currentPercent = (float)xp / rankup * 100;
-        xpBar.UpdateUI();
 
         // Setup any attached modules
         SetupModules();
@@ -227,22 +216,9 @@ public class Ship : Weapon
     // Update method 
     public void Update()
     {
-        // Check if deck is open
-        if (Dealer.isOpen)
-        {
-            if (crosshairOn)
-            {
-                Cursor.SetCursor(normalMouse, Vector2.zero, CursorMode.Auto);
-                crosshairOn = false;
-            }
-            return;
-        }
-        else if (!crosshairOn)
-        {
-            Cursor.SetCursor(crosshairMouse, crosshairOffset, CursorMode.Auto);
-            crosshairOn = true;
-        }
-        
+        // Check if something is open
+        if (Dealer.isOpen) return;
+
         // Check if space pressed for auto fire
         if (Input.GetKeyDown(Keybinds.autofire))
         {
@@ -267,9 +243,19 @@ public class Ship : Weapon
             }
         }
 
-        // If player can rotate, rotate
-        if (!shipData.playerControlledRotation)
-            model.Rotate(Vector3.forward, 60 * Time.deltaTime);
+        // Iterate through all weapon instances
+        for (int i = 0; i < weaponInstances.Count; i++)
+        {
+            if (weaponInstances[i] != null)
+                weaponInstances[i].Use();
+        }
+
+        // Iterate through all weapon instances
+        for (int i = 0; i < helperInstances.Count; i++)
+        {
+            if (helperInstances[i] != null)
+                helperInstances[i].CustomUpdate();
+        }
     }
 
     // Set the secondary weapon
@@ -286,38 +272,6 @@ public class Ship : Weapon
         this.secondary = Instantiate(secondary.obj, transform.position, Quaternion.identity);
         if (secondary.setShipAsParent) this.secondary.transform.SetParent(transform);
         this.secondary.Setup(this, secondary);
-    }
-
-    // Add XP
-    public void AddXP(float amount)
-    {
-        // Add the XP amount
-        float addAmount = amount * xpMultiplier;
-        Levels.AddXP(addAmount);
-        xp += addAmount;
-
-        // Check if XP over rankup
-        if (xp >= rankup)
-        {
-            // Increase level
-            level += 1;
-            xp -= rankup;
-            if (levels.Count <= level)
-            {
-                rankup = (int)(rankup * rankupMultiplier);
-                if (rankup > 80000) rankup = 80000;
-            }
-            else rankup = levels[level];
-
-            // Set text
-            levelText.text = "LEVEL " + level;
-            Dealer.active.OpenDealer();
-        }
-
-        // Set XP bar
-        xpText.text = Mathf.Round(xp) + " / " + Mathf.Round(rankup) + "xp";
-        xpBar.currentPercent = (float)xp / rankup * 100;
-        xpBar.UpdateUI();
     }
 
     // Shoot method
@@ -374,16 +328,6 @@ public class Ship : Weapon
         }
     }
 
-    // If bullet informs parent of hit, set drone targets
-    public override void TargetHit(Entity entity)
-    {
-        if (droneShip)
-        {
-            foreach (Drone drone in drones)
-                drone.SetTarget(entity);
-        }
-    }
-
     // Heal amount
     public static void Heal(float amount)
     {
@@ -423,7 +367,7 @@ public class Ship : Weapon
         RuntimeStats.damageTaken += damage;
 
         // Set enemy damage
-        damage = damage * enemyDamage;
+        damage = damage * enemyDamageMultiplier;
 
         // Update health
         health -= damage;
@@ -561,6 +505,57 @@ public class Ship : Weapon
 
     public static float GetHealth() { return health; }
 
+    public override void AddCard(CardData card)
+    {
+        // Check card type
+        if (card is StatData)
+        {
+            // Get weapon data
+            StatData statData = (StatData)card;
+
+            Debug.Log("Adding stat card " + statData.name + " to deck");
+            foreach (StatValue stat in statData.stats)
+            {
+                if (stat.multiply) Deck.AddMultiplier(stat.type, stat.modifier);
+                else Deck.AddAddition(stat.type, stat.modifier);
+                UpdateStat(stat.type);
+            }
+        }
+        else if (card is WeaponData)
+        {
+            // Get weapon data
+            WeaponData weapon = (WeaponData)card;
+
+            // Create the new weapon instance
+            Debug.Log("Adding weapon card " + weapon.name + " to deck");
+            Weapon newWeapon = Instantiate(weapon.obj, transform.position, Quaternion.identity).GetComponent<Weapon>();
+            newWeapon.Setup(weapon, transform);
+            weaponInstances.Add(newWeapon);
+
+            // Check if player is parent
+            if (weapon.setPlayerAsParent)
+                newWeapon.transform.SetParent(transform);
+        }
+        else if (card is HelperData)
+        {
+            // Get weapon data
+            HelperData helper = (HelperData)card;
+
+            Debug.Log("Adding helper card " + helper.name + " to deck");
+            Helper newHelper = Instantiate(helper.obj, transform.position, Quaternion.identity).GetComponent<Helper>();
+            newHelper.Setup(this, helper);
+            helperInstances.Add(newHelper);
+        }
+        else if (card is ChromaData)
+        {
+            // Get weapon data
+            ChromaData chroma = (ChromaData)card;
+
+            Debug.Log("Adding chroma card " + chroma.name + " to deck");
+            ChromaHandler.active.Setup(chroma.type);
+        }
+    }
+
     // Update stat
     public override void UpdateStat(Stat stat)
     {
@@ -634,7 +629,7 @@ public class Ship : Weapon
 
             // Increase XP gain
             case Stat.XPGain:
-                xpMultiplier = Deck.CalculateStat(stat, 1);
+                xpReceiver.SetXPMultiplier(Deck.CalculateStat(stat, 1));
                 break;
 
             // Increase regen rate
@@ -659,7 +654,7 @@ public class Ship : Weapon
 
             // Increase explosive rounds
             case Stat.EnemyDmg:
-                enemyDamage = Deck.CalculateStat(stat, 1);
+                enemyDamageMultiplier = Deck.CalculateStat(stat, 1);
                 break;
 
             // Increases bullet size
@@ -737,7 +732,7 @@ public class Ship : Weapon
 
             // Increase XP gain
             case Stat.XPGain:
-                return xpMultiplier;
+                return xpReceiver.GetXPMultiplier();
 
             // Increase regen rate
             case Stat.Regen:
@@ -758,7 +753,7 @@ public class Ship : Weapon
 
             // Get splitshots
             case Stat.EnemyDmg:
-                return enemyDamage;
+                return enemyDamageMultiplier;
 
             // Get bullet size
             case Stat.BulletSize:
@@ -887,4 +882,8 @@ public class Ship : Weapon
 
     // Returns a secondary instance
     public Secondary GetSecondary() { return secondary; }
+
+    // Check for helper or weapon instance
+    public bool HasHelper(HelperData helper) { return helperInstances.Contains(helper.obj); }
+    public bool HasWeapon(WeaponData weapon) { return weaponInstances.Contains(weapon.obj); }
 }
