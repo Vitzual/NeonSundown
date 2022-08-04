@@ -117,8 +117,15 @@ public class Weapon : MonoBehaviour
                 size = (Deck.CalculateStat(type, weapon.bulletSize)
                     + GetAdditions(type)) * GetMultiplier(type);
                 break;
+            case Stat.Range:
+                range = (Deck.CalculateStat(type, weapon.range)
+                    + GetAdditions(type)) * GetMultiplier(type);
+                break;
             case Stat.Criticals:
                 critical = (Deck.CalculateStat(type, 0) + GetAdditions(type)) * GetMultiplier(type);
+                break;
+            case Stat.Explosive:
+                explosiveRounds = explosiveRounds || Deck.GetAdditions(type) > 0;
                 break;
         }
     }
@@ -138,6 +145,7 @@ public class Weapon : MonoBehaviour
         UpdateStat(Stat.StunLength);
         UpdateStat(Stat.BulletSize);
         UpdateStat(Stat.Bullets);
+        UpdateStat(Stat.Explosive);
     }
 
     // Returns a stat

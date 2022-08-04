@@ -9,6 +9,7 @@ public class Scythe : Weapon
     public float xOffset = 0;
     public float yOffset = 0;
     public bool heal = false;
+    public Material material;
 
     // Override default setup
     public override void Setup(WeaponData data, Transform target = null)
@@ -32,8 +33,20 @@ public class Scythe : Weapon
         if (entity != null)
         {
             // Attempt to damage the enemy
-            if (stunLength > 0f) entity.Stun(stunLength);
-            entity.Damage(damage, weapon.knockback);
+            if (explosiveRounds)
+            {
+                if (stunLength > 0f) ExplosiveHandler.CreateStun(entity.transform.position,
+                    range, stunLength, damage, material, knockback);
+                else ExplosiveHandler.CreateExplosion(entity.transform.position, range,
+                    damage, knockback, material);
+            }
+            else
+            {
+                if (stunLength > 0f) entity.Stun(stunLength);
+                entity.Damage(damage, weapon.knockback);
+            }
+
+            // Check if healing enabled
             if (heal) Ship.Heal(0.01f);
 
             // Play death sound if enemy dies

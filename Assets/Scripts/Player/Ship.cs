@@ -649,7 +649,7 @@ public class Ship : Weapon
 
             // Increase explosive rounds
             case Stat.Explosive:
-                explosiveRounds = true;
+                explosiveRounds = Deck.GetAdditions(stat) > 0;
                 break;
 
             // Increase explosive rounds

@@ -210,6 +210,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 0
+  damageMultiplier: 1
   cooldown: 0
   moveSpeed: 0
   bloom: 0
@@ -222,10 +223,15 @@ MonoBehaviour:
   size: 0
   stunLength: 0
   critical: 0
+  rotateSpeed: 0
+  speedDamageMultiplier: 0
   explosiveRounds: 0
+  speedAffectsDamage: 0
+  informOnHit: 0
   level: 0
-  scytheOne: {fileID: 1036687550606148103}
-  scytheTwo: {fileID: 3751109599216238057}
+  scythes:
+  - {fileID: 1036687550606148103}
+  - {fileID: 3751109599216238057}
 --- !u!1 &3079325460147680250
 GameObject:
   m_ObjectHideFlags: 0
@@ -272,6 +278,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 0
+  damageMultiplier: 1
   cooldown: 0
   moveSpeed: 0
   bloom: 0
@@ -284,12 +291,17 @@ MonoBehaviour:
   size: 0
   stunLength: 0
   critical: 0
+  rotateSpeed: 0
+  speedDamageMultiplier: 0
   explosiveRounds: 0
+  speedAffectsDamage: 0
+  informOnHit: 0
   level: 0
   rotator: {fileID: 806457104087543718}
   xOffset: -15
   yOffset: 0
   heal: 1
+  material: {fileID: 2100000, guid: 11704204528017449aef7314f9c036c4, type: 2}
 --- !u!58 &2149021807019066158
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -434,6 +446,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 0
+  damageMultiplier: 1
   cooldown: 0
   moveSpeed: 0
   bloom: 0
@@ -446,12 +459,17 @@ MonoBehaviour:
   size: 0
   stunLength: 0
   critical: 0
+  rotateSpeed: 0
+  speedDamageMultiplier: 0
   explosiveRounds: 0
+  speedAffectsDamage: 0
+  informOnHit: 0
   level: 0
   rotator: {fileID: 3419083764338386134}
   xOffset: 15
   yOffset: 0
   heal: 1
+  material: {fileID: 2100000, guid: 11704204528017449aef7314f9c036c4, type: 2}
 --- !u!58 &7484064234064661025
 CircleCollider2D:
   m_ObjectHideFlags: 0
