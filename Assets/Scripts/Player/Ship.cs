@@ -185,9 +185,6 @@ public class Ship : Weapon
             {
                 Drone newDrone = Instantiate(shipData.drone.obj, transform.position, 
                     transform.rotation).GetComponent<Drone>();
-                newDrone.damage = shipData.droneDamage;
-                newDrone.movementSpeed = shipData.droneMoveSpeed;
-                newDrone.rotationSpeed = shipData.droneRotateSpeed;
                 newDrone.Setup(this, shipData.drone);
                 drones.Add(newDrone);
             }

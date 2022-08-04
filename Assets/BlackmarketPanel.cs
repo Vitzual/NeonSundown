@@ -53,13 +53,6 @@ public class BlackmarketPanel : MonoBehaviour
         UpdateProgress();
     }
 
-    public void UpdateResources()
-    {
-        redCrystals.text = SaveSystem.GetCrystalAmount(redCrystal.InternalID).ToString();
-        greenCrystals.text = SaveSystem.GetCrystalAmount(greenCrystal.InternalID).ToString();
-        blueCrystals.text = SaveSystem.GetCrystalAmount(blueCrystal.InternalID).ToString();
-    }
-
     public void UpdateProgress()
     {
         // Reset total amount
@@ -164,7 +157,7 @@ public class BlackmarketPanel : MonoBehaviour
 
         // Set text
         title.text = data.name.ToUpper();
-        desc.text = data.desc.ToUpper();
+        desc.text = data.desc;
         amount.text = data.amountRequired + " CRYSTALS";
         icon.sprite = data.icon;
 
@@ -241,8 +234,8 @@ public class BlackmarketPanel : MonoBehaviour
             SaveSystem.AddBlackmarketItem(data.InternalID);
 
             // Remove crystals from player
-            SaveSystem.AddCrystal(data.InternalID, -data.amountRequired);
-
+            SaveSystem.AddCrystal(data.crystal.InternalID, -data.amountRequired);
+            
             // Update the save
             SaveSystem.UpdateSave();
 
@@ -261,6 +254,9 @@ public class BlackmarketPanel : MonoBehaviour
             ResetPanel();
             UpdateProgress();
             UpdateResources();
+
+            // Call on buy event
+            Events.active.BlackmarketItemBought(data);
         }
     }
 
@@ -343,5 +339,37 @@ public class BlackmarketPanel : MonoBehaviour
     public int GetTotalAmountOfItems()
     {
         return totalAmountOfItems;
+    }
+
+    // Update the crystal amounts
+    public void UpdateResources()
+    {
+        // Update blue crystals
+        int amount;
+        if (SaveSystem.saveData.crystals.ContainsKey(blueCrystal.InternalID))
+        {
+            amount = SaveSystem.saveData.crystals[blueCrystal.InternalID];
+            if (amount > 999) blueCrystals.text = "999";
+            else blueCrystals.text = amount.ToString();
+        }
+        else blueCrystals.text = "0";
+
+        // Update green crystals
+        if (SaveSystem.saveData.crystals.ContainsKey(greenCrystal.InternalID))
+        {
+            amount = SaveSystem.saveData.crystals[greenCrystal.InternalID];
+            if (amount > 999) greenCrystals.text = "999";
+            else greenCrystals.text = amount.ToString();
+        }
+        else greenCrystals.text = "0";
+
+        // Update red crystals
+        if (SaveSystem.saveData.crystals.ContainsKey(redCrystal.InternalID))
+        {
+            amount = SaveSystem.saveData.crystals[redCrystal.InternalID];
+            if (amount > 999) redCrystals.text = "999";
+            else redCrystals.text = amount.ToString();
+        }
+        else redCrystals.text = "0";
     }
 }

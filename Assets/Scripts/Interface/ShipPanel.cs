@@ -102,6 +102,9 @@ public class ShipPanel : MonoBehaviour
         // After creating, set ordering
         foreach (ShipButton button in buttons)
             button.gameObject.transform.SetSiblingIndex(button.ship.listOrder);
+
+        // Set blackmarket buy event
+        Events.active.onBlackmarketItemBought += UpdateShipListing;
     }
 
     // Update the ships
@@ -158,6 +161,7 @@ public class ShipPanel : MonoBehaviour
             stats = new Dictionary<Stat, StatUI>();
             foreach (StatInfo stat in statInfoList)
             {
+                if (stat.hideInStats) continue;
                 StatUI newStat = Instantiate(statUI, statList);
                 newStat.Set(stat, ship.GetStat(stat.stat), ship.lightColor);
                 stats.Add(stat.stat, newStat);
@@ -351,5 +355,12 @@ public class ShipPanel : MonoBehaviour
             if (module.multi) moduleSlots[slot].amount.text += "%";
             moduleSlots[slot].amount.color = ship.lightColor;
         }
+    }
+     
+    public void UpdateShipListing(BlackmarketData data)
+    {
+        foreach (ShipButton button in buttons)
+            if (data.type == BlackmarketData.Type.Ship && data.ship == button.ship)
+                button.Set(button.ship);
     }
 }

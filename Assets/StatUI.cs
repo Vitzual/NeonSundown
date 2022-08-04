@@ -15,10 +15,10 @@ public class StatUI : MonoBehaviour
     {
         icon.sprite = info.sprite;
         icon.color = color;
-        value.text = "<b>" + info.name.ToUpper() + ":</b> " + Formatter.Round(amount, 0) + info.prefix;
-        average.text = "<b>AVG:</b> " + Formatter.Round(info.GetAverage(), 0) + info.prefix;
-        lowest.text = "<b>LOWEST:</b> " + Formatter.Round(info.GetLowest(), 0) + info.prefix;
-        highest.text = "<b>HIGHEST:</b> " + Formatter.Round(info.GetHighest(), 0) + info.prefix;
+        value.text = "<b>" + info.name.ToUpper() + ":</b> " + Formatter.Round(amount, info.decimalPlaces) + info.prefix;
+        average.text = "<b>AVG:</b> " + Formatter.Round(info.GetAverage(), info.decimalPlaces) + info.prefix;
+        lowest.text = "<b>LOWEST:</b> " + Formatter.Round(info.GetLowest(), info.decimalPlaces) + info.prefix;
+        highest.text = "<b>HIGHEST:</b> " + Formatter.Round(info.GetHighest(), info.decimalPlaces) + info.prefix;
         bar.minValue = info.GetLowest();
         bar.maxValue = info.GetHighest();
         bar.currentPercent = amount;

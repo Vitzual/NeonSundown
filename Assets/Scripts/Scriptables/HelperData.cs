@@ -15,5 +15,6 @@ public class HelperData : CardData
 
     public Helper obj;
     public List<Level> levels;
+    public float moveSpeed, rotationSpeed, statAmount;
 }
 

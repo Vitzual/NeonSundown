@@ -284,7 +284,14 @@ public class Dealer : MonoBehaviour
             else if (burnsLeft <= 0) burns.text = "0 Remaining";
             else
             {
+                // Lower burn amount
                 burnsLeft -= 1;
+
+                // Remove card from picked list
+                if (pickedList.Contains(card.GetCard()))
+                    pickedList.Remove(card.GetCard());
+
+                // Remove card from draw
                 Gamemode.blacklistCards.Add(card.GetCard());
                 card.RedrawCard(PickNewCard());
                 burns.text = burnsLeft + " Remaining";

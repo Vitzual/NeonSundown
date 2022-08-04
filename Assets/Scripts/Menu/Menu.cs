@@ -62,12 +62,14 @@ public class Menu : MonoBehaviour
         showWarning = _showWarning;
         Scriptables.GenerateAllScriptables();
         SaveSystem.GetSave();
-        Levels.UpdateUnlocks();
     }
 
     // On start, try and get meta context
     public void Start()
     {
+        // Update unlocks
+        Levels.UpdateUnlocks();
+
         // Reset effects always
         Effects.ToggleMainGlitchEffect(false);
 

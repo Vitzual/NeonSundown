@@ -13,9 +13,17 @@ public class BaseTotem : Drone
     public Vector3 scaleSpeed;
     public float maxDistance;
     protected float cooldown;
+    private AudioSource audioSource;
 
     // Within range flag
     protected bool shipInsideRange;
+
+    // Startup override
+    public override void Setup(Ship ship, HelperData data)
+    {
+        audioSource = GetComponent<AudioSource>();
+        base.Setup(ship, data);
+    }
 
     // On start, play animation
     public override void CustomUpdate()
@@ -30,7 +38,7 @@ public class BaseTotem : Drone
     public virtual void OnTriggerEnter2D(Collider2D collision)
     {
         // Get the enemy component
-        AudioPlayer.Play(totemSound, false, 1f, 1f, false, 0.6f);
+        PlaySound(totemSound, 1);
         shipInsideRange = true;
     }
 
@@ -38,7 +46,19 @@ public class BaseTotem : Drone
     public virtual void OnTriggerExit2D(Collider2D collision)
     {
         // Get the enemy component
-        AudioPlayer.Play(totemSound, false, 0.8f, 0.8f, false, 0.6f);
+        PlaySound(totemSound, 0.8f);
         shipInsideRange = false;
+    }
+
+    // Play sound
+    public void PlaySound(AudioClip clip, float pitch)
+    {
+        if (audioSource != null)
+        {
+            audioSource.clip = clip;
+            audioSource.pitch = pitch;
+            audioSource.volume = Settings.sound / 2f;
+            audioSource.Play();
+        }
     }
 }

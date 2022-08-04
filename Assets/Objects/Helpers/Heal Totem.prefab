@@ -5275,9 +5275,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8448323221370727100}
+  - component: {fileID: 9149381626263353731}
   - component: {fileID: 4319089354695385822}
   - component: {fileID: 8448323221370727098}
   - component: {fileID: 1406367762303667352}
+  - component: {fileID: 3566069646954039255}
   m_Layer: 19
   m_Name: Heal Totem
   m_TagString: Untagged
@@ -5301,6 +5303,35 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9149381626263353731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8448323221370727103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 122d66b71216c6c4f8abdbcce450ef1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  overrideOtherParticles: 0
+  rotateParticle: 0
+  deathMaterial: {fileID: 0}
+  deathEffect: {fileID: 0}
+  data: {fileID: 0}
+  level: 0
+  damage: 0
+  movementSpeed: 15
+  rotationSpeed: 100
+  range: 25
+  totemSound: {fileID: 8300000, guid: 9de4e4139c6ee8144bc3d644232e3b58, type: 3}
+  radius: {fileID: 489216570430884860}
+  targetRadius: 2
+  scaleSpeed: {x: 5, y: 5, z: 1}
+  maxDistance: 0
+  healAmount: 1
+  healCooldown: 0.5
 --- !u!114 &4319089354695385822
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5319,14 +5350,13 @@ MonoBehaviour:
   deathEffect: {fileID: 0}
   data: {fileID: 0}
   level: 0
+  damage: 0
   movementSpeed: 15
   rotationSpeed: 80
   range: 35
-  healSound: {fileID: 8300000, guid: 9de4e4139c6ee8144bc3d644232e3b58, type: 3}
-  healAmount: 1.5
-  healCooldown: 1
+  totemSound: {fileID: 0}
   radius: {fileID: 489216570430884860}
-  targetRadius: 2
+  targetRadius: 2.5
   scaleSpeed: {x: 5, y: 5, z: 1}
   maxDistance: 0
 --- !u!50 &8448323221370727098
@@ -5366,3 +5396,99 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 2.1
+--- !u!82 &3566069646954039255
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8448323221370727103}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4

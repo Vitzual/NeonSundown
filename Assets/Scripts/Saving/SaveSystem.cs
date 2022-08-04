@@ -59,6 +59,7 @@ public class SaveSystem
         // Check if save exists
         if (saveData == null)
         {
+            Debug.Log("[SAVE] Save data was null, generating...");
             GenerateSave();
             return;
         }

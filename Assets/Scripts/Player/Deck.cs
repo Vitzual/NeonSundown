@@ -29,6 +29,9 @@ public class Deck : MonoBehaviour
     // On awake, setup instance
     public void Awake()
     {
+        // Get player instance on the object
+        player = GetComponent<Ship>();
+
         // Set active instance
         active = this;
         secondary = null;
@@ -51,9 +54,6 @@ public class Deck : MonoBehaviour
     // On start, create decks
     public void Start()
     {
-        // Get player instance on the object
-        player = GetComponent<Ship>();
-
         // Setup ship
         Events.active.SetupShip(Gamemode.shipData);
     }

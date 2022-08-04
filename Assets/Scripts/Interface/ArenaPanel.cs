@@ -36,6 +36,7 @@ public class ArenaPanel : MonoBehaviour
     public SerializableDictionary<Difficulty, Color> difficultyColors;
     public AudioClip nightmareArenaSound;
     private List<GameObject> activeBlacklistCards;
+    private List<ArenaButton> buttonList;
 
     // Objective sprite options
     public Color incompleteObjectiveColor, completeObjectiveColor;
@@ -58,12 +59,13 @@ public class ArenaPanel : MonoBehaviour
     {
         // Setup events
         Events.active.onArenaButtonClicked += SetPanel;
+        Events.active.onBlackmarketItemBought += UpdateArenaListing;
 
         // Check if arenas already generated
         if (!arenasGenerated)
         {
             // Setup arenas
-            List<ArenaButton> buttonList = new List<ArenaButton>();
+            buttonList = new List<ArenaButton>();
 
             // Iterate through all arenas
             foreach (ArenaData arena in Scriptables.arenas)
@@ -233,5 +235,12 @@ public class ArenaPanel : MonoBehaviour
         
         // Create new active list
         activeBlacklistCards = new List<GameObject>();
+    }
+
+    public void UpdateArenaListing(BlackmarketData data)
+    {
+        foreach (ArenaButton button in buttonList)
+            if (data.type == BlackmarketData.Type.Arena && data.arena == button.arena)
+                button.Set(button.arena, "<b>BEST RUN:</b> " + Formatter.Time(SaveSystem.GetBestTime(button.arena.InternalID)));
     }
 }

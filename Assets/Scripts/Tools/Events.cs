@@ -148,4 +148,11 @@ public class Events : MonoBehaviour
         if (onBlackmarketItemClicked != null)
             onBlackmarketItemClicked(data);
     }
+
+    public event Action<BlackmarketData> onBlackmarketItemBought;
+    public void BlackmarketItemBought(BlackmarketData data)
+    {
+        if (onBlackmarketItemBought != null)
+            onBlackmarketItemBought(data);
+    }
 }

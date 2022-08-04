@@ -12,6 +12,15 @@ public class TrackerDrone : Drone
     private float cooldown = 0f;
     public AudioClip hitSound;
 
+    // Set move speed
+    public override void Setup(Ship ship, HelperData data)
+    {
+        damage = data.statAmount;
+        movementSpeed = data.moveSpeed;
+        rotationSpeed = data.rotationSpeed;
+        base.Setup(ship, data);
+    }
+
     // Move drone towards target
     public override void Move()
     {

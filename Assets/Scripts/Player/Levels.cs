@@ -1,3 +1,4 @@
+using HeathenEngineering.SteamworksIntegration;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,9 +8,15 @@ public class Levels : MonoBehaviour
 {
     public static List<LevelData> ranks;
     private static bool generated = false;
+    public AchievementObject _blackmarketAchievement;
+    private static AchievementObject blackmarketAchievement;
 
     // Generate ranks on startup
-    public void Awake() { GenerateRanks(); }
+    public void Awake()
+    {
+        blackmarketAchievement = _blackmarketAchievement;
+        GenerateRanks(); 
+    }
 
     // Generate ranks
     public static void GenerateRanks()
@@ -62,6 +69,12 @@ public class Levels : MonoBehaviour
             }
         }
 
+        if (SaveSystem.saveData.level >= 50 && !blackmarketAchievement.IsAchieved)
+        {
+            blackmarketAchievement.Unlock();
+            blackmarketAchievement.Store();
+        }
+        
         SaveSystem.UpdateSave();
     }
 
@@ -99,6 +112,13 @@ public class Levels : MonoBehaviour
             // Give reroll reward
             else if(rank.redrawReward)
                 SaveSystem.AddRedraws(1);
+
+            // Give blackmarket reward
+            else if (SaveSystem.saveData.level == 49 && !blackmarketAchievement.IsAchieved)
+            {
+                blackmarketAchievement.Unlock();
+                blackmarketAchievement.Store();
+            }
 
             // Increase level
             SaveSystem.saveData.xp -= rank.xpRequirement;

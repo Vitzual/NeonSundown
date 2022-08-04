@@ -6,7 +6,9 @@ public class StatInfo
     // Stat info
     public Stat stat;
     public string name, prefix;
+    public int decimalPlaces;
     public Sprite sprite;
+    public bool hideInStats = false;
 
     // Stat values (calculated at runtime)
     private float average = 0, total = 0, lowest = Mathf.Infinity, highest = Mathf.NegativeInfinity;

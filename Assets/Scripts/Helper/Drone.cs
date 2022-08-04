@@ -22,6 +22,8 @@ public class Drone : Helper
     // Moves the drone
     public virtual void Move()
     {
+        if (ship == null) return;
+
         // Check position relative to player
         if (Vector2.Distance(transform.position, ship.transform.position) > range)
         {

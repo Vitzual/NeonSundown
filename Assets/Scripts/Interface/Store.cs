@@ -124,18 +124,18 @@ public class Store : MonoBehaviour
             }
             else
             {
-                owned.text = module.GetCost(amount) + "x Crystals";
+                owned.text = module.GetCost(amount) + "x CRYSTALS";
                 buttonText.text = "UPGRADE";
             }
         }
         else
         {
-            owned.text = module.GetCost(-1) + "x Crystals";
+            owned.text = module.GetCost(-1) + "x CRYSTALS";
             buttonText.text = "PURCHASE";
         }
 
         // Set panel info
-        name.text = module.name;
+        name.text = module.name.ToUpper();
         desc.text = module.desc.Replace("{value}", value.ToString());
     }
     
