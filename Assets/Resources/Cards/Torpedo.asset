@@ -16,34 +16,68 @@ MonoBehaviour:
   createdAtTicks: 637787508488432577
   name: Torpedos
   description: Fires torpedos randomly in all directions
+  enableDescriptionOverrides: 0
+  levelDescriptionOverrides:
+    keys: 
+    values: []
   sprite: {fileID: 21300000, guid: b46d0c8c022681a4085ea02b49eb88c6, type: 3}
   color: {r: 1, g: 0.69146764, b: 0, a: 1}
   maximumAmount: 5
   dropChance: 1
+  isUpgradeable: 1
+  upgrades:
+  - stat: 2
+    name: Quickdraw
+    desc: Increases firerate by <value>
+    minValue: 0.85
+    maxValue: 0.95
+    multiply: 1
+    lowerIsBetter: 1
+  - stat: 1
+    name: Payload
+    desc: Increases damage by <value>
+    minValue: 1.05
+    maxValue: 1.15
+    multiply: 1
+    lowerIsBetter: 0
+  - stat: 5
+    name: Pinpoint
+    desc: Decreases bloom by <value>
+    minValue: 0.85
+    maxValue: 0.95
+    multiply: 1
+    lowerIsBetter: 1
+  - stat: 10
+    name: Refurbished
+    desc: Torpedo's last <value> longer
+    minValue: 0.25
+    maxValue: 0.75
+    multiply: 0
+    lowerIsBetter: 0
+  - stat: 21
+    name: EMP Discharge
+    desc: Increases stun length by <value>
+    minValue: 0.25
+    maxValue: 0.75
+    multiply: 0
+    lowerIsBetter: 0
+  - stat: 20
+    name: Doomsday
+    desc: Increases torpedo size by <value>
+    minValue: 1.05
+    maxValue: 1.1
+    multiply: 1
+    lowerIsBetter: 0
+  - stat: 23
+    name: Desecrate
+    desc: Increases crit chance by <value>
+    minValue: 1.05
+    maxValue: 1.15
+    multiply: 1
+    lowerIsBetter: 0
   canDrop: 1
   isUnlocked: 1
   isShipOnlyCard: 1
-  baseLevels:
-  - stat: 1
-    description: Increases damage by 5
-    multiply: 0
-    modifier: 5
-  - stat: 2
-    description: Decreases cooldown by 0.25s
-    multiply: 0
-    modifier: -0.25
-  - stat: 3
-    description: Increases move speed by 5
-    multiply: 0
-    modifier: 5
-  - stat: 1
-    description: Increases damage by 5
-    multiply: 0
-    modifier: 5
-  - stat: 2
-    description: Decreases cooldown by 0.25s
-    multiply: 0
-    modifier: -0.25
   damage: 5
   cooldown: 1.5
   moveSpeed: 50

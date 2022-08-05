@@ -21,6 +21,8 @@ public class Dealer : MonoBehaviour
     [BoxGroup("Card Options")]
     public List<Card> cardSlots;
     [BoxGroup("Card Options")]
+    public List<UpgradeSlot> upgrades;
+    [BoxGroup("Card Options")]
     private List<CardData> dealList;
     [BoxGroup("Card Options")]
     public int cardsToPick = 3;
@@ -77,6 +79,8 @@ public class Dealer : MonoBehaviour
     private CanvasGroup canvasGroup;
     private List<CardData> pickedList;
     private List<CardData> pickedCards;
+    private Card upgradingCard;
+    private bool isUpgrading = false;
 
     // On start get private components 
     public void Start()
@@ -197,10 +201,56 @@ public class Dealer : MonoBehaviour
     // Pick the card and add to palyer
     public void PickCard(CardData card, bool redraw, int cardNumber)
     {
+        // Check if card is upgradeable
+        if (card.isUpgradeable && Deck.active.HasCard(card))
+        {
+            isUpgrading = true;
+            upgradingCard = cardSlots[cardNumber];
+            upgradingCard.MoveToUpgradePosition();
+            foreach (UpgradeSlot slot in upgrades)
+            {
+                slot.Set(card.upgrades[Random.Range(0, card.upgrades.Count)]);
+                LeanTween.moveLocal(slot.gameObject, new Vector3(475, slot.transform.localPosition.y, 0f),
+                    0.25f).setEase(LeanTweenType.easeInExpo).setDelay(0.25f);
+                LeanTween.alphaCanvas(slot.canvasGroup, 1f, 0.25f).setDelay(0.25f);
+            }
+        }
+        else
+        {
+            // Add the thing boss man
+            RuntimeStats.cardsChosen += 1;
+
+            // Add this to pick list
+            if (Deck.active.GetCardAmount(card) + 1 == card.maximumAmount)
+            {
+                if (pickedCards.Contains(card))
+                {
+                    Debug.Log(card.name + " is now maxed, removing from drop pool");
+                    pickedCards.Remove(card);
+                }
+            }
+
+            if (!pickedCards.Contains(card))
+                pickedCards.Add(card);
+
+            // Check if cards dealt
+            if (!cardsDealt || cardSlots[cardNumber].redrawing) return;
+            Deck.active.AddCard(card);
+
+            // Check if card is secondary
+            if (redraw) cardSlots[cardNumber].RedrawCard(PickNewCard());
+            else CloseDealer();
+        }
+    }
+
+    // Applies an upgrade
+    public void ApplyUpgrade(CardData.Upgrade upgrade, float effect)
+    {
         // Add the thing boss man
         RuntimeStats.cardsChosen += 1;
 
         // Add this to pick list
+        CardData card = upgradingCard.GetCard();
         if (Deck.active.GetCardAmount(card) + 1 == card.maximumAmount)
         {
             if (pickedCards.Contains(card))
@@ -209,17 +259,25 @@ public class Dealer : MonoBehaviour
                 pickedCards.Remove(card);
             }
         }
-        
-        if (!pickedCards.Contains(card))
-            pickedCards.Add(card);
 
         // Check if cards dealt
-        if (!cardsDealt || cardSlots[cardNumber].redrawing) return;
         Deck.active.AddCard(card);
+        CloseDealer();
+    }
 
-        // Check if card is secondary
-        if (redraw) cardSlots[cardNumber].RedrawCard(PickNewCard());
-        else CloseDealer();
+    public void CancelUpgrade()
+    {
+        if (!isUpgrading) return;
+        isUpgrading = false;
+
+        foreach (UpgradeSlot slot in upgrades)
+        {
+            LeanTween.moveLocal(slot.gameObject, new Vector3(-475, slot.transform.position.y, 0f),
+                0.25f).setEase(LeanTweenType.easeInExpo);
+            LeanTween.alpha(slot.gameObject, 1f, 0.25f);
+        }
+        if (upgradingCard != null)
+            upgradingCard.MoveToNormalPosition();
     }
 
     // Pick synergy card

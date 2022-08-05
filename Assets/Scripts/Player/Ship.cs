@@ -258,6 +258,57 @@ public class Ship : Weapon
         }
     }
 
+    public override void AddCard(CardData card)
+    {
+        // Check card type
+        if (card is StatData)
+        {
+            // Get weapon data
+            StatData statData = (StatData)card;
+
+            Debug.Log("Adding stat card " + statData.name + " to deck");
+            foreach (StatValue stat in statData.stats)
+            {
+                if (stat.multiply) Deck.AddMultiplier(stat.type, stat.modifier);
+                else Deck.AddAddition(stat.type, stat.modifier);
+                UpdateStat(stat.type);
+            }
+        }
+        else if (card is WeaponData)
+        {
+            // Get weapon data
+            WeaponData weapon = (WeaponData)card;
+
+            // Create the new weapon instance
+            Debug.Log("Adding weapon card " + weapon.name + " to deck");
+            Weapon newWeapon = Instantiate(weapon.obj, transform.position, Quaternion.identity).GetComponent<Weapon>();
+            newWeapon.Setup(weapon, transform);
+            weaponInstances.Add(newWeapon);
+
+            // Check if player is parent
+            if (weapon.setPlayerAsParent)
+                newWeapon.transform.SetParent(transform);
+        }
+        else if (card is HelperData)
+        {
+            // Get weapon data
+            HelperData helper = (HelperData)card;
+
+            Debug.Log("Adding helper card " + helper.name + " to deck");
+            Helper newHelper = Instantiate(helper.obj, transform.position, Quaternion.identity).GetComponent<Helper>();
+            newHelper.Setup(this, helper);
+            helperInstances.Add(newHelper);
+        }
+        else if (card is ChromaData)
+        {
+            // Get weapon data
+            ChromaData chroma = (ChromaData)card;
+
+            Debug.Log("Adding chroma card " + chroma.name + " to deck");
+            ChromaHandler.active.Setup(chroma.type);
+        }
+    }
+
     // Set the secondary weapon
     public void SetSecondary(SecondaryData secondary)
     {
@@ -505,57 +556,6 @@ public class Ship : Weapon
 
     public static float GetHealth() { return health; }
 
-    public override void AddCard(CardData card)
-    {
-        // Check card type
-        if (card is StatData)
-        {
-            // Get weapon data
-            StatData statData = (StatData)card;
-
-            Debug.Log("Adding stat card " + statData.name + " to deck");
-            foreach (StatValue stat in statData.stats)
-            {
-                if (stat.multiply) Deck.AddMultiplier(stat.type, stat.modifier);
-                else Deck.AddAddition(stat.type, stat.modifier);
-                UpdateStat(stat.type);
-            }
-        }
-        else if (card is WeaponData)
-        {
-            // Get weapon data
-            WeaponData weapon = (WeaponData)card;
-
-            // Create the new weapon instance
-            Debug.Log("Adding weapon card " + weapon.name + " to deck");
-            Weapon newWeapon = Instantiate(weapon.obj, transform.position, Quaternion.identity).GetComponent<Weapon>();
-            newWeapon.Setup(weapon, transform);
-            weaponInstances.Add(newWeapon);
-
-            // Check if player is parent
-            if (weapon.setPlayerAsParent)
-                newWeapon.transform.SetParent(transform);
-        }
-        else if (card is HelperData)
-        {
-            // Get weapon data
-            HelperData helper = (HelperData)card;
-
-            Debug.Log("Adding helper card " + helper.name + " to deck");
-            Helper newHelper = Instantiate(helper.obj, transform.position, Quaternion.identity).GetComponent<Helper>();
-            newHelper.Setup(this, helper);
-            helperInstances.Add(newHelper);
-        }
-        else if (card is ChromaData)
-        {
-            // Get weapon data
-            ChromaData chroma = (ChromaData)card;
-
-            Debug.Log("Adding chroma card " + chroma.name + " to deck");
-            ChromaHandler.active.Setup(chroma.type);
-        }
-    }
-
     // Update stat
     public override void UpdateStat(Stat stat)
     {
@@ -651,7 +651,7 @@ public class Ship : Weapon
             case Stat.Explosive:
                 explosiveRounds = Deck.GetAdditions(stat) > 0;
                 break;
-
+                
             // Increase explosive rounds
             case Stat.EnemyDmg:
                 enemyDamageMultiplier = Deck.CalculateStat(stat, 1);

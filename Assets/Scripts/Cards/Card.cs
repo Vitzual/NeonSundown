@@ -12,6 +12,8 @@ public class Card : MonoBehaviour
     // Card position
     public Vector3 cardPosition;
     public Vector3 synergyPosition;
+    public Vector3 upgradePosition, upgradeSize;
+    private Vector3 originalSize;
     public float verticalAdjustment = 100f;
     public float animationSpeed = 0.25f;
     public float fadeInSpeed = 0.25f;
@@ -62,6 +64,16 @@ public class Card : MonoBehaviour
         level.color = card.color;
         type.color = card.color;
 
+        // Set card description
+        if (card.enableDescriptionOverrides)
+        {
+            int amount = Deck.active.GetCardAmount(card);
+            if (card.levelDescriptionOverrides.ContainsKey(amount))
+                desc.text = card.levelDescriptionOverrides[amount];
+            else desc.text = card.description;
+        }
+        else desc.text = card.description;
+
         bool useBase = true;
 
         // Show amount
@@ -85,7 +97,6 @@ public class Card : MonoBehaviour
             {
                 useBase = false;
                 image.sprite = card.sprite;
-                desc.text = card.description;
                 level.text = "UPGRADE AVAILABLE!";
             }
 
@@ -105,7 +116,6 @@ public class Card : MonoBehaviour
             {
                 useBase = false;
                 image.sprite = card.sprite;
-                desc.text = card.description;
                 level.text = "UPGRADE AVAILABLE!";
             }
 
@@ -200,7 +210,6 @@ public class Card : MonoBehaviour
 
                     // Set description of card level
                     image.sprite = card.sprite;
-                    desc.text = secondaryInstance.GetUpgradeString();
                     level.text = "LEVEL " + secondaryInstance.level;
                 }
                 else
@@ -224,16 +233,9 @@ public class Card : MonoBehaviour
         if (useBase)
         {
             image.sprite = card.sprite;
-            desc.text = card.description;
             int cardAmount = Deck.active.GetCardAmount(cardData);
-            if (cardAmount > 0)
-            {
-                level.text = cardAmount + " IN DECK";
-            }
-            else
-            {
-                level.text = "NEW CARD";
-            }
+            if (cardAmount > 0) level.text = cardAmount + " IN DECK";
+            else level.text = "NEW CARD";
         }
 
         // Animate the card
@@ -284,6 +286,19 @@ public class Card : MonoBehaviour
             audioSource.Play();
             redrawing = true;
         }
+    }
+
+    public void MoveToUpgradePosition()
+    {
+        originalSize = transform.localScale;
+        LeanTween.moveLocal(gameObject, upgradePosition, 0.25f).setEase(LeanTweenType.easeInExpo);
+        LeanTween.scale(gameObject, upgradeSize, 0.25f).setEase(LeanTweenType.easeInExpo);
+    }
+
+    public void MoveToNormalPosition()
+    {
+        LeanTween.moveLocal(gameObject, cardPosition, 0.25f).setEase(LeanTweenType.easeInExpo).setDelay(0.25f);
+        LeanTween.scale(gameObject, originalSize, 0.25f).setEase(LeanTweenType.easeInExpo).setDelay(0.25f);
     }
 
     // Calculate stat

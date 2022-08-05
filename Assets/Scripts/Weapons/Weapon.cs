@@ -24,7 +24,7 @@ public class Weapon : MonoBehaviour
 
     // Weapon data
     protected WeaponData weapon;
-
+    
     // Set the weapon data
     public virtual void Setup(WeaponData data, Transform target = null)
     {
@@ -45,17 +45,7 @@ public class Weapon : MonoBehaviour
     // Upgrades a weapon
     public virtual void Upgrade() 
     {
-        // Get the current level
-        WeaponData.Level newLevel;
-        newLevel = weapon.baseLevels[level];
-
-        // Add the upgrade
-        if (newLevel.multiply)
-            AddMultiplier(newLevel.stat, newLevel.modifier);
-        else AddAddition(newLevel.stat, newLevel.modifier);
-
-        // Update stats
-        UpdateStat(newLevel.stat);
+        
 
         // Increase level
         level += 1;
@@ -123,9 +113,6 @@ public class Weapon : MonoBehaviour
                 break;
             case Stat.Criticals:
                 critical = (Deck.CalculateStat(type, 0) + GetAdditions(type)) * GetMultiplier(type);
-                break;
-            case Stat.Explosive:
-                explosiveRounds = explosiveRounds || Deck.GetAdditions(type) > 0;
                 break;
         }
     }

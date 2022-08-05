@@ -5,6 +5,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Card", menuName = "Cards/Stat")]
 public class StatData : CardData
 {
-    [BoxGroup("Primary Info")]
+    [BoxGroup("Stat Info")]
     public List<StatValue> stats;
 }

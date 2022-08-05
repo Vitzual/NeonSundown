@@ -54,4 +54,20 @@ public class Scythe : Weapon
             else AudioPlayer.Play(weapon.onDamageSound);
         }
     }
+
+    // Update stat
+    public override void UpdateStat(Stat stat)
+    {
+        switch (stat)
+        {
+            // Increase explosive rounds
+            case Stat.Explosive:
+                explosiveRounds = Deck.GetAdditions(stat) > 2;
+                break;
+
+            default:
+                base.UpdateStat(stat);
+                break;
+        }
+    }
 }

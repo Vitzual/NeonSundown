@@ -5,19 +5,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Card", menuName = "Cards/Weapon")]
 public class WeaponData : CardData
 {
-    // Card levels
-    [System.Serializable]
-    public class Level
-    {
-        public Stat stat;
-        public string description;
-        public bool multiply;
-        public float modifier;
-    }
-
-    [BoxGroup("Weapon Levels")]
-    public List<Level> baseLevels;
-
     [BoxGroup("Weapon Stats")]
     public float damage;
     [BoxGroup("Weapon Stats")]

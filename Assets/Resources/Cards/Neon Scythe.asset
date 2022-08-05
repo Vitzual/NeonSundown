@@ -16,34 +16,47 @@ MonoBehaviour:
   createdAtTicks: 637787430929397253
   name: Neon Scythe
   description: Summons a rotating scythe that slices through enemies
+  enableDescriptionOverrides: 0
+  levelDescriptionOverrides:
+    keys: 
+    values: []
   sprite: {fileID: 21300000, guid: 26911e8f21f921e439a4e61b5ae3bb45, type: 3}
   color: {r: 0.73146677, g: 0, b: 1, a: 1}
   maximumAmount: 5
   dropChance: 1
+  isUpgradeable: 1
+  upgrades:
+  - stat: 1
+    name: Fine Blade
+    desc: Increases damage by <value>
+    minValue: 1.05
+    maxValue: 1.15
+    multiply: 1
+    lowerIsBetter: 0
+  - stat: 21
+    name: Electric Blade
+    desc: Increases stun length by <value>
+    minValue: 0.25
+    maxValue: 0.75
+    multiply: 0
+    lowerIsBetter: 0
+  - stat: 20
+    name: Masterful Handling
+    desc: Increasesrotation radius by <value>
+    minValue: 1.15
+    maxValue: 1.35
+    multiply: 1
+    lowerIsBetter: 0
+  - stat: 23
+    name: Desecrate
+    desc: Increases crit chance by <value>
+    minValue: 1.05
+    maxValue: 1.15
+    multiply: 1
+    lowerIsBetter: 0
   canDrop: 1
   isUnlocked: 1
   isShipOnlyCard: 1
-  baseLevels:
-  - stat: 1
-    description: Increases damage by 2
-    multiply: 0
-    modifier: 2
-  - stat: 3
-    description: Increases orbital speed by 15%
-    multiply: 0
-    modifier: 25
-  - stat: 1
-    description: Increases damage by 2
-    multiply: 0
-    modifier: 2
-  - stat: 3
-    description: Increases orbital speed by 15%
-    multiply: 0
-    modifier: 25
-  - stat: 1
-    description: Increases damage by 2
-    multiply: 0
-    modifier: 2
   damage: 2
   cooldown: 0
   moveSpeed: 300
