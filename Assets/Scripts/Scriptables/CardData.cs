@@ -4,34 +4,6 @@ using UnityEngine;
 
 public class CardData : IdentifiableScriptableObject
 {
-    // Card upgrade class
-    [System.Serializable]
-    public class Upgrade
-    {
-        public Quality quality;
-        public string name;
-        [FoldoutGroup("Positive Effect")]
-        public Stat positiveStat;
-        [FoldoutGroup("Positive Effect")]
-        public float positiveEffect;
-        [FoldoutGroup("Positive Effect")]
-        public string positiveDesc;
-        [FoldoutGroup("Positive Effect")]
-        public bool positiveMultiplier;
-        [FoldoutGroup("Positive Effect")]
-        public bool positiveReduction;
-        [FoldoutGroup("Negative Effect")]
-        public Stat negativeStat;
-        [FoldoutGroup("Negative Effect")]
-        public float negativeEffect;
-        [FoldoutGroup("Negative Effect")]
-        public string negativeDesc;
-        [FoldoutGroup("Negative Effect")]
-        public bool negativeMultiplier;
-        [FoldoutGroup("Negative Effect")]
-        public bool negativeReduction;
-    }
-
     // Card variables
     [BoxGroup("Card Info")]
     public new string name;
@@ -58,5 +30,5 @@ public class CardData : IdentifiableScriptableObject
     [BoxGroup("Upgrade Info")]
     public bool isUpgradeable;
     [ShowIf("isUpgradeable"), BoxGroup("Upgrade Info")]
-    public List<Upgrade> upgrades;
+    public List<UpgradeData> upgrades;
 }

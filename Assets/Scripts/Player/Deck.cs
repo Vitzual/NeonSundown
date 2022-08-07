@@ -62,8 +62,8 @@ public class Deck : MonoBehaviour
         else Events.active.AddCard(card);
     }
 
-    // Upgrades a card
-    public void UpgradeCard(CardData card, CardData.Upgrade upgrade, float effect)
+    // Upgrades a carda
+    public void UpgradeCard(CardData card, UpgradeData upgrade, float effect)
     {
 
     }

@@ -255,7 +255,7 @@ public class Dealer : MonoBehaviour
     }
 
     // Applies an upgrade
-    public void ApplyUpgrade(CardData.Upgrade upgrade)
+    public void ApplyUpgrade(UpgradeData upgrade)
     {
         // Add the thing boss man
         RuntimeStats.cardsChosen += 1;
@@ -284,6 +284,11 @@ public class Dealer : MonoBehaviour
         CloseDealer();
     }
 
+    public void RerollUpgrades()
+    {
+        ToggleUpgrades(true, upgradingCard.GetCard());
+    }
+
     public void ToggleUpgrades(bool toggle, CardData card = null)
     {
         if (toggle)
@@ -291,7 +296,11 @@ public class Dealer : MonoBehaviour
             float delay = 0.15f;
             foreach (UpgradeSlot slot in upgrades)
             {
-                slot.Set(card.upgrades[Random.Range(0, card.upgrades.Count)]);
+                slot.canvasGroup.alpha = 0f;
+                slot.canvasGroup.interactable = true;
+                slot.canvasGroup.blocksRaycasts = true;
+                UpgradeData upgrade = card.upgrades[Random.Range(0, card.upgrades.Count)];
+                slot.Set(upgrade, Random.Range(0, upgrade.qualities.Count));
                 slot.transform.localScale = upgradeNormalSize;
                 LeanTween.scale(slot.gameObject, upgradeTargetSize, 0.15f).setEase(LeanTweenType.easeInExpo).setDelay(delay);
                 LeanTween.alphaCanvas(slot.canvasGroup, 1f, 0.15f).setDelay(delay);

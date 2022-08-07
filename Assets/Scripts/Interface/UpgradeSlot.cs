@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class UpgradeSlot : MonoBehaviour
 {
     // All upgrade slot variables
-    private CardData.Upgrade upgrade;
+    private UpgradeData upgrade;
     public new TextMeshProUGUI name;
     public TextMeshProUGUI positiveDesc, negativeDesc, quality;
     public Image background, border, indent;
@@ -19,7 +19,7 @@ public class UpgradeSlot : MonoBehaviour
         canvasGroup = GetComponent<CanvasGroup>();
     }
 
-    public void Set(CardData.Upgrade upgrade)
+    public void Set(UpgradeData upgrade, int index)
     {
         // Set upgrade variable
         this.upgrade = upgrade;
@@ -28,40 +28,41 @@ public class UpgradeSlot : MonoBehaviour
         name.text = upgrade.name.ToUpper();
 
         // Set positive text
-        float formatted = upgrade.positiveEffect;
+        float formatted = upgrade.qualities[index].positiveEffect;
         if (upgrade.positiveMultiplier)
         {
-            if (upgrade.positiveReduction) formatted = (formatted * 100) - 100;
+            if (!upgrade.positiveReduction) formatted = (formatted * 100) - 100;
             else formatted = 100 - (formatted * 100);
         }
         positiveDesc.text = upgrade.positiveDesc.Replace("<value>", Formatter.Round(formatted, 1));
 
         // Set negative text
-        formatted = upgrade.negativeEffect;
+        formatted = upgrade.qualities[index].negativeEffect;
         if (upgrade.negativeMultiplier)
         {
-            if (upgrade.negativeReduction) formatted = (formatted * 100) - 100;
+            if (!upgrade.negativeReduction) formatted = (formatted * 100) - 100;
             else formatted = 100 - (formatted * 100);
         }
-        negativeDesc.text = upgrade.positiveDesc.Replace("<value>", Formatter.Round(formatted, 1));
-
-        // Set quality text
-        quality.text = upgrade.quality.ToString().ToUpper() + " QUALITY";
+        negativeDesc.text = upgrade.negativeDesc.Replace("<value>", Formatter.Round(formatted, 1));
 
         // Set border color
-        switch (upgrade.quality)
+        switch (upgrade.qualities[index].quality)
         {
             case Quality.Bad:
                 border.color = badColor;
+                quality.text = "BAD QUALITY";
                 break;
             case Quality.Good:
                 border.color = goodColor;
+                quality.text = "GOOD QUALITY";
                 break;
             case Quality.Great:
                 border.color = greatColor;
+                quality.text = "GREAT QUALITY";
                 break;
             default:
                 border.color = uniqueColor;
+                quality.text = "UNIQUE QUALITY";
                 break;
         }
 
