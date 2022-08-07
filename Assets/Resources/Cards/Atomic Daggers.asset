@@ -24,60 +24,23 @@ MonoBehaviour:
   color: {r: 0.2509804, g: 0.95265734, b: 0.99215686, a: 1}
   maximumAmount: 5
   dropChance: 1
-  isUpgradeable: 1
-  upgrades:
-  - stat: 2
-    name: Quickdraw
-    desc: Increases firerate by <value>
-    minValue: 0.85
-    maxValue: 0.95
-    multiply: 1
-    lowerIsBetter: 1
-  - stat: 1
-    name: Fine Blade
-    desc: Increases damage by <value>
-    minValue: 1.05
-    maxValue: 1.15
-    multiply: 1
-    lowerIsBetter: 0
-  - stat: 5
-    name: Pinpoint
-    desc: Decreases bloom by <value>
-    minValue: 0.85
-    maxValue: 0.95
-    multiply: 1
-    lowerIsBetter: 1
-  - stat: 10
-    name: Refurbished
-    desc: Daggers last <value> longer
-    minValue: 0.25
-    maxValue: 0.75
-    multiply: 0
-    lowerIsBetter: 0
-  - stat: 21
-    name: Electric Blade
-    desc: Increases stun length by <value>
-    minValue: 0.25
-    maxValue: 0.75
-    multiply: 0
-    lowerIsBetter: 0
-  - stat: 20
-    name: Enlarged Blade
-    desc: Increases dagger size by <value>
-    minValue: 1.05
-    maxValue: 1.1
-    multiply: 1
-    lowerIsBetter: 0
-  - stat: 23
-    name: Desecrate
-    desc: Increases crit chance by <value>
-    minValue: 1.05
-    maxValue: 1.15
-    multiply: 1
-    lowerIsBetter: 0
   canDrop: 1
   isUnlocked: 0
   isShipOnlyCard: 1
+  isUpgradeable: 1
+  upgrades:
+  - quality: 0
+    name: QUICKDRAW
+    positiveStat: 2
+    positiveEffect: 0.95
+    positiveDesc: +5% Firerate
+    positiveMultiplier: 1
+    positiveReduction: 1
+    negativeStat: 5
+    negativeEffect: 0.75
+    negativeDesc: -25% Spread
+    negativeMultiplier: 1
+    negativeReduction: 0
   damage: 3
   cooldown: 0.8
   moveSpeed: 120

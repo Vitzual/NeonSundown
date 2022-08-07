@@ -8,10 +8,28 @@ public class CardData : IdentifiableScriptableObject
     [System.Serializable]
     public class Upgrade
     {
-        public Stat stat;
-        public string name, desc;
-        public float minValue, maxValue;
-        public bool multiply, lowerIsBetter;
+        public Quality quality;
+        public string name;
+        [FoldoutGroup("Positive Effect")]
+        public Stat positiveStat;
+        [FoldoutGroup("Positive Effect")]
+        public float positiveEffect;
+        [FoldoutGroup("Positive Effect")]
+        public string positiveDesc;
+        [FoldoutGroup("Positive Effect")]
+        public bool positiveMultiplier;
+        [FoldoutGroup("Positive Effect")]
+        public bool positiveReduction;
+        [FoldoutGroup("Negative Effect")]
+        public Stat negativeStat;
+        [FoldoutGroup("Negative Effect")]
+        public float negativeEffect;
+        [FoldoutGroup("Negative Effect")]
+        public string negativeDesc;
+        [FoldoutGroup("Negative Effect")]
+        public bool negativeMultiplier;
+        [FoldoutGroup("Negative Effect")]
+        public bool negativeReduction;
     }
 
     // Card variables
@@ -32,13 +50,13 @@ public class CardData : IdentifiableScriptableObject
     [BoxGroup("Card Info"), Range(0f, 1f)]
     public float dropChance = 1f;
     [BoxGroup("Card Info")]
-    public bool isUpgradeable;
-    [ShowIf("isUpgradeable"), BoxGroup("Weapon Levels")]
-    public List<Upgrade> upgrades;
-    [BoxGroup("Card Info")]
     public bool canDrop;
     [BoxGroup("Card Info")]
     public bool isUnlocked;
     [BoxGroup("Card Info")]
     public bool isShipOnlyCard;
+    [BoxGroup("Upgrade Info")]
+    public bool isUpgradeable;
+    [ShowIf("isUpgradeable"), BoxGroup("Upgrade Info")]
+    public List<Upgrade> upgrades;
 }

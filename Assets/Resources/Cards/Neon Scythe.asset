@@ -24,39 +24,23 @@ MonoBehaviour:
   color: {r: 0.73146677, g: 0, b: 1, a: 1}
   maximumAmount: 5
   dropChance: 1
-  isUpgradeable: 1
-  upgrades:
-  - stat: 1
-    name: Fine Blade
-    desc: Increases damage by <value>
-    minValue: 1.05
-    maxValue: 1.15
-    multiply: 1
-    lowerIsBetter: 0
-  - stat: 21
-    name: Electric Blade
-    desc: Increases stun length by <value>
-    minValue: 0.25
-    maxValue: 0.75
-    multiply: 0
-    lowerIsBetter: 0
-  - stat: 20
-    name: Masterful Handling
-    desc: Increasesrotation radius by <value>
-    minValue: 1.15
-    maxValue: 1.35
-    multiply: 1
-    lowerIsBetter: 0
-  - stat: 23
-    name: Desecrate
-    desc: Increases crit chance by <value>
-    minValue: 1.05
-    maxValue: 1.15
-    multiply: 1
-    lowerIsBetter: 0
   canDrop: 1
   isUnlocked: 1
   isShipOnlyCard: 1
+  isUpgradeable: 1
+  upgrades:
+  - quality: 0
+    name: QUICKDRAW
+    positiveStat: 2
+    positiveEffect: 0.95
+    positiveDesc: +5% Firerate
+    positiveMultiplier: 1
+    positiveReduction: 1
+    negativeStat: 5
+    negativeEffect: 0.75
+    negativeDesc: -25% Spread
+    negativeMultiplier: 1
+    negativeReduction: 0
   damage: 2
   cooldown: 0
   moveSpeed: 300

@@ -9,11 +9,10 @@ public class UpgradeSlot : MonoBehaviour
     // All upgrade slot variables
     private CardData.Upgrade upgrade;
     public new TextMeshProUGUI name;
-    public TextMeshProUGUI desc, quality;
+    public TextMeshProUGUI positiveDesc, negativeDesc, quality;
     public Image background, border, indent;
-    public Color badColor, goodColor, greatColor;
+    public Color badColor, goodColor, greatColor, uniqueColor;
     [HideInInspector] public CanvasGroup canvasGroup;
-    private float effect;
 
     public void Awake()
     {
@@ -24,60 +23,46 @@ public class UpgradeSlot : MonoBehaviour
     {
         // Set upgrade variable
         this.upgrade = upgrade;
-
-        // Get random value from upgrade
-        effect = Random.Range(upgrade.minValue, upgrade.maxValue);
-
-        // Format effect amount
-        string formatted = Formatter.Round(effect, 1);
-        if (upgrade.multiply) 
-        { 
-            if (upgrade.lowerIsBetter) formatted = Formatter.Round(100 - (effect * 100)) + "%";
-            else formatted = Formatter.Round((effect * 100) - 100) + "%";
-        }
-
+      
         // Set upgrade components
         name.text = upgrade.name.ToUpper();
-        desc.text = upgrade.desc.Replace("<value>", formatted);
 
-        // Set quality amount
-        float thresholdAmount = (upgrade.maxValue - upgrade.minValue) / 3;
-        float low = thresholdAmount, mid = low + thresholdAmount;
-        if (upgrade.lowerIsBetter)
+        // Set positive text
+        float formatted = upgrade.positiveEffect;
+        if (upgrade.positiveMultiplier)
         {
-            if (effect <= low)
-            {
-                quality.text = "GREAT QUALITY";
-                border.color = greatColor;
-            }
-            else if (effect <= mid)
-            {
-                quality.text = "GOOD QUALITY";
-                border.color = goodColor;
-            }
-            else
-            {
-                quality.text = "BAD QUALITY";
-                border.color = badColor;
-            }
+            if (upgrade.positiveReduction) formatted = (formatted * 100) - 100;
+            else formatted = 100 - (formatted * 100);
         }
-        else
+        positiveDesc.text = upgrade.positiveDesc.Replace("<value>", Formatter.Round(formatted, 1));
+
+        // Set negative text
+        formatted = upgrade.negativeEffect;
+        if (upgrade.negativeMultiplier)
         {
-            if (effect > mid)
-            {
-                quality.text = "GREAT QUALITY";
-                border.color = greatColor;
-            }
-            else if (effect > low)
-            {
-                quality.text = "GOOD QUALITY";
-                border.color = goodColor;
-            }
-            else
-            {
-                quality.text = "BAD QUALITY";
+            if (upgrade.negativeReduction) formatted = (formatted * 100) - 100;
+            else formatted = 100 - (formatted * 100);
+        }
+        negativeDesc.text = upgrade.positiveDesc.Replace("<value>", Formatter.Round(formatted, 1));
+
+        // Set quality text
+        quality.text = upgrade.quality.ToString().ToUpper() + " QUALITY";
+
+        // Set border color
+        switch (upgrade.quality)
+        {
+            case Quality.Bad:
                 border.color = badColor;
-            }
+                break;
+            case Quality.Good:
+                border.color = goodColor;
+                break;
+            case Quality.Great:
+                border.color = greatColor;
+                break;
+            default:
+                border.color = uniqueColor;
+                break;
         }
 
         // Set other colors
@@ -87,7 +72,7 @@ public class UpgradeSlot : MonoBehaviour
 
     public void ApplyUpgrade()
     {
-        Dealer.active.ApplyUpgrade(upgrade, effect);
+        Dealer.active.ApplyUpgrade(upgrade);
     }
 
     public void Toggle(bool toggle)

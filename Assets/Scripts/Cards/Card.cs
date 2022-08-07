@@ -12,8 +12,7 @@ public class Card : MonoBehaviour
     // Card position
     public Vector3 cardPosition;
     public Vector3 synergyPosition;
-    public Vector3 upgradePosition, upgradeSize;
-    private Vector3 originalSize;
+    public Vector3 upgradePosition, upgradeSize, originalSize;
     public float verticalAdjustment = 100f;
     public float animationSpeed = 0.25f;
     public float fadeInSpeed = 0.25f;
@@ -29,13 +28,16 @@ public class Card : MonoBehaviour
     private bool redraw = false;
     private float cooldown = 0f;
     public bool redrawing = false;
+    private bool isUpgrading = false;
     private SynergyData synergy;
+    private OnHoverAdjustScale hover;
 
     // Get the canvas group
     public void Start() 
     { 
         canvasGroup = GetComponent<CanvasGroup>();
         audioSource = GetComponent<AudioSource>();
+        hover = GetComponent<OnHoverAdjustScale>();
     }
 
     // Check for redraw
@@ -263,6 +265,8 @@ public class Card : MonoBehaviour
     // Card clicked
     public void OnClick(bool synergy)
     {
+        if (isUpgrading) return;
+
         if (synergy) Dealer.active.PickSynergyCard(this.synergy);
         else Dealer.active.PickCard(cardData, redraw, cardNumber);
     }
@@ -270,6 +274,7 @@ public class Card : MonoBehaviour
     // Reset card
     public void ResetCard()
     {
+        transform.localScale = originalSize;
         transform.localPosition = new Vector3(cardPosition.x, cardPosition.y - verticalAdjustment, 0);
         canvasGroup.alpha = 0f;
     }
@@ -290,6 +295,8 @@ public class Card : MonoBehaviour
 
     public void MoveToUpgradePosition()
     {
+        isUpgrading = true;
+        hover.enabled = false;
         originalSize = transform.localScale;
         LeanTween.moveLocal(gameObject, upgradePosition, 0.25f).setEase(LeanTweenType.easeInExpo);
         LeanTween.scale(gameObject, upgradeSize, 0.25f).setEase(LeanTweenType.easeInExpo);
@@ -297,6 +304,8 @@ public class Card : MonoBehaviour
 
     public void MoveToNormalPosition()
     {
+        isUpgrading = false;
+        hover.enabled = true;
         LeanTween.moveLocal(gameObject, cardPosition, 0.25f).setEase(LeanTweenType.easeInExpo).setDelay(0.25f);
         LeanTween.scale(gameObject, originalSize, 0.25f).setEase(LeanTweenType.easeInExpo).setDelay(0.25f);
     }

@@ -25,6 +25,8 @@ public class Dealer : MonoBehaviour
     [BoxGroup("Card Options")]
     private List<CardData> dealList;
     [BoxGroup("Card Options")]
+    public Vector3 upgradeNormalSize, upgradeTargetSize;
+    [BoxGroup("Card Options")]
     public int cardsToPick = 3;
     [BoxGroup("Card Options")]
     public float cardDealSpeed = 0.5f;
@@ -47,7 +49,7 @@ public class Dealer : MonoBehaviour
     [BoxGroup("Interface Options")]
     public TextMeshProUGUI burns;
     [BoxGroup("Interface Options")]
-    public CanvasGroup dealOptions;
+    public CanvasGroup dealOptions, upgradeOptions;
     [BoxGroup("Interface Options")]
     public float titleFadeInSpeed = 0.01f;
     [BoxGroup("Interface Options")]
@@ -60,6 +62,8 @@ public class Dealer : MonoBehaviour
     public EventSystem eventSystem;
     [BoxGroup("Interface Options")]
     public GraphicRaycaster eventRaycaster;
+    [BoxGroup("Interface Options")]
+    public AudioClip upgradeSound;
 
     // Debug switch
     [BoxGroup("Debug Flags")]
@@ -75,7 +79,6 @@ public class Dealer : MonoBehaviour
     private int burnsLeft = 1;
 
     // Private components 
-    private Transform rotator;
     private CanvasGroup canvasGroup;
     private List<CardData> pickedList;
     private List<CardData> pickedCards;
@@ -86,7 +89,6 @@ public class Dealer : MonoBehaviour
     public void Start()
     {
         active = this;
-        rotator = transform;
         canvasGroup = GetComponent<CanvasGroup>();
         pickedList = new List<CardData>();
         pickedCards = new List<CardData>();
@@ -207,19 +209,28 @@ public class Dealer : MonoBehaviour
             isUpgrading = true;
             upgradingCard = cardSlots[cardNumber];
             upgradingCard.MoveToUpgradePosition();
-            foreach (UpgradeSlot slot in upgrades)
+            ToggleUpgrades(true, card);
+            for (int i = 0; i < cardSlots.Count; i++)
             {
-                slot.Set(card.upgrades[Random.Range(0, card.upgrades.Count)]);
-                LeanTween.moveLocal(slot.gameObject, new Vector3(475, slot.transform.localPosition.y, 0f),
-                    0.25f).setEase(LeanTweenType.easeInExpo).setDelay(0.25f);
-                LeanTween.alphaCanvas(slot.canvasGroup, 1f, 0.25f).setDelay(0.25f);
+                if (i == cardNumber) continue;
+                cardSlots[i].canvasGroup.interactable = false;
+                cardSlots[i].canvasGroup.blocksRaycasts = false;
+                LeanTween.alphaCanvas(cardSlots[i].canvasGroup, 0f, 0.15f);
             }
+
+            // Adjust alpha canvas
+            dealOptions.interactable = false;
+            dealOptions.blocksRaycasts = false;
+            upgradeOptions.interactable = true;
+            upgradeOptions.blocksRaycasts = true;
+            LeanTween.alphaCanvas(dealOptions, 0f, 0.15f);
+            LeanTween.alphaCanvas(upgradeOptions, 1f, 0.15f).setDelay(0.15f);
         }
         else
         {
             // Add the thing boss man
             RuntimeStats.cardsChosen += 1;
-
+            
             // Add this to pick list
             if (Deck.active.GetCardAmount(card) + 1 == card.maximumAmount)
             {
@@ -244,7 +255,7 @@ public class Dealer : MonoBehaviour
     }
 
     // Applies an upgrade
-    public void ApplyUpgrade(CardData.Upgrade upgrade, float effect)
+    public void ApplyUpgrade(CardData.Upgrade upgrade)
     {
         // Add the thing boss man
         RuntimeStats.cardsChosen += 1;
@@ -260,9 +271,45 @@ public class Dealer : MonoBehaviour
             }
         }
 
-        // Check if cards dealt
+        // Adjust alpha canvas
+        dealOptions.alpha = 1f;
+        dealOptions.interactable = true;
+        dealOptions.blocksRaycasts = true;
+        upgradeOptions.alpha = 0f;
+        upgradeOptions.interactable = false;
+        upgradeOptions.blocksRaycasts = false;
+
+        // Add card to dealer
         Deck.active.AddCard(card);
         CloseDealer();
+    }
+
+    public void ToggleUpgrades(bool toggle, CardData card = null)
+    {
+        if (toggle)
+        {
+            float delay = 0.15f;
+            foreach (UpgradeSlot slot in upgrades)
+            {
+                slot.Set(card.upgrades[Random.Range(0, card.upgrades.Count)]);
+                slot.transform.localScale = upgradeNormalSize;
+                LeanTween.scale(slot.gameObject, upgradeTargetSize, 0.15f).setEase(LeanTweenType.easeInExpo).setDelay(delay);
+                LeanTween.alphaCanvas(slot.canvasGroup, 1f, 0.15f).setDelay(delay);
+                LeanTween.delayedSound(upgradeSound, Deck.active.transform.position, Settings.sound).setDelay(delay);
+                delay += 0.15f;
+            }
+        }
+        else
+        {
+            // Reset upgrades
+            foreach (UpgradeSlot upgrade in upgrades)
+            {
+                upgrade.canvasGroup.alpha = 0f;
+                upgrade.canvasGroup.interactable = false;
+                upgrade.canvasGroup.blocksRaycasts = false;
+                upgrade.transform.localScale = upgradeNormalSize;
+            }
+        }
     }
 
     public void CancelUpgrade()
@@ -471,6 +518,8 @@ public class Dealer : MonoBehaviour
         // Reset cards
         foreach(Card card in cardSlots)
             card.ResetCard();
+
+        ToggleUpgrades(false);
 
         // Set the canvas component
         canvasGroup.alpha = 0f;
