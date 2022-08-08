@@ -13,8 +13,8 @@ public class Weapon : MonoBehaviour
             this.quality = quality;
         }
 
-        private UpgradeData upgrade;
-        private int quality;
+        public UpgradeData upgrade;
+        public int quality;
     }
     private List<UpgradeInfo> upgrades = new List<UpgradeInfo>();
 
@@ -71,6 +71,10 @@ public class Weapon : MonoBehaviour
             // Add negative effect
             if (upgrade.negativeMultiplier) AddMultiplier(upgrade.negativeStat, upgrade.qualities[quality].negativeEffect);
             else AddAddition(upgrade.negativeStat, upgrade.qualities[quality].negativeEffect);
+
+            // Update stats
+            UpdateStat(upgrade.positiveStat);
+            UpdateStat(upgrade.negativeStat);
         }
         else
         {

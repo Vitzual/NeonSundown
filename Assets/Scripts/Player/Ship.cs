@@ -271,6 +271,7 @@ public class Ship : Weapon
         {
             // Get weapon data
             WeaponData weapon = (WeaponData)card;
+            if (weaponInstances.ContainsKey(weapon)) return;
 
             // Create the new weapon instance
             Debug.Log("Adding weapon card " + weapon.name + " to deck");
@@ -286,6 +287,7 @@ public class Ship : Weapon
         {
             // Get weapon data
             HelperData helper = (HelperData)card;
+            if (helperInstances.ContainsKey(helper)) return;
 
             Debug.Log("Adding helper card " + helper.name + " to deck");
             Helper newHelper = Instantiate(helper.obj, transform.position, Quaternion.identity).GetComponent<Helper>();
@@ -296,6 +298,7 @@ public class Ship : Weapon
         {
             // Get weapon data
             SecondaryData secondary = (SecondaryData)card;
+            if (secondaryInstances.ContainsKey(secondary)) return;
 
             Debug.Log("Adding secondary card " + secondary.name + " to deck");
             Secondary newSecondary = Instantiate(secondary.obj, transform.position, Quaternion.identity).GetComponent<Secondary>();

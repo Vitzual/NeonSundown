@@ -211,10 +211,9 @@ public class Dealer : MonoBehaviour
             ToggleUpgrades(true, card);
             for (int i = 0; i < cardSlots.Count; i++)
             {
-                if (i == cardNumber) continue;
                 cardSlots[i].canvasGroup.interactable = false;
                 cardSlots[i].canvasGroup.blocksRaycasts = false;
-                LeanTween.alphaCanvas(cardSlots[i].canvasGroup, 0f, 0.15f);
+                if (i != cardNumber) LeanTween.alphaCanvas(cardSlots[i].canvasGroup, 0f, 0.15f);
             }
 
             // Adjust alpha canvas
@@ -293,12 +292,14 @@ public class Dealer : MonoBehaviour
     {
         isUpgrading = toggle;
 
-        // Create new upgrade list
-        List<UpgradeData> cardUpgrades = new List<UpgradeData>(card.upgrades);
-
-        if (toggle)
+        if (toggle && card != null)
         {
+            // Set delay
             float delay = 0.15f;
+
+            // Create new upgrade list
+            List<UpgradeData> cardUpgrades = new List<UpgradeData>(card.upgrades);
+
             foreach (UpgradeSlot slot in upgrades)
             {
                 slot.canvasGroup.alpha = 0f;
@@ -324,6 +325,13 @@ public class Dealer : MonoBehaviour
                 upgrade.canvasGroup.interactable = false;
                 upgrade.canvasGroup.blocksRaycasts = false;
                 upgrade.transform.localScale = upgradeNormalSize;
+            }
+
+            // Reset card slots
+            for (int i = 0; i < cardSlots.Count; i++)
+            {
+                cardSlots[i].canvasGroup.interactable = true;
+                cardSlots[i].canvasGroup.blocksRaycasts = true;
             }
         }
     }

@@ -28,7 +28,6 @@ public class Card : MonoBehaviour
     private bool redraw = false;
     private float cooldown = 0f;
     public bool redrawing = false;
-    private bool isUpgrading = false;
     private SynergyData synergy;
     private OnHoverAdjustScale hover;
 
@@ -210,8 +209,6 @@ public class Card : MonoBehaviour
     // Card clicked
     public void OnClick(bool synergy)
     {
-        if (isUpgrading) return;
-
         if (synergy) Dealer.active.PickSynergyCard(this.synergy);
         else Dealer.active.PickCard(cardData, redraw, cardNumber);
     }
@@ -237,11 +234,9 @@ public class Card : MonoBehaviour
             redrawing = true;
         }
     }
-
+    
     public void MoveToUpgradePosition()
     {
-        isUpgrading = true;
-        hover.enabled = false;
         originalSize = transform.localScale;
         LeanTween.moveLocal(gameObject, upgradePosition, 0.25f).setEase(LeanTweenType.easeInExpo);
         LeanTween.scale(gameObject, upgradeSize, 0.25f).setEase(LeanTweenType.easeInExpo);
@@ -249,8 +244,6 @@ public class Card : MonoBehaviour
 
     public void MoveToNormalPosition()
     {
-        isUpgrading = false;
-        hover.enabled = true;
         LeanTween.moveLocal(gameObject, cardPosition, 0.25f).setEase(LeanTweenType.easeInExpo).setDelay(0.25f);
         LeanTween.scale(gameObject, originalSize, 0.25f).setEase(LeanTweenType.easeInExpo).setDelay(0.25f);
     }
