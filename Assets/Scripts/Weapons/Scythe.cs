@@ -6,18 +6,10 @@ public class Scythe : Weapon
 {
     // Rotator transform
     public Transform rotator;
-    public float xOffset = 0;
-    public float yOffset = 0;
+    public Vector2 offset;
     public bool heal = false;
     public Material material;
-
-    // Override default setup
-    public override void Setup(WeaponData data, Transform target = null)
-    {
-        transform.localPosition = new Vector2(transform.localPosition.x + xOffset, transform.localPosition.y + yOffset);
-        base.Setup(data, target);
-    }
-
+    
     // Rotates around the player
     public override void Use()
     {
@@ -63,6 +55,13 @@ public class Scythe : Weapon
             // Increase explosive rounds
             case Stat.Explosive:
                 explosiveRounds = Deck.GetAdditions(stat) > 2;
+                break;
+
+            // Increase orbital range
+            case Stat.Range:
+                range = (Deck.CalculateStat(stat, weapon.range)
+                    + GetAdditions(stat)) * GetMultiplier(stat);
+                transform.localPosition = new Vector2(range * offset.x, range * offset.y);
                 break;
 
             default:

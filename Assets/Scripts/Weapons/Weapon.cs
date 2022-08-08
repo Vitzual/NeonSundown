@@ -78,6 +78,7 @@ public class Weapon : MonoBehaviour
         }
         else
         {
+            
             // Do custom stuff here
         }
     }

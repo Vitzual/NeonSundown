@@ -16,19 +16,26 @@ MonoBehaviour:
   createdAtTicks: 637827654932582092
   name: Dual Reaper
   description: Summons two deadly high damaging scythes
+  enableDescriptionOverrides: 0
+  levelDescriptionOverrides:
+    keys: 
+    values: []
   sprite: {fileID: 21300000, guid: c5b78cf61808e5c458e00271391be3ba, type: 3}
   color: {r: 1, g: 0.38365346, b: 0, a: 1}
   maximumAmount: 1
   dropChance: 1
   canDrop: 0
   isUnlocked: 0
-  baseLevels: []
+  isShipOnlyCard: 0
+  isUpgradeable: 0
+  upgrades: []
   damage: 60
   cooldown: 0
   moveSpeed: 400
   rotate: 0
   rotateSpeed: 300
-  range: 0
+  range: 17.5
+  bulletSize: 0
   bloom: 0
   pierces: 0
   bullets: 0
@@ -36,9 +43,11 @@ MonoBehaviour:
   lifetime: 0
   stun: 0
   randomDirection: 0
+  rotateOnSpawn: 0
   randomTarget: 0
   trackTarget: 0
   lockTarget: 0
+  informOnHit: 0
   bullet: {fileID: 0}
   bulletSound: {fileID: 0}
   obj: {fileID: 3031618334829126547, guid: f0aafcb3c0add8e40b5fc4f2ffdea597, type: 3}

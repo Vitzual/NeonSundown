@@ -173,8 +173,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2361462487313235420}
-  - component: {fileID: 2361462487313235421}
   - component: {fileID: 838190405679987182}
+  - component: {fileID: 2361462487313235421}
   m_Layer: 9
   m_Name: Scythe
   m_TagString: Untagged
@@ -197,22 +197,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!58 &2361462487313235421
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2361462487313235423}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 5
 --- !u!114 &838190405679987182
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -246,10 +230,25 @@ MonoBehaviour:
   informOnHit: 0
   level: 0
   rotator: {fileID: 4220948509160292344}
-  xOffset: 15
-  yOffset: 0
+  offset: {x: 1, y: 0}
   heal: 0
   material: {fileID: 2100000, guid: 797858e7ce56098428f00ca6f5601518, type: 2}
+--- !u!58 &2361462487313235421
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2361462487313235423}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 5
 --- !u!1 &2361462487731345048
 GameObject:
   m_ObjectHideFlags: 0

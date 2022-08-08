@@ -276,12 +276,9 @@ public class Ship : Weapon
             // Create the new weapon instance
             Debug.Log("Adding weapon card " + weapon.name + " to deck");
             Weapon newWeapon = Instantiate(weapon.obj, transform.position, Quaternion.identity).GetComponent<Weapon>();
+            if (weapon.setPlayerAsParent) newWeapon.transform.SetParent(transform);
             newWeapon.Setup(weapon, transform);
             weaponInstances.Add(weapon, newWeapon);
-
-            // Check if player is parent
-            if (weapon.setPlayerAsParent)
-                newWeapon.transform.SetParent(transform);
         }
         else if (card is HelperData)
         {

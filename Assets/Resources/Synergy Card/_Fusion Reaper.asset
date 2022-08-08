@@ -14,21 +14,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   internalId: 58d1bded-5181-491b-a78c-8fa4879d96f7
   createdAtTicks: 637919308187048341
-  name: Fusion Reaper
+  name: Fusion Reapers
   description: Summons four high-damaging fusion scythes
+  enableDescriptionOverrides: 0
+  levelDescriptionOverrides:
+    keys: 
+    values: []
   sprite: {fileID: 21300000, guid: fa9e5a3949051d54ba4d035c5db463eb, type: 3}
   color: {r: 1, g: 0.22067522, b: 0, a: 1}
   maximumAmount: 1
   dropChance: 1
   canDrop: 1
   isUnlocked: 1
-  baseLevels: []
+  isShipOnlyCard: 0
+  isUpgradeable: 0
+  upgrades: []
   damage: 150
   cooldown: 0
   moveSpeed: 250
   rotate: 0
   rotateSpeed: 500
-  range: 0
+  range: 20
+  bulletSize: 0
   bloom: 0
   pierces: 0
   bullets: 0
@@ -40,6 +47,7 @@ MonoBehaviour:
   randomTarget: 0
   trackTarget: 0
   lockTarget: 0
+  informOnHit: 0
   bullet: {fileID: 0}
   bulletSound: {fileID: 0}
   obj: {fileID: 3031618334829126547, guid: 845edcdbb76a00141a52a5d0ff49b0ec, type: 3}
