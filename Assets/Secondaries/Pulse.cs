@@ -25,39 +25,6 @@ public class Pulse : Secondary
         }   
     }
 
-    // Upgrade pulse
-    public override void Upgrade()
-    {
-        // Apply new effects
-        if (level < data.levels.Count)
-        {
-            StatValue stat = data.levels[level].stat;
-            switch (stat.type)
-            {
-                case Stat.Range:
-                    if (stat.multiply) range *= stat.modifier;
-                    else range += stat.modifier;
-                    break;
-
-                case Stat.Knockback:
-                    if (stat.multiply)
-                    {
-                        maxKnockback *= stat.modifier;
-                        minKnockback *= stat.modifier;
-                    }
-                    else
-                    {
-                        maxKnockback += stat.modifier;
-                        minKnockback += stat.modifier;
-                    }
-                    break;
-            }
-        }
-
-        // Increase level
-        base.Upgrade();
-    }
-
     // Overrides the get stat function
     public override float GetStat(Stat stat)
     {

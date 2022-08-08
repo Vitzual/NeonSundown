@@ -21,7 +21,6 @@ public class Ship : Weapon
 
     // Player model and data
     public ShipData shipData;
-    private Secondary secondary;
     public SpriteRenderer border;
     public SpriteRenderer fill;
 
@@ -69,8 +68,10 @@ public class Ship : Weapon
     private List<Drone> drones;
 
     // Scriptable and weapon reference
-    private List<Weapon> weaponInstances;
-    private List<Helper> helperInstances;
+    private Dictionary<WeaponData, Weapon> weaponInstances;
+    private Dictionary<HelperData, Helper> helperInstances;
+    private Dictionary<SecondaryData, Secondary> secondaryInstances;
+    private SecondaryData secondary;
 
     // Debug car
     public CardData debugCard;
@@ -80,8 +81,9 @@ public class Ship : Weapon
     {
         // Create starting slots
         drones = new List<Drone>();
-        weaponInstances = new List<Weapon>();
-        helperInstances = new List<Helper>();
+        weaponInstances = new Dictionary<WeaponData, Weapon>();
+        helperInstances = new Dictionary<HelperData, Helper>();
+        secondaryInstances = new Dictionary<SecondaryData, Secondary>();
         xpReceiver = GetComponent<XPReceiver>();
     }
 
@@ -244,18 +246,9 @@ public class Ship : Weapon
         }
 
         // Iterate through all weapon instances
-        for (int i = 0; i < weaponInstances.Count; i++)
-        {
-            if (weaponInstances[i] != null)
-                weaponInstances[i].Use();
-        }
-
-        // Iterate through all weapon instances
-        for (int i = 0; i < helperInstances.Count; i++)
-        {
-            if (helperInstances[i] != null)
-                helperInstances[i].CustomUpdate();
-        }
+        foreach (KeyValuePair<WeaponData, Weapon> weapon in weaponInstances) weapon.Value.Use();
+        foreach (KeyValuePair<HelperData, Helper> helper in helperInstances) helper.Value.CustomUpdate();
+        foreach (KeyValuePair<SecondaryData, Secondary> secondary in secondaryInstances) secondary.Value.CustomUpdate();
     }
 
     public override void AddCard(CardData card)
@@ -283,7 +276,7 @@ public class Ship : Weapon
             Debug.Log("Adding weapon card " + weapon.name + " to deck");
             Weapon newWeapon = Instantiate(weapon.obj, transform.position, Quaternion.identity).GetComponent<Weapon>();
             newWeapon.Setup(weapon, transform);
-            weaponInstances.Add(newWeapon);
+            weaponInstances.Add(weapon, newWeapon);
 
             // Check if player is parent
             if (weapon.setPlayerAsParent)
@@ -297,7 +290,17 @@ public class Ship : Weapon
             Debug.Log("Adding helper card " + helper.name + " to deck");
             Helper newHelper = Instantiate(helper.obj, transform.position, Quaternion.identity).GetComponent<Helper>();
             newHelper.Setup(this, helper);
-            helperInstances.Add(newHelper);
+            helperInstances.Add(helper, newHelper);
+        }
+        else if (card is SecondaryData)
+        {
+            // Get weapon data
+            SecondaryData secondary = (SecondaryData)card;
+
+            Debug.Log("Adding secondary card " + secondary.name + " to deck");
+            Secondary newSecondary = Instantiate(secondary.obj, transform.position, Quaternion.identity).GetComponent<Secondary>();
+            newSecondary.Setup(this, secondary);
+            secondaryInstances.Add(secondary, newSecondary);
         }
         else if (card is ChromaData)
         {
@@ -313,16 +316,7 @@ public class Ship : Weapon
     public void SetSecondary(SecondaryData secondary)
     {
         // Remove old instance
-        if (this.secondary != null)
-        {
-            Deck.active.TakeCard(this.secondary.data);
-            this.secondary.Destroy();
-        }
-
-        // Create new instance
-        this.secondary = Instantiate(secondary.obj, transform.position, Quaternion.identity);
-        if (secondary.setShipAsParent) this.secondary.transform.SetParent(transform);
-        this.secondary.Setup(this, secondary);
+        this.secondary = secondary;
     }
 
     // Shoot method
@@ -880,10 +874,27 @@ public class Ship : Weapon
         }
     }
 
-    // Returns a secondary instance
-    public Secondary GetSecondary() { return secondary; }
+    // Get weapon
+    public Weapon GetWeapon(WeaponData weapon)
+    {
+        if (weaponInstances.ContainsKey(weapon))
+            return weaponInstances[weapon];
+        else return null;
+    }
 
-    // Check for helper or weapon instance
-    public bool HasHelper(HelperData helper) { return helperInstances.Contains(helper.obj); }
-    public bool HasWeapon(WeaponData weapon) { return weaponInstances.Contains(weapon.obj); }
+    // Get helper
+    public Helper GetHelper(HelperData helper)
+    {
+        if (helperInstances.ContainsKey(helper))
+            return helperInstances[helper];
+        else return null;
+    }
+
+    // Get secondary
+    public Secondary GetSecondary(SecondaryData secondary)
+    {
+        if (secondaryInstances.ContainsKey(secondary))
+            return secondaryInstances[secondary];
+        else return null;
+    }
 }

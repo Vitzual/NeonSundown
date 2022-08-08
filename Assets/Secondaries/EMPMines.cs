@@ -27,23 +27,6 @@ public class EMPMines : Mines
         }
     }
 
-    // Upgrade mines
-    public override void Upgrade()
-    {
-        // Apply new effects
-        if (level < data.levels.Count)
-        {
-            StatValue stat = data.levels[level].stat;
-            if (stat.type == Stat.StunLength)
-            {
-                if (stat.multiply) stunTime *= stat.modifier;
-                else stunTime += stat.modifier;
-                return;
-            }
-            else base.Upgrade();
-        }
-    }
-
     // Overrides the get stat function
     public override float GetStat(Stat stat)
     {

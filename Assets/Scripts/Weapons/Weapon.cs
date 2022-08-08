@@ -4,6 +4,20 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
+    // List of all upgrades
+    public class UpgradeInfo
+    {
+        public UpgradeInfo(UpgradeData upgrade, int quality)
+        {
+            this.upgrade = upgrade;
+            this.quality = quality;
+        }
+
+        private UpgradeData upgrade;
+        private int quality;
+    }
+    private List<UpgradeInfo> upgrades = new List<UpgradeInfo>();
+
     // Multipliers 
     protected Dictionary<Stat, float> additions = new Dictionary<Stat, float>();
     protected Dictionary<Stat, float> multipliers = new Dictionary<Stat, float>();
@@ -43,12 +57,25 @@ public class Weapon : MonoBehaviour
     }
 
     // Upgrades a weapon
-    public virtual void Upgrade() 
+    public virtual void Upgrade(UpgradeData upgrade, int quality) 
     {
-        
+        // Add upgrade to upgrades class
+        upgrades.Add(new UpgradeInfo(upgrade, quality));
 
-        // Increase level
-        level += 1;
+        if (upgrade.qualities[quality].special == UpgradeData.Special.None)
+        {
+            // Add positive effect
+            if (upgrade.positiveMultiplier) AddMultiplier(upgrade.positiveStat, upgrade.qualities[quality].positiveEffect);
+            else AddAddition(upgrade.positiveStat, upgrade.qualities[quality].positiveEffect);
+
+            // Add negative effect
+            if (upgrade.negativeMultiplier) AddMultiplier(upgrade.negativeStat, upgrade.qualities[quality].negativeEffect);
+            else AddAddition(upgrade.negativeStat, upgrade.qualities[quality].negativeEffect);
+        }
+        else
+        {
+            // Do custom stuff here
+        }
     }
 
     // On add card event
@@ -277,8 +304,7 @@ public class Weapon : MonoBehaviour
     public WeaponData GetWeapon() { return weapon; }
 
     // Called if bullet is instructed to inform parent of hits
-    public virtual void TargetHit(Entity entity)
-    {
+    public virtual void TargetHit(Entity entity) { }
 
-    }
+    public List<UpgradeInfo> GetUpgrades() { return upgrades; }
 }

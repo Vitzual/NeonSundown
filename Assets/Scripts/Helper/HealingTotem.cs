@@ -27,23 +27,6 @@ public class HealingTotem : BaseTotem
         else cooldown -= Time.deltaTime;
     }
 
-    // Upgrade (literally just for cooldown)
-    public override void Upgrade()
-    {
-        // Apply new effects
-        if (level < data.levels.Count)
-        {
-            StatValue stat = data.levels[level].stat;
-            if (stat.type == Stat.Cooldown)
-            {
-                if (stat.multiply) healCooldown *= stat.modifier;
-                else healCooldown += stat.modifier;
-                return;
-            }
-            else base.Upgrade();
-        }
-    }
-
     // Overrides the get stat function
     public override float GetStat(Stat stat)
     {

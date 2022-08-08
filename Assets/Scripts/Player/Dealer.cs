@@ -254,7 +254,7 @@ public class Dealer : MonoBehaviour
     }
 
     // Applies an upgrade
-    public void ApplyUpgrade(UpgradeData upgrade)
+    public void ApplyUpgrade(UpgradeData upgrade, int quality)
     {
         // Add the thing boss man
         RuntimeStats.cardsChosen += 1;
@@ -269,6 +269,7 @@ public class Dealer : MonoBehaviour
                 pickedCards.Remove(card);
             }
         }
+        Deck.active.UpgradeCard(card, upgrade, quality);
 
         // Adjust alpha canvas
         dealOptions.alpha = 1f;
@@ -292,6 +293,9 @@ public class Dealer : MonoBehaviour
     {
         isUpgrading = toggle;
 
+        // Create new upgrade list
+        List<UpgradeData> cardUpgrades = new List<UpgradeData>(card.upgrades);
+
         if (toggle)
         {
             float delay = 0.15f;
@@ -300,12 +304,14 @@ public class Dealer : MonoBehaviour
                 slot.canvasGroup.alpha = 0f;
                 slot.canvasGroup.interactable = true;
                 slot.canvasGroup.blocksRaycasts = true;
-                UpgradeData upgrade = card.upgrades[Random.Range(0, card.upgrades.Count)];
+                UpgradeData newUpgrade = cardUpgrades[Random.Range(0, cardUpgrades.Count)];
+                UpgradeData upgrade = newUpgrade;
                 slot.Set(upgrade, Random.Range(0, upgrade.qualities.Count));
                 slot.transform.localScale = upgradeNormalSize;
                 LeanTween.scale(slot.gameObject, upgradeTargetSize, 0.15f).setEase(LeanTweenType.easeInExpo).setDelay(delay);
                 LeanTween.alphaCanvas(slot.canvasGroup, 1f, 0.15f).setDelay(delay);
                 LeanTween.delayedSound(upgradeSound, Deck.active.transform.position, Settings.sound).setDelay(delay);
+                cardUpgrades.Remove(newUpgrade);
                 delay += 0.15f;
             }
         }

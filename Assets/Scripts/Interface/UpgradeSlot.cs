@@ -13,22 +13,24 @@ public class UpgradeSlot : MonoBehaviour
     public Image background, border, indent;
     public Color badColor, goodColor, greatColor, uniqueColor;
     [HideInInspector] public CanvasGroup canvasGroup;
+    private int qualityIndex;
 
     public void Awake()
     {
         canvasGroup = GetComponent<CanvasGroup>();
     }
 
-    public void Set(UpgradeData upgrade, int index)
+    public void Set(UpgradeData upgrade, int qualityIndex)
     {
         // Set upgrade variable
         this.upgrade = upgrade;
-      
+        this.qualityIndex = qualityIndex;
+
         // Set upgrade components
         name.text = upgrade.name.ToUpper();
 
         // Set positive text
-        float formatted = upgrade.qualities[index].positiveEffect;
+        float formatted = upgrade.qualities[qualityIndex].positiveEffect;
         if (upgrade.positiveMultiplier)
         {
             if (!upgrade.positiveReduction) formatted = (formatted * 100) - 100;
@@ -37,7 +39,7 @@ public class UpgradeSlot : MonoBehaviour
         positiveDesc.text = upgrade.positiveDesc.Replace("<value>", Formatter.Round(formatted, 1));
 
         // Set negative text
-        formatted = upgrade.qualities[index].negativeEffect;
+        formatted = upgrade.qualities[qualityIndex].negativeEffect;
         if (upgrade.negativeMultiplier)
         {
             if (!upgrade.negativeReduction) formatted = (formatted * 100) - 100;
@@ -46,7 +48,7 @@ public class UpgradeSlot : MonoBehaviour
         negativeDesc.text = upgrade.negativeDesc.Replace("<value>", Formatter.Round(formatted, 1));
 
         // Set border color
-        switch (upgrade.qualities[index].quality)
+        switch (upgrade.qualities[qualityIndex].quality)
         {
             case Quality.Bad:
                 border.color = badColor;
@@ -73,7 +75,7 @@ public class UpgradeSlot : MonoBehaviour
 
     public void ApplyUpgrade()
     {
-        Dealer.active.ApplyUpgrade(upgrade);
+        Dealer.active.ApplyUpgrade(upgrade, qualityIndex);
     }
 
     public void Toggle(bool toggle)

@@ -7,23 +7,6 @@ public class RageTotem : BaseTotem
     // Healing variables
     public float damageMultiplier;
 
-    // Upgrade (literally just for cooldown)
-    public override void Upgrade()
-    {
-        // Apply new effects
-        if (level < data.levels.Count)
-        {
-            StatValue stat = data.levels[level].stat;
-            if (stat.type == Stat.Damage)
-            {
-                if (stat.multiply) damageMultiplier *= stat.modifier;
-                else damageMultiplier += stat.modifier;
-                return;
-            }
-            else base.Upgrade();
-        }
-    }
-
     // Overrides the get stat function
     public override float GetStat(Stat stat)
     {

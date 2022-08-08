@@ -10,7 +10,6 @@ public class Deck : MonoBehaviour
 
     // Player instance
     public static Ship player;
-    public static SecondaryData secondary;
 
     // Cards in deck
     private static Dictionary<CardData, int> cards;
@@ -28,7 +27,6 @@ public class Deck : MonoBehaviour
 
         // Set active instance
         active = this;
-        secondary = null;
         
         // Set new card dictionary
         cards = new Dictionary<CardData, int>();
@@ -63,11 +61,26 @@ public class Deck : MonoBehaviour
     }
 
     // Upgrades a carda
-    public void UpgradeCard(CardData card, UpgradeData upgrade, float effect)
+    public void UpgradeCard(CardData card, UpgradeData upgrade, int quality)
     {
-
+        if (card is WeaponData)
+        {
+            Weapon weapon = player.GetWeapon((WeaponData)card);
+            weapon.Upgrade(upgrade, quality);
+        }
+        else if (card is HelperData)
+        {
+            Helper helper = player.GetHelper((HelperData)card);
+            helper.Upgrade(upgrade, quality);
+        }
+        else if (card is SecondaryData)
+        {
+            Secondary secondary = player.GetSecondary((SecondaryData)card);
+            secondary.Upgrade(upgrade, quality);
+        }
+        else return;
     }
-
+    
     // Set passive card slot
     public void SetupStat(StatData statData)
     {
@@ -83,26 +96,6 @@ public class Deck : MonoBehaviour
 
         // Check player stats first
         Events.active.AddCard(statData);
-    }
-
-    // Set passive card slot
-    public void SetupSecondary(SecondaryData secondary)
-    {
-        // Check if secondary card already active
-        if (Deck.secondary == secondary)
-            GetSecondaryInstance().Upgrade();
-        else
-        {
-            Debug.Log("Adding secondary card " + secondary.name + " to deck");
-            player.SetSecondary(secondary);
-            Deck.secondary = secondary;
-        }
-    }
-
-    // Get secondary instance
-    public Secondary GetSecondaryInstance()
-    {
-        return player.GetSecondary();
     }
 
     // Takes a card
