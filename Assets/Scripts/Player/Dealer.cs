@@ -204,9 +204,8 @@ public class Dealer : MonoBehaviour
     public void PickCard(CardData card, bool redraw, int cardNumber)
     {
         // Check if card is upgradeable
-        if (card.isUpgradeable && Deck.active.HasCard(card))
+        if (card.isUpgradeable && card.upgrades.Count > 0 && Deck.active.HasCard(card))
         {
-            isUpgrading = true;
             upgradingCard = cardSlots[cardNumber];
             upgradingCard.MoveToUpgradePosition();
             ToggleUpgrades(true, card);
@@ -291,6 +290,8 @@ public class Dealer : MonoBehaviour
 
     public void ToggleUpgrades(bool toggle, CardData card = null)
     {
+        isUpgrading = toggle;
+
         if (toggle)
         {
             float delay = 0.15f;

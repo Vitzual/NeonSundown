@@ -10,21 +10,29 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ee644a645f261504392dacdce6c06ca3, type: 3}
-  m_Name: Sixth Sense
+  m_Name: Caliber
   m_EditorClassIdentifier: 
-  internalId: 37dbf9b3-6b53-413f-b6f8-c036ae41f9c7
-  createdAtTicks: 637954171037780532
-  name: Sixth Sense
+  internalId: 324a4afa-3ddc-40a3-ba56-5542d41d994b
+  createdAtTicks: 637955533213929392
+  name: Caliber
   qualities:
-  - quality: 3
-    positiveEffect: 1
+  - quality: 0
+    positiveEffect: 1.1
+    negativeEffect: 1.5
+    special: 0
+  - quality: 1
+    positiveEffect: 1.2
     negativeEffect: 2
-    special: 1
-  positiveStat: 0
-  positiveDesc: +<value> Reverse Projectiles
-  positiveMultiplier: 0
+    special: 0
+  - quality: 2
+    positiveEffect: 1.3
+    negativeEffect: 2.5
+    special: 0
+  positiveStat: 20
+  positiveDesc: +<value>% Projectile Size
+  positiveMultiplier: 1
   positiveReduction: 0
-  negativeStat: 8
+  negativeStat: 5
   negativeDesc: +<value>% Spread
-  negativeMultiplier: 0
+  negativeMultiplier: 1
   negativeReduction: 0
