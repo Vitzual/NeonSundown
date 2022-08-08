@@ -64,6 +64,13 @@ public class Scythe : Weapon
                 transform.localPosition = new Vector2(range * offset.x, range * offset.y);
                 break;
 
+            // Increase blade size
+            case Stat.BulletSize:
+                size = (Deck.CalculateStat(stat, weapon.bulletSize)
+                    + GetAdditions(stat)) * GetMultiplier(stat);
+                transform.localScale = new Vector2(size, size);
+                break;
+
             default:
                 base.UpdateStat(stat);
                 break;
