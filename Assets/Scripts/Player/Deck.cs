@@ -56,8 +56,38 @@ public class Deck : MonoBehaviour
             SynergyHandler.Add(card);
 
         // Setup the card
-        if (card.isShipOnlyCard) player.AddCard(card);
-        else Events.active.AddCard(card);
+        if (card.isShipOnlyCard)
+        {
+            // Add multipliers and additions
+            if (card is StatData)
+            {
+                StatData statData = (StatData)card;
+                foreach (StatValue stat in statData.stats)
+                {
+                    if (stat.multiply) player.AddMultiplier(stat.type, stat.modifier);
+                    else player.AddAddition(stat.type, stat.modifier);
+                }
+            }
+
+            // Invoke player update
+            player.AddCard(card);
+        }
+        else
+        {
+            // Add multipliers and additions
+            if (card is StatData)
+            {
+                StatData statData = (StatData)card;
+                foreach (StatValue stat in statData.stats)
+                {
+                    if (stat.multiply) AddMultiplier(stat.type, stat.modifier);
+                    else AddAddition(stat.type, stat.modifier);
+                }
+            }
+
+            // Invoke update event
+            Events.active.AddCard(card);
+        }
     }
 
     // Upgrades a carda

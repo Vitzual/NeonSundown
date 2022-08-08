@@ -11,6 +11,14 @@ public class Drone : Helper
     public float range = 35f;
     protected float directionCooldown;
 
+    // Setup method
+    public override void Setup(Ship ship, HelperData data)
+    {
+        UpdateStat(Stat.MoveSpeed);
+        UpdateStat(Stat.RotationSpeed);
+        base.Setup(ship, data);
+    }
+
     // Move totem around randomly
     public void FixedUpdate()
     {
@@ -52,5 +60,25 @@ public class Drone : Helper
 
         // Move forward
         transform.position += transform.up * movementSpeed * Time.fixedDeltaTime;
+    }
+
+    public override void UpdateStat(Stat type)
+    {
+        switch (type)
+        {
+            case Stat.MoveSpeed:
+                movementSpeed = (Deck.CalculateStat(type, data.moveSpeed)
+                    + GetAdditions(type)) * GetMultiplier(type);
+                break;
+
+            case Stat.RotationSpeed:
+                rotationSpeed = (Deck.CalculateStat(type, data.rotationSpeed)
+                    + GetAdditions(type)) * GetMultiplier(type);
+                break;
+
+            default:
+                base.UpdateStat(type);
+                break;
+        }
     }
 }

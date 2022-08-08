@@ -274,7 +274,7 @@ public class Weapon : MonoBehaviour
     }
 
     // Get multiplier
-    protected float GetAdditions(Stat type)
+    public float GetAdditions(Stat type)
     {
         if (additions.ContainsKey(type))
             return additions[type];
@@ -282,7 +282,7 @@ public class Weapon : MonoBehaviour
     }
 
     // Get multiplier
-    protected float GetMultiplier(Stat type)
+    public float GetMultiplier(Stat type)
     {
         if (multipliers.ContainsKey(type))
             return multipliers[type];
@@ -290,7 +290,7 @@ public class Weapon : MonoBehaviour
     }
 
     // Add a multiplier
-    protected void AddAddition(Stat type, float amount)
+    public void AddAddition(Stat type, float amount)
     {
         if (additions.ContainsKey(type))
             additions[type] += amount;
@@ -298,7 +298,7 @@ public class Weapon : MonoBehaviour
     }
 
     // Add a multiplier
-    protected void AddMultiplier(Stat type, float amount)
+    public void AddMultiplier(Stat type, float amount)
     {
         if (multipliers.ContainsKey(type))
             multipliers[type] += amount;

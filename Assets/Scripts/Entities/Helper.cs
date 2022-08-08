@@ -36,6 +36,8 @@ public class Helper : Entity
     {
         this.ship = ship;
         this.data = data;
+
+        UpdateStat(Stat.StunLength);
     }
 
     // Custom update

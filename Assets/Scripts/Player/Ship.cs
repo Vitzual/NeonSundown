@@ -174,8 +174,9 @@ public class Ship : Weapon
 
             for (int i = 0; i < shipData.droneAmount; i += 1)
             {
-                Drone newDrone = Instantiate(shipData.drone.obj, transform.position, 
-                    transform.rotation).GetComponent<Drone>();
+                Vector2 spawnPos = new Vector2(transform.position.x + Random.Range(-1f, 1f),
+                    transform.position.y + Random.Range(-1f, 1f));
+                Drone newDrone = Instantiate(shipData.drone.obj, spawnPos, transform.rotation).GetComponent<Drone>();
                 newDrone.Setup(this, shipData.drone);
                 drones.Add(newDrone);
             }
@@ -259,12 +260,39 @@ public class Ship : Weapon
             // Get weapon data
             StatData statData = (StatData)card;
 
+            // Add card
             Debug.Log("Adding stat card " + statData.name + " to deck");
-            foreach (StatValue stat in statData.stats)
+            foreach (StatValue stat in statData.stats) UpdateStat(stat.type);
+
+            // Update all drones
+            if (!card.isShipOnlyCard && drones != null)
             {
-                if (stat.multiply) Deck.AddMultiplier(stat.type, stat.modifier);
-                else Deck.AddAddition(stat.type, stat.modifier);
-                UpdateStat(stat.type);
+                // Check for multishot
+                int multishots = 0;
+
+                // Iterate through all drones and update their stats
+                foreach (Drone drone in drones)
+                {
+                    foreach (StatValue stat in statData.stats)
+                    {
+                        drone.UpdateStat(stat.type);
+                        if (multishots == 0 && stat.type == Stat.Bullets && !stat.multiply)
+                            multishots = (int)stat.modifier;
+                    }
+                }
+
+                // Add new drone if multishot
+                if (multishots != 0)
+                {
+                    for (int i = 0; i < multishots; i++)
+                    {
+                        Vector2 spawnPos = new Vector2(transform.position.x + Random.Range(-1f, 1f),
+                            transform.position.y + Random.Range(-1f, 1f));
+                        Drone newDrone = Instantiate(shipData.drone.obj, spawnPos, transform.rotation).GetComponent<Drone>();
+                        newDrone.Setup(this, shipData.drone);
+                        drones.Add(newDrone);
+                    }
+                }
             }
         }
         else if (card is WeaponData)
@@ -582,16 +610,6 @@ public class Ship : Weapon
             // Upgrades the damage 
             case Stat.Damage:
                 damage = Deck.CalculateStat(stat, weapon.damage);
-                if (drones != null)
-                {
-                    float droneDamage = Deck.CalculateStat(stat, shipData.droneDamage);
-                    foreach (Drone drone in drones)
-                    {
-                        if (drone != null)
-                            drone.damage = droneDamage;
-                    }
-                }
-
                 break;
 
             // Increases firerate 

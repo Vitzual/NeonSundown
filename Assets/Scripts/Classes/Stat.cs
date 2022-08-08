@@ -24,5 +24,6 @@ public enum Stat
     StunLength,
     EnemyDmg,
     Criticals,
-    Buckshot
+    Buckshot,
+    RotationSpeed
 }

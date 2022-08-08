@@ -15,10 +15,8 @@ public class TrackerDrone : Drone
     // Set move speed
     public override void Setup(Ship ship, HelperData data)
     {
-        damage = data.statAmount;
-        movementSpeed = data.moveSpeed;
-        rotationSpeed = data.rotationSpeed;
         base.Setup(ship, data);
+        UpdateStat(Stat.Damage);
     }
 
     // Move drone towards target
@@ -45,7 +43,6 @@ public class TrackerDrone : Drone
         // Move forward
         transform.position += transform.up * movementSpeed * Time.fixedDeltaTime;
     }
-
 
     public void OnCollisionEnter2D(Collision2D collision)
     {
@@ -81,5 +78,20 @@ public class TrackerDrone : Drone
     public override void SetTarget(Entity entity)
     {
         target = entity.transform;
+    }
+
+    public override void UpdateStat(Stat type)
+    {
+        switch (type)
+        {
+            case Stat.Damage:
+                damage = (Deck.CalculateStat(type, data.statAmount)
+                    + GetAdditions(type)) * GetMultiplier(type);
+                break;
+
+            default:
+                base.UpdateStat(type);
+                break;
+        }
     }
 }
