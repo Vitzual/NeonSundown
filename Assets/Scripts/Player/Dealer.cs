@@ -396,8 +396,12 @@ public class Dealer : MonoBehaviour
         // Debug the result
         foreach (RaycastResult result in results)
         {
-            Card card = result.gameObject.GetComponent<Card>();
-            Redraw(card);
+            Card card = result.gameObject.transform.parent.GetComponent<Card>();
+            if (card != null)
+            {
+                Redraw(card);
+                break;
+            }
         }
     }
 

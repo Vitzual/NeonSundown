@@ -15,20 +15,26 @@ MonoBehaviour:
   internalId: 6c32bde1-3a4d-4eb7-beb0-c475618fba33
   createdAtTicks: 637821596507664875
   name: Multishot
-  description: Increases amount of projectiles, but lowers damage by 20%
+  description: Increases ship projectiles, but lowers damage by 15%
+  enableDescriptionOverrides: 0
+  levelDescriptionOverrides:
+    keys: 
+    values: []
   sprite: {fileID: 21300000, guid: 9b4f57a45de399d40b6990bf190447ac, type: 3}
   color: {r: 1, g: 0, b: 0.010215759, a: 1}
   maximumAmount: 3
   dropChance: 1
   canDrop: 1
   isUnlocked: 0
-  isShipOnlyCard: 0
+  isShipOnlyCard: 1
+  isUpgradeable: 0
+  upgrades: []
   stats:
   - type: 6
     modifier: 1
     multiply: 0
     positive: 1
   - type: 1
-    modifier: 0.8
+    modifier: 0.85
     multiply: 1
     positive: 0

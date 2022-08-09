@@ -15,19 +15,21 @@ MonoBehaviour:
   internalId: 27065005-87c8-4670-b97a-58d62731058d
   createdAtTicks: 637822401349395075
   name: Explosives
-  description: Enables explosives for projectiles fired from the ship
-  enableDescriptionOverrides: 1
+  description: Bullets fired from your ship explode on impact
+  enableDescriptionOverrides: 0
   levelDescriptionOverrides:
     keys: 01000000
     values:
     - Enables explosives on all projectiles
   sprite: {fileID: 21300000, guid: f6eb501f7687bde438e30627cd738902, type: 3}
   color: {r: 1, g: 0.62409055, b: 0.2783019, a: 1}
-  maximumAmount: 2
+  maximumAmount: 1
   dropChance: 0.5
   canDrop: 1
   isUnlocked: 0
-  isShipOnlyCard: 0
+  isShipOnlyCard: 1
+  isUpgradeable: 0
+  upgrades: []
   stats:
   - type: 19
     modifier: 1

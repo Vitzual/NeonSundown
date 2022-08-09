@@ -39,8 +39,8 @@ public class SynergyUI : MonoBehaviour
         synergyCard.SetSynergy(synergy);
         synergyCard.canvasGroup.alpha = 0f;
         LeanTween.alphaCanvas(synergyCard.canvasGroup, 1f, 0.25f).setDelay(fadeInSpeed + moveSpeedDelay);
-        synergyCard.GetComponent<RectTransform>().localScale = new Vector3(12f, 12f, 12f);
-        LeanTween.scale(synergyCard.gameObject, new Vector3(14f, 14f, 1f), 0.5f)
+        synergyCard.GetComponent<RectTransform>().localScale = new Vector3(10f, 10f, 1f);
+        LeanTween.scale(synergyCard.gameObject, new Vector3(11f, 11f, 1f), 0.5f)
             .setEase(LeanTweenType.easeInExpo).setDelay(fadeInSpeed + moveSpeedDelay);
         cooldown = fadeInSpeed + moveSpeedDelay;
         Dealer.isOpen = true;

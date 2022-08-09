@@ -101,10 +101,6 @@ public class Card : MonoBehaviour
                 image.sprite = card.sprite;
                 level.text = "UPGRADE AVAILABLE!";
             }
-
-            // Set effects
-            //effectOne.gameObject.SetActive(false);
-            //effectTwo.gameObject.SetActive(false);
         }
 
         else if (card is HelperData)
@@ -120,10 +116,6 @@ public class Card : MonoBehaviour
                 image.sprite = card.sprite;
                 level.text = "UPGRADE AVAILABLE!";
             }
-
-            // Set effects
-            //effectOne.gameObject.SetActive(false);
-            //effectTwo.gameObject.SetActive(false);
         }
 
         else if (card is StatData)
@@ -163,18 +155,12 @@ public class Card : MonoBehaviour
                 image.sprite = card.sprite;
                 level.text = "UPGRADE AVAILABLE!";
             }
-
-            // Set effects
-            //effectOne.gameObject.SetActive(false);
-            //effectTwo.gameObject.SetActive(false);
         }
 
         else if (card is ChromaData)
         {
             // Set type
             type.text = "CHROMA";
-            //effectOne.gameObject.SetActive(false);
-            //effectTwo.gameObject.SetActive(false);
         }
         
         if (useBase)
@@ -281,6 +267,9 @@ public class Card : MonoBehaviour
     // Play synergy animation
     public void Synergize(CardData card, float speed, float moveDelay)
     {
+        // Check if card is null
+        if (card == null) return;
+
         // Set canvas to 0
         canvasGroup.alpha = 0f;
 
@@ -290,15 +279,18 @@ public class Card : MonoBehaviour
 
         // Set card information
         border.color = card.color;
+        background.color = new Color(card.color.r * 0.25f, card.color.g * 0.25f, card.color.b * 0.25f, 1f);
         image.color = card.color;
         title.text = card.name.ToUpper();
         title.color = card.color;
         level.color = card.color;
         type.color = card.color;
+        amount.color = card.color;
+        amount.text = card.maximumAmount + "/" + card.maximumAmount;
 
         // Set description
         image.sprite = card.sprite;
-        desc.text = "Card is maxed";
+        desc.text = "CARD IS MAXED";
         level.text = "LEVEL MAX";
 
         // Smooth move in

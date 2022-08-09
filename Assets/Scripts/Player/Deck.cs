@@ -5,6 +5,19 @@ using UnityEngine;
 
 public class Deck : MonoBehaviour
 {
+    // List of all upgrades
+    public class UpgradeInfo
+    {
+        public UpgradeInfo(UpgradeData upgrade, int quality)
+        {
+            this.upgrade = upgrade;
+            this.quality = quality;
+        }
+
+        public UpgradeData upgrade;
+        public int quality;
+    }
+
     // Active instance
     public static Deck active;
 
@@ -13,6 +26,7 @@ public class Deck : MonoBehaviour
     
     // Cards in deck
     private static Dictionary<CardData, int> cards;
+    private static Dictionary<CardData, List<UpgradeInfo>> upgrades;
 
     // Multipliers 
     public static Dictionary<Stat, float> additions;
@@ -30,6 +44,7 @@ public class Deck : MonoBehaviour
         
         // Set new card dictionary
         cards = new Dictionary<CardData, int>();
+        upgrades = new Dictionary<CardData, List<UpgradeInfo>>();
 
         // Create new dictionaries
         additions = new Dictionary<Stat, float>();
@@ -93,6 +108,10 @@ public class Deck : MonoBehaviour
     // Upgrades a card
     public void UpgradeCard(CardData card, UpgradeData upgrade, int quality)
     {
+        // Add upgrade to upgrades list
+        if (!upgrades.ContainsKey(card)) upgrades.Add(card, new List<UpgradeInfo>());
+        upgrades[card].Add(new UpgradeInfo(upgrade, quality));
+
         if (card is WeaponData)
         {
             Weapon weapon = player.GetWeapon((WeaponData)card);
@@ -207,4 +226,12 @@ public class Deck : MonoBehaviour
     // Get a stat
     public static float GetStat(Stat type) { return player.GetStat(type); }
     public static float GetDefaultStat(Stat type) { return player.GetDefaultStat(type); }
+
+    // Get upgades
+    public static List<UpgradeInfo> GetUpgrades(CardData card)
+    {
+        if (upgrades.ContainsKey(card))
+            return upgrades[card];
+        else return null;
+    }
 }

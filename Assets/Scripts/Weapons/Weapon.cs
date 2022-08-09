@@ -4,20 +4,6 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-    // List of all upgrades
-    public class UpgradeInfo
-    {
-        public UpgradeInfo(UpgradeData upgrade, int quality)
-        {
-            this.upgrade = upgrade;
-            this.quality = quality;
-        }
-        
-        public UpgradeData upgrade;
-        public int quality;
-    }
-    private List<UpgradeInfo> upgrades = new List<UpgradeInfo>();
-
     // Multipliers 
     protected Dictionary<Stat, float> additions = new Dictionary<Stat, float>();
     protected Dictionary<Stat, float> multipliers = new Dictionary<Stat, float>();
@@ -60,9 +46,6 @@ public class Weapon : MonoBehaviour
     // Upgrades a weapon
     public virtual void Upgrade(UpgradeData upgrade, int quality) 
     {
-        // Add upgrade to upgrades class
-        upgrades.Add(new UpgradeInfo(upgrade, quality));
-
         if (upgrade.qualities[quality].special == UpgradeData.Special.None)
         {
             // Add positive effect
@@ -314,6 +297,4 @@ public class Weapon : MonoBehaviour
 
     // Called if bullet is instructed to inform parent of hits
     public virtual void TargetHit(Entity entity) { }
-
-    public List<UpgradeInfo> GetUpgrades() { return upgrades; }
 }

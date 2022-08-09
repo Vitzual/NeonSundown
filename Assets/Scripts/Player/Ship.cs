@@ -328,6 +328,7 @@ public class Ship : Weapon
 
             Debug.Log("Adding secondary card " + secondary.name + " to deck");
             Secondary newSecondary = Instantiate(secondary.obj, transform.position, Quaternion.identity).GetComponent<Secondary>();
+            newSecondary.transform.SetParent(transform);
             newSecondary.Setup(this, secondary);
             secondaryInstances.Add(secondary, newSecondary);
         }
@@ -347,6 +348,18 @@ public class Ship : Weapon
         if (synergy.removeCardOne) RemoveCardInstance(synergy.cardOne);
         if (synergy.removeCardTwo) RemoveCardInstance(synergy.cardTwo);
         AddCard(synergy.outputCard);
+
+        // Pass all card one upgrades to synergy
+        List<Deck.UpgradeInfo> upgrades = Deck.GetUpgrades(synergy.cardOne);
+        if (upgrades != null && upgrades.Count > 0)
+            foreach (Deck.UpgradeInfo upgrade in upgrades)
+                Deck.active.UpgradeCard(synergy.outputCard, upgrade.upgrade, upgrade.quality);
+
+        // Pass all card two upgrades to synergy
+        upgrades = Deck.GetUpgrades(synergy.cardTwo);
+        if (upgrades != null && upgrades.Count > 0)
+            foreach (Deck.UpgradeInfo upgrade in upgrades)
+                Deck.active.UpgradeCard(synergy.outputCard, upgrade.upgrade, upgrade.quality);
     }
 
     public void RemoveCardInstance(CardData card)
@@ -688,7 +701,7 @@ public class Ship : Weapon
                     + GetAdditions(type)) * GetMultiplier(type);
                 break;
             case Stat.MoveSpeed:
-                controller.moveSpeed = (Deck.CalculateStat(type, weapon.moveSpeed)
+                controller.moveSpeed = (Deck.CalculateStat(type, shipData.playerSpeed)
                     + GetAdditions(type)) * GetMultiplier(type);
                 break;
             case Stat.DashSpeed:

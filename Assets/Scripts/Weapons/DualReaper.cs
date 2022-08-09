@@ -21,4 +21,11 @@ public class DualReaper : Weapon
         foreach (Scythe scythe in scythes)
             scythe.Use();
     }
+
+    // Override upgrade call
+    public override void Upgrade(UpgradeData upgrade, int quality)
+    {
+        foreach (Scythe scythe in scythes)
+            scythe.Upgrade(upgrade, quality);
+    }
 }
