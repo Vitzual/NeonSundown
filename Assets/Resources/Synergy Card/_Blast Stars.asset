@@ -16,6 +16,10 @@ MonoBehaviour:
   createdAtTicks: 637827680332158409
   name: Blast Stars
   description: Rapid fire shurikens that deal huge damage
+  enableDescriptionOverrides: 0
+  levelDescriptionOverrides:
+    keys: 
+    values: []
   sprite: {fileID: 21300000, guid: d807475d70447d948b2a785ebda93296, type: 3}
   color: {r: 0, g: 1, b: 0.029511452, a: 1}
   maximumAmount: 1
@@ -23,14 +27,15 @@ MonoBehaviour:
   canDrop: 0
   isUnlocked: 0
   isShipOnlyCard: 0
-  baseLevels: []
+  isUpgradeable: 0
+  upgrades: []
   damage: 10
   cooldown: 0.2
   moveSpeed: 120
   rotate: 1
   rotateSpeed: 180
   range: 0
-  bulletSize: 0
+  bulletSize: 1
   bloom: 0
   pierces: 1
   bullets: 1

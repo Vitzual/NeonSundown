@@ -43,7 +43,7 @@ public class Dealer : MonoBehaviour
 
     // Interface variables
     [BoxGroup("Interface Options")]
-    public TextMeshProUGUI title;
+    public CanvasGroup title;
     [BoxGroup("Interface Options")]
     public TextMeshProUGUI redraws;
     [BoxGroup("Interface Options")]
@@ -478,6 +478,9 @@ public class Dealer : MonoBehaviour
     {
         // Close upgrades
         ToggleUpgrades(false);
+        upgradeOptions.alpha = 0f;
+        upgradeOptions.interactable = false;
+        upgradeOptions.blocksRaycasts = false;
 
         // Set controller controls
         controlsOne.SetActive(Controller.isControllerConnected);

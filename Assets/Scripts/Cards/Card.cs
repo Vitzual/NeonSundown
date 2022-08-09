@@ -18,7 +18,7 @@ public class Card : MonoBehaviour
     public float fadeInSpeed = 0.25f;
 
     // Card elements
-    public Image model;
+    public Image border, background;
     public Image image;
     public TextMeshProUGUI title, desc, level, type, effectOne, effectTwo, amount;
 
@@ -58,7 +58,8 @@ public class Card : MonoBehaviour
         redraw = false;
 
         // Set card information
-        model.color = card.color;
+        border.color = card.color;
+        background.color = new Color(card.color.r * 0.25f, card.color.g * 0.25f, card.color.b * 0.25f, 1f);
         image.color = card.color;
         title.text = card.name.ToUpper();
         title.color = card.color;
@@ -70,10 +71,10 @@ public class Card : MonoBehaviour
         {
             int amount = Deck.active.GetCardAmount(card);
             if (card.levelDescriptionOverrides.ContainsKey(amount))
-                desc.text = card.levelDescriptionOverrides[amount];
-            else desc.text = card.description;
+                desc.text = card.levelDescriptionOverrides[amount].ToUpper();
+            else desc.text = card.description.ToUpper();
         }
-        else desc.text = card.description;
+        else desc.text = card.description.ToUpper();
 
         bool useBase = true;
 
@@ -90,7 +91,7 @@ public class Card : MonoBehaviour
         if (card is WeaponData)
         {
             // Set type
-            type.text = "Weapon";
+            type.text = "WEAPON";
             type.color = card.color;
 
             // Enable new upgrade
@@ -102,14 +103,14 @@ public class Card : MonoBehaviour
             }
 
             // Set effects
-            effectOne.gameObject.SetActive(false);
-            effectTwo.gameObject.SetActive(false);
+            //effectOne.gameObject.SetActive(false);
+            //effectTwo.gameObject.SetActive(false);
         }
 
         else if (card is HelperData)
         {
             // Set type
-            type.text = "Helper";
+            type.text = "HELPER";
             type.color = card.color;
 
             // Enable new upgrade
@@ -121,17 +122,17 @@ public class Card : MonoBehaviour
             }
 
             // Set effects
-            effectOne.gameObject.SetActive(false);
-            effectTwo.gameObject.SetActive(false);
+            //effectOne.gameObject.SetActive(false);
+            //effectTwo.gameObject.SetActive(false);
         }
 
         else if (card is StatData)
         {
             // Set type
             StatData stat = (StatData)card;
-            type.text = "Stat";
+            type.text = "STAT";
 
-            // Calculate effect
+            /* Calculate effect
             StatValue statType = stat.stats[0];
             effectOne.gameObject.SetActive(true);
             effectOne.text = "<b>" + statType.type.ToString() + ":</b> " + Formatter.Round(
@@ -146,13 +147,13 @@ public class Card : MonoBehaviour
                 effectTwo.text = "<b>" + statType.type.ToString() + ":</b> " + Formatter.Round(
                     Deck.GetStat(statType.type)) + GetDifference(statType);
             }
-            else effectTwo.gameObject.SetActive(false);
+            else effectTwo.gameObject.SetActive(false);*/
         }
 
         else if (card is SecondaryData)
         {
             // Set type
-            type.text = "Secondary";
+            type.text = "SECONDARY";
             type.color = card.color;
 
             // Enable new upgrade
@@ -164,16 +165,16 @@ public class Card : MonoBehaviour
             }
 
             // Set effects
-            effectOne.gameObject.SetActive(false);
-            effectTwo.gameObject.SetActive(false);
+            //effectOne.gameObject.SetActive(false);
+            //effectTwo.gameObject.SetActive(false);
         }
 
         else if (card is ChromaData)
         {
             // Set type
-            type.text = "Chroma";
-            effectOne.gameObject.SetActive(false);
-            effectTwo.gameObject.SetActive(false);
+            type.text = "CHROMA";
+            //effectOne.gameObject.SetActive(false);
+            //effectTwo.gameObject.SetActive(false);
         }
         
         if (useBase)
@@ -288,7 +289,7 @@ public class Card : MonoBehaviour
         redraw = false;
 
         // Set card information
-        model.color = card.color;
+        border.color = card.color;
         image.color = card.color;
         title.text = card.name.ToUpper();
         title.color = card.color;
