@@ -12,7 +12,7 @@ public class Weapon : MonoBehaviour
             this.upgrade = upgrade;
             this.quality = quality;
         }
-
+        
         public UpgradeData upgrade;
         public int quality;
     }

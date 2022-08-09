@@ -10,7 +10,7 @@ public class Deck : MonoBehaviour
 
     // Player instance
     public static Ship player;
-
+    
     // Cards in deck
     private static Dictionary<CardData, int> cards;
 

@@ -9,7 +9,6 @@ public class BulletHandler : MonoBehaviour
     public static bool stickyBullets = false;
     public static bool energyBullets = false;
     public static bool autoLockBullets = false;
-    public static float projectileSize = 1f;
 
     // List of all active bullets
     public List<Bullet> bullets;
@@ -23,7 +22,6 @@ public class BulletHandler : MonoBehaviour
         active = this; 
         stickyBullets = false;
         energyBullets = false;
-        projectileSize = 1f;
     }
 
     // Move normal enemies

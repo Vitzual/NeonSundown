@@ -629,120 +629,97 @@ public class Ship : Weapon
     public static float GetHealth() { return health; }
 
     // Update stat
-    public override void UpdateStat(Stat stat)
+    public override void UpdateStat(Stat type)
     {
-        switch(stat)
+        switch(type)
         {
-            // Upgrades the health
+            case Stat.Damage:
+                damage = (Deck.CalculateStat(type, weapon.damage)
+                    + GetAdditions(type)) * GetMultiplier(type);
+                break;
+            case Stat.Cooldown:
+                cooldown = (Deck.CalculateStat(type, weapon.cooldown)
+                    + GetAdditions(type)) * GetMultiplier(type);
+                break;
+            case Stat.Spread:
+                bloom = (Deck.CalculateStat(type, weapon.bloom)
+                    + GetAdditions(type)) * GetMultiplier(type);
+                break;
+            case Stat.Pierces:
+                pierces = (Deck.CalculateStat(type, weapon.pierces)
+                    + GetAdditions(type)) * GetMultiplier(type);
+                break;
+            case Stat.Bullets:
+                bullets = (Deck.CalculateStat(type, weapon.bullets)
+                    + GetAdditions(type)) * GetMultiplier(type);
+                break;
+            case Stat.Lifetime:
+                lifetime = (Deck.CalculateStat(type, weapon.lifetime)
+                    + GetAdditions(type)) * GetMultiplier(type);
+                break;
+            case Stat.Knockback:
+                knockback = (Deck.CalculateStat(type, weapon.knockback)
+                    + GetAdditions(type)) * GetMultiplier(type);
+                break;
+            case Stat.StunLength:
+                stunLength = (Deck.CalculateStat(type, weapon.stun)
+                    + GetAdditions(type)) * GetMultiplier(type);
+                break;
+            case Stat.BulletSize:
+                size = (Deck.CalculateStat(type, weapon.bulletSize)
+                    + GetAdditions(type)) * GetMultiplier(type);
+                break;
+            case Stat.Range:
+                range = (Deck.CalculateStat(type, weapon.range)
+                    + GetAdditions(type)) * GetMultiplier(type);
+                break;
+            case Stat.Criticals:
+                critical = (Deck.CalculateStat(type, 0) + GetAdditions(type)) * GetMultiplier(type);
+                break;
             case Stat.Health:
                 float oldHealth = maxHealth;
-                maxHealth = Deck.CalculateStat(stat, shipData.startingHealth);
+                maxHealth = Deck.CalculateStat(type, shipData.startingHealth);
                 health += maxHealth - oldHealth;
                 UpdateHealth();
                 break;
-
-            // Upgrades the view distance
             case Stat.View:
-                cam.orthographicSize = Deck.CalculateStat(stat, Gamemode.arena.startingViewRange);
+                cam.orthographicSize = (Deck.CalculateStat(type, Gamemode.arena.startingViewRange)
+                    + GetAdditions(type)) * GetMultiplier(type);
                 break;
-
-            // Upgrades the speed 
             case Stat.MoveSpeed:
-                controller.moveSpeed = Deck.CalculateStat(stat, shipData.playerSpeed);
-                controller.dashSpeed = Deck.CalculateStat(stat, shipData.dashSpeed);
+                controller.moveSpeed = (Deck.CalculateStat(type, weapon.moveSpeed)
+                    + GetAdditions(type)) * GetMultiplier(type);
                 break;
-
-            // Upgrades the speed 
             case Stat.DashSpeed:
-                controller.dashSpeed = Deck.CalculateStat(stat, shipData.dashSpeed);
+                controller.dashSpeed = (Deck.CalculateStat(type, shipData.dashSpeed)
+                    + GetAdditions(type)) * GetMultiplier(type);
                 break;
-
-            // Upgrades the damage 
-            case Stat.Damage:
-                damage = Deck.CalculateStat(stat, weapon.damage);
-                break;
-
-            // Increases firerate 
-            case Stat.Cooldown:
-                cooldown = Mathf.Clamp(Deck.CalculateStat(stat, 
-                    weapon.cooldown), 0.05f, Mathf.Infinity);
-                break;
-
-            // Increases bullets
-            case Stat.Bullets:
-                bullets = Deck.CalculateStat(stat, weapon.bullets);
-                break;
-
-            // Increases piercing rounds
-            case Stat.Pierces:
-                pierces = Deck.CalculateStat(stat, weapon.pierces);
-                break;
-
-            // Increases bullet lifetime
-            case Stat.Lifetime:
-                lifetime = Deck.CalculateStat(stat, weapon.lifetime);
-                break;
-
-            // Increases accuracy
-            case Stat.Spread:
-                bloom = Mathf.Clamp(Deck.CalculateStat(stat,
-                    weapon.bloom), 0f, Mathf.Infinity);
-                break;
-
-            // Increase XP gain
             case Stat.XPGain:
-                xpReceiver.SetXPMultiplier(Deck.CalculateStat(stat, 1));
+                xpReceiver.SetXPMultiplier((Deck.CalculateStat(type, 1)
+                    + GetAdditions(type)) * GetMultiplier(type));
                 break;
-
-            // Increase regen rate
             case Stat.Regen:
-                regenAmount = Deck.CalculateStat(stat, shipData.regenAmount);
+                regenAmount = (Deck.CalculateStat(type, shipData.regenAmount)
+                    + GetAdditions(type)) * GetMultiplier(type);
                 break;
-
-            // Increase regen rate
-            case Stat.Knockback:
-                knockback = Deck.CalculateStat(stat, weapon.knockback);
-                break;
-
-            // Increase splitshots
             case Stat.Splitshot:
-                splitshots = Deck.CalculateStat(stat, 0);
+                splitshots = (Deck.CalculateStat(type, 0)
+                    + GetAdditions(type)) * GetMultiplier(type);
                 break;
-
-            // Increase explosive rounds
             case Stat.Explosive:
-                explosiveRounds = Deck.GetAdditions(stat) > 0;
+                explosiveRounds = Deck.GetAdditions(type) > 0 || GetAdditions(type) > 0;
                 break;
-                
-            // Increase explosive rounds
             case Stat.EnemyDmg:
-                enemyDamageMultiplier = Deck.CalculateStat(stat, 1);
+                enemyDamageMultiplier = (Deck.CalculateStat(type, 1)
+                    + GetAdditions(type)) * GetMultiplier(type);
                 break;
-
-            // Increases bullet size
-            case Stat.BulletSize:
-                BulletHandler.projectileSize = Deck.CalculateStat(stat, 1);
-                size = weapon.bulletSize + BulletHandler.projectileSize - 1;
-                break;
-
-            // Increases bullet size
-            case Stat.StunLength:
-                stunLength = Deck.CalculateStat(stat, weapon.stun);
-                break;
-
-            // Increases bullet size
-            case Stat.Criticals:
-                DamageHandler.critChance = Deck.CalculateStat(stat, 0.1f);
-                break;
-
-            // Increases bullet size
             case Stat.Syphon:
-                EnemyHandler.syphon = Deck.CalculateStat(stat, 0f);
+                EnemyHandler.syphon = (Deck.CalculateStat(type, 0f)
+                    + GetAdditions(type)) * GetMultiplier(type);
                 break;
-
-            // Increases bullet size
             case Stat.Buckshot:
-                buckshots = (int)Deck.CalculateStat(stat, 0f);
+                buckshots = (int)((Deck.CalculateStat(type, 0)
+                    + GetAdditions(type)) * GetMultiplier(type));
                 break;
         }
     }
