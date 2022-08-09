@@ -8,7 +8,7 @@ public class AutoShooter : Weapon
     protected float weaponCooldown = 0;
     protected int buckshots = 0, buckshotCounter = 0;
     private float vertical, horizontal;
-
+    
     // Set the SO reference
     public override void Setup(WeaponData data, Transform target = null)
     {
@@ -49,7 +49,13 @@ public class AutoShooter : Weapon
             for (int i = 0; i < bulletsToFire; i++)
             {
                 BulletHandler.active.CreateBullet(this, weapon, transform.position, transform.rotation, weapon.bullets,
-                    weapon.bloom, BulletHandler.projectileSize, weapon.material, false, explosiveRounds);
+                    weapon.bloom, size, weapon.material, false, explosiveRounds);
+            }
+
+            for (int i = 0; i < reverseShots; i++)
+            {
+                BulletHandler.active.CreateBullet(this, weapon, transform.position, Quaternion.Inverse(transform.rotation),
+                    weapon.bullets, weapon.bloom, size, weapon.material, false, explosiveRounds);
             }
 
             if (cooldown < 0.05f) weaponCooldown = 0.05f;

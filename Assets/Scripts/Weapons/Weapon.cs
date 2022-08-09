@@ -25,7 +25,8 @@ public class Weapon : MonoBehaviour
     // Weapon variables
     [HideInInspector]
     public float damage, damageMultiplier = 1f, cooldown, moveSpeed, bloom, pierces, bullets, lifetime,
-        range, knockback, splitshots, size, stunLength, critical, rotateSpeed, speedDamageMultiplier;
+        range, knockback, splitshots, size, stunLength, critical, rotateSpeed, speedDamageMultiplier,
+        reverseShots = 0;
     [HideInInspector]
     public bool explosiveRounds, speedAffectsDamage = false, informOnHit = false;
 
@@ -68,19 +69,20 @@ public class Weapon : MonoBehaviour
             if (upgrade.positiveMultiplier) AddMultiplier(upgrade.positiveStat, upgrade.qualities[quality].positiveEffect);
             else AddAddition(upgrade.positiveStat, upgrade.qualities[quality].positiveEffect);
 
-            // Add negative effect
-            if (upgrade.negativeMultiplier) AddMultiplier(upgrade.negativeStat, upgrade.qualities[quality].negativeEffect);
-            else AddAddition(upgrade.negativeStat, upgrade.qualities[quality].negativeEffect);
-
             // Update stats
             UpdateStat(upgrade.positiveStat);
-            UpdateStat(upgrade.negativeStat);
         }
         else
         {
-            
-            // Do custom stuff here
+            if (upgrade.qualities[quality].special == UpgradeData.Special.Sense) reverseShots += 1;
         }
+
+        // Add negative effect
+        if (upgrade.negativeMultiplier) AddMultiplier(upgrade.negativeStat, upgrade.qualities[quality].negativeEffect);
+        else AddAddition(upgrade.negativeStat, upgrade.qualities[quality].negativeEffect);
+
+        // Update negative effect
+        UpdateStat(upgrade.negativeStat);
     }
 
     // On add card event

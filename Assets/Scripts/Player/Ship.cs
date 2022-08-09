@@ -92,6 +92,7 @@ public class Ship : Weapon
     {
         // Reset effects always
         Effects.ToggleMainGlitchEffect(false);
+        Events.active.onAddSynergy += AddSynergy;
 
         // Reset ship flags
         lowHealth = false;
@@ -215,7 +216,7 @@ public class Ship : Weapon
             fill.color = defaultColor;
         }
     }
-
+    
     // Update method 
     public void Update()
     {
@@ -340,6 +341,45 @@ public class Ship : Weapon
         }
     }
 
+    public void AddSynergy(SynergyData synergy)
+    {
+        // Remove old card instances
+        if (synergy.removeCardOne) RemoveCardInstance(synergy.cardOne);
+        if (synergy.removeCardTwo) RemoveCardInstance(synergy.cardTwo);
+        AddCard(synergy.outputCard);
+    }
+
+    public void RemoveCardInstance(CardData card)
+    {
+        if (card is WeaponData)
+        {
+            WeaponData weapon = (WeaponData)card;
+            if (weaponInstances.ContainsKey(weapon)) 
+            { 
+                Destroy(weaponInstances[weapon].gameObject);
+                weaponInstances.Remove(weapon);
+            }
+        }
+        else if (card is HelperData)
+        {
+            HelperData helper = (HelperData)card;
+            if (helperInstances.ContainsKey(helper))
+            {
+                Destroy(helperInstances[helper].gameObject);
+                helperInstances.Remove(helper);
+            }
+        }
+        else if (card is SecondaryData)
+        {
+            SecondaryData secondary = (SecondaryData)card;
+            if (secondaryInstances.ContainsKey(secondary))
+            {
+                Destroy(secondaryInstances[secondary].gameObject);
+                secondaryInstances.Remove(secondary);
+            }
+        }
+    }
+
     // Set the secondary weapon
     public void SetSecondary(SecondaryData secondary)
     {
@@ -398,6 +438,16 @@ public class Ship : Weapon
                     model.rotation, bulletsToFire, bloom, size, defaultGlow, true, explosiveRounds);
             }
             shipCooldown = cooldown;
+        }
+    }
+
+    // Set drone targets
+    public override void TargetHit(Entity entity)
+    {
+        if (drones != null)
+        {
+            foreach (Drone drone in drones)
+                drone.SetTarget(entity);
         }
     }
 
@@ -492,7 +542,7 @@ public class Ship : Weapon
         if (toggle) healthCanvas.alpha = 1f;
         else healthCanvas.alpha = 0f;
     }
-
+    
     private static void UpdateHealth()
     {
         // Update health UI bar

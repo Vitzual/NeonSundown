@@ -15,6 +15,7 @@ public class TrackerDrone : Drone
     // Set move speed
     public override void Setup(Ship ship, HelperData data)
     {
+        target = ship.transform;
         base.Setup(ship, data);
         UpdateStat(Stat.Damage);
     }
@@ -52,8 +53,8 @@ public class TrackerDrone : Drone
         // Check if enemy is not null
         if (enemy != null)
         {
-            cooldown = 0.5f;
-            enemy.Damage(damage, -1500f);
+            //cooldown = 0.5f;
+            enemy.Damage(damage, knockback);
             Knockback(-1500f, enemy.transform.position);
             if (hitSound != null) AudioPlayer.Play(hitSound);
         }

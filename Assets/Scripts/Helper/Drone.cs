@@ -8,15 +8,16 @@ public class Drone : Helper
     public float damage;
     public float movementSpeed;
     public float rotationSpeed;
+    public float knockback;
     public float range = 35f;
     protected float directionCooldown;
-
+    
     // Setup method
     public override void Setup(Ship ship, HelperData data)
     {
+        base.Setup(ship, data);
         UpdateStat(Stat.MoveSpeed);
         UpdateStat(Stat.RotationSpeed);
-        base.Setup(ship, data);
     }
 
     // Move totem around randomly
@@ -73,6 +74,11 @@ public class Drone : Helper
 
             case Stat.RotationSpeed:
                 rotationSpeed = (Deck.CalculateStat(type, data.rotationSpeed)
+                    + GetAdditions(type)) * GetMultiplier(type);
+                break;
+
+            case Stat.Knockback:
+                knockback = (Deck.CalculateStat(type, data.knockback)
                     + GetAdditions(type)) * GetMultiplier(type);
                 break;
 
