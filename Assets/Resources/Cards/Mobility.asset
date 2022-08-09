@@ -16,6 +16,10 @@ MonoBehaviour:
   createdAtTicks: 637796539977808474
   name: Mobility
   description: Increases overall speed by 15% (movement and dash)
+  enableDescriptionOverrides: 0
+  levelDescriptionOverrides:
+    keys: 
+    values: []
   sprite: {fileID: 21300000, guid: 42e74e9a9fdc8cc4291162210eec8b16, type: 3}
   color: {r: 0.4669811, g: 1, b: 0.6467174, a: 1}
   maximumAmount: 3
@@ -23,12 +27,14 @@ MonoBehaviour:
   canDrop: 1
   isUnlocked: 0
   isShipOnlyCard: 1
+  isUpgradeable: 0
+  upgrades: []
   stats:
   - type: 3
     modifier: 1.15
     multiply: 1
     positive: 1
   - type: 4
-    modifier: 115
+    modifier: 1.15
     multiply: 1
     positive: 1

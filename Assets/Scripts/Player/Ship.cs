@@ -678,7 +678,8 @@ public class Ship : Weapon
                 break;
             case Stat.Health:
                 float oldHealth = maxHealth;
-                maxHealth = Deck.CalculateStat(type, shipData.startingHealth);
+                maxHealth = (Deck.CalculateStat(type, shipData.startingHealth)
+                    + GetAdditions(type)) * GetMultiplier(type);
                 health += maxHealth - oldHealth;
                 UpdateHealth();
                 break;
@@ -796,7 +797,7 @@ public class Ship : Weapon
 
             // Get bullet size
             case Stat.BulletSize:
-                return BulletHandler.projectileSize;
+                return size;
 
             // Get bullet size
             case Stat.StunLength:

@@ -66,8 +66,10 @@ public class Weapon : MonoBehaviour
         if (upgrade.qualities[quality].special == UpgradeData.Special.None)
         {
             // Add positive effect
+            Debug.Log(upgrade.positiveStat.ToString() + " Multiplier: " + GetMultiplier(upgrade.positiveStat));
             if (upgrade.positiveMultiplier) AddMultiplier(upgrade.positiveStat, upgrade.qualities[quality].positiveEffect);
             else AddAddition(upgrade.positiveStat, upgrade.qualities[quality].positiveEffect);
+            Debug.Log(upgrade.positiveStat.ToString() + " New Multiplier: " + GetMultiplier(upgrade.positiveStat));
 
             // Update stats
             UpdateStat(upgrade.positiveStat);
@@ -303,7 +305,7 @@ public class Weapon : MonoBehaviour
     public void AddMultiplier(Stat type, float amount)
     {
         if (multipliers.ContainsKey(type))
-            multipliers[type] += amount;
+            multipliers[type] *= amount;
         else multipliers.Add(type, amount);
     }
 

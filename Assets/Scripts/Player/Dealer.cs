@@ -476,6 +476,9 @@ public class Dealer : MonoBehaviour
     // Open dealer
     public void OpenDealer()
     {
+        // Close upgrades
+        ToggleUpgrades(false);
+
         // Set controller controls
         controlsOne.SetActive(Controller.isControllerConnected);
         controlsTwo.SetActive(Controller.isControllerConnected);
@@ -543,6 +546,7 @@ public class Dealer : MonoBehaviour
         foreach(Card card in cardSlots)
             card.ResetCard();
 
+        // Close upgrades
         ToggleUpgrades(false);
 
         // Set the canvas component

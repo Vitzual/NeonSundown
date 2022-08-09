@@ -90,7 +90,7 @@ public class Deck : MonoBehaviour
         }
     }
 
-    // Upgrades a carda
+    // Upgrades a card
     public void UpgradeCard(CardData card, UpgradeData upgrade, int quality)
     {
         if (card is WeaponData)

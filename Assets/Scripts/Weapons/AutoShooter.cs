@@ -79,9 +79,6 @@ public class AutoShooter : Weapon
                 splitshots = (Deck.CalculateStat(type, 0)
                     + GetAdditions(type)) * GetMultiplier(type);
                 break;
-            case Stat.Explosive:
-                explosiveRounds = explosiveRounds || Deck.GetAdditions(type) > 1;
-                break;
             default:
                 base.UpdateStat(type);
                 break;
