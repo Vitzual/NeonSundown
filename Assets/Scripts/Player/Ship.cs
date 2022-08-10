@@ -5,18 +5,12 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class Ship : Weapon
-{
-    // Auto collect XP flag
-    public static bool warrior = false;
-    public static bool champion = false;
-    public static bool lasers = false;
-    
+{   
     // Controller associated with the player
     private Controller controller;
     private XPReceiver xpReceiver;
     public GameObject autoFireObj;
     private bool autoFire = false;
-    public bool _lasers = false;
     private static bool lowHealth = false;
 
     // Player model and data
@@ -53,6 +47,11 @@ public class Ship : Weapon
     private int buckshots = 0;
     private int buckshotCountdown = 4;
     private bool droneShip = false;
+    private bool energyBullets = false;
+    private bool lasers = false;
+    private bool beam = false;
+    private bool warrior = false;
+    private bool champion = false;
 
     // Ship specific stats
     private float regenAmount;
@@ -93,12 +92,10 @@ public class Ship : Weapon
         // Reset effects always
         Effects.ToggleMainGlitchEffect(false);
         Events.active.onAddSynergy += AddSynergy;
+        Events.active.onResetCooldown += ResetCooldown;
 
         // Reset ship flags
         lowHealth = false;
-        warrior = false;
-        champion = false;
-        lasers = _lasers;
         healthBar = _healthBar;
         healthCanvas = _healthCanvas;
 
@@ -122,7 +119,18 @@ public class Ship : Weapon
         // Setup the ship data
         shipData = data;
         weapon = data.weapon;
-        SetupShipModel();
+
+        // Set border and fill models
+        border.sprite = shipData.border;
+        fill.sprite = shipData.fill;
+
+        // Set positioning of models
+        border.transform.localPosition = shipData.barrelPosition;
+        fill.transform.localPosition = shipData.modelOffset;
+        border.transform.localScale = shipData.playerSize;
+        fill.transform.localScale = shipData.playerSize;
+
+        // Setup ship coloring
         SetupShipColoring(Settings.shipColoring);
 
         // Get controller instance
@@ -133,16 +141,14 @@ public class Ship : Weapon
         controller.canRotate = shipData.playerControlledRotation;
         controller.isChargeShip = shipData.chargingShip;
         
-        // Check if charing ship
-        if (shipData.chargingShip)
-            ChromaHandler.active.Setup(ChromaType.Warrior);
-
         // Setup base stuff
         health = shipData.startingHealth;
         maxHealth = health;
         
         // Setup ship specific variables
         regenAmount = shipData.regenAmount;
+        warrior = shipData.chargingShip;
+        beam = shipData.weapon.energyBeam;
 
         // Set weapon variables
         if (shipData.weapon != null)
@@ -188,20 +194,6 @@ public class Ship : Weapon
             Deck.active.AddCard(debugCard);
     }
 
-    // Setup ship model
-    public void SetupShipModel()
-    {
-        // Set border and fill models
-        border.sprite = shipData.border;
-        fill.sprite = shipData.fill;
-
-        // Set positioning of models
-        border.transform.localPosition = shipData.barrelPosition;
-        fill.transform.localPosition = shipData.modelOffset;
-        border.transform.localScale = shipData.playerSize;
-        fill.transform.localScale = shipData.playerSize;
-    }
-
     // Setup ship coloring
     public void SetupShipColoring(bool useColoring)
     {
@@ -231,7 +223,10 @@ public class Ship : Weapon
         }
 
         // Check if LMB input detected
-        if ((autoFire || Input.GetKey(Keybinds.primary) || Input.GetAxis("Primary") > 0.5) && shipData.canFire) Use();
+        if ((autoFire || Input.GetKey(Keybinds.primary) || (Controller.isControllerConnected &&
+            Input.GetAxis("Primary") > 0.5)) && shipData.canFire) Use();
+        if ((Input.GetKeyUp(Keybinds.primary) || (Controller.isControllerConnected && 
+            Input.GetAxis("Primary") <= 0.5f)) && beam) BulletHandler.active.EndBeam();
         if (shipCooldown > 0) shipCooldown -= Time.deltaTime;
         
         // If can regen, regenerate
@@ -251,153 +246,6 @@ public class Ship : Weapon
         foreach (KeyValuePair<WeaponData, Weapon> weapon in weaponInstances) weapon.Value.Use();
         foreach (KeyValuePair<HelperData, Helper> helper in helperInstances) helper.Value.CustomUpdate();
         foreach (KeyValuePair<SecondaryData, Secondary> secondary in secondaryInstances) secondary.Value.CustomUpdate();
-    }
-
-    public override void AddCard(CardData card)
-    {
-        // Check card type
-        if (card is StatData)
-        {
-            // Get weapon data
-            StatData statData = (StatData)card;
-
-            // Add card
-            Debug.Log("Adding stat card " + statData.name + " to deck");
-            foreach (StatValue stat in statData.stats) UpdateStat(stat.type);
-
-            // Update all drones
-            if (!card.isShipOnlyCard && drones != null)
-            {
-                // Check for multishot
-                int multishots = 0;
-
-                // Iterate through all drones and update their stats
-                foreach (Drone drone in drones)
-                {
-                    foreach (StatValue stat in statData.stats)
-                    {
-                        drone.UpdateStat(stat.type);
-                        if (multishots == 0 && stat.type == Stat.Bullets && !stat.multiply)
-                            multishots = (int)stat.modifier;
-                    }
-                }
-
-                // Add new drone if multishot
-                if (multishots != 0)
-                {
-                    for (int i = 0; i < multishots; i++)
-                    {
-                        Vector2 spawnPos = new Vector2(transform.position.x + Random.Range(-1f, 1f),
-                            transform.position.y + Random.Range(-1f, 1f));
-                        Drone newDrone = Instantiate(shipData.drone.obj, spawnPos, transform.rotation).GetComponent<Drone>();
-                        newDrone.Setup(this, shipData.drone);
-                        drones.Add(newDrone);
-                    }
-                }
-            }
-        }
-        else if (card is WeaponData)
-        {
-            // Get weapon data
-            WeaponData weapon = (WeaponData)card;
-            if (weaponInstances.ContainsKey(weapon)) return;
-
-            // Create the new weapon instance
-            Debug.Log("Adding weapon card " + weapon.name + " to deck");
-            Weapon newWeapon = Instantiate(weapon.obj, transform.position, Quaternion.identity).GetComponent<Weapon>();
-            if (weapon.setPlayerAsParent) newWeapon.transform.SetParent(transform);
-            newWeapon.Setup(weapon, transform);
-            weaponInstances.Add(weapon, newWeapon);
-        }
-        else if (card is HelperData)
-        {
-            // Get weapon data
-            HelperData helper = (HelperData)card;
-            if (helperInstances.ContainsKey(helper)) return;
-
-            Debug.Log("Adding helper card " + helper.name + " to deck");
-            Helper newHelper = Instantiate(helper.obj, transform.position, Quaternion.identity).GetComponent<Helper>();
-            newHelper.Setup(this, helper);
-            helperInstances.Add(helper, newHelper);
-        }
-        else if (card is SecondaryData)
-        {
-            // Get weapon data
-            SecondaryData secondary = (SecondaryData)card;
-            if (secondaryInstances.ContainsKey(secondary)) return;
-
-            Debug.Log("Adding secondary card " + secondary.name + " to deck");
-            Secondary newSecondary = Instantiate(secondary.obj, transform.position, Quaternion.identity).GetComponent<Secondary>();
-            newSecondary.transform.SetParent(transform);
-            newSecondary.Setup(this, secondary);
-            secondaryInstances.Add(secondary, newSecondary);
-        }
-        else if (card is ChromaData)
-        {
-            // Get weapon data
-            ChromaData chroma = (ChromaData)card;
-
-            Debug.Log("Adding chroma card " + chroma.name + " to deck");
-            ChromaHandler.active.Setup(chroma.type);
-        }
-    }
-
-    public void AddSynergy(SynergyData synergy)
-    {
-        // Remove old card instances
-        if (synergy.removeCardOne) RemoveCardInstance(synergy.cardOne);
-        if (synergy.removeCardTwo) RemoveCardInstance(synergy.cardTwo);
-        AddCard(synergy.outputCard);
-
-        // Pass all card one upgrades to synergy
-        List<Deck.UpgradeInfo> upgrades = Deck.GetUpgrades(synergy.cardOne);
-        if (upgrades != null && upgrades.Count > 0)
-            foreach (Deck.UpgradeInfo upgrade in upgrades)
-                Deck.active.UpgradeCard(synergy.outputCard, upgrade.upgrade, upgrade.quality);
-
-        // Pass all card two upgrades to synergy
-        upgrades = Deck.GetUpgrades(synergy.cardTwo);
-        if (upgrades != null && upgrades.Count > 0)
-            foreach (Deck.UpgradeInfo upgrade in upgrades)
-                Deck.active.UpgradeCard(synergy.outputCard, upgrade.upgrade, upgrade.quality);
-    }
-
-    public void RemoveCardInstance(CardData card)
-    {
-        if (card is WeaponData)
-        {
-            WeaponData weapon = (WeaponData)card;
-            if (weaponInstances.ContainsKey(weapon)) 
-            { 
-                Destroy(weaponInstances[weapon].gameObject);
-                weaponInstances.Remove(weapon);
-            }
-        }
-        else if (card is HelperData)
-        {
-            HelperData helper = (HelperData)card;
-            if (helperInstances.ContainsKey(helper))
-            {
-                Destroy(helperInstances[helper].gameObject);
-                helperInstances.Remove(helper);
-            }
-        }
-        else if (card is SecondaryData)
-        {
-            SecondaryData secondary = (SecondaryData)card;
-            if (secondaryInstances.ContainsKey(secondary))
-            {
-                Destroy(secondaryInstances[secondary].gameObject);
-                secondaryInstances.Remove(secondary);
-            }
-        }
-    }
-
-    // Set the secondary weapon
-    public void SetSecondary(SecondaryData secondary)
-    {
-        // Remove old instance
-        this.secondary = secondary;
     }
 
     // Shoot method
@@ -429,29 +277,33 @@ public class Ship : Weapon
             }
 
             // Create bullet
-            if (lasers)
+            if (beam)
             {
-                if (Settings.shipColoring) BulletHandler.active.CreateLaserBullet(this, shipData.weapon, shipData.weapon.material,
-                    barrel, size, 100f, bulletsToFire, explosiveRounds);
-                else BulletHandler.active.CreateLaserBullet(this, shipData.weapon, defaultGlow,
+                BulletHandler.active.CreateLaserBullet(this, shipData.weapon, border.material,
+                    barrel, size, 100f, bulletsToFire, explosiveRounds, true);
+            }
+            else if (lasers)
+            {
+                BulletHandler.active.CreateLaserBullet(this, shipData.weapon, border.material,
                     barrel, size, 100f, bulletsToFire, explosiveRounds);
             }
-            else if (BulletHandler.energyBullets)
+            else if (energyBullets)
             {
-                if (Settings.shipColoring) BulletHandler.active.CreateEnergyBullet(this, shipData.weapon, barrel.position,
-                    model.rotation, bulletsToFire, bloom, size, shipData.weapon.material, true, explosiveRounds);
-                else BulletHandler.active.CreateEnergyBullet(this, shipData.weapon, barrel.position,
-                    model.rotation, bulletsToFire, bloom, size, defaultGlow, true, explosiveRounds);
+                BulletHandler.active.CreateEnergyBullet(this, shipData.weapon, barrel.position, model.rotation, 
+                    bulletsToFire, bloom, size, border.material, true, explosiveRounds, autoLockRounds);
             }
             else
             {
-                if (Settings.shipColoring) BulletHandler.active.CreateBullet(this, shipData.weapon, barrel.position,
-                    model.rotation, bulletsToFire, bloom, size, shipData.weapon.material, true, explosiveRounds);
-                else BulletHandler.active.CreateBullet(this, shipData.weapon, barrel.position,
-                    model.rotation, bulletsToFire, bloom, size, defaultGlow, true, explosiveRounds);
+                BulletHandler.active.CreateBullet(this, shipData.weapon, barrel.position, model.rotation, 
+                    bulletsToFire, bloom, size, border.material, true, explosiveRounds, autoLockRounds);
             }
             shipCooldown = cooldown;
         }
+    }
+
+    public void ResetCooldown()
+    {
+        shipCooldown = cooldown;
     }
 
     // Set drone targets
@@ -949,11 +801,185 @@ public class Ship : Weapon
         else return null;
     }
 
+    // Set the secondary weapon
+    public void SetSecondary(SecondaryData secondary)
+    {
+        // Remove old instance
+        this.secondary = secondary;
+    }
+
     // Get secondary
     public Secondary GetSecondary(SecondaryData secondary)
     {
         if (secondaryInstances.ContainsKey(secondary))
             return secondaryInstances[secondary];
         else return null;
+    }
+
+    public override void AddCard(CardData card)
+    {
+        // Check card type
+        if (card is StatData)
+        {
+            // Get weapon data
+            StatData statData = (StatData)card;
+
+            // Add card
+            Debug.Log("Adding stat card " + statData.name + " to deck");
+            foreach (StatValue stat in statData.stats) UpdateStat(stat.type);
+
+            // Update all drones
+            if (!card.isShipOnlyCard && drones != null)
+            {
+                // Check for multishot
+                int multishots = 0;
+
+                // Iterate through all drones and update their stats
+                foreach (Drone drone in drones)
+                {
+                    foreach (StatValue stat in statData.stats)
+                    {
+                        drone.UpdateStat(stat.type);
+                        if (multishots == 0 && stat.type == Stat.Bullets && !stat.multiply)
+                            multishots = (int)stat.modifier;
+                    }
+                }
+
+                // Add new drone if multishot
+                if (multishots != 0)
+                {
+                    for (int i = 0; i < multishots; i++)
+                    {
+                        Vector2 spawnPos = new Vector2(transform.position.x + Random.Range(-1f, 1f),
+                            transform.position.y + Random.Range(-1f, 1f));
+                        Drone newDrone = Instantiate(shipData.drone.obj, spawnPos, transform.rotation).GetComponent<Drone>();
+                        newDrone.Setup(this, shipData.drone);
+                        drones.Add(newDrone);
+                    }
+                }
+            }
+        }
+        else if (card is WeaponData)
+        {
+            // Get weapon data
+            WeaponData weapon = (WeaponData)card;
+            if (weaponInstances.ContainsKey(weapon)) return;
+
+            // Create the new weapon instance
+            Debug.Log("Adding weapon card " + weapon.name + " to deck");
+            Weapon newWeapon = Instantiate(weapon.obj, transform.position, Quaternion.identity).GetComponent<Weapon>();
+            if (weapon.setPlayerAsParent) newWeapon.transform.SetParent(transform);
+            newWeapon.Setup(weapon, transform);
+            weaponInstances.Add(weapon, newWeapon);
+        }
+        else if (card is HelperData)
+        {
+            // Get weapon data
+            HelperData helper = (HelperData)card;
+            if (helperInstances.ContainsKey(helper)) return;
+
+            Debug.Log("Adding helper card " + helper.name + " to deck");
+            Helper newHelper = Instantiate(helper.obj, transform.position, Quaternion.identity).GetComponent<Helper>();
+            newHelper.Setup(this, helper);
+            helperInstances.Add(helper, newHelper);
+        }
+        else if (card is SecondaryData)
+        {
+            // Get weapon data
+            SecondaryData secondary = (SecondaryData)card;
+            if (secondaryInstances.ContainsKey(secondary)) return;
+
+            Debug.Log("Adding secondary card " + secondary.name + " to deck");
+            Secondary newSecondary = Instantiate(secondary.obj, transform.position, Quaternion.identity).GetComponent<Secondary>();
+            newSecondary.transform.SetParent(transform);
+            newSecondary.Setup(this, secondary);
+            secondaryInstances.Add(secondary, newSecondary);
+        }
+        else if (card is ChromaData)
+        {
+            // Get chroma data
+            ChromaData chroma = (ChromaData)card;
+            SetupChroma(chroma.type);
+        }
+    }
+
+    public void AddSynergy(SynergyData synergy)
+    {
+        // Remove old card instances
+        if (synergy.removeCardOne) RemoveCardInstance(synergy.cardOne);
+        if (synergy.removeCardTwo) RemoveCardInstance(synergy.cardTwo);
+        AddCard(synergy.outputCard);
+
+        // Pass all card one upgrades to synergy
+        List<Deck.UpgradeInfo> upgrades = Deck.GetUpgrades(synergy.cardOne);
+        if (upgrades != null && upgrades.Count > 0)
+            foreach (Deck.UpgradeInfo upgrade in upgrades)
+                Deck.active.UpgradeCard(synergy.outputCard, upgrade.upgrade, upgrade.quality);
+
+        // Pass all card two upgrades to synergy
+        upgrades = Deck.GetUpgrades(synergy.cardTwo);
+        if (upgrades != null && upgrades.Count > 0)
+            foreach (Deck.UpgradeInfo upgrade in upgrades)
+                Deck.active.UpgradeCard(synergy.outputCard, upgrade.upgrade, upgrade.quality);
+    }
+
+    public void RemoveCardInstance(CardData card)
+    {
+        if (card is WeaponData)
+        {
+            WeaponData weapon = (WeaponData)card;
+            if (weaponInstances.ContainsKey(weapon))
+            {
+                Destroy(weaponInstances[weapon].gameObject);
+                weaponInstances.Remove(weapon);
+            }
+        }
+        else if (card is HelperData)
+        {
+            HelperData helper = (HelperData)card;
+            if (helperInstances.ContainsKey(helper))
+            {
+                Destroy(helperInstances[helper].gameObject);
+                helperInstances.Remove(helper);
+            }
+        }
+        else if (card is SecondaryData)
+        {
+            SecondaryData secondary = (SecondaryData)card;
+            if (secondaryInstances.ContainsKey(secondary))
+            {
+                Destroy(secondaryInstances[secondary].gameObject);
+                secondaryInstances.Remove(secondary);
+            }
+        }
+    }
+
+    public void SetupChroma(ChromaType type)
+    {
+        // Set chroma data
+        switch (type)
+        {
+            case ChromaType.XPHealing:
+                xpReceiver.xpHealing = true;
+                break;
+            case ChromaType.Warrior:
+                warrior = true;
+                break;
+            case ChromaType.Champion:
+                champion = true;
+                break;
+            case ChromaType.EnergyBullets:
+                energyBullets = true;
+                break;
+            case ChromaType.AutoLock:
+                autoLockRounds = true;
+                break;
+            case ChromaType.Lasers:
+                lasers = true;
+                break;
+            case ChromaType.InverseExplosions:
+                knockback = -knockback;
+                break;
+        }
     }
 }

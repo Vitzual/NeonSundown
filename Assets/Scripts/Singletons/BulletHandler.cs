@@ -6,22 +6,22 @@ public class BulletHandler : MonoBehaviour
 {
     // Active instance
     public static BulletHandler active;
-    public static bool stickyBullets = false;
-    public static bool energyBullets = false;
-    public static bool autoLockBullets = false;
 
     // List of all active bullets
     public List<Bullet> bullets;
     public Bullet energyBullet;
     public Laser laserBullet;
+    public Beam beamBullet;
     public AudioClip laserSound;
+
+    // Runtime variables
+    private List<Beam> beams;
 
     // Start method
     public void Start() 
     {
-        active = this; 
-        stickyBullets = false;
-        energyBullets = false;
+        active = this;
+        beams = new List<Beam>();
     }
 
     // Move normal enemies
@@ -29,6 +29,20 @@ public class BulletHandler : MonoBehaviour
     {
         // Check if something is open
         if (Dealer.isOpen) return;
+
+        // Update timer
+        if (beams.Count > 0)
+        {
+            for (int i = 0; i < beams.Count; i++)
+            {
+                if (beams[i] != null) beams[i].Move();
+                else
+                {
+                    beams.RemoveAt(i);
+                    i--;
+                }
+            }
+        }
 
         // Move enemies each frame towards their target
         for (int a = 0; a < bullets.Count; a++)
@@ -46,8 +60,9 @@ public class BulletHandler : MonoBehaviour
     }
 
     // Create a new active bullet instance
-    public void CreateBullet(Weapon parent, WeaponData weapon, Vector2 position, Quaternion rotation, int amount, float bloom, 
-        float bulletSize, Material material, bool overrideAudioCooldown = false, bool explosiveRound = false, Transform target = null)
+    public void CreateBullet(Weapon parent, WeaponData weapon, Vector2 position, Quaternion rotation,
+        int amount, float bloom, float bulletSize, Material material, bool overrideAudioCooldown = false, 
+        bool explosiveRound = false, bool autoLockRound = false, Transform target = null)
     {
         // Loop depending on bullet amount
         for (int i = 0; i < amount; i++)
@@ -66,7 +81,7 @@ public class BulletHandler : MonoBehaviour
 
             // Attempt to set enemy variant
             Bullet bullet = lastObj.GetComponent<Bullet>();
-            bullet.Setup(parent, weapon, material, target, false, explosiveRound, autoLockBullets);
+            bullet.Setup(parent, weapon, material, target, false, explosiveRound, autoLockRound);
 
             // Add to enemies list
             bullets.Add(bullet);
@@ -78,8 +93,9 @@ public class BulletHandler : MonoBehaviour
     }
 
     // Create a new active bullet instance
-    public void CreateEnergyBullet(Weapon parent, WeaponData weapon, Vector2 position, Quaternion rotation, int amount, float bloom, 
-        float bulletSize, Material material, bool overrideAudioCooldown = false, bool explosiveRound = false, Transform target = null)
+    public void CreateEnergyBullet(Weapon parent, WeaponData weapon, Vector2 position, Quaternion rotation, 
+        int amount, float bloom, float bulletSize, Material material, bool overrideAudioCooldown = false, 
+        bool explosiveRound = false, bool autoLockRound = false, Transform target = null)
     {
         // Loop depending on bullet amount
         for (int i = 0; i < amount; i++)
@@ -98,7 +114,7 @@ public class BulletHandler : MonoBehaviour
 
             // Attempt to set enemy variant
             Bullet bullet = lastObj.GetComponent<Bullet>();
-            bullet.Setup(parent, weapon, material, target, false, explosiveRound, autoLockBullets);
+            bullet.Setup(parent, weapon, material, target, false, explosiveRound, autoLockRound);
 
             // Add to enemies list
             bullets.Add(bullet);
@@ -111,7 +127,7 @@ public class BulletHandler : MonoBehaviour
 
     // Creates a splitshot bullet instance
     public void CreateSplitshot(Weapon parent, WeaponData weapon, Vector2 position, Quaternion rotation, float bulletSize,
-        int amount, Material material, float rotationAmount, bool explosiveRound = false)
+        int amount, Material material, float rotationAmount, bool explosiveRound = false, bool autoLockRound = false)
     {
         // Loop depending on bullet amount
         for (int i = 0; i < amount; i++)
@@ -129,7 +145,7 @@ public class BulletHandler : MonoBehaviour
             
             // Attempt to set enemy variant
             Bullet bullet = lastObj.GetComponent<Bullet>();
-            bullet.Setup(parent, weapon, material, null, true, explosiveRound, autoLockBullets);
+            bullet.Setup(parent, weapon, material, null, true, explosiveRound, autoLockRound);
 
             // Add to enemies list
             bullets.Add(bullet);
@@ -138,26 +154,60 @@ public class BulletHandler : MonoBehaviour
 
     // Creates a laser bullet
     public void CreateLaserBullet(Weapon parent, WeaponData weapon, Material material, Transform barrel, float bulletSize,
-        float length, int amount, bool explosive)
+        float length, int amount, bool explosive, bool isBeam = false)
     {
+        // Check if already firing
+        if (isBeam && beams.Count > 0) return;
+
         // Calculate spread
         float spread = 0;
 
         // Check if amount greater than 1
-        if (amount > 1) spread -= (2.5f * amount) -2.5f;
+        if (amount > 1) spread -= (2.5f * amount) - 2.5f;
 
         // Create laser shots
         for (int i = 0; i < amount; i++)
         {
+            // Set beam sound effect
+            if (isBeam)
+            {
+                Beam newBeam = Instantiate(beamBullet, Vector3.zero, Quaternion.identity);
+                newBeam.SetupBeam(barrel, bulletSize, length, spread, weapon.bulletSound, material, i == 0);
+                newBeam.Setup(parent, weapon, material, null, false, explosive);
+                beams.Add(newBeam);
+            }
+
             // Create line
-            Laser newLaser = Instantiate(laserBullet, Vector3.zero, Quaternion.identity);
-            newLaser.SetupLaser(barrel, bulletSize, length, spread);
-            newLaser.Setup(parent, weapon, material, null, false, explosive);
-            bullets.Add(newLaser);
+            else
+            {
+                Laser newLaser = Instantiate(laserBullet, Vector3.zero, Quaternion.identity);
+                newLaser.SetupLaser(barrel, bulletSize, length, spread);
+                newLaser.Setup(parent, weapon, material, null, false, explosive);
+                bullets.Add(newLaser);
+            }
+
             spread += 5f;
         }
 
         // Play laser sound
-        AudioPlayer.Play(laserSound, true, 0.8f, 1.2f, true, 0.8f);
+        if (!isBeam) AudioPlayer.Play(laserSound, true, 0.8f, 1.2f, true, 0.8f);
+    }
+
+    // Forces the beam to end
+    public void EndBeam()
+    {
+        // Update timer
+        if (beams.Count > 0)
+        {
+            for (int i = 0; i < beams.Count; i++)
+            {
+                if (beams[i] != null) beams[i].EndEarly();
+                else
+                {
+                    beams.RemoveAt(i);
+                    i--;
+                }
+            }
+        }
     }
 }

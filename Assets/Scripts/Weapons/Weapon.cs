@@ -14,7 +14,7 @@ public class Weapon : MonoBehaviour
         range, knockback, splitshots, size, stunLength, critical, rotateSpeed, speedDamageMultiplier,
         reverseShots = 0;
     [HideInInspector]
-    public bool explosiveRounds, speedAffectsDamage = false, informOnHit = false;
+    public bool explosiveRounds, autoLockRounds, speedAffectsDamage = false, informOnHit = false;
 
     // Weapon level
     [HideInInspector]

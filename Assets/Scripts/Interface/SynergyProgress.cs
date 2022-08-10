@@ -17,6 +17,9 @@ public class SynergyProgress : MonoBehaviour
 
     public void Set(SynergyData synergy)
     {
+        // Check if synergy is null
+        if (synergy == null) return;
+
         // Set the synergy data
         data = synergy;
 

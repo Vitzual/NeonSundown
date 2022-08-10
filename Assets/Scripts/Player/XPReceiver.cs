@@ -16,6 +16,7 @@ public class XPReceiver : MonoBehaviour
     public ProgressBar xpBar;
     public TextMeshProUGUI levelText;
     public TextMeshProUGUI xpText;
+    public bool xpHealing = false;
 
     public void Awake()
     {
@@ -48,6 +49,9 @@ public class XPReceiver : MonoBehaviour
         Levels.AddXP(addAmount);
         xp += addAmount;
 
+        // Check if healing enabled
+        if (xpHealing) Ship.Heal(addAmount / 10f);
+
         // Check if XP over rankup
         if (xp >= rankup)
         {
@@ -72,6 +76,13 @@ public class XPReceiver : MonoBehaviour
         xpBar.UpdateUI();
     }
 
-    public void SetXPMultiplier(float amount) { xpMultiplier = amount; }
-    public float GetXPMultiplier() { return xpMultiplier; }
+    public void SetXPMultiplier(float amount)
+    {
+        xpMultiplier = amount; 
+    }
+    
+    public float GetXPMultiplier() 
+    {
+        return xpMultiplier; 
+    }
 }

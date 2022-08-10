@@ -14,7 +14,7 @@ public class SynergyElement : MonoBehaviour
     public SynergyProgress basicSynergyTwo;
     public SynergyProgress advancedSynergy;
     [HideInInspector] public SynergyData synergyData;
-
+    
     // Overarching synergy variables
     public TextMeshProUGUI treeName;
 

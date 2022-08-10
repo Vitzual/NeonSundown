@@ -14,6 +14,13 @@ public class Events : MonoBehaviour
         active = this;
     }
 
+    public event Action onResetCooldown;
+    public void ResetCooldown()
+    {
+        if (onResetCooldown != null)
+            onResetCooldown();
+    }
+
     // Card added event
     public event Action<CardData> onAddCard;
     public void AddCard(CardData card)

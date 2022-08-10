@@ -44,6 +44,8 @@ public class WeaponData : CardData
     public bool lockTarget;
     [BoxGroup("Bullet Stats"), Tooltip("Tells parent when it hits an entity.")]
     public bool informOnHit = false;
+    [BoxGroup("Bullet Stats"), Tooltip("Replaces bullets with an energy beam")]
+    public bool energyBeam;
 
     [BoxGroup("Object Instances"), Tooltip("The bullet object associated with this SO. Optional.")]
     public Bullet bullet;

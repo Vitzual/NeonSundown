@@ -10,7 +10,7 @@ public class Laser : Bullet
     public Transform rotationPoint;
     public Transform laserPoint;
 
-    public void SetupLaser(Transform parent, float width, float length, float bloom)
+    public virtual void SetupLaser(Transform parent, float width, float length, float bloom)
     {
         // Set rotation
         rotationPoint.SetParent(parent.transform);
