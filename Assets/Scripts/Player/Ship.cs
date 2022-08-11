@@ -4,6 +4,9 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+// V2 added a lot of new stuff that doesn't need to be in this script
+// Will sort everything out and organize all the new logic in future patches
+
 public class Ship : Weapon
 {   
     // Controller associated with the player
@@ -65,6 +68,7 @@ public class Ship : Weapon
 
     // List of drones
     private List<Drone> drones;
+    private List<Enemy> seededEnemies;
 
     // Scriptable and weapon reference
     private Dictionary<WeaponData, Weapon> weaponInstances;
@@ -80,6 +84,7 @@ public class Ship : Weapon
     {
         // Create starting slots
         drones = new List<Drone>();
+        seededEnemies = new List<Enemy>();
         weaponInstances = new Dictionary<WeaponData, Weapon>();
         helperInstances = new Dictionary<HelperData, Helper>();
         secondaryInstances = new Dictionary<SecondaryData, Secondary>();
@@ -167,6 +172,7 @@ public class Ship : Weapon
             speedAffectsDamage = shipData.speedAffectsDamage;
             speedDamageMultiplier = shipData.speedDamageMultiplier;
             informOnHit = shipData.weapon.informOnHit;
+            explosiveRounds = shipData.weapon.explosive;
         }
         splitshots = 0;
 
@@ -188,6 +194,9 @@ public class Ship : Weapon
                 drones.Add(newDrone);
             }
         }
+
+        // Check if ship is seed ship
+        if (shipData.seedShip) controller.OverrideDash();
 
         // Add debug card 
         if (debugCard != null)
@@ -309,11 +318,26 @@ public class Ship : Weapon
     // Set drone targets
     public override void TargetHit(Entity entity)
     {
-        if (drones != null)
+        if (shipData.droneShip && drones != null)
         {
             foreach (Drone drone in drones)
                 drone.SetTarget(entity);
         }
+        else if (shipData.seedShip && seededEnemies != null)
+        {
+            for (int i = 0; i < seededEnemies.Count; i++)
+            {
+                if (seededEnemies[i] != null)
+                {
+                    seededEnemies[i].SetTarget(entity.transform);
+                }
+                else
+                {
+                    seededEnemies.RemoveAt(i);
+                    i--;
+                }
+            }
+        } 
     }
 
     // Heal amount
@@ -981,5 +1005,22 @@ public class Ship : Weapon
                 knockback = -knockback;
                 break;
         }
+    }
+
+    public void DashOverride()
+    {
+        if (shipData.seedShip) DeploySeedBomb();
+    }
+
+    public void AddSeededEnemy(Enemy enemy)
+    {
+        seededEnemies.Add(enemy);
+    }
+    
+    public void DeploySeedBomb()
+    {
+        Seed newSeed = Instantiate(shipData.seed, transform.position, Quaternion.identity);
+        newSeed.Setup(this, shipData.weapon, border.material, null, false, explosiveRounds, false);
+        AudioPlayer.Play(shipData.seedDeploySound);
     }
 }

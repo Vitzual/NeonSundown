@@ -33,6 +33,7 @@ public class Enemy : Entity
     protected float moveSpeed;
     protected float rotateSpeed;
     private float damage;
+    private bool seeded = false;
 
     // Runtime only variables
     private float rotateStep, angle, step, dmg, stunImmunity;
@@ -88,17 +89,17 @@ public class Enemy : Entity
     }
 
     // Damage entity
-    public override void Damage(float amount, float knockback = -10f)
+    public override void Damage(float amount, float knockback = -10f, bool overrideImmunity = false)
     {
         if (target != null) Damage(amount, knockback, target.position);
         else Damage(amount, knockback, Vector3.zero);
     }
 
     // Damage entity
-    public void Damage(float amount, float knockback, Vector3 origin)
+    public void Damage(float amount, float knockback, Vector3 origin, bool overrideImmunity = false)
     {
         // Check if immune
-        if (immune)
+        if (!overrideImmunity && (immune || seeded))
         {
             DamageHandler.active.CreateImmune(transform.position);
             return;
@@ -182,6 +183,9 @@ public class Enemy : Entity
     // Called when a player hits this enemy
     public virtual void OnHitPlayer(Ship player)
     {
+        // Check if seeded
+        if (seeded) return;
+
         if (immune) { player.Kill(); return; }
         player.Damage(damage);
         if (dieOnCollision) Destroy();
@@ -306,5 +310,16 @@ public class Enemy : Entity
         if (hasRigidbody)
             rb.freezeRotation = true;
         rotateSpeed = 0f;
+    }
+
+    public void SeedEnemy(Transform target)
+    {
+        seeded = true;
+        this.target = target;
+    }
+
+    public bool IsSeeded()
+    {
+        return seeded;
     }
 }

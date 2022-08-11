@@ -66,6 +66,15 @@ public class ShipData : IdentifiableScriptableObject
     public float chargeDamage;
 
     [BoxGroup("Ship Data")]
+    public bool seedShip;
+    [BoxGroup("Ship Data"), ShowIf("seedShip", true)]
+    public Seed seed;
+    [BoxGroup("Ship Data"), ShowIf("seedShip", true)]
+    public AudioClip seedDeploySound;
+    [BoxGroup("Ship Data"), ShowIf("seedShip", true)]
+    public AudioClip seedBoomSound;
+
+    [BoxGroup("Ship Data")]
     public bool speedAffectsDamage;
     [BoxGroup("Ship Data"), ShowIf("speedAffectsDamage", true)]
     public float speedDamageMultiplier;

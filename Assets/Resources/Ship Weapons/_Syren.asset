@@ -16,15 +16,21 @@ MonoBehaviour:
   createdAtTicks: 637927007626126465
   name: 
   description: 
+  enableDescriptionOverrides: 0
+  levelDescriptionOverrides:
+    keys: 
+    values: []
   sprite: {fileID: 0}
   color: {r: 0, g: 0, b: 0, a: 0}
   maximumAmount: 0
   dropChance: 1
   canDrop: 0
   isUnlocked: 0
-  baseLevels: []
-  damage: 0.5
-  cooldown: 1
+  isShipOnlyCard: 0
+  isUpgradeable: 0
+  upgrades: []
+  damage: 1
+  cooldown: 2
   moveSpeed: 150
   rotate: 0
   rotateSpeed: 500
@@ -36,11 +42,14 @@ MonoBehaviour:
   knockback: -1000
   lifetime: 1
   stun: 2
+  explosive: 0
   randomDirection: 0
   rotateOnSpawn: 0
   randomTarget: 0
   trackTarget: 0
   lockTarget: 0
+  informOnHit: 1
+  energyBeam: 0
   bullet: {fileID: 4616838733166897725, guid: 89783b352b211694e8eda2366563639a, type: 3}
   bulletSound: {fileID: 8300000, guid: 3bd795b682c5bb345b5eb736f284a12c, type: 3}
   obj: {fileID: 0}

@@ -32,6 +32,8 @@ public class WeaponData : CardData
     public float lifetime;
     [BoxGroup("Bullet Stats")]
     public float stun;
+    [BoxGroup("Bullet Stats")]
+    public bool explosive;
     [BoxGroup("Bullet Stats"), Tooltip("Points the weapon in random directions.")]
     public bool randomDirection;
     [BoxGroup("Bullet Stats"), Tooltip("Rotates the weapon to the target on spawn.")]

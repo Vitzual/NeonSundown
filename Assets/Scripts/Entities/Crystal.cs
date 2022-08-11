@@ -63,7 +63,7 @@ public class Crystal : Entity
     }
 
     // On collision
-    public override void Damage(float amount, float knockback = -10f)
+    public override void Damage(float amount, float knockback = -10f, bool overrideImmunity = false)
     {
         Damage(amount, knockback, EnemyHandler.active.player.position);
     }
@@ -76,8 +76,7 @@ public class Crystal : Entity
 
         // Calculate health
         health -= amount;
-        if (health <= 0)
-            Destroy();
+        if (health <= 0) Destroy();
         else AudioPlayer.Play(crystalSound);
     }
 

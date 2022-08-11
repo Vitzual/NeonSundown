@@ -37,7 +37,7 @@ public class Entity : MonoBehaviour
     }
 
     // Damage entity
-    public virtual void Damage(float amount, float knockback = -10f)
+    public virtual void Damage(float amount, float knockback = -10f, bool overrideImmunity = false)
     {
         // Do something
     }

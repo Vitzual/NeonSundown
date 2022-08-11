@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class Controller : MonoBehaviour
 {
+    // Reference to ship
+    private Ship ship;
+
     // Controller associated with the player
     public static bool isControllerConnected;
     public GameObject controllerIcon;
@@ -45,6 +48,7 @@ public class Controller : MonoBehaviour
     public bool isChargeShip = false, charging = false;
     private bool dashOnCooldown = false;
     private bool dashQuickReset = false;
+    private bool shipOverridesDash = false;
 
     // Internal input measurements
     public static float horizontal;
@@ -62,6 +66,7 @@ public class Controller : MonoBehaviour
     {
         // Start for everyone
         body = GetComponent<Rigidbody2D>();
+        ship = GetComponent<Ship>();
         lastMousePos = Vector2.zero;
         controller = _controller;
         horizontal = 0;
@@ -136,6 +141,9 @@ public class Controller : MonoBehaviour
         // Check if dash pressed
         else if (Input.GetKey(Keybinds.dash) || (Settings.controllerInput && Input.GetKey(KeyCode.JoystickButton4)))
         {
+            // Check if ship overrides dash
+            if (shipOverridesDash) ship.DashOverride();
+
             // Check if dash ship
             if (isChargeShip)
             {
@@ -230,6 +238,8 @@ public class Controller : MonoBehaviour
             rotator.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
         }
     }
+
+    public void OverrideDash() { shipOverridesDash = true; }
 
     //public void OnMouseEnter() { Cursor.SetCursor(cursorTexture, hotSpot, cursorMode); }
     //public void OnMouseExit() { Cursor.SetCursor(null, Vector2.zero, cursorMode); }

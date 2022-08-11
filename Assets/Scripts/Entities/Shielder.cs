@@ -21,10 +21,10 @@ public class Shielder : Enemy
     }
 
     // Damage entity
-    public override void Damage(float amount, float knockback = 0f)
+    public override void Damage(float amount, float knockback = 0f, bool overrideImmunity = false)
     {
         // Damage shield if active
-        if (!shieldActive) base.Damage(amount);
+        if (!shieldActive) base.Damage(amount, knockback, overrideImmunity);
     }
 
     // On collision
