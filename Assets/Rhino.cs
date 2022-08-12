@@ -100,6 +100,9 @@ public class Rhino : Enemy
     // Called when colliding with ship
     public override void OnTriggerEnter2D(Collider2D collision)
     {
+        // Check if seeded
+        if (IsSeeded()) return;
+
         // Get ship component
         Ship ship = collision.GetComponent<Ship>();
 
@@ -117,6 +120,9 @@ public class Rhino : Enemy
     // Called when leaving ships range
     public void OnTriggerExit2D(Collider2D collision)
     {
+        // Check if seeded
+        if (IsSeeded()) return;
+
         // Get ship component
         Ship ship = collision.GetComponent<Ship>();
 
@@ -144,5 +150,12 @@ public class Rhino : Enemy
         attackState = AttackState.Normal;
         moveSpeed = moveSpeedHolder;
         rotateSpeed = rotateSpeedHolder;
+    }
+
+    // When seeded, disable attack
+    public override void SeedEnemy(Ship ship)
+    {
+        DisableAttack();
+        base.SeedEnemy(ship);
     }
 }

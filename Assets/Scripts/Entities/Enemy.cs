@@ -30,11 +30,11 @@ public class Enemy : Entity
     // Internal runtime variables
     private float health;
     private float maxHealth;
-    protected float moveSpeed;
+    [HideInInspector] public float moveSpeed;
     protected float rotateSpeed;
     private float damage;
     private bool seeded = false;
-
+    
     // Runtime only variables
     private float rotateStep, angle, step, dmg, stunImmunity;
 
@@ -99,10 +99,14 @@ public class Enemy : Entity
     public void Damage(float amount, float knockback, Vector3 origin, bool overrideImmunity = false)
     {
         // Check if immune
-        if (!overrideImmunity && (immune || seeded))
+        if (!overrideImmunity)
         {
-            DamageHandler.active.CreateImmune(transform.position);
-            return;
+            if (immune)
+            {
+                DamageHandler.active.CreateImmune(transform.position);
+                return;
+            }
+            else if (seeded) return;
         }
 
         // Add to total damage done
@@ -237,6 +241,32 @@ public class Enemy : Entity
         }
     }
 
+    // Seeds the enemy
+    public virtual void SeedEnemy(Ship ship)
+    {
+        // Check if boss
+        if (isBoss) return;
+
+        // Calculate fill color
+        Color fillColor = new Color(ship.fill.color.r * 0.2f,
+            ship.fill.color.g * 0.2f, ship.fill.color.b * 0.2f, 1f);
+        Material borderMaterial = ship.border.material;
+        
+        // Change glow and fills
+        foreach (SpriteRenderer sprite in glows) sprite.material = borderMaterial;
+        foreach (SpriteRenderer sprite in fills) sprite.color = fillColor;
+        foreach (TrailRenderer trail in trails) trail.material = borderMaterial;
+        foreach (ParticleSystemRenderer particle in particles)
+        {
+            particle.material = borderMaterial;
+            particle.trailMaterial = borderMaterial;
+        }
+
+        // Set seed to true
+        seeded = true;
+        target = ship.transform;
+    }
+
     // Get material function
     public override Material GetMaterial()
     {
@@ -251,6 +281,7 @@ public class Enemy : Entity
 
     // Set target
     public void SetTarget(Transform newTarget) { target = newTarget; }
+    public Transform GetTarget() { return target; }
 
     // Get object data
     public Variant GetVariant() { return variant; }
@@ -310,12 +341,6 @@ public class Enemy : Entity
         if (hasRigidbody)
             rb.freezeRotation = true;
         rotateSpeed = 0f;
-    }
-
-    public void SeedEnemy(Transform target)
-    {
-        seeded = true;
-        this.target = target;
     }
 
     public bool IsSeeded()

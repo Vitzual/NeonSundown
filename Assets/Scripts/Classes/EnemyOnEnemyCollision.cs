@@ -16,7 +16,7 @@ public class EnemyOnEnemyCollision : MonoBehaviour
     public void OnCollisionEnter2D(Collision2D collision)
     {
         Enemy enemy = collision.collider.GetComponent<Enemy>();
-        if (enemy != null)
+        if (enemy != null && !enemy.IsSeeded())
         {
             float enemyHealth = enemy.GetHealth();
             if (enemyHealth > health)

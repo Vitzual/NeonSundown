@@ -90,7 +90,7 @@ public class Ship : Weapon
         secondaryInstances = new Dictionary<SecondaryData, Secondary>();
         xpReceiver = GetComponent<XPReceiver>();
     }
-
+    
     // Subscribe to setup event
     public void Start()
     {
@@ -255,6 +255,26 @@ public class Ship : Weapon
         foreach (KeyValuePair<WeaponData, Weapon> weapon in weaponInstances) weapon.Value.Use();
         foreach (KeyValuePair<HelperData, Helper> helper in helperInstances) helper.Value.CustomUpdate();
         foreach (KeyValuePair<SecondaryData, Secondary> secondary in secondaryInstances) secondary.Value.CustomUpdate();
+
+        // Iterate through speed values for enemies
+        if (shipData.seedShip && seededEnemies != null)
+        {
+            float doubleSpeed = controller.moveSpeed * 2;
+            for (int i = 0; i < seededEnemies.Count; i++)
+            {
+                if (seededEnemies[i] != null)
+                {
+                    if (Vector2.Distance(seededEnemies[i].transform.position, 
+                        transform.position) > 15f) seededEnemies[i].moveSpeed = doubleSpeed;
+                    else seededEnemies[i].moveSpeed = controller.moveSpeed;
+                }
+                else
+                {
+                    seededEnemies.RemoveAt(i);
+                    i--;
+                }
+            }
+        }
     }
 
     // Shoot method
@@ -289,12 +309,12 @@ public class Ship : Weapon
             if (beam)
             {
                 BulletHandler.active.CreateLaserBullet(this, shipData.weapon, border.material,
-                    barrel, size, 100f, bulletsToFire, explosiveRounds, true);
+                    barrel, size, 100f, pierces, bulletsToFire, explosiveRounds, true);
             }
             else if (lasers)
             {
                 BulletHandler.active.CreateLaserBullet(this, shipData.weapon, border.material,
-                    barrel, size, 100f, bulletsToFire, explosiveRounds);
+                    barrel, size, 100f, pierces, bulletsToFire, explosiveRounds);
             }
             else if (energyBullets)
             {
@@ -325,16 +345,21 @@ public class Ship : Weapon
         }
         else if (shipData.seedShip && seededEnemies != null)
         {
-            for (int i = 0; i < seededEnemies.Count; i++)
+            Enemy enemy = entity.GetComponent<Enemy>();
+            if (enemy != null && !enemy.IsSeeded())
             {
-                if (seededEnemies[i] != null)
+                for (int i = 0; i < seededEnemies.Count; i++)
                 {
-                    seededEnemies[i].SetTarget(entity.transform);
-                }
-                else
-                {
-                    seededEnemies.RemoveAt(i);
-                    i--;
+                    if (seededEnemies[i] != null)
+                    {
+                        if (seededEnemies[i].GetTarget() == transform)
+                            seededEnemies[i].SetTarget(entity.transform);
+                    }
+                    else
+                    {
+                        seededEnemies.RemoveAt(i);
+                        i--;
+                    }
                 }
             }
         } 

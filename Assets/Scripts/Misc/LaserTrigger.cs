@@ -7,7 +7,6 @@ public class LaserTrigger : MonoBehaviour
     // Parent reference
     public Laser laser;
 
-    // On thing
     public void OnTriggerEnter2D(Collider2D collision)
     {
         // Check if enemy laser
@@ -21,7 +20,20 @@ public class LaserTrigger : MonoBehaviour
         else
         {
             Entity entity = collision.GetComponent<Entity>();
-            if (entity != null) laser.OnHit(entity);
+            if (entity != null)
+            {
+                if (laser.constantDamage) laser.AddEntity(entity);
+                else laser.OnHit(entity);
+            }
+        }
+    }
+
+    public void OnTriggerExit2D(Collider2D collision)
+    {
+        if (!laser.enemyLaser && laser.constantDamage)
+        {
+            Entity entity = collision.GetComponent<Entity>();
+            if (entity != null) laser.RemoveEntity(entity);
         }
     }
 }

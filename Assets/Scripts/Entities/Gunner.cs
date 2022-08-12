@@ -8,6 +8,7 @@ public class Gunner : MonoBehaviour
     public List<Turret> turrets;
     public WeaponData weapon;
     public bool selfSetup = false;
+    protected Enemy parentEnemy;
     protected Transform target;
 
     // Setup on staRt
@@ -20,6 +21,9 @@ public class Gunner : MonoBehaviour
     // Sets up a thing
     public void Setup(Material material = null)
     {
+        // Get parent enemy if it exists
+        parentEnemy = GetComponent<Enemy>();
+
         // Get enemy and target reference
         if (EnemyHandler.active != null && EnemyHandler.active.player != null)
             target = EnemyHandler.active.player;
@@ -33,7 +37,8 @@ public class Gunner : MonoBehaviour
     public void Update()
     {
         // Check if paused
-        if (Dealer.isOpen) return;
+        if (Dealer.isOpen || (parentEnemy != null 
+            && parentEnemy.IsSeeded())) return;
 
         // Keep turrets up to date
         foreach (Turret turret in turrets)

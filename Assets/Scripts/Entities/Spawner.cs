@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Spawner : Enemy
 {
+    // Reference to seed
+    private Ship ship;
+
     // Spawning variables
     public EnemyData enemyToSpawn;
     public bool setupWithHandler;
@@ -33,13 +36,15 @@ public class Spawner : Enemy
 
             // Check if enemy should be setup with handler
             if (setupWithHandler)
-                EnemyHandler.active.CreateEnemy(enemyToSpawn, variant, spawnPos, false, false, false);
+                EnemyHandler.active.CreateEnemy(enemyToSpawn, variant, spawnPos, 
+                    false, false, false, isClone, IsSeeded());
 
             // If not, just instantiate it
             else
             {
                 Enemy newEnemy = Instantiate(enemyToSpawn.obj, spawnPos, transform.rotation).GetComponent<Enemy>();
                 newEnemy.Setup(enemyToSpawn, variant, target);
+                if (IsSeeded()) newEnemy.SeedEnemy(ship);
             }
         }
 
@@ -60,5 +65,11 @@ public class Spawner : Enemy
 
         // If not circle, move normally
         base.Move();
+    }
+
+    public override void SeedEnemy(Ship ship)
+    {
+        this.ship = ship;
+        base.SeedEnemy(ship);
     }
 }

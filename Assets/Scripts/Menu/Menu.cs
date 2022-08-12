@@ -270,8 +270,12 @@ public class Menu : MonoBehaviour
 
         // Get the equipped modules
         List<string> moduleIDs = new List<string>();
-        foreach (KeyValuePair<int, ModuleData> module in Gamemode.modules)
-            if (module.Value != null) moduleIDs.Add(module.Value.InternalID);
+        if (Gamemode.modules != null)
+        {
+            foreach (KeyValuePair<int, ModuleData> module in Gamemode.modules)
+                if (module.Value != null) moduleIDs.Add(module.Value.InternalID);
+        }
+        else Debug.Log("[ERROR] Gamemode modules were null!");
 
         // Set meta context and save
         if (Gamemode.arena == null) 

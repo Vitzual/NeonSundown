@@ -135,8 +135,8 @@ public class EnemyHandler : MonoBehaviour
     /// <param name="disableRotation"></param>
     /// <param name="enableLockOn"></param>
     /// <param name="global"></param>
-    public void CreateEnemy(EnemyData enemyData, Variant variant, Vector2 position, 
-        bool disableRotation, bool enableLockOn, bool global, bool isClone = false)
+    public void CreateEnemy(EnemyData enemyData, Variant variant, Vector2 position, bool disableRotation, 
+        bool enableLockOn, bool global, bool isClone = false, bool isSeeded = false)
     {
         // Create the tile
         Vector2 spawnPos;
@@ -148,7 +148,7 @@ public class EnemyHandler : MonoBehaviour
         // Spawn the entity
         GameObject lastObj = Instantiate(enemyData.obj, spawnPos, Quaternion.identity);
         lastObj.name = enemyData.name;
-
+        
         // Rotate to the target
         float angle = Mathf.Atan2(player.transform.position.y - lastObj.transform.position.y,
             player.transform.position.x - lastObj.transform.position.x) * Mathf.Rad2Deg;
@@ -158,6 +158,7 @@ public class EnemyHandler : MonoBehaviour
         // Attempt to set enemy variant
         Enemy enemy = lastObj.GetComponent<Enemy>();
         enemy.Setup(enemyData, variant, player);
+        if (isSeeded) enemy.SeedEnemy(ship);
         if (isClone) enemy.isClone = true;
         if (enableLockOn) enemy.EnableLockOn();
         else if (disableRotation) enemy.DisableRotation();

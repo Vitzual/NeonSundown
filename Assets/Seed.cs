@@ -25,18 +25,17 @@ public class Seed : Bullet
         Enemy enemy = entity.GetComponent<Enemy>();
         if (enemy != null && !enemy.IsSeeded())
         {
+            // Update enemy seed status
             enemy.gameObject.AddComponent<EnemyOnEnemyCollision>().Setup(enemy);
-            foreach (SpriteRenderer sprite in enemy.glows) sprite.material = ship.border.material;
-            foreach (SpriteRenderer sprite in enemy.fills) sprite.color = ship.fill.color;
-            enemy.SeedEnemy(ship.transform);
+            enemy.SeedEnemy(ship);
             ship.AddSeededEnemy(enemy);
+
+            // Play convert sound
+            if (convertSound != null)
+                AudioPlayer.Play(convertSound);
+
+            // Destroy
+            Destroy();
         }
-
-        // Play convert sound
-        if (convertSound != null) 
-            AudioPlayer.Play(convertSound);
-
-        // Destroy
-        Destroy();
     }
 }

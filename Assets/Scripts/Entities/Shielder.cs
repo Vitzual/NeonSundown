@@ -12,7 +12,7 @@ public class Shielder : Enemy
     public AudioClip reflectSound;
     private bool shieldActive = true;
     private float initialSize = 7f;
-
+    
     // Get initial shield size
     public override void Setup(EnemyData data, Variant variant, Transform target)
     {
@@ -30,6 +30,9 @@ public class Shielder : Enemy
     // On collision
     public override void OnTriggerEnter2D(Collider2D collision)
     {
+        // Check if seeded
+        if (IsSeeded()) return;
+
         // Check if shield active
         if (!shieldActive) base.OnTriggerEnter2D(collision);
 
@@ -72,5 +75,12 @@ public class Shielder : Enemy
         AudioPlayer.Play(shieldSound, true, 0.8f, 0.8f);
         shield.gameObject.SetActive(false);
         shieldActive = false;
+    }
+
+    // Disable shield
+    public override void SeedEnemy(Ship ship)
+    {
+        DisableShield();
+        base.SeedEnemy(ship);
     }
 }

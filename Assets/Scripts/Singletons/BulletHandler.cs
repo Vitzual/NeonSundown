@@ -154,7 +154,7 @@ public class BulletHandler : MonoBehaviour
 
     // Creates a laser bullet
     public void CreateLaserBullet(Weapon parent, WeaponData weapon, Material material, Transform barrel, float bulletSize,
-        float length, int amount, bool explosive, bool isBeam = false)
+        float length, float pierces, int amount, bool explosive, bool isBeam = false)
     {
         // Check if already firing
         if (isBeam && beams.Count > 0) return;
@@ -172,7 +172,7 @@ public class BulletHandler : MonoBehaviour
             if (isBeam)
             {
                 Beam newBeam = Instantiate(beamBullet, Vector3.zero, Quaternion.identity);
-                newBeam.SetupBeam(barrel, bulletSize, length, spread, weapon.bulletSound, material, i == 0);
+                newBeam.SetupBeam(barrel, bulletSize, length, spread, pierces, weapon.bulletSound, material, i == 0);
                 newBeam.Setup(parent, weapon, material, null, false, explosive);
                 beams.Add(newBeam);
             }
