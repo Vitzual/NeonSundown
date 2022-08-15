@@ -636,6 +636,14 @@ public class Ship : Weapon
                 buckshots = (int)((Deck.CalculateStat(type, 0)
                     + GetAdditions(type)) * GetMultiplier(type));
                 break;
+            case Stat.Richochets:
+                richochets = (int)((Deck.CalculateStat(type, 0)
+                    + GetAdditions(type)) * GetMultiplier(type));
+                break;
+            case Stat.DashRate:
+                controller.dashCooldown = (Deck.CalculateStat(type, 1f)
+                    + GetAdditions(type)) * GetMultiplier(type);
+                break;
         }
     }
 
@@ -728,6 +736,14 @@ public class Ship : Weapon
             // Syphon thing
             case Stat.Buckshot:
                 return buckshots;
+
+            // Richochet
+            case Stat.Richochets:
+                return richochets;
+
+            // Dash rate
+            case Stat.DashRate:
+                return controller.dashCooldown;
 
             // Default case
             default:
@@ -827,6 +843,14 @@ public class Ship : Weapon
             // Crit thing
             case Stat.Buckshot:
                 return 0;
+
+            // Crit thing
+            case Stat.Richochets:
+                return 0;
+
+            // Crit thing
+            case Stat.DashRate:
+                return 1f;
 
             // Default case
             default:

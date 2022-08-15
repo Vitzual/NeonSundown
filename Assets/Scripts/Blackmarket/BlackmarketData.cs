@@ -16,7 +16,7 @@ public class BlackmarketData : IdentifiableScriptableObject
         XP,
         DLC
     }
-
+    
     [BoxGroup("Item Type")]
     public Type type;
     [ShowIf("type", Type.Ship), BoxGroup("Item Type")]

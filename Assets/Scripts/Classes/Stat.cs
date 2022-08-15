@@ -25,5 +25,7 @@ public enum Stat
     EnemyDmg,
     Criticals,
     Buckshot,
-    RotationSpeed
+    RotationSpeed,
+    Richochets,
+    DashRate
 }

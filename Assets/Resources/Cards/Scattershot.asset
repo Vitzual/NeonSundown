@@ -1,0 +1,74 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 153c17b437486e247978b2d4dcab4b10, type: 3}
+  m_Name: Scattershot
+  m_EditorClassIdentifier: 
+  internalId: ebc4da1a-22df-4afb-8a0e-18a923973910
+  createdAtTicks: 637961667565897195
+  name: Scattershot
+  description: Alternates firing bullets diagonally and vertically
+  enableDescriptionOverrides: 0
+  levelDescriptionOverrides:
+    keys: 
+    values: []
+  sprite: {fileID: 21300000, guid: c9fce0a6b5ebea3448697e1fad67eceb, type: 3}
+  color: {r: 1, g: 0.7877835, b: 0.4481132, a: 1}
+  maximumAmount: 5
+  dropChance: 1
+  canDrop: 1
+  isUnlocked: 0
+  isShipOnlyCard: 1
+  isUpgradeable: 1
+  upgrades:
+  - {fileID: 11400000, guid: b96d9a98412485444be1ee94bb7485f5, type: 2}
+  - {fileID: 11400000, guid: 1fee093820581d94fa551131c64f4738, type: 2}
+  - {fileID: 11400000, guid: 154ae6316fc13944fb6c3f3cb1ff1668, type: 2}
+  - {fileID: 11400000, guid: 2a6aa7e12e5e0154da18eb2c2080dc8f, type: 2}
+  - {fileID: 11400000, guid: b8e9b6434910df94ea22550b5aa3c06a, type: 2}
+  damage: 1
+  cooldown: 1
+  moveSpeed: 100
+  rotate: 0
+  rotateSpeed: 0
+  range: 10
+  bulletSize: 1
+  bloom: 0
+  pierces: 0
+  bullets: 1
+  knockback: 0
+  lifetime: 2
+  stun: 0
+  explosive: 0
+  randomDirection: 0
+  rotateOnSpawn: 0
+  randomTarget: 0
+  trackTarget: 0
+  lockTarget: 0
+  informOnHit: 0
+  energyBeam: 0
+  bullet: {fileID: 5224849746800538397, guid: 90071dbda6c9c6e42afbfdc062286747, type: 3}
+  bulletSound: {fileID: 0}
+  obj: {fileID: -7772969131874841496, guid: 2f39dc80ca2effe479db74f96ea3eb81, type: 3}
+  onDamageSound: {fileID: 8300000, guid: faa447057b23006488a040c1ea46a7ba, type: 3}
+  onDeathSound: {fileID: 0}
+  minPitch: 0.9
+  maxPitch: 1.1
+  audioScale: 1
+  setPlayerAsParent: 1
+  useMaterial: 1
+  useTrail: 0
+  useParticle: 0
+  material: {fileID: 2100000, guid: 4b02bf1bd62576c4db90bf7824c03559, type: 2}
+  trail: {fileID: 0}
+  particle: {fileID: 0}
+  shakeScreenOnSpawn: 0
+  shakeScreenOnDeath: 0

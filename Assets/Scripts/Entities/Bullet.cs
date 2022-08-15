@@ -15,7 +15,7 @@ public class Bullet : Entity
 
     // The bullets target
     protected Transform target;
-
+    
     // Active variables
     protected float damage;
     protected float speed;
@@ -25,6 +25,7 @@ public class Bullet : Entity
     protected float knockback;
     protected float splitshots;
     protected float bulletSize;
+    protected float richochets;
     public bool explosive;
     public bool overrideSprite;
     public float explosionSize = 10f;
@@ -98,6 +99,7 @@ public class Bullet : Entity
         stunLength = parent.stunLength;
         bulletSize = parent.size;
         informOnHit = parent.informOnHit;
+        richochets = parent.richochets;
         if (!explosive) explosive = parent.explosiveRounds;
 
         // Give bullets a bit of randomness
@@ -192,8 +194,15 @@ public class Bullet : Entity
             if (weapon != null && weapon.onDeathSound != null && entity.IsDead())
                 AudioPlayer.Play(weapon.onDeathSound, true, weapon.minPitch, weapon.maxPitch);
 
+            // Check for richochets
+            if (richochets > 0)
+            {
+                richochets -= 1;
+                ReverseBullet(false);
+            }
+
             // Check pierce amount
-            if (pierce < 0)
+            else if (pierce < 0)
             {
                 // Get material to hold
                 Material holder = entity.GetMaterial();
@@ -235,12 +244,12 @@ public class Bullet : Entity
     public float GetDamage() { return damage; }
 
     // Reverse bullet
-    public void ReverseBullet()
+    public void ReverseBullet(bool playSound = true)
     {
         if (!isReversed)
         {
             transform.eulerAngles = new Vector3(0, 0, transform.eulerAngles.z - 180f);
-            AudioPlayer.PlayReflectSound();
+            if (playSound) AudioPlayer.PlayReflectSound();
             isReversed = true;
         }
     }

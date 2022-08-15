@@ -28,7 +28,8 @@ public class CardEffects : MonoBehaviour
             Stat stat = (Stat)i;
             if (stat == Stat.Evasion || stat == Stat.DashSpeed || stat == Stat.AutoCollect ||
                 stat == Stat.View || stat == Stat.Tracking || stat == Stat.Explosive || 
-                stat == Stat.Buckshot || stat == Stat.RotationSpeed)
+                stat == Stat.Buckshot || stat == Stat.RotationSpeed || stat == Stat.Richochets ||
+                stat == Stat.DashRate)
             {
                 totalSkipped += 1;
                 continue;

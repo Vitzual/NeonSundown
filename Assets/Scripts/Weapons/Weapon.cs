@@ -12,7 +12,7 @@ public class Weapon : MonoBehaviour
     [HideInInspector]
     public float damage, damageMultiplier = 1f, cooldown, moveSpeed, bloom, pierces, bullets, lifetime,
         range, knockback, splitshots, size, stunLength, critical, rotateSpeed, speedDamageMultiplier,
-        reverseShots = 0;
+        reverseShots = 0, richochets = 0;
     [HideInInspector]
     public bool explosiveRounds, autoLockRounds, speedAffectsDamage = false, informOnHit = false;
 
@@ -133,6 +133,9 @@ public class Weapon : MonoBehaviour
             case Stat.Criticals:
                 critical = (Deck.CalculateStat(type, 0) + GetAdditions(type)) * GetMultiplier(type);
                 break;
+            case Stat.Richochets:
+                richochets = (Deck.CalculateStat(type, 0) + GetAdditions(type)) * GetMultiplier(type);
+                break;
         }
     }
 
@@ -152,6 +155,7 @@ public class Weapon : MonoBehaviour
         UpdateStat(Stat.BulletSize);
         UpdateStat(Stat.Bullets);
         UpdateStat(Stat.Explosive);
+        UpdateStat(Stat.Richochets);
     }
 
     // Returns a stat
@@ -203,6 +207,10 @@ public class Weapon : MonoBehaviour
             case Stat.BulletSize:
                 return size;
 
+            // Get richochets
+            case Stat.Richochets:
+                return richochets;
+
             // Default case
             default:
                 return 0;
@@ -253,6 +261,10 @@ public class Weapon : MonoBehaviour
             // Get bullet size
             case Stat.BulletSize:
                 return weapon.bulletSize;
+
+            // Get richochets
+            case Stat.Richochets:
+                return 0;
 
             // Default case
             default:
