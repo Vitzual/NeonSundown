@@ -15,7 +15,7 @@ public class Ship : Weapon
     public GameObject autoFireObj;
     private bool autoFire = false;
     private static bool lowHealth = false;
-
+    
     // Player model and data
     public ShipData shipData;
     public SpriteRenderer border;

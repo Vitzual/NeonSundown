@@ -415,8 +415,8 @@ public class Dealer : MonoBehaviour
         if (card != null && !card.redrawing)
         {
             // Check to make sure enough cards are in the list
-            if (dealList.Count == 0) burns.text = "No Cards Left!";
-            else if (burnsLeft <= 0) burns.text = "0 Remaining";
+            if (dealList.Count == 0) burns.text = "NO CARDS LEFT!";
+            else if (burnsLeft <= 0) burns.text = "0 REMAINING";
             else
             {
                 // Lower burn amount
@@ -429,7 +429,7 @@ public class Dealer : MonoBehaviour
                 // Remove card from draw
                 Gamemode.blacklistCards.Add(card.GetCard());
                 card.RedrawCard(PickNewCard());
-                burns.text = burnsLeft + " Remaining";
+                burns.text = burnsLeft + " REMAINING";
                 return;
             }
         }
@@ -441,13 +441,13 @@ public class Dealer : MonoBehaviour
         if (card != null && !card.redrawing)
         {
             // Check to make sure enough cards are in the list
-            if (dealList.Count == 0) redraws.text = "No Cards Left!";
-            else if (redrawsLeft <= 0) redraws.text = "0 Remaining";
+            if (dealList.Count == 0) redraws.text = "NO CARDS LEFT!";
+            else if (redrawsLeft <= 0) redraws.text = "0 REMAINING";
             else
             {
                 redrawsLeft -= 1;
                 card.RedrawCard(PickNewCard());
-                redraws.text = redrawsLeft + " Remaining";
+                redraws.text = redrawsLeft + " REMAINING";
                 return;
             }
         }
