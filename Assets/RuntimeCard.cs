@@ -25,9 +25,10 @@ public class RuntimeCard : MonoBehaviour
         icon.color = card.color;
         background.color = card.color;
         amount.text = count.ToString();
+        SetPosition(position);
     }
 
-    public void SetNextStat(RuntimeCard stat)
+    public void SetNextCard(RuntimeCard stat)
     {
         nextCard = stat;
     }
@@ -38,19 +39,21 @@ public class RuntimeCard : MonoBehaviour
         amount.text = count.ToString();
     }
 
-    public void DeleteStat(CardData card)
+    public void DeleteStat()
     {
-        if (this.card == card)
-        {
-            if (nextCard != null)
-                nextCard.UpdatePosition(rect.localPosition);
-            Destroy(gameObject);
-        }
+        if (nextCard != null)
+            nextCard.UpdatePosition(rect.localPosition);
+        Destroy(gameObject);
     }
 
     public void SetPosition(Vector2 position)
     {
         rect.localPosition = position;
+    }
+
+    public Vector2 GetPosition()
+    {
+        return rect.localPosition;
     }
 
     public void UpdatePosition(Vector2 position)

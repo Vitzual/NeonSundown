@@ -69,7 +69,7 @@ public class Deck : MonoBehaviour
         // Check if card is maxed
         if (cards[card] >= card.maximumAmount)
             SynergyHandler.Add(card);
-
+        
         // Setup the card
         if (card.isShipOnlyCard)
         {
@@ -86,6 +86,9 @@ public class Deck : MonoBehaviour
 
             // Invoke player update
             player.AddCard(card);
+
+            // Invoke update event
+            Events.active.AddShipOnlyCard(card);
         }
         else
         {

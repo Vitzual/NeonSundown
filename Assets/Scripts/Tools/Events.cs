@@ -29,6 +29,14 @@ public class Events : MonoBehaviour
             onAddCard(card);
     }
 
+    // Card added event
+    public event Action<CardData> onShipOnlyCardAdded;
+    public void AddShipOnlyCard(CardData card)
+    {
+        if (onShipOnlyCardAdded != null)
+            onShipOnlyCardAdded(card);
+    }
+
     // Synergy added event
     public event Action<SynergyData> onAddSynergy;
     public void AddSynergy(SynergyData card)
