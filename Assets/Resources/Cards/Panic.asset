@@ -14,19 +14,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   internalId: 4c22c2d4-38ce-40b6-b066-3043afe5ae92
   createdAtTicks: 637961813472816609
-  name: 
-  description: 
-  enableDescriptionOverrides: 0
+  name: Panic
+  description: Every 10% health lost, gain 5% firerate
+  enableDescriptionOverrides: 1
   levelDescriptionOverrides:
-    keys: 
-    values: []
-  sprite: {fileID: 0}
-  color: {r: 0, g: 0, b: 0, a: 0}
-  maximumAmount: 0
+    keys: 01000000020000000300000004000000
+    values:
+    - Every 10% health lost, gain 10% firerate
+    - Every 10% health lost, gain 15% firerate
+    - Every 10% health lost, gain 20% firerate
+    - Every 10% health lost, gain 25% firerate
+  sprite: {fileID: 21300000, guid: 281d6da0e7cbede4b9befaffc3997948, type: 3}
+  color: {r: 0.8207547, g: 0.3213332, b: 0.3213332, a: 1}
+  maximumAmount: 5
   dropChance: 1
-  canDrop: 0
+  canDrop: 1
   isUnlocked: 0
   isShipOnlyCard: 0
   isUpgradeable: 0
   upgrades: []
-  stats: []
+  stats:
+  - type: 0
+    modifier: 0
+    multiply: 0
+    positive: 0

@@ -5,7 +5,7 @@ using UnityEngine;
 public class Scattershot : AutoShooter
 {
     // Scattershot flag
-    private bool vertical = true;
+    private bool verticalAdjustment = true;
 
     // Shoots projectiles
     public override void Use()
@@ -26,8 +26,8 @@ public class Scattershot : AutoShooter
 
             // Adjust vertical shots
             float adjustment = 0f;
-            if (vertical) adjustment = 45f;
-            vertical = !vertical;
+            if (verticalAdjustment) adjustment = 45f;
+            verticalAdjustment = !verticalAdjustment;
 
             for (int r = 0; r < 4; r++)
             {

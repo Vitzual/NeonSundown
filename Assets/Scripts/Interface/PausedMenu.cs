@@ -22,11 +22,7 @@ public class PausedMenu : MonoBehaviour
     {
         if (!isOpen)
         {
-            if (Input.GetKeyDown(Keybinds.stats))
-            {
-                CardEffects.UpdateEffects();
-                stats.alpha = 1f;
-            }
+            if (Input.GetKeyDown(Keybinds.stats)) stats.alpha = 1f;
             else if (Input.GetKeyUp(Keybinds.stats)) stats.alpha = 0f;
         }
 
@@ -57,7 +53,6 @@ public class PausedMenu : MonoBehaviour
         canvasGroup.alpha = 1f;
         canvasGroup.interactable = true;
         canvasGroup.blocksRaycasts = true;
-        CardEffects.UpdateEffects();
 
         isOpen = true;
         Dealer.isOpen = true;
