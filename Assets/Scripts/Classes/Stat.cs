@@ -27,5 +27,6 @@ public enum Stat
     Buckshot,
     RotationSpeed,
     Richochets,
-    DashRate
+    DashRate,
+    Panic
 }
