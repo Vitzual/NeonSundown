@@ -51,7 +51,7 @@ public class Scattershot : AutoShooter
                     }
 
                     // Instantiate bullet
-                    BulletHandler.active.CreateBullet(this, weapon, transform.position, rotation, weapon.bullets,
+                    BulletHandler.active.CreateBullet(this, weapon, transform.position, rotation, (int)bullets,
                         weapon.bloom, size, weapon.material, false, explosiveRounds);
 
                     // Update spread

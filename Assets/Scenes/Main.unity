@@ -9101,6 +9101,51 @@ MonoBehaviour:
   m_Decay: 0.1
   m_UiShakeModifier: 10
   m_MultiplyByTimeScale: 1
+--- !u!1 &523507795
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 523507797}
+  - component: {fileID: 523507796}
+  m_Layer: 0
+  m_Name: Cursor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!114 &523507796
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 523507795}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2296f5e79675e3e47b05a309e34b451a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  crosshair: {fileID: 2800000, guid: 347780322b1cab849a8dddfae00ddc35, type: 3}
+  mouse: {fileID: 2800000, guid: da1d5296a2781b54ea60c59eb4d4cee0, type: 3}
+--- !u!4 &523507797
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 523507795}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 32
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &526235965
 GameObject:
   m_ObjectHideFlags: 0
@@ -19165,6 +19210,10 @@ MonoBehaviour:
   eventRaycaster: {fileID: 1881371645}
   upgradeSound: {fileID: 8300000, guid: 61dff02fcd33ae3408a6c0f8875b1d6c, type: 3}
   debugSwitch: 0
+  rerollBorder: {fileID: 1080655509}
+  rerollBackground: {fileID: 243301187}
+  availableReroll: {r: 0, g: 1, b: 0.065570354, a: 1}
+  unavailableReroll: {r: 1, g: 0, b: 0, a: 1}
 --- !u!225 &1046696079
 CanvasGroup:
   m_ObjectHideFlags: 0

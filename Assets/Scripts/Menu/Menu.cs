@@ -67,6 +67,9 @@ public class Menu : MonoBehaviour
     // On start, try and get meta context
     public void Start()
     {
+        // Reset cursor lock state
+        Cursor.lockState = CursorLockMode.None;
+
         // Update unlocks
         Levels.UpdateUnlocks();
 

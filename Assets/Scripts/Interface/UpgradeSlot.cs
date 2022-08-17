@@ -70,7 +70,8 @@ public class UpgradeSlot : MonoBehaviour
 
         // Set other colors
         indent.color = border.color;
-        background.color = new Color(border.color.r, border.color.g, border.color.b, 0.2f);
+        background.color = new Color(border.color.r * 0.2f, 
+            border.color.g * 0.2f, border.color.b * 0.2f, 1f);
     }
 
     public void ApplyUpgrade()

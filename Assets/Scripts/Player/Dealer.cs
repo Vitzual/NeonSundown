@@ -77,6 +77,11 @@ public class Dealer : MonoBehaviour
     private int cardNumber = 0;
     private int redrawsLeft = 0;
     private int burnsLeft = 1;
+    private bool reroll = false;
+    [BoxGroup("Re-Roll Options")]
+    public Image rerollBorder, rerollBackground;
+    [BoxGroup("Re-Roll Options")]
+    public Color availableReroll, unavailableReroll;
 
     // Private components 
     private CanvasGroup canvasGroup;
@@ -285,7 +290,14 @@ public class Dealer : MonoBehaviour
 
     public void RerollUpgrades()
     {
-        ToggleUpgrades(true, upgradingCard.GetCard());
+        if (reroll)
+        {
+            reroll = false;
+            rerollBorder.color = unavailableReroll;
+            rerollBackground.color = new Color(unavailableReroll.r * 0.2f, 
+                unavailableReroll.g * 0.2f, unavailableReroll.b * 0.2f, 1f);
+            ToggleUpgrades(true, upgradingCard.GetCard());
+        }
     }
 
     public void ToggleUpgrades(bool toggle, CardData card = null)
@@ -484,6 +496,12 @@ public class Dealer : MonoBehaviour
     // Open dealer
     public void OpenDealer()
     {
+        // Reset re-rolls
+        reroll = true;
+        rerollBorder.color = availableReroll;
+        rerollBackground.color = new Color(availableReroll.r * 0.2f,
+            availableReroll.g * 0.2f, availableReroll.b * 0.2f, 1f);
+
         // Close upgrades
         ToggleUpgrades(false);
         upgradeOptions.alpha = 0f;
