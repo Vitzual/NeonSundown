@@ -311,9 +311,6 @@ public class Menu : MonoBehaviour
     // Load the main scene
     public void LoadMain()
     {
-        // Check if show warning
-        if (!Authenticator.UserAuthenticated) return;
-
         // Save game to update modules
         SaveSystem.UpdateSave();
 
