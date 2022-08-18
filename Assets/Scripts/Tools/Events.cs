@@ -14,6 +14,20 @@ public class Events : MonoBehaviour
         active = this;
     }
 
+    public event Action onAuthenticationFinished;
+    public void FinishAuthentication()
+    {
+        if (onAuthenticationFinished != null)
+            onAuthenticationFinished();
+    }
+
+    public event Action onAuthenticationFailed;
+    public void AuthenticationFailed()
+    {
+        if (onAuthenticationFailed != null)
+            onAuthenticationFailed();
+    }
+
     public event Action onResetCooldown;
     public void ResetCooldown()
     {

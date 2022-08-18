@@ -17,6 +17,7 @@ public class Enemy : Entity
     private bool isDestroyed = false;
     private bool lockOn = false;
     public bool isBoss = false;
+    public bool isTameable = true;
     public bool isClone = false;
     public bool dieOnCollision = true;
 
@@ -245,7 +246,7 @@ public class Enemy : Entity
     public virtual void SeedEnemy(Ship ship)
     {
         // Check if boss
-        if (isBoss) return;
+        if (isBoss || !isTameable) return;
 
         // Calculate fill color
         Color fillColor = new Color(ship.fill.color.r * 0.2f,
@@ -327,7 +328,7 @@ public class Enemy : Entity
         {
             stunned = true;
             stunLength = length;
-            stunImmunity = 0.5f;
+            stunImmunity = 1.5f;
         }
     }
 

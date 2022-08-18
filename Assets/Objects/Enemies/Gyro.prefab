@@ -128,13 +128,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83b4a6d62eaea864e826931f2a511f80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  immune: 1
   overrideOtherParticles: 0
   rotateParticle: 0
   deathMaterial: {fileID: 0}
   deathEffect: {fileID: 0}
   rb: {fileID: 0}
   isCullable: 0
+  isBoss: 0
+  isTameable: 0
+  isClone: 0
+  dieOnCollision: 1
   trails: []
   glows:
   - {fileID: 8071768146122005031}
@@ -142,6 +145,7 @@ MonoBehaviour:
   - {fileID: 4127652600434861569}
   particles: []
   rotator: {fileID: 8071768145869598027}
+  moveSpeed: 0
 --- !u!61 &1847761932305048788
 BoxCollider2D:
   m_ObjectHideFlags: 0

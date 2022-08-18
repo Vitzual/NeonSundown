@@ -6,6 +6,13 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Sirenix.OdinInspector;
 
+/// <summary>
+/// IMPORTANT NOTE IF YOU'RE GETTING ERRORS IN THIS SCRIPT:
+/// - The authenticator script is not available in the GitHub for obvious reasons
+/// - Replace any Authenticator.Login() calls with OpenMain()
+/// - Remove any Authenticator.UserAuthenticated calls
+/// </summary>
+
 public class Menu : MonoBehaviour
 {
     // Menu panels
@@ -32,6 +39,7 @@ public class Menu : MonoBehaviour
     public CanvasGroup creditsGroup;
     public CanvasGroup levelsGroup;
     public CanvasGroup warningGroup;
+    public GameObject lockedStoreDesc, normalStoreDesc, offlineMode;
     public Image pressSpaceBg;
 
     // Other interface options
@@ -44,8 +52,6 @@ public class Menu : MonoBehaviour
     // Press space text element
     public TextMeshProUGUI pressSpaceText;
     public bool increaseAlpha = false;
-    public bool _showWarning = false;
-    private static bool showWarning;
     public static bool roadmapWarningShown = false;
     public ArenaData alphaArena;
     public ShipData alphaShip;
@@ -55,11 +61,12 @@ public class Menu : MonoBehaviour
     // Menu flags
     private bool spacePressed = false;
     private CanvasGroup currentOpening;
+    private float authenticationTimer = 10f;
+    private bool mainOpened = false;
 
     // Start is called before the first frame update
     public void Awake()
     {
-        showWarning = _showWarning;
         Scriptables.GenerateAllScriptables();
         SaveSystem.GetSave();
     }
@@ -67,6 +74,9 @@ public class Menu : MonoBehaviour
     // On start, try and get meta context
     public void Start()
     {
+        // Subscribe to authentication event
+        Events.active.onAuthenticationFinished += StartGameWithCheck;
+
         // Reset cursor lock state
         Cursor.lockState = CursorLockMode.None;
 
@@ -142,34 +152,66 @@ public class Menu : MonoBehaviour
     // Update user input
     public void Update()
     {
-        if (!spacePressed && Input.anyKey) OpenMain();
+        if (!spacePressed && Input.anyKey)
+        {
+            spacePressed = true;
+            pressSpaceText.text = "LOGGING INTO STEAM...";
+            Authenticator.Login();
+        }
+        else if (!mainOpened && spacePressed && !Authenticator.UserAuthenticated)
+        {
+            if (authenticationTimer <= 0f)
+            {
+                StartGameWithCheck();
+            }
+            else authenticationTimer -= Time.deltaTime;
+        } 
     }
 
     // Open main panel
-    public void OpenMain()
+    public void StartGameWithCheck()
     {
-        if (showWarning)
+        // Open main flag
+        mainOpened = true;
+
+        // Remove this if-statement if it's erroring out
+        if (!Authenticator.UserAuthenticated)
         {
             TogglePanel(warningGroup, mainGroup, false);
-            showWarning = false;
-            spacePressed = true;
         }
         else
         {
-            if (_showWarning) TogglePanel(mainGroup, warningGroup);
-            LeanTween.scale(title, titleTargetSize, titleSizeSpeed).setEase(LeanTweenType.easeInExpo).setDelay(0.2f);
-            LeanTween.moveLocal(title.gameObject, titleTargetPos, titleAnimSpeed).setEase(LeanTweenType.easeInExpo).setDelay(0.2f);
-            LeanTween.alphaCanvas(pressSpace, 0f, titleAnimSpeed);
-            LeanTween.alphaCanvas(buttonsGroup, 1f, titleAnimSpeed).setDelay(titleAnimSpeed);
-            LeanTween.alphaCanvas(socialsGroup, 1f, titleAnimSpeed).setDelay(titleAnimSpeed);
-            LeanTween.alphaCanvas(mainBackground, 1f, titleAnimSpeed).setDelay(titleAnimSpeed);
-            LeanTween.alphaCanvas(levelGroup, 1f, titleAnimSpeed).setDelay(titleAnimSpeed);
-            buttonsGroup.interactable = true;
-            buttonsGroup.blocksRaycasts = true;
-            socialsGroup.interactable = true;
-            socialsGroup.blocksRaycasts = true;
-            spacePressed = true;
+            lockedStoreDesc.SetActive(false);
+            normalStoreDesc.SetActive(true);
+            offlineMode.SetActive(false);
+
+            OpenMain();
         }
+    }
+
+    public void StartGameLocked()
+    {
+        lockedStoreDesc.SetActive(true);
+        normalStoreDesc.SetActive(false);
+        offlineMode.SetActive(true);
+
+        OpenMain();
+    }
+
+    public void OpenMain()
+    {
+        TogglePanel(mainGroup, warningGroup);
+        LeanTween.scale(title, titleTargetSize, titleSizeSpeed).setEase(LeanTweenType.easeInExpo).setDelay(0.2f);
+        LeanTween.moveLocal(title.gameObject, titleTargetPos, titleAnimSpeed).setEase(LeanTweenType.easeInExpo).setDelay(0.2f);
+        LeanTween.alphaCanvas(pressSpace, 0f, titleAnimSpeed);
+        LeanTween.alphaCanvas(buttonsGroup, 1f, titleAnimSpeed).setDelay(titleAnimSpeed);
+        LeanTween.alphaCanvas(socialsGroup, 1f, titleAnimSpeed).setDelay(titleAnimSpeed);
+        LeanTween.alphaCanvas(mainBackground, 1f, titleAnimSpeed).setDelay(titleAnimSpeed);
+        LeanTween.alphaCanvas(levelGroup, 1f, titleAnimSpeed).setDelay(titleAnimSpeed);
+        buttonsGroup.interactable = true;
+        buttonsGroup.blocksRaycasts = true;
+        socialsGroup.interactable = true;
+        socialsGroup.blocksRaycasts = true;
     }
 
     // Open canvas group panel
@@ -227,6 +269,7 @@ public class Menu : MonoBehaviour
     // Open store panel
     public void ToggleStorePanel(bool toggle)
     {
+        if (!Authenticator.UserAuthenticated) return;
         if (toggle) TogglePanel(storeGroup, mainGroup);
         else TogglePanel(mainGroup, storeGroup);
     }
@@ -268,6 +311,9 @@ public class Menu : MonoBehaviour
     // Load the main scene
     public void LoadMain()
     {
+        // Check if show warning
+        if (!Authenticator.UserAuthenticated) return;
+
         // Save game to update modules
         SaveSystem.UpdateSave();
 
@@ -301,6 +347,7 @@ public class Menu : MonoBehaviour
     // Exit the application
     public void QuitGame()
     {
+        Authenticator.Logout();
         Application.Quit();
     }
 

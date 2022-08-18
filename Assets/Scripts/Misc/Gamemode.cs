@@ -35,6 +35,7 @@ public class Gamemode : MonoBehaviour
     public Vault vault;
     public Vector2 vaultPosition;
     public Vector2 vaultPlayerPosition;
+    public GameObject offlineMode;
 
     // Reference to in-game camera
     public new Camera camera;
@@ -82,6 +83,9 @@ public class Gamemode : MonoBehaviour
 
         // Set camera viewing range
         if (camera != null) camera.orthographicSize = arena.startingViewRange;
+
+        // Check offline mode
+        if (offlineMode != null && !Authenticator.UserAuthenticated) offlineMode.SetActive(true);
     }
 
     // Load menu

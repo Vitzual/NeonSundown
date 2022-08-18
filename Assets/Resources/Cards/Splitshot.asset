@@ -15,7 +15,11 @@ MonoBehaviour:
   internalId: 4fd2b69f-e51c-4bec-b532-afc8f8871731
   createdAtTicks: 637821706237246243
   name: Splitshot
-  description: Adds splitshots to all projectiles, but decreases firerate by 15%
+  description: Adds a splitshot, but decreases firerate by 15%
+  enableDescriptionOverrides: 0
+  levelDescriptionOverrides:
+    keys: 
+    values: []
   sprite: {fileID: 21300000, guid: 4fcbd3c737c86854fb9a9b4cc5b2b179, type: 3}
   color: {r: 0.63685143, g: 0.2216981, b: 1, a: 1}
   maximumAmount: 3
@@ -23,6 +27,8 @@ MonoBehaviour:
   canDrop: 1
   isUnlocked: 1
   isShipOnlyCard: 0
+  isUpgradeable: 0
+  upgrades: []
   stats:
   - type: 18
     modifier: 2
