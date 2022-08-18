@@ -368,6 +368,7 @@ public class Dealer : MonoBehaviour
     {
         SynergyUI.Close();
         Events.active.AddSynergy(data);
+        Deck.active.AddCard(data.outputCard);
         isOpen = false;
     }
 

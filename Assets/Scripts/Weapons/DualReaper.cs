@@ -28,4 +28,9 @@ public class DualReaper : Weapon
         foreach (Scythe scythe in scythes)
             scythe.Upgrade(upgrade, quality);
     }
+
+    public override void UpdateStat(Stat type)
+    {
+        return;
+    }
 }

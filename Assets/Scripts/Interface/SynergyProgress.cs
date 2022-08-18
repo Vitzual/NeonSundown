@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class SynergyProgress : MonoBehaviour
 {
-    public GameObject locked, unlocked;
+    public GameObject locked, unlocked, requirementOneLock, requirementTwoLock;
     public TextMeshProUGUI synergyName, desc, status, requirementOne, 
         collectedOne, requirementTwo, collectedTwo, unlockReq;
     public Image icon, border, background, statusBackground, iconOne,
@@ -42,13 +42,13 @@ public class SynergyProgress : MonoBehaviour
             locked.SetActive(false);
 
             // Set text objects
-            synergyName.text = synergy.name;
+            synergyName.text = synergy.name.ToString().ToUpper();
             desc.text = synergy.outputCard.description;
-            if (Deck.active.HasCard(synergy.outputCard)) status.text = "CURRENTLY ACTIVE";
-            else if (SynergyHandler.availableSynergies.Contains(synergy)) status.text = "BREAK RED CRYSTAL";
+            if (Deck.active.HasCard(synergy.outputCard)) status.text = "ACTIVE";
+            else if (SynergyHandler.availableSynergies.Contains(synergy)) status.text = "READY";
             else status.text = "NOT READY";
-            requirementOne.text = synergy.cardOne.name;
-            requirementTwo.text = synergy.cardTwo.name;
+            requirementOne.text = synergy.cardOne.name.ToUpper();
+            requirementTwo.text = synergy.cardTwo.name.ToUpper();
             int amountCollected = Deck.active.GetCardAmount(synergy.cardOne);
 
             // Set amount collected
@@ -65,6 +65,21 @@ public class SynergyProgress : MonoBehaviour
                 / (float)synergy.cardTwo.maximumAmount;
             cardBarOne.UpdateUI();
             cardBarTwo.UpdateUI();
+
+            // Check for blacklist cards
+            if (!Deck.active.HasCard(synergy.outputCard))
+            {
+                if (Gamemode.blacklistCards.Contains(synergy.cardOne))
+                {
+                    requirementOneLock.SetActive(true);
+                    status.text = "UNAVAILABLE";
+                }
+                if (Gamemode.blacklistCards.Contains(synergy.cardTwo))
+                {
+                    requirementTwoLock.SetActive(true);
+                    status.text = "UNAVAILABLE";
+                }
+            }
 
             // Set image components
             icon.sprite = synergy.outputCard.sprite;

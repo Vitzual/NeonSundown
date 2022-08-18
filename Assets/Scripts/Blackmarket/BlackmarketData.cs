@@ -51,7 +51,5 @@ public class BlackmarketData : IdentifiableScriptableObject
     [BoxGroup("Item Color")]
     public Color lightColor;
     [BoxGroup("Item Color")]
-    public Color darkColor;
-    [BoxGroup("Item Color")]
     public bool useLightColorOnIcon;
 }

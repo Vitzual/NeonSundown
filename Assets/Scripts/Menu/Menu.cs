@@ -50,7 +50,7 @@ public class Menu : MonoBehaviour
     public float titleSizeSpeed;
 
     // Press space text element
-    public TextMeshProUGUI pressSpaceText;
+    public TextMeshProUGUI pressSpaceText, errorText;
     public bool increaseAlpha = false;
     public static bool roadmapWarningShown = false;
     public ArenaData alphaArena;
@@ -76,6 +76,7 @@ public class Menu : MonoBehaviour
     {
         // Subscribe to authentication event
         Events.active.onAuthenticationFinished += StartGameWithCheck;
+        Events.active.onAuthenticationFailed += OpenWarningPanel;
 
         // Reset cursor lock state
         Cursor.lockState = CursorLockMode.None;
@@ -155,8 +156,12 @@ public class Menu : MonoBehaviour
         if (!spacePressed && Input.anyKey)
         {
             spacePressed = true;
-            pressSpaceText.text = "LOGGING INTO STEAM...";
-            Authenticator.Login();
+            if (!Authenticator.UserAuthenticated)
+            {
+                pressSpaceText.text = "LOGGING INTO STEAM...";
+                Authenticator.Login();
+            }
+            else StartGameWithCheck();
         }
         else if (!mainOpened && spacePressed && !Authenticator.UserAuthenticated)
         {
@@ -177,7 +182,7 @@ public class Menu : MonoBehaviour
         // Remove this if-statement if it's erroring out
         if (!Authenticator.UserAuthenticated)
         {
-            TogglePanel(warningGroup, mainGroup, false);
+            OpenWarningPanel("Connection to server timed out");
         }
         else
         {
@@ -187,6 +192,14 @@ public class Menu : MonoBehaviour
 
             OpenMain();
         }
+    }
+
+    public void OpenWarningPanel(string errorMsg)
+    {
+        // Open main flag
+        mainOpened = true;
+        TogglePanel(warningGroup, mainGroup, false);
+        errorText.text = "<color=orange><b>ERROR:</b></color> " + errorMsg;
     }
 
     public void StartGameLocked()

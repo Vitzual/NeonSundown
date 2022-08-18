@@ -163,7 +163,8 @@ public class BlackmarketPanel : MonoBehaviour
 
         // Set colors
         border.color = data.lightColor;
-        background.color = data.darkColor;
+        background.color = new Color(data.lightColor.r * 0.2f, data.lightColor.g * 0.2f,
+            data.lightColor.b * 0.2f, 1f);
         title.color = data.lightColor;
         buyButton.color = data.lightColor;
         testButton.color = data.lightColor;

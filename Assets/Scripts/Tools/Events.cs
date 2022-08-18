@@ -21,11 +21,11 @@ public class Events : MonoBehaviour
             onAuthenticationFinished();
     }
 
-    public event Action onAuthenticationFailed;
-    public void AuthenticationFailed()
+    public event Action<string> onAuthenticationFailed;
+    public void AuthenticationFailed(string msg)
     {
         if (onAuthenticationFailed != null)
-            onAuthenticationFailed();
+            onAuthenticationFailed(msg);
     }
 
     public event Action onResetCooldown;
