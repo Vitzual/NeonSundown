@@ -1003,7 +1003,7 @@ public class Ship : Weapon
             WeaponData weapon = (WeaponData)card;
             if (weaponInstances.ContainsKey(weapon))
             {
-                Destroy(weaponInstances[weapon].gameObject);
+                weaponInstances[weapon].Destroy();
                 weaponInstances.Remove(weapon);
             }
         }
@@ -1012,7 +1012,7 @@ public class Ship : Weapon
             HelperData helper = (HelperData)card;
             if (helperInstances.ContainsKey(helper))
             {
-                Destroy(helperInstances[helper].gameObject);
+                helperInstances[helper].Destroy();
                 helperInstances.Remove(helper);
             }
         }
@@ -1021,10 +1021,11 @@ public class Ship : Weapon
             SecondaryData secondary = (SecondaryData)card;
             if (secondaryInstances.ContainsKey(secondary))
             {
-                Destroy(secondaryInstances[secondary].gameObject);
+                secondaryInstances[secondary].Destroy();
                 secondaryInstances.Remove(secondary);
             }
         }
+        Gamemode.blacklistCards.Add(card);
     }
 
     public void SetupChroma(ChromaType type)

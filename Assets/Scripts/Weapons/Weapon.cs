@@ -81,6 +81,12 @@ public class Weapon : MonoBehaviour
         }
     }
 
+    public virtual void Destroy()
+    {
+        Events.active.onAddCard -= AddCard;
+        Destroy(gameObject);
+    }
+
     // Calculate stat
     public virtual void UpdateStat(Stat type)
     {
