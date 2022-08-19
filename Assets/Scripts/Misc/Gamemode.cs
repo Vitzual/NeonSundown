@@ -24,13 +24,8 @@ public class Gamemode : MonoBehaviour
     public Image arenaIcon;
     public TextMeshProUGUI arenaName, arenaDesc;
     public bool useArenaInfo = false;
-    private static bool awardGiven = false;
-
-    // Enemies objective tracking
-    public static bool killEnemiesObjective;
-    public static EnemyData enemyObjective;
-    private static int objectiveAmountKilled = 0;
-
+    public static bool awardGiven = false;
+    
     // Arena specific modifiers
     public Vault vault;
     public Vector2 vaultPosition;
@@ -43,6 +38,7 @@ public class Gamemode : MonoBehaviour
     // Setup the game
     public void Awake()
     {
+        awardGiven = false;
         RuntimeStats.ResetStats();
         Scriptables.GenerateAllScriptables();
         if (arena == null) arena = _arena;
@@ -111,18 +107,14 @@ public class Gamemode : MonoBehaviour
     }
 
     // Defeat boss
-    public static void ObjectiveEnemyKilled()
+    public static void ArenaObjectiveComplete()
     {
-        objectiveAmountKilled += 1;
-        if (objectiveAmountKilled > arena.amountToKill && !awardGiven)
+        awardGiven = true;
+        if (!arena.achievement.IsAchieved)
         {
-            awardGiven = true;
-            if (!arena.achievement.IsAchieved)
-            {
-                arena.achievement.Unlock();
-                arena.achievement.Store();
-            }
-            else Debug.Log("Achievement has already been given!");
+            arena.achievement.Unlock();
+            arena.achievement.Store();
         }
+        else Debug.Log("Achievement has already been given!");
     }
 }

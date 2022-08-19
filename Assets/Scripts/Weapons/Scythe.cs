@@ -46,7 +46,7 @@ public class Scythe : Weapon
             else AudioPlayer.Play(weapon.onDamageSound);
         }
     }
-
+    
     // Update stat
     public override void UpdateStat(Stat stat)
     {
@@ -61,14 +61,14 @@ public class Scythe : Weapon
             case Stat.Range:
                 range = (Deck.CalculateStat(stat, weapon.range)
                     + GetAdditions(stat)) * GetMultiplier(stat);
-                transform.localPosition = new Vector2(range * offset.x, range * offset.y);
+                if (transform != null) transform.localPosition = new Vector2(range * offset.x, range * offset.y);
                 break;
 
             // Increase blade size
             case Stat.BulletSize:
                 size = (Deck.CalculateStat(stat, weapon.bulletSize)
                     + GetAdditions(stat)) * GetMultiplier(stat);
-                transform.localScale = new Vector2(size, size);
+                if (transform != null) transform.localScale = new Vector2(size, size);
                 break;
 
             default:

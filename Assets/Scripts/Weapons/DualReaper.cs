@@ -14,7 +14,7 @@ public class DualReaper : Weapon
 
         base.Setup(data, target);
     }
-
+    
     // Rotates around the player
     public override void Use()
     {
@@ -32,5 +32,12 @@ public class DualReaper : Weapon
     public override void UpdateStat(Stat type)
     {
         return;
+    }
+
+    public override void Destroy()
+    {
+        foreach (Scythe scythe in scythes)
+            scythe.Destroy();
+        base.Destroy();
     }
 }

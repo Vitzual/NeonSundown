@@ -51,8 +51,6 @@ public class ArenaData : IdentifiableScriptableObject
     public bool useAchievementKills;
     [BoxGroup("Achievement Info"), ShowIf("useAchievementKills", true)]
     public EnemyData enemyToKill;
-    [BoxGroup("Achievement Info"), ShowIf("useAchievementKills", true)]
-    public int amountToKill;
     [BoxGroup("Achievement Info")]
     public AchievementObject achievement;
 

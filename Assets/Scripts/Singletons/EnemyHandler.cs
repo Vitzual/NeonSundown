@@ -30,7 +30,7 @@ public class EnemyHandler : MonoBehaviour
     public float spawnRange = 120;
     public float cullRange = 200;
     private int cullIndex = 0;
-
+    
     // Contains all active enemies in the scene
     public List<Enemy> enemies = new List<Enemy>();
     public static float syphon = 0f;

@@ -151,9 +151,13 @@ public class Enemy : Entity
         if (immune) return;
 
         // Check objective status
-        if (Gamemode.killEnemiesObjective && 
-            Gamemode.enemyObjective == enemyData)
-            Gamemode.ObjectiveEnemyKilled();
+        if (!Gamemode.awardGiven &&
+            Gamemode.arena.useAchievementKills &&
+            Gamemode.arena.enemyToKill == enemyData)
+        {
+            Debug.Log("Awarding achievement!");
+            Gamemode.ArenaObjectiveComplete();
+        }
 
         // Check if boss
         if (isBoss) Events.active.BossDestroyed();

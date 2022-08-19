@@ -183,6 +183,8 @@ public class Dealer : MonoBehaviour
         // Check to make sure enough cards are in the list
         if (dealList.Count == 0 || cardSlots.Count <= number)
         {
+            canvasGroup.interactable = true;
+            canvasGroup.blocksRaycasts = true;
             Debug.Log("Mismatch deck slots");
             dealCards = false;
             cardsDealt = true;
@@ -199,6 +201,8 @@ public class Dealer : MonoBehaviour
         // Check if that was the last card
         if (number + 1 == cardsToPick)
         {
+            canvasGroup.interactable = true;
+            canvasGroup.blocksRaycasts = true;
             dealCards = false;
             cardsDealt = true;
         }
@@ -211,6 +215,7 @@ public class Dealer : MonoBehaviour
         // Check if card is upgradeable
         if (card.isUpgradeable && card.upgrades.Count > 0 && Deck.active.HasCard(card))
         {
+            LeanTween.cancelAll();
             upgradingCard = cardSlots[cardNumber];
             upgradingCard.MoveToUpgradePosition();
             ToggleUpgrades(true, card);
@@ -554,8 +559,6 @@ public class Dealer : MonoBehaviour
 
         // Set the canvas component
         canvasGroup.alpha = 1f;
-        canvasGroup.interactable = true;
-        canvasGroup.blocksRaycasts = true;
         background.color = new Color(0, 0, 0, 0);
         title.alpha = 0;
         dealOptions.alpha = 0;
