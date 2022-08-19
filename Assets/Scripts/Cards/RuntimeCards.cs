@@ -52,33 +52,30 @@ public class RuntimeCards : MonoBehaviour
                 }
                 if (synergy.removeCardTwo && cards.ContainsKey(synergy.cardTwo))
                 {
-                    cards[synergy.cardOne].DeleteStat();
-                    cards.Remove(synergy.cardOne);
+                    cards[synergy.cardTwo].DeleteStat();
+                    cards.Remove(synergy.cardTwo);
                 }
-                UpdateCards(synergy.outputCard);
                 break;
 
             case 2:
-                if (synergy.removeCardOne && cards.ContainsKey(synergy.synergyOne.outputCard))
+                if (synergy.removeCardOne && cards.ContainsKey(synergy.cardOne))
                 {
-                    cards[synergy.synergyOne.outputCard].DeleteStat();
-                    cards.Remove(synergy.synergyOne.outputCard);
+                    cards[synergy.cardOne].DeleteStat();
+                    cards.Remove(synergy.cardOne);
                 }
-                if (synergy.removeCardTwo && cards.ContainsKey(synergy.synergyTwo.outputCard))
+                if (synergy.removeCardTwo && cards.ContainsKey(synergy.cardTwo))
                 {
-                    cards[synergy.synergyOne.outputCard].DeleteStat();
-                    cards.Remove(synergy.synergyOne.outputCard);
+                    cards[synergy.cardTwo].DeleteStat();
+                    cards.Remove(synergy.cardTwo);
                 }
-                UpdateCards(synergy.outputCard);
                 break;
 
             case 3:
-                if (synergy.removeCardOne && cards.ContainsKey(synergy.baseSynergy.outputCard))
+                if (synergy.removeCardOne && cards.ContainsKey(synergy.cardOne))
                 {
-                    cards[synergy.baseSynergy.outputCard].DeleteStat();
-                    cards.Remove(synergy.baseSynergy.outputCard);
+                    cards[synergy.cardOne].DeleteStat();
+                    cards.Remove(synergy.cardOne);
                 }
-                UpdateCards(synergy.outputCard);
                 break;
         }
     }

@@ -11,7 +11,7 @@ public class Dealer : MonoBehaviour
     // Active instance
     public static Dealer active;
     public static bool isOpen;
-
+    
     // Gameobject for controls
     public GameObject controlsOne;
     public GameObject controlsTwo;
@@ -367,8 +367,7 @@ public class Dealer : MonoBehaviour
     public void PickSynergyCard(SynergyData data)
     {
         SynergyUI.Close();
-        Events.active.AddSynergy(data);
-        Deck.active.AddCard(data.outputCard);
+        Deck.active.AddSynergy(data);
         isOpen = false;
     }
 

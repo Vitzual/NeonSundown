@@ -108,6 +108,62 @@ public class Deck : MonoBehaviour
         }
     }
 
+    public void AddSynergy(SynergyData synergy)
+    {
+        // Remove old card instances
+        if (synergy.removeCardOne) RemoveCardInstance(synergy.cardOne);
+        if (synergy.removeCardTwo) RemoveCardInstance(synergy.cardTwo);
+        AddCard(synergy.outputCard);
+
+        // Pass all card one upgrades to synergy
+        List<UpgradeInfo> upgrades = Deck.GetUpgrades(synergy.cardOne);
+        if (upgrades != null && upgrades.Count > 0)
+            foreach (UpgradeInfo upgrade in upgrades)
+                active.UpgradeCard(synergy.outputCard, upgrade.upgrade, upgrade.quality);
+
+        // Pass all card two upgrades to synergy
+        upgrades = GetUpgrades(synergy.cardTwo);
+        if (upgrades != null && upgrades.Count > 0)
+            foreach (UpgradeInfo upgrade in upgrades)
+                active.UpgradeCard(synergy.outputCard, upgrade.upgrade, upgrade.quality);
+
+        // Invoke update event
+        Events.active.AddSynergy(synergy);
+    }
+
+    // Removes a card instance
+    public void RemoveCardInstance(CardData card)
+    {
+        if (card is WeaponData)
+        {
+            WeaponData weapon = (WeaponData)card;
+            if (player.weaponInstances.ContainsKey(weapon))
+            {
+                player.weaponInstances[weapon].Destroy();
+                player.weaponInstances.Remove(weapon);
+            }
+        }
+        else if (card is HelperData)
+        {
+            HelperData helper = (HelperData)card;
+            if (player.helperInstances.ContainsKey(helper))
+            {
+                player.helperInstances[helper].Destroy();
+                player.helperInstances.Remove(helper);
+            }
+        }
+        else if (card is SecondaryData)
+        {
+            SecondaryData secondary = (SecondaryData)card;
+            if (player.secondaryInstances.ContainsKey(secondary))
+            {
+                player.secondaryInstances[secondary].Destroy();
+                player.secondaryInstances.Remove(secondary);
+            }
+        }
+        Gamemode.blacklistCards.Add(card);
+    }
+
     // Upgrades a card
     public void UpgradeCard(CardData card, UpgradeData upgrade, int quality)
     {

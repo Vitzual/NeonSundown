@@ -71,9 +71,9 @@ public class Ship : Weapon
     private List<Enemy> seededEnemies;
 
     // Scriptable and weapon reference
-    private Dictionary<WeaponData, Weapon> weaponInstances;
-    private Dictionary<HelperData, Helper> helperInstances;
-    private Dictionary<SecondaryData, Secondary> secondaryInstances;
+    public Dictionary<WeaponData, Weapon> weaponInstances;
+    public Dictionary<HelperData, Helper> helperInstances;
+    public Dictionary<SecondaryData, Secondary> secondaryInstances;
     private SecondaryData secondary;
 
     // Debug car
@@ -96,7 +96,6 @@ public class Ship : Weapon
     {
         // Reset effects always
         Effects.ToggleMainGlitchEffect(false);
-        Events.active.onAddSynergy += AddSynergy;
         Events.active.onResetCooldown += ResetCooldown;
 
         // Reset ship flags
@@ -888,7 +887,7 @@ public class Ship : Weapon
             return secondaryInstances[secondary];
         else return null;
     }
-
+    
     public override void AddCard(CardData card)
     {
         // Check card type
@@ -974,58 +973,6 @@ public class Ship : Weapon
             ChromaData chroma = (ChromaData)card;
             SetupChroma(chroma.type);
         }
-    }
-
-    public void AddSynergy(SynergyData synergy)
-    {
-        // Remove old card instances
-        if (synergy.removeCardOne) RemoveCardInstance(synergy.cardOne);
-        if (synergy.removeCardTwo) RemoveCardInstance(synergy.cardTwo);
-        AddCard(synergy.outputCard);
-
-        // Pass all card one upgrades to synergy
-        List<Deck.UpgradeInfo> upgrades = Deck.GetUpgrades(synergy.cardOne);
-        if (upgrades != null && upgrades.Count > 0)
-            foreach (Deck.UpgradeInfo upgrade in upgrades)
-                Deck.active.UpgradeCard(synergy.outputCard, upgrade.upgrade, upgrade.quality);
-
-        // Pass all card two upgrades to synergy
-        upgrades = Deck.GetUpgrades(synergy.cardTwo);
-        if (upgrades != null && upgrades.Count > 0)
-            foreach (Deck.UpgradeInfo upgrade in upgrades)
-                Deck.active.UpgradeCard(synergy.outputCard, upgrade.upgrade, upgrade.quality);
-    }
-
-    public void RemoveCardInstance(CardData card)
-    {
-        if (card is WeaponData)
-        {
-            WeaponData weapon = (WeaponData)card;
-            if (weaponInstances.ContainsKey(weapon))
-            {
-                weaponInstances[weapon].Destroy();
-                weaponInstances.Remove(weapon);
-            }
-        }
-        else if (card is HelperData)
-        {
-            HelperData helper = (HelperData)card;
-            if (helperInstances.ContainsKey(helper))
-            {
-                helperInstances[helper].Destroy();
-                helperInstances.Remove(helper);
-            }
-        }
-        else if (card is SecondaryData)
-        {
-            SecondaryData secondary = (SecondaryData)card;
-            if (secondaryInstances.ContainsKey(secondary))
-            {
-                secondaryInstances[secondary].Destroy();
-                secondaryInstances.Remove(secondary);
-            }
-        }
-        Gamemode.blacklistCards.Add(card);
     }
 
     public void SetupChroma(ChromaType type)
