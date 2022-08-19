@@ -7,9 +7,10 @@ using UnityEngine.UI;
 public class BlackmarketItem : MonoBehaviour
 {
     // Item UI components
-    public Image border, background, icon, crystal;
+    public Image border, icon, crystal;
     public new TextMeshProUGUI name;
     public TextMeshProUGUI desc, amount, purchased, unavailable;
+    public Button button;
 
     // Color settings
     public Color blueCrystal, redCrystal, greenCrystal;
@@ -78,10 +79,18 @@ public class BlackmarketItem : MonoBehaviour
 
         // Set colors
         border.color = data.lightColor;
-        background.color = new Color(data.lightColor.r * 0.2f, data.lightColor.g * 0.2f,
+        ColorBlock block = button.colors;
+        block.normalColor = new Color(data.lightColor.r * 0.15f, data.lightColor.g * 0.15f,
+            data.lightColor.b * 0.15f, 1f);
+        block.highlightedColor = new Color(data.lightColor.r * 0.2f, data.lightColor.g * 0.2f,
             data.lightColor.b * 0.2f, 1f);
+        block.pressedColor = new Color(data.lightColor.r * 0.25f, data.lightColor.g * 0.25f,
+            data.lightColor.b * 0.25f, 1f);
+        block.selectedColor = new Color(data.lightColor.r * 0.3f, data.lightColor.g * 0.3f,
+            data.lightColor.b * 0.3f, 1f);
+        button.colors = block;
         name.color = data.lightColor;
-
+        
         // If light color set for icon, apply
         if (data.useLightColorOnIcon)
             icon.color = data.lightColor;

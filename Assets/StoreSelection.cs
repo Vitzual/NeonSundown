@@ -42,11 +42,12 @@ public class StoreSelection : MonoBehaviour
         moduleAmount.text = amountCompleted + " / " + amountTodo + " COMPLETE";
 
         // Update blackmarket progress
+        int amount = SaveSystem.GetBlackmarketItemsUnlocked();
+        if (amount > panel.GetTotalAmountOfItems()) amount = panel.GetTotalAmountOfItems();
+        blackmarketAmount.text = amount + " / "  + panel.GetTotalAmountOfItems() + " UNLOCKED";
         blackmarketBar.maxValue = panel.GetTotalAmountOfItems();
-        blackmarketBar.currentPercent = SaveSystem.GetBlackmarketItemsUnlocked();
+        blackmarketBar.currentPercent = amount;
         blackmarketBar.UpdateUI();
-        blackmarketAmount.text = SaveSystem.GetBlackmarketItemsUnlocked() + " / " 
-            + panel.GetTotalAmountOfItems() + " UNLOCKED";
     }
     
     public void ToggleStore(bool toggle)
