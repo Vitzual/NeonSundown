@@ -24,6 +24,7 @@ public class SaveData
         crystals = new SerializableDictionary<string, int>();
         modules = new SerializableDictionary<string, int>();
         oldSave = true;
+        discordReward = false;
     }
 
     public long epochMillisecond;
@@ -39,4 +40,5 @@ public class SaveData
     public SerializableDictionary<string, int> crystals;
     public SerializableDictionary<string, int> modules;
     public bool oldSave = true;
+    public bool discordReward = false;
 }

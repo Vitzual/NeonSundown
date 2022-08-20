@@ -39,7 +39,8 @@ public class Menu : MonoBehaviour
     public CanvasGroup creditsGroup;
     public CanvasGroup levelsGroup;
     public CanvasGroup warningGroup;
-    public GameObject lockedStoreDesc, normalStoreDesc, offlineMode;
+    public GameObject lockedStoreDesc, normalStoreDesc, offlineMode,
+        joinedDiscord, notJoinedDiscord;
     public Image pressSpaceBg;
 
     // Other interface options
@@ -148,8 +149,15 @@ public class Menu : MonoBehaviour
             }
         }
         else shipPanel.Setup(alphaShip);
+
+        // Check discord reward
+        if (SaveSystem.saveData != null)
+        {
+            notJoinedDiscord.SetActive(!SaveSystem.saveData.discordReward);
+            joinedDiscord.SetActive(SaveSystem.saveData.discordReward);
+        }
     }
-    
+
     // Update user input
     public void Update()
     {
@@ -365,6 +373,21 @@ public class Menu : MonoBehaviour
     public void OpenLink(string link)
     {
         Application.OpenURL(link);
+    }
+
+    public void OpenDiscord(string link)
+    {
+        if (!SaveSystem.saveData.discordReward)
+        {
+            SaveSystem.saveData.discordReward = true;
+            foreach (CrystalData crystal in Scriptables.crystals)
+                SaveSystem.AddCrystal(crystal.InternalID, 5);
+            SaveSystem.UpdateSave();
+
+            notJoinedDiscord.SetActive(false);
+            joinedDiscord.SetActive(true);
+        }
+        OpenLink(link);
     }
 
     // Editor controls - collapse if expanded

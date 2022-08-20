@@ -585,7 +585,7 @@ public class Dealer : MonoBehaviour
         // Set open flag
         isOpen = true;
     }
-
+    
     // Open dealer
     public void CloseDealer()
     {
