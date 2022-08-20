@@ -23,7 +23,7 @@ public class BulletHandler : MonoBehaviour
         active = this;
         beams = new List<Beam>();
     }
-
+    
     // Move normal enemies
     public void Update()
     {

@@ -14,6 +14,13 @@ public class Events : MonoBehaviour
         active = this;
     }
 
+    public event Action<bool> onGamePause;
+    public void PauseGame(bool pause)
+    {
+        if (onGamePause != null)
+            onGamePause(pause);
+    }
+
     public event Action onAuthenticationFinished;
     public void FinishAuthentication()
     {

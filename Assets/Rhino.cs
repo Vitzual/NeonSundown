@@ -35,11 +35,10 @@ public class Rhino : Enemy
     public override void Setup(EnemyData data, Variant variant, Transform target)
     {
         base.Setup(data, variant, target);
+        Events.active.onGamePause += PauseAudio;
         moveSpeedHolder = moveSpeed;
         rotateSpeedHolder = rotateSpeed;
     }
-
-    // Override 
 
     // Override movement call
     public override void Move()
@@ -95,6 +94,13 @@ public class Rhino : Enemy
         {
             base.Knockback(amount, origin, forceKnockback);
         }
+    }
+
+    // Remove pause event
+    public override void Destroy()
+    {
+        Events.active.onGamePause -= PauseAudio;
+        base.Destroy();
     }
 
     // Called when colliding with ship
@@ -157,5 +163,11 @@ public class Rhino : Enemy
     {
         DisableAttack();
         base.SeedEnemy(ship);
+    }
+
+    public void PauseAudio(bool pause)
+    {
+        if (pause) audioSource.Pause();
+        else audioSource.Play();
     }
 }

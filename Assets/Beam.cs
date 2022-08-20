@@ -11,6 +11,7 @@ public class Beam : Laser
 
     // Update beam timer
     private float timer, endAtTime, endEarlyTime, damageCooldown = 0.5f, damageTimer = 0f;
+    private bool useSound;
 
     public void SetupBeam(Transform parent, float width, float length, float spread,
         float pierces, AudioClip sound, Material beamMaterial, bool useSound)
@@ -21,7 +22,12 @@ public class Beam : Laser
 
         // Setup sound effect
         audioSource.clip = sound;
-        if (useSound) audioSource.volume = Settings.sound;
+        this.useSound = useSound;
+        if (useSound)
+        {
+            Events.active.onGamePause += PauseAudio;
+            audioSource.volume = Settings.sound;
+        }
         else audioSource.volume = 0f;
         audioSource.Play();
 
@@ -83,6 +89,12 @@ public class Beam : Laser
         if (timer >= endAtTime) Destroy();
         else if (timer >= endEarlyTime) base.Move();
     }
+    
+    public override void Destroy()
+    {
+        if (useSound) Events.active.onGamePause -= PauseAudio;
+        base.Destroy();
+    }
 
     public void EndEarly()
     {
@@ -99,5 +111,11 @@ public class Beam : Laser
     {
         OnHit(entity);
         base.AddEntity(entity);
+    }
+
+    public void PauseAudio(bool pause)
+    {
+        if (pause) audioSource.Pause();
+        else audioSource.Play();
     }
 }

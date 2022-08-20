@@ -114,7 +114,7 @@ public class BlackmarketPanel : MonoBehaviour
             }
         }
     }
-
+    
     public void ResetPanel()
     {
         // Set selected view

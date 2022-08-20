@@ -9,7 +9,7 @@ public class PausedMenu : MonoBehaviour
     public static CanvasGroup stats;
     public static CanvasGroup canvasGroup;
     private static bool isOpen = false;
-
+    
     // On start grab the canvas group
     public void Start()
     {
@@ -45,10 +45,14 @@ public class PausedMenu : MonoBehaviour
             else if (canvasGroup.alpha == 1f) Close();
         }
     }
-
+    
     // Open the pause menu
     public static void Open()
     {
+        // Call pause event
+        if (Events.active != null)
+            Events.active.PauseGame(true);
+
         if (stats != null) stats.alpha = 1f;
         canvasGroup.alpha = 1f;
         canvasGroup.interactable = true;
@@ -61,6 +65,10 @@ public class PausedMenu : MonoBehaviour
     // Close the pause menu
     public static void Close()
     {
+        // Call pause event
+        if (Events.active != null)
+            Events.active.PauseGame(false);
+
         if (stats != null) stats.alpha = 0f;
         canvasGroup.alpha = 0f;
         canvasGroup.interactable = false;

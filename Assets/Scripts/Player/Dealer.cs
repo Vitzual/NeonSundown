@@ -512,12 +512,16 @@ public class Dealer : MonoBehaviour
     // Open dealer
     public void OpenDealer()
     {
+        // Call pause event
+        if (Events.active != null)
+            Events.active.PauseGame(true);
+        
         // Reset re-rolls
         reroll = true;
         rerollBorder.color = availableReroll;
         rerollBackground.color = new Color(availableReroll.r * 0.2f,
             availableReroll.g * 0.2f, availableReroll.b * 0.2f, 1f);
-
+        
         // Close upgrades
         ToggleUpgrades(false);
         upgradeOptions.alpha = 0f;
@@ -585,8 +589,12 @@ public class Dealer : MonoBehaviour
     // Open dealer
     public void CloseDealer()
     {
+        // Call resume event
+        if (Events.active != null)
+            Events.active.PauseGame(false);
+
         // Reset cards
-        foreach(Card card in cardSlots)
+        foreach (Card card in cardSlots)
             card.ResetCard();
 
         // Close upgrades
