@@ -1,3 +1,4 @@
+using HeathenEngineering.SteamworksIntegration;
 using Michsky.UI.ModernUIPack;
 using System.Collections;
 using System.Collections.Generic;
@@ -28,6 +29,7 @@ public class BlackmarketPanel : MonoBehaviour
     public Blackmarket blackmarket;
 
     // Panel components 
+    public AchievementObject blackmarketAchievement;
     public TextMeshProUGUI title, desc, amount, buy, 
         test, redCrystals, greenCrystals, blueCrystals;
     public Image icon, crystal, border, background,
@@ -82,12 +84,14 @@ public class BlackmarketPanel : MonoBehaviour
         }
 
         // Set progress bars
+        bool isAllUnlocked = true;
         foreach (KeyValuePair<BlackmarketData.Type, int> amount in totalAmount)
         {
             foreach (Progress pro in progress)
             {
                 if (pro.type == amount.Key)
                 {
+                    if (isAllUnlocked && progressAmount[amount.Key] < amount.Value) isAllUnlocked = false;
                     pro.amount.text = progressAmount[amount.Key] + "/" + amount.Value;
                     pro.bar.maxValue = amount.Value;
                     pro.bar.currentPercent = progressAmount[amount.Key];
@@ -97,6 +101,17 @@ public class BlackmarketPanel : MonoBehaviour
             }
 
             totalAmountOfItems += amount.Value;
+        }
+
+        // Check if all unlock
+        if (isAllUnlocked)
+        {
+            Debug.Log("[STORE] All black market items unlocked!");
+            if (!blackmarketAchievement.IsAchieved)
+            {
+                blackmarketAchievement.Unlock();
+                blackmarketAchievement.Store();
+            }
         }
     }
 

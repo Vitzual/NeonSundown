@@ -89,6 +89,8 @@ public class Dealer : MonoBehaviour
     private List<CardData> pickedCards;
     private Card upgradingCard;
     private bool isUpgrading = false;
+    private bool pitchSet = false;
+    private float pitch = 1f;
 
     // On start get private components 
     public void Start()
@@ -138,8 +140,17 @@ public class Dealer : MonoBehaviour
             // Check the connected controller
             if (Controller.isControllerConnected && cardsDealt) CheckController();
 
-            if (Settings.musicPitching && music.pitch > pitchDown)
-                music.pitch -= pitchSpeed * Time.deltaTime * fastDealSpeed;
+            if (Settings.musicPitching)
+            {
+                if (!pitchSet)
+                {
+                    pitchSet = true;
+                    pitch = music.pitch;
+                }
+
+                if (music.pitch > pitchDown)
+                    music.pitch -= pitchSpeed * Time.deltaTime * fastDealSpeed;
+            }
 
             if (!canvasSet && cardsDealt)
             {
@@ -153,12 +164,12 @@ public class Dealer : MonoBehaviour
         }
 
         // Pitch back up music after dealign
-        else if (music.pitch < 1.0f)
+        else if (music.pitch < pitch)
         {
             music.pitch += pitchSpeed * Time.deltaTime * fastDealSpeed;
 
-            if (music.pitch >= 1f)
-                music.pitch = 1f;
+            if (music.pitch >= pitch)
+                music.pitch = pitch;
         }
     }
 
