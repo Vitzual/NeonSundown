@@ -13,7 +13,7 @@ public class SaveSystem
     private const string SAVE_PATH = "/V2_player_save.json";
     private const string META_PATH = "/V2_context_save.json";
     private const int MAX_ARENA_TIMES = 10;
-
+    
     // Most up-to-date data
     public static SaveData saveData;
 
@@ -164,6 +164,7 @@ public class SaveSystem
 
         // Create new save data instance
         saveData = new SaveData();
+        saveData.oldSave = false;
 
         // Convert to json and save
         string newData = JsonUtility.ToJson(saveData);
