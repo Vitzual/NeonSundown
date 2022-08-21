@@ -28,6 +28,15 @@ public class ArenaButton : MonoBehaviour
     // Generates at runtime
     public void Set(ArenaData arena, string bestRun)
     {
+        // Check if unlocked
+        if (SaveSystem.IsArenaUnlocked(arena.InternalID))
+        {
+            // Set hover adjust
+            OnHoverAdjustScale onHover = GetComponent<OnHoverAdjustScale>();
+            if (onHover != null) onHover.enabled = true;
+            isLocked = false;
+        }
+
         // Set arena info
         this.arena = arena;
         name.text = arena.name.ToUpper();

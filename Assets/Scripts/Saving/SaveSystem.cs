@@ -5,17 +5,69 @@ using System.IO;
 using UnityEngine;
 using HeathenEngineering.SteamworksIntegration.API;
 using System.Linq;
+using System;
 
 public class SaveSystem
 {
     // Save path
-    private const string CLOUD_SAVE_NAME = "V2_player_save.json";
     private const string SAVE_PATH = "/V2_player_save.json";
     private const string META_PATH = "/V2_context_save.json";
-    private const int MAX_ARENA_TIMES = 10;
+
+    // Outdated save paths
+    private const string OLD_SAVE_PATH = "player_save.json";
     
     // Most up-to-date data
     public static SaveData saveData;
+
+    public static void CheckForOldSave()
+    {
+        // Check for a V2 save first
+        string path = Application.persistentDataPath + SAVE_PATH;
+
+        // If file exists, do nothing
+        if (File.Exists(path)) return;
+
+        // Check for cloud save
+        else
+        {
+            // Try to write to cloud
+            try
+            {
+                if (CloudAPI.IsEnabled)
+                {
+                    // Check cloud storage
+                    CloudAPI.GetQuota(out ulong total, out ulong remaining);
+                    Debug.Log("[CLOUD] Used " + (total - remaining) + " of " + total + " bytes on Steam cloud.");
+                    RemoteStorageFile[] files = CloudAPI.GetFiles();
+                    Debug.Log("[CLOUD] Retrieved " + files.Length + " from Steam cloud.");
+
+                    // Attempt to get the object from the cloud
+                    Debug.Log("[CLOUD] Attempting to load save file from cloud");
+                    if (CloudAPI.FileExists(SAVE_PATH))
+                    {
+                        SaveData cloudSave = CloudAPI.FileReadJson<SaveData>(SAVE_PATH, System.Text.Encoding.UTF8);
+
+                        // If save is not null, compare timestamps
+                        if (cloudSave != null)
+                        {
+                            saveData = cloudSave;
+                            UpdateSave();
+                            return;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex) { Debug.Log("[CLOUD] Ran into error while trying to access Steam cloud.\nError: " + ex); }
+        }
+
+        // No file on cloud or local, check for old
+        Debug.Log("No instances of a V2 file could be found!");
+
+        // Attempt to get an old save
+        GetSave(OLD_SAVE_PATH);
+        if (saveData != null) UpdateSave();
+    }
+
 
     // Sets the meta context
     public static void SetMetacontext(string arena, string ship, string song, List<string> modules)
@@ -76,7 +128,7 @@ public class SaveSystem
         {
             if (CloudAPI.IsEnabled)
             {
-                CloudAPI.FileWriteAsync(CLOUD_SAVE_NAME, newData, System.Text.Encoding.UTF8, (result, hasError) =>
+                CloudAPI.FileWriteAsync(SAVE_PATH, newData, System.Text.Encoding.UTF8, (result, hasError) =>
                 {
                     if (!hasError) Debug.Log("[CLOUD SAVE] Game was successfully saved on Steam cloud!");
                     else Debug.Log("[CLOUD SAVE] Game could not be saved on Steam cloud!");
@@ -90,10 +142,11 @@ public class SaveSystem
     }
 
     // Generates the player data
-    public static void GetSave()
+    public static void GetSave(string PATH = "")
     {
         // Grab the persistent data path
-        string path = Application.persistentDataPath + SAVE_PATH;
+        if (PATH == "") PATH = SAVE_PATH;
+        string path = Application.persistentDataPath + PATH;
 
         // Check if file exists
         if (File.Exists(path))
@@ -121,7 +174,7 @@ public class SaveSystem
                 Debug.Log("[CLOUD] Retrieved " + files.Length + " from Steam cloud.");
 
                 // Attempt to get the object from the cloud
-                SaveData cloudSave = CloudAPI.FileReadJson<SaveData>(CLOUD_SAVE_NAME, System.Text.Encoding.UTF8);
+                SaveData cloudSave = CloudAPI.FileReadJson<SaveData>(PATH, System.Text.Encoding.UTF8);
                 Debug.Log("[CLOUD] Attempting to load save file from cloud");
 
                 // If save is not null, compare timestamps
@@ -140,7 +193,7 @@ public class SaveSystem
                 }
             }
         }
-        catch { Debug.Log("[CLOUD] Ran into error while trying to access Steam cloud."); }
+        catch (Exception ex) { Debug.Log("[CLOUD] Ran into error while trying to access Steam cloud.\nError: " + ex); }
 
         // If save data not loaded, generate new save
         if (saveData == null) GenerateSave();
@@ -164,7 +217,6 @@ public class SaveSystem
 
         // Create new save data instance
         saveData = new SaveData();
-        saveData.oldSave = false;
 
         // Convert to json and save
         string newData = JsonUtility.ToJson(saveData);
@@ -175,14 +227,14 @@ public class SaveSystem
         { 
             if (CloudAPI.IsEnabled)
             {
-                CloudAPI.FileWriteAsync(CLOUD_SAVE_NAME, newData, System.Text.Encoding.UTF8, (result, hasError) =>
+                CloudAPI.FileWriteAsync(SAVE_PATH, newData, System.Text.Encoding.UTF8, (result, hasError) =>
                 {
                     if (!hasError) Debug.Log("[CLOUD SAVE] New save data was created successfully on Steam cloud!");
                     else Debug.Log("[CLOUD SAVE] New save data could not be written to Steam cloud!");
                 });
             }
-        } 
-        catch { Debug.Log("[CLOUD] Ran into error while trying to access Steam cloud."); }
+        }
+        catch (Exception ex) { Debug.Log("[CLOUD] Ran into error while trying to access Steam cloud.\nError: " + ex); }
 
         // Game saved 
         Debug.Log("[SAVE] New save data was created successfully!");

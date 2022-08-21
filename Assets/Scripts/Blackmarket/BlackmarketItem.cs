@@ -14,7 +14,7 @@ public class BlackmarketItem : MonoBehaviour
 
     // Color settings
     public Color blueCrystal, redCrystal, greenCrystal;
-
+    
     // Blackmarket data 
     [HideInInspector]
     public BlackmarketData data;

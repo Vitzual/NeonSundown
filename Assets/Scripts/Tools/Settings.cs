@@ -15,8 +15,8 @@ public class Settings
     }
 
     // Volume control
-    public static float music = 1f;
-    public static float sound = 1f;
+    public static float music = 0.5f;
+    public static float sound = 0.5f;
 
     // Video options
     private static int resolutionX = 1920;
@@ -162,8 +162,8 @@ public class Settings
         {
             // Set default settings
             Keybinds.SetDefaultKeybinds();
-            music = 1f;
-            sound = 1f;
+            music = 0.5f;
+            sound = 0.5f;
             resolutionX = 1920;
             resolutionY = 1080;
             screenmode = true;
