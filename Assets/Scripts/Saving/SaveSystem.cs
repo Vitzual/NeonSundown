@@ -46,6 +46,7 @@ public class SaveSystem
                     if (CloudAPI.FileExists(SAVE_PATH))
                     {
                         SaveData cloudSave = CloudAPI.FileReadJson<SaveData>(SAVE_PATH, System.Text.Encoding.UTF8);
+                        Debug.Log("[CLOUD] Found save file on cloud, checking epoch data");
 
                         // If save is not null, compare timestamps
                         if (cloudSave != null)

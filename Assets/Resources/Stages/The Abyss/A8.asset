@@ -12,15 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74bee22c4c15df545aab77de393cc123, type: 3}
   m_Name: A8
   m_EditorClassIdentifier: 
-  internalId: 66c67171-099b-4b0c-a61c-9f23e850826e
-  createdAtTicks: 637795888212830274
-  name: PHASE 8
+  internalId: eb154739-a31a-40c7-9e44-1d220b43498a
+  createdAtTicks: 637796069366094686
+  name: BOSS PHASE
   isMenuStage: 0
   enemyScaling: 0
   enemies:
-  - data: {fileID: 11400000, guid: ef612518b9edcd7448ae3e9d922e1874, type: 2}
+  - data: {fileID: 11400000, guid: 83e41a2d30c207449a8381a61d5bd24d, type: 2}
     variant: 0
-    cooldown: 0.5
+    cooldown: 120
     amount: 1
     enableLockOn: 0
     disableRotation: 0
@@ -28,6 +28,12 @@ MonoBehaviour:
     variant: 0
     cooldown: 3
     amount: 10
+    enableLockOn: 0
+    disableRotation: 0
+  - data: {fileID: 11400000, guid: 93a6ee9e8a156aa4cb5d660915aca99e, type: 2}
+    variant: 0
+    cooldown: 5
+    amount: 1
     enableLockOn: 0
     disableRotation: 0
   time: 30

@@ -12,28 +12,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74bee22c4c15df545aab77de393cc123, type: 3}
   m_Name: A9
   m_EditorClassIdentifier: 
-  internalId: eb154739-a31a-40c7-9e44-1d220b43498a
-  createdAtTicks: 637796069366094686
-  name: BOSS PHASE
+  internalId: 281aaf23-1979-424c-9a09-999a5dbac1b0
+  createdAtTicks: 637796070025844776
+  name: PHASE 9
   isMenuStage: 0
   enemyScaling: 0
   enemies:
-  - data: {fileID: 11400000, guid: 83e41a2d30c207449a8381a61d5bd24d, type: 2}
+  - data: {fileID: 11400000, guid: 93a6ee9e8a156aa4cb5d660915aca99e, type: 2}
     variant: 0
-    cooldown: 120
-    amount: 1
+    cooldown: 3
+    amount: 5
     enableLockOn: 0
     disableRotation: 0
   - data: {fileID: 11400000, guid: 31309ad257c223f49917d49d350b3979, type: 2}
     variant: 0
     cooldown: 3
-    amount: 10
+    amount: 15
     enableLockOn: 0
     disableRotation: 0
-  - data: {fileID: 11400000, guid: 93a6ee9e8a156aa4cb5d660915aca99e, type: 2}
+  - data: {fileID: 11400000, guid: 4450b0e67d8c81f46b87d6ad461fcdf8, type: 2}
     variant: 0
-    cooldown: 5
+    cooldown: 0.2
     amount: 1
     enableLockOn: 0
     disableRotation: 0
-  time: 30
+  - data: {fileID: 11400000, guid: 6fab594cc37a5f147829f1e090bb84d7, type: 2}
+    variant: 0
+    cooldown: 0.5
+    amount: 1
+    enableLockOn: 0
+    disableRotation: 0
+  time: 60
