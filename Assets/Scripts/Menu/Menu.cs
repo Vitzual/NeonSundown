@@ -25,6 +25,7 @@ public class Menu : MonoBehaviour
     public CanvasGroup mainGroup;
     public CanvasGroup mainBackground;
     public CanvasGroup levelGroup;
+    public CanvasGroup achievementGroup;
     public CanvasGroup arenaGroup;
     public CanvasGroup planningGroup;
     public CanvasGroup catalogGroup;
@@ -270,6 +271,13 @@ public class Menu : MonoBehaviour
     {
         if (toggle) TogglePanel(levelsGroup, mainGroup);
         else TogglePanel(mainGroup, levelsGroup);
+    }
+
+    // Open levels panel
+    public void ToggleAchievementsPanel(bool toggle)
+    {
+        if (toggle) TogglePanel(achievementGroup, mainGroup);
+        else TogglePanel(mainGroup, achievementGroup);
     }
 
     // Open arena panel

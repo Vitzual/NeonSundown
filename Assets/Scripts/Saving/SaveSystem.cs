@@ -121,6 +121,7 @@ public class SaveSystem
         Debug.Log("[SAVE] Attempting to update save...");
 
         // Convert to json and save
+        saveData.epochMillisecond = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
         string newData = JsonUtility.ToJson(saveData);
         File.WriteAllText(Application.persistentDataPath + SAVE_PATH, newData);
 
