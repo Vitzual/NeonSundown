@@ -26,6 +26,7 @@ public class Menu : MonoBehaviour
     public CanvasGroup mainBackground;
     public CanvasGroup levelGroup;
     public CanvasGroup achievementGroup;
+    public CanvasGroup achievementButton;
     public CanvasGroup arenaGroup;
     public CanvasGroup planningGroup;
     public CanvasGroup catalogGroup;
@@ -230,6 +231,7 @@ public class Menu : MonoBehaviour
         LeanTween.alphaCanvas(socialsGroup, 1f, titleAnimSpeed).setDelay(titleAnimSpeed);
         LeanTween.alphaCanvas(mainBackground, 1f, titleAnimSpeed).setDelay(titleAnimSpeed);
         LeanTween.alphaCanvas(levelGroup, 1f, titleAnimSpeed).setDelay(titleAnimSpeed);
+        LeanTween.alphaCanvas(achievementButton, 1f, titleAnimSpeed).setDelay(titleAnimSpeed);
         buttonsGroup.interactable = true;
         buttonsGroup.blocksRaycasts = true;
         socialsGroup.interactable = true;
@@ -408,6 +410,7 @@ public class Menu : MonoBehaviour
         socialsGroup.alpha = 1f;
         mainBackground.alpha = 1f;
         levelGroup.alpha = 1f;
+        achievementButton.alpha = 1f;
         buttonsGroup.interactable = true;
         buttonsGroup.blocksRaycasts = true;
         socialsGroup.interactable = true;
@@ -423,6 +426,7 @@ public class Menu : MonoBehaviour
         socialsGroup.alpha = 0f;
         mainBackground.alpha = 0f;
         levelGroup.alpha = 0f;
+        achievementButton.alpha = 0f;
         buttonsGroup.interactable = false;
         buttonsGroup.blocksRaycasts = false;
         socialsGroup.interactable = false;

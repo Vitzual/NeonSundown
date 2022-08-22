@@ -18,10 +18,12 @@ public class Achievement : MonoBehaviour
         data = achievement;
 
         name.text = achievement.obj.Name.ToUpper();
-        desc.text = achievement.obj.Description;
+        desc.text = achievement.obj.Description.ToUpper();
 
         if (achievement.obj.IsAchieved)
         {
+            name.color = Color.white;
+            desc.color = Color.white;
             icon.sprite = achievement.unlockedIcon;
             border.color = achievement.color;
             iconBorder.color = achievement.color;

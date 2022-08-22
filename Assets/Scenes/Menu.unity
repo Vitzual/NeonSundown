@@ -9063,7 +9063,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 154849195}
   m_Enabled: 1
-  m_Alpha: 0
+  m_Alpha: 1
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -11347,7 +11347,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 201019734}
   m_Enabled: 1
-  m_Alpha: 0
+  m_Alpha: 1
   m_Interactable: 0
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
@@ -12684,8 +12684,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "<color=green>NEW ADDITIONS:\r</color>\r<size=8>\n- New hidden master achievements
-    on every arena\n\n<size=10><color=green>BALANCE CHANGES:\r</color>\r<size=8>\n-
+  m_text: "<color=green>NEW ADDITIONS:\r</color>\r<size=8>\n- New in-game achievement
+    progress tracking\n\n<size=10><color=green>BALANCE CHANGES:\r</color>\r<size=8>\n-
     Increased difficulty ramping on The Abyss substantially\n- Increased overall
     difficulty of The Vault \n- Reduced effect of Scythe grand blades upgrade\n\r\n<size=10><color=green>BUG
     FIXES:\r</color>\r<size=8>\n- Fixed cloud save discrepancies when loading into
@@ -15527,7 +15527,7 @@ RectTransform:
   m_GameObject: {fileID: 286735094}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.8, y: 0.8, z: 0}
+  m_LocalScale: {x: 0.95, y: 0.95, z: 0.95}
   m_Children:
   - {fileID: 1398233070}
   - {fileID: 309236242}
@@ -15536,7 +15536,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 135}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &286735096
@@ -28394,7 +28394,30 @@ MonoBehaviour:
   progressBar: {fileID: 553345312}
   achievementObj: {fileID: 4650253901345951709, guid: ae602d4c27739894da4012191163306c, type: 3}
   achievementList: {fileID: 83115952}
-  achievements: []
+  achievements:
+  - {fileID: 11400000, guid: d06edfb69997fe84bb0c9dbbedc05d2d, type: 2}
+  - {fileID: 11400000, guid: 2eaa15adea8f9d44aade5ff3cc4b26e9, type: 2}
+  - {fileID: 11400000, guid: 2610ac074cb9468419d4a95aaf970150, type: 2}
+  - {fileID: 11400000, guid: 9a291b7c3dd221c48a5e6507b37e3198, type: 2}
+  - {fileID: 11400000, guid: 32635cfb55beadc40b20c735d25f2745, type: 2}
+  - {fileID: 11400000, guid: 0c76c823bd06a3441a356a66c52103c9, type: 2}
+  - {fileID: 11400000, guid: b72da633afb698a40a8eb1e373f80a73, type: 2}
+  - {fileID: 11400000, guid: d339599169bc0c64e8e08515db816145, type: 2}
+  - {fileID: 11400000, guid: 904b4e2236ca202459cef3d16502416b, type: 2}
+  - {fileID: 11400000, guid: ba012059289a7a04c92c500ca659487b, type: 2}
+  - {fileID: 11400000, guid: 0ef57744cbb5237439f1e864d7fea8bf, type: 2}
+  - {fileID: 11400000, guid: d651b84e3af6f0e4487aee5c0bf9c0d4, type: 2}
+  - {fileID: 11400000, guid: 9a219acb58cd48d478352109b5c9eef0, type: 2}
+  - {fileID: 11400000, guid: 59c7e715defef014a9bdd5f7d25e7760, type: 2}
+  - {fileID: 11400000, guid: da8d9ecca705dbd48b6c5d01e8a42006, type: 2}
+  - {fileID: 11400000, guid: 2a5bf57444a7f8745b7cf4ecccf6e947, type: 2}
+  - {fileID: 11400000, guid: 5e55de57b42d4884fa34cc7dfe744cca, type: 2}
+  - {fileID: 11400000, guid: 871b668cd75d0b84982074c72a9f02b9, type: 2}
+  - {fileID: 11400000, guid: dd6af3a9ea31d5a43b7b9e5583813c75, type: 2}
+  - {fileID: 11400000, guid: 5b23a2876f083df4f83b9016955a160c, type: 2}
+  - {fileID: 11400000, guid: 5b9eb8d4d1e13cb4f9b34dfe0a34d02d, type: 2}
+  - {fileID: 11400000, guid: 28438ab13bd405a46a8b75fedaebb62b, type: 2}
+  - {fileID: 11400000, guid: 8ed3d1510f655c64293851a11bf53b29, type: 2}
 --- !u!225 &529811641
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -28403,7 +28426,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 529811638}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 0
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
@@ -45608,9 +45631,9 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 880141170}
   m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
+  m_Alpha: 0
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
 --- !u!1001 &883533129
 PrefabInstance:
@@ -52820,7 +52843,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!224 &1023007615 stripped
 RectTransform:
@@ -53809,7 +53832,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1039449561
 MonoBehaviour:
@@ -61515,50 +61538,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1192836775}
   m_CullTransparentMesh: 1
---- !u!1 &1194867750
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1194867752}
-  - component: {fileID: 1194867751}
-  m_Layer: 0
-  m_Name: Steamworks [ENABLE FOR TESTING)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1194867751
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1194867750}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4882e1f0baaa18a45836edebb1e6b881, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  settings: {fileID: 11400000, guid: f589d5fe6376ca443bb8e175e09de7de, type: 2}
---- !u!4 &1194867752
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1194867750}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1198263414
 GameObject:
   m_ObjectHideFlags: 0
@@ -63013,7 +62992,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1221858378}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -63196,7 +63175,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1223934199
 GameObject:
@@ -71768,7 +71747,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1373869714
 GameObject:
@@ -72752,7 +72731,7 @@ RectTransform:
   - {fileID: 383514994}
   - {fileID: 648138946}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -72779,6 +72758,7 @@ MonoBehaviour:
   mainBackground: {fileID: 1801472767}
   levelGroup: {fileID: 1221858380}
   achievementGroup: {fileID: 529811641}
+  achievementButton: {fileID: 1531289062}
   arenaGroup: {fileID: 1546299619}
   planningGroup: {fileID: 329460108}
   catalogGroup: {fileID: 529811641}
@@ -77772,9 +77752,9 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1496916994}
   m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
+  m_Alpha: 0
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
 --- !u!1 &1500751162
 GameObject:
@@ -78065,7 +78045,7 @@ Transform:
   m_Children:
   - {fileID: 131810205}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1506489096
 GameObject:
@@ -79278,7 +79258,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1531289060}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -82337,7 +82317,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1603974343
 GameObject:
@@ -84697,7 +84677,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1642490503
 GameObject:
@@ -85734,7 +85714,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1667217920
 MonoBehaviour:
@@ -87273,7 +87253,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1699659181
 GameObject:
@@ -93094,7 +93074,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1801472763}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 0
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
@@ -95675,7 +95655,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1859912154
 GameObject:
@@ -98523,7 +98503,7 @@ Transform:
   m_LocalScale: {x: 1.0013301, y: 1.0013301, z: 1.0013301}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1915266134
 GameObject:
@@ -100179,7 +100159,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1952695949
 GameObject:

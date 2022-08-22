@@ -6,7 +6,7 @@ public class BulletHandler : MonoBehaviour
 {
     // Active instance
     public static BulletHandler active;
-
+    
     // List of all active bullets
     public List<Bullet> bullets;
     public Bullet energyBullet;
@@ -105,7 +105,7 @@ public class BulletHandler : MonoBehaviour
             lastObj.name = weapon.bullet.gameObject.name;
 
             // Set size if bigger then 1
-            lastObj.transform.localScale = new Vector2(bulletSize, bulletSize);
+            // lastObj.transform.localScale = new Vector2(bulletSize, bulletSize);
 
             // Adjust for rotational offset
             Vector3 rotationOffset = new Vector3(lastObj.transform.eulerAngles.x, lastObj.transform.eulerAngles.y,

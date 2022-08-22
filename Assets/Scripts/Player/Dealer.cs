@@ -169,7 +169,10 @@ public class Dealer : MonoBehaviour
             music.pitch += pitchSpeed * Time.deltaTime * fastDealSpeed;
 
             if (music.pitch >= pitch)
+            {
+                pitchSet = false;
                 music.pitch = pitch;
+            }
         }
     }
 
@@ -564,7 +567,7 @@ public class Dealer : MonoBehaviour
                 i--;
             }
         }
-
+        
         // Deal the cards
         dealCards = true;
         cardsDealt = false;
@@ -580,7 +583,7 @@ public class Dealer : MonoBehaviour
 
         // Get redraws from save file
         redrawsLeft = SaveSystem.GetRedraws();
-        redraws.text = redrawsLeft + " Remaining";
+        redraws.text = redrawsLeft + " REMAINING";
 
         // Set open flag
         isOpen = true;
