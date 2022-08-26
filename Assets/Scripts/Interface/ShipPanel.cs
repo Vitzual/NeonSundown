@@ -37,8 +37,10 @@ public class ShipPanel : MonoBehaviour
     public List<ModuleButton> moduleButtons;
     private Dictionary<string, TextMeshProUGUI> moduleAmounts;
     private List<ModuleData> equippedModules;
+    private List<GameObject> activeBlacklistCards;
 
     // Ship button prefab
+    [Header("Ship Button Elements")]
     public ShipButton shipButton;
     public Transform shipList;
     public CanvasGroup shipCanvas;
@@ -49,7 +51,13 @@ public class ShipPanel : MonoBehaviour
     public AudioClip moduleSound;
     private AudioSource audioSource;
 
+    [Header("Blacklist Options")]
+    public BlacklistCard blacklistCard;
+    public GameObject blacklistEmpty;
+    public Transform cardList;
+
     // Panel elements
+    [Header("Panel Elements")]
     public new TextMeshProUGUI name;
     public TextMeshProUGUI desc, passiveAbility;
     public Image icon, panelBackground, panelBorder, moduleCancelButton,
@@ -64,7 +72,7 @@ public class ShipPanel : MonoBehaviour
         foreach (StatInfo stat in statInfoList)
             statInfo.Add(stat.stat, stat);
     }
-
+    
     // On start, subscribe to ship setup and create buttons
     public void Start()
     {
@@ -76,6 +84,7 @@ public class ShipPanel : MonoBehaviour
 
         // Setup module amounts
         equippedModules = new List<ModuleData>();
+        activeBlacklistCards = new List<GameObject>();
         moduleAmounts = new Dictionary<string, TextMeshProUGUI>();
         foreach (ModuleButton module in moduleButtons)
             moduleAmounts.Add(module.data.InternalID, module.amount);
@@ -140,6 +149,34 @@ public class ShipPanel : MonoBehaviour
             passiveAbilityIcon.color = noPassiveColor;
         }
 
+        // Iterate through blacklist slots
+        if (ship.incompatibleCards.Count > 0)
+        {
+            // Remove previous blacklist cards
+            RemoveBlacklistCards();
+
+            // Set no blacklist object to false
+            if (blacklistEmpty.activeSelf)
+                blacklistEmpty.SetActive(false);
+
+            // Iterate through and create cards
+            foreach (CardData card in ship.incompatibleCards)
+            {
+                BlacklistCard newCard = Instantiate(blacklistCard, cardList);
+                activeBlacklistCards.Add(newCard.gameObject);
+                newCard.Set(card);
+            }
+        }
+        else
+        {
+            // Remove previous blacklist cards
+            RemoveBlacklistCards();
+
+            // Set no blacklist object to true
+            if (!blacklistEmpty.activeSelf)
+                blacklistEmpty.SetActive(true);
+        }
+
         // Set stats
         SetStats(ship);
     }
@@ -151,7 +188,7 @@ public class ShipPanel : MonoBehaviour
         foreach (StatInfo stat in statInfoList)
             stat.AddValue(ship.GetStat(stat.stat));
     }
-
+    
     // Sets the ship stats
     public void SetStats(ShipData ship)
     {
@@ -362,5 +399,22 @@ public class ShipPanel : MonoBehaviour
         foreach (ShipButton button in buttons)
             if (data.type == BlackmarketData.Type.Ship && data.ship == button.ship)
                 button.Set(button.ship);
+    }
+
+    public void RemoveBlacklistCards()
+    {
+        // Remove previous blacklist cards
+        if (activeBlacklistCards != null)
+        {
+            for (int i = 0; i < activeBlacklistCards.Count; i++)
+            {
+                Destroy(activeBlacklistCards[i]);
+                activeBlacklistCards.RemoveAt(i);
+                i--;
+            }
+        }
+
+        // Create new active list
+        activeBlacklistCards = new List<GameObject>();
     }
 }

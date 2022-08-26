@@ -22,6 +22,8 @@ MonoBehaviour:
   passive: SEEKER DRONES
   unlockRequirement: Black Market Ship
   unlocked: 0
+  incompatibleCards:
+  - {fileID: 0}
   subTitle: AGILE DRONE SHIP
   shortDesc: Agile seeker drone ship
   mainColor: {r: 1, g: 0.87176263, b: 0, a: 1}
@@ -46,6 +48,10 @@ MonoBehaviour:
   maxChargeTime: 0
   chargeSpeed: 0
   chargeDamage: 0
+  seedShip: 0
+  seed: {fileID: 0}
+  seedDeploySound: {fileID: 0}
+  seedBoomSound: {fileID: 0}
   speedAffectsDamage: 0
   speedDamageMultiplier: 0
   weapon: {fileID: 11400000, guid: b7e6b5a09ee40c14fb8c5b8341fd21a0, type: 2}

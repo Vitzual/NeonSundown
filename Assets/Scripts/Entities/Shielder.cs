@@ -24,7 +24,19 @@ public class Shielder : Enemy
     public override void Damage(float amount, float knockback = 0f, bool overrideImmunity = false)
     {
         // Damage shield if active
-        if (!shieldActive) base.Damage(amount, knockback, overrideImmunity);
+        if (!shieldActive)
+        {
+            base.Damage(amount, knockback, overrideImmunity);
+        }
+        else
+        {
+            float adjust = amount / 10;
+            shield.localScale = new Vector3(shield.localScale.x
+                - adjust, shield.localScale.y - adjust, 1);
+            particle = _particle.main;
+            particle.startLifetime = (shield.localScale.x / initialSize) - 0.25f;
+            if (shield.localScale.x < 2f) DisableShield();
+        }
     }
 
     // On collision
@@ -40,25 +52,7 @@ public class Shielder : Enemy
         Bullet bullet = collision.GetComponent<Bullet>();
 
         // If is bullet, invoke on hit method
-        if (bullet != null)
-        {
-            if (shieldActive)
-            {
-                bullet.ReverseBullet();
-                float adjust = bullet.GetDamage() / 10;
-                shield.localScale = new Vector3(shield.localScale.x 
-                    - adjust, shield.localScale.y - adjust, 1);
-                particle = _particle.main;
-                particle.startLifetime = (shield.localScale.x / initialSize) - 0.25f;
-                if (shield.localScale.x < 2f) DisableShield();
-            }
-            else
-            {
-                bullet.deathMaterial = material;
-                Damage(bullet.GetDamage());
-                bullet.Destroy();
-            }
-        }
+        if (bullet != null && shieldActive) bullet.ReverseBullet();
     }
 
     // Disable shield

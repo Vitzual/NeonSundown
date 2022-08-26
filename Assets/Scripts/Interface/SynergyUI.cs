@@ -10,6 +10,7 @@ public class SynergyUI : MonoBehaviour
 
     // Debug synergy
     public static CanvasGroup screen;
+    public CanvasGroup declineSynergy;
     public Card cardOne, cardTwo, synergyCard;
     public bool debugFlag;
     public SynergyData debugTest;
@@ -32,6 +33,7 @@ public class SynergyUI : MonoBehaviour
 
         debugFlag = false;
         synergizing = true;
+        declineSynergy.alpha = 0f;
         LeanTween.alphaCanvas(screen, 1f, 1f);
         cardOne.Synergize(synergy.cardOne, fadeInSpeed, moveSpeedDelay);
         cardTwo.Synergize(synergy.cardTwo, fadeInSpeed, moveSpeedDelay);
@@ -42,6 +44,7 @@ public class SynergyUI : MonoBehaviour
         synergyCard.GetComponent<RectTransform>().localScale = new Vector3(10f, 10f, 1f);
         LeanTween.scale(synergyCard.gameObject, new Vector3(11f, 11f, 1f), 0.5f)
             .setEase(LeanTweenType.easeInExpo).setDelay(fadeInSpeed + moveSpeedDelay);
+        LeanTween.alphaCanvas(declineSynergy, 1f, 0.25f).setDelay(fadeInSpeed + moveSpeedDelay);
         cooldown = fadeInSpeed + moveSpeedDelay;
         Dealer.isOpen = true;
     }

@@ -47,7 +47,7 @@ public class Beam : Laser
     {
         // Remove pierces
         entity.Damage(damage, knockback);
-
+        
         // Check if entity dead
         if (!entity.IsDead() && stunLength > 0)
             entity.Stun(stunLength);

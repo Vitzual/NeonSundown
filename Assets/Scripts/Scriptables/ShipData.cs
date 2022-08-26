@@ -20,6 +20,8 @@ public class ShipData : IdentifiableScriptableObject
     public string unlockRequirement;
     [BoxGroup("Ship Info")]
     public bool unlocked;
+    [BoxGroup("Ship Info")]
+    public List<CardData> incompatibleCards;
 
     [BoxGroup("Ship Selection Variables")]
     public string subTitle, shortDesc;
