@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.GlobalIllumination;
 
 public class Rhino : Enemy
 {
@@ -35,6 +36,11 @@ public class Rhino : Enemy
     public override void Setup(EnemyData data, Variant variant, Transform target)
     {
         base.Setup(data, variant, target);
+
+        // Get the variant color
+        VariantColor variantColor = VariantPalette.GetVariantColor(variant);
+        lineColor = new Color(variantColor.borderColor.r, 
+            variantColor.borderColor.g, variantColor.borderColor.b, 0.4f);
         Events.active.onGamePause += PauseAudio;
         moveSpeedHolder = moveSpeed;
         rotateSpeedHolder = rotateSpeed;

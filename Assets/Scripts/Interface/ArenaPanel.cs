@@ -42,7 +42,7 @@ public class ArenaPanel : MonoBehaviour
     protected List<ArenaButton> limitedTimeArenas = new List<ArenaButton>();
 
     // Objective sprite options
-    public Color incompleteObjectiveColor, completeObjectiveColor;
+    public Color incompleteObjectiveColor, completeObjectiveColor, limitedTimeArenaColor;
     public Sprite incompleteObjectiveIcon, completeObjectiveIcon;
 
     // Image components
@@ -94,10 +94,23 @@ public class ArenaPanel : MonoBehaviour
                 buttonList.Add(newButton);
 
                 // Add arena button to limited time list
-                if (arena.limitedTimeArena) limitedTimeArenas.Add(newButton);
+                if (arena.limitedTimeArena)
+                {
+                    limitedTimeArenas.Add(newButton);
+                    if (SaveSystem.GetPlayerLevel() >= 50)
+                    {
+                        if (SaveSystem.saveData.arenaTimes.ContainsKey(arena.InternalID))
+                        {
+                            newButton.Set(arena, "<b>Best Run:</b> " + Formatter.Time
+                                (SaveSystem.saveData.arenaTimes[arena.InternalID]));
+                        }
+                        else newButton.Set(arena, "<b>Best Run:</b> 0:00");
+                    }
+                    else newButton.Lock(arena);
+                }
 
                 // Check if save is unlocked, and if so set time
-                if (arena.unlockByDefault || SaveSystem.IsArenaUnlocked(arena.InternalID))
+                else if (arena.unlockByDefault || SaveSystem.IsArenaUnlocked(arena.InternalID))
                 {
                     if (SaveSystem.saveData.arenaTimes.ContainsKey(arena.InternalID))
                     {
@@ -154,11 +167,13 @@ public class ArenaPanel : MonoBehaviour
         arenaDesc.text = arena.shortDesc;
         arenaTime.text = "<b>BEST RUN:</b> " + Formatter.Time(SaveSystem.GetBestTime(arena.InternalID));
 
-        // Set limited time arena banner
-        limitedTimeArena.gameObject.SetActive(arena.limitedTimeArena);
-
         // Set arena difficulty
-        if (difficultyColors.ContainsKey(arena.difficulty))
+        if (arena.limitedTimeArena)
+        {
+            arenaName.text += " <size=18><color=#" + ColorUtility.ToHtmlStringRGB(limitedTimeArenaColor)
+                + ">LIMITED TIME ARENA";
+        }
+        else if (difficultyColors.ContainsKey(arena.difficulty))
         {
             arenaName.text += " <size=18><color=#" + ColorUtility.ToHtmlStringRGB(difficultyColors[arena.difficulty])
                 + ">" + arena.difficulty.ToString().ToUpper();
