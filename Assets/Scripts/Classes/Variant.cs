@@ -6,5 +6,6 @@ public enum Variant
     Fusion,
     Toxic,
     Dark,
-    Phantom
+    Phantom,
+    Frozen
 }
