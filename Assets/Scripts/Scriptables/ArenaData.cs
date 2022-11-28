@@ -39,6 +39,15 @@ public class ArenaData : IdentifiableScriptableObject
     [BoxGroup("Arena Info")]
     public float startingViewRange = 45f;
 
+    [BoxGroup("Limited Time")]
+    public bool limitedTimeArena;
+    [BoxGroup("Limited Time"), ShowIf("limitedTimeArena", true)]
+    public int limitedTimeYear;
+    [BoxGroup("Limited Time"), ShowIf("limitedTimeArena", true)]
+    public int limitedTimeMonth;
+    [BoxGroup("Limited Time"), ShowIf("limitedTimeArena", true)]
+    public int limitedTimeDay;
+
     [BoxGroup("Achievement Info")]
     public string achievementObjective;
     [BoxGroup("Achievement Info")]

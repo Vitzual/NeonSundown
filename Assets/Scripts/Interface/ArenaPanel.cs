@@ -1,6 +1,8 @@
 using Michsky.UI.ModernUIPack;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.ComTypes;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -37,6 +39,7 @@ public class ArenaPanel : MonoBehaviour
     public AudioClip nightmareArenaSound;
     private List<GameObject> activeBlacklistCards;
     private List<ArenaButton> buttonList;
+    protected List<ArenaButton> limitedTimeArenas = new List<ArenaButton>();
 
     // Objective sprite options
     public Color incompleteObjectiveColor, completeObjectiveColor;
@@ -46,7 +49,7 @@ public class ArenaPanel : MonoBehaviour
     public Image arenaIcon, panelBackground, panelBorder, objectiveIcon;
 
     // Text components
-    public TextMeshProUGUI arenaName, arenaDesc, arenaTime, objective;
+    public TextMeshProUGUI arenaName, arenaDesc, arenaTime, objective, limitedTimeArena;
 
     // Game object components
     public GameObject blacklistEmpty, chipsLocked;
@@ -70,12 +73,28 @@ public class ArenaPanel : MonoBehaviour
             // Iterate through all arenas
             foreach (ArenaData arena in Scriptables.arenas)
             {
+                // Check if limited time
+                if (arena.limitedTimeArena)
+                {
+                    DateTime endTime = new DateTime(
+                        arena.limitedTimeYear,
+                        arena.limitedTimeMonth,
+                        arena.limitedTimeDay);
+                    DateTime nowTime = DateTime.Now;
+                    TimeSpan time = endTime - nowTime;
+
+                    if (time.Seconds < 0f) continue;
+                }
+
                 // Create arena buttons
                 ArenaButton newButton = Instantiate(arenaButton, Vector2.zero, Quaternion.identity);
                 newButton.transform.SetParent(arenaList);
                 RectTransform rect = newButton.GetComponent<RectTransform>();
                 rect.localScale = new Vector3(1, 1, 1);
                 buttonList.Add(newButton);
+
+                // Add arena button to limited time list
+                if (arena.limitedTimeArena) limitedTimeArenas.Add(newButton);
 
                 // Check if save is unlocked, and if so set time
                 if (arena.unlockByDefault || SaveSystem.IsArenaUnlocked(arena.InternalID))
@@ -111,7 +130,15 @@ public class ArenaPanel : MonoBehaviour
             arenasGenerated = true;
         }
     }
-    
+
+    public void Update()
+    {
+        foreach (ArenaButton button in limitedTimeArenas)
+        {
+            button.UpdateTimer();
+        }
+    }
+
     public void SetPanel(ArenaData arena)
     {
         // Set the new arena data
@@ -126,6 +153,9 @@ public class ArenaPanel : MonoBehaviour
         arenaName.text = arena.name.ToUpper();
         arenaDesc.text = arena.shortDesc;
         arenaTime.text = "<b>BEST RUN:</b> " + Formatter.Time(SaveSystem.GetBestTime(arena.InternalID));
+
+        // Set limited time arena banner
+        limitedTimeArena.gameObject.SetActive(arena.limitedTimeArena);
 
         // Set arena difficulty
         if (difficultyColors.ContainsKey(arena.difficulty))

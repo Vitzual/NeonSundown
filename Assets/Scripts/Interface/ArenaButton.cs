@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -18,6 +19,12 @@ public class ArenaButton : MonoBehaviour
     public Image buttonBackground;
     public Image buttonBorder;
     private bool isLocked = false;
+
+    [Header("Limited time variables")]
+    public GameObject limitedTimeObject;
+    public Image limitedTimeBanner;
+    public TextMeshProUGUI title;
+    public TextMeshProUGUI countdown;
 
     // Button vairables
     [Header("Button customization")]
@@ -52,6 +59,30 @@ public class ArenaButton : MonoBehaviour
         // Reset the rect transform
         RectTransform rect = GetComponent<RectTransform>();
         rect.localScale = new Vector3(1, 1, 1);
+
+        // Check if limited time arena
+        if (arena.limitedTimeArena)
+        {
+            limitedTimeObject.SetActive(true);
+            limitedTimeBanner.color = arena.buttonColor;
+            //title.color = arena.darkColor;
+            countdown.color = arena.darkColor;
+
+            UpdateTimer();
+        }
+        else limitedTimeObject.SetActive(false);
+    }
+
+    public void UpdateTimer()
+    {
+        DateTime endTime = new DateTime(
+            arena.limitedTimeYear,
+            arena.limitedTimeMonth,
+            arena.limitedTimeDay);
+        DateTime nowTime = DateTime.Now;
+        TimeSpan time = endTime - nowTime;
+
+        countdown.text = string.Format("{0}:{1}:{2}:{3}", time.Days, time.Hours, time.Minutes, time.Seconds);
     }
 
     // Pass arena info to panel
@@ -86,5 +117,17 @@ public class ArenaButton : MonoBehaviour
         // Reset the rect transform
         RectTransform rect = GetComponent<RectTransform>();
         rect.localScale = new Vector3(1, 1, 1);
+
+        // Check if limited time arena
+        if (arena.limitedTimeArena)
+        {
+            limitedTimeObject.SetActive(true);
+            limitedTimeBanner.color = lockedBorderColor;
+            //title.color = lockedBackgroundColor;
+            countdown.color = lockedBackgroundColor;
+
+            UpdateTimer();
+        }
+        else limitedTimeObject.SetActive(false);
     }
 }
