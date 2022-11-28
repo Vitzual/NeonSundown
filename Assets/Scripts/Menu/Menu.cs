@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Sirenix.OdinInspector;
+using System;
 
 /// <summary>
 /// IMPORTANT NOTE IF YOU'RE GETTING ERRORS IN THIS SCRIPT:
@@ -20,6 +21,15 @@ public class Menu : MonoBehaviour
     public ShipPanel shipPanel;
     public Store storePanel;
     public ModuleData defaultStoreModule;
+
+    [BoxGroup("Update Title")]
+    public bool showUpdateTitle;
+    [BoxGroup("Update Title"), ShowIf("showUpdateTitle", true)]
+    public int updateTitleYear, updateTitleMonth, updateTitleDay;
+    [BoxGroup("Update Title"), ShowIf("showUpdateTitle", true)]
+    public CanvasGroup updateTitleGroup;
+    [BoxGroup("Update Title"), ShowIf("showUpdateTitle", true)]
+    public Vector2 updateTitleTargetPos;
 
     // Group CG elements
     public CanvasGroup mainGroup;
@@ -223,9 +233,35 @@ public class Menu : MonoBehaviour
 
     public void OpenMain()
     {
-        TogglePanel(mainGroup, warningGroup);
-        LeanTween.scale(title, titleTargetSize, titleSizeSpeed).setEase(LeanTweenType.easeInExpo).setDelay(0.2f);
-        LeanTween.moveLocal(title.gameObject, titleTargetPos, titleAnimSpeed).setEase(LeanTweenType.easeInExpo).setDelay(0.2f);
+        bool normalMovement = true;
+
+        if (showUpdateTitle)
+        {
+            DateTime endTime = new DateTime(
+                updateTitleYear,
+                updateTitleMonth,
+                updateTitleDay);
+            DateTime nowTime = DateTime.Now;
+            TimeSpan time = endTime - nowTime;
+
+            if (time.TotalSeconds > 0f)
+            {
+                normalMovement = false;
+
+                TogglePanel(mainGroup, warningGroup);
+                LeanTween.scale(title, titleTargetSize, titleSizeSpeed).setEase(LeanTweenType.easeInExpo).setDelay(0.2f);
+                LeanTween.moveLocal(title.gameObject, updateTitleTargetPos, titleAnimSpeed).setEase(LeanTweenType.easeInExpo).setDelay(0.2f);
+                LeanTween.alphaCanvas(updateTitleGroup, 1f, titleAnimSpeed).setDelay(titleAnimSpeed + 1f);
+            }
+        }
+
+        if (normalMovement)
+        {
+            TogglePanel(mainGroup, warningGroup);
+            LeanTween.scale(title, titleTargetSize, titleSizeSpeed).setEase(LeanTweenType.easeInExpo).setDelay(0.2f);
+            LeanTween.moveLocal(title.gameObject, titleTargetPos, titleAnimSpeed).setEase(LeanTweenType.easeInExpo).setDelay(0.2f);
+        }
+
         LeanTween.alphaCanvas(pressSpace, 0f, titleAnimSpeed);
         LeanTween.alphaCanvas(buttonsGroup, 1f, titleAnimSpeed).setDelay(titleAnimSpeed);
         LeanTween.alphaCanvas(socialsGroup, 1f, titleAnimSpeed).setDelay(titleAnimSpeed);
@@ -403,7 +439,32 @@ public class Menu : MonoBehaviour
     // Editor controls - collapse if expanded
     [DisableInPlayMode, Button] private void SetTitlePositionToEnd()
     {
-        title.localPosition = titleTargetPos;
+        if (showUpdateTitle)
+        {
+            DateTime endTime = new DateTime(
+                updateTitleYear,
+                updateTitleMonth,
+                updateTitleDay);
+            DateTime nowTime = DateTime.Now;
+            TimeSpan time = endTime - nowTime;
+
+            if (time.TotalSeconds > 0f)
+            {
+                title.localPosition = updateTitleTargetPos;
+                updateTitleGroup.alpha = 1f;
+            }
+            else
+            {
+                title.localPosition = titleTargetPos;
+                updateTitleGroup.alpha = 0f;
+            }
+        }
+        else
+        {
+            title.localPosition = titleTargetPos;
+            updateTitleGroup.alpha = 0f;
+        }
+
         title.localScale = titleTargetSize;
         pressSpace.alpha = 0f;
         buttonsGroup.alpha = 1f;
@@ -420,6 +481,7 @@ public class Menu : MonoBehaviour
     [DisableInPlayMode, Button] private void SetTitlePositionToStart()
     {
         title.localPosition = Vector3.zero;
+        updateTitleGroup.alpha = 0f;
         title.localScale = new Vector3(0.95f, 0.95f, 0.95f);
         pressSpace.alpha = 1f;
         buttonsGroup.alpha = 0f;

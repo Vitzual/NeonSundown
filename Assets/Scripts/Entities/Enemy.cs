@@ -32,6 +32,7 @@ public class Enemy : Entity
     private float health;
     private float maxHealth;
     [HideInInspector] public float moveSpeed;
+    public bool isSlowed = false;
     protected float rotateSpeed;
     private float damage;
     private bool seeded = false;

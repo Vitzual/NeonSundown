@@ -83,7 +83,7 @@ public class ArenaPanel : MonoBehaviour
                     DateTime nowTime = DateTime.Now;
                     TimeSpan time = endTime - nowTime;
 
-                    if (time.Seconds < 0f) continue;
+                    if (time.TotalSeconds < 0f) continue;
                 }
 
                 // Create arena buttons

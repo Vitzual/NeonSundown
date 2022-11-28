@@ -46,6 +46,11 @@ public class ShipData : IdentifiableScriptableObject
     public Vector2 modelOffset;
 
     [BoxGroup("Ship Data")]
+    public bool cryoShip;
+    [BoxGroup("Ship Data"), ShowIf("cryoShip", true)]
+    public float slowMultiplier;
+
+    [BoxGroup("Ship Data")]
     public bool droneShip;
     [BoxGroup("Ship Data"), ShowIf("droneShip", true)]
     public HelperData drone;

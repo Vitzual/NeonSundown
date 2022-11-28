@@ -342,7 +342,8 @@ public class Ship : Weapon
             foreach (Drone drone in drones)
                 drone.SetTarget(entity);
         }
-        else if (shipData.seedShip && seededEnemies != null)
+
+        if (shipData.seedShip && seededEnemies != null)
         {
             Enemy enemy = entity.GetComponent<Enemy>();
             if (enemy != null && !enemy.IsSeeded())
@@ -361,7 +362,17 @@ public class Ship : Weapon
                     }
                 }
             }
-        } 
+        }
+
+        if (shipData.cryoShip)
+        {
+            Enemy enemy = entity.GetComponent<Enemy>();
+            if (enemy != null && !enemy.isSlowed)
+            {
+                enemy.moveSpeed *= shipData.slowMultiplier;
+                enemy.isSlowed = true;
+            }
+        }
     }
 
     // Heal amount

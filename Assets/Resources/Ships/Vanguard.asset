@@ -19,9 +19,10 @@ MonoBehaviour:
   desc: Agility based ship that deals more damage while moving. Do note it's extremely
     low HP.
   hasPassive: 1
-  passive: MOBILE DAMAGE
+  passive: MOBILITY DAMAGE
   unlockRequirement: Black Market Ship
   unlocked: 0
+  incompatibleCards: []
   subTitle: AGILE ATTACK SHIP
   shortDesc: High damaging, mobility based ship
   mainColor: {r: 0.9293332, g: 0, b: 1, a: 1}
@@ -46,6 +47,10 @@ MonoBehaviour:
   maxChargeTime: 0
   chargeSpeed: 0
   chargeDamage: 0
+  seedShip: 0
+  seed: {fileID: 0}
+  seedDeploySound: {fileID: 0}
+  seedBoomSound: {fileID: 0}
   speedAffectsDamage: 1
   speedDamageMultiplier: 0.15
   weapon: {fileID: 11400000, guid: dd5aaf265a9d6f04f8d41112656e1f72, type: 2}
