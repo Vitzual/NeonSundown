@@ -82,7 +82,21 @@ public class ArenaButton : MonoBehaviour
         DateTime nowTime = DateTime.Now;
         TimeSpan time = endTime - nowTime;
 
-        countdown.text = string.Format("{0}:{1}:{2}:{3}", time.Days, time.Hours, time.Minutes, time.Seconds);
+        string days = time.Days.ToString();
+        if (days.Length == 1) days = "0" + days;
+
+        string hours = time.Hours.ToString();
+        if (hours.Length == 1) hours = "0" + hours;
+
+        string minutes = time.Minutes.ToString();
+        if (minutes.Length == 1) minutes = "0" + minutes;
+
+        string seconds = time.Seconds.ToString();
+        if (seconds.Length == 1) seconds = "0" + seconds;
+
+        countdown.text = string.Format("{0}:{1}:{2}:{3}", days, hours, minutes, seconds);
+
+        if (time.TotalSeconds <= 0f) gameObject.SetActive(false);
     }
 
     // Pass arena info to panel
