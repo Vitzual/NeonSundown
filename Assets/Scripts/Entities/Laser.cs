@@ -52,10 +52,19 @@ public class Laser : Bullet
         if (!entities.Contains(entity))
             entities.Add(entity);
     }
-
+    
     public virtual void RemoveEntity(Entity entity)
     {
         if (entities.Contains(entity))
             entities.Remove(entity);
+    }
+
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (enemyLaser)
+        {
+            Ship ship = collision.GetComponent<Ship>();
+            if (ship != null) ship.Kill();
+        }
     }
 }

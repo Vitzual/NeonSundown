@@ -185,7 +185,7 @@ public class ArenaPanel : MonoBehaviour
             noBoss.SetActive(false);
 
             bossName.text = arena.boss.name.ToUpper();
-            bossName.color = arena.buttonColor;
+            bossName.color = arena.lightColor;
             bossIcon.sprite = arena.boss.icon;
             bossIcon.color = arena.buttonColor;
         }
