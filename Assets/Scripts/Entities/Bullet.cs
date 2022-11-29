@@ -146,8 +146,10 @@ public class Bullet : Entity
         // Check if bullet is explosive
         if (explosive)
         {
-            if (stunLength > 0) ExplosiveHandler.CreateStun(transform.position, explosionSize, stunLength, damage, deathMaterial, knockback);
-            else ExplosiveHandler.CreateExplosion(transform.position, explosionSize, damage, knockback, deathMaterial);
+            if (stunLength > 0) ExplosiveHandler.CreateStun(transform.position, explosionSize,
+                stunLength, damage, deathMaterial, knockback, parent);
+            else ExplosiveHandler.CreateExplosion(transform.position, explosionSize, damage,
+                knockback, deathMaterial, parent);
         }
         
         // Check if bullet has splitshots

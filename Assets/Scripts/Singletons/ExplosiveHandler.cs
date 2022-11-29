@@ -42,8 +42,12 @@ public class ExplosiveHandler : MonoBehaviour
     }
 
     // Create an explosion at a location
-    public static void CreateExplosion(Vector2 position, float range, float damage, float knockback, Material material)
+    public static void CreateExplosion(Vector2 position, float range, float damage, 
+        float knockback, Material material, Weapon weapon = null)
     {
+        // Check if should inform on hit
+        bool informOnHit = weapon != null && weapon.informOnHit;
+
         // Get all colliders in range
         Collider2D[] colliders = Physics2D.OverlapCircleAll(position, range, explosionLayer);
 
@@ -58,7 +62,10 @@ public class ExplosiveHandler : MonoBehaviour
 
             // If enemy not null, apply damage
             if (enemy != null)
+            {
                 enemy.Damage(damage, knockback, position);
+                if (informOnHit) weapon.TargetHit(enemy);
+            }
 
             // If null, check for crystals
             else
@@ -127,8 +134,12 @@ public class ExplosiveHandler : MonoBehaviour
         }
     }
 
-    public static void CreateStun(Vector2 origin, float range, float length, float damage, Material material, float knockback = -1f)
+    public static void CreateStun(Vector2 origin, float range, float length, float damage, 
+        Material material, float knockback = -1f, Weapon weapon = null)
     {
+        // Check if should inform on hit
+        bool informOnHit = weapon != null && weapon.informOnHit;
+
         // Get all colliders in range
         Collider2D[] colliders = Physics2D.OverlapCircleAll(origin, range, explosionLayer);
 
@@ -141,6 +152,8 @@ public class ExplosiveHandler : MonoBehaviour
             {
                 enemy.Damage(damage, knockback, origin);
                 enemy.Stun(length);
+
+                if (informOnHit) weapon.TargetHit(enemy);
             }
 
             // If null, check for crystals

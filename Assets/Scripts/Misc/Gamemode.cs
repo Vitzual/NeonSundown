@@ -53,7 +53,8 @@ public class Gamemode : MonoBehaviour
 
         // Add blacklist cards
         if (blacklistCards == null) blacklistCards = new List<CardData>();
-        else foreach (CardData card in arena.blacklistCards) blacklistCards.Add(card);
+        if (arena != null) foreach (CardData card in arena.blacklistCards) blacklistCards.Add(card);
+        if (shipData != null) foreach (CardData card in shipData.incompatibleCards) blacklistCards.Add(card);
 
         // Check if save data exists
         if (SaveSystem.saveData == null)

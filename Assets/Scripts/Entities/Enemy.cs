@@ -110,7 +110,7 @@ public class Enemy : Entity
             }
             else if (seeded) return;
         }
-
+        
         // Add to total damage done
         RuntimeStats.damageGiven += amount;
 

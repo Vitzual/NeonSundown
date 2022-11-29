@@ -16,13 +16,14 @@ MonoBehaviour:
   createdAtTicks: 638052428591927150
   name: Cryonetic
   glowIcon: {fileID: 21300000, guid: 3110ebb0ab2c0c4489a3f8a217d6b62f, type: 3}
-  desc: Extremely agile freezing ship. Fires explosive cryo bullets that permanently
-    slow down enemies.
+  desc: Agile freezing ship. Fires explosive cryo bullets that permanently slow down
+    enemies.
   hasPassive: 1
   passive: CRYO BULLETS
   unlockRequirement: Black Market Ship
   unlocked: 1
-  incompatibleCards: []
+  incompatibleCards:
+  - {fileID: 11400000, guid: 41ef0c285a4c757489b3b6bb0a3a4e5c, type: 2}
   subTitle: CRYO SHIP
   shortDesc: Explosive cryo ship
   mainColor: {r: 0, g: 0.9436171, b: 1, a: 1}
@@ -38,7 +39,7 @@ MonoBehaviour:
   barrelPosition: {x: 0, y: 0}
   modelOffset: {x: 0, y: 0}
   cryoShip: 1
-  slowMultiplier: 0.2
+  slowMultiplier: 0.5
   droneShip: 0
   drone: {fileID: 0}
   droneAmount: 0
