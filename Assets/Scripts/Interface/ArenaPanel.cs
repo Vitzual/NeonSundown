@@ -70,8 +70,26 @@ public class ArenaPanel : MonoBehaviour
             // Setup arenas
             buttonList = new List<ArenaButton>();
 
+            ArenaData[] arenas = new ArenaData[Scriptables.arenas.Count];
+            List<ArenaData> unsorted = new List<ArenaData>(Scriptables.arenas);
+            for (int i = 0; i < arenas.Length; i++)
+            {
+                int lowest = int.MaxValue;
+                ArenaData lowestArena = null;
+                foreach (ArenaData arena in unsorted)
+                {
+                    if (arena.order < lowest) 
+                    {
+                        lowest = arena.order;
+                        lowestArena = arena;
+                    }
+                }
+                arenas[i] = lowestArena;
+                unsorted.Remove(lowestArena);
+            }
+
             // Iterate through all arenas
-            foreach (ArenaData arena in Scriptables.arenas)
+            foreach (ArenaData arena in arenas)
             {
                 // Check if limited time
                 if (arena.limitedTimeArena)
@@ -123,21 +141,6 @@ public class ArenaPanel : MonoBehaviour
                 // If arena not unlocked, show it as locked
                 else newButton.Lock(arena);
             }
-
-            // I'll come back to this later. Unity is being a dummy and
-            // not giving two shits about setting the sibling index
-
-            // Iterate through all generated buttons and set order
-            foreach (ArenaButton button in buttonList)
-                button.gameObject.transform.SetSiblingIndex(button.arena.order);
-
-            // Iterate through all generated buttons and set order
-            foreach (ArenaButton button in buttonList)
-                button.gameObject.transform.SetSiblingIndex(button.arena.order);
-
-            // Iterate through all generated buttons and set order
-            foreach (ArenaButton button in buttonList)
-                button.gameObject.transform.SetSiblingIndex(button.arena.order);
 
             // Set arenas generated flag to true
             arenasGenerated = true;
