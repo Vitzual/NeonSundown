@@ -1,4 +1,5 @@
 using Michsky.UI.ModernUIPack;
+using Sirenix.OdinInspector;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -30,6 +31,13 @@ public class ArenaPanel : MonoBehaviour
     public ArenaButton arenaButton;
     public Transform arenaList, cardList;
 
+    [BoxGroup("Arena Boss")]
+    public GameObject noBoss, arenaBoss;
+    [BoxGroup("Arena Boss")]
+    public Image bossIcon;
+    [BoxGroup("Arena Boss")]
+    public TextMeshProUGUI bossName;
+    
     // Background tilebase
     public Tilemap backgroundTilemap;
 
@@ -169,6 +177,23 @@ public class ArenaPanel : MonoBehaviour
         arenaName.text = arena.name.ToUpper();
         arenaDesc.text = arena.shortDesc;
         arenaTime.text = "<b>BEST RUN:</b> " + Formatter.Time(SaveSystem.GetBestTime(arena.InternalID));
+
+        // Set arena boss info
+        if (arena.boss != null)
+        {
+            arenaBoss.SetActive(true);
+            noBoss.SetActive(false);
+
+            bossName.text = arena.boss.name.ToUpper();
+            bossName.color = arena.buttonColor;
+            bossIcon.sprite = arena.boss.icon;
+            bossIcon.color = arena.buttonColor;
+        }
+        else
+        {
+            arenaBoss.SetActive(false);
+            noBoss.SetActive(true);
+        }
 
         // Set arena difficulty
         if (arena.limitedTimeArena)

@@ -10,7 +10,7 @@ public class Razorclaw : Boss
     public AnimationClip normalAnimation;
     public List<AnimationClip> attacks;
     private float cooldown = 10f;
-
+    
     public override void Setup()
     {
         animator.updateMode = AnimatorUpdateMode.AnimatePhysics;

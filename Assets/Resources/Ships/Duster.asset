@@ -18,8 +18,12 @@ MonoBehaviour:
   glowIcon: {fileID: 21300000, guid: b1e2ee6bd0da0964b907af3881fd8e19, type: 3}
   desc: A jack of all trades but master of none. Good starting ship, but fails in
     specific deck archetypes.
+  hasPassive: 0
+  passive: 
   unlockRequirement: 
+  levelRequirement: <b>REQUIREMENT:</b> NONE
   unlocked: 1
+  incompatibleCards: []
   subTitle: MULTI PURPOSE SHIP
   shortDesc: Jack of all trades, master of none
   mainColor: {r: 0, g: 0.6851115, b: 1, a: 1}
@@ -34,6 +38,24 @@ MonoBehaviour:
   playerSize: {x: 1, y: 1}
   barrelPosition: {x: 0, y: 0}
   modelOffset: {x: 0, y: 0}
+  cryoShip: 0
+  slowMultiplier: 0
+  droneShip: 0
+  drone: {fileID: 0}
+  droneAmount: 0
+  droneDamage: 0
+  droneMoveSpeed: 0
+  droneRotateSpeed: 0
+  chargingShip: 0
+  maxChargeTime: 0
+  chargeSpeed: 0
+  chargeDamage: 0
+  seedShip: 0
+  seed: {fileID: 0}
+  seedDeploySound: {fileID: 0}
+  seedBoomSound: {fileID: 0}
+  speedAffectsDamage: 0
+  speedDamageMultiplier: 0
   weapon: {fileID: 11400000, guid: 47257b3edd738a6439db85b8312baf7a, type: 2}
   playerControlledRotation: 1
   canFire: 1

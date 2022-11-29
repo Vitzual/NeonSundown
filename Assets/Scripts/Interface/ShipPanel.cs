@@ -59,7 +59,7 @@ public class ShipPanel : MonoBehaviour
     // Panel elements
     [Header("Panel Elements")]
     public new TextMeshProUGUI name;
-    public TextMeshProUGUI desc, passiveAbility;
+    public TextMeshProUGUI desc, passiveAbility, levelRequirement;
     public Image icon, panelBackground, panelBorder, moduleCancelButton,
         moduleClearButton, passiveAbilityIcon;
     public Sprite hasPassiveSprite, noPassiveSprite;
@@ -149,6 +149,8 @@ public class ShipPanel : MonoBehaviour
             passiveAbilityIcon.color = noPassiveColor;
         }
 
+        levelRequirement.text = ship.levelRequirement;
+
         // Iterate through blacklist slots
         if (ship.incompatibleCards.Count > 0)
         {
@@ -208,6 +210,8 @@ public class ShipPanel : MonoBehaviour
         {
             foreach (StatInfo stat in statInfoList)
             {
+                if (stat.hideInStats) continue;
+
                 if (stats.ContainsKey(stat.stat))
                 {
                     stats[stat.stat].Set(stat, ship.GetStat(stat.stat), ship.lightColor);

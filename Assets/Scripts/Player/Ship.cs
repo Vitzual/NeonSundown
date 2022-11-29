@@ -13,6 +13,7 @@ public class Ship : Weapon
     private Controller controller;
     private XPReceiver xpReceiver;
     public GameObject autoFireObj;
+    public ChillAura chillAura;
     private bool autoFire = false;
     private static bool lowHealth = false;
     

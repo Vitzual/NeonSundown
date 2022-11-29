@@ -12,26 +12,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 153c17b437486e247978b2d4dcab4b10, type: 3}
   m_Name: Chill Aura
   m_EditorClassIdentifier: 
-  internalId: 9b04d40d-b4a8-437e-8541-f634bc688114
+  internalId: cb3afc56-6f61-40f0-80d3-237762bbb821
   createdAtTicks: 638051511765594084
   name: Chill Aura
-  description: Slows the movement of nearby enemies
-  enableDescriptionOverrides: 0
+  description: Slows down nearby enemies by 10%
+  enableDescriptionOverrides: 1
   levelDescriptionOverrides:
-    keys: 
-    values: []
-  sprite: {fileID: 0}
+    keys: 0000000001000000020000000300000004000000
+    values:
+    - Slows down nearby enemies by 10%
+    - Slows down nearby enemies by 20%
+    - Slows down nearby enemies by 30%
+    - Slows down nearby enemies by 40%
+    - Slows down nearby enemies by 50%
+  sprite: {fileID: 21300000, guid: 3cd7c62cef03ea84b8f43508078855af, type: 3}
   color: {r: 0.48584908, g: 0.90463203, b: 1, a: 1}
-  maximumAmount: 0
-  dropChance: 0.5
+  maximumAmount: 5
+  dropChance: 1
   canDrop: 1
   isUnlocked: 0
-  isShipOnlyCard: 0
+  isShipOnlyCard: 1
   isUpgradeable: 0
   upgrades: []
   damage: 0
   cooldown: 0
-  moveSpeed: 0
+  moveSpeed: 0.05
   rotate: 0
   rotateSpeed: 0
   range: 5
@@ -52,7 +57,7 @@ MonoBehaviour:
   energyBeam: 0
   bullet: {fileID: 0}
   bulletSound: {fileID: 0}
-  obj: {fileID: 0}
+  obj: {fileID: 757087355763772990, guid: f47aa081e05e4654294c6919cdaee874, type: 3}
   onDamageSound: {fileID: 0}
   onDeathSound: {fileID: 0}
   minPitch: 0.9

@@ -17,8 +17,12 @@ MonoBehaviour:
   name: Blaster
   glowIcon: {fileID: 21300000, guid: d5fb1a7c98f5f824c98fe2c3ffb21c16, type: 3}
   desc: A multi-shot ship that excels at horde control and mobility based combat.
+  hasPassive: 0
+  passive: 
   unlockRequirement: Unlocked at rank 40
+  levelRequirement: <b>REQUIREMENT:</b> RANK 40
   unlocked: 0
+  incompatibleCards: []
   subTitle: HORDE CONTROL SHIP
   shortDesc: Mobility based multishot ship
   mainColor: {r: 1, g: 0.65787435, b: 0, a: 1}
@@ -33,6 +37,24 @@ MonoBehaviour:
   playerSize: {x: 1, y: 1}
   barrelPosition: {x: 0, y: 0}
   modelOffset: {x: 0, y: 0}
+  cryoShip: 0
+  slowMultiplier: 0
+  droneShip: 0
+  drone: {fileID: 0}
+  droneAmount: 0
+  droneDamage: 0
+  droneMoveSpeed: 0
+  droneRotateSpeed: 0
+  chargingShip: 0
+  maxChargeTime: 0
+  chargeSpeed: 0
+  chargeDamage: 0
+  seedShip: 0
+  seed: {fileID: 0}
+  seedDeploySound: {fileID: 0}
+  seedBoomSound: {fileID: 0}
+  speedAffectsDamage: 0
+  speedDamageMultiplier: 0
   weapon: {fileID: 11400000, guid: 5e247ba076de6514a8fe962be6ea76bc, type: 2}
   playerControlledRotation: 1
   canFire: 1

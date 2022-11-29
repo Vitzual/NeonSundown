@@ -15,6 +15,7 @@ public class BossBar : MonoBehaviour
     public new TextMeshProUGUI name;
     public Image icon, fill, background;
     private CanvasGroup canvasGroup;
+    private bool overrideMusic;
 
     // Internal hidden flag
     private bool isHidden = true;
@@ -47,7 +48,8 @@ public class BossBar : MonoBehaviour
         isHidden = false;
 
         // Do the thing my guy
-        MusicPlayer.PlayBossMusic(boss.music);
+        overrideMusic = boss.overrideMusic;
+        if (overrideMusic) MusicPlayer.PlayBossMusic(boss.music);
     }
 
     // Update is called once per frame
@@ -63,7 +65,7 @@ public class BossBar : MonoBehaviour
             else
             {
                 // Do the thing my guy
-                MusicPlayer.StopBossMusic();
+                if (overrideMusic) MusicPlayer.StopBossMusic();
                 canvasGroup.alpha = 0f;
                 isHidden = true;
             }

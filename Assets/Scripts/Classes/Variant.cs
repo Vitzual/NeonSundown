@@ -7,5 +7,6 @@ public enum Variant
     Toxic,
     Dark,
     Phantom,
-    Frozen
+    Frozen,
+    Scorch
 }

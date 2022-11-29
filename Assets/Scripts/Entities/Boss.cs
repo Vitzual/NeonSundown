@@ -8,6 +8,8 @@ public class Boss : MonoBehaviour
     public Sprite bossModel;
     public Gunner gunner;
     public AudioClip music;
+    public bool overrideMusic = true;
+    public bool playSpawnSound = true;
     protected Enemy enemy;
 
     // On start call setup
@@ -22,13 +24,16 @@ public class Boss : MonoBehaviour
         // Setup gunner
         if (gunner != null)
             gunner.Setup(enemy.deathMaterial);
-
+        
         // Set the boss bar
         Events.active.BossSpawned(this, enemy);
 
         // Play boss sound
-        AudioSource audio = GetComponent<AudioSource>();
-        audio.volume = Settings.sound;
-        audio.Play();
+        if (playSpawnSound)
+        {
+            AudioSource audio = GetComponent<AudioSource>();
+            audio.volume = Settings.sound;
+            audio.Play();
+        }
     }
 }

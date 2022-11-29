@@ -19,6 +19,8 @@ public class ShipData : IdentifiableScriptableObject
     [BoxGroup("Ship Info")]
     public string unlockRequirement;
     [BoxGroup("Ship Info")]
+    public string levelRequirement;
+    [BoxGroup("Ship Info")]
     public bool unlocked;
     [BoxGroup("Ship Info")]
     public List<CardData> incompatibleCards;

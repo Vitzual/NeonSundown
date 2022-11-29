@@ -336,7 +336,7 @@ public class Enemy : Entity
             stunImmunity = 1.5f;
         }
     }
-
+    
     public void EnableLockOn()
     {
         lockOn = true;

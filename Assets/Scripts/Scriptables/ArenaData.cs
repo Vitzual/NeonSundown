@@ -37,6 +37,8 @@ public class ArenaData : IdentifiableScriptableObject
     [BoxGroup("Arena Info")]
     public Difficulty difficulty;
     [BoxGroup("Arena Info")]
+    public EnemyData boss;
+    [BoxGroup("Arena Info")]
     public float startingViewRange = 45f;
 
     [BoxGroup("Limited Time")]

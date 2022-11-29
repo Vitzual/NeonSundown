@@ -4,15 +4,25 @@ using UnityEngine;
 
 public class ChillAura : Weapon
 {
-    // Enemies being chilled?
-    protected Dictionary<Enemy, float> _chilledEntities = new Dictionary<Enemy, float>();
-
     // Set the weapon data
     public override void Setup(WeaponData data, Transform target = null)
     {
+        moveSpeed = 1f;
         Events.active.onAddCard += AddCard;
-        UpdateStat(Stat.Range);
+        Events.active.onShipOnlyCardAdded += AddCard;
         UpdateStat(Stat.MoveSpeed);
+        this.target = target;
+    }
+
+    public override void AddCard(CardData card)
+    {
+        UpdateStat(Stat.MoveSpeed);
+    }
+
+    public override void Use()
+    {
+        if (target != null)
+            transform.position = target.position;
     }
 
     // On collision with enemy, apply damage
@@ -20,22 +30,24 @@ public class ChillAura : Weapon
     {
         // Get the enemy component
         Enemy enemy = collision.GetComponent<Enemy>();
-        if (enemy != null && !enemy.IsSeeded())
+        if (enemy != null && !enemy.IsSeeded() && !enemy.isSlowed)
         {
-            _chilledEntities.Add(enemy, enemy.moveSpeed);
             enemy.moveSpeed *= moveSpeed;
+            enemy.isSlowed = true;
         }
     }
 
-    // On collision with enemy, apply damage
-    public void OnTriggerExit2D(Collider2D collision)
+    // Update stat
+    public override void UpdateStat(Stat stat)
     {
-        // Get the enemy component
-        Enemy enemy = collision.GetComponent<Enemy>();
-        if (enemy != null && !enemy.IsSeeded() && _chilledEntities.ContainsKey(enemy))
+        switch (stat)
         {
-            enemy.moveSpeed = _chilledEntities[enemy];
-            _chilledEntities.Remove(enemy);
+            // Increase explosive rounds
+            case Stat.MoveSpeed:
+                moveSpeed -= 0.1f;
+                if (moveSpeed < 0.5f)
+                    moveSpeed = 0.5f;
+                break;
         }
     }
 }

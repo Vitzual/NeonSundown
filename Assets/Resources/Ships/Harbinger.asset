@@ -21,7 +21,9 @@ MonoBehaviour:
   hasPassive: 1
   passive: DASH CHARGE
   unlockRequirement: Black Market Ship
+  levelRequirement: <b>REQUIREMENT:</b> RANK 50
   unlocked: 0
+  incompatibleCards: []
   subTitle: CHARGING TANK SHIP
   shortDesc: Charging based tank ship
   mainColor: {r: 1, g: 0.24816974, b: 0, a: 1}
@@ -36,6 +38,8 @@ MonoBehaviour:
   playerSize: {x: 1.5, y: 1.5}
   barrelPosition: {x: 0, y: 0}
   modelOffset: {x: 0, y: 0}
+  cryoShip: 0
+  slowMultiplier: 0
   droneShip: 0
   drone: {fileID: 0}
   droneAmount: 0
@@ -46,6 +50,10 @@ MonoBehaviour:
   maxChargeTime: 2
   chargeSpeed: 100
   chargeDamage: 25
+  seedShip: 0
+  seed: {fileID: 0}
+  seedDeploySound: {fileID: 0}
+  seedBoomSound: {fileID: 0}
   speedAffectsDamage: 0
   speedDamageMultiplier: 0
   weapon: {fileID: 11400000, guid: 6a7055a89094b77488608f215d9fb4e4, type: 2}
