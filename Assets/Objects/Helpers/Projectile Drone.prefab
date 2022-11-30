@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 0
+  damageMultiplier: 1
   cooldown: 0
   moveSpeed: 0
   bloom: 0
@@ -56,7 +57,14 @@ MonoBehaviour:
   size: 0
   stunLength: 0
   critical: 0
+  rotateSpeed: 0
+  speedDamageMultiplier: 0
+  reverseShots: 0
+  richochets: 0
   explosiveRounds: 0
+  autoLockRounds: 0
+  speedAffectsDamage: 0
+  informOnHit: 0
   level: 0
 --- !u!1 &2629815514678944784
 GameObject:
@@ -184,6 +192,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 0
+  damageMultiplier: 1
   cooldown: 0
   moveSpeed: 0
   bloom: 0
@@ -196,7 +205,14 @@ MonoBehaviour:
   size: 0
   stunLength: 0
   critical: 0
+  rotateSpeed: 0
+  speedDamageMultiplier: 0
+  reverseShots: 0
+  richochets: 0
   explosiveRounds: 0
+  autoLockRounds: 0
+  speedAffectsDamage: 0
+  informOnHit: 0
   level: 0
 --- !u!1 &8448323219929391267
 GameObject:
@@ -417,11 +433,14 @@ MonoBehaviour:
   rotateParticle: 0
   deathMaterial: {fileID: 2100000, guid: 481c6fcda3007f74eb1ed8295678812f, type: 2}
   deathEffect: {fileID: 0}
+  moveSpeed: 0
   data: {fileID: 0}
   level: 0
-  movementSpeed: 60
-  rotationSpeed: 25
-  range: 25
+  damage: 0
+  movementSpeed: 80
+  rotationSpeed: 250
+  knockback: 0
+  range: 15
   projectileOne: {fileID: 1500620125175788772}
   projectileTwo: {fileID: 4300246227806824110}
   weaponOne: {fileID: 11400000, guid: 8944debe76be08b4da4ef540a6b2bd43, type: 2}
