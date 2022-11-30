@@ -22,7 +22,7 @@ public class ArenaButton : MonoBehaviour
 
     [Header("Limited time variables")]
     public GameObject limitedTimeObject;
-    public Image limitedTimeBanner;
+    public Image bannerLeft, bannerRight;
     public TextMeshProUGUI title;
     public TextMeshProUGUI countdown;
 
@@ -64,8 +64,9 @@ public class ArenaButton : MonoBehaviour
         if (arena.limitedTimeArena)
         {
             limitedTimeObject.SetActive(true);
-            limitedTimeBanner.color = arena.buttonColor;
-            //title.color = arena.darkColor;
+            bannerLeft.color = arena.buttonColor;
+            title.color = arena.darkColor;
+            bannerRight.color = arena.buttonColor;
             countdown.color = arena.darkColor;
 
             UpdateTimer();
@@ -136,8 +137,9 @@ public class ArenaButton : MonoBehaviour
         if (arena.limitedTimeArena)
         {
             limitedTimeObject.SetActive(true);
-            limitedTimeBanner.color = lockedBorderColor;
-            //title.color = lockedBackgroundColor;
+            bannerLeft.color = lockedBorderColor;
+            title.color = lockedBackgroundColor;
+            bannerRight.color = lockedBorderColor;
             countdown.color = lockedBackgroundColor;
 
             UpdateTimer();
