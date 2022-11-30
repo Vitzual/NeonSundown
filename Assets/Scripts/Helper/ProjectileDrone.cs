@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class ProjectileDrone : Drone
 {
@@ -22,8 +23,25 @@ public class ProjectileDrone : Drone
         this.ship = ship;
         this.data = data;
 
-        droneOne = Instantiate(this, new Vector3(transform.position.x + 5f, transform.position.y + 5f, 0f), Quaternion.identity);
-        droneTwo = Instantiate(this, new Vector3(transform.position.x - 5f, transform.position.y - 5f, 0f), Quaternion.identity);
+        droneOne = Instantiate(this, new Vector3(
+            transform.position.x + 5f, 
+            transform.position.y + 5f, 
+            transform.position.z), 
+            Quaternion.identity);
+        droneOne.CloneSetup(ship, data);
+
+        droneTwo = Instantiate(this, new Vector3(
+            transform.position.x - 5f, 
+            transform.position.y - 5f, 
+            transform.position.z), 
+            Quaternion.identity);
+        droneTwo.CloneSetup(ship, data);
+    }
+
+    public void CloneSetup(Ship ship, HelperData data)
+    {
+        this.ship = ship;
+        this.data = data;
     }
 
     // Override custom update
