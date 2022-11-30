@@ -396,6 +396,9 @@ public class Ship : Weapon
     // Damage method
     public void Damage(float damage)
     {
+        // Check if dealer is open
+        if (Dealer.isOpen) return;
+
         // Check if warrior active
         if (champion && controller.isDashing)
         {
