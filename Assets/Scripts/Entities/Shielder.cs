@@ -49,10 +49,17 @@ public class Shielder : Enemy
         if (!shieldActive) base.OnTriggerEnter2D(collision);
 
         // Get the other enemy component
-        Bullet bullet = collision.GetComponent<Bullet>();
+        else
+        {
+            Bullet bullet = collision.GetComponent<Bullet>();
 
-        // If is bullet, invoke on hit method
-        if (bullet != null && shieldActive) bullet.ReverseBullet();
+            // If is bullet, invoke on hit method
+            if (bullet != null && shieldActive)
+            {
+                bullet.ReverseBullet();
+                Damage(bullet.GetDamage());
+            }
+        }
     }
 
     // Disable shield
