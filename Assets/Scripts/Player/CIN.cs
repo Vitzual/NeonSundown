@@ -49,9 +49,14 @@ public class CIN : MonoBehaviour
     {
         if (user.controlScheme == _inputActions.GamepadScheme)
         {
+            Debug.Log("[INPUT] Controller device changed to controller!");
             inputType = InputType.Controller;
         }
-        else inputType = InputType.KMB;
+        else
+        {
+            Debug.Log("[INPUT] Controller device changed to KMB!");
+            inputType = InputType.KMB;
+        }
     }
 
     /// <summary>

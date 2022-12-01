@@ -105,8 +105,8 @@ public class Dealer : MonoBehaviour
     public void Update()
     {
         // Check if input from re-draw
-        if (isOpen && cardsDealt && Input.GetKeyDown(Keybinds.secondary)) RedrawCard();
-        else if (isOpen && cardsDealt && Input.GetKeyDown(Keybinds.burn)) BurnCard();
+        // if (isOpen && cardsDealt && Input.GetKeyDown(Keybinds.secondary)) RedrawCard();
+        // else if (isOpen && cardsDealt && Input.GetKeyDown(Keybinds.burn)) BurnCard();
 
         // If debug switch set to true, deal cards
         if (debugSwitch)
@@ -137,9 +137,6 @@ public class Dealer : MonoBehaviour
         // Pitch down music
         if (isOpen)
         {
-            // Check the connected controller
-            if (Controller.isControllerConnected && cardsDealt) CheckController();
-
             if (Settings.musicPitching)
             {
                 if (!pitchSet)
@@ -174,21 +171,6 @@ public class Dealer : MonoBehaviour
                 music.pitch = pitch;
             }
         }
-    }
-
-    // Check controller
-    public void CheckController()
-    {
-        // Check for redraws
-        if (Input.GetAxis("D-Pad X") < 0) Redraw(cardSlots[0]);
-        else if (Input.GetAxis("D-Pad X") > 0) Redraw(cardSlots[2]);
-        else if (Input.GetAxis("D-Pad Y") < 0) Redraw(cardSlots[1]);
-        else if (Input.GetAxis("D-Pad Y") > 0) CloseDealer();
-
-        // Check for pick cards
-        if (Input.GetKeyDown(KeyCode.JoystickButton0)) cardSlots[1].OnClick(false);
-        else if (Input.GetKeyDown(KeyCode.JoystickButton1)) cardSlots[2].OnClick(false);
-        else if (Input.GetKeyDown(KeyCode.JoystickButton2)) cardSlots[0].OnClick(false);
     }
 
     // Deal cards
@@ -395,7 +377,7 @@ public class Dealer : MonoBehaviour
     {
         // Raycast for card on interface layer
         PointerEventData m_PointerEventData = new PointerEventData(eventSystem);
-        m_PointerEventData.position = Input.mousePosition;
+        // m_PointerEventData.position = Input.mousePosition;
 
         //Create a list of Raycast Results
         List<RaycastResult> results = new List<RaycastResult>();
@@ -420,7 +402,7 @@ public class Dealer : MonoBehaviour
     {
         // Raycast for card on interface layer
         PointerEventData m_PointerEventData = new PointerEventData(eventSystem);
-        m_PointerEventData.position = Input.mousePosition;
+        // m_PointerEventData.position = Input.mousePosition;
 
         //Create a list of Raycast Results
         List<RaycastResult> results = new List<RaycastResult>();
