@@ -22,23 +22,20 @@ public class SynergyElement : MonoBehaviour
     public void Set(SynergyData tree)
     {
         synergyData = tree;
-        if (tree.baseSynergy != null)
-        {
-            basicSynergyOne.Set(tree.baseSynergy.synergyOne);
-            basicSynergyTwo.Set(tree.baseSynergy.synergyTwo);
-            advancedSynergy.Set(tree.baseSynergy);
-        }
+        basicSynergyOne.Set(tree.synergyOne);
+        basicSynergyTwo.Set(tree.synergyTwo);
+        advancedSynergy.Set(tree);
         treeName.text = tree.name.ToUpper();
     }
 
     // Update the synergies
     public void UpdateSynergies()
     {
-        if (synergyData != null && synergyData.baseSynergy != null)
+        if (synergyData != null && synergyData != null)
         {
-            basicSynergyOne.Set(synergyData.baseSynergy.synergyOne);
-            basicSynergyTwo.Set(synergyData.baseSynergy.synergyTwo);
-            advancedSynergy.Set(synergyData.baseSynergy);
+            basicSynergyOne.Set(synergyData.synergyOne);
+            basicSynergyTwo.Set(synergyData.synergyTwo);
+            advancedSynergy.Set(synergyData);
         }
     }
 }

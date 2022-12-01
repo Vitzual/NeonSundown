@@ -59,7 +59,7 @@ public class ProjectileDrone : Drone
         projectileOne.Use();
         projectileTwo.Use();
     }
-
+    
     // Moves the drone
     public override void Move()
     {
