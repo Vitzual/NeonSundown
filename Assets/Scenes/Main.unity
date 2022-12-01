@@ -7533,6 +7533,7 @@ GameObject:
   m_Component:
   - component: {fileID: 407388096}
   - component: {fileID: 407388095}
+  - component: {fileID: 407388097}
   m_Layer: 0
   m_Name: Events Handler
   m_TagString: Untagged
@@ -7566,6 +7567,63 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &407388097
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 407388094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9667a6677dd8834184f220d7e60730c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onHotbarPressed:
+    m_PersistentCalls:
+      m_Calls: []
+  onPrimaryPressed:
+    m_PersistentCalls:
+      m_Calls: []
+  onPrimaryHeld:
+    m_PersistentCalls:
+      m_Calls: []
+  onPrimaryReleased:
+    m_PersistentCalls:
+      m_Calls: []
+  onSecondaryPressed:
+    m_PersistentCalls:
+      m_Calls: []
+  onSecondaryHeld:
+    m_PersistentCalls:
+      m_Calls: []
+  onSecondaryReleased:
+    m_PersistentCalls:
+      m_Calls: []
+  onEscapePressed:
+    m_PersistentCalls:
+      m_Calls: []
+  onSprintPressed:
+    m_PersistentCalls:
+      m_Calls: []
+  onSprintHeld:
+    m_PersistentCalls:
+      m_Calls: []
+  onSprintReleased:
+    m_PersistentCalls:
+      m_Calls: []
+  onPipettePressed:
+    m_PersistentCalls:
+      m_Calls: []
+  onPausePressed:
+    m_PersistentCalls:
+      m_Calls: []
+  onToggleHudPressed:
+    m_PersistentCalls:
+      m_Calls: []
+  onToggleHudReleased:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &416237963
 GameObject:
   m_ObjectHideFlags: 0
@@ -16085,6 +16143,7 @@ GameObject:
   - component: {fileID: 872257026}
   - component: {fileID: 872257029}
   - component: {fileID: 872257022}
+  - component: {fileID: 872257030}
   - component: {fileID: 872257028}
   - component: {fileID: 872257025}
   - component: {fileID: 872257024}
@@ -16381,6 +16440,19 @@ MonoBehaviour:
   levelText: {fileID: 2015260872}
   xpText: {fileID: 1219155500}
   xpHealing: 0
+--- !u!114 &872257030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 872257021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f56b2f953de34e7459a35e0b6885bebe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  debug: 1
 --- !u!1 &877225145
 GameObject:
   m_ObjectHideFlags: 0

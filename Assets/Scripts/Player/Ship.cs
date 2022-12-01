@@ -95,6 +95,9 @@ public class Ship : Weapon
     // Subscribe to setup event
     public void Start()
     {
+        // Setup input events
+        InputEvents.Instance.onSpacePressed.AddListener(ToggleAutoFire);
+
         // Reset effects always
         Effects.ToggleMainGlitchEffect(false);
         Events.active.onResetCooldown += ResetCooldown;
@@ -224,18 +227,8 @@ public class Ship : Weapon
         // Check if something is open
         if (Dealer.isOpen) return;
 
-        // Check if space pressed for auto fire
-        if (Input.GetKeyDown(Keybinds.autofire))
-        {
-            autoFire = !autoFire;
-            autoFireObj.SetActive(autoFire);
-        }
-
         // Check if LMB input detected
-        if ((autoFire || Input.GetKey(Keybinds.primary) || (Controller.isControllerConnected &&
-            Input.GetAxis("Primary") > 0.5)) && shipData.canFire) Use();
-        if ((Input.GetKeyUp(Keybinds.primary) || (Controller.isControllerConnected && 
-            Input.GetAxis("Primary") <= 0.5f)) && beam) BulletHandler.active.EndBeam();
+        if (CIN._action_primary.IsPressed()) Use();
         if (shipCooldown > 0) shipCooldown -= Time.deltaTime;
         
         // If can regen, regenerate
@@ -275,6 +268,12 @@ public class Ship : Weapon
                 }
             }
         }
+    }
+
+    public void ToggleAutoFire()
+    {
+        autoFire = !autoFire;
+        autoFireObj.SetActive(autoFire);
     }
 
     // Shoot method

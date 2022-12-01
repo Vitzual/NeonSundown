@@ -15,7 +15,6 @@ public class Controller : MonoBehaviour
     // Controller object
     public GameObject _controller;
     public static GameObject controller;
-    private Vector3 lastMousePos;
 
     // Transform that rotates
     public Transform rotator;
@@ -67,7 +66,6 @@ public class Controller : MonoBehaviour
         // Start for everyone
         body = GetComponent<Rigidbody2D>();
         ship = GetComponent<Ship>();
-        lastMousePos = Vector2.zero;
         controller = _controller;
         horizontal = 0;
         vertical = 0;
@@ -106,18 +104,9 @@ public class Controller : MonoBehaviour
     private void CheckMovementInput()
     {
         // Horizontal Movement
-        horizontal = 0;
-        if (Settings.controllerInput) horizontal += Input.GetAxis("L-Stick X");
-        horizontal += Input.GetKey(Keybinds.move_right) ? 1 : 0;
-        horizontal -= Input.GetKey(Keybinds.move_left) ? 1 : 0;
-        horizontal = Mathf.Clamp(horizontal, -1, 1);
-
-        // Vertical Movement
-        vertical = 0;
-        if (Settings.controllerInput) vertical += Input.GetAxis("L-Stick Y");
-        vertical += Input.GetKey(Keybinds.move_up) ? 1 : 0;
-        vertical -= Input.GetKey(Keybinds.move_down) ? 1 : 0;
-        vertical = Mathf.Clamp(vertical, -1, 1);
+        Vector2 movement = CIN._action_move.ReadValue<Vector2>();
+        horizontal = Mathf.Clamp(movement.x, -1, 1);
+        vertical = Mathf.Clamp(movement.y, -1, 1);
 
         // Check if dashing
         if (isDashing)
@@ -139,7 +128,7 @@ public class Controller : MonoBehaviour
         }
 
         // Check if dash pressed
-        else if (Input.GetKey(Keybinds.dash) || (Settings.controllerInput && Input.GetKey(KeyCode.JoystickButton4)))
+        else if (CIN._action_sprint.IsPressed())
         {
             // Check if ship overrides dash
             if (shipOverridesDash) ship.DashOverride();
@@ -193,42 +182,25 @@ public class Controller : MonoBehaviour
     private void RotateToMouse()
     {
         // Check if controller input allowed
-        if (Settings.controllerInput)
+        if (CIN.inputType == CIN.InputType.Controller)
         {
-            // Controller input
-            float horizontal = Input.GetAxis("R-Stick X");
-            float vertical = Input.GetAxis("R-Stick Y");
+            // Horizontal Movement
+            Vector2 aim = CIN._action_mouse.ReadValue<Vector2>();
+            horizontal = Mathf.Clamp(aim.x, -1, 1);
+            vertical = Mathf.Clamp(aim.y, -1, 1);
 
             // Check horizontal and vertical
             if (horizontal != 0 || vertical != 0)
             {
-                if (!controller.activeSelf)
-                {
-                    // Check if controller is connected
-                    isControllerConnected = true;
-                    controllerIcon.SetActive(true);
-                    controller.SetActive(true);
-                }
                 controller.transform.localPosition = new Vector2(horizontal * 35, vertical * 35);
                 float angle = Mathf.Atan2(controller.transform.localPosition.y, controller.transform.localPosition.x) * Mathf.Rad2Deg;
                 rotator.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
             }
-            else if (controller.activeSelf) controller.SetActive(false);
         }
-
-        // Get mouse pos
-        Vector3 mousePos = Input.mousePosition;
-        if (mousePos != lastMousePos)
+        else
         {
-            if (isControllerConnected)
-            {
-                // Check if controller is connected
-                isControllerConnected = false;
-                controllerIcon.SetActive(false);
-                controller.SetActive(false);
-            }
-
-            lastMousePos = mousePos;
+            // Get mouse pos
+            Vector3 mousePos = CIN._action_mouse.ReadValue<Vector2>();
             Vector3 objectPos = Camera.main.WorldToScreenPoint(rotator.position);
 
             mousePos.x -= objectPos.x;
@@ -240,7 +212,4 @@ public class Controller : MonoBehaviour
     }
 
     public void OverrideDash() { shipOverridesDash = true; }
-
-    //public void OnMouseEnter() { Cursor.SetCursor(cursorTexture, hotSpot, cursorMode); }
-    //public void OnMouseExit() { Cursor.SetCursor(null, Vector2.zero, cursorMode); }
 }

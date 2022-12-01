@@ -22,20 +22,11 @@ public class PausedMenu : MonoBehaviour
     {
         if (!isOpen)
         {
-            if (Input.GetKeyDown(Keybinds.stats)) stats.alpha = 1f;
-            else if (Input.GetKeyUp(Keybinds.stats)) stats.alpha = 0f;
+            if (CIN._action_stats.IsPressed()) stats.alpha = 1f;
+            else if (CIN._action_stats.IsPressed()) stats.alpha = 0f;
         }
 
-        if (Input.GetKeyDown(Keybinds.escape))
-        {
-            if (!Dealer.isOpen)
-            {
-                if (isOpen) Close();
-                else Open();
-            }
-            else if (canvasGroup.alpha == 1f) Close();
-        }
-        else if (Input.GetKeyDown(KeyCode.JoystickButton7))
+        if (CIN._action_escape.IsPressed())
         {
             if (!Dealer.isOpen)
             {
