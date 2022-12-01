@@ -21,7 +21,7 @@ public class CIN : MonoBehaviour
     protected PlayerInput _inputActions;
 
     // List of input actions in action map
-    public static InputAction _action_move, _action_mouse, _action_scroll, _action_primary,
+    public static InputAction _action_move, _action_mouse, _action_scroll, _action_primary, _action_aim,
         _action_secondary, _action_sprint, _action_escape, _action_stats, _action_autofire;
 
     // List of keybinds currently being pressed
@@ -184,6 +184,7 @@ public class CIN : MonoBehaviour
             // Set input action references
             _action_move = _inputActions.Player.Move;
             _action_mouse = _inputActions.Player.Mouse;
+            _action_aim = _inputActions.Player.Aim;
             _action_scroll = _inputActions.Player.Scroll;
             _action_primary = _inputActions.Player.Primary;
             _action_secondary = _inputActions.Player.Secondary;
@@ -202,6 +203,7 @@ public class CIN : MonoBehaviour
             _action_escape.Enable();
             _action_stats.Enable();
             _action_autofire.Enable();
+            _action_aim.Enable();
         }
         else
         {
@@ -218,6 +220,7 @@ public class CIN : MonoBehaviour
             _action_escape.Disable();
             _action_stats.Disable();
             _action_autofire.Disable();
+            _action_aim.Disable();
         }
     }
 }

@@ -182,12 +182,12 @@ public class Controller : MonoBehaviour
     private void RotateToMouse()
     {
         // Check if controller input allowed
-        if (CIN.inputType == CIN.InputType.Controller)
+        if (CIN._action_aim.IsPressed())
         {
             // Horizontal Movement
-            Vector2 aim = CIN._action_mouse.ReadValue<Vector2>();
-            horizontal = Mathf.Clamp(aim.x, -1, 1);
-            vertical = Mathf.Clamp(aim.y, -1, 1);
+            Vector2 aim = CIN._action_aim.ReadValue<Vector2>();
+            float horizontal = Mathf.Clamp(aim.x, -1, 1);
+            float vertical = Mathf.Clamp(aim.y, -1, 1);
 
             // Check horizontal and vertical
             if (horizontal != 0 || vertical != 0)
