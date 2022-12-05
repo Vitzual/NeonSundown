@@ -12,7 +12,7 @@ public class RuntimeCursor : MonoBehaviour
 
     public void Start()
     {
-        if (isMenu)
+        /*if (isMenu)
         {
             crosshairEnabled = false;
             Cursor.SetCursor(mouse, Vector2.zero, CursorMode.ForceSoftware);
@@ -23,12 +23,12 @@ public class RuntimeCursor : MonoBehaviour
             crosshairEnabled = true;
             Cursor.SetCursor(crosshair, Vector2.zero, CursorMode.ForceSoftware);
             Cursor.lockState = CursorLockMode.Confined;
-        }
+        }*/
     }
     
     public void Update()
     {
-        if (!isMenu)
+        /*if (!isMenu)
         {
             if (Dealer.isOpen && crosshairEnabled)
             {
@@ -42,16 +42,16 @@ public class RuntimeCursor : MonoBehaviour
                 Cursor.SetCursor(crosshair, Vector2.zero, CursorMode.ForceSoftware);
                 Cursor.lockState = CursorLockMode.Confined;
             }
-        }
+        }*/
     }
 
     public void OnMouseEnter()
     {
-        if (isMenu)
+        /*if (isMenu)
         {
             crosshairEnabled = false;
             Cursor.SetCursor(mouse, Vector2.zero, CursorMode.ForceSoftware);
             Cursor.lockState = CursorLockMode.None;
-        }
+        }*/
     }
 }

@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Sirenix.OdinInspector;
 using System;
+using UnityEngine.InputSystem.Utilities;
+using UnityEngine.InputSystem;
 
 /// <summary>
 /// IMPORTANT NOTE IF YOU'RE GETTING ERRORS IN THIS SCRIPT:
@@ -76,6 +78,7 @@ public class Menu : MonoBehaviour
     private CanvasGroup currentOpening;
     private float authenticationTimer = 10f;
     private bool mainOpened = false;
+    private bool anyKey = false;
 
     // Start is called before the first frame update
     public void Awake()
@@ -90,6 +93,7 @@ public class Menu : MonoBehaviour
         // Subscribe to authentication event
         Events.active.onAuthenticationFinished += StartGameWithCheck;
         Events.active.onAuthenticationFailed += OpenWarningPanel;
+        InputSystem.onAnyButtonPress.CallOnce(SetAnyKey);
 
         // Reset cursor lock state
         Cursor.lockState = CursorLockMode.None;
@@ -170,10 +174,15 @@ public class Menu : MonoBehaviour
         }
     }
 
+    public void SetAnyKey(InputControl inputControl)
+    {
+        anyKey = true;
+    }
+
     // Update user input
     public void Update()
     {
-        if (!spacePressed && Input.anyKey)
+        if (!spacePressed && anyKey)
         {
             spacePressed = true;
             if (!Authenticator.UserAuthenticated)

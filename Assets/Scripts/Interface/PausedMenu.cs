@@ -60,6 +60,9 @@ public class PausedMenu : MonoBehaviour
         if (Events.active != null)
             Events.active.PauseGame(false);
 
+        // Reset cursor lock state
+        // Cursor.lockState = CursorLockMode.Confined;
+
         if (stats != null) stats.alpha = 0f;
         canvasGroup.alpha = 0f;
         canvasGroup.interactable = false;

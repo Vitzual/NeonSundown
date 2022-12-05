@@ -1,5 +1,8 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using static UnityEditor.PlayerSettings;
 
 // Handles anything player-input related
 
@@ -60,9 +63,15 @@ public class Controller : MonoBehaviour
     public CursorMode cursorMode = CursorMode.Auto;
     public Vector2 hotSpot = Vector2.zero;
 
+    protected Vector2 lastMousePos = Vector2.zero;
+
     // Called on start
     void Start()
     {
+        // Reset cursor lock state
+        Cursor.SetCursor(cursorTexture, hotSpot, cursorMode);
+        Cursor.visible = true;
+
         // Start for everyone
         body = GetComponent<Rigidbody2D>();
         ship = GetComponent<Ship>();
@@ -182,10 +191,24 @@ public class Controller : MonoBehaviour
     private void RotateToMouse()
     {
         // Check if controller input allowed
-        if (CIN._action_aim.IsPressed())
+        Vector2 aim = CIN._action_aim.ReadValue<Vector2>();
+        if (aim.x > 0.5f || aim.y > 0.5f || aim.x < -0.5f || aim.y < -0.5f)
         {
+            Debug.Log("[CONTROLLER] Controller input detected " + aim);
+
+            // Check if controller icon pressed
+            if (!controllerIcon.activeSelf)
+            {
+                // Set last mouse pos
+                lastMousePos = Mouse.current.position.ReadValue();
+
+                // Reset cursor lock state
+                Cursor.visible = false;
+                controller.SetActive(true);
+                controllerIcon.SetActive(true);
+            }
+            
             // Horizontal Movement
-            Vector2 aim = CIN._action_aim.ReadValue<Vector2>();
             float horizontal = Mathf.Clamp(aim.x, -1, 1);
             float vertical = Mathf.Clamp(aim.y, -1, 1);
 
@@ -199,6 +222,20 @@ public class Controller : MonoBehaviour
         }
         else
         {
+            Debug.Log("[CONTROLLER] No controller input detected " + aim);
+
+            // Check if controller icon pressed
+            if (controllerIcon.activeSelf)
+            {
+                if (Mouse.current.position.ReadValue() == lastMousePos) return;
+
+                Cursor.SetCursor(cursorTexture, hotSpot, cursorMode);
+
+                Cursor.visible = true;
+                controller.SetActive(false);
+                controllerIcon.SetActive(false);
+            }
+
             // Get mouse pos
             Vector3 mousePos = CIN._action_mouse.ReadValue<Vector2>();
             Vector3 objectPos = Camera.main.WorldToScreenPoint(rotator.position);

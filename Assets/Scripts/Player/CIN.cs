@@ -6,13 +6,6 @@ using UnityEngine.InputSystem.Users;
 
 public class CIN : MonoBehaviour
 {
-    public enum InputType
-    {
-        KMB,
-        Controller
-    }
-    public static InputType inputType;
-
     /////////////////////////////////////
     /////////// INPUT ACTIONS ///////////
     /////////////////////////////////////
@@ -35,28 +28,12 @@ public class CIN : MonoBehaviour
         // Set input actions
         _inputActions = new PlayerInput();
         ToggleActionMap(true);
-
-        InputUser.onChange += ChangeInputDevice;
     }
 
     // On disable, deactivate all input listeners
     private void OnDisable()
     {
         ToggleActionMap(false);
-    }
-
-    public void ChangeInputDevice(InputUser user, InputUserChange change, InputDevice device)
-    {
-        if (user.controlScheme == _inputActions.GamepadScheme)
-        {
-            Debug.Log("[INPUT] Controller device changed to controller!");
-            inputType = InputType.Controller;
-        }
-        else
-        {
-            Debug.Log("[INPUT] Controller device changed to KMB!");
-            inputType = InputType.KMB;
-        }
     }
 
     /// <summary>
