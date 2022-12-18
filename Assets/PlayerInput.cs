@@ -134,6 +134,15 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Click Thru"",
+                    ""type"": ""Button"",
+                    ""id"": ""06fa3ca9-e081-4aec-9ccb-d6d5f66ee89f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -519,6 +528,28 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
                     ""action"": ""Aim"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""af1529be-cd00-4f49-be95-8fbdfdea105a"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Click Thru"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f5092f1c-2ae9-49e5-b55f-ecdd203c6008"",
+                    ""path"": ""<XInputController>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Click Thru"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1118,6 +1149,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         m_Player_HUD = m_Player.FindAction("HUD", throwIfNotFound: true);
         m_Player_Stats = m_Player.FindAction("Stats", throwIfNotFound: true);
         m_Player_AutoFire = m_Player.FindAction("Auto Fire", throwIfNotFound: true);
+        m_Player_ClickThru = m_Player.FindAction("Click Thru", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1201,6 +1233,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_HUD;
     private readonly InputAction m_Player_Stats;
     private readonly InputAction m_Player_AutoFire;
+    private readonly InputAction m_Player_ClickThru;
     public struct PlayerActions
     {
         private @PlayerInput m_Wrapper;
@@ -1217,6 +1250,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         public InputAction @HUD => m_Wrapper.m_Player_HUD;
         public InputAction @Stats => m_Wrapper.m_Player_Stats;
         public InputAction @AutoFire => m_Wrapper.m_Player_AutoFire;
+        public InputAction @ClickThru => m_Wrapper.m_Player_ClickThru;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1262,6 +1296,9 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @AutoFire.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAutoFire;
                 @AutoFire.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAutoFire;
                 @AutoFire.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAutoFire;
+                @ClickThru.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnClickThru;
+                @ClickThru.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnClickThru;
+                @ClickThru.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnClickThru;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -1302,6 +1339,9 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @AutoFire.started += instance.OnAutoFire;
                 @AutoFire.performed += instance.OnAutoFire;
                 @AutoFire.canceled += instance.OnAutoFire;
+                @ClickThru.started += instance.OnClickThru;
+                @ClickThru.performed += instance.OnClickThru;
+                @ClickThru.canceled += instance.OnClickThru;
             }
         }
     }
@@ -1470,6 +1510,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         void OnHUD(InputAction.CallbackContext context);
         void OnStats(InputAction.CallbackContext context);
         void OnAutoFire(InputAction.CallbackContext context);
+        void OnClickThru(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

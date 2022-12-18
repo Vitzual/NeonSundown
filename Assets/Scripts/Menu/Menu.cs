@@ -90,6 +90,9 @@ public class Menu : MonoBehaviour
     // On start, try and get meta context
     public void Start()
     {
+        // Add click thru listener
+        InputEvents.Instance.onClickThruPressed.AddListener(ClickThru);
+
         // Subscribe to authentication event
         Events.active.onAuthenticationFinished += StartGameWithCheck;
         Events.active.onAuthenticationFailed += OpenWarningPanel;
@@ -172,6 +175,23 @@ public class Menu : MonoBehaviour
             notJoinedDiscord.SetActive(!SaveSystem.saveData.discordReward);
             joinedDiscord.SetActive(SaveSystem.saveData.discordReward);
         }
+    }
+
+    public void ClickThru()
+    {
+        if (!spacePressed)
+        {
+            spacePressed = true;
+            if (!Authenticator.UserAuthenticated)
+            {
+                pressSpaceText.text = "LOGGING INTO STEAM...";
+                Authenticator.Login();
+            }
+            else StartGameWithCheck();
+        }
+        else if (mainGroup.alpha == 1f) TogglePanel(arenaGroup, mainGroup, true);
+        else if (arenaGroup.alpha == 1f) TogglePanel(planningGroup, arenaGroup, true);
+        else if (planningGroup.alpha == 1f) LoadMain();
     }
 
     public void SetAnyKey(InputControl inputControl)

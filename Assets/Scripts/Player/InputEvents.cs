@@ -20,6 +20,7 @@ public class InputEvents : Singleton<InputEvents>
     [HideInInspector] public UnityEvent onSecondaryReleased;
 
     // Escape keybinds
+    [HideInInspector] public UnityEvent onClickThruPressed;
     [HideInInspector] public UnityEvent onEscapePressed;
     [HideInInspector] public UnityEvent onSpacePressed;
 

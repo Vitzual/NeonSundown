@@ -15,8 +15,8 @@ public class CIN : MonoBehaviour
 
     // List of input actions in action map
     public static InputAction _action_move, _action_mouse, _action_scroll, _action_primary, _action_aim,
-        _action_secondary, _action_sprint, _action_escape, _action_stats, _action_autofire;
-
+        _action_secondary, _action_sprint, _action_escape, _action_stats, _action_autofire, _action_clickthru;
+    
     // List of keybinds currently being pressed
     private List<InputAction> _keybindActivity = new List<InputAction>();
 
@@ -146,6 +146,23 @@ public class CIN : MonoBehaviour
             _keybindActivity.Remove(_action_sprint);
             if (debug) Debug.Log("[CONTROLLER] Sprint keybind released!");
         }
+
+        ///////////////////////////////////////////
+        ////// Calculate escape action input //////
+        ///////////////////////////////////////////
+        if (_action_clickthru.IsPressed())
+        {
+            if (!_keybindActivity.Contains(_action_clickthru))
+            {
+                InputEvents.Instance.onClickThruPressed.Invoke();
+                _keybindActivity.Add(_action_clickthru);
+                if (debug) Debug.Log("[CONTROLLER] Click thru keybind pressed!");
+            }
+        }
+        else if (_keybindActivity.Contains(_action_clickthru))
+        {
+            _keybindActivity.Remove(_action_clickthru);
+        }
     }
 
     /// <summary>
@@ -169,6 +186,7 @@ public class CIN : MonoBehaviour
             _action_escape = _inputActions.Player.Escape;
             _action_stats = _inputActions.Player.Stats;
             _action_autofire = _inputActions.Player.AutoFire;
+            _action_clickthru = _inputActions.Player.ClickThru;
 
             // Enable all input actions
             _action_move.Enable();
@@ -181,6 +199,7 @@ public class CIN : MonoBehaviour
             _action_stats.Enable();
             _action_autofire.Enable();
             _action_aim.Enable();
+            _action_clickthru.Enable();
         }
         else
         {
@@ -198,6 +217,7 @@ public class CIN : MonoBehaviour
             _action_stats.Disable();
             _action_autofire.Disable();
             _action_aim.Disable();
+            _action_clickthru.Disable();
         }
     }
 }

@@ -228,7 +228,7 @@ public class Controller : MonoBehaviour
             if (controllerIcon.activeSelf)
             {
                 if (Mouse.current.position.ReadValue() == lastMousePos) return;
-
+                
                 Cursor.SetCursor(cursorTexture, hotSpot, cursorMode);
 
                 Cursor.visible = true;
