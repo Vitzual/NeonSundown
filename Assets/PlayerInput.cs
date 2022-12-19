@@ -548,7 +548,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""path"": ""<XInputController>/buttonSouth"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""Click Thru"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false

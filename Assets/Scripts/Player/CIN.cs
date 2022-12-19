@@ -20,6 +20,9 @@ public class CIN : MonoBehaviour
     // List of keybinds currently being pressed
     private List<InputAction> _keybindActivity = new List<InputAction>();
 
+    // Toggles true if action maps are enabled
+    protected bool _actionMappingEnabled = false;
+
     public bool debug;
 
     // Grab required components in start
@@ -28,6 +31,13 @@ public class CIN : MonoBehaviour
         // Set input actions
         _inputActions = new PlayerInput();
         ToggleActionMap(true);
+    }
+
+    // Calculate inputs each frame
+    public void Update()
+    {
+        if (_actionMappingEnabled)
+            CalculateInputs();
     }
 
     // On disable, deactivate all input listeners
@@ -170,6 +180,9 @@ public class CIN : MonoBehaviour
     /// </summary>
     public void ToggleActionMap(bool toggle)
     {
+        // Set action mapping toggle
+        _actionMappingEnabled = toggle;
+
         if (toggle)
         {
             // Debug action map is enabled
