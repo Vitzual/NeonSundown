@@ -11,11 +11,6 @@ public class Dealer : MonoBehaviour
     // Active instance
     public static Dealer active;
     public static bool isOpen;
-    
-    // Gameobject for controls
-    public GameObject controlsOne;
-    public GameObject controlsTwo;
-    public GameObject controlsThree;
 
     // List of card slots
     [BoxGroup("Card Options")]
@@ -513,11 +508,6 @@ public class Dealer : MonoBehaviour
         upgradeOptions.interactable = false;
         upgradeOptions.blocksRaycasts = false;
 
-        // Set controller controls
-        controlsOne.SetActive(Controller.isControllerConnected);
-        controlsTwo.SetActive(Controller.isControllerConnected);
-        controlsThree.SetActive(Controller.isControllerConnected);
-
         // Reset all cards
         foreach (Card card in cardSlots)
             card.canvasGroup.alpha = 0f;
@@ -594,4 +584,6 @@ public class Dealer : MonoBehaviour
         isOpen = false;
         cardsDealt = false;
     }
+
+    public bool IsOpen => canvasGroup.alpha == 1f;
 }

@@ -325,7 +325,7 @@ RectTransform:
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &28469939
 Animator:
-  serializedVersion: 3
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -338,10 +338,11 @@ Animator:
   m_UpdateMode: 2
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!225 &28469940
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -7418,6 +7419,18 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   onToggleHudReleased:
+    m_PersistentCalls:
+      m_Calls: []
+  onLeftDPad:
+    m_PersistentCalls:
+      m_Calls: []
+  onRightDPad:
+    m_PersistentCalls:
+      m_Calls: []
+  onRightButton:
+    m_PersistentCalls:
+      m_Calls: []
+  onLeftButton:
     m_PersistentCalls:
       m_Calls: []
 --- !u!1 &416237963
@@ -15295,7 +15308,7 @@ AudioSource:
     m_RotationOrder: 4
 --- !u!95 &863299128
 Animator:
-  serializedVersion: 3
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -15308,10 +15321,11 @@ Animator:
   m_UpdateMode: 2
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!225 &863299129
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -19052,6 +19066,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1046696077}
+  - component: {fileID: 1046696080}
   - component: {fileID: 1046696078}
   - component: {fileID: 1046696079}
   m_Layer: 5
@@ -19149,6 +19164,23 @@ CanvasGroup:
   m_Interactable: 0
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
+--- !u!114 &1046696080
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1046696076}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5cda479f7ff245846a1cc166a622999c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  position: 1
+  cards:
+  - {fileID: 1280160441}
+  - {fileID: 287118298}
+  - {fileID: 1978946283}
 --- !u!1 &1047215700
 GameObject:
   m_ObjectHideFlags: 0

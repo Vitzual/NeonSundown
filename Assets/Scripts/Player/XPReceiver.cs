@@ -68,6 +68,8 @@ public class XPReceiver : MonoBehaviour
             // Set text
             levelText.text = "LEVEL " + level;
             Dealer.active.OpenDealer();
+
+            Debug.Log("Levelled up to " + level);
         }
 
         // Set XP bar

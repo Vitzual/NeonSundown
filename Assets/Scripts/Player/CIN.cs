@@ -9,13 +9,14 @@ public class CIN : MonoBehaviour
     /////////////////////////////////////
     /////////// INPUT ACTIONS ///////////
     /////////////////////////////////////
-
+    
     [Header("Input Actions")]
     protected PlayerInput _inputActions;
 
     // List of input actions in action map
     public static InputAction _action_move, _action_mouse, _action_scroll, _action_primary, _action_aim,
-        _action_secondary, _action_sprint, _action_escape, _action_stats, _action_autofire, _action_clickthru;
+        _action_secondary, _action_sprint, _action_escape, _action_stats, _action_autofire, _action_clickthru,
+        _action_leftDpad, _action_rightDpad, _action_leftButton, _action_rightButton;
     
     // List of keybinds currently being pressed
     private List<InputAction> _keybindActivity = new List<InputAction>();
@@ -173,6 +174,74 @@ public class CIN : MonoBehaviour
         {
             _keybindActivity.Remove(_action_clickthru);
         }
+
+        ///////////////////////////////////////////
+        ////// Calculate escape action input //////
+        ///////////////////////////////////////////
+        if (_action_leftDpad.IsPressed())
+        {
+            if (!_keybindActivity.Contains(_action_leftDpad))
+            {
+                InputEvents.Instance.onLeftDPad.Invoke();
+                _keybindActivity.Add(_action_leftDpad);
+                if (debug) Debug.Log("[CONTROLLER] Left dpad keybind pressed!");
+            }
+        }
+        else if (_keybindActivity.Contains(_action_leftDpad))
+        {
+            _keybindActivity.Remove(_action_leftDpad);
+        }
+
+        ///////////////////////////////////////////
+        ////// Calculate escape action input //////
+        ///////////////////////////////////////////
+        if (_action_rightDpad.IsPressed())
+        {
+            if (!_keybindActivity.Contains(_action_rightDpad))
+            {
+                InputEvents.Instance.onRightDPad.Invoke();
+                _keybindActivity.Add(_action_rightDpad);
+                if (debug) Debug.Log("[CONTROLLER] Right dpad keybind pressed!");
+            }
+        }
+        else if (_keybindActivity.Contains(_action_rightDpad))
+        {
+            _keybindActivity.Remove(_action_rightDpad);
+        }
+
+        ///////////////////////////////////////////
+        ////// Calculate escape action input //////
+        ///////////////////////////////////////////
+        if (_action_leftButton.IsPressed())
+        {
+            if (!_keybindActivity.Contains(_action_leftButton))
+            {
+                InputEvents.Instance.onLeftButton.Invoke();
+                _keybindActivity.Add(_action_leftButton);
+                if (debug) Debug.Log("[CONTROLLER] Left button keybind pressed!");
+            }
+        }
+        else if (_keybindActivity.Contains(_action_leftButton))
+        {
+            _keybindActivity.Remove(_action_leftButton);
+        }
+
+        ///////////////////////////////////////////
+        ////// Calculate escape action input //////
+        ///////////////////////////////////////////
+        if (_action_rightButton.IsPressed())
+        {
+            if (!_keybindActivity.Contains(_action_rightButton))
+            {
+                InputEvents.Instance.onRightButton.Invoke();
+                _keybindActivity.Add(_action_rightButton);
+                if (debug) Debug.Log("[CONTROLLER] Click thru keybind pressed!");
+            }
+        }
+        else if (_keybindActivity.Contains(_action_rightButton))
+        {
+            _keybindActivity.Remove(_action_rightButton);
+        }
     }
 
     /// <summary>
@@ -200,6 +269,10 @@ public class CIN : MonoBehaviour
             _action_stats = _inputActions.Player.Stats;
             _action_autofire = _inputActions.Player.AutoFire;
             _action_clickthru = _inputActions.Player.ClickThru;
+            _action_leftDpad = _inputActions.Player.LeftDPad;
+            _action_rightDpad = _inputActions.Player.RightDPad;
+            _action_leftButton = _inputActions.Player.LeftButton;
+            _action_rightButton = _inputActions.Player.RightButton;
 
             // Enable all input actions
             _action_move.Enable();
@@ -213,6 +286,10 @@ public class CIN : MonoBehaviour
             _action_autofire.Enable();
             _action_aim.Enable();
             _action_clickthru.Enable();
+            _action_leftDpad.Enable();
+            _action_rightDpad.Enable();
+            _action_leftButton.Enable();
+            _action_rightButton.Enable();
         }
         else
         {
@@ -231,6 +308,10 @@ public class CIN : MonoBehaviour
             _action_autofire.Disable();
             _action_aim.Disable();
             _action_clickthru.Disable();
+            _action_leftDpad.Disable();
+            _action_rightDpad.Disable();
+            _action_leftButton.Disable();
+            _action_rightButton.Disable();
         }
     }
 }

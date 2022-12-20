@@ -38,4 +38,10 @@ public class InputEvents : Singleton<InputEvents>
     // Toggle HUD keybinds
     [HideInInspector] public UnityEvent onToggleHudPressed;
     [HideInInspector] public UnityEvent onToggleHudReleased;
+
+    // Card control options
+    [HideInInspector] public UnityEvent onLeftDPad;
+    [HideInInspector] public UnityEvent onRightDPad;
+    [HideInInspector] public UnityEvent onRightButton;
+    [HideInInspector] public UnityEvent onLeftButton;
 }

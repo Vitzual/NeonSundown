@@ -143,6 +143,42 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""LeftDPad"",
+                    ""type"": ""Button"",
+                    ""id"": ""24003f29-d466-4355-8272-abafeed1be91"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RightDPad"",
+                    ""type"": ""Button"",
+                    ""id"": ""4f5c0c2b-cafc-4377-88d8-e09f91fe6626"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""LeftButton"",
+                    ""type"": ""Button"",
+                    ""id"": ""6d6b444c-e97b-4a54-9697-b25c1ad0ace1"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RightButton"",
+                    ""type"": ""Button"",
+                    ""id"": ""0a200647-7951-4b59-a96c-7a292848051d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -550,6 +586,50 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
                     ""action"": ""Click Thru"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0f2cff3b-6431-4516-b9f6-4d996c786243"",
+                    ""path"": ""<Gamepad>/dpad/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""LeftDPad"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""46544edd-2a88-48b0-b3b1-9137fb98e930"",
+                    ""path"": ""<Gamepad>/dpad/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""RightDPad"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e9c8b647-48d4-42f7-b0dd-33fc32299818"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""LeftButton"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4da176ae-6a7e-4c00-ae70-19fe8f920d2e"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""RightButton"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1150,6 +1230,10 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         m_Player_Stats = m_Player.FindAction("Stats", throwIfNotFound: true);
         m_Player_AutoFire = m_Player.FindAction("Auto Fire", throwIfNotFound: true);
         m_Player_ClickThru = m_Player.FindAction("Click Thru", throwIfNotFound: true);
+        m_Player_LeftDPad = m_Player.FindAction("LeftDPad", throwIfNotFound: true);
+        m_Player_RightDPad = m_Player.FindAction("RightDPad", throwIfNotFound: true);
+        m_Player_LeftButton = m_Player.FindAction("LeftButton", throwIfNotFound: true);
+        m_Player_RightButton = m_Player.FindAction("RightButton", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1234,6 +1318,10 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Stats;
     private readonly InputAction m_Player_AutoFire;
     private readonly InputAction m_Player_ClickThru;
+    private readonly InputAction m_Player_LeftDPad;
+    private readonly InputAction m_Player_RightDPad;
+    private readonly InputAction m_Player_LeftButton;
+    private readonly InputAction m_Player_RightButton;
     public struct PlayerActions
     {
         private @PlayerInput m_Wrapper;
@@ -1251,6 +1339,10 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         public InputAction @Stats => m_Wrapper.m_Player_Stats;
         public InputAction @AutoFire => m_Wrapper.m_Player_AutoFire;
         public InputAction @ClickThru => m_Wrapper.m_Player_ClickThru;
+        public InputAction @LeftDPad => m_Wrapper.m_Player_LeftDPad;
+        public InputAction @RightDPad => m_Wrapper.m_Player_RightDPad;
+        public InputAction @LeftButton => m_Wrapper.m_Player_LeftButton;
+        public InputAction @RightButton => m_Wrapper.m_Player_RightButton;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1299,6 +1391,18 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @ClickThru.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnClickThru;
                 @ClickThru.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnClickThru;
                 @ClickThru.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnClickThru;
+                @LeftDPad.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLeftDPad;
+                @LeftDPad.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLeftDPad;
+                @LeftDPad.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLeftDPad;
+                @RightDPad.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRightDPad;
+                @RightDPad.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRightDPad;
+                @RightDPad.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRightDPad;
+                @LeftButton.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLeftButton;
+                @LeftButton.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLeftButton;
+                @LeftButton.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLeftButton;
+                @RightButton.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRightButton;
+                @RightButton.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRightButton;
+                @RightButton.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRightButton;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -1342,6 +1446,18 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @ClickThru.started += instance.OnClickThru;
                 @ClickThru.performed += instance.OnClickThru;
                 @ClickThru.canceled += instance.OnClickThru;
+                @LeftDPad.started += instance.OnLeftDPad;
+                @LeftDPad.performed += instance.OnLeftDPad;
+                @LeftDPad.canceled += instance.OnLeftDPad;
+                @RightDPad.started += instance.OnRightDPad;
+                @RightDPad.performed += instance.OnRightDPad;
+                @RightDPad.canceled += instance.OnRightDPad;
+                @LeftButton.started += instance.OnLeftButton;
+                @LeftButton.performed += instance.OnLeftButton;
+                @LeftButton.canceled += instance.OnLeftButton;
+                @RightButton.started += instance.OnRightButton;
+                @RightButton.performed += instance.OnRightButton;
+                @RightButton.canceled += instance.OnRightButton;
             }
         }
     }
@@ -1511,6 +1627,10 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         void OnStats(InputAction.CallbackContext context);
         void OnAutoFire(InputAction.CallbackContext context);
         void OnClickThru(InputAction.CallbackContext context);
+        void OnLeftDPad(InputAction.CallbackContext context);
+        void OnRightDPad(InputAction.CallbackContext context);
+        void OnLeftButton(InputAction.CallbackContext context);
+        void OnRightButton(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
