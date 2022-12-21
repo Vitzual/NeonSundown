@@ -5,12 +5,14 @@ using UnityEngine;
 using UnityEngine.UI;
 using Sirenix.OdinInspector;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 
 public class Dealer : MonoBehaviour
 {
     // Active instance
     public static Dealer active;
     public static bool isOpen;
+    public static bool isController = false;
 
     // List of card slots
     [BoxGroup("Card Options")]
@@ -94,15 +96,14 @@ public class Dealer : MonoBehaviour
         canvasGroup = GetComponent<CanvasGroup>();
         pickedList = new List<CardData>();
         pickedCards = new List<CardData>();
+
+        InputEvents.Instance.onSecondaryPressed.AddListener(RedrawCard);
+        InputEvents.Instance.onPipettePressed.AddListener(BurnCard);
     }
 
     // While open, rotate
     public void Update()
     {
-        // Check if input from re-draw
-        // if (isOpen && cardsDealt && Input.GetKeyDown(Keybinds.secondary)) RedrawCard();
-        // else if (isOpen && cardsDealt && Input.GetKeyDown(Keybinds.burn)) BurnCard();
-
         // If debug switch set to true, deal cards
         if (debugSwitch)
         {
@@ -370,9 +371,14 @@ public class Dealer : MonoBehaviour
     // Burns a specific card
     public void BurnCard()
     {
+        // Check dealer status
+        if (!isOpen || !cardsDealt) return;
+
         // Raycast for card on interface layer
-        PointerEventData m_PointerEventData = new PointerEventData(eventSystem);
-        // m_PointerEventData.position = Input.mousePosition;
+        PointerEventData m_PointerEventData = new PointerEventData(eventSystem)
+        {
+            position = Mouse.current.position.ReadValue()
+        };
 
         //Create a list of Raycast Results
         List<RaycastResult> results = new List<RaycastResult>();
@@ -395,9 +401,14 @@ public class Dealer : MonoBehaviour
     // Re draws a specific card
     public void RedrawCard()
     {
+        // Check dealer status
+        if (!isOpen || !cardsDealt) return;
+
         // Raycast for card on interface layer
-        PointerEventData m_PointerEventData = new PointerEventData(eventSystem);
-        // m_PointerEventData.position = Input.mousePosition;
+        PointerEventData m_PointerEventData = new PointerEventData(eventSystem)
+        {
+            position = Mouse.current.position.ReadValue()
+        };
 
         //Create a list of Raycast Results
         List<RaycastResult> results = new List<RaycastResult>();

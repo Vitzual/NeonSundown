@@ -16,7 +16,7 @@ public class CIN : MonoBehaviour
     // List of input actions in action map
     public static InputAction _action_move, _action_mouse, _action_scroll, _action_primary, _action_aim,
         _action_secondary, _action_sprint, _action_escape, _action_stats, _action_autofire, _action_clickthru,
-        _action_leftDpad, _action_rightDpad, _action_leftButton, _action_rightButton;
+        _action_leftDpad, _action_rightDpad, _action_leftButton, _action_rightButton, _action_topButton;
     
     // List of keybinds currently being pressed
     private List<InputAction> _keybindActivity = new List<InputAction>();
@@ -235,12 +235,29 @@ public class CIN : MonoBehaviour
             {
                 InputEvents.Instance.onRightButton.Invoke();
                 _keybindActivity.Add(_action_rightButton);
-                if (debug) Debug.Log("[CONTROLLER] Click thru keybind pressed!");
+                if (debug) Debug.Log("[CONTROLLER] Right button keybind pressed!");
             }
         }
         else if (_keybindActivity.Contains(_action_rightButton))
         {
             _keybindActivity.Remove(_action_rightButton);
+        }
+
+        ///////////////////////////////////////////
+        ////// Calculate escape action input //////
+        ///////////////////////////////////////////
+        if (_action_topButton.IsPressed())
+        {
+            if (!_keybindActivity.Contains(_action_topButton))
+            {
+                InputEvents.Instance.onTopButton.Invoke();
+                _keybindActivity.Add(_action_topButton);
+                if (debug) Debug.Log("[CONTROLLER] Top button keybind pressed!");
+            }
+        }
+        else if (_keybindActivity.Contains(_action_topButton))
+        {
+            _keybindActivity.Remove(_action_topButton);
         }
     }
 
@@ -273,6 +290,7 @@ public class CIN : MonoBehaviour
             _action_rightDpad = _inputActions.Player.RightDPad;
             _action_leftButton = _inputActions.Player.LeftButton;
             _action_rightButton = _inputActions.Player.RightButton;
+            _action_topButton = _inputActions.Player.TopButton;
 
             // Enable all input actions
             _action_move.Enable();
@@ -290,6 +308,7 @@ public class CIN : MonoBehaviour
             _action_rightDpad.Enable();
             _action_leftButton.Enable();
             _action_rightButton.Enable();
+            _action_topButton.Enable();
         }
         else
         {
@@ -312,6 +331,7 @@ public class CIN : MonoBehaviour
             _action_rightDpad.Disable();
             _action_leftButton.Disable();
             _action_rightButton.Disable();
+            _action_topButton.Disable();
         }
     }
 }

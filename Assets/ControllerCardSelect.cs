@@ -29,11 +29,9 @@ public class ControllerCardSelect : MonoBehaviour
                 cardSelect = true;
                 cards[position].GetComponent<OnHoverAdjustScale>().OnPointerEnter(null);
             }
-            else
-            {
-                cards[position].OnClick(false);
-                cardSelect = false;
-            }
+
+            cards[position].OnClick(false);
+            cardSelect = false;
         }
     }
 
@@ -47,11 +45,9 @@ public class ControllerCardSelect : MonoBehaviour
                 cardSelect = true;
                 cards[position].GetComponent<OnHoverAdjustScale>().OnPointerEnter(null);
             }
-            else
-            {
-                Dealer.active.Redraw(cards[position]);
-                cardSelect = false;
-            }
+
+            Dealer.active.Redraw(cards[position]);
+            cardSelect = false;
         }
     }
 
@@ -65,11 +61,9 @@ public class ControllerCardSelect : MonoBehaviour
                 cardSelect = true;
                 cards[position].GetComponent<OnHoverAdjustScale>().OnPointerEnter(null);
             }
-            else
-            {
-                Dealer.active.Burn(cards[position]);
-                cardSelect = false;
-            }
+
+            Dealer.active.Burn(cards[position]);
+            cardSelect = false;
         }
     }
 

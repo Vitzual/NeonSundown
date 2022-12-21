@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 public class OnHoverAdjustScale : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     // Hover variables
-    public float scaleAdjustment = 0.1f;
+    public float scaleAdjustment = 0.15f;
     public bool overrideSize = false;
     public Vector3 originalSize;
     public bool playSound = true;

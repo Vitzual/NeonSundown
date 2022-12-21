@@ -44,4 +44,5 @@ public class InputEvents : Singleton<InputEvents>
     [HideInInspector] public UnityEvent onRightDPad;
     [HideInInspector] public UnityEvent onRightButton;
     [HideInInspector] public UnityEvent onLeftButton;
+    [HideInInspector] public UnityEvent onTopButton;
 }
