@@ -16,7 +16,7 @@ public class Secondary : MonoBehaviour
         private int quality;
     }
     private List<UpgradeInfo> upgrades = new List<UpgradeInfo>();
-
+    
     // Multipliers 
     protected Dictionary<Stat, float> additions = new Dictionary<Stat, float>();
     protected Dictionary<Stat, float> multipliers = new Dictionary<Stat, float>();
@@ -34,6 +34,9 @@ public class Secondary : MonoBehaviour
     // Virtual setup method
     public virtual void Setup(Ship ship, SecondaryData data)
     {
+        InputEvents.Instance.onSecondaryPressed.AddListener(Use);
+        InputEvents.Instance.onSecondaryHeld.AddListener(Use);
+
         this.ship = ship;
         this.data = data;
     }
@@ -44,7 +47,6 @@ public class Secondary : MonoBehaviour
         // Update secondary instance
         if (!Dealer.isOpen && cooldown > 0)
             cooldown -= Time.deltaTime;
-        if (Input.GetKey(Keybinds.secondary) || Input.GetAxis("Secondary") > 0.5) Use();
 
         // Check if secondary has custom update
         if (useCustomUpdate) CustomUpdate();
@@ -66,6 +68,9 @@ public class Secondary : MonoBehaviour
     // Destroys the instance
     public virtual void Destroy()
     {
+        InputEvents.Instance.onSecondaryPressed.RemoveListener(Use);
+        InputEvents.Instance.onSecondaryHeld.RemoveListener(Use);
+
         Destroy(gameObject);
     }
 

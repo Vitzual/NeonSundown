@@ -1,8 +1,5 @@
-using System;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using static UnityEditor.PlayerSettings;
 
 // Handles anything player-input related
 
@@ -10,7 +7,7 @@ public class Controller : MonoBehaviour
 {
     // Reference to ship
     private Ship ship;
-
+    
     // Controller associated with the player
     public static bool isControllerConnected;
     public GameObject controllerIcon;
@@ -194,8 +191,6 @@ public class Controller : MonoBehaviour
         Vector2 aim = CIN._action_aim.ReadValue<Vector2>();
         if (aim.x > 0.5f || aim.y > 0.5f || aim.x < -0.5f || aim.y < -0.5f)
         {
-            Debug.Log("[CONTROLLER] Controller input detected " + aim);
-
             // Check if controller icon pressed
             if (!controllerIcon.activeSelf)
             {
@@ -222,8 +217,6 @@ public class Controller : MonoBehaviour
         }
         else
         {
-            Debug.Log("[CONTROLLER] No controller input detected " + aim);
-
             // Check if controller icon pressed
             if (controllerIcon.activeSelf)
             {

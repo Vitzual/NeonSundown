@@ -9,20 +9,41 @@ public class ControllerCardSelect : MonoBehaviour
     public List<Card> cards;
     protected bool cardSelect = false;
     protected bool upgradesOpen = false;
+    
+    protected bool controllerEnabled = false;
+    public GameObject controllerBurn, kmbBurn, controllerSkip, 
+        kmbSkip, controllerRedraw, kmbRedraw;
 
     public void Start()
     {
         InputEvents.Instance.onClickThruPressed.AddListener(OnCardSelect);
-        InputEvents.Instance.onRightButton.AddListener(OnCardSkip);
+        InputEvents.Instance.onRightButton.AddListener(OnCardRedraw);
+        InputEvents.Instance.onTopButton.AddListener(OnCardSkip);
         InputEvents.Instance.onLeftButton.AddListener(OnCardBurn);
         InputEvents.Instance.onRightDPad.AddListener(OnRightDpad);
         InputEvents.Instance.onLeftDPad.AddListener(OnLeftDpad);
+    }
+
+    public void ToggleController(bool toggle)
+    {
+        if (controllerEnabled != toggle)
+        {
+            controllerEnabled = toggle;
+            controllerBurn.SetActive(toggle);
+            controllerSkip.SetActive(toggle);
+            controllerRedraw.SetActive(toggle);
+            kmbBurn.SetActive(!toggle);
+            kmbSkip.SetActive(!toggle);
+            kmbRedraw.SetActive(!toggle);
+        }
     }
 
     public void OnCardSelect()
     {
         if (Dealer.isOpen && Dealer.active.IsOpen)
         {
+            ToggleController(true);
+
             if (!cardSelect)
             {
                 position = 1;
@@ -35,10 +56,12 @@ public class ControllerCardSelect : MonoBehaviour
         }
     }
 
-    public void OnCardSkip()
+    public void OnCardRedraw()
     {
         if (Dealer.isOpen && Dealer.active.IsOpen)
         {
+            ToggleController(true);
+
             if (!cardSelect)
             {
                 position = 1;
@@ -55,6 +78,8 @@ public class ControllerCardSelect : MonoBehaviour
     {
         if (Dealer.isOpen && Dealer.active.IsOpen)
         {
+            ToggleController(true);
+
             if (!cardSelect)
             {
                 position = 1;
@@ -67,10 +92,30 @@ public class ControllerCardSelect : MonoBehaviour
         }
     }
 
+    public void OnCardSkip()
+    {
+        if (Dealer.isOpen && Dealer.active.IsOpen)
+        {
+            ToggleController(true);
+
+            if (!cardSelect)
+            {
+                position = 1;
+                cardSelect = true;
+                cards[position].GetComponent<OnHoverAdjustScale>().OnPointerEnter(null);
+            }
+
+            Dealer.active.CloseDealer();
+            cardSelect = false;
+        }
+    }
+
     public void OnRightDpad()
     {
         if (Dealer.isOpen && Dealer.active.IsOpen)
         {
+            ToggleController(true);
+
             if (position == 0)
             {
                 position = 1;
@@ -90,6 +135,8 @@ public class ControllerCardSelect : MonoBehaviour
     {
         if (Dealer.isOpen && Dealer.active.IsOpen)
         {
+            ToggleController(true);
+
             if (position == 2)
             {
                 position = 1;

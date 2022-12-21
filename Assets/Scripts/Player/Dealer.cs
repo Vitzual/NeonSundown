@@ -14,6 +14,8 @@ public class Dealer : MonoBehaviour
     public static bool isOpen;
     public static bool isController = false;
 
+    public ControllerCardSelect controllerSelect;
+
     // List of card slots
     [BoxGroup("Card Options")]
     public List<Card> cardSlots;
@@ -373,6 +375,7 @@ public class Dealer : MonoBehaviour
     {
         // Check dealer status
         if (!isOpen || !cardsDealt) return;
+        controllerSelect.ToggleController(false);
 
         // Raycast for card on interface layer
         PointerEventData m_PointerEventData = new PointerEventData(eventSystem)
@@ -403,6 +406,7 @@ public class Dealer : MonoBehaviour
     {
         // Check dealer status
         if (!isOpen || !cardsDealt) return;
+        controllerSelect.ToggleController(false);
 
         // Raycast for card on interface layer
         PointerEventData m_PointerEventData = new PointerEventData(eventSystem)

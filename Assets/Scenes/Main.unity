@@ -7738,6 +7738,9 @@ MonoBehaviour:
   onLeftButton:
     m_PersistentCalls:
       m_Calls: []
+  onTopButton:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &416237963
 GameObject:
   m_ObjectHideFlags: 0
@@ -19646,6 +19649,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c84a8f8c9fc853a42b61b7af366ec31f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  controllerSelect: {fileID: 1046696080}
   cardSlots:
   - {fileID: 1280160441}
   - {fileID: 287118298}
@@ -19687,7 +19691,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1046696076}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 0
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
@@ -19708,6 +19712,12 @@ MonoBehaviour:
   - {fileID: 1280160441}
   - {fileID: 287118298}
   - {fileID: 1978946283}
+  controllerBurn: {fileID: 1924529849}
+  kmbBurn: {fileID: 2043620980}
+  controllerSkip: {fileID: 2029337586}
+  kmbSkip: {fileID: 1687032617}
+  controllerRedraw: {fileID: 1427321899}
+  kmbRedraw: {fileID: 37074556}
 --- !u!1 &1047215700
 GameObject:
   m_ObjectHideFlags: 0

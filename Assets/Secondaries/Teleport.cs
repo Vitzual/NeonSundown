@@ -16,7 +16,7 @@ public class Teleport : Secondary
         customCooldown = data.cooldown;
         base.Setup(ship, data);
     }
-
+    
     // Teleport the ship to mouse cursor
     public override void Use()
     {
