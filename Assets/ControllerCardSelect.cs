@@ -13,10 +13,10 @@ public class ControllerCardSelect : MonoBehaviour
     public void Start()
     {
         InputEvents.Instance.onClickThruPressed.AddListener(OnCardSelect);
-        InputEvents.Instance.onClickThruPressed.AddListener(OnCardSkip);
-        InputEvents.Instance.onClickThruPressed.AddListener(OnCardBurn);
-        InputEvents.Instance.onClickThruPressed.AddListener(OnRightDpad);
-        InputEvents.Instance.onClickThruPressed.AddListener(OnLeftDpad);
+        InputEvents.Instance.onRightButton.AddListener(OnCardSkip);
+        InputEvents.Instance.onLeftButton.AddListener(OnCardBurn);
+        InputEvents.Instance.onRightDPad.AddListener(OnRightDpad);
+        InputEvents.Instance.onLeftDPad.AddListener(OnLeftDpad);
     }
 
     public void OnCardSelect()
