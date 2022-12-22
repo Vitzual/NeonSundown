@@ -103,7 +103,6 @@ public class ControllerCardSelect : MonoBehaviour
                 }
 
                 Dealer.active.Redraw(cards[cardPosition]);
-                cardSelect = false;
             }
         }
     }
@@ -122,7 +121,6 @@ public class ControllerCardSelect : MonoBehaviour
             }
 
             Dealer.active.Burn(cards[cardPosition]);
-            cardSelect = false;
         }
     }
 

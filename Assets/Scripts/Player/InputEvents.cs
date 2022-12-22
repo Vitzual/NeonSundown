@@ -30,7 +30,7 @@ public class InputEvents : Singleton<InputEvents>
     [HideInInspector] public UnityEvent onSprintReleased;
 
     // Pipette keybinds
-    [HideInInspector] public UnityEvent onPipettePressed;
+    [HideInInspector] public UnityEvent onBurnPressed;
 
     // Pause keybinds
     [HideInInspector] public UnityEvent onPausePressed;

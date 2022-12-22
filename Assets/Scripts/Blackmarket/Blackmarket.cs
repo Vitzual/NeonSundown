@@ -67,6 +67,22 @@ public class Blackmarket : MonoBehaviour
         // Load all blackmarket items 
         foreach (BlackmarketData blackmarketItem in blackmarketItems)
         {
+            // Check for limited time arena
+            if (blackmarketItem.arena != null)
+            {
+                if (blackmarketItem.arena.limitedTimeArena)
+                {
+                    DateTime endTime = new DateTime(
+                        blackmarketItem.arena.limitedTimeYear,
+                        blackmarketItem.arena.limitedTimeMonth,
+                        blackmarketItem.arena.limitedTimeDay);
+                    DateTime nowTime = DateTime.Now;
+                    TimeSpan time = endTime - nowTime;
+
+                    if (time.TotalSeconds > 0f) continue;
+                }
+            }
+
             // Check if null
             if (blackmarketItem == null) continue;
 

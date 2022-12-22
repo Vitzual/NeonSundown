@@ -16,7 +16,8 @@ public class CIN : MonoBehaviour
     // List of input actions in action map
     public static InputAction _action_move, _action_mouse, _action_scroll, _action_primary, _action_aim,
         _action_secondary, _action_sprint, _action_escape, _action_stats, _action_autofire, _action_clickthru,
-        _action_leftDpad, _action_rightDpad, _action_leftButton, _action_rightButton, _action_topButton;
+        _action_leftDpad, _action_rightDpad, _action_leftButton, _action_rightButton, _action_topButton, 
+        _action_burn, _action_upDpad, _action_bottomDpad;
     
     // List of keybinds currently being pressed
     private List<InputAction> _keybindActivity = new List<InputAction>();
@@ -195,6 +196,40 @@ public class CIN : MonoBehaviour
         ///////////////////////////////////////////
         ////// Calculate escape action input //////
         ///////////////////////////////////////////
+        if (_action_burn.IsPressed())
+        {
+            if (!_keybindActivity.Contains(_action_burn))
+            {
+                InputEvents.Instance.onBurnPressed.Invoke();
+                _keybindActivity.Add(_action_burn);
+                if (debug) Debug.Log("[CONTROLLER] Burn keybind pressed!");
+            }
+        }
+        else if (_keybindActivity.Contains(_action_burn))
+        {
+            _keybindActivity.Remove(_action_burn);
+        }
+
+        ///////////////////////////////////////////
+        ////// Calculate escape action input //////
+        ///////////////////////////////////////////
+        if (_action_upDpad.IsPressed())
+        {
+            if (!_keybindActivity.Contains(_action_upDpad))
+            {
+                InputEvents.Instance.onTopDPad.Invoke();
+                _keybindActivity.Add(_action_upDpad);
+                if (debug) Debug.Log("[CONTROLLER] Up dpad keybind pressed!");
+            }
+        }
+        else if (_keybindActivity.Contains(_action_upDpad))
+        {
+            _keybindActivity.Remove(_action_upDpad);
+        }
+
+        ///////////////////////////////////////////
+        ////// Calculate escape action input //////
+        ///////////////////////////////////////////
         if (_action_rightDpad.IsPressed())
         {
             if (!_keybindActivity.Contains(_action_rightDpad))
@@ -207,6 +242,23 @@ public class CIN : MonoBehaviour
         else if (_keybindActivity.Contains(_action_rightDpad))
         {
             _keybindActivity.Remove(_action_rightDpad);
+        }
+
+        ///////////////////////////////////////////
+        ////// Calculate escape action input //////
+        ///////////////////////////////////////////
+        if (_action_bottomDpad.IsPressed())
+        {
+            if (!_keybindActivity.Contains(_action_bottomDpad))
+            {
+                InputEvents.Instance.onBottomDPad.Invoke();
+                _keybindActivity.Add(_action_bottomDpad);
+                if (debug) Debug.Log("[CONTROLLER] Bottom dpad keybind pressed!");
+            }
+        }
+        else if (_keybindActivity.Contains(_action_bottomDpad))
+        {
+            _keybindActivity.Remove(_action_bottomDpad);
         }
 
         ///////////////////////////////////////////
@@ -286,11 +338,14 @@ public class CIN : MonoBehaviour
             _action_stats = _inputActions.Player.Stats;
             _action_autofire = _inputActions.Player.AutoFire;
             _action_clickthru = _inputActions.Player.ClickThru;
-            _action_leftDpad = _inputActions.Player.LeftDPad;
+            _action_upDpad = _inputActions.Player.TopDPad;
             _action_rightDpad = _inputActions.Player.RightDPad;
+            _action_bottomDpad = _inputActions.Player.BottomDPad;
+            _action_leftDpad = _inputActions.Player.LeftDPad;
             _action_leftButton = _inputActions.Player.LeftButton;
             _action_rightButton = _inputActions.Player.RightButton;
             _action_topButton = _inputActions.Player.TopButton;
+            _action_burn = _inputActions.Player.Burn;
 
             // Enable all input actions
             _action_move.Enable();
@@ -304,11 +359,14 @@ public class CIN : MonoBehaviour
             _action_autofire.Enable();
             _action_aim.Enable();
             _action_clickthru.Enable();
-            _action_leftDpad.Enable();
+            _action_upDpad.Enable();
             _action_rightDpad.Enable();
+            _action_bottomDpad.Enable();
+            _action_leftDpad.Enable();
             _action_leftButton.Enable();
             _action_rightButton.Enable();
             _action_topButton.Enable();
+            _action_burn.Enable();
         }
         else
         {
@@ -327,11 +385,14 @@ public class CIN : MonoBehaviour
             _action_autofire.Disable();
             _action_aim.Disable();
             _action_clickthru.Disable();
-            _action_leftDpad.Disable();
+            _action_upDpad.Disable();
             _action_rightDpad.Disable();
+            _action_bottomDpad.Disable();
+            _action_leftDpad.Disable();
             _action_leftButton.Disable();
             _action_rightButton.Disable();
             _action_topButton.Disable();
+            _action_burn.Disable();
         }
     }
 }

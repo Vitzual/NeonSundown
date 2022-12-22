@@ -33,7 +33,7 @@ public class ArenaButton : MonoBehaviour
     public Color lockedObjectiveColor;
     
     // Generates at runtime
-    public void Set(ArenaData arena, string bestRun)
+    public void Set(ArenaData arena, string bestRun, bool showTime = false)
     {
         // Check if unlocked
         if (SaveSystem.IsArenaUnlocked(arena.InternalID))
@@ -61,7 +61,7 @@ public class ArenaButton : MonoBehaviour
         rect.localScale = new Vector3(1, 1, 1);
 
         // Check if limited time arena
-        if (arena.limitedTimeArena)
+        if (arena.limitedTimeArena && showTime)
         {
             limitedTimeObject.SetActive(true);
             bannerLeft.color = arena.buttonColor;
@@ -108,7 +108,7 @@ public class ArenaButton : MonoBehaviour
     }
 
     // Locks the button
-    public void Lock(ArenaData arena)
+    public void Lock(ArenaData arena, bool showTime = false)
     {
         // Set is locked flag
         isLocked = true;
@@ -134,7 +134,7 @@ public class ArenaButton : MonoBehaviour
         rect.localScale = new Vector3(1, 1, 1);
 
         // Check if limited time arena
-        if (arena.limitedTimeArena)
+        if (arena.limitedTimeArena && showTime)
         {
             limitedTimeObject.SetActive(true);
             bannerLeft.color = lockedBorderColor;

@@ -66,7 +66,7 @@ public class SettingsUI : MonoBehaviour
     // Get input from player
     public void Update()
     {
-        if (listeningForInput && Input.anyKeyDown)
+        /*if (listeningForInput && Input.anyKeyDown)
         {
             // Grab input and capitalize it if needed
             string input = Input.inputString.ToUpper();
@@ -102,13 +102,13 @@ public class SettingsUI : MonoBehaviour
                     keybind.button.UpdateUI();
                 }
             }
-        }
+        }*/
     }
 
     // Set keybinds methods
     public void SetKeybind(int number)
     {
-        Key key = (Key)number;
+        /*Key key = (Key)number;
 
         listeningForInput = true;
         listeningForKey = key;
@@ -120,18 +120,18 @@ public class SettingsUI : MonoBehaviour
                 keybind.button.buttonText = "Press any key...";
                 keybind.button.UpdateUI();
             }
-        }
+        }*/
     }
 
     // Reset all keybinds
     public void ResetKeybinds()
     {
-        Keybinds.SetDefaultKeybinds();
+        /*Keybinds.SetDefaultKeybinds();
         foreach (Keybind keybind in keybinds)
         {
             keybind.button.buttonText = Keybinds.GetKeybind(keybind.key).ToString();
             keybind.button.UpdateUI();
-        }
+        }*/
     }
 
     // Set volume control methods
@@ -279,7 +279,7 @@ public class SettingsUI : MonoBehaviour
 
     public string CheckOtherInputs()
     {
-        // Check mouse input
+        /* Check mouse input
         if (Input.GetMouseButtonDown(0)) return "Mouse0";
         else if (Input.GetMouseButtonDown(1)) return "Mouse1";
         else if (Input.GetMouseButtonDown(2)) return "Mouse2";
@@ -296,6 +296,7 @@ public class SettingsUI : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.LeftArrow)) return "LeftArrow";
         else if (Input.GetKeyDown(KeyCode.DownArrow)) return "DownArrow";
         else if (Input.GetKeyDown(KeyCode.RightArrow)) return "RightArrow";
-        else return "";
+        else return "";*/
+        return "";
     }
 }

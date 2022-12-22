@@ -46,8 +46,11 @@ public class PausedMenu : MonoBehaviour
 
     protected void QuitGame()
     {
-        Close();
-        endScreen.ShowScreen();
+        if (isOpen)
+        {
+            Close();
+            endScreen.ShowScreen();
+        }
     }
 
     // Open the pause menu

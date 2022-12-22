@@ -100,7 +100,7 @@ public class Dealer : MonoBehaviour
         pickedCards = new List<CardData>();
 
         InputEvents.Instance.onSecondaryPressed.AddListener(RedrawCard);
-        InputEvents.Instance.onPipettePressed.AddListener(BurnCard);
+        InputEvents.Instance.onBurnPressed.AddListener(BurnCard);
     }
 
     // While open, rotate

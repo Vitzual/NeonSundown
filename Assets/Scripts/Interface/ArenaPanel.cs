@@ -100,6 +100,7 @@ public class ArenaPanel : MonoBehaviour
             foreach (ArenaData arena in arenas)
             {
                 // Check if limited time
+                bool limitedTimeStillAvailable = false;
                 if (arena.limitedTimeArena)
                 {
                     DateTime endTime = new DateTime(
@@ -109,7 +110,8 @@ public class ArenaPanel : MonoBehaviour
                     DateTime nowTime = DateTime.Now;
                     TimeSpan time = endTime - nowTime;
 
-                    if (time.TotalSeconds < 0f) continue;
+                    if (time.TotalSeconds > 0f) 
+                        limitedTimeStillAvailable = true;
                 }
 
                 // Create arena buttons
@@ -122,17 +124,34 @@ public class ArenaPanel : MonoBehaviour
                 // Add arena button to limited time list
                 if (arena.limitedTimeArena)
                 {
-                    limitedTimeArenas.Add(newButton);
-                    if (SaveSystem.GetPlayerLevel() >= 50)
+                    if (limitedTimeStillAvailable)
+                    {
+                        limitedTimeArenas.Add(newButton);
+                        if (SaveSystem.GetPlayerLevel() >= 50)
+                        {
+                            if (SaveSystem.saveData.arenaTimes.ContainsKey(arena.InternalID))
+                            {
+                                newButton.Set(arena, "<b>Best Run:</b> " + Formatter.Time
+                                    (SaveSystem.saveData.arenaTimes[arena.InternalID]), true);
+                            }
+                            else newButton.Set(arena, "<b>Best Run:</b> 0:00", true);
+                        }
+                        else newButton.Lock(arena, true);
+                    }
+                    else
                     {
                         if (SaveSystem.saveData.arenaTimes.ContainsKey(arena.InternalID))
                         {
                             newButton.Set(arena, "<b>Best Run:</b> " + Formatter.Time
                                 (SaveSystem.saveData.arenaTimes[arena.InternalID]));
                         }
-                        else newButton.Set(arena, "<b>Best Run:</b> 0:00");
+                        else
+                        {
+                            if (SaveSystem.IsArenaUnlocked(arena.InternalID))
+                                newButton.Set(arena, "<b>Best Run:</b> 0:00");
+                            else newButton.Lock(arena);
+                        }
                     }
-                    else newButton.Lock(arena);
                 }
 
                 // Check if save is unlocked, and if so set time
