@@ -6,6 +6,7 @@ using UnityEngine;
 public class GameOverScreen : MonoBehaviour
 {
     // Canvas group
+    public Gamemode gamemode;
     public CanvasGroup mainScreen;
     public GameObject gameOverTitle;
     public CanvasGroup gameOverScreen;
@@ -19,8 +20,15 @@ public class GameOverScreen : MonoBehaviour
     {
         Events.active.onShipDestroyed += ShowScreen;
         isActive = false;
+
+        InputEvents.Instance.onClickThruPressed.AddListener(QuitGame);
     }
-    
+
+    public void QuitGame()
+    {
+        if (isActive) gamemode.LoadMenu();
+    }
+
     // Update is called once per frame
     public void ShowScreen()
     {

@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class ControllerCardSelect : MonoBehaviour
 {
-    public int position = 1;
+    public int cardPosition = 1;
+    public int upgradePosition = 0;
 
     public List<Card> cards;
+    public List<UpgradeSlot> upgrades;
+
     protected bool cardSelect = false;
-    protected bool upgradesOpen = false;
+    protected bool upgradeSelect = false;
     
     protected bool controllerEnabled = false;
-    public GameObject controllerBurn, kmbBurn, controllerSkip, 
-        kmbSkip, controllerRedraw, kmbRedraw;
+    public GameObject controllerBurn, kmbBurn, controllerSkip, kmbSkip, 
+        controllerRedraw, kmbRedraw, controllerReroll, kmbReroll;
 
     public void Start()
     {
@@ -22,6 +25,8 @@ public class ControllerCardSelect : MonoBehaviour
         InputEvents.Instance.onLeftButton.AddListener(OnCardBurn);
         InputEvents.Instance.onRightDPad.AddListener(OnRightDpad);
         InputEvents.Instance.onLeftDPad.AddListener(OnLeftDpad);
+        InputEvents.Instance.onTopDPad.AddListener(OnTopDpad);
+        InputEvents.Instance.onBottomDPad.AddListener(OnBottomDpad);
     }
 
     public void ToggleController(bool toggle)
@@ -44,15 +49,30 @@ public class ControllerCardSelect : MonoBehaviour
         {
             ToggleController(true);
 
-            if (!cardSelect)
+            if (Dealer.active.isUpgrading)
             {
-                position = 1;
-                cardSelect = true;
-                cards[position].GetComponent<OnHoverAdjustScale>().OnPointerEnter(null);
-            }
+                if (!upgradeSelect)
+                {
+                    upgradePosition = 0;
+                    upgradeSelect = true;
+                    upgrades[upgradePosition].GetComponent<OnHoverAdjustScale>().OnPointerEnter(null);
+                }
 
-            cards[position].OnClick(false);
-            cardSelect = false;
+                upgrades[cardPosition].ApplyUpgrade();
+                upgradeSelect = false;
+            }
+            else
+            {
+                if (!cardSelect)
+                {
+                    cardPosition = 1;
+                    cardSelect = true;
+                    cards[cardPosition].GetComponent<OnHoverAdjustScale>().OnPointerEnter(null);
+                }
+
+                cards[cardPosition].OnClick(false);
+                cardSelect = false;
+            }
         }
     }
 
@@ -62,47 +82,61 @@ public class ControllerCardSelect : MonoBehaviour
         {
             ToggleController(true);
 
-            if (!cardSelect)
+            if (Dealer.active.isUpgrading)
             {
-                position = 1;
-                cardSelect = true;
-                cards[position].GetComponent<OnHoverAdjustScale>().OnPointerEnter(null);
-            }
+                if (!upgradeSelect)
+                {
+                    upgradePosition = 0;
+                    upgradeSelect = true;
+                    upgrades[upgradePosition].GetComponent<OnHoverAdjustScale>().OnPointerEnter(null);
+                }
 
-            Dealer.active.Redraw(cards[position]);
-            cardSelect = false;
+                Dealer.active.RerollUpgrades();
+            }
+            else
+            {
+                if (!cardSelect)
+                {
+                    cardPosition = 1;
+                    cardSelect = true;
+                    cards[cardPosition].GetComponent<OnHoverAdjustScale>().OnPointerEnter(null);
+                }
+
+                Dealer.active.Redraw(cards[cardPosition]);
+                cardSelect = false;
+            }
         }
     }
 
     public void OnCardBurn()
     {
-        if (Dealer.isOpen && Dealer.active.IsOpen)
+        if (Dealer.isOpen && Dealer.active.IsOpen && !Dealer.active.isUpgrading)
         {
             ToggleController(true);
 
             if (!cardSelect)
             {
-                position = 1;
+                cardPosition = 1;
                 cardSelect = true;
-                cards[position].GetComponent<OnHoverAdjustScale>().OnPointerEnter(null);
+                cards[cardPosition].GetComponent<OnHoverAdjustScale>().OnPointerEnter(null);
             }
 
-            Dealer.active.Burn(cards[position]);
+            Dealer.active.Burn(cards[cardPosition]);
             cardSelect = false;
         }
     }
 
     public void OnCardSkip()
     {
-        if (Dealer.isOpen && Dealer.active.IsOpen)
+        if (Dealer.isOpen && Dealer.active.IsOpen && !Dealer.active.isUpgrading)
         {
             ToggleController(true);
 
             if (!cardSelect)
             {
-                position = 1;
+                cardPosition = 1;
                 cardSelect = true;
-                cards[position].GetComponent<OnHoverAdjustScale>().OnPointerEnter(null);
+                cards[cardPosition].GetComponent<OnHoverAdjustScale>().OnPointerEnter(null);
             }
 
             Dealer.active.CloseDealer();
@@ -110,21 +144,84 @@ public class ControllerCardSelect : MonoBehaviour
         }
     }
 
-    public void OnRightDpad()
+    public void OnTopDpad()
     {
-        if (Dealer.isOpen && Dealer.active.IsOpen)
+        if (Dealer.isOpen && Dealer.active.IsOpen && Dealer.active.isUpgrading)
         {
             ToggleController(true);
 
-            if (position == 0)
+            if (!upgradeSelect)
             {
-                position = 1;
+                upgradePosition = 0;
+                upgradeSelect = true;
+                upgrades[upgradePosition].GetComponent<OnHoverAdjustScale>().OnPointerEnter(null);
+            }
+
+            if (upgradePosition == 1)
+            {
+                upgradePosition = 0;
+                upgrades[1].GetComponent<OnHoverAdjustScale>().OnPointerExit(null);
+                upgrades[0].GetComponent<OnHoverAdjustScale>().OnPointerEnter(null);
+            }
+            else if (upgradePosition == 2)
+            {
+                upgradePosition = 1;
+                upgrades[2].GetComponent<OnHoverAdjustScale>().OnPointerExit(null);
+                upgrades[1].GetComponent<OnHoverAdjustScale>().OnPointerEnter(null);
+            }
+        }
+    }
+
+    public void OnBottomDpad()
+    {
+        if (Dealer.isOpen && Dealer.active.IsOpen && Dealer.active.isUpgrading)
+        {
+            ToggleController(true);
+
+            if (!upgradeSelect)
+            {
+                upgradePosition = 0;
+                upgradeSelect = true;
+                upgrades[upgradePosition].GetComponent<OnHoverAdjustScale>().OnPointerEnter(null);
+            }
+
+            if (upgradePosition == 0)
+            {
+                upgradePosition = 1;
+                upgrades[0].GetComponent<OnHoverAdjustScale>().OnPointerExit(null);
+                upgrades[1].GetComponent<OnHoverAdjustScale>().OnPointerEnter(null);
+            }
+            else if (upgradePosition == 1)
+            {
+                upgradePosition = 2;
+                upgrades[1].GetComponent<OnHoverAdjustScale>().OnPointerExit(null);
+                upgrades[2].GetComponent<OnHoverAdjustScale>().OnPointerEnter(null);
+            }
+        }
+    }
+
+    public void OnRightDpad()
+    {
+        if (Dealer.isOpen && Dealer.active.IsOpen && !Dealer.active.isUpgrading)
+        {
+            ToggleController(true);
+
+            if (!cardSelect)
+            {
+                cardPosition = 1;
+                cardSelect = true;
+                cards[cardPosition].GetComponent<OnHoverAdjustScale>().OnPointerEnter(null);
+            }
+
+            if (cardPosition == 0)
+            {
+                cardPosition = 1;
                 cards[0].GetComponent<OnHoverAdjustScale>().OnPointerExit(null);
                 cards[1].GetComponent<OnHoverAdjustScale>().OnPointerEnter(null);
             }
-            else if (position == 1)
+            else if (cardPosition == 1)
             {
-                position = 2;
+                cardPosition = 2;
                 cards[1].GetComponent<OnHoverAdjustScale>().OnPointerExit(null);
                 cards[2].GetComponent<OnHoverAdjustScale>().OnPointerEnter(null);
             }
@@ -137,15 +234,22 @@ public class ControllerCardSelect : MonoBehaviour
         {
             ToggleController(true);
 
-            if (position == 2)
+            if (!cardSelect)
             {
-                position = 1;
+                cardPosition = 1;
+                cardSelect = true;
+                cards[cardPosition].GetComponent<OnHoverAdjustScale>().OnPointerEnter(null);
+            }
+
+            if (cardPosition == 2)
+            {
+                cardPosition = 1;
                 cards[2].GetComponent<OnHoverAdjustScale>().OnPointerExit(null);
                 cards[1].GetComponent<OnHoverAdjustScale>().OnPointerEnter(null);
             }
-            else if (position == 1)
+            else if (cardPosition == 1)
             {
-                position = 0;
+                cardPosition = 0;
                 cards[1].GetComponent<OnHoverAdjustScale>().OnPointerExit(null);
                 cards[0].GetComponent<OnHoverAdjustScale>().OnPointerEnter(null);
             }

@@ -87,7 +87,7 @@ public class Dealer : MonoBehaviour
     private List<CardData> pickedList;
     private List<CardData> pickedCards;
     private Card upgradingCard;
-    private bool isUpgrading = false;
+    public bool isUpgrading = false;
     private bool pitchSet = false;
     private float pitch = 1f;
 

@@ -42,6 +42,8 @@ public class InputEvents : Singleton<InputEvents>
     // Card control options
     [HideInInspector] public UnityEvent onLeftDPad;
     [HideInInspector] public UnityEvent onRightDPad;
+    [HideInInspector] public UnityEvent onTopDPad;
+    [HideInInspector] public UnityEvent onBottomDPad;
     [HideInInspector] public UnityEvent onRightButton;
     [HideInInspector] public UnityEvent onLeftButton;
     [HideInInspector] public UnityEvent onTopButton;

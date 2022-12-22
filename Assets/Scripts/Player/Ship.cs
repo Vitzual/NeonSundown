@@ -228,7 +228,7 @@ public class Ship : Weapon
         if (Dealer.isOpen) return;
 
         // Check if LMB input detected
-        if (CIN._action_primary.IsPressed()) Use();
+        if (autoFire || CIN._action_primary.IsPressed()) Use();
         if (shipCooldown > 0) shipCooldown -= Time.deltaTime;
         
         // If can regen, regenerate

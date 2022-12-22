@@ -8,7 +8,7 @@ public class Teleport : Secondary
     public ParticleSystem particle;
     private float customCooldown;
     private AudioSource audioSource;
-
+    
     // Get the audio source
     public override void Setup(Ship ship, SecondaryData data)
     {

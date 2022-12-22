@@ -6,6 +6,7 @@ public class PausedMenu : MonoBehaviour
 {
     // Pause menu variables
     public CanvasGroup _stats;
+    public GameOverScreen endScreen;
     public static CanvasGroup stats;
     public static CanvasGroup canvasGroup;
     private static bool isOpen = false;
@@ -15,6 +16,9 @@ public class PausedMenu : MonoBehaviour
     {
         stats = _stats;
         canvasGroup = GetComponent<CanvasGroup>();
+
+        InputEvents.Instance.onEscapePressed.AddListener(Toggle);
+        InputEvents.Instance.onRightButton.AddListener(QuitGame);
     }
 
     // Start is called before the first frame update
@@ -23,20 +27,29 @@ public class PausedMenu : MonoBehaviour
         if (!isOpen)
         {
             if (CIN._action_stats.IsPressed()) stats.alpha = 1f;
-            else if (CIN._action_stats.IsPressed()) stats.alpha = 0f;
-        }
-
-        if (CIN._action_escape.IsPressed())
-        {
-            if (!Dealer.isOpen)
-            {
-                if (isOpen) Close();
-                else Open();
-            }
-            else if (canvasGroup.alpha == 1f) Close();
+            else if (!CIN._action_stats.IsPressed()) stats.alpha = 0f;
         }
     }
     
+    /// <summary>
+    /// Togges the dealer menu
+    /// </summary>
+    public static void Toggle()
+    {
+        if (!Dealer.isOpen)
+        {
+            if (isOpen) Close();
+            else Open();
+        }
+        else if (canvasGroup.alpha == 1f) Close();
+    }
+
+    protected void QuitGame()
+    {
+        Close();
+        endScreen.ShowScreen();
+    }
+
     // Open the pause menu
     public static void Open()
     {
