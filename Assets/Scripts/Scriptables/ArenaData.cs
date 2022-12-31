@@ -49,6 +49,8 @@ public class ArenaData : IdentifiableScriptableObject
     public int limitedTimeMonth;
     [BoxGroup("Limited Time"), ShowIf("limitedTimeArena", true)]
     public int limitedTimeDay;
+    [BoxGroup("Limited Time"), ShowIf("limitedTimeArena", true)]
+    public string limitedTimeUnlockObjective;
 
     [BoxGroup("Achievement Info")]
     public string achievementObjective;

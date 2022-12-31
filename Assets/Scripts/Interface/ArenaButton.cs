@@ -120,7 +120,6 @@ public class ArenaButton : MonoBehaviour
         // Set arena info
         this.arena = arena;
         name.text = "LOCKED";
-        desc.text = arena.unlockObjective.ToUpper();
 
         // Set button colors
         desc.color = lockedObjectiveColor;
@@ -136,6 +135,8 @@ public class ArenaButton : MonoBehaviour
         // Check if limited time arena
         if (arena.limitedTimeArena && showTime)
         {
+            desc.text = arena.limitedTimeUnlockObjective.ToUpper();
+
             limitedTimeObject.SetActive(true);
             bannerLeft.color = lockedBorderColor;
             title.color = lockedBackgroundColor;
@@ -144,6 +145,10 @@ public class ArenaButton : MonoBehaviour
 
             UpdateTimer();
         }
-        else limitedTimeObject.SetActive(false);
+        else
+        {
+            desc.text = arena.unlockObjective.ToUpper();
+            limitedTimeObject.SetActive(false);
+        }
     }
 }
