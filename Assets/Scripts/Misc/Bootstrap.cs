@@ -1,9 +1,4 @@
-using CloudAPI = HeathenEngineering.SteamworksIntegration.API.RemoteStorage.Client;
 using HeathenEngineering.SteamworksIntegration;
-using HeathenEngineering.SteamworksIntegration.API;
-using System.Collections;
-using System.Collections.Generic;
-using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -22,9 +17,6 @@ public class Bootstrap : MonoBehaviour
 
         // Update old save
         SaveSystem.CheckForOldSave();
-
-        // End authentication session
-        Authenticator.Logout();
 
         // Load main
         cooldown = 0.5f;

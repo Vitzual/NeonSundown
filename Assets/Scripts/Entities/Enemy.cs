@@ -1,6 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using Thinksquirrel.CShake;
 using UnityEngine;
 
 public class Enemy : Entity
@@ -125,7 +123,7 @@ public class Enemy : Entity
             AudioPlayer.PlayCritSound();
 
             // Check if enemy can shake screen
-            if (Settings.screenShake) CameraShake.ShakeAll();
+            //if (Settings.screenShake) CameraShake.ShakeAll();
         }
         else
         {

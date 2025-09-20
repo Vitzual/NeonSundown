@@ -1,22 +1,9 @@
-using Michsky.UI.ModernUIPack;
-using MK.Glow.URP;
-using System.Collections;
+using Michsky.MUIP;
 using System.Collections.Generic;
-using System.Text.RegularExpressions;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 public class SettingsUI : MonoBehaviour
 {
-    // List of keybinds
-    [System.Serializable]
-    public class Keybind
-    {
-        public Key key;
-        public ButtonManagerBasic button;
-    }
-    
-    public List<Keybind> keybinds;
     private Key listeningForKey;
     private bool listeningForInput = false;
 
@@ -253,11 +240,11 @@ public class SettingsUI : MonoBehaviour
             pausedMenu.SetActive(false);
 
         // Set all keybind buttons
-        foreach (Keybind keybind in keybinds)
-        {
-            keybind.button.buttonText = Keybinds.GetKeybind(keybind.key).ToString();
-            keybind.button.UpdateUI();
-        }
+        //foreach (Keybind keybind in keybinds)
+        //{
+        //    keybind.button.buttonText = Keybinds.GetKeybind(keybind.key).ToString();
+        //    keybind.button.UpdateUI();
+        //}
     }
 
     // Go back

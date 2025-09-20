@@ -94,8 +94,6 @@ public class Menu : MonoBehaviour
         InputEvents.Instance.onClickThruPressed.AddListener(ClickThru);
 
         // Subscribe to authentication event
-        Events.active.onAuthenticationFinished += StartGameWithCheck;
-        Events.active.onAuthenticationFailed += OpenWarningPanel;
         InputSystem.onAnyButtonPress.CallOnce(SetAnyKey);
 
         // Reset cursor lock state
@@ -182,12 +180,7 @@ public class Menu : MonoBehaviour
         if (!spacePressed)
         {
             spacePressed = true;
-            if (!Authenticator.UserAuthenticated)
-            {
-                pressSpaceText.text = "LOGGING INTO STEAM...";
-                Authenticator.Login();
-            }
-            else StartGameWithCheck();
+            OpenMain();
         }
         else if (mainGroup.alpha == 1f) TogglePanel(arenaGroup, mainGroup, true);
         else if (arenaGroup.alpha == 1f) TogglePanel(planningGroup, arenaGroup, true);
@@ -199,65 +192,13 @@ public class Menu : MonoBehaviour
         anyKey = true;
     }
 
-    // Update user input
     public void Update()
     {
         if (!spacePressed && anyKey)
         {
             spacePressed = true;
-            if (!Authenticator.UserAuthenticated)
-            {
-                pressSpaceText.text = "LOGGING INTO STEAM...";
-                Authenticator.Login();
-            }
-            else StartGameWithCheck();
-        }
-        else if (!mainOpened && spacePressed && !Authenticator.UserAuthenticated)
-        {
-            if (authenticationTimer <= 0f)
-            {
-                StartGameWithCheck();
-            }
-            else authenticationTimer -= Time.deltaTime;
-        } 
-    }
-
-    // Open main panel
-    public void StartGameWithCheck()
-    {
-        // Open main flag
-        mainOpened = true;
-
-        // Remove this if-statement if it's erroring out
-        if (!Authenticator.UserAuthenticated)
-        {
-            OpenWarningPanel("Connection to server timed out");
-        }
-        else
-        {
-            lockedStoreDesc.SetActive(false);
-            normalStoreDesc.SetActive(true);
-            offlineMode.SetActive(false);
-
             OpenMain();
         }
-    }
-
-    public void OpenWarningPanel(string errorMsg)
-    {
-        // Open main flag
-        mainOpened = true;
-        TogglePanel(warningGroup, mainGroup, false);
-        errorText.text = "<color=orange><b>ERROR:</b></color> " + errorMsg;
-    }
-
-    public void StartGameLocked()
-    {
-        lockedStoreDesc.SetActive(true);
-        normalStoreDesc.SetActive(false);
-        offlineMode.SetActive(true);
-
-        OpenMain();
     }
 
     public void OpenMain()
@@ -365,7 +306,6 @@ public class Menu : MonoBehaviour
     // Open store panel
     public void ToggleStorePanel(bool toggle)
     {
-        if (!Authenticator.UserAuthenticated) return;
         if (toggle) TogglePanel(storeGroup, mainGroup);
         else TogglePanel(mainGroup, storeGroup);
     }
@@ -440,7 +380,6 @@ public class Menu : MonoBehaviour
     // Exit the application
     public void QuitGame()
     {
-        Authenticator.Logout();
         Application.Quit();
     }
 

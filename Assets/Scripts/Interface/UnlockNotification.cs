@@ -1,6 +1,4 @@
-using Michsky.UI.ModernUIPack;
-using System.Collections;
-using System.Collections.Generic;
+using Michsky.MUIP;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;

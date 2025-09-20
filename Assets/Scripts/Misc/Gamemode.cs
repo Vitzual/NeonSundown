@@ -80,9 +80,6 @@ public class Gamemode : MonoBehaviour
 
         // Set camera viewing range
         if (camera != null) camera.orthographicSize = arena.startingViewRange;
-
-        // Check offline mode
-        if (offlineMode != null && !Authenticator.UserAuthenticated) offlineMode.SetActive(true);
     }
 
     // Load menu

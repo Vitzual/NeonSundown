@@ -1,4 +1,3 @@
-using MK.Glow.URP;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -36,12 +35,12 @@ public class Effects : MonoBehaviour
     public static void SetGlowAmount(float amount)
     {
         // Set menu glow component
-        MKGlowLite mkg = (MKGlowLite)menuVolumeProfile.components[mkGlowIndex];
-        if (mkg != null) mkg.bloomIntensity.value = amount;
+        //MKGlowLite mkg = (MKGlowLite)menuVolumeProfile.components[mkGlowIndex];
+        //if (mkg != null) mkg.bloomIntensity.value = amount;
 
         // Set main glow component
-        mkg = (MKGlowLite)mainVolumeProfile.components[mkGlowIndex];
-        if (mkg != null) mkg.bloomIntensity.value = amount;
+        //mkg = (MKGlowLite)mainVolumeProfile.components[mkGlowIndex];
+        //if (mkg != null) mkg.bloomIntensity.value = amount;
     }
 
     /// <summary>
@@ -49,8 +48,8 @@ public class Effects : MonoBehaviour
     /// </summary>
     public static void ToggleMenuGlitchEffect(bool toggle)
     {
-        Limitless_Glitch3 glitchEffect = (Limitless_Glitch3)menuVolumeProfile.components[menuGlitchIndex];
-        if (glitchEffect.enable.value != toggle) glitchEffect.enable.value = toggle;
+        //Limitless_Glitch3 glitchEffect = (Limitless_Glitch3)menuVolumeProfile.components[menuGlitchIndex];
+        //if (glitchEffect.enable.value != toggle) glitchEffect.enable.value = toggle;
     }
   
     /// <summary>
@@ -58,7 +57,7 @@ public class Effects : MonoBehaviour
     /// </summary>
     public static void ToggleMainGlitchEffect(bool toggle)
     {
-        LimitlessGlitch7 glitchEffect = (LimitlessGlitch7)mainVolumeProfile.components[mainGlitchIndex];
-        if (glitchEffect.enable.value != toggle) glitchEffect.enable.value = toggle;
+        //LimitlessGlitch7 glitchEffect = (LimitlessGlitch7)mainVolumeProfile.components[mainGlitchIndex];
+        //if (glitchEffect.enable.value != toggle) glitchEffect.enable.value = toggle;
     }
 }

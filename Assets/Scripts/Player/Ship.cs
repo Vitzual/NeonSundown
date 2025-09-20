@@ -1,8 +1,6 @@
-using Michsky.UI.ModernUIPack;
+using Michsky.MUIP;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 // V2 added a lot of new stuff that doesn't need to be in this script
 // Will sort everything out and organize all the new logic in future patches
